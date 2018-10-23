@@ -266,7 +266,8 @@
         $("#createGoalBtn").click(function() {
 
             GoalFactory.createGoal(
-                $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
+                $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
+                $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
                       //store fitbitID
