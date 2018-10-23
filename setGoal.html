@@ -388,7 +388,7 @@
               if (!error){
                 var PocGoal = PocGoalContract.at(result);
 
-                var usdStake = ($("#stake").val()-2.15)*0.0049;
+                var usdStake = ($("#stake").val()-2.50)*0.0048;
                 PocGoal.depositStake(
                   {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
                     function(error, result2) {
