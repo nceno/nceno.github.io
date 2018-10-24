@@ -355,9 +355,10 @@
                       console.error(error);
                 })
         });
-                //event listener for deposit
-        //var goalAddress = $("#goalAddress").html();
-        var PocGoal = PocGoalContract.at($("#goalAddress").html());
+                
+        
+        var PocGoal = PocGoalContract.at($("#goalAddress").val());
+        //event listener for deposit
         var depositEvent = PocGoal.depositSent({},'latest');
         depositEvent.watch(function(error, result){
             if (result)
