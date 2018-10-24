@@ -316,7 +316,7 @@
             if (!error)
                 {
                     $("#loader").hide();
-                    $("#goalParams").html(result.args.fitbitID + result.args.stake);
+                    $("#goalDisplay").html(result.args.fitbitID + result.args.stake);
                 } else {
                     $("#loader").hide();
                     console.log(error);
