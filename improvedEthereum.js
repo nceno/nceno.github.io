@@ -357,9 +357,9 @@
         });
                 
         
-        var PocGoal = PocGoalContract.at($("#goalAddress").val());
+        var PocGoalext = PocGoalContract.at($("#goalAddress").val());
         //event listener for deposit
-        var depositEvent = PocGoal.depositSent({},'latest');
+        var depositEvent = PocGoalext.depositSent({},'latest');
         depositEvent.watch(function(error, result){
             if (result)
                 {
