@@ -316,7 +316,7 @@
 
         var GoalFactory = GoalFactoryContract.at('0x275f6e15bca3c9fa6af5a26b79ccd4d6b711ee63'); //ropsten testnet
         console.log(GoalFactory);
-        //$("#depositStakeBtn").hide();
+        
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
@@ -360,7 +360,6 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
-            //$("#depositStakeBtn").hide();
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
