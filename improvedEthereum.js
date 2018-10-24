@@ -280,7 +280,7 @@
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0x1909f9e8409636483288678fd141417cddeeac13'); //ropsten testnet
+        var GoalFactory = GoalFactoryContract.at('0x31003094393d4990932e7fd5583ef8b1b0a679e3'); //mainnet from metamask account 2
         console.log(GoalFactory);
         $("#awaiting").hide();
         

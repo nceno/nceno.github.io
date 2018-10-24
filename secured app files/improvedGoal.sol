@@ -142,10 +142,10 @@ event depositSent();
         stake = _stake;
 
     //addresses where lost stake goes
-    nceno = 0x27BD6D3fD046Fb3A6b073C55061f952873ADB0Cf; //address 1 metamask rinkeby net
+    //nceno = 0x27BD6D3fD046Fb3A6b073C55061f952873ADB0Cf; //address 1 metamask rinkeby net
     // nceno = 0x441bd7Cd53a00fa8ba5CEb6FbDEa0bB4d5Eca8DE; //address 2 ganache
     // nceno = 0x5e67903bbf7ea3c5f54bd2b81e3d96ee2d12394a; //status.im mainnet account 1
-    //nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 2 (admin also)
+    nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 2 (admin also)
     }
   
   //makes the contract able to hold some ether
