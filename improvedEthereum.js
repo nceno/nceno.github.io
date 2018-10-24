@@ -320,7 +320,7 @@
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
-        goalInfoEvent.watch(function(error, result){
+        goalInfoEvent.watch(function(error, result1){
             if (result)
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
@@ -331,7 +331,7 @@
                           if (!error){
                             var PocGoal = PocGoalContract.at(result);
                             var usdStake = ($("#stake").val()-1.00)*0.0049;
-                            $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just staked '+ '$' +result.args.stake+ ' on their goal!');
+                            $("#goalDisplay").html(web3.toAscii(result1.args.name) + ' just staked '+ '$' +result1.args.stake+ ' on their goal!');
                             PocGoal.depositStake(
                               {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
                               function(error, result2) {
