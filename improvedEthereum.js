@@ -308,7 +308,7 @@
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0x1d18758b8df5bb83b3e91145163b508dfcb4241c'); //ropsten testnet
+        var GoalFactory = GoalFactoryContract.at('0x87eda33132862f6e15efd6a681ecd0910458b29f'); //ropsten testnet
         console.log(GoalFactory);
 
         //var goalInfoEvent = GoalFactory.goalInfo();
