@@ -292,10 +292,10 @@
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
-                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal.');
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal!');
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
-                        ' just committed to doing '+ result.args.rounds+ ' '+ result.args.activeMinutes+ 
-                        ' exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
+                        ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
+                        ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
                         ' with a stake of $'+ result.args.stake+'USD!');
                       $("#depositStatus").html('Awaiting deposit...');
                       GoalFactory.getLastGoalByFitbitID(
