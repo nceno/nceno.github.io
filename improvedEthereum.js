@@ -316,44 +316,40 @@
 
         var GoalFactory = GoalFactoryContract.at('0x275f6e15bca3c9fa6af5a26b79ccd4d6b711ee63'); //ropsten testnet
         console.log(GoalFactory);
-        $("#depositStakeBtn").hide();
+        //$("#depositStakeBtn").hide();
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         goalInfoEvent.watch(function(error, result){
             if (result)
                 {
-                    if (result.blockHash != $("#insTrans").html()) 
+                    if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       $("#loader").hide();
-                      $("#depositStakeBtn").show();
-                      $("#createGoalBtn").hide();
-                      $("#insTrans").html('Block hash: ' +result.blockHash);
-                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
+                      //$("#depositStakeBtn").show();
+                      //$("#insTrans").html('Block hash: ' + result.blockHash);
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just staked '+ '$' +result.args.stake+ 'on their goal!');
                       console.log(result.blockHash);
                       GoalFactory.getLastGoalByFitbitID(
-            $("#fitbitID").val(),
-            function(error, result) {
-              if (!error){
-                var PocGoal = PocGoalContract.at(result);
-                
-                
-                var usdStake = ($("#stake").val()-1.00)*0.0048;
-                PocGoal.depositStake(
-                  {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
-                    function(error, result2) {
-                      if (!error){
-                        console.log(result2);
-                      }//close if
-                      else
-                        console.error(error);
-                    }//closes callback
-                )//closes contract function call
-
-              }//close if
-              else
-                console.error(error);
-            }//closes callback
-          )//closes GoalFactory contract function call
+                        $("#fitbitID").val(),
+                        function(error, result) {
+                          if (!error){
+                            var PocGoal = PocGoalContract.at(result);
+                            var usdStake = ($("#stake").val()-1.00)*0.0049;
+                            PocGoal.depositStake(
+                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
+                              function(error, result2) {
+                                if (!error){
+                                  console.log(result2);
+                                }//close if
+                                  else
+                                    console.error(error);
+                              }//closes callback
+                            )//closes contract function call
+                          }//close if
+                            else
+                              console.error(error);
+                        }//closes callback
+                      )//closes GoalFactory contract function call
 
 
 
@@ -366,8 +362,9 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
+            $("#createGoalBtn").hide();
             $("#loader").show();
-            $("#depositStakeBtn").hide();
+            //$("#depositStakeBtn").hide();
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
@@ -382,35 +379,7 @@
                 
         
         
-        //get address of the goal just created and deposit stake
-        $("#depositStakeBtn").click(function() {
-          //$("#loader").show();
-          GoalFactory.getLastGoalByFitbitID(
-            $("#fitbitID").val(),
-            function(error, result) {
-              if (!error){
-                var PocGoal = PocGoalContract.at(result);
-                
-                
-                var usdStake = ($("#stake").val()-1.00)*0.0048;
-                PocGoal.depositStake(
-                  {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
-                    function(error, result2) {
-                      if (!error){
-                        console.log(result2);
-                      }//close if
-                      else
-                        console.error(error);
-                    }//closes callback
-                )//closes contract function call
-
-              }//close if
-              else
-                console.error(error);
-            }//closes callback
-          )//closes GoalFactory contract function call 
-        });//closes function(){ and click(
-        //end of function call by button click
+        //button goes here
 
 
 
