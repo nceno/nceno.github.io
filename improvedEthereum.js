@@ -27,6 +27,57 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "bytes16"
+      },
+      {
+        "name": "_email",
+        "type": "bytes16"
+      },
+      {
+        "name": "_fitbitID",
+        "type": "uint256"
+      },
+      {
+        "name": "_activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "name": "_rounds",
+        "type": "uint256"
+      },
+      {
+        "name": "_roundLength",
+        "type": "uint256"
+      },
+      {
+        "name": "_beginAt",
+        "type": "bytes16"
+      },
+      {
+        "name": "_endAt",
+        "type": "bytes16"
+      },
+      {
+        "name": "_stake",
+        "type": "uint256"
+      }
+    ],
+    "name": "createGoal",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "getGoalCount",
@@ -60,57 +111,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "name": "_email",
-        "type": "string"
-      },
-      {
-        "name": "_fitbitID",
-        "type": "uint256"
-      },
-      {
-        "name": "_activeMinutes",
-        "type": "uint256"
-      },
-      {
-        "name": "_rounds",
-        "type": "uint256"
-      },
-      {
-        "name": "_roundLength",
-        "type": "uint256"
-      },
-      {
-        "name": "_beginAt",
-        "type": "string"
-      },
-      {
-        "name": "_endAt",
-        "type": "string"
-      },
-      {
-        "name": "_stake",
-        "type": "uint256"
-      }
-    ],
-    "name": "createGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "getAllGoals",
@@ -123,6 +123,58 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "email",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "fitbitID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rounds",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "roundLength",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "beginAt",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "endAt",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "stake",
+        "type": "uint256"
+      }
+    ],
+    "name": "goalInfo",
+    "type": "event"
   }
 ]);
         var PocGoalContract = web3.eth.contract([
@@ -164,15 +216,11 @@
       },
       {
         "name": "",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
+        "type": "bytes16"
       },
       {
         "name": "",
@@ -188,11 +236,15 @@
       },
       {
         "name": "",
-        "type": "string"
+        "type": "uint256"
       },
       {
         "name": "",
-        "type": "string"
+        "type": "bytes16"
+      },
+      {
+        "name": "",
+        "type": "bytes16"
       },
       {
         "name": "",
@@ -215,11 +267,11 @@
       },
       {
         "name": "_name",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_email",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_fitbitID",
@@ -239,11 +291,11 @@
       },
       {
         "name": "_beginAt",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_endAt",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_stake",
@@ -256,15 +308,24 @@
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0xb9f93fa46be29fdd77ca2b9deb4063a97925bc04');
+        var GoalFactory = GoalFactoryContract.at('0x1d18758b8df5bb83b3e91145163b508dfcb4241c'); //ropsten testnet
         console.log(GoalFactory);
 
-        //var PocGoal = PocGoalContract.at('0xE4a9F35A85644ce480743Dc5ab9512820dBA27B3');
-        //console.log(PocGoal);
+        var goalInfoEvent = GoalFactory.goalInfo();
+        goalInfoEvent.watch(function(error, result){
+            if (!error)
+                {
+                    $("#loader").hide();
+                    $("#goalParams").html(result.args.fitbitID + result.args.stake);
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                }
+        });
 
         //creating the goal
         $("#createGoalBtn").click(function() {
-
+            $("#loader").show();
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
@@ -281,6 +342,7 @@
                 
         //get address of the goal just created
         $("#depositStakeBtn").click(function() {
+          //$("#loader").show();
           GoalFactory.getLastGoalByFitbitID(
             $("#fitbitID").val(),
             function(error, result) {
