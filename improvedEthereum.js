@@ -311,17 +311,23 @@
         var GoalFactory = GoalFactoryContract.at('0x1d18758b8df5bb83b3e91145163b508dfcb4241c'); //ropsten testnet
         console.log(GoalFactory);
 
-        var goalInfoEvent = GoalFactory.goalInfo();
+        //var goalInfoEvent = GoalFactory.goalInfo();
+        var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         goalInfoEvent.watch(function(error, result){
             if (!error)
                 {
-                    $("#loader").hide();
-                    $("#goalDisplay").html(result.args.fitbitID + result.args.stake);
+                    if (result.blockHash != $("#instrans").html()) 
+                      $("#loader").hide();
+            
+                      $("#insTrans").html('Block hash: ' +result.blockHash);
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
                 } else {
                     $("#loader").hide();
                     console.log(error);
                 }
         });
+
+       
 
         //creating the goal
         $("#createGoalBtn").click(function() {
