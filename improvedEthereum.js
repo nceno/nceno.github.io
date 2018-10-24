@@ -314,13 +314,14 @@
         //var goalInfoEvent = GoalFactory.goalInfo();
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         goalInfoEvent.watch(function(error, result){
-            if (!error)
+            if (result)
                 {
                     if (result.blockHash != $("#insTrans").html()) 
                       $("#loader").hide();
             
                       $("#insTrans").html('Block hash: ' +result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
+                      console.log(result.blockHash);
                 } else {
                     $("#loader").hide();
                     console.log(error);

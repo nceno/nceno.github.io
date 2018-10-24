@@ -22,19 +22,18 @@ contract GoalFactory {
 
   //fire event on contract creation
   event goalInfo(
-       bytes16 _name,
-       bytes16 _email,
-       uint _fitbitID,
-       uint _activeMinutes,
-       uint _rounds,
-       uint _roundLength, 
-       bytes16 _beginAt,
-       bytes16 _endAt,
-       uint _stake
-    );
+       bytes16 name,
+       bytes16 email,
+       uint fitbitID,
+       uint activeMinutes,
+       uint rounds,
+       uint roundLength, 
+       bytes16 beginAt,
+       bytes16 endAt, 
+       uint stake);
 
 //spawn a new goal with intended parameters
-  function createGoal(bytes16 _name,bytes16 _email,uint _fitbitID,uint _activeMinutes,uint _rounds,uint _roundLength, bytes16 _beginAt,bytes16 _endAt,uint _stake) public returns(address) {
+  function createGoal(bytes16 _name, bytes16 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,uint _roundLength, bytes16 _beginAt, bytes16 _endAt, uint _stake) public returns(address) {
       address creator = msg.sender;
       createdGoal = new PocGoal(creator, _name,_email,_fitbitID,_activeMinutes,_rounds,_roundLength,_beginAt,_endAt,_stake);
       //add it to the registry
@@ -42,6 +41,7 @@ contract GoalFactory {
       //add it to the player's history
       goalsByFitbit[_fitbitID].hostedGoals.push(createdGoal);
       return address(createdGoal);
+      goalInfo(_name, _email, _fitbitID, _activeMinutes, _rounds, _roundLength, _beginAt, _endAt, _stake);
     }
   
   //get the address of the most recently created goal
