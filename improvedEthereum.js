@@ -336,23 +336,7 @@
                 }
         });
 
-        //event listener for deposit
-        var depositEvent = GoalFactory.depositSent({},'latest');
-        depositEvent.watch(function(error, result){
-            if (result)
-                {
-                    if (result.blockHash != $("#insTrans").html()) 
-                      $("#loader").hide();
-                      //$("#depositStakeBtn").show();
-                      //$("#createGoalBtn").hide();
-                      $("#insTrans").html('Block hash: ' +result.blockHash);
-                      $("#depositStatus").html('Successful deposit of '+ ($("#stake").val()-1.00)*0.0048);
-                      console.log(result.blockHash);
-                } else {
-                    $("#loader").hide();
-                    console.log(error);
-                }
-        });
+        
 
        
 
@@ -381,6 +365,23 @@
               if (!error){
                 var PocGoal = PocGoalContract.at(result);
 
+                //event listener for deposit
+        var depositEvent = PocGoal.depositSent({},'latest');
+        depositEvent.watch(function(error, result){
+            if (result)
+                {
+                    if (result.blockHash != $("#insTrans").html()) 
+                      $("#loader").hide();
+                      //$("#depositStakeBtn").show();
+                      //$("#createGoalBtn").hide();
+                      $("#insTrans").html('Block hash: ' +result.blockHash);
+                      $("#depositStatus").html('Successful deposit of '+ ($("#stake").val()-1.00)*0.0048);
+                      console.log(result.blockHash);
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                }
+        });
                 var usdStake = ($("#stake").val()-1.00)*0.0048;
                 PocGoal.depositStake(
                   {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
