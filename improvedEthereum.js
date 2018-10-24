@@ -339,7 +339,7 @@
                                   console.log(result2);
                                   $("#loader").hide();
                                   $("#depositStatus").html('Deposit of $' +usdStake+ ' was successful!');
-                                  $("#insTrans").html(result.blockHash);
+                                  $("#insTrans").html(result2.blockHash);
                                 }//close if
                                   else
                                     console.error(error);
