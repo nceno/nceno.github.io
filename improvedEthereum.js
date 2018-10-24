@@ -330,16 +330,40 @@
                       $("#insTrans").html('Block hash: ' +result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
                       console.log(result.blockHash);
+                      GoalFactory.getLastGoalByFitbitID(
+            $("#fitbitID").val(),
+            function(error, result) {
+              if (!error){
+                var PocGoal = PocGoalContract.at(result);
+                
+                
+                var usdStake = ($("#stake").val()-1.00)*0.0048;
+                PocGoal.depositStake(
+                  {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
+                    function(error, result2) {
+                      if (!error){
+                        console.log(result2);
+                      }//close if
+                      else
+                        console.error(error);
+                    }//closes callback
+                )//closes contract function call
+
+              }//close if
+              else
+                console.error(error);
+            }//closes callback
+          )//closes GoalFactory contract function call
+
+
+
                 } else {
                     $("#loader").hide();
                     console.log(error);
                 }
         });
-
-        
-
        
-
+    
         //creating the goal
         $("#createGoalBtn").click(function() {
             $("#loader").show();
@@ -366,7 +390,7 @@
             function(error, result) {
               if (!error){
                 var PocGoal = PocGoalContract.at(result);
-                $("#goalAddress").html(result);
+                
                 
                 var usdStake = ($("#stake").val()-1.00)*0.0048;
                 PocGoal.depositStake(
@@ -378,36 +402,16 @@
                       else
                         console.error(error);
                     }//closes callback
-                )       //closes contract function call
+                )//closes contract function call
 
               }//close if
               else
                 console.error(error);
             }//closes callback
-          ).then(function() {
-  console.log('Got the final result: ');
-})   //closes contract function call
+          )//closes GoalFactory contract function call 
         });//closes function(){ and click(
         //end of function call by button click
 
-        var PocGoalext = PocGoalContract.at($("#goalAddress").val());
-        console.log('new goal address: '+ $("#goalAddress").val());
-        //event listener for deposit
-        var depositEvent = PocGoalext.depositSent({},'latest');
-        depositEvent.watch(function(error, result){
-            if (result)
-                {
-                    if (result.blockHash != $("#insTrans").html()) 
-                      $("#loader").hide();
-                      //$("#depositStakeBtn").show();
-                      //$("#createGoalBtn").hide();
-                      $("#insTrans").html('Block hash: ' +result.blockHash);
-                      $("#depositStatus").html('Successful deposit of '+ ($("#stake").val()-1.00)*0.0048);
-                      console.log(result.blockHash);
-                } else {
-                    $("#loader").hide();
-                    console.log(error);
-                }
-        });
+
 
     //</script>
