@@ -362,14 +362,14 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
-            $("#createGoalBtn").hide();
-            $("#loader").show();
             //$("#depositStakeBtn").hide();
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
+                      $("#createGoalBtn").hide();
+                      $("#loader").show();
                       console.log(result);
                     }
                     else
