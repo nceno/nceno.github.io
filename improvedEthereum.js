@@ -324,10 +324,6 @@
             if (result)
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
-                      $("#loader").hide();
-                      //$("#depositStakeBtn").show();
-                      //$("#insTrans").html('Block hash: ' + result.blockHash);
-                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just staked '+ '$' +result.args.stake+ 'on their goal!');
                       console.log(result.blockHash);
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
@@ -340,6 +336,8 @@
                               function(error, result2) {
                                 if (!error){
                                   console.log(result2);
+                                  $("#loader").hide();
+                                  $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just staked '+ '$' +result.args.stake+ ' on their goal!');
                                 }//close if
                                   else
                                     console.error(error);
