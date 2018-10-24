@@ -305,13 +305,20 @@
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "depositSent",
+    "type": "event"
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0x87eda33132862f6e15efd6a681ecd0910458b29f'); //ropsten testnet
+        var GoalFactory = GoalFactoryContract.at('0x275f6e15bca3c9fa6af5a26b79ccd4d6b711ee63'); //ropsten testnet
         console.log(GoalFactory);
         $("#depositStakeBtn").hide();
-        //var goalInfoEvent = GoalFactory.goalInfo();
+        
+        //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         goalInfoEvent.watch(function(error, result){
             if (result)
@@ -322,6 +329,24 @@
                       $("#createGoalBtn").hide();
                       $("#insTrans").html('Block hash: ' +result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
+                      console.log(result.blockHash);
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                }
+        });
+
+        //event listener for deposit
+        var depositEvent = GoalFactory.depositSent({},'latest');
+        depositEvent.watch(function(error, result){
+            if (result)
+                {
+                    if (result.blockHash != $("#insTrans").html()) 
+                      $("#loader").hide();
+                      //$("#depositStakeBtn").show();
+                      //$("#createGoalBtn").hide();
+                      $("#insTrans").html('Block hash: ' +result.blockHash);
+                      $("#depositStatus").html('Successful deposit of '+ ($("#stake").val()-1.00)*0.0048);
                       console.log(result.blockHash);
                 } else {
                     $("#loader").hide();
@@ -347,7 +372,7 @@
                 })
         });
                 
-        //get address of the goal just created
+        //get address of the goal just created and deposit stake
         $("#depositStakeBtn").click(function() {
           //$("#loader").show();
           GoalFactory.getLastGoalByFitbitID(
@@ -356,7 +381,7 @@
               if (!error){
                 var PocGoal = PocGoalContract.at(result);
 
-                var usdStake = ($("#stake").val()-2.50)*0.0048;
+                var usdStake = ($("#stake").val()-1.00)*0.0048;
                 PocGoal.depositStake(
                   {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
                     function(error, result2) {

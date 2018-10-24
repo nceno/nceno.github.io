@@ -34,6 +34,7 @@ contract GoalFactory {
 
 //spawn a new goal with intended parameters
   function createGoal(bytes16 _name, bytes16 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,uint _roundLength, bytes16 _beginAt, bytes16 _endAt, uint _stake) public returns(address) {
+      goalInfo(_name, _email, _fitbitID, _activeMinutes, _rounds, _roundLength, _beginAt, _endAt, _stake);
       address creator = msg.sender;
       createdGoal = new PocGoal(creator, _name,_email,_fitbitID,_activeMinutes,_rounds,_roundLength,_beginAt,_endAt,_stake);
       //add it to the registry
@@ -41,7 +42,7 @@ contract GoalFactory {
       //add it to the player's history
       goalsByFitbit[_fitbitID].hostedGoals.push(createdGoal);
       return address(createdGoal);
-      goalInfo(_name, _email, _fitbitID, _activeMinutes, _rounds, _roundLength, _beginAt, _endAt, _stake);
+      
     }
   
   //get the address of the most recently created goal
@@ -104,7 +105,7 @@ contract PocGoal {
         require(msg.sender == nceno);
         _;
     }
-
+event depositSent();
   
     //constructor, called by GoalFactory to instantiate contract
   function PocGoal(address _goalOwner, bytes16 _name,bytes16 _email,uint _fitbitID,uint _activeMinutes,uint _rounds,uint _roundLength,bytes16 _beginAt,bytes16 _endAt,uint _stake) public {
@@ -127,7 +128,9 @@ contract PocGoal {
     }
   
   //makes the contract able to hold some ether
-  function depositStake() public payable {  }
+  function depositStake() public payable { 
+      depositSent;
+    }
   
   //returns stake to user when they win a milestone. Funds go to the address that created the goal.
   function winStake() onlyNceno public payable{
