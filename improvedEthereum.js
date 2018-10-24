@@ -357,24 +357,7 @@
         });
                 
         
-        var PocGoalext = PocGoalContract.at($("#goalAddress").val());
-        //event listener for deposit
-        var depositEvent = PocGoalext.depositSent({},'latest');
-        depositEvent.watch(function(error, result){
-            if (result)
-                {
-                    if (result.blockHash != $("#insTrans").html()) 
-                      $("#loader").hide();
-                      //$("#depositStakeBtn").show();
-                      //$("#createGoalBtn").hide();
-                      $("#insTrans").html('Block hash: ' +result.blockHash);
-                      $("#depositStatus").html('Successful deposit of '+ ($("#stake").val()-1.00)*0.0048);
-                      console.log(result.blockHash);
-                } else {
-                    $("#loader").hide();
-                    console.log(error);
-                }
-        });
+        
         //get address of the goal just created and deposit stake
         $("#depositStakeBtn").click(function() {
           //$("#loader").show();
@@ -404,5 +387,25 @@
           )//closes contract function call
         });//closes function(){ and click(
         //end of function call by button click
+
+        var PocGoalext = PocGoalContract.at($("#goalAddress").val());
+        console.log('new goal address: '+ $("#goalAddress").val());
+        //event listener for deposit
+        var depositEvent = PocGoalext.depositSent({},'latest');
+        depositEvent.watch(function(error, result){
+            if (result)
+                {
+                    if (result.blockHash != $("#insTrans").html()) 
+                      $("#loader").hide();
+                      //$("#depositStakeBtn").show();
+                      //$("#createGoalBtn").hide();
+                      $("#insTrans").html('Block hash: ' +result.blockHash);
+                      $("#depositStatus").html('Successful deposit of '+ ($("#stake").val()-1.00)*0.0048);
+                      console.log(result.blockHash);
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                }
+        });
 
     //</script>
