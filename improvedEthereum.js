@@ -328,9 +328,9 @@
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal ');
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
-                        function(error, result1) {
+                        function(error, result) {
                           if (!error){
-                            var PocGoal = PocGoalContract.at(result1);
+                            var PocGoal = PocGoalContract.at(result);
                             var usdStake = ($("#stake").val()-1.00)*0.0049;
                             PocGoal.depositStake(
                               {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
