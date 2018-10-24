@@ -41,34 +41,15 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_fbID",
-        "type": "uint256"
-      }
-    ],
-    "name": "getGoalsByFitbitID",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
         "name": "_name",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_email",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_fitbitID",
@@ -83,16 +64,8 @@
         "type": "uint256"
       },
       {
-        "name": "_roundLength",
-        "type": "uint256"
-      },
-      {
         "name": "_beginAt",
-        "type": "string"
-      },
-      {
-        "name": "_endAt",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_stake",
@@ -112,6 +85,25 @@
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "name": "_fbID",
+        "type": "uint256"
+      }
+    ],
+    "name": "getGoalsByFitbitID",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "getAllGoals",
     "outputs": [
@@ -123,6 +115,48 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "email",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "fitbitID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rounds",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "beginAt",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "stake",
+        "type": "uint256"
+      }
+    ],
+    "name": "goalInfo",
+    "type": "event"
   }
 ]);
         var PocGoalContract = web3.eth.contract([
@@ -164,15 +198,11 @@
       },
       {
         "name": "",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
+        "type": "bytes16"
       },
       {
         "name": "",
@@ -188,11 +218,7 @@
       },
       {
         "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "",
@@ -215,11 +241,11 @@
       },
       {
         "name": "_name",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_email",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_fitbitID",
@@ -234,16 +260,8 @@
         "type": "uint256"
       },
       {
-        "name": "_roundLength",
-        "type": "uint256"
-      },
-      {
         "name": "_beginAt",
-        "type": "string"
-      },
-      {
-        "name": "_endAt",
-        "type": "string"
+        "type": "bytes16"
       },
       {
         "name": "_stake",
@@ -253,25 +271,72 @@
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "depositSent",
+    "type": "event"
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0xb9f93fa46be29fdd77ca2b9deb4063a97925bc04');
+        var GoalFactory = GoalFactoryContract.at('0x31003094393d4990932e7fd5583ef8b1b0a679e3'); //mainnet from metamask account 2
         console.log(GoalFactory);
+        $("#awaiting").hide();
+        
+        //event listener for goal creation
+        var goalInfoEvent = GoalFactory.goalInfo({},'latest');
+        goalInfoEvent.watch(function(error, result){
+            if (result)
+                {
+                    if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
+                      console.log(result.blockHash);
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal.');
+                      $("#awaiting").show();
+                      GoalFactory.getLastGoalByFitbitID(
+                        $("#fitbitID").val(),
+                        function(error, result) {
+                          if (!error){
+                            var PocGoal = PocGoalContract.at(result);
+                            var usdStake = ($("#stake").val()-1.00)*0.0049;
+                            PocGoal.depositStake(
+                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
+                              function(error, result2) {
+                                if (!error){
+                                  console.log(result2);
+                                  $("#loader").hide();
+                                  $("#awaiting").hide();
+                                  $("#depositStatus").html('Deposit of $' +usdStake+ ' was successful!');
+                                  $("#insTrans").html(result2.blockHash);
+                                }//close if
+                                  else
+                                    console.error(error);
+                              }//closes callback
+                            )//closes contract function call
+                          }//close if
+                            else
+                              console.error(error);
+                        }//closes callback
+                      )//closes GoalFactory contract function call
 
-        //var PocGoal = PocGoalContract.at('0xE4a9F35A85644ce480743Dc5ab9512820dBA27B3');
-        //console.log(PocGoal);
 
+
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                }
+        });
+       
+    
         //creating the goal
         $("#createGoalBtn").click(function() {
-
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
-                $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
+                $("#rounds").val(), $("#beginAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
-                      //store fitbitID
-                      //var fitbitID = $("#fitbitID").val();
+                      $("#createGoalBtn").hide();
+                      $("#loader").show();
                       console.log(result);
                     }
                     else
@@ -279,32 +344,10 @@
                 })
         });
                 
-        //get address of the goal just created
-        $("#depositStakeBtn").click(function() {
-          GoalFactory.getLastGoalByFitbitID(
-            $("#fitbitID").val(),
-            function(error, result) {
-              if (!error){
-                var PocGoal = PocGoalContract.at(result);
+        
+        
+        //button goes here
 
-                var usdStake = ($("#stake").val()-2.50)*0.0048;
-                PocGoal.depositStake(
-                  {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
-                    function(error, result2) {
-                      if (!error){
-                        console.log(result2);
-                      }//close if
-                      else
-                        console.error(error);
-                    }//closes callback
-                )//closes contract function call
 
-              }//close if
-              else
-                console.error(error);
-            }//closes callback
-          )//closes contract function call
-        });//closes function(){ and click(
-        //end of function call by button click
 
     //</script>
