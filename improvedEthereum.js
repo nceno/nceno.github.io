@@ -316,7 +316,7 @@
 
         var GoalFactory = GoalFactoryContract.at('0x275f6e15bca3c9fa6af5a26b79ccd4d6b711ee63'); //ropsten testnet
         console.log(GoalFactory);
-        
+        $("#awaiting").hide();
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
@@ -325,7 +325,8 @@
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
-                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal ');
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal.');
+                      $("#awaiting").show();
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
                         function(error, result) {
@@ -338,6 +339,7 @@
                                 if (!error){
                                   console.log(result2);
                                   $("#loader").hide();
+                                  $("#awaiting").hide();
                                   $("#depositStatus").html('Deposit of $' +usdStake+ ' was successful!');
                                   $("#insTrans").html(result2.blockHash);
                                 }//close if
