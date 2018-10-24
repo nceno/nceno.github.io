@@ -310,7 +310,7 @@
 
         var GoalFactory = GoalFactoryContract.at('0x87eda33132862f6e15efd6a681ecd0910458b29f'); //ropsten testnet
         console.log(GoalFactory);
-
+        $("#depositStakeBtn").hide();
         //var goalInfoEvent = GoalFactory.goalInfo();
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         goalInfoEvent.watch(function(error, result){
@@ -319,7 +319,7 @@
                     if (result.blockHash != $("#insTrans").html()) 
                       $("#loader").hide();
                       $("#depositStakeBtn").show();
-            
+                      $("#createGoalBtn").hide();
                       $("#insTrans").html('Block hash: ' +result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
                       console.log(result.blockHash);
@@ -340,8 +340,6 @@
                 $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
-                      //store fitbitID
-                      //var fitbitID = $("#fitbitID").val();
                       console.log(result);
                     }
                     else
