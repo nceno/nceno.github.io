@@ -318,6 +318,7 @@
                 {
                     if (result.blockHash != $("#insTrans").html()) 
                       $("#loader").hide();
+                      $("#depositStakeBtn").show();
             
                       $("#insTrans").html('Block hash: ' +result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' ' + result.args.fitbitID + ' '+ result.args.stake);
@@ -333,6 +334,7 @@
         //creating the goal
         $("#createGoalBtn").click(function() {
             $("#loader").show();
+            $("#depositStakeBtn").hide();
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
