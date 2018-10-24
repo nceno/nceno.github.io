@@ -283,6 +283,7 @@
         var GoalFactory = GoalFactoryContract.at('0x31003094393d4990932e7fd5583ef8b1b0a679e3'); //mainnet from metamask account 2
         console.log(GoalFactory);
         $("#awaiting").hide();
+        $("#yourGoal").hide();
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
@@ -292,6 +293,10 @@
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal.');
+                      $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
+                        ' just committed to doing '+ result.args.rounds+ ' '+ result.args.activeMinutes+ 
+                        ' exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
+                        ' with a stake of $'+ result.args.stake+'USD!');
                       $("#depositStatus").html('Awaiting deposit...');
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
@@ -306,7 +311,8 @@
                                   console.log(result2);
                                   $("#loader").hide();
                                   //$("#awaiting").html();
-                                  $("#depositStatus").html('Deposit of $' +usdStake+ ' was successful!');
+                                  $("#depositStatus").html('Deposit of $' +usdStake/0.0049+ ' was successful!');
+                                  $("#yourGoal").show();
                                   $("#insTrans").html(result2.blockHash);
                                 }//close if
                                   else
