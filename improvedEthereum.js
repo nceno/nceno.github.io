@@ -378,13 +378,15 @@
                       else
                         console.error(error);
                     }//closes callback
-                )//closes contract function call
+                )       //closes contract function call
 
               }//close if
               else
                 console.error(error);
             }//closes callback
-          )//closes contract function call
+          ).then(function() {
+  console.log('Got the final result: ');
+})   //closes contract function call
         });//closes function(){ and click(
         //end of function call by button click
 
