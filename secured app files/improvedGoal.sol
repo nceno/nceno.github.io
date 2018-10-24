@@ -27,16 +27,28 @@ contract GoalFactory {
        uint fitbitID,
        uint activeMinutes,
        uint rounds,
-       uint roundLength, 
+       //uint roundLength, 
        bytes16 beginAt,
-       bytes16 endAt, 
+       //bytes16 endAt, 
        uint stake);
 
 //spawn a new goal with intended parameters
-  function createGoal(bytes16 _name, bytes16 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,uint _roundLength, bytes16 _beginAt, bytes16 _endAt, uint _stake) public returns(address) {
-      goalInfo(_name, _email, _fitbitID, _activeMinutes, _rounds, _roundLength, _beginAt, _endAt, _stake);
+  function createGoal(bytes16 _name, bytes16 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,
+    //uint _roundLength, 
+    bytes16 _beginAt, 
+    //bytes16 _endAt, 
+    uint _stake) public returns(address) {
+      goalInfo(_name, _email, _fitbitID, _activeMinutes, _rounds, 
+        //_roundLength,
+         _beginAt, 
+        // _endAt, 
+         _stake);
       address creator = msg.sender;
-      createdGoal = new PocGoal(creator, _name,_email,_fitbitID,_activeMinutes,_rounds,_roundLength,_beginAt,_endAt,_stake);
+      createdGoal = new PocGoal(creator, _name,_email,_fitbitID,_activeMinutes,_rounds,
+        //_roundLength,
+        _beginAt,
+        //_endAt,
+        _stake);
       //add it to the registry
       goalList.push(createdGoal);
       //add it to the player's history
@@ -86,11 +98,11 @@ contract PocGoal {
   //number of total workouts in the goal
   uint rounds;
   //number of days per rounds
-  uint roundLength;
+  //uint roundLength;
   //when does the clock start?
   bytes16 beginAt;
   //when the goal ends
-  bytes16 endAt;
+  //bytes16 endAt;
     //how much ether will you stake?
   uint stake;
   //last 5 digits of phone number
@@ -105,19 +117,28 @@ contract PocGoal {
         require(msg.sender == nceno);
         _;
     }
+
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
 event depositSent();
   
     //constructor, called by GoalFactory to instantiate contract
-  function PocGoal(address _goalOwner, bytes16 _name,bytes16 _email,uint _fitbitID,uint _activeMinutes,uint _rounds,uint _roundLength,bytes16 _beginAt,bytes16 _endAt,uint _stake) public {
+  function PocGoal(address _goalOwner, bytes16 _name,bytes16 _email,uint _fitbitID,uint _activeMinutes,uint _rounds,
+    //uint _roundLength,
+    bytes16 _beginAt,
+    //bytes16 _endAt,
+    uint _stake) public {
       owner = _goalOwner;
       name =_name;
         email = _email;
         fitbitID = _fitbitID;
         activeMinutes = _activeMinutes;
         rounds = _rounds;
-        roundLength = _roundLength;
+        //roundLength = _roundLength;
         beginAt = _beginAt;
-        endAt = _endAt;
+        //endAt = _endAt;
         stake = _stake;
 
     //addresses where lost stake goes
@@ -128,7 +149,7 @@ event depositSent();
     }
   
   //makes the contract able to hold some ether
-  function depositStake() public payable { 
+  function depositStake() onlyOwner public payable { 
       depositSent;
     }
   
@@ -145,9 +166,17 @@ event depositSent();
     }
 
   //see the goal details
-  function getGoal () public constant returns (address, bytes16, bytes16, uint, uint, uint, uint, bytes16, bytes16, uint, uint256){
+  function getGoal () public constant returns (address, bytes16, bytes16, uint, uint, uint, 
+    //uint, 
+    bytes16, 
+    //bytes16, 
+    uint, uint256){
       uint256 bal = address(this).balance;
-      return(owner,name,email,fitbitID,activeMinutes,rounds,roundLength,beginAt,endAt,stake,bal);
+      return(owner,name,email,fitbitID,activeMinutes,rounds,
+       // roundLength,
+        beginAt,
+        //endAt,
+        stake,bal);
   }
   
 //end of contract
