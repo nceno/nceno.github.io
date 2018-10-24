@@ -320,25 +320,25 @@
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
-        goalInfoEvent.watch(function(error, result1){
+        goalInfoEvent.watch(function(error, result){
             if (result)
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal ');
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
-                        function(error, result) {
+                        function(error, result1) {
                           if (!error){
-                            var PocGoal = PocGoalContract.at(result);
+                            var PocGoal = PocGoalContract.at(result1);
                             var usdStake = ($("#stake").val()-1.00)*0.0049;
-                            $("#goalDisplay").html(web3.toAscii(result1.args.name) + ' just staked '+ '$' +result1.args.stake+ ' on their goal!');
                             PocGoal.depositStake(
                               {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
                               function(error, result2) {
                                 if (!error){
                                   console.log(result2);
                                   $("#loader").hide();
-                                  $("#depositStatus").html('Deposit successful!');
+                                  $("#depositStatus").html('Deposit of $' +usdStake+ ' was successful!');
                                   $("#insTrans").html(result.blockHash);
                                 }//close if
                                   else
