@@ -316,7 +316,7 @@
         goalInfoEvent.watch(function(error, result){
             if (!error)
                 {
-                    if (result.blockHash != $("#instrans").html()) 
+                    if (result.blockHash != $("#insTrans").html()) 
                       $("#loader").hide();
             
                       $("#insTrans").html('Block hash: ' +result.blockHash);
