@@ -27,6 +27,20 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getGoalCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -50,15 +64,7 @@
         "type": "uint256"
       },
       {
-        "name": "_roundLength",
-        "type": "uint256"
-      },
-      {
         "name": "_beginAt",
-        "type": "bytes16"
-      },
-      {
-        "name": "_endAt",
         "type": "bytes16"
       },
       {
@@ -75,20 +81,6 @@
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getGoalCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -154,17 +146,7 @@
       },
       {
         "indexed": false,
-        "name": "roundLength",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
         "name": "beginAt",
-        "type": "bytes16"
-      },
-      {
-        "indexed": false,
-        "name": "endAt",
         "type": "bytes16"
       },
       {
@@ -236,14 +218,6 @@
       },
       {
         "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes16"
-      },
-      {
-        "name": "",
         "type": "bytes16"
       },
       {
@@ -286,15 +260,7 @@
         "type": "uint256"
       },
       {
-        "name": "_roundLength",
-        "type": "uint256"
-      },
-      {
         "name": "_beginAt",
-        "type": "bytes16"
-      },
-      {
-        "name": "_endAt",
         "type": "bytes16"
       },
       {
@@ -314,7 +280,7 @@
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0x275f6e15bca3c9fa6af5a26b79ccd4d6b711ee63'); //ropsten testnet
+        var GoalFactory = GoalFactoryContract.at('0x1909f9e8409636483288678fd141417cddeeac13'); //ropsten testnet
         console.log(GoalFactory);
         $("#awaiting").hide();
         
