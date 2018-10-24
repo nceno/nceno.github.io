@@ -292,7 +292,7 @@
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal.');
-                      $("#awaiting").show();
+                      $("#depositStatus").html('Awaiting deposit...');
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
                         function(error, result) {
@@ -305,7 +305,7 @@
                                 if (!error){
                                   console.log(result2);
                                   $("#loader").hide();
-                                  $("#awaiting").hide();
+                                  //$("#awaiting").html();
                                   $("#depositStatus").html('Deposit of $' +usdStake+ ' was successful!');
                                   $("#insTrans").html(result2.blockHash);
                                 }//close if
