@@ -346,7 +346,7 @@
             $("#depositStakeBtn").hide();
             GoalFactory.createGoal(
                 $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
-                $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gasPrice: 10000000000},
+                $("#rounds").val(), $("#roundLength").val(), $("#beginAt").val(), $("#endAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
                       console.log(result);
@@ -355,17 +355,9 @@
                       console.error(error);
                 })
         });
-                
-        //get address of the goal just created and deposit stake
-        $("#depositStakeBtn").click(function() {
-          //$("#loader").show();
-          GoalFactory.getLastGoalByFitbitID(
-            $("#fitbitID").val(),
-            function(error, result) {
-              if (!error){
-                var PocGoal = PocGoalContract.at(result);
-
                 //event listener for deposit
+        //var goalAddress = $("#goalAddress").html();
+        var PocGoal = PocGoalContract.at($("#goalAddress").html());
         var depositEvent = PocGoal.depositSent({},'latest');
         depositEvent.watch(function(error, result){
             if (result)
@@ -382,6 +374,16 @@
                     console.log(error);
                 }
         });
+        //get address of the goal just created and deposit stake
+        $("#depositStakeBtn").click(function() {
+          //$("#loader").show();
+          GoalFactory.getLastGoalByFitbitID(
+            $("#fitbitID").val(),
+            function(error, result) {
+              if (!error){
+                var PocGoal = PocGoalContract.at(result);
+                $("#goalAddress").html(result);
+                
                 var usdStake = ($("#stake").val()-1.00)*0.0048;
                 PocGoal.depositStake(
                   {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
