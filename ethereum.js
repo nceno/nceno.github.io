@@ -292,25 +292,33 @@
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
+                      //echo goal creation
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal!');
+                      //echo goal data
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
                         ' with a stake of $'+ result.args.stake+'USD!');
+                      //await deposit
                       $("#depositStatus").html('Awaiting deposit...');
+                      //prompt for signing deposit
+                      //get address of most recent goal created by fitbitID
                       GoalFactory.getLastGoalByFitbitID(
                         $("#fitbitID").val(),
                         function(error, result) {
                           if (!error){
+                            //pass it and the intended stake to deposit
                             var PocGoal = PocGoalContract.at(result);
                             var usdStake = ($("#stake").val()-1.00)*0.0049;
+                            //call deposit on that address
                             PocGoal.depositStake(
                               {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
                               function(error, result2) {
                                 if (!error){
                                   console.log(result2);
+                                  //loader animation
                                   $("#loader").hide();
-                                  //$("#awaiting").html();
+                                  //echo deposit and goal data
                                   $("#depositStatus").html('Deposit of $' +usdStake/0.0049+ ' was successful!');
                                   $("#yourGoal").show();
                                   $("#insTrans").html(result2.blockHash);
