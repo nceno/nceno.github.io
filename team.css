@@ -13,7 +13,7 @@
 }
 .team-box {border: 1px solid #000000; padding:10px;}
 .team-box:hover {border: 1px solid #ea6c56 ;}
-.team-img img {border: 1px solid #040505;}
+.team-img img {border: 1px solid #000000;}
 .team-title h3 {font-size:24px;font-weight:700;color:#040505 ;}
 .team-title h4 {font-size:16px; font-weight:600;}
 .team-title p {line-height:22px;}
