@@ -286,8 +286,8 @@
         $("#yourGoal").hide();
         
         //event listener for goal creation
-        //var goalInfoEvent = GoalFactory.goalInfo({},'latest');
-        var goalInfoEvent = GoalFactory.goalInfo();
+        var goalInfoEvent = GoalFactory.goalInfo({},'latest');
+        
         goalInfoEvent.watch(function(error, result){
             if (result)
                 {
