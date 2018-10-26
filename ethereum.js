@@ -1,8 +1,8 @@
 //<script>
         var Web3 = require('web3');
-        //web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545")); //for local testnet
+        //web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545")); //local testnet
         web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
-        //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //for key handler  
+        //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //rinkeby  
 
         web3.eth.defaultAccount = web3.eth.accounts[0];
 
