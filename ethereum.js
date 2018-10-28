@@ -286,7 +286,7 @@
         console.log(GoalFactory);
         $("#awaiting").hide();
         $("#yourGoal").hide();
-        //$("#createGoalBtn").hide();
+        $("#createGoalBtn").hide();
         
         //show create button only if user agrees to terms
         $("#checker").on('click', function() {
