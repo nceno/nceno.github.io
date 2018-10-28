@@ -320,7 +320,7 @@
                       //prompt for signing deposit
                       //get address of most recent goal created by fitbitID
                       GoalFactory.getLastGoalByFitbitID(
-                        ("1"+$("#fitbitID").val()),
+                        ('1'+$("#fitbitID").val()),
                         function(error, result) {
                           if (!error){
                             //pass it and the intended stake to deposit
@@ -363,7 +363,7 @@
             GoalFactory.createGoal(
                 $("#name").val(), 
                 $("#email").val(), 
-                ("1"+$("#fitbitID").val()), 
+                ('1'+$("#fitbitID").val()), 
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
                 $("#beginAt").val(), 
