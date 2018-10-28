@@ -286,6 +286,9 @@
         console.log(GoalFactory);
         $("#awaiting").hide();
         $("#yourGoal").hide();
+        if ($("#checker").is(":checked")){
+          $("#createGoalBtn").show();
+        }
         
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
