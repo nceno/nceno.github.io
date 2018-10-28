@@ -335,7 +335,7 @@
                                   //loader animation
                                   $("#loader").hide();
                                   //echo deposit and goal data
-                                  $("#depositStatus").html('Deposit of $' +usdStake/0.0049+ ' was successful!');
+                                  $("#depositStatus").html('Deposit of $' +usdStake/0.0048+ ' was successful!');
                                   $("#yourGoal").show();
                                   $("#insTrans").html(result2.blockHash);
                                 }//close if
