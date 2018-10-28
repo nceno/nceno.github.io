@@ -290,7 +290,7 @@
         
         //show create button only if user agrees to terms
         $("#checker").on('click', function() {
-          if($(this).is(':checked')) {
+          if($("#checker").is(':checked')) {
             $("#createGoalBtn").show();
             
           } else {
