@@ -18,11 +18,3 @@ input[type=button] {
 input[type=checkbox]:checked ~ input[type=button] {
   display:block;
 }
-
-#createGoalBtn {
-	padding-left: 5rem;
-}
-
-#checker {
-	padding-left: 5rem;
-}
