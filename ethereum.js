@@ -287,7 +287,18 @@
         $("#awaiting").hide();
         $("#yourGoal").hide();
         
-        
+        //show create button only if user agrees to terms
+        $("#checkbox").on('click', function() {
+          if($(this).is(':checked')) {
+            $("#createGoalBtn").show();
+            
+          } else {
+            $("#createGoalBtn").hide();
+            
+          }
+        });
+
+
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         

@@ -11,10 +11,3 @@ body {
     display:none;
 }
 
-input[type=button] {
-  display:none;
-}
-
-input[type=checkbox]:checked ~ input[type=button] {
-  display:block;
-}
