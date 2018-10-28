@@ -362,7 +362,7 @@
         $("#createGoalBtn").click(function() {
             GoalFactory.createGoal(
                 $("#name").val(), 
-                $("#email").val()+"EMAIL", 
+                $("#email").val(), 
                 $("#fitbitID").val(), 
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
