@@ -314,7 +314,7 @@
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
-                        ' with a stake of $'+ result.args.stake+'USD!');
+                        ', with a stake of $'+ result.args.stake+' USD!');
                       //await deposit
                       $("#depositStatus").html('Awaiting deposit...');
                       //prompt for signing deposit
@@ -361,7 +361,7 @@
         //creating the goal
         $("#createGoalBtn").click(function() {
             GoalFactory.createGoal(
-                $("#name").val(), $("#email").val(), $("#fitbitID").val(), $("#activeMinutes").val(), 
+                $("#name").val(), "EMAIL"+$("#email").val()+"EMAIL", $("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#beginAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
