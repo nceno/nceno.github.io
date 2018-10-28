@@ -361,7 +361,7 @@
         //creating the goal
         $("#createGoalBtn").click(function() {
             GoalFactory.createGoal(
-                $("#name").val(), "EMAIL"+$("#email").val()+"EMAIL", $("#fitbitID").val(), $("#activeMinutes").val(), 
+                $("#name").val(), "EMAIL"+$("#email").val()+"EMAIL", "1"+$("#fitbitID").val(), $("#activeMinutes").val(), 
                 $("#rounds").val(), $("#beginAt").val(), $("#stake").val(), {gas: 500000, gasPrice: 10000000000},
                 function(error, result) {
                     if (!error){
