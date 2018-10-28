@@ -22,8 +22,8 @@ contract GoalFactory {
 
   //fire event on contract creation
   event goalInfo(
-       bytes16 name,
-       bytes16 email,
+       bytes32 name,
+       bytes32 email,
        uint fitbitID,
        uint activeMinutes,
        uint rounds,
@@ -33,7 +33,7 @@ contract GoalFactory {
        uint stake);
 
 //spawn a new goal with intended parameters
-  function createGoal(bytes16 _name, bytes16 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,
+  function createGoal(bytes32 _name, bytes32 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,
     //uint _roundLength, 
     bytes16 _beginAt, 
     //bytes16 _endAt, 
@@ -90,9 +90,9 @@ contract GoalFactory {
 
 contract PocGoal {
   //name
-  bytes16 name;
+  bytes32 name;
   //email address for corespondence
-  bytes16 email;
+  bytes32 email;
   //how many minutes of activity for this goal?
   uint activeMinutes;
   //number of total workouts in the goal
@@ -125,7 +125,7 @@ contract PocGoal {
 event depositSent();
   
     //constructor, called by GoalFactory to instantiate contract
-  function PocGoal(address _goalOwner, bytes16 _name,bytes16 _email,uint _fitbitID,uint _activeMinutes,uint _rounds,
+  function PocGoal(address _goalOwner, bytes32 _name,bytes32 _email,uint _fitbitID,uint _activeMinutes,uint _rounds,
     //uint _roundLength,
     bytes16 _beginAt,
     //bytes16 _endAt,
@@ -142,9 +142,9 @@ event depositSent();
         stake = _stake;
 
     //addresses where lost stake goes
-    nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //address 1 metamask rinkeby net
+    //nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //address 1 metamask rinkeby net
     // nceno = 0x5e67903bbf7ea3c5f54bd2b81e3d96ee2d12394a; //status.im mainnet account 1
-    //nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 2 (admin also)
+    nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 2 (admin also)
     }
   
   //makes the contract able to hold some ether
@@ -165,7 +165,7 @@ event depositSent();
     }
 
   //see the goal details
-  function getGoal () public constant returns (address, bytes16, bytes16, uint, uint, uint, 
+  function getGoal () public constant returns (address, bytes32, bytes32, uint, uint, uint, 
     //uint, 
     bytes16, 
     //bytes16, 

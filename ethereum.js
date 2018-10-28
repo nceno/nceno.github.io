@@ -27,29 +27,15 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getGoalCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
         "name": "_name",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "_email",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "_fitbitID",
@@ -81,6 +67,20 @@
     ],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getGoalCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -122,12 +122,12 @@
       {
         "indexed": false,
         "name": "name",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "indexed": false,
         "name": "email",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "indexed": false,
@@ -198,11 +198,11 @@
       },
       {
         "name": "",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "",
@@ -241,11 +241,11 @@
       },
       {
         "name": "_name",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "_email",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "_fitbitID",
@@ -280,7 +280,7 @@
   }
 ]);
 
-        var GoalFactory = GoalFactoryContract.at('0x31003094393d4990932e7fd5583ef8b1b0a679e3'); //mainnet from metamask account 2
+        var GoalFactory = GoalFactoryContract.at('0x749ec2fc3aba4900d2217d82e73af8466dc02a11'); //mainnet from metamask account 2
         //var GoalFactory = GoalFactoryContract.at('0x3678bbf288896ecce9597c76d9f430fda20fd556'); //rinkeby from metamask account 1
         
         console.log(GoalFactory);
@@ -320,7 +320,7 @@
                       //prompt for signing deposit
                       //get address of most recent goal created by fitbitID
                       GoalFactory.getLastGoalByFitbitID(
-                        ("1"+$("#fitbitID").val()),
+                        $("#fitbitID").val(),
                         function(error, result) {
                           if (!error){
                             //pass it and the intended stake to deposit
@@ -362,8 +362,8 @@
         $("#createGoalBtn").click(function() {
             GoalFactory.createGoal(
                 $("#name").val(), 
-                ("EMAIL"+$("#email").val()+"EMAIL"), 
-                ("1"+$("#fitbitID").val()), 
+                $("#email").val()+"EMAIL", 
+                $("#fitbitID").val(), 
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
                 $("#beginAt").val(), 
