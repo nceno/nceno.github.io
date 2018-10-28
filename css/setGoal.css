@@ -1,0 +1,20 @@
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+#loader {
+    width: 100px;
+    display:none;
+}
+
+input[type=button] {
+  display:none;
+}
+
+input[type=checkbox]:checked ~ input[type=button] {
+  display:block;
+}
