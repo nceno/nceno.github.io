@@ -325,10 +325,10 @@
                           if (!error){
                             //pass it and the intended stake to deposit
                             var PocGoal = PocGoalContract.at(result);
-                            var usdStake = ($("#stake").val()-1.00)*0.0049;
+                            var usdStake = ($("#stake").val()-1.50)*0.0048;
                             //call deposit on that address
                             PocGoal.depositStake(
-                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 10000000000},
+                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 12000000000},
                               function(error, result2) {
                                 if (!error){
                                   console.log(result2);
@@ -368,7 +368,7 @@
                 $("#rounds").val(), 
                 $("#beginAt").val(), 
                 $("#stake").val(), 
-                {gas: 500000, gasPrice: 10000000000},
+                {gas: 500000, gasPrice: 12000000000},
                 function(error, result) {
                     if (!error){
                       $("#createGoalBtn").hide();
