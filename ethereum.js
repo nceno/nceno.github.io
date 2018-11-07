@@ -5,7 +5,6 @@
         //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //rinkeby 
         //web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9db967faa260482782c435096a818865")); //mainnet
          
-
         web3.eth.defaultAccount = web3.eth.accounts[0];
 
         var GoalFactoryContract = web3.eth.contract([
@@ -34,7 +33,7 @@
       },
       {
         "name": "_beginAt",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "name": "_stake",
@@ -42,19 +41,60 @@
       }
     ],
     "name": "createGoal",
-    "outputs": [
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "ncenoTotalWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
-        "type": "address"
+        "name": "withdrawal",
+        "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "nonpayable",
+    "name": "ncenoWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "name": "payout",
+        "type": "uint256"
+      }
+    ],
+    "name": "userPayout",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "name": "owner",
+        "type": "address"
+      },
       {
         "indexed": false,
         "name": "name",
@@ -83,7 +123,7 @@
       {
         "indexed": false,
         "name": "beginAt",
-        "type": "bytes16"
+        "type": "bytes32"
       },
       {
         "indexed": false,
@@ -100,8 +140,42 @@
     "name": "getAllGoals",
     "outputs": [
       {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes32"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
       }
     ],
     "payable": false,
@@ -133,8 +207,42 @@
     "name": "getGoalsByFitbitID",
     "outputs": [
       {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes32"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
       }
     ],
     "payable": false,
@@ -152,138 +260,52 @@
     "name": "getLastGoalByFitbitID",
     "outputs": [
       {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes32"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
         "name": "",
-        "type": "address"
+        "type": "tuple"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  }
-]);
-        var PocGoalContract = web3.eth.contract([
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "depositStake",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "loseStake",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "winStake",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes16"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "name": "_goalOwner",
-        "type": "address"
-      },
-      {
-        "name": "_name",
-        "type": "bytes32"
-      },
-      {
-        "name": "_email",
-        "type": "bytes32"
-      },
-      {
-        "name": "_fitbitID",
-        "type": "uint256"
-      },
-      {
-        "name": "_activeMinutes",
-        "type": "uint256"
-      },
-      {
-        "name": "_rounds",
-        "type": "uint256"
-      },
-      {
-        "name": "_beginAt",
-        "type": "bytes16"
-      },
-      {
-        "name": "_stake",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "depositSent",
-    "type": "event"
   }
 ]);
 
-        //var GoalFactory = GoalFactoryContract.at('0x749ec2fc3aba4900d2217d82e73af8466dc02a11'); //mainnet from metamask account 2
-        var GoalFactory = GoalFactoryContract.at('0xa0b32a7238f24846e193338092e3405d33c9194e'); //rinkeby from metamask account 1
+        var GoalFactory = GoalFactoryContract.at('0x40f86e52e25582ff031b5ae04007301042b77298'); //mainnet from metamask account 2
+        //var GoalFactory = GoalFactoryContract.at('0x7a750c376a9e6a62418d8253e8f8918598e363dd'); //rinkeby from metamask account 2
         
         console.log(GoalFactory);
         $("#awaiting").hide();
@@ -310,50 +332,19 @@
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
+                      //loader hide
+                      $("#loader").hide();
                       //echo goal creation
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal!');
+
+                      //show data
+                      $("#yourGoal").show();
                       //echo goal data
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
                         ', with a stake of $'+ result.args.stake+' USD!');
-                      //await deposit
-                      $("#depositStatus").html('Awaiting deposit...');
-                      //prompt for signing deposit
-                      //get address of most recent goal created by fitbitID
-                      GoalFactory.getLastGoalByFitbitID(
-                        ('1'+$("#fitbitID").val()),
-                        function(error, result) {
-                          if (!error){
-                            //pass it and the intended stake to deposit
-                            var PocGoal = PocGoalContract.at(result);
-                            var usdStake = ($("#stake").val()-1.50)*0.0047;
-                            //call deposit on that address
-                            PocGoal.depositStake(
-                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 12000000000},
-                              function(error, result2) {
-                                if (!error){
-                                  console.log(result2);
-                                  //loader animation
-                                  $("#loader").hide();
-                                  //echo deposit and goal data
-                                  $("#depositStatus").html('Deposit of $' +usdStake/0.0047+ ' was successful!');
-                                  $("#yourGoal").show();
-                                  $("#insTrans").html(result2.blockHash);
-                                }//close if
-                                  else
-                                    console.error(error);
-                              }//closes callback
-                            )//closes contract function call
-                          }//close if
-                            else
-                              console.error(error);
-                        }//closes callback
-                      )//closes GoalFactory contract function call
-
-
-
-                } else {
+                    } else {
                     $("#loader").hide();
                     console.log(error);
                 }
@@ -362,6 +353,7 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
+            var usdStake = ($("#stake").val()-1.05)*0.0048;
             GoalFactory.createGoal(
                 $("#name").val(), 
                 $("#email").val(), 
@@ -369,12 +361,13 @@
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
                 $("#beginAt").val(), 
-                $("#stake").val(), 
-                {gas: 500000, gasPrice: 12000000000},
+                $("#stake").val(),
+                {from: web3.eth.accounts[0], gas: 400000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
                 function(error, result) {
                     if (!error){
                       $("#createGoalBtn").hide();
                       $("#loader").show();
+                      $("#insTrans").html(result.blockHash);
                       console.log(result);
                     }
                     else

@@ -7,7 +7,6 @@ pragma experimental ABIEncoderV2;
 //with those parameters and (separately) loaded with the intended stake. The GoalFactory contract also acts as a registry where the admin can 
 //retreive a list of all goals ever set by a fitbitID (user ID).
 
-//testnet rinkeby: 0xa0b32a7238f24846e193338092e3405d33c9194e
 
 contract GoalFactory {
 
@@ -20,7 +19,7 @@ contract GoalFactory {
     uint fitbitID;
     uint activeMinutes;
     uint rounds;
-    bytes16 beginAt;
+    bytes32 beginAt;
     uint stake;
   }
 
@@ -43,11 +42,11 @@ contract GoalFactory {
        uint fitbitID,
        uint activeMinutes,
        uint rounds,
-       bytes16 beginAt,
+       bytes32 beginAt,
        uint stake);
 
 //spawn a new goal with intended parameters
-  function createGoal(bytes32 _name, bytes32 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,bytes16 _beginAt, uint _stake) public payable {
+  function createGoal(bytes32 _name, bytes32 _email, uint _fitbitID,uint _activeMinutes, uint _rounds,bytes32 _beginAt, uint _stake) public payable {
     address owner = msg.sender;
       goalInfo(owner, _name, _email, _fitbitID, _activeMinutes, _rounds,  _beginAt,  _stake);
       address creator = msg.sender;
@@ -67,9 +66,9 @@ contract GoalFactory {
     }
 
     //addresses where lost stake goes
-    address nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //address 1 metamask rinkeby net
+    //address nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //address 1 metamask rinkeby net
     //address nceno = 0x5e67903bbf7ea3c5f54bd2b81e3d96ee2d12394a; //status.im mainnet account 1
-   //address nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 2 (admin also)
+   address nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 3 (admin also)
 
 //get the total number of goals created so far
   function getGoalCount() public view returns (uint) {
