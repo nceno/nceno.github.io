@@ -308,7 +308,7 @@
         //var GoalFactory = GoalFactoryContract.at('0x7a750c376a9e6a62418d8253e8f8918598e363dd'); //rinkeby from metamask account 2
         
         console.log(GoalFactory);
-        $("#awaiting").hide();
+        $("#allSet").hide();
         $("#yourGoal").hide();
         $("#createGoalBtn").hide();
         
@@ -344,6 +344,8 @@
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
                         ', with a stake of $'+ result.args.stake+' USD!');
+                      //link to log workouts
+                      $("#allSet").show();
                     } else {
                     $("#loader").hide();
                     console.log(error);
