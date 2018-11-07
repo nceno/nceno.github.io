@@ -5,7 +5,7 @@
         //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //rinkeby 
         //web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9db967faa260482782c435096a818865")); //mainnet
          
-        web3.eth.defaultAccount = web3.eth.accounts[1];
+        web3.eth.defaultAccount = web3.eth.accounts[3];
 
         var GoalFactoryContract = web3.eth.contract([
   {
@@ -282,7 +282,7 @@
 ]);
 
         //var GoalFactory = GoalFactoryContract.at('0x749ec2fc3aba4900d2217d82e73af8466dc02a11'); //mainnet from metamask account 2
-        var GoalFactory = GoalFactoryContract.at('0xa0b32a7238f24846e193338092e3405d33c9194e'); //rinkeby from metamask account 1
+        var GoalFactory = GoalFactoryContract.at('0xa0b32a7238f24846e193338092e3405d33c9194e'); //rinkeby from metamask account 2
         
         console.log(GoalFactory);
         $("#awaiting").hide();
