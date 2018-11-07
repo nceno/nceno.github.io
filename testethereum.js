@@ -332,8 +332,13 @@
                 {
                     if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
                       console.log(result.blockHash);
+                      //loader hide
+                      $("#loader").hide();
                       //echo goal creation
                       $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal!');
+
+                      //show data
+                      $("#yourGoal").show();
                       //echo goal data
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
