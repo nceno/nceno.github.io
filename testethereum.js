@@ -305,7 +305,7 @@
 ]);
 
         //var GoalFactory = GoalFactoryContract.at('0x749ec2fc3aba4900d2217d82e73af8466dc02a11'); //mainnet from metamask account 2
-        var GoalFactory = GoalFactoryContract.at('0xa0b32a7238f24846e193338092e3405d33c9194e'); //rinkeby from metamask account 2
+        var GoalFactory = GoalFactoryContract.at('0x7a750c376a9e6a62418d8253e8f8918598e363dd'); //rinkeby from metamask account 2
         
         console.log(GoalFactory);
         $("#awaiting").hide();
