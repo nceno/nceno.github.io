@@ -9,6 +9,59 @@
 
         var GoalFactoryContract = web3.eth.contract([
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_fbID",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLastGoalByFitbitID",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes16"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -48,29 +101,6 @@
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "ncenoTotalWithdrawal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "withdrawal",
-        "type": "uint256"
-      }
-    ],
-    "name": "ncenoWithdrawal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "name": "userAddress",
@@ -88,98 +118,12 @@
     "type": "function"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "name",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "email",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "fitbitID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "activeMinutes",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "rounds",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "beginAt",
-        "type": "bytes16"
-      },
-      {
-        "indexed": false,
-        "name": "stake",
-        "type": "uint256"
-      }
-    ],
-    "name": "goalInfo",
-    "type": "event"
-  },
-  {
-    "constant": true,
+    "constant": false,
     "inputs": [],
-    "name": "getAllGoals",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "name": "name",
-            "type": "bytes32"
-          },
-          {
-            "name": "email",
-            "type": "bytes32"
-          },
-          {
-            "name": "fitbitID",
-            "type": "uint256"
-          },
-          {
-            "name": "activeMinutes",
-            "type": "uint256"
-          },
-          {
-            "name": "rounds",
-            "type": "uint256"
-          },
-          {
-            "name": "beginAt",
-            "type": "bytes16"
-          },
-          {
-            "name": "stake",
-            "type": "uint256"
-          }
-        ],
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
+    "name": "ncenoTotalWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -250,14 +194,23 @@
     "type": "function"
   },
   {
-    "constant": true,
+    "constant": false,
     "inputs": [
       {
-        "name": "_fbID",
+        "name": "withdrawal",
         "type": "uint256"
       }
     ],
-    "name": "getLastGoalByFitbitID",
+    "name": "ncenoWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getAllGoals",
     "outputs": [
       {
         "components": [
@@ -295,17 +248,64 @@
           }
         ],
         "name": "",
-        "type": "tuple"
+        "type": "tuple[]"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "email",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "fitbitID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rounds",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "beginAt",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "stake",
+        "type": "uint256"
+      }
+    ],
+    "name": "goalInfo",
+    "type": "event"
   }
 ]);
 
-        //var GoalFactory = GoalFactoryContract.at('0x749ec2fc3aba4900d2217d82e73af8466dc02a11'); //mainnet from metamask account 2
-        var GoalFactory = GoalFactoryContract.at('0x7a750c376a9e6a62418d8253e8f8918598e363dd'); //rinkeby from metamask account 2
+        var GoalFactory = GoalFactoryContract.at('0x4b3b47cb816aaac8d52e377262aac6371d66742e'); //mainnet from metamask account 2
+        //var GoalFactory = GoalFactoryContract.at('0x7a750c376a9e6a62418d8253e8f8918598e363dd'); //rinkeby from metamask account 2
         
         console.log(GoalFactory);
         $("#awaiting").hide();
@@ -344,43 +344,7 @@
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
                         ', with a stake of $'+ result.args.stake+' USD!');
-                      //await deposit
-                      //$("#depositStatus").html('Awaiting deposit...');
-                      //prompt for signing deposit
-                      //get address of most recent goal created by fitbitID
-                      /*GoalFactory.getLastGoalByFitbitID(
-                        ('1'+$("#fitbitID").val()),
-                        function(error, result) {
-                          if (!error){
-                            //pass it and the intended stake to deposit
-                            var PocGoal = PocGoalContract.at(result);
-                            var usdStake = ($("#stake").val()-1.50)*0.0047;
-                            //call deposit on that address
-                            PocGoal.depositStake(
-                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 12000000000},
-                              function(error, result2) {
-                                if (!error){
-                                  console.log(result2);
-                                  //loader animation
-                                  $("#loader").hide();
-                                  //echo deposit and goal data
-                                  $("#depositStatus").html('Deposit of $' +usdStake/0.0047+ ' was successful!');
-                                  $("#yourGoal").show();
-                                  $("#insTrans").html(result2.blockHash);
-                                }//close if
-                                  else
-                                    console.error(error);
-                              }//closes callback
-                            )//closes contract function call
-                          }//close if
-                            else
-                              console.error(error);
-                        }//closes callback
-                      )//closes GoalFactory contract function call*/
-
-
-
-                } else {
+                    } else {
                     $("#loader").hide();
                     console.log(error);
                 }
@@ -389,7 +353,7 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
-            var usdStake = ($("#stake").val()-1.1)*0.0047;
+            var usdStake = ($("#stake").val()-1.05)*0.0048;
             GoalFactory.createGoal(
                 $("#name").val(), 
                 $("#email").val(), 
