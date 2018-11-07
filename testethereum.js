@@ -1,0 +1,391 @@
+//<script>
+        var Web3 = require('web3');
+        //web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545")); //local testnet
+        web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
+        //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //rinkeby 
+        //web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9db967faa260482782c435096a818865")); //mainnet
+         
+
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        var GoalFactoryContract = web3.eth.contract([
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "name": "_email",
+        "type": "bytes32"
+      },
+      {
+        "name": "_fitbitID",
+        "type": "uint256"
+      },
+      {
+        "name": "_activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "name": "_rounds",
+        "type": "uint256"
+      },
+      {
+        "name": "_beginAt",
+        "type": "bytes16"
+      },
+      {
+        "name": "_stake",
+        "type": "uint256"
+      }
+    ],
+    "name": "createGoal",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "email",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "fitbitID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rounds",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "beginAt",
+        "type": "bytes16"
+      },
+      {
+        "indexed": false,
+        "name": "stake",
+        "type": "uint256"
+      }
+    ],
+    "name": "goalInfo",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getAllGoals",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getGoalCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_fbID",
+        "type": "uint256"
+      }
+    ],
+    "name": "getGoalsByFitbitID",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_fbID",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLastGoalByFitbitID",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]);
+        var PocGoalContract = web3.eth.contract([
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "depositStake",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "loseStake",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "winStake",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getGoal",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes16"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "_goalOwner",
+        "type": "address"
+      },
+      {
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "name": "_email",
+        "type": "bytes32"
+      },
+      {
+        "name": "_fitbitID",
+        "type": "uint256"
+      },
+      {
+        "name": "_activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "name": "_rounds",
+        "type": "uint256"
+      },
+      {
+        "name": "_beginAt",
+        "type": "bytes16"
+      },
+      {
+        "name": "_stake",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "depositSent",
+    "type": "event"
+  }
+]);
+
+        //var GoalFactory = GoalFactoryContract.at('0x749ec2fc3aba4900d2217d82e73af8466dc02a11'); //mainnet from metamask account 2
+        var GoalFactory = GoalFactoryContract.at('0xa0b32a7238f24846e193338092e3405d33c9194e'); //rinkeby from metamask account 1
+        
+        console.log(GoalFactory);
+        $("#awaiting").hide();
+        $("#yourGoal").hide();
+        $("#createGoalBtn").hide();
+        
+        //show create button only if user agrees to terms
+        $("#checker").on('click', function() {
+          if($("#checker").is(':checked')) {
+            $("#createGoalBtn").show();
+            
+          } else {
+            $("#createGoalBtn").hide();
+            
+          }
+        });
+
+
+        //event listener for goal creation
+        var goalInfoEvent = GoalFactory.goalInfo({},'latest');
+        
+        goalInfoEvent.watch(function(error, result){
+            if (result)
+                {
+                    if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
+                      console.log(result.blockHash);
+                      //echo goal creation
+                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal!');
+                      //echo goal data
+                      $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
+                        ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
+                        ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
+                        ', with a stake of $'+ result.args.stake+' USD!');
+                      //await deposit
+                      $("#depositStatus").html('Awaiting deposit...');
+                      //prompt for signing deposit
+                      //get address of most recent goal created by fitbitID
+                      GoalFactory.getLastGoalByFitbitID(
+                        ('1'+$("#fitbitID").val()),
+                        function(error, result) {
+                          if (!error){
+                            //pass it and the intended stake to deposit
+                            var PocGoal = PocGoalContract.at(result);
+                            var usdStake = ($("#stake").val()-1.50)*0.0047;
+                            //call deposit on that address
+                            PocGoal.depositStake(
+                              {from: web3.eth.accounts[0], gas: 30000, value: web3.toWei(usdStake, "ether"), gasPrice: 12000000000},
+                              function(error, result2) {
+                                if (!error){
+                                  console.log(result2);
+                                  //loader animation
+                                  $("#loader").hide();
+                                  //echo deposit and goal data
+                                  $("#depositStatus").html('Deposit of $' +usdStake/0.0047+ ' was successful!');
+                                  $("#yourGoal").show();
+                                  $("#insTrans").html(result2.blockHash);
+                                }//close if
+                                  else
+                                    console.error(error);
+                              }//closes callback
+                            )//closes contract function call
+                          }//close if
+                            else
+                              console.error(error);
+                        }//closes callback
+                      )//closes GoalFactory contract function call
+
+
+
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                }
+        });
+       
+    
+        //creating the goal
+        $("#createGoalBtn").click(function() {
+            GoalFactory.createGoal(
+                $("#name").val(), 
+                $("#email").val(), 
+                ('1'+$("#fitbitID").val()), 
+                $("#activeMinutes").val(), 
+                $("#rounds").val(), 
+                $("#beginAt").val(), 
+                $("#stake").val(), 
+                {gas: 500000, gasPrice: 12000000000},
+                function(error, result) {
+                    if (!error){
+                      $("#createGoalBtn").hide();
+                      $("#loader").show();
+                      console.log(result);
+                    }
+                    else
+                      console.error(error);
+                })
+        });
+                
+        
+        
+        //button goes here
+
+
+
+    //</script>
