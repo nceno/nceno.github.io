@@ -6,7 +6,7 @@ pragma solidity ^0.4.18;
 //with those parameters and (separately) loaded with the intended stake. The GoalFactory contract also acts as a registry where the admin can 
 //retreive a list of all goals ever set by a fitbitID (user ID).
 
-
+//testnet rinkeby: 0xa0b32a7238f24846e193338092e3405d33c9194e
 
 contract GoalFactory {
   PocGoal createdGoal;
