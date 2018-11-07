@@ -398,11 +398,12 @@
                 $("#rounds").val(), 
                 $("#beginAt").val(), 
                 $("#stake").val(),
-                {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
+                {from: web3.eth.accounts[0], gas: 400000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
                 function(error, result) {
                     if (!error){
                       $("#createGoalBtn").hide();
                       $("#loader").show();
+                      $("#insTrans").html(result.blockHash);
                       console.log(result);
                     }
                     else
