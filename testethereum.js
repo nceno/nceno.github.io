@@ -41,19 +41,60 @@
       }
     ],
     "name": "createGoal",
-    "outputs": [
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "ncenoTotalWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
-        "type": "address"
+        "name": "withdrawal",
+        "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "nonpayable",
+    "name": "ncenoWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "name": "payout",
+        "type": "uint256"
+      }
+    ],
+    "name": "userPayout",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "name": "owner",
+        "type": "address"
+      },
       {
         "indexed": false,
         "name": "name",
@@ -99,8 +140,42 @@
     "name": "getAllGoals",
     "outputs": [
       {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes16"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
       }
     ],
     "payable": false,
@@ -132,8 +207,42 @@
     "name": "getGoalsByFitbitID",
     "outputs": [
       {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes16"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
       }
     ],
     "payable": false,
@@ -151,133 +260,47 @@
     "name": "getLastGoalByFitbitID",
     "outputs": [
       {
+        "components": [
+          {
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "email",
+            "type": "bytes32"
+          },
+          {
+            "name": "fitbitID",
+            "type": "uint256"
+          },
+          {
+            "name": "activeMinutes",
+            "type": "uint256"
+          },
+          {
+            "name": "rounds",
+            "type": "uint256"
+          },
+          {
+            "name": "beginAt",
+            "type": "bytes16"
+          },
+          {
+            "name": "stake",
+            "type": "uint256"
+          }
+        ],
         "name": "",
-        "type": "address"
+        "type": "tuple"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  }
-]);
-        var PocGoalContract = web3.eth.contract([
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "depositStake",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "loseStake",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "winStake",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes16"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "name": "_goalOwner",
-        "type": "address"
-      },
-      {
-        "name": "_name",
-        "type": "bytes32"
-      },
-      {
-        "name": "_email",
-        "type": "bytes32"
-      },
-      {
-        "name": "_fitbitID",
-        "type": "uint256"
-      },
-      {
-        "name": "_activeMinutes",
-        "type": "uint256"
-      },
-      {
-        "name": "_rounds",
-        "type": "uint256"
-      },
-      {
-        "name": "_beginAt",
-        "type": "bytes16"
-      },
-      {
-        "name": "_stake",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "depositSent",
-    "type": "event"
   }
 ]);
 
@@ -317,10 +340,10 @@
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
                         ', with a stake of $'+ result.args.stake+' USD!');
                       //await deposit
-                      $("#depositStatus").html('Awaiting deposit...');
+                      //$("#depositStatus").html('Awaiting deposit...');
                       //prompt for signing deposit
                       //get address of most recent goal created by fitbitID
-                      GoalFactory.getLastGoalByFitbitID(
+                      /*GoalFactory.getLastGoalByFitbitID(
                         ('1'+$("#fitbitID").val()),
                         function(error, result) {
                           if (!error){
@@ -348,7 +371,7 @@
                             else
                               console.error(error);
                         }//closes callback
-                      )//closes GoalFactory contract function call
+                      )//closes GoalFactory contract function call*/
 
 
 
@@ -361,6 +384,7 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
+            var usdStake = ($("#stake").val()-1.1)*0.0047;
             GoalFactory.createGoal(
                 $("#name").val(), 
                 $("#email").val(), 
@@ -368,8 +392,8 @@
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
                 $("#beginAt").val(), 
-                $("#stake").val(), 
-                {gas: 500000, gasPrice: 12000000000},
+                $("#stake").val(),
+                {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
                 function(error, result) {
                     if (!error){
                       $("#createGoalBtn").hide();
