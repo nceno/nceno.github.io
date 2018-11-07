@@ -6,7 +6,7 @@
         //web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9db967faa260482782c435096a818865")); //mainnet
          
 
-        web3.eth.defaultAccount = web3.eth.accounts[0];
+        web3.eth.defaultAccount = web3.eth.accounts[1];
 
         var GoalFactoryContract = web3.eth.contract([
   {
