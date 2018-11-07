@@ -362,7 +362,7 @@
                 ('1'+$("#fitbitID").val()), 
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
-                $("#beginAt").val(), 
+                ('Beginning/ '+$("#beginAt").val()), 
                 $("#stake").val(),
                 {from: web3.eth.accounts[0], gas: 400000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
                 function(error, result) {
