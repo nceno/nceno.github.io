@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Nceno: Workout for a payout</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+        <link href="./css/starter-template.css" rel="stylesheet">
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="index.html">Nceno</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="alpha.html">Alpha</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="faq.html">FAQ</a>
+            </li>
+          </ul>
+          
+        </div>
+      </nav>
+
+    <main role="main" class="container">
+        <div class="starter-template">
+            <h1>Set a new goal</h1>
+            <p class="lead">You are about to set a goal and stake some crypto on your progress. Only proceed if you have read the <a href="instructions.html">instructions</a> and agree to the <a href="terms.html">terms</a>. IMPORTANT: When you create the goal, you will have to approve two transactions only. Ignore additional requests for your approval.</p>
+        </div>
+    </main>
+    <!-- /.container -->
+
+
+
+
+    <form>
+        <div class="col-7">
+            <label for="exampleInputEmail1"><b>Name:</b></label>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="First Last">
+            <small id="emailHelp" class="form-text text-muted">English only</small>
+        </div>
+
+        <div class="col-7">
+            <label for="exampleInputEmail1"><b>Email address:</b></label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email@email.com">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email.</small>
+        </div>
+
+        <div class="col-10">
+            <label for="exampleInputEmail1"><b>your phone number:</b></label>
+            <input type="number" class="form-control" id="fitbitID" aria-describedby="emailHelp" placeholder="Whole number only, no symbols">
+            <small id="emailHelp" class="form-text text-muted">For internal use only</small>
+        </div>
+
+        <div class="col-10">
+            <label for="exampleInputEmail1"><b>Minutes per workout (average):</b></label>
+            <input type="number" class="form-control" id="activeMinutes" aria-describedby="emailHelp" placeholder="Whole number only, no symbols">
+            <small id="emailHelp" class="form-text text-muted"><a href="faq.html">Common question: "Should I play it safe by setting a small number?"</a></small>
+        </div>
+
+        <div class="col-10">
+            <label for="exampleInputEmail1"><b>Number of workouts you will do per week for the next 4 weeks:</b></label>
+            <input type="number" class="form-control" id="rounds" aria-describedby="emailHelp" placeholder="Whole number only, no symbols">
+            <small id="emailHelp" class="form-text text-muted">Each workout must last as long as your answer above.</small>
+        </div>
+
+      
+
+        <div class="col-7">
+            <label for="exampleInputEmail1"><b>Starting from:</b></label>
+            <input type="text" class="form-control" id="beginAt" aria-describedby="emailHelp" placeholder="MM/DD/YYYY">
+            <small id="emailHelp" class="form-text text-muted">The first day you are allowed to workout and still have it count toward your 4 week goal.</small>
+        </div>
+
+     
+
+
+        <div class="col-10">
+            <label for="exampleInputEmail1"><b>How much money will you stake (in USD)?</b></label>
+            <input type="number" class="form-control" id="stake" aria-describedby="emailHelp" placeholder="Whole number only, no symbols">
+            <small id="emailHelp" class="form-text text-muted">Note: 1 ETH = approx. $219 USD.</small>
+        </div>
+
+        
+    <div class="form-group form-check">
+    	<input type="checkbox" class="form-check-input" id="checker">
+    	<label class="form-check-label" for="checker">I've read the <a href="instructions.html">instructions</a> and agree to the <a href="terms.html">terms</a>.</label>
+  	</div>
+
+  	
+        <button id="createGoalBtn" type="button" class="btn btn-primary">Create this goal</button>
+        <img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif">
+    </form>
+
+    <!--echo and loader -->
+        
+        <h2 id="goalDisplay"></h2>
+        <span id="depositStatus"></span>
+        <hr>
+       <div> 
+        <span id="yourGoal"></span>
+       </div>
+        <hr>
+        <span id="insTrans"></span>
+
+        
+        
+
+    <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2017-2018 Nceno Co., Ltd. &middot; <a href="contact.html">Contact</a> &middot; <a href="terms.html">Terms of Use</a> &middot; <a href="privacy.html">Privacy Policy</a> </p>
+      </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!--interacting with ethereum -->
+    <script src="ethereum.js"></script>
+
+</body>
+</html>
+
