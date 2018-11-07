@@ -5,7 +5,7 @@
         //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //rinkeby 
         //web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9db967faa260482782c435096a818865")); //mainnet
          
-        web3.eth.defaultAccount = '0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD';
+        web3.eth.defaultAccount = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD;
         // web3.eth.accounts[4];
 
         var GoalFactoryContract = web3.eth.contract([
