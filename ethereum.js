@@ -355,7 +355,7 @@
     
         //creating the goal
         $("#createGoalBtn").click(function() {
-            var usdStake = ($("#stake").val()-1.05)*0.0048;
+            var usdStake = ($("#stake").val()-1.05)*0.0047;
             GoalFactory.createGoal(
                 $("#name").val(), 
                 $("#email").val(), 
