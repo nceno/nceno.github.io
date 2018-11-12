@@ -1,5 +1,5 @@
 // get the url
-var url = window.location.href;
+var url = window.location.hash;
 
 //getting the access token from url
 var access_token = url.split("#")[1].split("=")[1].split("&")[0];
