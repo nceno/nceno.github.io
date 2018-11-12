@@ -1,5 +1,5 @@
 // get the url
-var url = window.location.pathname;
+var url = window.location.href;
 //console.log(url);
 
 //getting the access token from url
