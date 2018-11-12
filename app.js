@@ -3,10 +3,10 @@ var url = window.location.pathname;
 //console.log(url);
 
 //getting the access token from url
-var access_token1 = url.split('#')[1].split('=')[1].split('&')[0];
+var access_token = url.split('#')[1].split('=')[1].split('&')[0];
 
 // get the userid
-var userId1 = url.split('#')[1].split('=')[2].split('&')[0];
+var userId = url.split('#')[1].split('=')[2].split('&')[0];
 
 console.log(access_token);
 console.log(userId);
