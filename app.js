@@ -3,7 +3,7 @@ var access_token= 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMkQ1U04iLCJzdWIiOiI2TTM1NkIi
 
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'httpss://api.fitbit.com/1/user/6M356B/activities/heart/date/today/1w.json');
+xhr.open('GET', 'https://api.fitbit.com/1/user/6M356B/activities/heart/date/today/1w.json');
 xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr.onload = function() {
    if (xhr.status === 200) {
