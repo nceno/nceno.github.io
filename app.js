@@ -1,7 +1,3 @@
-// get the url
-//var url = window.location.hash;
-//console.log(url);
-
 //getting the access token from url
 var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
 
@@ -11,12 +7,9 @@ var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 console.log(access_token);
 console.log(userId);
 
-//var access_token= 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMkQ1U04iLCJzdWIiOiI2TTM1NkIiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJybG9jIHJhY3QgcmhyIHJwcm8iLCJleHAiOjE1NzM1NTgwNTMsImlhdCI6MTU0MjAyNDQ2NH0.Kke008tn1ekWY57ekez0298feEjhNSKlKyXMjDQSWX4';
-//var userId= '6M356B';
-
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/date/today/1w.json');
+xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/date/today/1d.json');
 xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr.onload = function() {
    if (xhr.status === 200) {
