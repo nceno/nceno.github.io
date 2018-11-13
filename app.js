@@ -14,7 +14,7 @@ xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/dat
 xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr.onload = function() {
    if (xhr.status === 200) {
-      //console.log(xhr.responseText);
+      console.log(xhr.responseText);
       //document.write(xhr.responseText);
       var obj = [xhr.responseText];
       console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
