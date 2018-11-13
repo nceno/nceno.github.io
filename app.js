@@ -16,7 +16,7 @@ xhr.onload = function() {
    if (xhr.status === 200) {
       //console.log(xhr.responseText);
       //document.write(xhr.responseText);
-      var obj = xhr.responseText;
+      var obj = [xhr.responseText];
       console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[1]);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[2]);
