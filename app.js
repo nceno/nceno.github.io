@@ -17,11 +17,11 @@ xhr.onload = function() {
       console.log(xhr.responseText);
       //document.write(xhr.responseText);
       
-      var obj = xhr.responseText;
-      console.log(userId +"'s active minutes for "+ obj["activities-heart"][0].dateTime);
-	  console.log(obj["activities-heart"][0].value.heartRateZones[1]);
-	  console.log(obj["activities-heart"][0].value.heartRateZones[2]);
-	  console.log(obj["activities-heart"][0].value.heartRateZones[3]);
+      //var obj = [xhr.responseText];
+      console.log(userId +"'s active minutes for "+ xhr.responseText["activities-heart"][0].dateTime);
+	  console.log(xhr.responseText["activities-heart"][0].value.heartRateZones[1]);
+	  console.log(xhr.responseText["activities-heart"][0].value.heartRateZones[2]);
+	  console.log(xhr.responseText["activities-heart"][0].value.heartRateZones[3]);
 	  
    }
 };
