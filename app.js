@@ -32,7 +32,7 @@ var xhr2 = new XMLHttpRequest();
 xhr2.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/tracker/steps/date/today/1d.json');
 xhr2.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr2.onload = function() {
-   if (xhr.status === 200) {
+   if (xhr2.status === 200) {
       console.log(xhr2.responseText);
       //document.write(xhr2.responseText);
       /*
@@ -45,4 +45,4 @@ xhr2.onload = function() {
 	  */
    }
 };
-xhr.send()
+xhr2.send()
