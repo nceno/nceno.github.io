@@ -5,8 +5,8 @@ var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0
 // get the userid
 var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 
-console.log(access_token);
-console.log(userId);
+//console.log(access_token);
+//console.log(userId);
 
 
 var xhr = new XMLHttpRequest();
@@ -35,14 +35,13 @@ xhr2.onload = function() {
    if (xhr2.status === 200) {
       console.log(xhr2.responseText);
       //document.write(xhr2.responseText);
-      /*
+      
       var data = JSON.parse(xhr2.responseText);
       var obj = [data];
-      console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
-	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
-	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
-	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
-	  */
+      console.log(userId +"'s step count for "+ obj[0]["activities-tracker-steps"][0].dateTime);
+	  console.log(obj[0]["activities-tracker-steps"][0].value);
+	  
+	  
    }
 };
 xhr2.send()
