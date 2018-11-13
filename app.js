@@ -33,7 +33,7 @@ xhr2.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/tracker/
 xhr2.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr2.onload = function() {
    if (xhr2.status === 200) {
-      console.log(xhr2.responseText);
+      //console.log(xhr2.responseText);
       //document.write(xhr2.responseText);
       
       var data = JSON.parse(xhr2.responseText);
