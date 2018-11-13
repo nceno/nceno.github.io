@@ -27,3 +27,22 @@ xhr.onload = function() {
    }
 };
 xhr.send()
+
+var xhr2 = new XMLHttpRequest();
+xhr2.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/tracker/steps/date/today/1d.json');
+xhr2.setRequestHeader("Authorization", 'Bearer ' + access_token);
+xhr2.onload = function() {
+   if (xhr.status === 200) {
+      console.log(xhr2.responseText);
+      //document.write(xhr2.responseText);
+      /*
+      var data = JSON.parse(xhr2.responseText);
+      var obj = [data];
+      console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
+	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
+	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
+	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
+	  */
+   }
+};
+xhr.send()
