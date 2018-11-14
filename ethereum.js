@@ -372,7 +372,7 @@
                       $("#insTrans").html(result.blockHash);
                       console.log(result);
                     }
-                    else
+                      else
                       console.error(error);
                 })
         });

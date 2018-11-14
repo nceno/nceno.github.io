@@ -16,11 +16,33 @@ xhr.onload = function() {
    if (xhr.status === 200) {
       //console.log(xhr.responseText);
       //document.write(xhr.responseText);
-      var obj = responseText;
+      
+      var data = JSON.parse(xhr.responseText);
+      var obj = [data];
+      var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1];
+      var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2];
+      var peak = obj[0]["activities-heart"][0].value.heartRateZones[3];
+
       console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[1]);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[2]);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[3]);
+
+	  var sessionMins = fatBurn + cardio + peak;
+	  $("#logBtn").click(function() {
+	  GoalFactory.settleLog(
+                userId, 
+                sessionMins,
+                {from: web3.eth.accounts[0], gas: 400000, gasPrice: 12000000000},
+                function(error, result) {
+                    if (!error){
+                      //echo the result and do some jquery loader stuff
+                    }
+                      else
+                      console.error(error);
+                })
+	  });
+	  
    }
 };
 xhr.send()
