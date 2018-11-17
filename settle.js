@@ -8,7 +8,7 @@ var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 console.log(access_token);
 console.log(userId);
 
-
+$("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/date/today/1d.json');
 xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
@@ -29,7 +29,8 @@ xhr.onload = function() {
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[3]);
 
 	  var sessionMins = fatBurn + cardio + peak;
-	  $("#logBtn").click(function() {
+	  console.log(sessionMins);
+	  
 	  GoalFactory.settleLog(
                 userId, 
                 sessionMins,
@@ -40,12 +41,13 @@ xhr.onload = function() {
                     }
                       else
                       console.error(error);
-                })
-	  });
+                })//close contract function call
+	  
 	  
    }
 };
 xhr.send()
+});//close click(function(){
 
 
 //strip response to activeMinutes components --> _submission
