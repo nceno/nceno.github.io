@@ -22,12 +22,23 @@ contract GoalFactory {
     bytes32 beginAt;
     uint stake;
     uint sucPayouts;
+    
   }
 
   //make a "history" for each player of their goals
   struct PlayerGoalHistory{
      goalObject[] hostedGoals; //needs to be a goalObject array: goalObject[] hostedGoals
     }
+    
+  //****************************************************  
+  //make a dictionary of timestamps by userID  
+  struct stamps{
+    mapping(uint256 => bool) fbTimes;
+  }
+  mapping(string => stamps) allLogs;
+  //allLogs[userID].fbTimes[timeStamp]
+  //*************************************************
+  
   
   //make a registry of ALL histories, accessible by a SINGE UNIQUE fitbitID
   mapping (string => PlayerGoalHistory) goalsByFitbit;
@@ -48,7 +59,7 @@ contract GoalFactory {
 
 
 //spawn a new goal with intended parameters
-  function createGoal(bytes32 _name, bytes32 _email, string _fitbitID, uint _activeMinutes, uint _rounds,bytes32 _beginAt, uint _stake) public payable {
+  function createGoal(bytes32 _name, bytes32 _email, string _fitbitID, uint _activeMinutes, uint _rounds,bytes32 _beginAt, uint _stake) external payable {
     address creator = msg.sender;
     //address owner = msg.sender;
       
@@ -86,61 +97,60 @@ contract GoalFactory {
    //address nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 3 (admin also)
 
 //get the total number of goals created so far
-  function getGoalCount() public view returns (uint) {
+  function getGoalCount() external view returns (uint) {
       return allGoals.length;
     }
   
  //get a list of all the goals created
-  function getAllGoals() public view returns (goalObject[]) {
+  function getAllGoals() external view returns (goalObject[]) {
       return allGoals;
     }
   
  //lookup function. Given a fitbitID, return a list of all goals associated to it.
-  function getGoalsByFitbitID(string _fbID) view public returns (goalObject[]) {   
+  function getGoalsByFitbitID(string _fbID) view external returns (goalObject[]) {   
         return goalsByFitbit[_fbID].hostedGoals;
     }
   
   
-
   //lookup function. Given a fitbitID, returns the address of the last goal deployed by it.
-  function getLastGoalByFitbitID(string _fbID) view public returns (goalObject ) {   
+  function getLastGoalByFitbitID(string _fbID) view external returns (goalObject ) {   
         uint theLast = goalsByFitbit[_fbID].hostedGoals.length -1;
         return goalsByFitbit[_fbID].hostedGoals[theLast];
     }
 
   //returns partial stake to user when they win a milestone. Funds go to the address that created the goal.
-  function userPayout(address userAddress,uint256 payout) onlyNceno public payable{
+  function userPayout(address userAddress,uint256 payout) onlyNceno external payable{
         
         userAddress.transfer(payout);
         
     }
 //sends all stake to nceno wallet (set above)
-  function ncenoTotalWithdrawal() onlyNceno public payable{
+  function ncenoTotalWithdrawal() onlyNceno external payable{
         
         nceno.transfer(address(this).balance);
     }
 //sends partial lost stake to nceno wallet (set above)
-  function ncenoWithdrawal(uint256 withdrawal) onlyNceno public payable{
+  function ncenoWithdrawal(uint256 withdrawal) onlyNceno external payable{
         
         nceno.transfer(withdrawal);
     }
 
-
 //settleLog
-function settleLog(string userID, uint reportedMins, string password) public payable{
+function settleLog(string userID, uint reportedMins, uint256 timeStamp) external payable{
   //payment logic
-  if(reportedMins >= myTargetMins && theGoal.sucPayouts < 6 && password ='password'){
-
   uint theLast = goalsByFitbit[userID].hostedGoals.length -1;
-  goalObject theGoal = goalsByFitbit[userID].hostedGoals[theLast];
+  goalObject memory theGoal = goalsByFitbit[userID].hostedGoals[theLast]; //if this doesn't work, try it long-hand without a variable
   uint myTargetMins = theGoal.activeMinutes;
+  bool logExists = allLogs[userID].fbTimes[timeStamp];
+  if(reportedMins >= myTargetMins && theGoal.sucPayouts < 6 && !logExists){
   //TODO: convert stake to wei and use safemath for division
-  uint payout = partitions[theGoal.sucPayouts]*stake/100;  //remember the offset by 1 for array index
-
-  
+  //TODO: restrict to only one payout per day
+  uint payout = partitions[theGoal.sucPayouts]*theGoal.stake/100;  //remember the offset by 1 for array index
     msg.sender.transfer(payout);
     theGoal.sucPayouts++;
+    allLogs[userID].fbTimes[timeStamp]=true;
   }
 }
+
 }
 //end of GoalFactory contract

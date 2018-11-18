@@ -19,11 +19,12 @@ xhr.onload = function() {
       
       var data = JSON.parse(xhr.responseText);
       var obj = [data];
+      var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000;
       console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
-	  
+	  console.log(formattedTime);
    }
 };
 xhr.send()
