@@ -28,11 +28,11 @@ xhr.onload = function() {
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
 	  console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
-	  console.log(formattedTime);
+	  console.log("time stamp: "+formattedTime);
 
 	  var sessionMins = fatBurn + cardio + peak;
-	  console.log(sessionMins);
-	  console.log(formattedTime);
+	  console.log("total session minutes to be logged: "+sessionMins);
+
 	  
 	  GoalFactory.settleLog(
                 userId, 
