@@ -53,8 +53,3 @@ xhr.send()
 });//close click(function(){
 
 
-//strip response to activeMinutes components --> _submission
-
-//send to smart contract "settle(_submission)"
-
-//settle(_submission) compares _submission to goal minutes, triggers payout accordingly
