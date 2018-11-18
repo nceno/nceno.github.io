@@ -9,14 +9,162 @@
 
         var GoalFactoryContract = web3.eth.contract([
   {
-    "constant": true,
+    "constant": false,
     "inputs": [
       {
-        "name": "_fbID",
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "name": "_email",
+        "type": "bytes32"
+      },
+      {
+        "name": "_fitbitID",
         "type": "string"
+      },
+      {
+        "name": "_activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "name": "_rounds",
+        "type": "uint256"
+      },
+      {
+        "name": "_beginAt",
+        "type": "bytes32"
+      },
+      {
+        "name": "_stake",
+        "type": "uint256"
       }
     ],
-    "name": "getGoalsByFitbitID",
+    "name": "createGoal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "ncenoTotalWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "withdrawal",
+        "type": "uint256"
+      }
+    ],
+    "name": "ncenoWithdrawal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "userID",
+        "type": "string"
+      },
+      {
+        "name": "reportedMins",
+        "type": "uint256"
+      },
+      {
+        "name": "timeStamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "settleLog",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "name": "payout",
+        "type": "uint256"
+      }
+    ],
+    "name": "userPayout",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "email",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "fitbitID",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "activeMinutes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rounds",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "beginAt",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "stake",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "timeCreated",
+        "type": "uint256"
+      }
+    ],
+    "name": "goalInfo",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getAllGoals",
     "outputs": [
       {
         "components": [
@@ -74,55 +222,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "userAddress",
-        "type": "address"
-      },
-      {
-        "name": "payout",
-        "type": "uint256"
-      }
-    ],
-    "name": "userPayout",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "ncenoTotalWithdrawal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "userID",
-        "type": "string"
-      },
-      {
-        "name": "reportedMins",
-        "type": "uint256"
-      },
-      {
-        "name": "timeStamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "settleLog",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "getGoalCount",
@@ -137,61 +236,14 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "withdrawal",
-        "type": "uint256"
-      }
-    ],
-    "name": "ncenoWithdrawal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_name",
-        "type": "bytes32"
-      },
-      {
-        "name": "_email",
-        "type": "bytes32"
-      },
-      {
-        "name": "_fitbitID",
-        "type": "string"
-      },
-      {
-        "name": "_activeMinutes",
-        "type": "uint256"
-      },
-      {
-        "name": "_rounds",
-        "type": "uint256"
-      },
-      {
-        "name": "_beginAt",
-        "type": "bytes32"
-      },
-      {
-        "name": "_stake",
-        "type": "uint256"
-      }
-    ],
-    "name": "createGoal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
     "constant": true,
-    "inputs": [],
-    "name": "getAllGoals",
+    "inputs": [
+      {
+        "name": "_fbID",
+        "type": "string"
+      }
+    ],
+    "name": "getGoalsByFitbitID",
     "outputs": [
       {
         "components": [
@@ -312,58 +364,6 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "name",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "email",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "fitbitID",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "activeMinutes",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "rounds",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "beginAt",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "stake",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "timeCreated",
-        "type": "uint256"
-      }
-    ],
-    "name": "goalInfo",
-    "type": "event"
   }
 ]);
 
@@ -442,8 +442,60 @@
                 
         
         
-        //button goes here
+  ///////////////call fitbit api with user creds
+//getting the access token from url
+var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
 
+// get the userid
+var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+
+console.log(access_token);
+console.log(userId);
+
+$("#logBtn").click(function() {
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/date/today/1d.json');
+xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+xhr.onload = function() {
+   if (xhr.status === 200) {
+      //console.log(xhr.responseText);
+      //document.write(xhr.responseText);
+      
+      var data = JSON.parse(xhr.responseText);
+      var obj = [data];
+      var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
+      var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
+      var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
+      var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000;
+
+      console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
+    console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
+    console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
+    console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
+    console.log("time stamp: "+formattedTime);
+
+    var sessionMins = fatBurn + cardio + peak;
+    console.log("total session minutes to be logged: "+sessionMins);
+
+    
+    GoalFactory.settleLog(
+                userId, 
+                sessionMins,
+                formattedTime,
+                {from: web3.eth.accounts[0], gas: 3000000, gasPrice: 12000000000},
+                function(error, result) {
+                    if (!error){
+                      //echo the result and do some jquery loader stuff
+                    }
+                      else
+                      console.error(error);
+                })//close contract function call
+    
+    
+   }
+};
+xhr.send()
+});//close click(function(){
 
 
     //</script>
