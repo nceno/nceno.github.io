@@ -1,4 +1,14 @@
 //<script>
+         ///////////////call fitbit api with user creds
+//getting the access token from url
+var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
+
+// get the userid
+var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+
+console.log(access_token);
+console.log(userId);
+
         var Web3 = require('web3');
         //web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545")); //local testnet
         web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
@@ -442,15 +452,7 @@
                 
         
         
-  ///////////////call fitbit api with user creds
-//getting the access token from url
-var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
-
-// get the userid
-var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-
-console.log(access_token);
-console.log(userId);
+ 
 
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
