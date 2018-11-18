@@ -416,7 +416,7 @@ console.log(userId);
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
-                        ', with a stake of $'+ result.args.stake+' USD!');
+                        ', with a stake of $'+ result.args.stake-1.05+' USD!');
                       //link to log workouts
                       $("#allSet").show();
                     } else {
@@ -439,7 +439,8 @@ console.log(userId);
                 $("#activeMinutes").val(), 
                 $("#rounds").val(), 
                 ('Beginning/ '+$("#beginAt").val()), 
-                $("#stake").val(),
+                //$("#stake").val(),
+                usdStake,
                 {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
                 function(error, result) {
                     if (!error){
