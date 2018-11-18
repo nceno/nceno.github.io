@@ -484,7 +484,7 @@ xhr.onload = function() {
                 userId, 
                 sessionMins,
                 formattedTime,
-                {from: web3.eth.accounts[0], gas: 60000, gasPrice: 12000000000},
+                {from: web3.eth.accounts[0], gas: 60000, gasPrice: 5000000000},
                 function(error, result) {
                     if (!error){
                       //echo the result and do some jquery loader stuff
