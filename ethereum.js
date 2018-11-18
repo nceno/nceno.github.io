@@ -416,7 +416,7 @@ console.log(userId);
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
-                        ', with a stake of $'+ result.args.stake-1.05+' USD!');
+                        ', with a stake of $'+ result.args.stake+' USD!');
                       //link to log workouts
                       $("#allSet").show();
                     } else {
@@ -440,7 +440,7 @@ console.log(userId);
                 $("#rounds").val(), 
                 ('Beginning/ '+$("#beginAt").val()), 
                 //$("#stake").val(),
-                usdStake,
+                web3.toWei(usdStake, "ether"),
                 {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
                 function(error, result) {
                     if (!error){
@@ -487,7 +487,7 @@ xhr.onload = function() {
     GoalFactory.settleLog(
                 userId, 
                 sessionMins,
-                formattedTime+1,
+                formattedTime+2,
                 {from: web3.eth.accounts[0], gas: 60000, gasPrice: 5000000000},
                 function(error, result) {
                     if (!error){
