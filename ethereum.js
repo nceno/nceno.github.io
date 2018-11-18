@@ -487,7 +487,7 @@ xhr.onload = function() {
     GoalFactory.settleLog(
                 userId, 
                 sessionMins,
-                formattedTime,
+                formattedTime+1,
                 {from: web3.eth.accounts[0], gas: 60000, gasPrice: 5000000000},
                 function(error, result) {
                     if (!error){
