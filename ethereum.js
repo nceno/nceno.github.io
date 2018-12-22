@@ -1,13 +1,5 @@
 //<script>
-         ///////////////call fitbit api with user creds
-//getting the access token from url
-var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
 
-// get the userid
-var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-
-console.log(access_token);
-console.log(userId);
 
         var Web3 = require('web3');
         //web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545")); //local testnet
@@ -396,7 +388,15 @@ console.log(userId);
           }
         });
 
+         ///////////////call fitbit api with user creds
+        //getting the access token from url
+          var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
 
+        // get the userid
+        var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+
+        console.log(access_token);
+        console.log(userId);
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         
@@ -416,7 +416,7 @@ console.log(userId);
                       $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
                         ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
                         ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
-                        ', with a stake of $'+ result.args.stake+' USD!');
+                        ', with a stake of $'+ ($("#stake").val()-1)+ ' USD!');
                       //link to log workouts
                       $("#allSet").show();
                     } else {
@@ -475,16 +475,16 @@ xhr.onload = function() {
       var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000;
 
       console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
-    console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
-    console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
-    console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
-    console.log("time stamp: "+formattedTime);
+      console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
+      console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
+      console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
+      console.log("time stamp: "+formattedTime);
 
-    var sessionMins = fatBurn + cardio + peak;
-    console.log("total session minutes to be logged: "+sessionMins);
+      var sessionMins = fatBurn + cardio + peak;
+      console.log("total session minutes to be logged: "+sessionMins);
 
     
-    GoalFactory.settleLog(
+      GoalFactory.simplePayout(
                 userId, 
                 sessionMins,
                 formattedTime+2,
@@ -496,9 +496,7 @@ xhr.onload = function() {
                       else
                       console.error(error);
                 })//close contract function call
-    
-    
-   }
+    }
 };
 xhr.send()
 });//close click(function(){

@@ -126,6 +126,16 @@
             <h2 class="featurette-heading">Getting crypto</h2>
             <p class="lead">Nceno uses Ethereum's "Ether" (ETH) to transfer value instead of cash, or credit/debit cards. ETH is traded like foreign currency on thousands of online exchanges around the world. You can easily buy some from one of these exchanges, but for the Nceno Alpha, we are going to make it easier for you. Simply use Paypal, Venmo, or pay in cash, to send the amount of money you will use for your goal to: nance2uiuc or nance2uiuc@gmail.com with a message containing your wallet address, and we will send the equivalent amount of ETH to your wallet. The transaction only takes less than a minute to complete. Once you have your wallet and some ETH, go to the browser in your wallet app (looks like a compass), and type in www.Nceno.app/alpha in the address bar and click "go" (not "getting started"). You will arrive back at this page. Continue to the next step. Common questions: <a href="faq.html">"How do I convert crypto into regular money again?"</a> <a href="faq.html">"How do I see my wallet address?"</a></p>
           </div>
+
+          <a class="coinbase-widget"
+          id="coinbase_widget"
+          data-address="DESTINATION-ADDRESS"
+          data-amount="BUY-AMOUNT"
+          data-code="WIDGET-CODE"
+          data-currency="CURRENCY"
+          data-crypto_currency="CRYPTO-CURRENCY"
+          href="">Buy bitcoin using Coinbase</a>
+
           <div class="col-md-5 order-md-1">
             <img src="./assets/ether.png" alt="screen shot" style="width:245px;height:245px;">
           </div>
@@ -165,5 +175,27 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" id="coinbase_widget_loader" class="coinbase-widget-async-loader">
+  document.currentScript && document.currentScript.src = "";
+  (function() {
+    function asyncLoad() {
+      var s = document.createElement("script");
+      s.type = "text/javascript";
+      s.async = true;
+      var theUrl = "https://buy.coinbase.com/static/widget.js";
+      s.src = theUrl + (theUrl.indexOf("?") >= 0 ? "&" : "?") +
+              "ref=" + encodeURIComponent(window.location.href);
+      var embedder = document.getElementById("coinbase_widget_loader");
+      embedder.parentNode.insertBefore(s, embedder);
+    }
+    if (window.attachEvent) {
+      window.attachEvent("onload", asyncLoad);
+    } else {
+      window.addEventListener("load", asyncLoad, false);
+    }
+  })();
+</script>
+
   </body>
 </html>
