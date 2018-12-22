@@ -15,6 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/carousel.css" rel="stylesheet">
+
+    <!-- for coinbase widget -->
+    <link rel="stylesheet" type="text/css" href="./css/buy.css">
   </head>
   <body>
 
@@ -127,14 +130,8 @@
             <p class="lead">Nceno uses Ethereum's "Ether" (ETH) to transfer value instead of cash, or credit/debit cards. ETH is traded like foreign currency on thousands of online exchanges around the world. You can easily buy some from one of these exchanges, but for the Nceno Alpha, we are going to make it easier for you. Simply use Paypal, Venmo, or pay in cash, to send the amount of money you will use for your goal to: nance2uiuc or nance2uiuc@gmail.com with a message containing your wallet address, and we will send the equivalent amount of ETH to your wallet. The transaction only takes less than a minute to complete. Once you have your wallet and some ETH, go to the browser in your wallet app (looks like a compass), and type in www.Nceno.app/alpha in the address bar and click "go" (not "getting started"). You will arrive back at this page. Continue to the next step. Common questions: <a href="faq.html">"How do I convert crypto into regular money again?"</a> <a href="faq.html">"How do I see my wallet address?"</a></p>
           </div>
 
-          <a class="coinbase-widget"
-          id="coinbase_widget"
-          data-address="DESTINATION-ADDRESS"
-          data-amount="BUY-AMOUNT"
-          data-code="WIDGET-CODE"
-          data-currency="CURRENCY"
-          data-crypto_currency="CRYPTO-CURRENCY"
-          href="">Buy bitcoin using Coinbase</a>
+          <iframe src="https:&#x2F;&#x2F;buy.coinbase.com?amount=20&amp;code=414a342f-463e-5e93-b160-d9f088a8938d&amp;currency=USD&amp;crypto_currency=ETH" id="coinbase_modal_iframe" name="coinbase_modal_iframe" style="transition: all 0.3s ease-out; background-color: transparent; border: 0px none transparent; display: block; position: fixed; visibility: visible; margin: 0px; padding: 0px; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999;" scrolling="no" allowtransparency="true" frameborder="0">
+          </iframe>
 
           <div class="col-md-5 order-md-1">
             <img src="./assets/ether.png" alt="screen shot" style="width:245px;height:245px;">
