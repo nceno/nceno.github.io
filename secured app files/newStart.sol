@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.2;
 pragma experimental ABIEncoderV2;
 
 
@@ -8,7 +8,7 @@ pragma experimental ABIEncoderV2;
 
 contract GoalFactory {
   //addresses where lost stakeWEI goes
-  address nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 3 (admin also)
+  address payable nceno = 0x861CD7c8b659cF685B7d459a6710DFfdc305464b; //metamask mainnet account 3 (admin also)
   
   //the competitor object
   struct competitorObject{
@@ -133,7 +133,8 @@ contract GoalFactory {
   //claims the bonus from lost stakeWEI of the previous week
   function claimBonus(bytes32 _goalID, bytes32 _userID) external{
     //must have 100% adherence for the previous week, and can only claim once.
-    require(goalRegistry[_goalID].isCompetitor[_userID]==true && goalRegistry[_goalID].successes[_userID][wk]==goalRegistry[_goalID].sesPerWk && goalRegistry[_goalID].bonusWasClaimed[_userID][wk] == false);
+    
+    require(goalRegistry[_goalID].isCompetitor[_userID]==true && goalRegistry[_goalID].successes[_userID][(now-goalRegistry[_goalID].startTime)/604800]==goalRegistry[_goalID].sesPerWk && goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == false);
     
     uint wk = (now-goalRegistry[_goalID].startTime)/604800;
     uint winners;
