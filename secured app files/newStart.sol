@@ -20,8 +20,8 @@ contract GoalFactory {
     mapping(uint => goalObject) goalAt; //index of historical goals
       uint goalTotal;
   }
-  mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by wearableID
-    mapping(bytes32 => bool) public userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
+  mapping(bytes32 => competitorObject) internal profileOf; //registry of ALL users' info, indexed by wearableID
+    mapping(bytes32 => bool) internal userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
 
   function createCompetitor(bytes32 _wearableID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
     require(userExists[_wearableID] == false);
@@ -70,44 +70,43 @@ contract GoalFactory {
   }
   goalObject[] public allGoals; //iterable registry of all goals created, (only indexed by order of deployment).
     uint public goalCount; //total number of goals
-    mapping(bytes32 => goalObject) public goalRegistry; //dictionary of goals, accessible by goalID
+    mapping(bytes32 => goalObject) internal goalRegistry; //dictionary of goals, accessible by goalID
 
-  //get active goals (goal browser)
+  //get upcoming goals (goal browser)
   function getUpcomingGoals() external returns(bytes32[], uint[], uint[], uint[], uint[], uint256[], uint[]){
-    bytes32[] goalIDs;
-    uint[] activemins;
-    uint[] stakes;
-    uint[] sesions;
-    uint[] wkDurations;
-    uint256[] startTimes;
-    uint[] competitorCounts;
+    bytes32[] storage goalIDs ;
+    uint[] storage activemins;
+    uint[] storage stakes;
+    uint[] storage sessions;
+    uint[] storage wkDurations;
+    uint256[] storage startTimes;
+    uint[] storage competitorCounts;
 
-    for(int i =0; i<goalCount; i++){
+    for(uint i =0; i < goalCount; i++){
       if(now < allGoals[i].startTime){
-        goalIDs.push(allGoals[i]);
-        activemins.push(allGoals[i]);
-        stakes.push(allGoals[i]);
-        sessions.push(allGoals[i]);
-        wkDurations.push(allGoals[i]);
-        startTimes.push(allGoals[i]);
-        competitorCounts.push(allGoals[i]);
+        goalIDs.push(allGoals[i].goalID);
+        activemins.push(allGoals[i].activeMins);
+        stakes.push(allGoals[i].stakeWEI);
+        sessions.push(allGoals[i].sesPerWk);
+        wkDurations.push(allGoals[i].wks);
+        startTimes.push(allGoals[i].startTime);
+        competitorCounts.push(allGoals[i].competitorCount);
       }
     }
-    return(goalIDs, activemins, stakes, sesions, wkDurations, startTimes, competitorCounts);
+    return(goalIDs, activemins, stakes, sessions, wkDurations, startTimes, competitorCounts);
   }
 
   //get personal stats***********************
   struct myStatsObject{
     uint adherenceRate;
     uint[12] wkPayouts;
-      uint lostStake;
+    uint lostStake;
     uint[12] wkBonuses;
-      uint bonusTotal;
+    uint bonusTotal;
     uint roi;
-    //uint workoutsRem;
-    uint totalAtStake;
+    //uint totalAtStake;
   }
-  function getMyStats(bytes32 _userID, bytes32 _goalID) external returns(myStatsObject){
+  function getMyStats(bytes32 _userID, bytes32 _goalID) external view returns(myStatsObject){
     uint wk = (now - goalRegistry[_goalID].startTime)/604800;
     if(0<=wk && wk<goalRegistry[_goalID].wks+1){
       
@@ -118,50 +117,54 @@ contract GoalFactory {
       }
       my.adherenceRate = 100*successCount/(wk*goalRegistry[_goalID].sesPerWk);
       
-      for(uint j =0; j<wk; j++){
-        my.wkPayouts[j] = partitions[goalRegistry[_goalID].wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
-      } 
+      //compile error: stack too deep
+      //for(uint j =0; j<wk; j++){
+        //my.wkPayouts[j] = partitions[goalRegistry[_goalID].wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
+      //}
 
-      for(uint k =0; k<wk; k++){
-        my.lostStake+=(partitions[goalRegistry[_goalID].wks/2 -1][k]*goalRegistry[_goalID].stakeWEI/100-my.wkPayouts[k]);
-      }
+      //compile error: stack too deep
+      //for(uint k =0; k<wk; k++){
+        //my.lostStake+=(partitions[goalRegistry[_goalID].wks/2 -1][k]*goalRegistry[_goalID].stakeWEI/100-my.wkPayouts[k]);
+      //}
       
       for(uint m =0; m<wk; m++){
         my.wkBonuses[m] = goalRegistry[_goalID].bonusWasClaimed[_userID][m]*goalRegistry[_goalID].potWk[m]/(goalRegistry[_goalID].winnersWk[m]*2);
         my.bonusTotal+= my.wkBonuses[m];
       }
       
-      uint totalPay;
-      for(uint n =0; n<wk; n++){
-        totalPay+= my.wkPayouts[n];
-      }
-      my.roi =100*(totalPay+my.bonusTotal)/goalRegistry[_goalID].stakeWEI;
-
-      //my.workoutsRem = (goalRegistry[_goalID].wks-wk)*goalRegistry[_goalID].sesPerWk-goalRegistry[_goalID].successes[_userID][wk];
+      //uint totalPay;
+      //for(uint n =0; n<wk; n++){
+        //totalPay+= my.wkPayouts[n];
+      //}
+      //my.roi =100*(totalPay+my.bonusTotal)/goalRegistry[_goalID].stakeWEI;
       
-      for(uint p =wk; p<goalRegistry[_goalID].wks; p++){
-        my.totalAtStake += partitions[goalRegistry[_goalID].wks/2 -1][p]*goalRegistry[_goalID].stakeWEI*goalRegistry[_goalID].competitorCount/100;
-      } 
+      //compile error: stack too deep
+      //for(uint p =wk; p<goalRegistry[_goalID].wks; p++){
+        //my.totalAtStake += partitions[goalRegistry[_goalID].wks/2 -1][p]*goalRegistry[_goalID].stakeWEI*goalRegistry[_goalID].competitorCount/100;
+     // }
       
       return(my);
     }
   }
-
-  //get leaderboard
-  struct scoreCardObject{
-    mapping(bytes32 => uint[12]) performances; //number of successes in a given week by a given competitor's name
-  }
-  /*function getScoreCard(bytes32 _goalID) public returns(scoreCardObject){
-    scoreCardObject memory card;
+  
+  //get the leaderboard
+  function getScoreCard(bytes32 _goalID) external returns(bytes32[10], uint[12][10]){
+    uint[12][10] storage performances;
+    bytes32[10] storage competitorName;
     for(uint i =0; i<10; i++){
       if(goalRegistry[_goalID].competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
-        card.performances[profileOf[goalRegistry[_goalID].competitor[i]].name] = goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]];
+        competitorName[i] = profileOf[goalRegistry[_goalID].competitor[i]].name;
+        performances[i] = goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]];
       }
     }
-    return(card); //returns a list of names (not userIDs) associated to their corresponding successes[] array from that goal
-  } */
-  //get goal
-  /*function getGoalParams(bytes32 _goalID) external returns(goalObject){
+    return(competitorName, performances);
+  }
+
+
+
+
+  /*//get goal
+  function getGoalParams(bytes32 _goalID) external view returns(goalObject){
     return(goalRegistry[_goalID]);
   }*/
 
@@ -171,10 +174,10 @@ contract GoalFactory {
   /*struct revenueStats{
 
   }
-  function getRevStatsByGoal{
+  function getRevStatsByGoal external view returns(){
 
   }
-  function getGlobalRevStats{
+  function getGlobalRevStats external view returns(){
 
   } */
 
@@ -375,7 +378,4 @@ contract GoalFactory {
   function ncenoEmergencyCashout() onlyNceno external{
     nceno.transfer(address(this).balance);
   }
-  
-
- 
 }//end of contract
