@@ -1,132 +1,60 @@
 //<script>
 
+  var PortisProvider = require('portis').PortisProvider;
+  var Web3 = require('web3');
+  // Check if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    web3 = new Web3(web3.currentProvider);
+  } else {
+      // Fallback - use Portis
+      web3 = new Web3(new PortisProvider({
+      apiKey: "332bfe3ea28174fa515d478e23a1b31c"
+      }));
+    }
 
-        var Web3 = require('web3');
-        //web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545")); //local testnet
-        web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
-        //web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/9db967faa260482782c435096a818865")); //rinkeby 
-        //web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/9db967faa260482782c435096a818865")); //mainnet
          
         web3.eth.defaultAccount = web3.eth.accounts[0];
 
         var GoalFactoryContract = web3.eth.contract([
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "userAddress",
-        "type": "address"
-      },
-      {
-        "name": "payout",
-        "type": "uint256"
-      }
-    ],
-    "name": "userPayout",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "ncenoTotalWithdrawal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "userID",
-        "type": "bytes32"
-      },
-      {
-        "name": "reportedMins",
-        "type": "uint256"
-      },
-      {
-        "name": "timeStamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "settleLog",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getGoalCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [
       {
-        "name": "_fbID",
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_goalID",
         "type": "bytes32"
       }
     ],
-    "name": "getLastGoalByFitbitID",
+    "name": "getMyStats",
     "outputs": [
       {
         "components": [
           {
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "name": "name",
-            "type": "bytes32"
-          },
-          {
-            "name": "email",
-            "type": "bytes32"
-          },
-          {
-            "name": "fitbitID",
-            "type": "bytes32"
-          },
-          {
-            "name": "activeMinutes",
+            "name": "adherenceRate",
             "type": "uint256"
           },
           {
-            "name": "rounds",
+            "name": "wkPayouts",
+            "type": "uint256[12]"
+          },
+          {
+            "name": "lostStake",
             "type": "uint256"
           },
           {
-            "name": "beginAt",
-            "type": "bytes32"
+            "name": "wkBonuses",
+            "type": "uint256[12]"
           },
           {
-            "name": "stake",
+            "name": "bonusTotal",
             "type": "uint256"
           },
           {
-            "name": "sucPayouts",
-            "type": "uint256"
-          },
-          {
-            "name": "totalPaidOut",
-            "type": "uint256"
-          },
-          {
-            "name": "timeCreated",
+            "name": "roi",
             "type": "uint256"
           }
         ],
@@ -139,114 +67,35 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_fbID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getGoalsByFitbitID",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "name": "name",
-            "type": "bytes32"
-          },
-          {
-            "name": "email",
-            "type": "bytes32"
-          },
-          {
-            "name": "fitbitID",
-            "type": "bytes32"
-          },
-          {
-            "name": "activeMinutes",
-            "type": "uint256"
-          },
-          {
-            "name": "rounds",
-            "type": "uint256"
-          },
-          {
-            "name": "beginAt",
-            "type": "bytes32"
-          },
-          {
-            "name": "stake",
-            "type": "uint256"
-          },
-          {
-            "name": "sucPayouts",
-            "type": "uint256"
-          },
-          {
-            "name": "totalPaidOut",
-            "type": "uint256"
-          },
-          {
-            "name": "timeCreated",
-            "type": "uint256"
-          }
-        ],
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
-        "name": "withdrawal",
-        "type": "uint256"
-      }
-    ],
-    "name": "ncenoWithdrawal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_name",
+        "name": "_goalID",
         "type": "bytes32"
       },
       {
-        "name": "_email",
-        "type": "bytes32"
-      },
-      {
-        "name": "_fitbitID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_activeMinutes",
+        "name": "_activeMins",
         "type": "uint256"
       },
       {
-        "name": "_rounds",
+        "name": "_stakeWEI",
         "type": "uint256"
       },
       {
-        "name": "_beginAt",
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "name": "_wearableID",
         "type": "bytes32"
-      },
-      {
-        "name": "_stake",
-        "type": "uint256"
       }
     ],
     "name": "createGoal",
@@ -257,58 +106,293 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getAllGoals",
+    "inputs": [
+      {
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getFutureGoal",
     "outputs": [
       {
-        "components": [
-          {
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "name": "name",
-            "type": "bytes32"
-          },
-          {
-            "name": "email",
-            "type": "bytes32"
-          },
-          {
-            "name": "fitbitID",
-            "type": "bytes32"
-          },
-          {
-            "name": "activeMinutes",
-            "type": "uint256"
-          },
-          {
-            "name": "rounds",
-            "type": "uint256"
-          },
-          {
-            "name": "beginAt",
-            "type": "bytes32"
-          },
-          {
-            "name": "stake",
-            "type": "uint256"
-          },
-          {
-            "name": "sucPayouts",
-            "type": "uint256"
-          },
-          {
-            "name": "totalPaidOut",
-            "type": "uint256"
-          },
-          {
-            "name": "timeCreated",
-            "type": "uint256"
-          }
-        ],
         "name": "",
-        "type": "tuple[]"
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "activeCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getSingleRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getPastRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "ncenoEmergencyCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_reportedMins",
+        "type": "uint256"
+      },
+      {
+        "name": "_timeStamp",
+        "type": "uint256"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "simplePayout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getActiveRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getLeaderBoard",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      },
+      {
+        "name": "",
+        "type": "uint256[12][10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_wearableID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_wearableModel",
+        "type": "bytes32"
+      },
+      {
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "name": "_email",
+        "type": "bytes32"
+      }
+    ],
+    "name": "createCompetitor",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "pastCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "claimBonus",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "joinGoal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "goalCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "singleCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getGoalParams",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32[10]"
       }
     ],
     "payable": false,
@@ -320,51 +404,144 @@
     "inputs": [
       {
         "indexed": false,
-        "name": "owner",
+        "name": "_wearableID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_wearableModel",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_email",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_walletAdr",
         "type": "address"
-      },
+      }
+    ],
+    "name": "ProfileCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
       {
         "indexed": false,
-        "name": "name",
+        "name": "_goalID",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "email",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "fitbitID",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "activeMinutes",
+        "name": "_activeMins",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "rounds",
+        "name": "_stakeWEI",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "beginAt",
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wearableID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "GoalCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_userID",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "stake",
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "CompetitorJoined",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_wk",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "timeCreated",
+        "name": "_payout",
         "type": "uint256"
       }
     ],
-    "name": "goalInfo",
+    "name": "PayoutRedeemedBy",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wk",
+        "type": "uint256"
+      }
+    ],
+    "name": "BonusClaimedBy",
     "type": "event"
   }
 ]);
