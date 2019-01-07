@@ -85,7 +85,7 @@ contract GoalFactory {
     }
   }
 
-  //get personal stats***********************
+  //get personal stats
   struct myStatsObject{
     uint adherenceRate; //
     uint[12] wkPayouts;
@@ -156,13 +156,18 @@ contract GoalFactory {
   }
 
   //payout partitions based on wks parameter
-  uint[][] partitions = 
+  uint[12][6] partitions = 
   [[25,75,0,0,0,0,0,0,0,0,0,0],
   [11,26,36,27,0,0,0,0,0,0,0,0],
   [6,12,25,13,26,18,0,0,0,0,0,0],
   [11,11,14,10,4,7,17,26,0,0,0,0],
   [9,8,10,11,7,4,4,9,17,21,0,0],
   [5,8,9,6,2,3,9,12,8,6,12,20]];
+
+  //set new partitions
+  function setPartitions(uint[12][6] _newPartitions) onlyNceno external{
+    partitions = _newPartitions;
+  }
 
  
   //spawn a new goal with intended parameters
