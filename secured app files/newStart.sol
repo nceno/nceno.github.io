@@ -5,6 +5,7 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 //web3.padRight(web3.fromAscii('a string of text'), 34)
 //"0x6120676f616c20696400000000000000"
 //"0x736f6d65207573657220494400000000"
+//"0x6120676f616c20696400000000000000","60","400","4","8","1546847338","0x736f6d65207573657220494400000000"
 
 contract GoalFactory {
   //addresses where lost stakeWEI goes
@@ -20,9 +21,9 @@ contract GoalFactory {
     mapping(uint => goalObject) goalAt; //index of historical goals
       uint goalTotal;
   }
-  mapping(bytes32 => competitorObject) internal profileOf; //registry of ALL users' info, indexed by wearableID
+  mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by wearableID
     mapping(bytes32 => bool) internal userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
-
+  
   function createCompetitor(bytes32 _wearableID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
     require(userExists[_wearableID] == false);
     competitorObject memory createdCompetitor;
@@ -37,12 +38,11 @@ contract GoalFactory {
     userExists[_wearableID] = true;
 
     //fire event: _userID made a profile with params: @1, @2, ...
-    emit ProfileCreated(_wearableID, _wearableModel, _name, _email, msg.sender);
+    bytes32 _eventName = 0x50726f66696c65437265617465640000;
+    emit ProfileCreated(_eventName, _wearableID, _wearableModel, _name, _email, msg.sender);
   }
   
-  event ProfileCreated(bytes32 _wearableID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, address _walletAdr);
-
-  //get profile**********************************
+  event ProfileCreated(bytes32 _eventName, bytes32 _wearableID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, address _walletAdr);
 
   struct stampList{
     mapping(uint256 => bool) stampExists; //checks if a timestamp exists. each user in a goal will have one of these
@@ -96,65 +96,60 @@ contract GoalFactory {
     uint totalAtStake;
   }
  
-  
-  function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint){
-    uint wk = (now - goalRegistry[_goalID].startTime)/604800;
-    if(0<=wk && wk<goalRegistry[_goalID].wks+1){
+    function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint){
+    goalObject memory theGoal = goalRegistry[_goalID];
+    uint wk = (now - theGoal.startTime)/604800;
+    if(0<=wk && wk<theGoal.wks+1){
       
       myStatsObject memory my;
       uint successCount;
       for(uint i =0; i<wk; i++){
         successCount += goalRegistry[_goalID].successes[_userID][i];
       }
-      my.adherenceRate = 100*successCount/(wk*goalRegistry[_goalID].sesPerWk); 
+      my.adherenceRate = 100*successCount/(wk*theGoal.sesPerWk); 
       
-      for(uint p =wk; p<goalRegistry[_goalID].wks; p++){
-        my.totalAtStake += partitions[goalRegistry[_goalID].wks/2 -1][p]*goalRegistry[_goalID].stakeWEI*goalRegistry[_goalID].competitorCount/100;
+      for(uint p =wk; p<theGoal.wks; p++){
+        my.totalAtStake += partitions[theGoal.wks/2 -1][p]*theGoal.stakeWEI*theGoal.competitorCount/100;
       }  
                  
       return(my.adherenceRate, my.totalAtStake);
     }
   }
-  
-  
+    
   function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint, uint[12], uint){
-    uint wk = (now - goalRegistry[_goalID].startTime)/604800;
-    if(0<=wk && wk<goalRegistry[_goalID].wks+1){
-      
+    goalObject memory theGoal = goalRegistry[_goalID];
+    uint wk = (now - theGoal.startTime)/604800;
+    if(0<=wk && wk<theGoal.wks+1){
       myStatsObject memory my;
-      
-      for(uint j =0; j<wk; j++){
-        my.wkPayouts[j] = partitions[goalRegistry[_goalID].wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
-      }
-
-      for(uint k =0; k<wk; k++){
-        my.lostStake+=(partitions[goalRegistry[_goalID].wks/2 -1][k]*goalRegistry[_goalID].stakeWEI/100-my.wkPayouts[k]);
-      }
-
-      for(uint m =0; m<wk; m++){
-        my.wkBonuses[m] = goalRegistry[_goalID].bonusWasClaimed[_userID][m]*goalRegistry[_goalID].potWk[m]/(goalRegistry[_goalID].winnersWk[m]*2);
-        my.bonusTotal+= my.wkBonuses[m];
-      }
-
       uint totalPay;
-      for(uint n =0; n<wk; n++){
-        totalPay+= my.wkPayouts[n];
+      for(uint j =0; j<wk; j++){
+        
+        //stack too deep********************
+        my.wkPayouts[j] = partitions[theGoal.wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*theGoal.stakeWEI/(100*theGoal.sesPerWk);
+      
+        //stack too deep*******************
+        my.lostStake+=(partitions[theGoal.wks/2 -1][j]*theGoal.stakeWEI/100-my.wkPayouts[j]);
+      
+        my.wkBonuses[j] = goalRegistry[_goalID].bonusWasClaimed[_userID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
+        my.bonusTotal+= my.wkBonuses[j];
+        totalPay+= my.wkPayouts[j];
       }
-      my.roi =100*(totalPay+my.bonusTotal)/goalRegistry[_goalID].stakeWEI;
+      my.roi =100*(totalPay+my.bonusTotal)/theGoal.stakeWEI;
       
       return(my.wkPayouts, my.roi, my.lostStake, my.wkBonuses, my.bonusTotal);
     }
   }
 
   //get the leaderboard
-  function getLeaderBoard(bytes32 _goalID) external returns(bytes32[10], uint[12][10]){
-    uint[12][10] storage performances;
-    bytes32[10] storage competitorName;
+  function getLeaderBoard(bytes32 _goalID) external view returns(bytes32[10], uint[12][10]){
+    goalObject memory theGoal = goalRegistry[_goalID];
+    uint[12][10] memory performances;
+    bytes32[10] memory competitorName;
     for(uint i =0; i<10; i++){
-    if(goalRegistry[_goalID].competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
-      //if(bytes(goalRegistry[_goalID].competitor[i]).length != 0){
-        competitorName[i] = profileOf[goalRegistry[_goalID].competitor[i]].name;
-        performances[i] = goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]];
+    if(theGoal.competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
+      //if(bytes(theGoal.competitor[i]).length != 0){
+        competitorName[i] = profileOf[theGoal.competitor[i]].name;
+        performances[i] = goalRegistry[_goalID].successes[theGoal.competitor[i]];
       }
     }
     return(competitorName, performances);
@@ -190,10 +185,11 @@ contract GoalFactory {
     goalCount++; //incriment global count
 
     //fire event: _userID created _goalID with params: @1, @2, ...
-    emit GoalCreated(_goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _wearableID);
+    bytes32 _eventName = 0x476f616c437265617465640000000000;
+    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _wearableID);
   }
   
-  event GoalCreated(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _wearableID);
+  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _wearableID);
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
@@ -209,10 +205,11 @@ contract GoalFactory {
     profileOf[_userID].goalTotal++;
 
     //fire event: _userID joined _goalID
-    emit CompetitorJoined(_userID, _goalID);
+    bytes32 _eventName = 0x436f6d70657469746f724a6f696e6564;
+    emit CompetitorJoined(_eventName, _userID, _goalID);
   }
   
-  event CompetitorJoined(bytes32 _userID, bytes32 _goalID);
+  event CompetitorJoined(bytes32 _eventName, bytes32 _userID, bytes32 _goalID);
 
   //simple payout function when someone logs a workout
   function simplePayout(bytes32 _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
@@ -230,12 +227,12 @@ contract GoalFactory {
       goalRegistry[_goalID].successes[_userID][wk]++; //note the success
       goalRegistry[_goalID].timeLog[_userID].stampExists[_timeStamp]=true; //protect timestamp from double spending
       //fire event: _userID was refunded _amount from _goalID on _wk
-      emit PayoutRedeemedBy(_userID, _goalID, wk, payout);
+      bytes32 _eventName = 0x5061796f757452656465656d65644279;
+      emit PayoutRedeemedBy(_eventName, _userID, _goalID, wk, payout);
     }
-    
   }
 
-  event PayoutRedeemedBy(bytes32 _userID, bytes32 _goalID, uint _wk, uint _payout);
+  event PayoutRedeemedBy(bytes32 _eventName, bytes32 _userID, bytes32 _goalID, uint _wk, uint _payout);
 
   //claims the bonus from lost stakeWEI of the previous week
   function claimBonus(bytes32 _goalID, bytes32 _userID) external{
@@ -264,10 +261,12 @@ contract GoalFactory {
     goalRegistry[_goalID].winnersWk[wk-1] = winners; //write to the global goal stats
 
     //fire event: _userID claimed _amount of lost stake from week _wk of _goalID.
-    emit BonusClaimedBy(_userID, _goalID, pot/(2*winners), wk);
+    bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
+    emit BonusClaimedBy(_eventName, _userID, _goalID, pot/(2*winners), wk);
+    
   }
 
-  event BonusClaimedBy(bytes32 _userID, bytes32 _goalID, uint _amount, uint _wk);
+  event BonusClaimedBy(bytes32 _eventName, bytes32 _userID, bytes32 _goalID, uint _amount, uint _wk);
 
   //replaces numerous "require()" statements, restricts caller to admin (nceno)
   modifier onlyNceno(){

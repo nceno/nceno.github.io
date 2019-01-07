@@ -1,6 +1,6 @@
 //<script>
 
-  var PortisProvider = require('portis').PortisProvider;
+  /*var PortisProvider = require('portis').PortisProvider;
   var Web3 = require('web3');
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
@@ -13,60 +13,11 @@
       network: 'rinkeby'
       }));
     }
-
-         
-        web3.eth.defaultAccount = web3.eth.accounts[0];
-
-        var GoalFactoryContract = web3.eth.contract([
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getMyStats",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "adherenceRate",
-            "type": "uint256"
-          },
-          {
-            "name": "wkPayouts",
-            "type": "uint256[12]"
-          },
-          {
-            "name": "lostStake",
-            "type": "uint256"
-          },
-          {
-            "name": "wkBonuses",
-            "type": "uint256[12]"
-          },
-          {
-            "name": "bonusTotal",
-            "type": "uint256"
-          },
-          {
-            "name": "roi",
-            "type": "uint256"
-          }
-        ],
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
+    */
+    var Web3 = require('web3');
+    web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
+    web3.eth.defaultAccount = web3.eth.accounts[0];
+    var GoalFactoryContract = web3.eth.contract([
   {
     "constant": false,
     "inputs": [
@@ -103,6 +54,45 @@
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "profileOf",
+    "outputs": [
+      {
+        "name": "wearableID",
+        "type": "bytes32"
+      },
+      {
+        "name": "wearableModel",
+        "type": "bytes32"
+      },
+      {
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "name": "email",
+        "type": "bytes32"
+      },
+      {
+        "name": "walletAdr",
+        "type": "address"
+      },
+      {
+        "name": "goalTotal",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -240,7 +230,46 @@
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMyGoalStats2",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
         "name": "_goalID",
@@ -259,7 +288,7 @@
       }
     ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -348,6 +377,33 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMyGoalStats1",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -405,6 +461,11 @@
     "inputs": [
       {
         "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
         "name": "_wearableID",
         "type": "bytes32"
       },
@@ -435,6 +496,11 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
       {
         "indexed": false,
         "name": "_goalID",
@@ -479,6 +545,11 @@
     "inputs": [
       {
         "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
         "name": "_userID",
         "type": "bytes32"
       },
@@ -494,6 +565,11 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
       {
         "indexed": false,
         "name": "_userID",
@@ -521,6 +597,11 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
       {
         "indexed": false,
         "name": "_userID",
@@ -604,37 +685,33 @@
         });
        
 
-
-    
-        //creating the goal
-        $("#createGoalBtn").click(function() {
-            var usdStake = ($("#stake").val()-1.05)*0.0057;
-            GoalFactory.createGoal(
-                $("#name").val(), 
-                $("#email").val(), 
-                //('1'+$("#fitbitID").val()),
-                userId, 
-                $("#activeMinutes").val(), 
-                $("#rounds").val(), 
-                ('Beginning/ '+$("#beginAt").val()), 
-                //$("#stake").val(),
-                web3.toWei(usdStake, "ether"),
-                {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
-                function(error, result) {
-                    if (!error){
-                      $("#createGoalBtn").hide();
-                      $("#loader").show();
-                      $("#insTrans").html(result.blockHash);
-                      console.log(result);
-                    }
-                      else
-                      console.error(error);
-                })
-        });
-                
-        
-        
- 
+//creating the goal
+$("#createGoalBtn").click(function() {
+  var usdStake = ($("#stake").val()-1.05)*0.0057;
+  GoalFactory.createGoal(
+    $("#name").val(),
+    $("#email").val(), 
+    //('1'+$("#fitbitID").val()),
+    userId, 
+    $("#activeMinutes").val(), 
+    $("#rounds").val(), 
+    ('Beginning/ '+$("#beginAt").val()), 
+    //$("#stake").val(),
+    web3.toWei(usdStake, "ether"),
+    {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
+    function(error, result) {
+      if (!error){
+        $("#createGoalBtn").hide();
+        $("#loader").show();
+        $("#insTrans").html(result.blockHash);
+        console.log(result);
+      }
+      else
+      console.error(error);
+    }
+  )
+}); 
+       
 
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
