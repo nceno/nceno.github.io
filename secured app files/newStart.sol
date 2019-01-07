@@ -1,7 +1,6 @@
 pragma solidity ^0.4.24;
 pragma experimental ABIEncoderV2; //to return a struct in a function
 
-
 //string to bytes32 converter
 //web3.padRight(web3.fromAscii('a string of text'), 34)
 //"0x6120676f616c20696400000000000000"
@@ -86,18 +85,19 @@ contract GoalFactory {
     }
   }
 
-
   //get personal stats***********************
   struct myStatsObject{
-    uint adherenceRate;
+    uint adherenceRate; //
     uint[12] wkPayouts;
     uint lostStake;
     uint[12] wkBonuses;
     uint bonusTotal;
     uint roi;
-    //uint totalAtStake;
+    uint totalAtStake;
   }
-  function getMyStats(bytes32 _userID, bytes32 _goalID) external view returns(myStatsObject){
+ 
+  
+  function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint){
     uint wk = (now - goalRegistry[_goalID].startTime)/604800;
     if(0<=wk && wk<goalRegistry[_goalID].wks+1){
       
@@ -106,38 +106,46 @@ contract GoalFactory {
       for(uint i =0; i<wk; i++){
         successCount += goalRegistry[_goalID].successes[_userID][i];
       }
-      my.adherenceRate = 100*successCount/(wk*goalRegistry[_goalID].sesPerWk);
+      my.adherenceRate = 100*successCount/(wk*goalRegistry[_goalID].sesPerWk); 
       
-      //compile error: stack too deep
-      //for(uint j =0; j<wk; j++){
-        //my.wkPayouts[j] = partitions[goalRegistry[_goalID].wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
-      //}
+      for(uint p =wk; p<goalRegistry[_goalID].wks; p++){
+        my.totalAtStake += partitions[goalRegistry[_goalID].wks/2 -1][p]*goalRegistry[_goalID].stakeWEI*goalRegistry[_goalID].competitorCount/100;
+      }  
+                 
+      return(my.adherenceRate, my.totalAtStake);
+    }
+  }
+  
+  
+  function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint, uint[12], uint){
+    uint wk = (now - goalRegistry[_goalID].startTime)/604800;
+    if(0<=wk && wk<goalRegistry[_goalID].wks+1){
+      
+      myStatsObject memory my;
+      
+      for(uint j =0; j<wk; j++){
+        my.wkPayouts[j] = partitions[goalRegistry[_goalID].wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
+      }
 
-      //compile error: stack too deep
-      //for(uint k =0; k<wk; k++){
-        //my.lostStake+=(partitions[goalRegistry[_goalID].wks/2 -1][k]*goalRegistry[_goalID].stakeWEI/100-my.wkPayouts[k]);
-      //}
-      
+      for(uint k =0; k<wk; k++){
+        my.lostStake+=(partitions[goalRegistry[_goalID].wks/2 -1][k]*goalRegistry[_goalID].stakeWEI/100-my.wkPayouts[k]);
+      }
+
       for(uint m =0; m<wk; m++){
         my.wkBonuses[m] = goalRegistry[_goalID].bonusWasClaimed[_userID][m]*goalRegistry[_goalID].potWk[m]/(goalRegistry[_goalID].winnersWk[m]*2);
         my.bonusTotal+= my.wkBonuses[m];
       }
+
+      uint totalPay;
+      for(uint n =0; n<wk; n++){
+        totalPay+= my.wkPayouts[n];
+      }
+      my.roi =100*(totalPay+my.bonusTotal)/goalRegistry[_goalID].stakeWEI;
       
-      //uint totalPay;
-      //for(uint n =0; n<wk; n++){
-        //totalPay+= my.wkPayouts[n];
-      //}
-      //my.roi =100*(totalPay+my.bonusTotal)/goalRegistry[_goalID].stakeWEI;
-      
-      //compile error: stack too deep
-      //for(uint p =wk; p<goalRegistry[_goalID].wks; p++){
-        //my.totalAtStake += partitions[goalRegistry[_goalID].wks/2 -1][p]*goalRegistry[_goalID].stakeWEI*goalRegistry[_goalID].competitorCount/100;
-     // }
-      
-      return(my);
+      return(my.wkPayouts, my.roi, my.lostStake, my.wkBonuses, my.bonusTotal);
     }
   }
-  
+
   //get the leaderboard
   function getLeaderBoard(bytes32 _goalID) external returns(bytes32[10], uint[12][10]){
     uint[12][10] storage performances;
@@ -151,24 +159,6 @@ contract GoalFactory {
     }
     return(competitorName, performances);
   }
-
-
-
-
-  
-  
-   
-
-  //Nceno revenue stats****************
-  /*struct revenueStats{
-
-  }
-  function getRevStatsByGoal external view returns(){
-
-  }
-  function getGlobalRevStats external view returns(){
-
-  } */
 
   //payout partitions based on wks parameter
   uint[][] partitions = 
@@ -191,9 +181,7 @@ contract GoalFactory {
     createdGoal.sesPerWk = _sesPerWk;
     createdGoal.wks = _wks;
     createdGoal.startTime = _startTime;
-    
-
-        
+          
     createdGoal.competitorCount = 1; //incriment competitor count
     createdGoal.competitor[0] = _wearableID; //add self to competitor list
     
@@ -206,8 +194,6 @@ contract GoalFactory {
   }
   
   event GoalCreated(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _wearableID);
-
-  
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
@@ -283,7 +269,6 @@ contract GoalFactory {
 
   event BonusClaimedBy(bytes32 _userID, bytes32 _goalID, uint _amount, uint _wk);
 
-
   //replaces numerous "require()" statements, restricts caller to admin (nceno)
   modifier onlyNceno(){
     require(msg.sender == nceno,
@@ -310,7 +295,6 @@ contract GoalFactory {
 
     nceno.transfer(revenue/2);
   }
-
 
   //see our revenue from all active goals
   function getActiveRev() onlyNceno external view returns (uint){
