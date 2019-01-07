@@ -9,7 +9,8 @@
   } else {
       // Fallback - use Portis
       web3 = new Web3(new PortisProvider({
-      apiKey: "332bfe3ea28174fa515d478e23a1b31c"
+      apiKey: "332bfe3ea28174fa515d478e23a1b31c",
+      network: 'rinkeby'
       }));
     }
 
