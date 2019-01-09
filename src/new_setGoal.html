@@ -67,9 +67,46 @@
 
         <p>Nceno uses several services to interact with the blockchain (Portis) and verify your workout (Fitbit). Thus, you need to sign in to them before continuing.</p>
         
-        <button id="createGoalBtn" type="button" class="btn btn-primary">Log into Portis</button>
-        <button id="createGoalBtn" type="button" class="btn btn-primary">Log into Fitbit</button>
-
+        <p>Step 1:</p><button id="createGoalBtn" type="button" class="btn btn-primary">Log into Portis</button>
+        <p>Step 2:</p><button id="createGoalBtn" type="button" class="btn btn-primary">Log into Fitbit</button>
+        <p>(Step 3: One-time)</p>
+        
+        <!--modal-->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create an Nceno account</button>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">New Nceno account</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Name</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Email</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Wearable make/model</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Make account</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--modal-->
+        
 
       </div>
       </div>
@@ -86,7 +123,7 @@
       <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
       <div class="panel-body px-3 mb-4">
 
-        <p>Go for it! But we will only count the number of workouts you do which are less than or equal to the number you put as your goal. If you find yourself over-achieving, try setting the bar higher next time :)</p>
+        <p>You are about to set a goal and stake some crypto on your progress. Only proceed if you have read the <a href="instructions.html">instructions</a> and agree to the <a href="terms.html">terms</a>.</p>
         <button id="createGoalBtn" type="button" class="btn btn-secondary">Create an Nceno account</button>
         <button id="createGoalBtn" type="button" class="btn btn-primary">Create this goal</button>
 
