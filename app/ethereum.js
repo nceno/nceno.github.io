@@ -25,15 +25,15 @@
         console.log(GoalFactory);
         //$("#allSet").hide();
         //$("#yourGoal").hide();
-        $("#createMdl").hide();
+        $("#modalCreateBtn").hide();
         
         //show create button only if user agrees to terms
         $("#checker").on('click', function() {
           if($("#checker").is(':checked')) {
-            $("#createMdl").show();
+            $("#modalCreateBtn").show();
             
           } else {
-            $("#createMdl").hide();
+            $("#modalCreateBtn").hide();
             
           }
         });
@@ -92,7 +92,7 @@ $("#createBtn").click(function() {
     {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
     function(error, result) {
       if (!error){
-        $("#createGoalBtn").hide();
+        $("#createBtn").hide();
         $("#loader").show();
         $("#insTrans").html(result.blockHash);
         console.log(result);
