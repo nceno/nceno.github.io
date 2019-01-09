@@ -23,17 +23,17 @@
         //var GoalFactory = GoalFactoryContract.at('0x22b51c7a64510780dad13fb2cd1c868476060447'); //rinkeby from metamask account 2
         
         console.log(GoalFactory);
-        $("#allSet").hide();
-        $("#yourGoal").hide();
-        $("#createGoalBtn").hide();
+        //$("#allSet").hide();
+        //$("#yourGoal").hide();
+        $("#createBtn").hide();
         
         //show create button only if user agrees to terms
         $("#checker").on('click', function() {
           if($("#checker").is(':checked')) {
-            $("#createGoalBtn").show();
+            $("#createBtn").show();
             
           } else {
-            $("#createGoalBtn").hide();
+            $("#createBtn").hide();
             
           }
         });
