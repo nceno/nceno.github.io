@@ -67,8 +67,8 @@
 
         <p>Nceno uses several services to interact with the blockchain (Portis) and verify your workout (Fitbit). Thus, you need to sign in to them before continuing.</p>
         
-        <p>Step 1:</p><button id="createGoalBtn" type="button" class="btn btn-primary">Log into Portis</button>
-        <p>Step 2:</p><button id="createGoalBtn" type="button" class="btn btn-primary">Log into Fitbit</button>
+        <p>Step 1:</p><button id="portisBtn" type="button" class="btn btn-primary">Log into Portis</button>
+        <p>Step 2:</p><button id="fitbitBtn" type="button" class="btn btn-primary">Log into Fitbit</button>
         <p>Step 3 (One-time):</p>
         <!--modal-->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create an Nceno account</button>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Make account</button>
+                  <button id="makeAcctBtn" type="button" class="btn btn-primary">Make account</button>
                 </div>
               </div>
             </div>
@@ -397,6 +397,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../app/ethereum.js"></script>
+<script src="../app/NcenoABI.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
   </body>
 </html>
