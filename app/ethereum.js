@@ -25,15 +25,15 @@
         console.log(GoalFactory);
         //$("#allSet").hide();
         //$("#yourGoal").hide();
-        $("#createBtn").hide();
+        $("#createMdl").hide();
         
         //show create button only if user agrees to terms
         $("#checker").on('click', function() {
           if($("#checker").is(':checked')) {
-            $("#createBtn").show();
+            $("#createMdl").show();
             
           } else {
-            $("#createBtn").hide();
+            $("#createMdl").hide();
             
           }
         });
@@ -77,7 +77,7 @@
        
 
 //creating the goal
-$("#createGoalBtn").click(function() {
+$("#createBtn").click(function() {
   var usdStake = ($("#stake").val()-1.05)*0.0057;
   GoalFactory.createGoal(
     $("#name").val(),
