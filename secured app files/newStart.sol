@@ -156,20 +156,25 @@ contract GoalFactory {
   }
 
   //payout partitions based on wks parameter
-  uint[12][6] partitions = 
-  [[25,75,0,0,0,0,0,0,0,0,0,0],
-  [11,26,36,27,0,0,0,0,0,0,0,0],
-  [6,12,25,13,26,18,0,0,0,0,0,0],
-  [11,11,14,10,4,7,17,26,0,0,0,0],
-  [9,8,10,11,7,4,4,9,17,21,0,0],
-  [5,8,9,6,2,3,9,12,8,6,12,20]];
+  uint[12][6] partitions = partitionChoices[0];
+  uint[12][6][2] partitionChoices =[ 
+    //1
+    [[43, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [13, 30, 21, 36, 0, 0, 0, 0, 
+    0, 0, 0, 0], [7, 12, 24, 13, 26, 18, 0, 0, 0, 0, 0, 0], [3, 10, 9, 
+    21, 12, 10, 24, 11, 0, 0, 0, 0], [2, 7, 7, 9, 18, 11, 4, 17, 16, 9, 
+    0, 0], [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]],
+    //2
+    [[45, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [22, 23, 11, 44, 0, 0, 0, 0, 
+    0, 0, 0, 0], [14, 17, 14, 6, 16, 33, 0, 0, 0, 0, 0, 0], [11, 11, 14,
+     10, 4, 7, 17, 26, 0, 0, 0, 0], [9, 8, 10, 11, 7, 4, 4, 9, 17, 21, 
+    0, 0], [7, 7, 8, 9, 8, 6, 4, 3, 5, 10, 15, 18]]
+  ];
 
-  //set new partitions
-  function setPartitions(uint[12][6] _newPartitions) onlyNceno external{
-    partitions = _newPartitions;
+  //seed with new partitions
+  function setPartitionChoices(uint[12][6][2] _newChoices) onlyNceno external {
+    partitionChoices = _newChoices;
   }
 
- 
   //spawn a new goal with intended parameters
   function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _wearableID) external payable {
     require(msg.value == _stakeWEI);
@@ -188,6 +193,8 @@ contract GoalFactory {
     goalRegistry[_goalID] = createdGoal; //add goal to the registry
     iterableGoals[goalCount] = createdGoal; //add goal to iterable registry ***expensive!
     goalCount++; //incriment global count
+
+    partitions = partitionChoices[now%2];
 
     //fire event: _userID created _goalID with params: @1, @2, ...
     bytes32 _eventName = 0x476f616c437265617465640000000000;
