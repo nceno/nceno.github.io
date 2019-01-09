@@ -226,7 +226,7 @@ contract GoalFactory {
   //simple payout function when someone logs a workout
   function simplePayout(bytes32 _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
     //can only call if in challenge, and challenge is active
-    require(goalRegistry[_goalID].isCompetitor[_userID]==true && (goalRegistry[_goalID].startTime < now) && (now < goalRegistry[_goalID].startTime + goalRegistry[_goalID].wks*1 weeks));
+    require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && (goalRegistry[_goalID].startTime < now) && (now < goalRegistry[_goalID].startTime + goalRegistry[_goalID].wks*1 weeks));
     
     uint wk = (now - goalRegistry[_goalID].startTime)/604800;
     
@@ -250,7 +250,7 @@ contract GoalFactory {
   function claimBonus(bytes32 _goalID, bytes32 _userID) external{
     //must have 100% adherence for the previous week, and can only claim once.
     
-    require(goalRegistry[_goalID].isCompetitor[_userID]==true && goalRegistry[_goalID].successes[_userID][(now-goalRegistry[_goalID].startTime)/604800-1]==goalRegistry[_goalID].sesPerWk && goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0);
+    require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && goalRegistry[_goalID].successes[_userID][(now-goalRegistry[_goalID].startTime)/604800-1]==goalRegistry[_goalID].sesPerWk && goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0);
     
     uint wk = (now-goalRegistry[_goalID].startTime)/604800;
     uint winners;
