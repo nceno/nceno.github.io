@@ -184,21 +184,24 @@
       </div>
 
 
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Starting date:</label>
-            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Starting time:</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
                 </div>
-              </div>
             </div>
-          </div>
-          <script type="text/javascript">
+        </div>
+        <script type="text/javascript">
             $(function () {
-              $('#datetimepicker1').datetimepicker();
+                $('#datetimepicker1').datetimepicker();
             });
-          </script>
+        </script>
+    </div>
         
 
       </form>                            
