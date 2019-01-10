@@ -13,11 +13,12 @@
     }
     */
     //var Web3 = require('web3');
+    
     web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
-    var NcenoContract = web3.eth.contract(NcenoABI);
-    var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //mainnet from metamask account 2
-        //var Nceno = NcenoContract.at('0x22b51c7a64510780dad13fb2cd1c868476060447'); //rinkeby from metamask account 2
+    var NcenoContract = web3.eth.contract(longABI);
+    var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
+    
         
         console.log(Nceno);
         
@@ -141,3 +142,628 @@ xhr.onload = function() {
 };
 xhr.send()
 });//close click(function(){
+
+var longABI =[
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "activeCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "claimBonus",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_wearableID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_wearableModel",
+        "type": "bytes32"
+      },
+      {
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "name": "_email",
+        "type": "bytes32"
+      }
+    ],
+    "name": "createCompetitor",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_activeMins",
+        "type": "uint256"
+      },
+      {
+        "name": "_stakeWEI",
+        "type": "uint256"
+      },
+      {
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "name": "_wearableID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "createGoal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "joinGoal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "ncenoEmergencyCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "pastCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newChoices",
+        "type": "uint256[12][6][2]"
+      }
+    ],
+    "name": "setPartitionChoices",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_reportedMins",
+        "type": "uint256"
+      },
+      {
+        "name": "_timeStamp",
+        "type": "uint256"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "simplePayout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "singleCashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_wearableID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_wearableModel",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_name",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_email",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_walletAdr",
+        "type": "address"
+      }
+    ],
+    "name": "ProfileCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_activeMins",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stakeWEI",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wearableID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "GoalCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "CompetitorJoined",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_wk",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_payout",
+        "type": "uint256"
+      }
+    ],
+    "name": "PayoutRedeemedBy",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_eventName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wk",
+        "type": "uint256"
+      }
+    ],
+    "name": "BonusClaimedBy",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getActiveRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getFutureGoal",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getGoalParams",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getLeaderBoard",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      },
+      {
+        "name": "",
+        "type": "uint256[12][10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMyGoalStats1",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMyGoalStats2",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getPastRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getSingleRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "goalCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "profileOf",
+    "outputs": [
+      {
+        "name": "wearableID",
+        "type": "bytes32"
+      },
+      {
+        "name": "wearableModel",
+        "type": "bytes32"
+      },
+      {
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "name": "email",
+        "type": "bytes32"
+      },
+      {
+        "name": "walletAdr",
+        "type": "address"
+      },
+      {
+        "name": "goalTotal",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+];

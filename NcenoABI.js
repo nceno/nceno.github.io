@@ -1,4 +1,4 @@
-var NcenoABI =[
+var ABI =[
   {
     "constant": false,
     "inputs": [],
