@@ -1,5 +1,5 @@
   var PortisProvider = require('portis').PortisProvider;
-  //var Web3 = require('web3');
+  var Web3 = require('web3');
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
