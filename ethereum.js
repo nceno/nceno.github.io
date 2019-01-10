@@ -1,5 +1,3 @@
-//<script>
-
   /*var PortisProvider = require('portis').PortisProvider;
   var Web3 = require('web3');
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
@@ -14,7 +12,7 @@
       }));
     }
     */
-    var Web3 = require('web3');
+    var Web3 = require('node_modules/web3');
     web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
     var NcenoContract = web3.eth.contract(NcenoABI);
@@ -145,6 +143,3 @@ xhr.onload = function() {
 };
 xhr.send()
 });//close click(function(){
-
-
-    //</script>
