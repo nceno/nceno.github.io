@@ -1,4 +1,4 @@
-  /*var PortisProvider = require('portis').PortisProvider;
+  var PortisProvider = require('portis').PortisProvider;
   var Web3 = require('web3');
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
@@ -11,10 +11,10 @@
       network: 'rinkeby'
       }));
     }
-    */
-    var Web3 = require('web3');
+   
+
     
-    web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
+    //web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
     var NcenoContract = web3.eth.contract(longABI);
     var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
