@@ -28,7 +28,7 @@
 
     
     web3.eth.defaultAccount = web3.eth.accounts[0];
-    var Nceno = new web3.eth.Contract(abi, '0xe9390c922503b98da5785e57616739379a26a699');
+    var Nceno = new web3.eth.Contract([abi], '0xe9390c922503b98da5785e57616739379a26a699');
     //var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
     
         
@@ -154,7 +154,7 @@ xhr.onload = function() {
 xhr.send()
 });//close click(function(){
 
-  const abi = [
+  var abi = 
   {
     "constant": false,
     "inputs": [],
@@ -776,5 +776,4 @@ xhr.send()
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  }
-];
+  };
