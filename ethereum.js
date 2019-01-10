@@ -12,12 +12,11 @@
       }));
     }
     */
-    var Web3 = require('web3');
+    //var Web3 = require('web3');
     web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
     var NcenoContract = web3.eth.contract(NcenoABI);
-
-        var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //mainnet from metamask account 2
+    var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //mainnet from metamask account 2
         //var Nceno = NcenoContract.at('0x22b51c7a64510780dad13fb2cd1c868476060447'); //rinkeby from metamask account 2
         
         console.log(Nceno);
@@ -34,8 +33,7 @@
             
           }
         });
-
-         ///////////////call fitbit api with user creds
+        ///////////////call fitbit api with user creds
         //getting the access token from url
         var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
 
