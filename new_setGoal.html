@@ -452,7 +452,7 @@
     
     //web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
-    var NcenoContract = new web3.eth.contract(longABI);
+    var NcenoContract = new web3.eth.Contract(longABI);
     var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
     
         
