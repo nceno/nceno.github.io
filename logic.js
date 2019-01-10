@@ -1,3 +1,4 @@
+  <script>
   //var PortisProvider = require('portis').PortisProvider;
   //var Web3 = require('web3');
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
@@ -767,3 +768,4 @@ var longABI =[
     "type": "function"
   }
 ];
+</script>
