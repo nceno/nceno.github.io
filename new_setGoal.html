@@ -439,16 +439,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
   <script>
-  //var PortisProvider = require('portis').PortisProvider;
+  
   var PortisProvider = window.Portis.PortisProvider;
-  //var Web3 = require('web3');
+  
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
     web3 = new Web3(web3.currentProvider);
   } else {
       // Fallback - use Portis
-      web3p = new Web3(new PortisProvider({
+      web3 = new Web3(new PortisProvider({
       apiKey: "332bfe3ea28174fa515d478e23a1b31c",
       network: 'rinkeby'
       }));
@@ -456,11 +456,11 @@
 
    function showPortis() {
       // will only open the portis menu
-      web3p.currentProvider.showPortis();
+      web3.currentProvider.showPortis();
     }
 
     function getAccounts() {
-      web3p.eth.getAccounts((error, accounts) => {
+      web3.eth.getAccounts((error, accounts) => {
         if (error) {
           return document.getElementById('address').innerHTML = error;
         }
