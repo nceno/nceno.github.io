@@ -155,7 +155,7 @@ xhr.send()
 });//close click(function(){
 
   var abi = 
-  {
+  {{
     "constant": false,
     "inputs": [],
     "name": "activeCashout",
@@ -776,4 +776,4 @@ xhr.send()
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  };
+  }};
