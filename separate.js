@@ -28,7 +28,8 @@ var PortisProvider = window.Portis.PortisProvider;
 
     
     web3.eth.defaultAccount = web3.eth.accounts[0];
-    var Nceno = new web3.eth.Contract([{
+    var Nceno = new web3.eth.Contract([
+  {
     "constant": false,
     "inputs": [],
     "name": "activeCashout",
@@ -649,7 +650,8 @@ var PortisProvider = window.Portis.PortisProvider;
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  }], '0xe9390c922503b98da5785e57616739379a26a699');
+  }
+], '0xe9390c922503b98da5785e57616739379a26a699');
     //var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
     
         
