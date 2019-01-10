@@ -456,16 +456,16 @@
 
    function showPortis() {
       // will only open the portis menu
-      web3js.currentProvider.showPortis()
+      web3.currentProvider.showPortis()
     }
 
     function getAccounts() {
-      web3js.eth.getAccounts((error, accounts) => {
+      web3.eth.getAccounts((error, accounts) => {
         if (error) {
           return document.getElementById('address').innerHTML = error
         }
         // will run every time the user clicks on the button
-        document.getElementById('address').innerHTML = "Got accounts: " + accounts[0]
+        document.getElementById('address').innerHTML = "Got accounts: " + web3.eth.accounts[0]
       });
     }
 
