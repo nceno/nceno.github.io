@@ -440,8 +440,7 @@
 
   <script>
   
-  var PortisProvider = window.Portis.PortisProvider;
-  
+  //var PortisProvider = window.Portis.PortisProvider;
   // Check if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
@@ -454,7 +453,7 @@
       }));
     }
 
-   function showPortis() {
+   /*function showPortis() {
       // will only open the portis menu
       web3.currentProvider.showPortis();
     }
@@ -467,10 +466,9 @@
         // will run every time the user clicks on the button
         document.getElementById('address').innerHTML = "Got accounts: " + accounts[0];
       });
-    }
+    }*/
 
     
-    //web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
     var Nceno = new web3.eth.Contract([
   {
