@@ -13,13 +13,13 @@ var PortisProvider = window.Portis.PortisProvider;
 
    function showPortis() {
       // will only open the portis menu
-      web3.currentProvider.showPortis();
+      web3.currentProvider.showPortis()
     }
 
     function getAccounts() {
       web3.eth.getAccounts((error, accounts) => {
         if (error) {
-          return document.getElementById('address').innerHTML = error;
+          return document.getElementById('address').innerHTML = error
         }
         // will run every time the user clicks on the button
         document.getElementById('address').innerHTML = "Got accounts: " + accounts[0];
