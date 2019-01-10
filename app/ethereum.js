@@ -17,14 +17,13 @@
     var Web3 = require('../web3');
     web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
-    var GoalFactoryContract = web3.eth.contract(NcenoABI);
+    var NcenoContract = web3.eth.contract(NcenoABI);
 
-        var GoalFactory = GoalFactoryContract.at('0x57f871f42bea39e5a1b4168151f3a42e619bfc0d'); //mainnet from metamask account 2
-        //var GoalFactory = GoalFactoryContract.at('0x22b51c7a64510780dad13fb2cd1c868476060447'); //rinkeby from metamask account 2
+        var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //mainnet from metamask account 2
+        //var Nceno = NcenoContract.at('0x22b51c7a64510780dad13fb2cd1c868476060447'); //rinkeby from metamask account 2
         
-        console.log(GoalFactory);
-        //$("#allSet").hide();
-        //$("#yourGoal").hide();
+        console.log(Nceno);
+        
         $("#modalCreateBtn").hide();
         
         //show create button only if user agrees to terms
@@ -48,7 +47,7 @@
         console.log(access_token);
         console.log(userID);
         //event listener for goal creation
-        var goalInfoEvent = GoalFactory.goalInfo({},'latest');
+        var goalInfoEvent = Nceno.goalInfo({},'latest');
         
         goalInfoEvent.watch(function(error, result){
             if (result)
@@ -79,7 +78,7 @@
 //creating the goal
 $("#createBtn").click(function() {
   var usdStake = ($("#stake").val()-1.05)*0.0057;
-  GoalFactory.createGoal(
+  Nceno.createGoal(
     $("#name").val(),
     $("#email").val(), 
     //('1'+$("#fitbitID").val()),
@@ -130,7 +129,7 @@ xhr.onload = function() {
       console.log("total session minutes to be logged: "+sessionMins);
 
     
-      GoalFactory.simplePayout(
+      Nceno.simplePayout(
                 userID, 
                 sessionMins,
                 formattedTime+2,
