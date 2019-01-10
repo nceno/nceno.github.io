@@ -12,7 +12,7 @@
       }));
     }
     */
-    //var Web3 = require('web3');
+    var Web3 = require('web3');
     
     web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
