@@ -14,7 +14,7 @@
       }));
     }
     */
-    var Web3 = require('web3');
+    var Web3 = require('../web3');
     web3 = new Web3(web3.currentProvider); //for cipher, status, or metamask
     web3.eth.defaultAccount = web3.eth.accounts[0];
     var GoalFactoryContract = web3.eth.contract(NcenoABI);
@@ -42,11 +42,11 @@
         //getting the access token from url
         var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
 
-        // get the userid
-        var userId = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+        // get the userID
+        var userID = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 
         console.log(access_token);
-        console.log(userId);
+        console.log(userID);
         //event listener for goal creation
         var goalInfoEvent = GoalFactory.goalInfo({},'latest');
         
@@ -83,7 +83,7 @@ $("#createBtn").click(function() {
     $("#name").val(),
     $("#email").val(), 
     //('1'+$("#fitbitID").val()),
-    userId, 
+    userID, 
     $("#activeMinutes").val(), 
     $("#rounds").val(), 
     ('Beginning/ '+$("#beginAt").val()), 
@@ -106,7 +106,7 @@ $("#createBtn").click(function() {
 
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/date/today/1d.json');
+xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userID +'/activities/heart/date/today/1d.json');
 xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr.onload = function() {
    if (xhr.status === 200) {
@@ -120,7 +120,7 @@ xhr.onload = function() {
       var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
       var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000;
 
-      console.log(userId +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
+      console.log(userID +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
       console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
       console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
       console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
@@ -131,7 +131,7 @@ xhr.onload = function() {
 
     
       GoalFactory.simplePayout(
-                userId, 
+                userID, 
                 sessionMins,
                 formattedTime+2,
                 {from: web3.eth.accounts[0], gas: 60000, gasPrice: 5000000000},
