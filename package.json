@@ -11,6 +11,6 @@
   "dependencies": {
     "bootstrap": "^4.1.3",
     "portis": "^1.3.2",
-    "web3": "github:web3.js"
+    "web3": "github:ethereum/web3.js"
   }
 }
