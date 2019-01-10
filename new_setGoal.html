@@ -448,7 +448,7 @@
     web3 = new Web3(web3.currentProvider);
   } else {
       // Fallback - use Portis
-      web3 = new Web3(new PortisProvider({
+      web3p = new Web3(new PortisProvider({
       apiKey: "332bfe3ea28174fa515d478e23a1b31c",
       network: 'rinkeby'
       }));
@@ -456,11 +456,11 @@
 
    function showPortis() {
       // will only open the portis menu
-      web3.currentProvider.showPortis();
+      web3p.currentProvider.showPortis();
     }
 
     function getAccounts() {
-      web3.eth.getAccounts((error, accounts) => {
+      web3p.eth.getAccounts((error, accounts) => {
         if (error) {
           return document.getElementById('address').innerHTML = error;
         }
