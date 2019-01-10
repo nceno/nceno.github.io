@@ -68,7 +68,7 @@
         <p>Nceno uses several services to interact with the blockchain (Portis) and verify your workout (Fitbit). Thus, you need to sign in to them before continuing.</p>
         
         <p>Step 1:</p><button id="portisBtn" type="button" class="btn btn-primary">Log into Portis</button>
-        <p>Step 2:</p><button id="fitbitBtn" type="button" class="btn btn-primary">Log into Fitbit</button>
+        <p>Step 2:</p><button id="fitbitBtn" type="button" class="btn btn-primary" href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2FsetGoal.html&scope=activity%20heartrate%20location%20profile&expires_in=604800">Log into Fitbit</button>
         <p>Step 3 (One-time):</p>
         <!--modal-->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create an Nceno account</button>
@@ -136,7 +136,7 @@
 
       <div class="form-group">
         <label for="exampleFormControlSelect1">Minutes per exercise session:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" id="activeMinsDD">
           <option>20</option>
           <option>30</option>
           <option>40</option>
@@ -153,7 +153,7 @@
 
       <div class="form-group">
         <label for="exampleFormControlSelect1">Exercise sessions per week:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" id="sesPerWkDD">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -166,7 +166,7 @@
 
       <div class="form-group">
         <label for="exampleFormControlSelect1">Challenge duration in weeks:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" id="wksDD">
           <option>2</option>
           <option>4</option>
           <option>6</option>
@@ -182,7 +182,7 @@
         </div> -->
        <div class="form-group">
         <label for="exampleFormControlSelect1">Stake in $USD:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" id="stakeDD">
           <option>5</option>
           <option>8</option>
           <option>10</option>
@@ -276,12 +276,9 @@
         <div class="form-group">
         <label for="exampleFormControlSelect1">Select one of your challenges:</label>
         <select class="form-control" id="exampleFormControlSelect1">
-          <option>2</option>
-          <option>4</option>
-          <option>6</option>
-          <option>8</option>
-          <option>10</option>
-          <option>12</option>
+          <option>NCN0123</option>
+          <option>NCN9940</option>
+          <option>NCN0012</option>
         </select>
       </div>
         </form>
