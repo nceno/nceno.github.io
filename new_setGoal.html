@@ -75,6 +75,7 @@
         <p>Step 1:</p><button onclick="showPortis()" id="portisBtn" type="button" class="btn btn-primary">Log into Portis</button>
         <p>Step 2:</p><a id="fitbitBtn" type="button" class="btn btn-primary" href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fnew_setGoal.html&scope=activity%20heartrate%20location%20profile&expires_in=604800">Log into Fitbit</a>
         <p>Step 3 (One-time):</p>
+        <span id="insTrans"></span>
         <!--modal-->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create an Nceno account</button>
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,21 +91,23 @@
                   <form>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Name</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <input type="text" class="form-control" id="name">
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Email</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <input type="text" class="form-control" id="email">
                     </div>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Wearable make/model</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <input type="text" class="form-control" id="wearable">
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button id="makeAcctBtn" type="button" class="btn btn-primary">Make account</button>
+                  <img id="loader" src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif">
+                  <h2 id="profCre"></h2>
                 </div>
               </div>
             </div>
@@ -457,17 +460,7 @@
       web3.currentProvider.showPortis()
     }
 
-    function getAccounts() {
-      web3.eth.getAccounts((error, accounts) => {
-        if (error) {
-          return document.getElementById('address').innerHTML = error
-        }
-        // will run every time the user clicks on the button
-        document.getElementById('address').innerHTML = "Got accounts: " + accounts[0];
-      });
-    }
-
-    
+      
     web3.eth.defaultAccount = web3.eth.accounts[0];
     var Nceno = new web3.eth.Contract([
   {
@@ -1095,10 +1088,9 @@
 ], '0xe9390c922503b98da5785e57616739379a26a699');
     //var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
     
-        
+        //web3.utils.randomHex(32) goalID
         console.log(Nceno);
         $("#modalCreateBtn").hide();
-        
         //show create button only if user agrees to terms
         $("#checker").on('click', function() {
           if($("#checker").is(':checked')) {
@@ -1109,61 +1101,27 @@
             
           }
         });
-        ///////////////call fitbit api with user creds
+
+        //call fitbit api with user creds
         //getting the access token from url
         var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
-
         // get the userID
         var userID = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-
+        //log them
         console.log(access_token);
         console.log(userID);
         //event listener for goal creation
-        var goalInfoEvent = Nceno.goalInfo({},'latest');
-        
-        goalInfoEvent.watch(function(error, result){
-            if (result)
-                {
-                    if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
-                      console.log(result.blockHash);
-                      //loader hide
-                      $("#loader").hide();
-                      //echo goal creation
-                      $("#goalDisplay").html(web3.toAscii(result.args.name) + ' just made a goal!');
-
-                      //show data
-                      $("#yourGoal").show();
-                      //echo goal data
-                      $("#yourGoal").html(web3.toAscii(result.args.name)+' at '+web3.toAscii(result.args.email)+ 
-                        ' just committed to doing '+ result.args.rounds+ ' x '+ result.args.activeMinutes+ 
-                        ' minute exercise sessions each week for 4 weeks, beginning from '+ web3.toAscii(result.args.beginAt)+ 
-                        ', with a stake of $'+ ($("#stake").val()-1)+ ' USD!');
-                      //link to log workouts
-                      $("#allSet").show();
-                    } else {
-                    $("#loader").hide();
-                    console.log(error);
-                }
-        });
-       
-
-//creating the goal
-$("#createBtn").click(function() {
-  var usdStake = ($("#stake").val()-1.05)*0.0057;
-  Nceno.createGoal(
+        //creating a competitor account
+$("#makeAcctBtn").click(function() {
+  Nceno.createCompetitor(
+    userID,
+    $("#wearable").val(),
     $("#name").val(),
-    $("#email").val(), 
-    //('1'+$("#fitbitID").val()),
-    userID, 
-    $("#activeMinutes").val(), 
-    $("#rounds").val(), 
-    ('Beginning/ '+$("#beginAt").val()), 
-    //$("#stake").val(),
-    web3.toWei(usdStake, "ether"),
-    {from: web3.eth.accounts[0], gas: 500000, gasPrice: 12000000000, value: web3.toWei(usdStake, "ether")},
+    $("#email").val(),
+    {from: web3.eth.accounts[0], gas: 8000000, gasPrice: 21000000000},
     function(error, result) {
       if (!error){
-        $("#createBtn").hide();
+        $("#makeAcctBtn").hide();
         $("#loader").show();
         $("#insTrans").html(result.blockHash);
         console.log(result);
@@ -1173,6 +1131,27 @@ $("#createBtn").click(function() {
     }
   )
 }); 
+
+
+//waiting for it to be mined
+var profileCreatedEvent = Nceno.profileCreated({},'latest');
+        profileCreatedEvent.watch(function(error, result){
+            if (result)
+                {
+                  if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
+                    console.log(result.blockHash);
+                    //loader hide
+                    $("#loader").hide();
+                    //echo goal creation
+                    $("#profCre").html('Success!'+ web3.toAscii(result.args._name) );
+                } else {
+                    $("#loader").hide();
+                    console.log(error);
+                  }
+        });
+       
+
+ 
        
 
 $("#logBtn").click(function() {

@@ -13,7 +13,7 @@ contract GoalFactory {
   
   //the competitor object
   struct competitorObject{
-    bytes32 wearableID; //unique
+    bytes32 userID; //unique
     bytes32 wearableModel; //fitbit, garmin, apple, xiaomi, samsung, etc.
     bytes32 name;
     bytes32 email;
@@ -21,28 +21,28 @@ contract GoalFactory {
     mapping(uint => goalObject) goalAt; //index of historical goals
       uint goalTotal;
   }
-  mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by wearableID
+  mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by userID
     mapping(bytes32 => bool) internal userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
-  
-  function createCompetitor(bytes32 _wearableID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
-    require(userExists[_wearableID] == false);
+
+  function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
+    require(userExists[_userID] == false);
     competitorObject memory createdCompetitor;
-    createdCompetitor.wearableID = _wearableID;
+    createdCompetitor.userID = _userID;
     createdCompetitor.wearableModel = _wearableModel;
     createdCompetitor.name = _name;
     createdCompetitor.email = _email;
     createdCompetitor.walletAdr = msg.sender;
 
     //add to registry
-    profileOf[_wearableID] = createdCompetitor;
-    userExists[_wearableID] = true;
+    profileOf[_userID] = createdCompetitor;
+    userExists[_userID] = true;
 
     //fire event: _userID made a profile with params: @1, @2, ...
     bytes32 _eventName = 0x50726f66696c65437265617465640000;
-    emit ProfileCreated(_eventName, _wearableID, _wearableModel, _name, _email, msg.sender);
+    emit ProfileCreated(_eventName, _userID, _wearableModel, _name, _email, msg.sender);
   }
   
-  event ProfileCreated(bytes32 _eventName, bytes32 _wearableID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, address _walletAdr);
+  event ProfileCreated(bytes32 _eventName, bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, address _walletAdr);
 
   struct stampList{
     mapping(uint256 => bool) stampExists; //checks if a timestamp exists. each user in a goal will have one of these
@@ -180,8 +180,8 @@ contract GoalFactory {
   }
 
   //spawn a new goal with intended parameters
-  function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _wearableID) external payable {
-    require(msg.value == _stakeWEI);
+  function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID) external payable {
+    require(msg.value == _stakeWEI && userExists[_userID] == true);
     goalObject memory createdGoal; 
     //initialize params
     createdGoal.goalID = _goalID;
@@ -192,20 +192,22 @@ contract GoalFactory {
     createdGoal.startTime = _startTime;
           
     createdGoal.competitorCount = 1; //incriment competitor count
-    createdGoal.competitor[0] = _wearableID; //add self to competitor list
+    createdGoal.competitor[0] = _userID; //add self to competitor list
     
     goalRegistry[_goalID] = createdGoal; //add goal to the registry
     iterableGoals[goalCount] = createdGoal; //add goal to iterable registry ***expensive!
     goalCount++; //incriment global count
-
     partitions = partitionChoices[now%2];
+
+    profileOf[_userID].goalAt[goalTotal] = createdGoal; //add goal to self's registry
+  	profileOf[_userID].goalTotal++; 
 
     //fire event: _userID created _goalID with params: @1, @2, ...
     bytes32 _eventName = 0x476f616c437265617465640000000000;
-    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _wearableID);
+    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID);
   }
   
-  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _wearableID);
+  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID);
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
