@@ -7,7 +7,7 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 //"0x736f6d65207573657220494400000000"
 //"0x6120676f616c20696400000000000000","60","400","4","8","1546847338","0x736f6d65207573657220494400000000"
 
-contract GoalFactory {
+contract Nceno {
   //addresses where lost stakeWEI goes
   address nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //metamask rinkeby account (admin also)
   
@@ -199,7 +199,7 @@ contract GoalFactory {
     goalCount++; //incriment global count
     partitions = partitionChoices[now%2];
 
-    profileOf[_userID].goalAt[goalTotal] = createdGoal; //add goal to self's registry
+    profileOf[_userID].goalAt[profileOf[_userID].goalTotal] = createdGoal; //add goal to self's registry
   	profileOf[_userID].goalTotal++; 
 
     //fire event: _userID created _goalID with params: @1, @2, ...
