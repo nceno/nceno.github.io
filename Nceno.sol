@@ -22,7 +22,7 @@ contract Nceno {
       uint goalTotal;
   }
   mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by userID
-    mapping(bytes32 => bool) internal userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
+    mapping(bytes32 => bool) public userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
 
   function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
     require(userExists[_userID] == false);
