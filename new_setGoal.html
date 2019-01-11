@@ -1121,7 +1121,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
     web3.utils.padRight(web3.utils.toHex($("#email").val()),34)
   )
-  .send({from: web3.eth.accounts[0], gas: 8000000, gasPrice: 21000000000},
+  .send({gas: 8000000, gasPrice: 21000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
@@ -1187,7 +1187,7 @@ xhr.onload = function() {
                 userID, 
                 sessionMins,
                 formattedTime+2,
-                {from: web3.eth.accounts[0], gas: 60000, gasPrice: 5000000000},
+                {gas: 60000, gasPrice: 5000000000},
                 function(error, result) {
                     if (!error){
                       //echo the result and do some jquery loader stuff
