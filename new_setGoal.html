@@ -137,10 +137,7 @@
           </div>
 
       <form>
-       <!--<div class="form-group">
-         <label for="recipient-name" class="col-form-label">Challenge title:</label>
-          <input type="text" class="form-control" id="recipient-name">
-        </div>-->
+       
 
       <div class="form-group">
         <label for="exampleFormControlSelect1">Minutes per exercise session:</label>
@@ -184,10 +181,7 @@
         </select>
       </div>
 
-      <!--<div class="form-group">
-         <label for="recipient-name" class="col-form-label">Stake in $USD:</label>
-          <input type="number" class="form-control" id="stake">
-        </div> -->
+      
        <div class="form-group">
         <label for="exampleFormControlSelect1">Stake in $USD:</label>
         <select class="form-control" id="stakeDD">
@@ -223,20 +217,16 @@
                     </div>
                 </div>
             </div>
-                <!--<script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker1();
-            });
-        </script>-->
+                
    
         
 
       </form>                            
-        
-        
+                
+        <button onclick="echoGoal()" type="button" id="createBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupCreate" data-whatever="@mdo">Create this challenge</button>
+
         <!--modal-->
-        <button type="button" id="modalCreateBtn" class="btn btn-primary" data-toggle="modal" data-target="#createMdl" data-whatever="@mdo">Create this challenge</button>
-          <div class="modal fade" id="createMdl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="popupCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -246,7 +236,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  You're commiting $*stake* to working out for *activeMins* mins *sesPerWk* times per week for *wks* weeks, starting automatically at *startingTime string*. 
+                  <p id="goalEcho"></p> 
                 </div> 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -1161,11 +1151,14 @@ $("#makeAcctBtn").click(function() {
   );
 }); 
 
-//create a goal
+//creating a goal
+//Date.now()/1000
+
 var usdStake = ($("#stakeDD").val()-2)*0.0048;
+var goalID = web3.utils.randomHex(32);
 $("#hostBtn").click(function() {
-  Nceno.methods.createGoal(
-    web3.utils.randomHex(32),
+    Nceno.methods.createGoal(
+    goalID,
     $("#activeMinsDD").val(),
     web3.utils.toWei(usdStake, "ether"),
     $("#sesPerWkDD").val(),
@@ -1184,6 +1177,10 @@ $("#hostBtn").click(function() {
     }
   );
 });
+
+function echoGoal(){
+  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + "to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").val()+". The challenge ID is (write this down, if you want to share this challenge later!) "+ goalID+".");
+}
 /*//waiting for it to be mined
 var profileCreatedEvent = Nceno.events.profileCreated({},'latest');
 profileCreatedEvent.watch(function(error, result){
