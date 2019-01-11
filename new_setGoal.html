@@ -463,8 +463,12 @@
 
       
     //web3.eth.defaultAccount = web3.eth.accounts[0];
-    web3.eth.getAccounts()
-    .then(web3.eth.defaultAccount = result[0]);
+    //var firstAccount;
+
+    web3.eth.getAccounts().then(e => { 
+      web3.eth.defaultAccount = e[0];
+      console.log("default " + firstAccount);
+    });
 
     var Nceno = new web3.eth.Contract([
   {
