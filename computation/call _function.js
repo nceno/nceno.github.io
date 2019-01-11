@@ -29,8 +29,9 @@ $("#makeAcctBtn").click(function() {
     userID,
     $("#wearable").val(),
     $("#name").val(),
-    $("#email").val(),
-    {from: web3.eth.accounts[0], gas: 8000000, gasPrice: 21000000000},
+    $("#email").val()
+  )
+  .send({from: web3.eth.accounts[0], gas: 8000000, gasPrice: 21000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
@@ -41,12 +42,12 @@ $("#makeAcctBtn").click(function() {
       else
       console.error(error);
     }
-  )
+  );
 }); 
 
 
 //waiting for it to be mined
-var profileCreatedEvent = Nceno.profileCreated({},'latest');
+var profileCreatedEvent = Nceno.events.profileCreated({},'latest');
         profileCreatedEvent.watch(function(error, result){
             if (result)
                 {
