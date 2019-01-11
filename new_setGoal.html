@@ -1128,7 +1128,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
     web3.utils.padRight(web3.utils.toHex($("#email").val()),34)
   )
-  .send({from: web3.eth.defaultAccount, gas: 160000, gasPrice: 15000000000},
+  .send({from: web3.eth.defaultAccount, gas: 1600000, gasPrice: 15000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
