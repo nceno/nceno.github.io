@@ -1108,7 +1108,7 @@
         var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
         // get the userID
         var fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-        var userID = web3.padRight(web3.toHex(fitbitUser),34);
+        var userID = web3.utils.utils.padRight(web3.utils.utils.toHex(fitbitUser),34);
         //log them
         console.log(access_token);
         console.log(fitbitUser);
@@ -1117,9 +1117,9 @@
 $("#makeAcctBtn").click(function() {
   Nceno.methods.createCompetitor(
     userID,
-    web3.padRight(web3.toHex($("#wearable").val()),34),
-    web3.padRight(web3.toHex($("#name").val()),34),
-    web3.padRight(web3.toHex($("#email").val()),34)
+    web3.utils.padRight(web3.utils.toHex($("#wearable").val()),34),
+    web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
+    web3.utils.padRight(web3.utils.toHex($("#email").val()),34)
   )
   .send({from: web3.eth.accounts[0], gas: 8000000, gasPrice: 21000000000},
     function(error, result) {
