@@ -1121,7 +1121,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
     web3.utils.padRight(web3.utils.toHex($("#email").val()),34)
   )
-  .send({from: accounts[0], gas: 8000000, gasPrice: 21000000000},
+  .send({from: web3.eth.defaultAccount, gas: 8000000, gasPrice: 21000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
@@ -1136,7 +1136,7 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 
-//waiting for it to be mined
+/*//waiting for it to be mined
 var profileCreatedEvent = Nceno.events.profileCreated({},'latest');
 profileCreatedEvent.watch(function(error, result){
     if (result)
@@ -1151,7 +1151,7 @@ profileCreatedEvent.watch(function(error, result){
             $("#loader").hide();
             console.log(error);
           }
-});
+});*/
        
 
  
@@ -1187,7 +1187,7 @@ xhr.onload = function() {
                 userID, 
                 sessionMins,
                 formattedTime+2,
-                {from: accounts[0], gas: 60000, gasPrice: 5000000000},
+                {from: web3.eth.defaultAccount, gas: 60000, gasPrice: 5000000000},
                 function(error, result) {
                     if (!error){
                       //echo the result and do some jquery loader stuff
