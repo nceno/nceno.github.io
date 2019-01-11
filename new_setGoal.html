@@ -463,6 +463,9 @@
 
       
     web3.eth.defaultAccount = web3.eth.accounts[0];
+    web3.eth.getAccounts()
+    .then(console.log);
+    
     var Nceno = new web3.eth.Contract([
   {
     "constant": false,
