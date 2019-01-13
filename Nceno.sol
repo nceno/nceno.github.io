@@ -237,8 +237,7 @@ contract Nceno {
     uint wk = (now - goalRegistry[_goalID].startTime)/604800;
     
     //payment logic for activity comparison, timestamp double spending, and limited payouts per week
-    if(_reportedMins = goalRegistry[_goalID].activeMins && goalRegistry[_goalID].timeLog[_userID].stampExists[_timeStamp]==false && goalRegistry[_goalID].successes[_userID][wk]<goalRegistry[_goalID].sesPerWk){
-
+    if(_reportedMins >= goalRegistry[_goalID].activeMins && goalRegistry[_goalID].timeLog[_userID].stampExists[_timeStamp]==false && goalRegistry[_goalID].successes[_userID][wk]<goalRegistry[_goalID].sesPerWk){
       //payout a refund
       uint payout = partitions[goalRegistry[_goalID].wks/2 -1][wk]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);  //remember there is an offset by 1 for partition array index
       msg.sender.transfer(payout);
