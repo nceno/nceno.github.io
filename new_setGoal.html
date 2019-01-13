@@ -1117,7 +1117,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
     web3.utils.padRight(web3.utils.toHex($("#email").val()),34)
   )
-  .send({from: web3.eth.defaultAccount, gas: 1600000, gasPrice: 15000000000},
+  .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
@@ -1148,7 +1148,7 @@ $("#hostBtn").click(function() {
     trimmed,
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: 15000000000, value: msgValue},
+  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValue},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
