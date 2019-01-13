@@ -1132,7 +1132,7 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-var usdStake = $("#stakeDD").val()*0.00813;
+var usdStake = Math.floor($("#stakeDD").val()*1000000000000000000/123);
 var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
   console.log(usdStake, start);
@@ -1141,7 +1141,8 @@ $("#hostBtn").click(function() {
   Nceno.methods.createGoal(
     goalID,
     $("#activeMinsDD").val(),
-    web3.utils.toWei(usdStake.toString(), "ether"),
+    //web3.utils.toWei(usdStake.toString(), "ether"),
+    usdStake,
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
     start,
