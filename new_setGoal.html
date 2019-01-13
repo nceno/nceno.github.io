@@ -443,17 +443,21 @@
    function showPortis() {
       // will only open the portis menu
       web3.currentProvider.showPortis();
-      console.log('portis launched!');
+      web3.eth.getAccounts().then(e => { 
+      web3.eth.defaultAccount = e[0];
+      console.log("default: " + web3.eth.defaultAccount);
+    })
+
     }
 
       
     //web3.eth.defaultAccount = web3.eth.accounts[0];
     //var firstAccount;
 
-    web3.eth.getAccounts().then(e => { 
+   /*web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       console.log("default: " + web3.eth.defaultAccount);
-    });
+    });*/
 
     var Nceno = new web3.eth.Contract([
   {
