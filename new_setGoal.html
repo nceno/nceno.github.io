@@ -456,41 +456,42 @@
 
     var Nceno = new web3.eth.Contract([
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
       {
         "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_activeMins",
-        "type": "uint256"
-      },
-      {
-        "name": "_stakeWEI",
-        "type": "uint256"
-      },
-      {
-        "name": "_sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "name": "_wks",
-        "type": "uint256"
-      },
-      {
-        "name": "_startTime",
-        "type": "uint256"
-      },
-      {
-        "name": "_userID",
-        "type": "bytes32"
+        "type": "bytes16"
       }
     ],
-    "name": "createGoal",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "name": "getGoalParams",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -586,25 +587,6 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getSingleRev",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [],
     "name": "getPastRev",
     "outputs": [
@@ -627,32 +609,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_userID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_reportedMins",
-        "type": "uint256"
-      },
-      {
-        "name": "_timeStamp",
-        "type": "uint256"
-      },
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "simplePayout",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "getActiveRev",
@@ -660,68 +616,6 @@
       {
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getMyGoalStats2",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getLeaderBoard",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32[10]"
-      },
-      {
-        "name": "",
-        "type": "uint256[12][10]"
       }
     ],
     "payable": false,
@@ -772,6 +666,93 @@
     "constant": true,
     "inputs": [
       {
+        "name": "_goalID",
+        "type": "bytes16"
+      }
+    ],
+    "name": "getLeaderBoard",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[10]"
+      },
+      {
+        "name": "",
+        "type": "uint256[12][10]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_reportedMins",
+        "type": "uint256"
+      },
+      {
+        "name": "_timeStamp",
+        "type": "uint256"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes16"
+      }
+    ],
+    "name": "simplePayout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes16"
+      },
+      {
+        "name": "_activeMins",
+        "type": "uint256"
+      },
+      {
+        "name": "_stakeWEI",
+        "type": "uint256"
+      },
+      {
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "createGoal",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "",
         "type": "bytes32"
       }
@@ -801,17 +782,71 @@
     "inputs": [
       {
         "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_userID",
-        "type": "bytes32"
+        "type": "bytes16"
       }
     ],
-    "name": "claimBonus",
+    "name": "singleCashout",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_goalID",
+        "type": "bytes16"
+      }
+    ],
+    "name": "getMyGoalStats2",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes16"
+      }
+    ],
+    "name": "getSingleRev",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -819,7 +854,7 @@
     "inputs": [
       {
         "name": "_goalID",
-        "type": "bytes32"
+        "type": "bytes16"
       },
       {
         "name": "_userID",
@@ -830,6 +865,24 @@
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes16"
+      },
+      {
+        "name": "_userID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "claimBonus",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -855,7 +908,7 @@
       },
       {
         "name": "_goalID",
-        "type": "bytes32"
+        "type": "bytes16"
       }
     ],
     "name": "getMyGoalStats1",
@@ -867,59 +920,6 @@
       {
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "singleCashout",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getGoalParams",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes32[10]"
       }
     ],
     "payable": false,
@@ -974,7 +974,7 @@
       {
         "indexed": false,
         "name": "_goalID",
-        "type": "bytes32"
+        "type": "bytes16"
       },
       {
         "indexed": false,
@@ -1026,7 +1026,7 @@
       {
         "indexed": false,
         "name": "_goalID",
-        "type": "bytes32"
+        "type": "bytes16"
       }
     ],
     "name": "CompetitorJoined",
@@ -1048,7 +1048,7 @@
       {
         "indexed": false,
         "name": "_goalID",
-        "type": "bytes32"
+        "type": "bytes16"
       },
       {
         "indexed": false,
@@ -1080,7 +1080,7 @@
       {
         "indexed": false,
         "name": "_goalID",
-        "type": "bytes32"
+        "type": "bytes16"
       },
       {
         "indexed": false,
@@ -1096,8 +1096,8 @@
     "name": "BonusClaimedBy",
     "type": "event"
   }
-], '0x59f96be7a037351e4a324d9d02dae27ea68af5a8');
-    //var Nceno = NcenoContract.at('0xe9390c922503b98da5785e57616739379a26a699'); //test
+], '0xaa8831c3600d398cb81390dd61d7432d3a9d53b8');
+
     
         //web3.utils.randomHex(32) goalID
         console.log(Nceno);
