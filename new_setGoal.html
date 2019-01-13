@@ -1135,10 +1135,11 @@ $("#makeAcctBtn").click(function() {
 var usdStakeInWei = Math.floor($("#stakeDD").val()*1000000000000000000/123).toString();
 var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/123);
 var goalID = web3.utils.randomHex(16);
+var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
+var trimmed = Date(start).getTime();
 
 $("#hostBtn").click(function() {
-  console.log(usdStakeInWei, start);
-  var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
+  console.log(usdStakeInWei, start, trimmed);
   //function call:
   Nceno.methods.createGoal(
     goalID,
@@ -1146,7 +1147,7 @@ $("#hostBtn").click(function() {
     usdStakeInWei,
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
-    start,
+    trimmed,
     userID
   )
   .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: msgValue},
