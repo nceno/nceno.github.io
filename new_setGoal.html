@@ -1150,7 +1150,7 @@ $("#hostBtn").click(function() {
     trimmed,
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 600040, gasPrice: 15000000000, value: msgValue},
+  .send({from: web3.eth.defaultAccount, gas: 700100, gasPrice: 15000000000, value: msgValue},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
