@@ -1135,10 +1135,10 @@ $("#makeAcctBtn").click(function() {
 var usdStakeInWei = Math.floor($("#stakeDD").val()*1000000000000000000/123).toString();
 var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/123);
 var goalID = web3.utils.randomHex(16);
-var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
-var trimmed = Date(start).getTime();
 
 $("#hostBtn").click(function() {
+  var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
+  var trimmed = new Date(start).getTime();
   console.log(usdStakeInWei, start, trimmed);
   //function call:
   Nceno.methods.createGoal(
