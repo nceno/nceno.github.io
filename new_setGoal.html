@@ -1132,7 +1132,8 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-var usdStakeInWei = Math.floor($("#stakeDD").val()*1000000000000000000/123);
+var usdStakeInWei = Math.floor($("#stakeDD").val()*1000000000000000000/(123);
+var msgValue = usdStakeInWei*1.01;
 var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
   console.log(usdStakeInWei, start);
@@ -1148,7 +1149,7 @@ $("#hostBtn").click(function() {
     start,
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: msgValue},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
