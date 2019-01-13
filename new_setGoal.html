@@ -1138,7 +1138,7 @@ var goalID = web3.utils.randomHex(16);
 
 $("#hostBtn").click(function() {
   var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
-  var trimmed = new Date(start).getTime()/1000000;
+  var trimmed = new Date(start).getTime()/1000;
   console.log(usdStakeInWei, start, trimmed);
   //function call:
   Nceno.methods.createGoal(
