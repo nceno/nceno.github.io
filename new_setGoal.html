@@ -211,11 +211,12 @@
                     </div>
                 </div>
             </div>
-                
+      
    
         
 
-      </form>                            
+      </form> 
+      <span id="timeEcho"></span>                           
                 
         <button onclick="echoGoal()" type="button" id="createBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupCreate" data-whatever="@mdo">Create this challenge</button>
 
@@ -1151,7 +1152,7 @@ $("#makeAcctBtn").click(function() {
 //creating a goal
 var usdStake = $("#stakeDD").val()*0.00813;
 //var ethStake = web3.utils.toWei(usdStake.toString(), "ether");
-var start = $("#datetimepicker1").datetimepicker('date').toString();
+var start = $("#timeEcho").html($("#datetimepicker1").datetimepicker('date'));
 var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
   console.log(usdStake, start);
