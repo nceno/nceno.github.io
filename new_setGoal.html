@@ -1099,7 +1099,7 @@
 ], '0xaa8831c3600d398cb81390dd61d7432d3a9d53b8');
 
     
-        //web3.utils.randomHex(32) goalID
+        
         console.log(Nceno);
         $("#createBtn").hide();
         //show create button only if user agrees to terms
@@ -1135,8 +1135,6 @@ $("#makeAcctBtn").click(function() {
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
-        //$("#loader").show();
-        //$("#insTrans").html(result.blockHash);
         console.log(result);
       }
       else
@@ -1147,6 +1145,7 @@ $("#makeAcctBtn").click(function() {
 
 //creating a goal
 var usdStake = $("#stakeDD").val()*0.00813;
+var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
   Nceno.methods.createGoal(
     goalID,
