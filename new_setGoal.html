@@ -1132,23 +1132,23 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-var usdStake = Math.floor($("#stakeDD").val()*1000000000000000000/123);
+var usdStakeInWei = Math.floor($("#stakeDD").val()*1000000000000000000/123);
 var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
-  console.log(usdStake, start);
+  console.log(usdStakeInWei, start);
   $("#timeEcho").html($("#datetimepicker1").datetimepicker('date'));
   var start = $("#timeEcho").html();
   Nceno.methods.createGoal(
     goalID,
     $("#activeMinsDD").val(),
-    //web3.utils.toWei(usdStake.toString(), "ether"),
-    usdStake,
+    //web3.utils.toWei(usdStakeInWei.toString(), "ether"),
+    usdStakeInWei,
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
     start,
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: usdStake},
+  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
