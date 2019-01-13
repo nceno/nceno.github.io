@@ -212,11 +212,7 @@
                 </div>
             </div>
       
-   
-        
-
-      </form> 
-      <h2 id="timeEcho"></h2>                           
+      </form>                          
                 
         <button onclick="echoGoal()" type="button" id="createBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupCreate" data-whatever="@mdo">Create this challenge</button>
 
@@ -242,13 +238,7 @@
           </div>
           <!--modal-->
 
-          <!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> This challenge's ID is CH0112NCN. Share it with your friends and they can join you when it starts!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div> -->
-
+          
       </div>
       </div>
     </div>
@@ -450,15 +440,6 @@
         });
       })
     }
-
-      
-    //web3.eth.defaultAccount = web3.eth.accounts[0];
-    //var firstAccount;
-
-   /*web3.eth.getAccounts().then(e => { 
-      web3.eth.defaultAccount = e[0];
-      console.log("default: " + web3.eth.defaultAccount);
-    });*/
 
     var Nceno = new web3.eth.Contract([
   {
@@ -1151,8 +1132,7 @@ $("#makeAcctBtn").click(function() {
 
 //creating a goal
 var usdStake = $("#stakeDD").val()*0.00813;
-//var ethStake = web3.utils.toWei(usdStake.toString(), "ether");
-$("#timeEcho").html($("#datetimepicker1").datetimepicker('date'));
+var start = $("#datetimepicker1").datetimepicker('date');
 var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
   console.log(usdStake, start);
@@ -1180,26 +1160,6 @@ $("#hostBtn").click(function() {
 function echoGoal(){
   $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").datetimepicker('date') +". The challenge ID is (save it somewhere!): "+ goalID+".");
 }
-/*//waiting for it to be mined
-var profileCreatedEvent = Nceno.events.profileCreated({},'latest');
-profileCreatedEvent.watch(function(error, result){
-    if (result)
-        {
-          if (result.blockHash != $("#insTrans").html()) //when the creation txn is mined, and goal spawned
-            console.log(result.blockHash);
-            //loader hide
-            $("#loader").hide();
-            //echo goal creation
-            $("#profCre").html('Success!'+ web3.toAscii(result.args._name) );
-        } else {
-            $("#loader").hide();
-            console.log(error);
-          }
-});*/
-       
-
- 
-       
 
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
