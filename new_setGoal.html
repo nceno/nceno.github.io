@@ -442,12 +442,11 @@
 
    function showPortis() {
       // will only open the portis menu
-      web3.currentProvider.showPortis().then(
-        web3.eth.getAccounts().then(e => { 
-          web3.eth.defaultAccount = e[0];
-          console.log("default: " + web3.eth.defaultAccount);
-        })
-      );
+      web3.currentProvider.showPortis();
+      web3.eth.getAccounts().then(e => { 
+        web3.eth.defaultAccount = e[0];
+        console.log("default: " + web3.eth.defaultAccount);
+      });
     }
 
       
