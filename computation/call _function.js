@@ -1,21 +1,20 @@
 //creating a goal
 //Date.now()/1000,
-var usdStake = ($("#stakeDD").val()-2)*0.0048;
+var usdStake = $("#stakeDD").val()*0.00813;
 $("#hostBtn").click(function() {
   Nceno.methods.createGoal(
-    web3.utils.randomHex(32),
+    goalID,
     $("#activeMinsDD").val(),
     web3.utils.toWei(usdStake, "ether"),
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
-    $("#datetimepicker1").val(),
+    $("#datetimepicker1").datetimepicker('date'),
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000},
+  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: usdStake},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
-        $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + "to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").val()+".");
         console.log(result);
       }
       else

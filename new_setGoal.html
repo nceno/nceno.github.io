@@ -67,13 +67,8 @@
 
         <p>Nceno uses several services to interact with the blockchain (Portis) and verify your workout (Fitbit). Thus, you need to sign in to them before continuing.</p>
 
-        <!--<button onclick="showPortis()">Show Portis</button>
-        <button onclick="getAccounts()">Get accounts</button>
-        <div id="result"></div>
-        <div id="address"></div>-->
-        
-        <p>Step 1:</p><button onclick="showPortis()" id="portisBtn" type="button" class="btn btn-primary">Log into Portis</button>
-        <p>Step 2:</p><a id="fitbitBtn" type="button" class="btn btn-primary" href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fnew_setGoal.html&scope=activity%20heartrate%20location%20profile&expires_in=604800">Log into Fitbit</a>
+        <p>Step 1:</p><a id="fitbitBtn" type="button" class="btn btn-primary" href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fnew_setGoal.html&scope=activity%20heartrate%20location%20profile&expires_in=604800">Log into Fitbit</a>
+        <p>Step 2:</p><button onclick="showPortis()" id="portisBtn" type="button" class="btn btn-primary">Log into Portis</button>
         <p>Step 3 (One-time):</p>
         <span id="insTrans"></span>
         <!--modal-->
@@ -1151,21 +1146,18 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-//Date.now()/1000
-
-var usdStake = ($("#stakeDD").val()-2)*0.0048;
-var goalID = web3.utils.randomHex(8);
+var usdStake = $("#stakeDD").val()*0.00813;
 $("#hostBtn").click(function() {
-    Nceno.methods.createGoal(
+  Nceno.methods.createGoal(
     goalID,
     $("#activeMinsDD").val(),
     web3.utils.toWei(usdStake, "ether"),
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
-    $("#datetimepicker1").val(),
+    $("#datetimepicker1").datetimepicker('date'),
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000},
+  .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: usdStake},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -1176,8 +1168,6 @@ $("#hostBtn").click(function() {
     }
   );
 });
-
-//var start = ;
 
 function echoGoal(){
   $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").datetimepicker('date') +". The challenge ID is (save it somewhere!): "+ goalID+".");

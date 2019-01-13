@@ -181,7 +181,7 @@ contract Nceno {
 
   //spawn a new goal with intended parameters
   function createGoal(bytes16 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID) external payable {
-    require(msg.value == _stakeWEI && userExists[_userID] == true);
+    require(msg.value >= _stakeWEI && userExists[_userID] == true);
     goalObject memory createdGoal; 
     //initialize params
     createdGoal.goalID = _goalID;
