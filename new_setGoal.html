@@ -1178,7 +1178,7 @@ $("#hostBtn").click(function() {
 });
 
 function echoGoal(){
-  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").viewDate()+". The challenge ID is (save it somewhere!): "+ goalID+".");
+  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $('#datetimepicker1').datetimepicker(viewDate)+". The challenge ID is (save it somewhere!): "+ goalID+".");
 }
 /*//waiting for it to be mined
 var profileCreatedEvent = Nceno.events.profileCreated({},'latest');
