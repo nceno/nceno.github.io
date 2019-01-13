@@ -1138,13 +1138,11 @@ var goalID = web3.utils.randomHex(16);
 
 $("#hostBtn").click(function() {
   console.log(usdStakeInWei, start);
-  $("#timeEcho").html($("#datetimepicker1").datetimepicker('date'));
-  var start = $("#timeEcho").html();
-
+  var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
+  //function call:
   Nceno.methods.createGoal(
     goalID,
     $("#activeMinsDD").val(),
-    //web3.utils.toWei(usdStakeInWei.toString(), "ether"),
     usdStakeInWei,
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
@@ -1164,7 +1162,7 @@ $("#hostBtn").click(function() {
 });
 
 function echoGoal(){
-  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is (save it somewhere!): "+ goalID+".");
+  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ moment.unix($("#datetimepicker1").data('date')) +". The challenge ID is (save it somewhere!): "+ goalID+".");
 }
 
 $("#logBtn").click(function() {
