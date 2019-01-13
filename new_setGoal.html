@@ -446,7 +446,7 @@
       web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       console.log("default: " + web3.eth.defaultAccount);
-    })
+    });
 
     }
 
@@ -1161,7 +1161,7 @@ $("#hostBtn").click(function() {
     web3.utils.toWei(usdStake.toString(), "ether"),
     $("#sesPerWkDD").val(),
     $("#wksDD").val(),
-    $("#datetimepicker1").datetimepicker('date'),
+    start,
     userID
   )
   .send({from: web3.eth.defaultAccount, gas: 5000000, gasPrice: 15000000000, value: usdStake},
