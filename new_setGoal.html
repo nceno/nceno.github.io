@@ -1154,7 +1154,7 @@ $("#makeAcctBtn").click(function() {
 //Date.now()/1000
 
 var usdStake = ($("#stakeDD").val()-2)*0.0048;
-var goalID = web3.utils.randomHex(32);
+var goalID = web3.utils.randomHex(16);
 $("#hostBtn").click(function() {
     Nceno.methods.createGoal(
     goalID,
@@ -1177,8 +1177,9 @@ $("#hostBtn").click(function() {
   );
 });
 
+var start = $("#datetimepicker1").datetimepicker('date');
 function echoGoal(){
-  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").datetimepicker('date')+". The challenge ID is (save it somewhere!): "+ goalID+".");
+  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ parseInt(start/1000)+". The challenge ID is (save it somewhere!): "+ goalID+".");
 }
 /*//waiting for it to be mined
 var profileCreatedEvent = Nceno.events.profileCreated({},'latest');
