@@ -1237,7 +1237,7 @@ function echoSelectedGoal(){
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
-        var tstamp = new Date(result[4]);
+        var tstamp = new Date(result[4]*1000);
         $("#echoSelectedGoal").html(
           "Details for challenge "+ goalid.slice(0, 12) +
           ": You commited $" + 
