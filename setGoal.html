@@ -1187,7 +1187,7 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/124);
+var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/127);
 var usdStakeInWei = msgValue.toString();
 var goalID = web3.utils.randomHex(5);
 
@@ -1252,7 +1252,7 @@ function echoSelectedGoal(){
         $("#echoSelectedGoal").html(
           "Details for challenge "+ goalid.slice(0, 12) +
           ": You commited $" + 
-          Math.floor(result[1]*124/1000000000000000000) + 
+          Math.floor(result[1]*127/1000000000000000000) + 
           " to working out for " + 
           result[0] +
           "mins " + 
@@ -1283,7 +1283,7 @@ function echoSelectedGoal2(){
         $("#echoSelectedGoal2").html(
           "Details for challenge "+ goalid.slice(0, 12) +
           ": You commited $" + 
-          Math.floor(result[1]*124/1000000000000000000) + 
+          Math.floor(result[1]*127/1000000000000000000) + 
           " to working out for " + 
           result[0] +
           "mins " + 
