@@ -1194,7 +1194,7 @@ function makeList(){
     var i = 0;
     var goals = new Array();
 
-    for (i = 0; i < 3; i++){
+    for (i = 0; i < 5; i++){
       Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         goals[i] = result;
         console.log(goals[i]);
