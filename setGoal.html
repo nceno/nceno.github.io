@@ -1308,7 +1308,7 @@ function echoSelectedGoal2(){
 }
 
 $("#claimBtn").click(function() {
-  var goalid = web3.utils.padRight($("#chIDtools").val(),34)
+  var goalid = web3.utils.padRight($("#chIDtools").val(),34);
   //function call:
   Nceno.methods.claimBonus(
     goalid,
