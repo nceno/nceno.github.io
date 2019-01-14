@@ -442,12 +442,12 @@
 
   function makeList(){
     //makes a list of active goals for a user
-    var count = Nceno.methods.profileOf[userID].goalTotal.call();
+    var count = Nceno.methods.profileOf[userID].goalTotal.call({from: web3.eth.defaultAccount}, function(error, result){});
     var i;
-    //var goals = new Array();
+    var goals = new Array();
     for (i = 0; i < count; i++){
-      //goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call();
-      $("#chIDtools").append('<option>'+ Nceno.methods.profileOf[userID].goalAt[i].goalID.call() +'</option>');
+      goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call({from: web3.eth.defaultAccount}, function(error, result){});
+      $("#chIDtools").append('<option>'+ goals[i] +'</option>');
     }
   }
 
