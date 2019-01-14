@@ -1238,9 +1238,9 @@ function echoSelectedGoal(){
     function(error, result) {
       if (!error){
         $("#echoSelectedGoal").html(
-          "Details for challenge "+ goalid +
+          "Details for challenge "+ goalid.slice(0, 12) +
           ": You commited $" + 
-          result[1] + 
+          Math.floor(result[1]*116/1000000000000000000) + 
           " to working out for " + 
           result[0] +
           "mins " + 
