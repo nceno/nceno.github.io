@@ -1230,21 +1230,36 @@ function makeList(){
 }
 
 function echoSelectedGoal(){
-  $("#echoSelectedGoal").html(
-    "Details for challenge "+ goalID 
-    +
-    ": You commited $" + 
-    $("#stakeDD").val() + 
-    " to working out for " + 
-    $("#activeMinsDD").val() +
-    "mins " + 
-    $("#sesPerWkDD").val()+
-    " times per week for "+ 
-    $("#wksDD").val()+
-    " weeks, starting automatically at "+ 
-    $("#datetimepicker1").data('date') + 
-    "."
+  var goalid = web3.utils.padRight($("#chIDtools").val(),34)
+  Nceno.methods.getGoalParams(
+    goalid
+  )
+  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValue},
+    function(error, result) {
+      if (!error){
+        $("#echoSelectedGoal").html(
+          "Details for challenge "+ goalid +
+          ": You commited $" + 
+          result[1] + 
+          " to working out for " + 
+          result[0] +
+          "mins " + 
+          result[2] +
+          " times per week for "+ 
+          result[3] +
+          " weeks, starting automatically at "+ 
+          result[4] + 
+          "."
+        );
+        console.log(result);
+      }
+      else
+      console.error(error);
+    }
   );
+
+
+  
 }
 
 $("#logBtn").click(function() {
