@@ -1270,8 +1270,9 @@ function echoSelectedGoal(){
       console.error(error);
     }
   );
+}
 
-/*function echoSelectedGoal2(){
+function echoSelectedGoal2(){
   var goalid = web3.utils.padRight($("#chIDtools").val(),34)
   Nceno.methods.getGoalParams(
     goalid
@@ -1300,9 +1301,9 @@ function echoSelectedGoal(){
       console.error(error);
     }
   );
-}*/
+}
 
-/*$("#claimBtn").click(function() {
+$("#claimBtn").click(function() {
   var goalid = web3.utils.padRight($("#chIDtools").val(),34);
   //function call:
   Nceno.methods.claimBonus(
@@ -1319,7 +1320,7 @@ function echoSelectedGoal(){
       console.error(error);
     }
   );
-});*/
+});
 
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
