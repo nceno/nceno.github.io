@@ -443,11 +443,12 @@
   function makeList(){
     //makes a list of active goals for a user
     var count = Nceno.methods.profileOf[userID].goalTotal.call({from: web3.eth.defaultAccount}, function(error, result){});
-    var i;
+    var i = 0;
     var goals = new Array();
-    console.log(web3.eth.defaultAccount);
+    console.log(count, web3.eth.defaultAccount); //debug
     for (i = 0; i < count; i++){
       goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call({from: web3.eth.defaultAccount}, function(error, result){});
+      console.log(goals[i]); //debug
       $("#chIDtools").append('<option>'+ goals[i] +'</option>');
     }
   }
