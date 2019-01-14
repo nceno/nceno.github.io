@@ -23,6 +23,13 @@ contract Nceno {
   }
   mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by userID
     mapping(bytes32 => bool) public userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
+  
+  //get active goal: only returns a user's goal if it has already started
+  function getActiveGoal(bytes32 _userID, uint _index) external view returns(bytes32){
+    require(now - profileOf[_userID].goalAt[_index].startTime < profileOf[_userID].goalAt[_index].wks*604800);
+    return(profileOf[_userID].goalAt[_index].goalID);
+    
+  }
 
   function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
     require(userExists[_userID] == false);
