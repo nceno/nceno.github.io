@@ -1230,7 +1230,21 @@ function makeList(){
 }
 
 function echoSelectedGoal(){
-  $("#echoSelectedGoal").html("Details for challenge "+ goalID+":" " You commited $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') + ".");
+  $("#echoSelectedGoal").html(
+    "Details for challenge "+ goalID 
+    /*+
+    ":" " You commited $" + 
+    $("#stakeDD").val() + 
+    " to working out for " + 
+    $("#activeMinsDD").val() +
+    "mins " + 
+    $("#sesPerWkDD").val()+
+    " times per week for "+ 
+    $("#wksDD").val()+
+    " weeks, starting automatically at "+ 
+    $("#datetimepicker1").data('date') + 
+    "."*/
+  );
 }
 
 $("#logBtn").click(function() {
