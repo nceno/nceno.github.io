@@ -1,6 +1,5 @@
 //creating a goal
-//Date.now()/1000,
-var usdStake = $("#stakeDD").val()*0.00813;
+var usdStake = $("#stakeDD").val()*0.0087;
 $("#hostBtn").click(function() {
   Nceno.methods.createGoal(
     goalID,
@@ -22,3 +21,15 @@ $("#hostBtn").click(function() {
     }
   );
 });
+
+function makeList(){
+  var count = Nceno.methods.profileOf[userID].goalTotal.call();
+  var i;
+  //var goals = new Array();
+  for (i = 0; i < count; i++){
+    //goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call();
+    $("#chIDtools").append('<option>'+ Nceno.methods.profileOf[userID].goalAt[i].goalID.call() +'</option>');
+  }
+  else
+  console.error(error);
+}

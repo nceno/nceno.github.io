@@ -247,7 +247,7 @@
     <div class="panel panel-default">
       <div class="panel-heading p-3 mb-3" role="tab" id="heading2">
       <h3 class="panel-title">
-        <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+        <a class="collapsed" onclick="makeList()" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
         My challenges
         </a>
       </h3>
@@ -258,11 +258,9 @@
         <p>Here are your active and upcoming challenges. Use these tools to unlock your stake.</p>
         <form>
         <div class="form-group">
-        <label for="exampleFormControlSelect1">Select one of your challenges:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>NCN0123</option>
-          <option>NCN9940</option>
-          <option>NCN0012</option>
+        <label for="chIDtools">Select one of your challenges:</label>
+        <select class="form-control" id="chIDtools">
+          <!-- options go here -->
         </select>
       </div>
         </form>
@@ -441,6 +439,19 @@
         });
       })
     }
+
+  function makeList(){
+    //makes a list of active goals for a user
+  var count = Nceno.methods.profileOf[userID].goalTotal.call();
+  var i;
+  //var goals = new Array();
+  for (i = 0; i < count; i++){
+    //goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call();
+    $("#chIDtools").append('<option>'+ Nceno.methods.profileOf[userID].goalAt[i].goalID.call() +'</option>');
+  }
+  else
+  console.error(error);
+}
 
     var Nceno = new web3.eth.Contract([
   {
@@ -1130,8 +1141,8 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-var usdStakeInWei = Math.floor($("#stakeDD").val()*1000000000000000000/123).toString();
-var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/123);
+var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/116);
+var usdStakeInWei = msgValue.toString();
 var goalID = web3.utils.randomHex(16);
 
 $("#hostBtn").click(function() {
@@ -1161,7 +1172,7 @@ $("#hostBtn").click(function() {
 });
 
 function echoGoal(){
-  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is (save it somewhere!): "+ goalID+".");
+  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID+".");
 }
 
 $("#logBtn").click(function() {
@@ -1194,6 +1205,7 @@ xhr.onload = function() {
                 userID, 
                 sessionMins,
                 formattedTime+2,
+                $("#chIDtools").val(),
                 {from: web3.eth.defaultAccount, gas: 60000, gasPrice: 5000000000},
                 function(error, result) {
                     if (!error){

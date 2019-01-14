@@ -200,7 +200,7 @@ contract Nceno {
     partitions = partitionChoices[now%2];
 
     profileOf[_userID].goalAt[profileOf[_userID].goalTotal] = createdGoal; //add goal to self's registry
-  	profileOf[_userID].goalTotal++; 
+  	profileOf[_userID].goalTotal++;
 
     //fire event: _userID created _goalID with params: @1, @2, ...
     bytes32 _eventName = 0x476f616c437265617465640000000000;
