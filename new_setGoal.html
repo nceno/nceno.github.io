@@ -228,7 +228,7 @@
                 </div>
                 <div class="modal-body">
                   <p id="goalEcho"></p>
-                  <p id="timeEcho"></p> 
+                   
                 </div> 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -265,7 +265,29 @@
       </div>
         </form>
 
-        <button id="logBtn" type="button" class="btn btn-primary">Log a workout</button>
+        <button onclick="echoSelectedGoal()" type="button" id="log" class="btn btn-primary" data-toggle="modal" data-target="#popupLog" data-whatever="@mdo">Log a workout</button>
+        <!--modal-->
+          <div class="modal fade" id="popupLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="logMdl">Log a workout for a payout</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="echoSelectedGoal"></p>
+                  
+                </div> 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id="logBtn" type="button" class="btn btn-primary">Log minutes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--modal-->
         <button id="claimBtn" type="button" class="btn btn-primary">Claim lost stake</button>
         <button id="statsBtn" type="button" class="btn btn-secondary">My stats</button>
         
@@ -1207,6 +1229,10 @@ function makeList(){
   }
 }
 
+function echoSelectedGoal(){
+  $("#echoSelectedGoal").html("Details for challenge "+ goalID+":" " You commited $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') + ".");
+}
+
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
@@ -1229,8 +1255,8 @@ xhr.onload = function() {
       console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
       console.log("time stamp: "+formattedTime);
 
-      //var sessionMins = fatBurn + cardio + peak;
-      var sessionMins = 32;
+      var sessionMins = fatBurn + cardio + peak;
+      //var sessionMins = 32; //debug only
       console.log("total session minutes to be logged: "+sessionMins);
 
     
