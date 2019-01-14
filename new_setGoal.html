@@ -1191,7 +1191,7 @@ function makeList(){
     //makes a list of active goals for a user
       console.log(web3.eth.defaultAccount);
       var count;
-      Nceno.methods.profileOf[userID].goalTotal.call({from: web3.eth.defaultAccount}, function(error, result){count = result});
+      Nceno.methods.profileOf([userID].goalTotal).call({from: web3.eth.defaultAccount}, function(error, result){count = result});
       //var i = 0;
       //var goals = new Array();
       console.log(count); //debug
