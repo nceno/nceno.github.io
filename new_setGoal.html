@@ -1164,10 +1164,10 @@ function echoGoal(){
   $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID+".");
 }
 
-var populated = false;
+//var populated = false;
 function makeList(){
     //makes a list of active goals for a user
-    if(populated = false){
+    //if(populated = false){
       var count;
       Nceno.methods.profileOf[userID].goalTotal.call({from: web3.eth.defaultAccount}, function(error, result){count = result});
       var i = 0;
@@ -1178,8 +1178,8 @@ function makeList(){
         console.log(goals[i]); //debug
         $("#chIDtools").append('<option>'+ goals[i] +'</option>');
       }
-      populated = true;
-    }
+      //populated = true;
+    //}
   }
 
 $("#logBtn").click(function() {
