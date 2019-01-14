@@ -445,6 +445,7 @@
     var count = Nceno.methods.profileOf[userID].goalTotal.call({from: web3.eth.defaultAccount}, function(error, result){});
     var i;
     var goals = new Array();
+    console.log(web3.eth.defaultAccount);
     for (i = 0; i < count; i++){
       goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call({from: web3.eth.defaultAccount}, function(error, result){});
       $("#chIDtools").append('<option>'+ goals[i] +'</option>');
