@@ -1190,19 +1190,21 @@ function echoGoal(){
 //var populated = false;
 function makeList(){
   //makes a list of active goals for a user
-  //if(populated = false){ 
+  if(populated === false){ 
     var i = 0;
     var goals = new Array();
 
     for (i = 0; i < 5; i++){
       Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
-        goals[i] = result;
-        console.log(goals[i]);
-        $("#chIDtools").append('<option>'+ goals[i] +'</option>');
+        if(result != 'undefined'){
+          goals[i] = result;
+          console.log(goals[i]);
+          $("#chIDtools").append('<option>'+ goals[i] +'</option>');
+        }
       });    
     }
-    //populated = true;
-  //}
+    populated = true;
+  }
 }
 
 $("#logBtn").click(function() {
