@@ -1235,7 +1235,7 @@ xhr.onload = function() {
 
     
       Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#chIDtools").val(),34)).send(
-        {from: web3.eth.defaultAccount, gas: 600000, gasPrice: 15000000000},
+        {from: web3.eth.defaultAccount, gas: 1000000, gasPrice: 15000000000},
           function(error, result) {
             if (!error){
               $("#logBtn").hide();
