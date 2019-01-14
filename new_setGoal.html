@@ -442,16 +442,14 @@
 
   function makeList(){
     //makes a list of active goals for a user
-  var count = Nceno.methods.profileOf[userID].goalTotal.call();
-  var i;
-  //var goals = new Array();
-  for (i = 0; i < count; i++){
-    //goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call();
-    $("#chIDtools").append('<option>'+ Nceno.methods.profileOf[userID].goalAt[i].goalID.call() +'</option>');
+    var count = Nceno.methods.profileOf[userID].goalTotal.call();
+    var i;
+    //var goals = new Array();
+    for (i = 0; i < count; i++){
+      //goals[i] = Nceno.methods.profileOf[userID].goalAt[i].goalID.call();
+      $("#chIDtools").append('<option>'+ Nceno.methods.profileOf[userID].goalAt[i].goalID.call() +'</option>');
+    }
   }
-  else
-  console.error(error);
-}
 
     var Nceno = new web3.eth.Contract([
   {
