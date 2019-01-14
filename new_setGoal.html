@@ -1233,19 +1233,16 @@ xhr.onload = function() {
       console.log("total session minutes to be logged: "+sessionMins);
 
     
-      Nceno.simplePayout(
-                userID, 
-                sessionMins,
-                formattedTime+2,
-                web3.utils.padRight($("#chIDtools").val(),34),
-                {from: web3.eth.defaultAccount, gas: 60000, gasPrice: 5000000000},
-                function(error, result) {
-                    if (!error){
-                      //echo the result and do some jquery loader stuff
-                    }
-                      else
-                      console.error(error);
-                })//close contract function call
+      Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#chIDtools").val(),34)).send(
+        {from: web3.eth.defaultAccount, gas: 600000, gasPrice: 15000000000},
+          function(error, result) {
+            if (!error){
+              $("#logBtn").hide();
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
     }
 };
 xhr.send()
