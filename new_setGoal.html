@@ -1199,7 +1199,7 @@ function makeList(){
         if(result != undefined){
           goals[i] = result;
           console.log(goals[i]);
-          $("#chIDtools").append('<option>'+ web3.utils.toHex(goals[i]) +'</option>');
+          $("#chIDtools").append('<option>'+ goals[i].slice(0, 12) +'</option>');
         }
       });    
     }
