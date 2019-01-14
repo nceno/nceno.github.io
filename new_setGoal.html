@@ -1234,7 +1234,7 @@ function echoSelectedGoal(){
   Nceno.methods.getGoalParams(
     goalid
   )
-  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValue},
+  .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
         $("#echoSelectedGoal").html(
