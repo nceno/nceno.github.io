@@ -295,7 +295,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="logMdl">Some people skipped their workouts last week... Their loss is your gain!</h5>
+                  <h5 class="modal-title" id="claimMdl">Some people skipped their workouts last week... Their loss is your gain!</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -1281,7 +1281,7 @@ function echoSelectedGoal2(){
     function(error, result) {
       if (!error){
         var tstamp = new Date(result[4]*1000);
-        $("#echoSelectedGoal").html(
+        $("#echoSelectedGoal2").html(
           "Details for challenge "+ goalid.slice(0, 12) +
           ": You commited $" + 
           Math.floor(result[1]*116/1000000000000000000) + 
