@@ -1302,7 +1302,7 @@ function echoSelectedGoal2(){
   );
 }
 
-$("#claimBtn").click(function() {
+/*$("#claimBtn").click(function() {
   var goalid = web3.utils.padRight($("#chIDtools").val(),34);
   //function call:
   Nceno.methods.claimBonus(
@@ -1319,7 +1319,7 @@ $("#claimBtn").click(function() {
       console.error(error);
     }
   );
-});
+});*/
 
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
@@ -1359,13 +1359,13 @@ xhr.onload = function() {
             console.error(error);
           });
     }
-};
-xhr.send()
-});//close click(function(){
+  };
+  xhr.send()
+  });//close click(function(){
 
    
   
-    </script>
+  </script>
 
   </body>
 </html>
