@@ -22,20 +22,28 @@ $("#hostBtn").click(function() {
   );
 });
 
-var populated = false;
-function makeList(){
-  //makes a list of active goals for a user
-  if(populated = false){ 
-    var i = 0;
-    var goals = new Array();
 
-    for (i = 0; i < 3; i++){
-      Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
-        goals[i] = result;
-        console.log(goals[i]);
-        $("#chIDtools").append('<option>'+ goals[i] +'</option>');
-      });    
+
+//joining a goal
+$("#joinPopup[i]").click(function() {
+var goalid = web3.utils.padRight($("colGoal[i]").val(),34)
+  Nceno.methods.getGoalParams(goalid)
+  .call({from: web3.eth.defaultAccount},
+    function(error, result) {
+      if (!error){
+        Nceno.methods.simplePayout(goalid, userID).send(
+        {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: result[1]},
+          function(error, result) {
+            if (!error){
+              $("#joinPopup").hide();
+              console.log(result);
+            }
+            else
+            console.error(error);
+          });
+      }
+      else
+      console.error(error);
     }
-    populated = true;
-  }
-}
+  );
+});
