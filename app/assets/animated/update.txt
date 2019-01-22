@@ -1,0 +1,9 @@
+Version 2.5.379 (October 24, 2018)
+
+-- Added a fix for ForeFox error with "display:none" icons
+
+-- Made code syntax fix of 3 icons: narrow-screen.svg, scales.svg and wide-screen.svg
+
+-- For this update: 
+  - replace all JavaScript and CSS files with new ones from the "LivIconsEvo-2.4.379 > for_upload > LivIconsEvo" folder 
+  - copy new SVG icons files from the "LivIconsEvo-2.4.379 > for_upload > LivIconsEvo > svg" folder
