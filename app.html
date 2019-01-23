@@ -147,7 +147,7 @@
           <!-- sign in -->
           <div class="tab-pane show active" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
             <div class="viewport">
-              <div class="image image-overlay" style="background-image:url(../../assets/images/demo/image-2.jpg)"></div>
+              <div class="image image-overlay" style="background-image:url(app/assets/images/demo/image-2.jpg)"></div>
               <div class="container">
                 <div class="row justify-content-center align-items-center vh-100">
                   <div class="col-md-6 col-lg-5">
@@ -159,39 +159,40 @@
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
                             <form>
-                              <div class="form-group">
-                                <label for="exampleFormControlInput1">Email address</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleFormControlInput2">Password</label>
-                                <input type="password" class="form-control" id="exampleFormControlInput2">
-                              </div>
-                              <a href="" class="btn btn-primary btn-block">Sign In</a>
+                              <a id="fitbitBtn" href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2FsetGoal.html&scope=activity%20heartrate%20location%20profile&expires_in=604800" class="btn btn-primary btn-block">Step 1: Sign in with Fitbit</a>
+                              <a id="portisBtn" class="btn btn-secondary btn-block" onclick="showPortis()">Step 2: Log into Portis</a>
                             </form>
                           </div>
                         </div>
                       </div>
                       <div class="accordion" data-accordion>
                         <div class="accordion-control" data-control>
-                          <h5>Create Account</h5>
+                          <h5>Create Nceno profile</h5>
+                          <p>(One-time only)</p>
                         </div>
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
                             <form>
                               <div class="form-group">
-                                <label for="exampleFormControlInput3">Email address</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="name@example.com">
+                                <label for="exampleFormControlInput3">Username</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput3">
                               </div>
                               <div class="form-group">
-                                <label for="exampleFormControlInput4">Password</label>
-                                <input type="password" class="form-control" id="exampleFormControlInput4">
+                                <label for="exampleFormControlInput4">Email address</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput4" placeholder="name@example.com">
                               </div>
                               <div class="form-group">
-                                <label for="exampleFormControlInput5">Repeat Password</label>
-                                <input type="password" class="form-control" id="exampleFormControlInput5">
+                                <label for="exampleFormControlSelect5">Wearable brand</label>
+                                <select class="form-control" id="exampleFormControlSelect5">
+                                  <option>Fitbit</option>
+                                  <option>Apple</option>
+                                  <option>Garmin</option>
+                                  <option>Samsung</option>
+                                  <option>Xiaomi</option>
+                                  <option>Other</option>
+                                </select>
                               </div>
-                              <a href="" class="btn btn-primary btn-block">Sign In</a>
+                              <a href="" class="btn btn-primary btn-block" id="makeAcctBtn">Create Nceno profile</a>
                             </form>
                           </div>
                         </div>
@@ -338,7 +339,7 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
 
-                <div class="row mb-4">
+<!--                 <div class="row mb-4">
                   <div class="col">
                     <div class="boxed">
                       <div class="row align-items-center justify-content-between p-3">
@@ -346,7 +347,7 @@
                           <img src="app/assets/images/demo/user-5.jpg" alt="Avatar" class="avatar avatar-lg rounded">
                         </div>
                         <div class="col-md-5 text-center text-md-left">
-                          <h4 class="mb-0"><b>Valerie</b> Doe</h4>
+                          <h4 class="mb-0"><b>Dill</b> Doe</h4>
                           <a href="" class="fs-14 link text-primary">Change Avatar</a>
                         </div>
                         <div class="col-md-4 text-center text-md-right mt-1 mt-md-0">
@@ -355,88 +356,71 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                   <div class="col">
-                    <h5 class="mb-2 fs-20 font-weight-normal">General Information</h5>
-                    <form>
-                      <div class="form-row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="email" class="form-control" id="firstName" aria-describedby="firstName" placeholder="John">
-                          </div>
+                    <h5 class="mb-2 fs-20 font-weight-normal">Host a new challenge</h5>
+                      <form>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput3">Minutes per exercise session:</label>
+                          <select class="form-control" id="exampleFormControlSelect5">
+                            <option>Fitbit</option>
+                            <option>Apple</option>
+                            <option>Garmin</option>
+                            <option>Samsung</option>
+                            <option>Xiaomi</option>
+                            <option>Other</option>
+                          </select>
                         </div>
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="secondName">Second Name</label>
-                            <input type="email" class="form-control" id="secondName" aria-describedby="secondName" placeholder="Doe">
-                          </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput4">Exercise sessions per week:</label>
+                          <select class="form-control" id="exampleFormControlSelect5">
+                            <option>Fitbit</option>
+                            <option>Apple</option>
+                            <option>Garmin</option>
+                            <option>Samsung</option>
+                            <option>Xiaomi</option>
+                            <option>Other</option>
+                          </select>
                         </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="userMail">Email address</label>
-                            <input type="email" class="form-control" id="userMail" aria-describedby="userMail" placeholder="johndoe@example.com">
-                          </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect5">Challenge duration (in weeks):</label>
+                          <select class="form-control" id="exampleFormControlSelect5">
+                            <option>Fitbit</option>
+                            <option>Apple</option>
+                            <option>Garmin</option>
+                            <option>Samsung</option>
+                            <option>Xiaomi</option>
+                            <option>Other</option>
+                          </select>
                         </div>
-                      </div>
-                      <div class="form-row mt-1 align-items-center">
-                        <div class="col-3">
-                          <button class="btn btn-secondary">Save Changes</button>
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect5">Stake in $USD:</label>
+                          <select class="form-control" id="exampleFormControlSelect5">
+                            <option>Fitbit</option>
+                            <option>Apple</option>
+                            <option>Garmin</option>
+                            <option>Samsung</option>
+                            <option>Xiaomi</option>
+                            <option>Other</option>
+                          </select>
                         </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col">
-                    <h5 class="mb-2 fs-20 font-weight-normal">Profile Information</h5>
-                    <form>
-                      <div class="form-row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="userCity">City</label>
-                            <input type="email" class="form-control" id="userCity" aria-describedby="userCity" placeholder="New York">
-                          </div>
-                        </div>
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="userCountry">Country</label>
-                            <input type="email" class="form-control" id="userCountry" aria-describedby="userCountry" placeholder="United States">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="userTwitter">Twitter</label>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text">@</span>
-                              </div>
-                              <input type="text" id="userTwitter" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="userTwitter">
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Starting time:</label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="exampleFormControlTextarea1">About</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col-3">
-                          <button class="btn btn-secondary">Save Changes</button>
-                        </div>
-                      </div>
-                    </form>
+                        <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input" id="checker">
+                          <label class="form-check-label" for="checker">I've read the <a href="instructions.html">instructions</a> and agree to the <a href="terms.html">terms</a>.</label>
+                        </div>                                                                        
+                        <a href="" class="btn btn-primary" id="createBtn">Create Nceno profile</a>
+                      </form>
                   </div>
                 </div>
               </div>
@@ -525,10 +509,15 @@
     </footer>
     <!-- / footer -->
 
-
-
-
+<!-- scripts -->
     <script src="app/assets/js/vendor.js"></script>
     <script src="app/assets/js/app.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/portis/dist/bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"/>
+<!-- / scripts -->
+
   </body>
 </html>
