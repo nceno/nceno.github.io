@@ -204,56 +204,7 @@
             </div>
           </div>
           <!-- / sign in -->
-
-          <!-- manage -->
-          <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-8">
-                <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats</h5>
-                  <form>
-                    <div class="form-group">
-                      <label for="chIDtools">Select one of your challenges to manage:</label>
-                      <select class="form-control" id="chIDtools">
-                        <!-- options generated here -->
-                      </select>
-                    </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="table-responsive-md">
-                      <table class="table table-lined">
-                        <thead>
-                          <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Order</th>
-                            <th scope="col">Price</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">July 20, 2018</th>
-                            <td>#110</td>
-                            <td>$8021.47</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">July 20, 2018</th>
-                            <td>#111</td>
-                            <td>$8021.47</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">July 22, 2018</th>
-                            <td>#112</td>
-                            <td>$815</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- / manage -->          
-
+    
           <!-- host -->
           <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
             <div class="row justify-content-center">
@@ -361,37 +312,49 @@
           </div>
           <!-- / host -->
 
-          <!-- browse -->
-          <div class="tab-pane" id="demo-2-5" role="tabpanel" aria-labelledby="demo-2-5">
+          <!-- manage -->
+          <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
-
+                <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats</h5>
+                  <form>
+                    <div class="form-group">
+                      <label for="chIDtools">Select one of your challenges:</label>
+                      <select class="form-control" id="chIDtools">
+                        <!-- options generated here -->
+                      </select>
+                    </div>
                 <div class="row">
                   <div class="col">
                     <div class="table-responsive-md">
-                      <table class="table table-lined">
-                        <thead>
+                      <table class="table table-lined" id="leaderboard">
+                        <thead class="thead-dark">
                           <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Order</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">Adherence %</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Global Rank #</th>
+                            <th scope="col">Profit $</th>      
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <th scope="row">July 20, 2018</th>
-                            <td>#110</td>
-                            <td>$8021.47</td>
+                            <th scope="row">97%</th>
+                            <td>MarkFit</td>
+                            <td>16</td>
+                            <td>$22.03</td>
+                            
                           </tr>
                           <tr>
-                            <th scope="row">July 20, 2018</th>
-                            <td>#111</td>
-                            <td>$8021.47</td>
+                            <th scope="row">82%</th>
+                            <td>Zoe16</td>
+                            <td>1034</td>
+                            <td>$6.15</td>
                           </tr>
                           <tr>
-                            <th scope="row">July 22, 2018</th>
-                            <td>#112</td>
-                            <td>$815</td>
+                            <th scope="row">71%</th>
+                            <td>ZebraFish123</td>
+                            <td>433</td>
+                            <td>-$8.54</td>
                           </tr>
                         </tbody>
                       </table>
@@ -401,7 +364,80 @@
               </div>
             </div>
           </div>
-          <!-- / browse -->
+          <!-- / manage -->          
+
+          <!-- browse -->
+          <div class="tab-pane" id="demo-2-5" role="tabpanel" aria-labelledby="demo-2-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-10">
+                <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats</h5>
+                  <form>
+                    <div class="form-group">
+                      <label for="chIDtools">Select one of your challenges:</label>
+                      <select class="form-control" id="chIDtools">
+                        <!-- options generated here -->
+                      </select>
+                    </div>
+                  </form>
+                <div class="row">
+                  <div class="col">
+                    <div class="table-responsive-md">
+                      <table class="table table-lined" id="leaderboard">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Buy-in</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Sessions</th>
+                            <th scope="col">Minutes</th>
+                            <th scope="col">Competitors</th>
+                            <th scope="col">Starting Date</th>
+                            <th scope="col">Host</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            
+                            <td>$50</td>
+                            <td>8 wks</td>
+                            <td>4 /wk</td>
+                            <td>45 min</td>
+                            <td>8 </td>
+                            <td>Jan 14</td>
+                            <td>Zoefit91</td>
+                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                          </tr>
+                          <tr>
+                            
+                            <td>$110</td>
+                            <td>12 wks</td>
+                            <td>4 /wk</td>
+                            <td>60 min</td>
+                            <td>12 </td>
+                            <td>Jan 15</td>
+                            <td>BenShape3</td>
+                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                          </tr>
+                          <tr>
+                            
+                            <td>$75</td>
+                            <td>6 wks</td>
+                            <td>3 /wk</td>
+                            <td>40 min</td>
+                            <td>20 </td>
+                            <td>Feb 1</td>
+                            <td>Kylez1023</td>
+                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- / browse -->          
         </div>
       </div>
     </section>
