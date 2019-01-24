@@ -250,20 +250,20 @@
     <!-- / news -->
 
     <!-- footer -->
-    <footer class="bg-dark text-white">
+    <footer class="separator-top">
       <div class="separator-top">
         <div class="container py-5">
           <div class="row justify-content-between align-items-center">
             <div class="col-md-5 text-center text-md-left">
               <ul class="nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Contact</a>
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#contactModal">Contact</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="careers.html">Careers</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Legal</a>
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#legalModal">Legal</a>
                 </li>
               </ul>
             </div>
@@ -272,9 +272,9 @@
             </div>
             <div class="col-md-5 text-center text-md-right">
               <ul class="socials">
-                <li><a href="" class="icon-facebook fs-20"></a></li>
-                <li><a href="" class="icon-instagram fs-20"></a></li>
-                <li><a href="" class="icon-twitter fs-20"></a></li>
+                <li><a href="https://www.facebook.com/ncenoapp" class="icon-facebook fs-20"></a></li>
+                <li><a href="https://www.instagram.com/nceno.app/" class="icon-instagram fs-20"></a></li>
+                <li><a href="https://twitter.com/nceno1" class="icon-twitter fs-20"></a></li>
               </ul>
             </div>
           </div>
@@ -282,6 +282,44 @@
       </div>
     </footer>
     <!-- / footer -->
+
+    <!-- modals -->
+    <!--contact modal-->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header justify-content-end">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="icon-x"></span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <h3><b>Contact Us</b></h3>
+            <p>We'd love to hear from you. Email us at support@nceno.app</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / contact modal-->
+
+    <!--legal modal-->
+    <div class="modal fade" id="legalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header justify-content-end">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="icon-x"></span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <h3><b>Privacy Statement and Terms of Use</b></h3>
+            <p>We'd love to hear from you. Email us at support@nceno.app</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / legal modal-->      
+    <!-- / modals -->
 
 
 
