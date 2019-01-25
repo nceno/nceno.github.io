@@ -1630,13 +1630,13 @@ fieldset:disabled a.btn {
   pointer-events: none; }
 
 .btn-primary {
-  color: #fff;
-  background-color: #4829B2;
-  border-color: #4829B2; }
+  color: #000000;
+  background-color: #ccff00;
+  border-color: #ccff00; }
   .btn-primary:hover {
-    color: #fff;
-    background-color: #3b2293;
-    border-color: #371f89; }
+    color: #000000;
+    background-color: #accf20;
+    border-color: #accf20; }
   .btn-primary:focus, .btn-primary.focus {
     box-shadow: 0 0 0 0 rgba(72, 41, 178, 0.5); }
   .btn-primary.disabled, .btn-primary:disabled {

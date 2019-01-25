@@ -690,8 +690,7 @@
           ],
           "name": "BonusClaimedBy",
           "type": "event"
-        }
-      ], '0xed2bcfbe945ae7de0eb480510ff7290b223929ae');
+        }], '0xed2bcfbe945ae7de0eb480510ff7290b223929ae');
 
                console.log(Nceno);
               
@@ -809,10 +808,10 @@
           }
         );
       }
-      //var populated = false;
+      var populated = false;
       function makeList(){
         //makes a list of active goals for a user
-        //if(populated === false){ 
+        if(populated === false){ 
           var i = 0;
           var goals = new Array();
           for (i = 0; i < 15; i++){
@@ -824,8 +823,8 @@
               }
             });    
           }
-          //populated = true;
-        //}
+          populated = true;
+        }
       }
       $( document ).ready(function() {makeList();});
 
