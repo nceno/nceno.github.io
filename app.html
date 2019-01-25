@@ -154,7 +154,7 @@
       <div class="container">
         <div class="tab-content" id="appPages">
 
-          <!-- sign in -->
+        <!-- sign in -->
           <div class="tab-pane show active" id="signin" role="tabpanel" aria-labelledby="signin">
             <div class="viewport">
               <div class="image image-overlay" style="background-image:url(app/assets/images/demo/image-2.jpg)"></div>
@@ -213,9 +213,9 @@
               </div>
             </div>
           </div>
-          <!-- / sign in -->
+        <!-- / sign in -->
     
-          <!-- host -->
+        <!-- host -->
           <div class="tab-pane" id="host" role="tabpanel" aria-labelledby="host">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
@@ -300,9 +300,9 @@
               </div>
             </div>
           </div>
-          <!-- / host -->
+        <!-- / host -->
 
-          <!-- manage -->
+        <!-- manage -->
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
@@ -318,45 +318,45 @@
 
               </div>
             </div>
-          <!--echo -->
-              <div class="row justify-content-center">
-              <div class="col-md-12 col-lg-12">
-                <h5 class="mb-2 fs-20 font-weight-normal">The challenge you selected: </h5>
-                <div class="row">
-                  <div class="col">
-                    <div class="table-responsive-md">
-                      <table class="table table-lined" id="leaderboard">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Buy-in</th>
-                            <th scope="col">Duration</th>
-                            <th scope="col">Sessions</th>
-                            <th scope="col">Minutes</th>
-                            <th scope="col">Competitors</th>
-                            <th scope="col">Starting Date</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>$50</td>
-                            <td>8 wks</td>
-                            <td>4 /wk</td>
-                            <td>45 min</td>
-                            <td>8 </td>
-                            <td>Jan 14</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Log</button></td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Claim</button></td>
-                          </tr>
-                        </tbody>
-                      </table>
+            <!--echo -->
+                <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-12">
+                  <h5 class="mb-2 fs-20 font-weight-normal">The challenge you selected: </h5>
+                  <div class="row">
+                    <div class="col">
+                      <div class="table-responsive-md">
+                        <table class="table table-lined" id="leaderboard">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Buy-in</th>
+                              <th scope="col">Duration</th>
+                              <th scope="col">Sessions</th>
+                              <th scope="col">Minutes</th>
+                              <th scope="col">Competitors</th>
+                              <th scope="col">Starting Date</th>
+                              <th scope="col"></th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>$50</td>
+                              <td>8 wks</td>
+                              <td>4 /wk</td>
+                              <td>45 min</td>
+                              <td>8 </td>
+                              <td>Jan 14</td>
+                              <td><button type="button" id="logBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Log</button></td>
+                              <td><button type="button" id="claimBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Claim</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          <!-- / echo--> 
+            <!-- / echo--> 
 
               <!--stats -->
             <div class="row justify-content-center">
@@ -403,9 +403,9 @@
             </div>
               <!-- / stats -->  
           </div>
-          <!-- / manage -->          
+        <!-- / manage -->          
 
-          <!-- browse -->
+        <!-- browse -->
           <div class="tab-pane" id="browse" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-10">
@@ -436,7 +436,7 @@
                             <td>8 </td>
                             <td>Jan 14</td>
                             <td>Zoefit91</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
                             
@@ -447,7 +447,7 @@
                             <td>12 </td>
                             <td>Jan 15</td>
                             <td>BenShape3</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
                             
@@ -458,7 +458,7 @@
                             <td>20 </td>
                             <td>Feb 1</td>
                             <td>Kylez1023</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
                             
@@ -469,7 +469,7 @@
                             <td>8 </td>
                             <td>Jan 14</td>
                             <td>Zoefit91</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
                             
@@ -480,7 +480,7 @@
                             <td>12 </td>
                             <td>Jan 15</td>
                             <td>BenShape3</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
                             
@@ -491,7 +491,7 @@
                             <td>20 </td>
                             <td>Feb 1</td>
                             <td>Kylez1023</td>
-                            <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
 
                         </tbody>
@@ -502,7 +502,7 @@
               </div>
             </div>
           </div>
-          <!-- / browse -->          
+        <!-- / browse -->          
         </div>
       </div>
     </section>

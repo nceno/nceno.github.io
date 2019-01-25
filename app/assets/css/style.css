@@ -15147,7 +15147,7 @@ footer {
     color: #000; }
   .table th,
   .table td {
-    padding: 1.875rem; }
+    padding: 0.8rem; }
     .table th.highlight,
     .table td.highlight {
       position: relative;
