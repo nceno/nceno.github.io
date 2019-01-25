@@ -814,13 +814,14 @@
         if(populated === false){ 
           var i = 0;
           var goals = new Array();
-          for (i = 0; i < 15; i++){
+          for (i = 0; i < 5; i++){
             Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
               if(result != undefined){
                 goals[i] = result;
                 console.log(goals[i]);
                 //$("#chIDtools").append("<option>"+ goals[i].slice(0, 12) +"</option>");
-                $("#chIDtools").append(goals[i].slice(0, 12));
+                $("#op1").html(goals[i].slice(0, 12));
+
               }
             });    
           }
