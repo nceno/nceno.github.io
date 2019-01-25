@@ -832,9 +832,7 @@
 
       function echoSelectedGoal(){
         var goalid = web3.utils.padRight($("#chIDtools").val(),34)
-        Nceno.methods.getGoalParams(
-          goalid
-        )
+        Nceno.methods.getGoalParams(goalid)
         .call({from: web3.eth.defaultAccount},
           function(error, result) {
             if (!error){
