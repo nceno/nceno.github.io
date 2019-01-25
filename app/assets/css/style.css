@@ -20244,14 +20244,14 @@ pre[class*="language-"] {
 .progress-circle {
   position: relative; }
   .progress-circle canvas {
-    height: 100% !important;
-    width: 100% !important; }
+    height: 18% !important;
+    width: 18% !important; }
   .progress-circle strong {
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-362%, -50%);
     position: absolute;
-    font-size: 2.5rem;
+    font-size: 1rem;
     font-family: "Nunito Sans", sans-serif;
     font-weight: 400;
     top: 50%;
