@@ -759,6 +759,7 @@
           function(error, result) {
             if (!error){
               $("#hostBtn").hide();
+              $("#cancelBtn").hide();
               console.log(result);
             }
             else

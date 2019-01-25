@@ -140,7 +140,7 @@
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#host">Host</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#manage">Manage</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makeList()">Manage</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#browse">Browse</a>
             </div>
           </div>
@@ -533,7 +533,7 @@
                     <button id="hostBtn" type="button" class="btn btn-block btn-primary">Host this challenge</button>
                   </div>
                   <div class="col-4">
-                    <button type="button" class="btn btn-block btn-red" data-dismiss="modal">Cancel</button>
+                    <button id="cancelBtn" type="button" class="btn btn-block btn-red" data-dismiss="modal">Cancel</button>
                   </div>
                 </div>
               </div>
