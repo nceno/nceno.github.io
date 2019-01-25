@@ -15082,7 +15082,7 @@ footer {
   .tile .tile-content strong, .text-white b, .user-panel b, .tile .tile-content b, .text-white li, .user-panel li, .tile .tile-content li, .text-white a:not(.btn), .user-panel a:not(.btn), .tile .tile-content a:not(.btn) {
     color: #fff; }
   .text-white p, .user-panel p, .tile .tile-content p, .text-white span:not(.badge), .user-panel span:not(.badge), .tile .tile-content span:not(.badge) {
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(204, 255, 0, 1); }
   .text-white hr, .user-panel hr, .tile .tile-content hr {
     border-color: rgba(255, 255, 255, 0.2); }
 
