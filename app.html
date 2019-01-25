@@ -315,7 +315,45 @@
                         <!-- options generated here -->
                       </select>
                     </div>
-                    
+            <!--echo -->
+            <div class="row justify-content-center">
+            <div class="col-md-20 col-lg-20">
+              <h5 class="mb-2 fs-20 font-weight-normal">The challenge you selected: </h5>
+              <div class="row">
+                <div class="col">
+                  <div class="table-responsive-md">
+                    <table class="table table-lined" id="leaderboard">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Buy-in</th>
+                          <th scope="col">Duration</th>
+                          <th scope="col">Sessions</th>
+                          <th scope="col">Minutes</th>
+                          <th scope="col">Competitors</th>
+                          <th scope="col">Starting Date</th>
+                          <th scope="col">Log</th>
+                          <th scope="col">Claim</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>$50</td>
+                          <td>8 wks</td>
+                          <td>4 /wk</td>
+                          <td>45 min</td>
+                          <td>8 </td>
+                          <td>Jan 14</td>
+                          <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Log</button></td>
+                          <td><button onclick="echoJoin()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Claim</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- / echo-->    
                 <div class="row">
                   <div class="col">
                     <div class="table-responsive-md">
