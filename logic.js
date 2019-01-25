@@ -820,7 +820,11 @@
                 goals[i] = result;
                 console.log(goals[i]);
                 //$("#chIDtools").append("<option>"+ goals[i].slice(0, 12) +"</option>");
-                $("#op1").html(goals[i].slice(0, 12));
+                $("#op1").html(goals[1].slice(0, 12));
+                $("#op2").html(goals[2].slice(0, 12));
+                $("#op3").html(goals[3].slice(0, 12));
+                $("#op4").html(goals[4].slice(0, 12));
+                $("#op5").html(goals[5].slice(0, 12));
 
               }
             });    
