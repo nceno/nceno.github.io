@@ -811,28 +811,24 @@
       var populated = false;
       function makeList(){
         //makes a list of active goals for a user
-        console.log("ready");
-        if(populated === false){ 
+        if(populated === false){
+          $("#chIDtools").selectric(); 
           var i = 0;
           var goals = new Array();
-          for (i = 0; i < 5; i++){
+          for (i = 0; i < 15; i++){
             Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
               if(result != undefined){
                 goals[i] = result;
                 console.log(goals[i]);
+                $("#chIDtools").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+                $('#chIDtools').selectric('refresh');
               }
-                //$("#chIDtools").append("<option>"+ goals[i].slice(0, 12) +"</option>");
-                $("#op1").html("my nigga");
-                $("#op2").html(goals[2].slice(0, 12));
-                $("#op3").html(goals[3].slice(0, 12));
-                $("#op4").html(goals[4].slice(0, 12));
-                $("#op5").html(goals[5].slice(0, 12));
             });    
           }
           populated = true;
         }
       }
-      //$( document ).ready(function() {makeList();});
+      $( document ).ready(function() {console.log("refreshed");});
 
       function echoSelectedGoal(){
         var goalid = web3.utils.padRight($("#chIDtools").val(),34)
