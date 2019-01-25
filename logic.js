@@ -811,6 +811,7 @@
       var populated = false;
       function makeList(){
         //makes a list of active goals for a user
+        console.log("pussywussy");
         if(populated === false){ 
           var i = 0;
           var goals = new Array();
