@@ -809,10 +809,10 @@
           }
         );
       }
-      var populated = false;
+      //var populated = false;
       function makeList(){
         //makes a list of active goals for a user
-        if(populated === false){ 
+        //if(populated === false){ 
           var i = 0;
           var goals = new Array();
           for (i = 0; i < 15; i++){
@@ -824,8 +824,8 @@
               }
             });    
           }
-          populated = true;
-        }
+          //populated = true;
+        //}
       }
       $( document ).ready(function() {makeList();});
 
