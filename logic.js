@@ -694,6 +694,9 @@
       ], '0xed2bcfbe945ae7de0eb480510ff7290b223929ae');
 
                console.log(Nceno);
+              
+
+              
               $("#createBtn").hide();
               //show create button only if user agrees to terms
               $("#checker").on('click', function() {
@@ -824,6 +827,7 @@
           populated = true;
         }
       }
+      $( document ).ready(function() {makeList();});
 
       function echoSelectedGoal(){
         var goalid = web3.utils.padRight($("#chIDtools").val(),34)
