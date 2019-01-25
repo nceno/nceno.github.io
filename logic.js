@@ -768,7 +768,10 @@
       });
 
       function echoGoal(){
-        $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+" weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID+".");
+        $("#host").tab('show');
+        $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + 
+        $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+
+        " weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID+".");
       }
 
       function echoJoinedGoal(){

@@ -138,10 +138,10 @@
         <div class="row justify-content-center">
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
-              <a class="nav-item nav-link active" data-toggle="tab" href="#demo-2-2">Sign in</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-4">Host</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-3">Manage</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#demo-2-5">Browse</a>
+              <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#host">Host</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#manage">Manage</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#browse">Browse</a>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@
         <div class="tab-content" id="demo-2">
 
           <!-- sign in -->
-          <div class="tab-pane show active" id="demo-2-2" role="tabpanel" aria-labelledby="demo-2-2">
+          <div class="tab-pane show active" id="signin" role="tabpanel" aria-labelledby="signin">
             <div class="viewport">
               <div class="image image-overlay" style="background-image:url(app/assets/images/demo/image-2.jpg)"></div>
               <div class="container">
@@ -216,7 +216,7 @@
           <!-- / sign in -->
     
           <!-- host -->
-          <div class="tab-pane" id="demo-2-4" role="tabpanel" aria-labelledby="demo-2-4">
+          <div class="tab-pane" id="host" role="tabpanel" aria-labelledby="host">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
                 <div class="row">
@@ -303,7 +303,7 @@
           <!-- / host -->
 
           <!-- manage -->
-          <div class="tab-pane" id="demo-2-3" role="tabpanel" aria-labelledby="demo-2-3">
+          <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
                 <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats</h5>
@@ -357,7 +357,7 @@
           <!-- / manage -->          
 
           <!-- browse -->
-          <div class="tab-pane" id="demo-2-5" role="tabpanel" aria-labelledby="demo-2-5">
+          <div class="tab-pane" id="browse" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-10">
                 <h5 class="mb-2 fs-20 font-weight-normal">Here's the challenges that are starting soon: </h5>
@@ -514,7 +514,7 @@
       </div>
       <!-- / contact modal-->
       <!--create modal-->
-      <div class="modal fade" id="popupCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="popupCreate" tabindex="-1" role="dialog" aria-labelledby="popupCreate" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header justify-content-end">
@@ -525,6 +525,18 @@
             <div class="modal-body text-center">
               <h3>Confirm your challenge:</h3>
               <p id="goalEcho"></p>
+            </div>
+            <div class="modal-footer gutter-1">
+              <div class="container-fluid">
+                <div class="row gutter-1">
+                  <div class="col-8">
+                    <button id="hostBtn" type="button" class="btn btn-block btn-primary">Host this challenge</button>
+                  </div>
+                  <div class="col-4">
+                    <button type="button" class="btn btn-block btn-red">Cancel</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
