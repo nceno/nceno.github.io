@@ -819,7 +819,8 @@
               if(result != undefined){
                 goals[i] = result;
                 console.log(goals[i]);
-                $("#chIDtools").append("<option>"+ goals[i].slice(0, 12) +"</option>");
+                //$("#chIDtools").append("<option>"+ goals[i].slice(0, 12) +"</option>");
+                $("#chIDtools").append(goals[i].slice(0, 12));
               }
             });    
           }
