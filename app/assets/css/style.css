@@ -14845,9 +14845,9 @@ img {
     -webkit-transform: scale(1.25);
     -moz-transform: scale(1.25);
     transform: scale(1.25);
-    background: #4829B2;
+    background: #ccff00;
     border-color: transparent;
-    color: #fff; }
+    color: #000; }
 
 .owl-item:not(:last-child) .step::after {
   content: "";
