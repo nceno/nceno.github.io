@@ -933,7 +933,7 @@
           //document.write(xhr2.responseText);
           var data = JSON.parse(xhr2.responseText);
           var obj = [data];
-          var ethPrice = obj[0]["price_usd"].value;
+          var ethPrice = obj[0]["price_usd"];
 
           console.log(ethPrice);
         }
