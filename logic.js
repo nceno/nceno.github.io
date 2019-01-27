@@ -925,19 +925,18 @@
   var ethPrice
   $("#priceBtn").click(
     function() {
-      var data = null;
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
-          var obj = [resp];
-          ethPrice = obj[0].price_usd
+          //var obj = [resp];
+          ethPrice = resp[0].price_usd
           console.log(this.responseText);
           console.log(ethPrice);
         }
       });
       xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
-      xhr.send(data);
+      xhr.send();
     }
   );              
     /*</script>
