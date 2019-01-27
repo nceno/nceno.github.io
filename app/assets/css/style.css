@@ -17726,8 +17726,8 @@ footer {
   border-color: #fff; }
   .btn-outline-white:hover {
     color: #151515;
-    background-color: #fff;
-    border-color: #fff; }
+    background-color: #ccff00;
+    border-color: #ccff00; }
   .btn-outline-white:focus, .btn-outline-white.focus {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
   .btn-outline-white.disabled, .btn-outline-white:disabled {
