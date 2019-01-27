@@ -935,7 +935,7 @@
       }
     });
 
-    xhr.open("GET", "http://crossorigin.me/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=ETH");
+    xhr.open("GET", "https://crossorigin.me/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=ETH");
     xhr.setRequestHeader("X-CMC_PRO_API_KEY", "5f4a09dd-cb09-4bd2-856c-878830c67fdf");
     xhr.setRequestHeader("cache-control", "no-cache");
     xhr.setRequestHeader("Postman-Token", "7952c0a8-0206-49b5-8c27-3576ddc93030");
