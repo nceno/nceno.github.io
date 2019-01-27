@@ -740,12 +740,12 @@
 
       //creating a goal
 
-
+      var goalID = web3.utils.randomHex(5);
       $("#hostBtn").click(function() {
         updateEthPrice();
-        var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/ethPrice);
-        var usdStakeInWei = msgValue.toString();
-        var goalID = web3.utils.randomHex(5);
+        var msgValueHost = Math.floor($("#stakeDD").val()*1000000000000000000/ethPrice);
+        var usdStakeInWei = msgValueHost.toString();
+        
         var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
         var trimmed = Math.floor(new Date(start).getTime()/1000000);
         console.log(usdStakeInWei, start, trimmed);
@@ -759,7 +759,7 @@
           trimmed,
           userID
         )
-        .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValue},
+        .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValueHost},
           function(error, result) {
             if (!error){
               $("#hostBtn").hide();
