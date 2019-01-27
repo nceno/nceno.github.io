@@ -742,7 +742,7 @@
 
 
       $("#hostBtn").click(function() {
-        setEthPrice();
+        updateEthPrice();
         var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/ethPrice);
         var usdStakeInWei = msgValue.toString();
         var goalID = web3.utils.randomHex(5);
@@ -774,7 +774,7 @@
       var ethPrice;
       function echoGoal(){
         //get live eth price
-        setEthPrice();
+        updateEthPrice();
         //echo modal
         $("#host").tab('show');
         $('#popupCreate').modal('show');        
@@ -784,7 +784,7 @@
       }
 
       function echoJoinedGoal(){
-        setEthPrice();
+        updateEthPrice();
         var goalid = web3.utils.padRight($("#col[i]").val(),34)
         Nceno.methods.getGoalParams(
           goalid
@@ -837,7 +837,7 @@
       $( document ).ready(function() {console.log("refreshed");});
 
       function echoSelectedGoal(){
-        setEthPrice();
+        updateEthPrice();
         var goalid = web3.utils.padRight($("#chIDtools").val(),34)
         Nceno.methods.getGoalParams(goalid)
         .call({from: web3.eth.defaultAccount},
@@ -931,7 +931,7 @@
 
   
 
-    function setEthPrice() {
+    function updateEthPrice() {
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
