@@ -930,7 +930,7 @@
         if (this.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
           //var obj = [resp];
-          ethPrice = resp[0].price_usd.value;
+          ethPrice = resp[0].price_usd;
           console.log(this.responseText);
           console.log(ethPrice);
         }
