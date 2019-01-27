@@ -920,6 +920,26 @@
           }
         };
         xhr.send()
-        });//close click(function(){      
+        });//close click(function(){
+
+  $("#priceBtn").click(
+    function() {
+      var xhr2 = new XMLHttpRequest();
+      xhr2.open('GET', 'https://api.coinmarketcap.com/v1/ticker/ethereum/');
+      xhr2.setRequestHeader("Authorization", 'Bearer ' + 'b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c');
+      xhr2.onload = function() {
+       if (xhr2.status === 200) {
+          //console.log(xhr2.responseText);
+          //document.write(xhr2.responseText);
+          var data = JSON.parse(xhr2.responseText);
+          var obj = [data];
+          var ethPrice = obj[0]["price_usd"][0].value;
+
+          console.log(ethPrice);
+        }
+      };
+      xhr2.send()
+    }
+  );              
     /*</script>
     <!-- / app logic -->*/
