@@ -934,7 +934,6 @@
         console.log(this.responseText);
       }
     });
-
     xhr.open("GET", "https://cors-escape.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=ETH");
     xhr.setRequestHeader("X-CMC_PRO_API_KEY", "5f4a09dd-cb09-4bd2-856c-878830c67fdf");
     xhr.setRequestHeader("cache-control", "no-cache");
