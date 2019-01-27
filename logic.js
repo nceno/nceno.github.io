@@ -924,21 +924,22 @@
 
   $("#priceBtn").click(
     function() {
+      var data = null;
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/ethereum/');
-      //xhr2.setRequestHeader("Authorization", 'Bearer ' + '5f4a09dd-cb09-4bd2-856c-878830c67fdf');
-      xhr.onload = function() {
-       if (xhr2.status === 200) {
-          console.log(xhr.responseText);
-          //document.write(xhr2.responseText);
-          var data = JSON.parse(xhr.responseText);
-          var obj = [data];
-          var ethPrice = obj[0].price_usd;
+      xhr.withCredentials = true;
 
-          console.log(ethPrice);
+      xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+          console.log(this.responseText);
         }
-      };
-      xhr.send()
+      });
+
+      xhr.open("GET", "https://api.coinmarketcap.com/v1/ticker/ethereum/");
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("cache-control", "no-cache");
+      xhr.setRequestHeader("Postman-Token", "e3587500-beed-4c16-8e53-c32c1be72ef2");
+
+      xhr.send(data);
     }
   );              
     /*</script>
