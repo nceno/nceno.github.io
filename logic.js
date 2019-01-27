@@ -925,6 +925,7 @@
   $("#priceBtn").click(
     function() {
       var data = null;
+
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
 
@@ -935,9 +936,9 @@
       });
 
       xhr.open("GET", "https://api.coinmarketcap.com/v1/ticker/ethereum/");
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("Authorization", "Bearer 5f4a09dd-cb09-4bd2-856c-878830c67fdf");
       xhr.setRequestHeader("cache-control", "no-cache");
-      xhr.setRequestHeader("Postman-Token", "e3587500-beed-4c16-8e53-c32c1be72ef2");
+      //xhr.setRequestHeader("Postman-Token", "00c43537-68d4-4d50-a813-d2a42caab349");
 
       xhr.send(data);
     }
