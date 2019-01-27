@@ -936,9 +936,8 @@
       });
 
       xhr.open("GET", "https://api.coinmarketcap.com/v1/ticker/ethereum/");
-      xhr.setRequestHeader("Authorization", "Bearer 5f4a09dd-cb09-4bd2-856c-878830c67fdf");
       xhr.setRequestHeader("cache-control", "no-cache");
-      //xhr.setRequestHeader("Postman-Token", "00c43537-68d4-4d50-a813-d2a42caab349");
+      xhr.setRequestHeader("Postman-Token", "97fcfc01-8707-4846-91bf-159e12bc9ae0");
 
       xhr.send(data);
     }
