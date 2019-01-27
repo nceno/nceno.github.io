@@ -16337,7 +16337,7 @@ footer {
 .accordion-group-portal {
   overflow: hidden; }
   .accordion-group-portal .accordion.open {
-    background: #f5f5f5; }
+     }
     .accordion-group-portal .accordion.open .accordion-control::after {
       -webkit-transform: rotate(45deg);
       -moz-transform: rotate(45deg);
