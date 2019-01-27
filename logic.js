@@ -926,7 +926,7 @@
     function() {
       var xhr2 = new XMLHttpRequest();
       xhr2.open('GET', 'https://api.coinmarketcap.com/v1/ticker/ethereum/');
-      xhr2.setRequestHeader("Authorization", 'Bearer ' + 'b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c');
+      xhr2.setRequestHeader("Authorization", 'Bearer ' + '5f4a09dd-cb09-4bd2-856c-878830c67fdf');
       xhr2.onload = function() {
        if (xhr2.status === 200) {
           //console.log(xhr2.responseText);
