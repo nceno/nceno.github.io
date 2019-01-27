@@ -739,11 +739,13 @@
       }); 
 
       //creating a goal
-      var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/127);
-      var usdStakeInWei = msgValue.toString();
-      var goalID = web3.utils.randomHex(5);
+
 
       $("#hostBtn").click(function() {
+        setEthPrice();
+        var msgValue = Math.floor($("#stakeDD").val()*1000000000000000000/ethPrice);
+        var usdStakeInWei = msgValue.toString();
+        var goalID = web3.utils.randomHex(5);
         var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
         var trimmed = Math.floor(new Date(start).getTime()/1000000);
         console.log(usdStakeInWei, start, trimmed);
@@ -769,8 +771,11 @@
           }
         );
       });
-
+      var ethPrice;
       function echoGoal(){
+        //get live eth price
+        setEthPrice();
+        //echo modal
         $("#host").tab('show');
         $('#popupCreate').modal('show');        
         $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + 
@@ -779,6 +784,7 @@
       }
 
       function echoJoinedGoal(){
+        setEthPrice();
         var goalid = web3.utils.padRight($("#col[i]").val(),34)
         Nceno.methods.getGoalParams(
           goalid
@@ -790,7 +796,7 @@
               $("#echoSelectedGoal").html(
                 "Details for challenge "+ goalid.slice(0, 12) +
                 ": You commited $" + 
-                Math.floor(result[1]*127/1000000000000000000) + 
+                Math.floor(result[1]*ethPrice/1000000000000000000) + 
                 " to working out for " + 
                 result[0] +
                 "mins " + 
@@ -831,6 +837,7 @@
       $( document ).ready(function() {console.log("refreshed");});
 
       function echoSelectedGoal(){
+        setEthPrice();
         var goalid = web3.utils.padRight($("#chIDtools").val(),34)
         Nceno.methods.getGoalParams(goalid)
         .call({from: web3.eth.defaultAccount},
@@ -840,7 +847,7 @@
               $("#echoSelectedGoal").html(
                 "Details for challenge "+ goalid.slice(0, 12) +
                 ": You commited $" + 
-                Math.floor(result[1]*127/1000000000000000000) + 
+                Math.floor(result[1]*ethPrice/1000000000000000000) + 
                 " to working out for " + 
                 result[0] +
                 "mins " + 
@@ -922,22 +929,22 @@
         xhr.send()
         });//close click(function(){
 
-  var ethPrice
-  $("#priceBtn").click(
-    function() {
+  
+
+    function setEthPrice() {
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
           var resp = JSON.parse(xhr.responseText);
           //var obj = [resp];
           ethPrice = resp[0].price_usd;
-          console.log(this.responseText);
+          //console.log(this.responseText);
           console.log(ethPrice);
         }
       });
       xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
       xhr.send();
     }
-  );              
+             
     /*</script>
     <!-- / app logic -->*/
