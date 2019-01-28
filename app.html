@@ -159,7 +159,7 @@
             <div class="viewport">
               <!-- <div class="image image-overlay image-blur" style="background-image:url(app/assets/images/tp101.jpg)"></div>-->
               <div class="container bg-dark">
-                <div class="row justify-content-center align-items-center vh-70">
+                <div class="row justify-content-center align-items-center vh-80">
                   <div class="col-md-6 col-lg-5">
                     <div class="accordion-group accordion-group-portal bg-dark text-white " data-accordion-group>
                       <div class="accordion open" data-accordion>
@@ -413,6 +413,57 @@
           <div class="tab-pane" id="browse" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-10">
+
+                <div class="col-md-5">
+                  <div class="input-group rounded">
+                    <input type="text" class="form-control px-2" placeholder="Search by challenge ID ..." aria-label="Search challenges">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">Search</button>
+                    </div>
+                  </div>
+                </div>
+                <p>&nbsp;</p>
+              <!--echo -->
+                <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-12">
+                  <h5 class="mb-2 fs-20 font-weight-normal">The challenge you requested: </h5>
+                  <div class="row">
+                    <div class="col">
+                      <div class="table-responsive-md">
+                        <table class="table table-lined" id="leaderboard">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Buy-in</th>
+                              <th scope="col">Duration</th>
+                              <th scope="col">Sessions</th>
+                              <th scope="col">Minutes</th>
+                              <th scope="col">Competitors</th>
+                              <th scope="col">Starting Date</th>
+                              <th scope="col">Host</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>$50</td>
+                              <td>8 wks</td>
+                              <td>4 /wk</td>
+                              <td>45 min</td>
+                              <td>8 </td>
+                              <td>Jan 14</td>
+                              <td>Zoefit91</td>
+                              <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- / echo-->
+
+
                 <h5 class="mb-2 fs-20 font-weight-normal">Here's the challenges that are starting soon: </h5>
                 <div class="row">
                   <div class="col">
