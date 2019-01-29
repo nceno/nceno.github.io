@@ -19,8 +19,7 @@
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
-    "portis": "^1.3.2",
-    "web3": "github:ethereum/web3.js"
+    "@chenfengyuan/datepicker": "^1.0.6",
     "aos": "^2.2.0",
     "bootstrap": "^4.1.3",
     "filterizr": "^1.3.5",
@@ -38,6 +37,7 @@
     "masonry-layout": "^4.2.1",
     "owl.carousel": "^2.3.3",
     "popper.js": "^1.14.1",
+    "portis": "^1.3.2",
     "progressbar.js": "^1.0.1",
     "shufflejs": "^5.1.2",
     "skrollr": "^0.6.26",
@@ -46,6 +46,7 @@
     "typed.js": "^2.0.6",
     "video.js": "^6.7.3",
     "videojs-youtube": "^2.4.1",
-    "vivus": "^0.4.3"
+    "vivus": "^0.4.3",
+    "web3": "github:ethereum/web3.js"
   }
 }
