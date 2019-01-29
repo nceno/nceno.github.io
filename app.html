@@ -139,7 +139,6 @@
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#profile">Profile</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#host">Host</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makeList()">Manage</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#browse">Browse</a>
@@ -220,132 +219,7 @@
             </div>
           </div>
         <!-- / sign in -->
-
-        <!-- profile -->
-          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-8">             
-                <div class="boxed scaling bg-dark text-white">
-                  <h5><b style="color:#ccff00;">Zoe16</b>: 
-                  <span id="typed"></span>
-                  <div id="typed-strings">
-                   <p><b>6</b> challenges</p>
-                    <p><b>82%</b> success</p>. 
-                    <p><b>$12.82</b> lost</p> 
-                    <p><b>$75.30</b> gained</p> 
-                    <p><b>$62.48</b> net profit</p>
-                  </div></h5>
-                  <p>&nbsp;</p>
-                </div>
-                  <form>
-                    <div class="form-group">
-                      <label for="pastChallenges">View one of your past challenges:</label>
-                      <select class="form-control" id="pastChallenges">
-                        <option></option>
-                        <!-- options generated here -->
-                      </select>
-                    </div>
-              </div>
-            </div>
-            <!--echo -->
-                <div class="row justify-content-center">
-                <div class="col-md-12 col-lg-12">
-                  <h5 class="mb-2 fs-20 font-weight-normal">The challenge you selected: </h5>
-                  <div class="row">
-                    <div class="col">
-                      <div class="table-responsive-md">
-                        <table class="table table-lined" id="leaderboard">
-                          <thead class="thead-dark">
-                            <tr>
-                              <th scope="col">Buy-in</th>
-                              <th scope="col">Duration</th>
-                              <th scope="col">Sessions</th>
-                              <th scope="col">Minutes</th>
-                              <th scope="col">Participants</th>
-                              <th scope="col">Starting Date</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>$50</td>
-                              <td>8 wks</td>
-                              <td>4 /wk</td>
-                              <td>45 min</td>
-                              <td>8 </td>
-                              <td>Jan 14</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <!-- / echo--> 
-
-              <!--stats -->
-            <div class="row justify-content-center">
-              <div class="col-md-12 col-lg-12">
-                <h5 class="mb-2 fs-20 font-weight-normal">End-results for this challenge: </h5>
-                <div class="row">
-                  <div class="col">
-                    <div class="table-responsive-md">
-                      <table class="table table-lined" id="leaderboard">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Adherence %</th>
-                            <th scope="col">Participant</th>
-                            <th scope="col">Country</th>
-                            <th scope="col">Profit Claimed $</th>
-                            <th scope="col">Stake Returned $</th>
-                            <th scope="col">ROI %</th>      
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td> 94% </td>
-                            <td>MarkFit</td>
-                            <td>USA</td>
-                            <td>$22.03</td>
-                            <td>$25.10</td>
-                            <td> 94% </td>
-                          </tr>
-                          <tr>
-                            <td style="color:#ccff00;"> 86% </td>
-                            <td style="color:#ccff00;">Zoe16</td>
-                            <td style="color:#ccff00;">Taiwan</td>
-                            <td style="color:#ccff00;">$6.15</td>
-                            <td style="color:#ccff00;">$21.10</td>
-                            <td style="color:#ccff00;"> 55% </td>
-                          </tr>
-                          <tr>
-                            <td> 71% </td>
-                            <td>ZebraFish123</td>
-                            <td>Germany</td>
-                            <td>$8.54</td>
-                            <td>$16.03</td>
-                            <td> 49% </td>
-                          </tr>
-                          <tr>
-                            <td> 68% </td>
-                            <td>Ronnie041</td>
-                            <td>Japan</td>
-                            <td>$11.34</td>
-                            <td>$12.08</td>
-                            <td> 47% </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-              <!-- / stats -->  
-          </div>
-        <!-- / profile -->
-    
+  
         <!-- host -->
           <div class="tab-pane" id="host" role="tabpanel" aria-labelledby="host">
             <div class="row justify-content-center">
@@ -438,15 +312,32 @@
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
+                <h5><b style="color:#ccff00;">Zoe16</b>: 
+                <span id="typed"></span>
+                <div id="typed-strings">
+                 <p><b>6</b> total challenges</p>
+                  <p><b>82%</b> success rate</p>. 
+                  <p><b>$12.82</b> total lost</p> 
+                  <p><b>$75.30</b> total gained</p> 
+                  <p><b>$62.48</b> net profit</p>
+                </div></h5>
+                <p>&nbsp;</p>
+
                 <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats.</h5>
-                  <form>
-                    <div class="form-group">
-                      <label for="chIDtools">Select one of your challenges:</label>
-                      <select class="form-control" id="chIDtools">
-                        <option></option>
-                        <!-- options generated here -->
-                      </select>
-                    </div>
+                <form>
+                <div class="form-group">
+                  <label for="chIDtools">Your Challenges:</label>
+                  <select class="form-control" id="chIDtools">
+                    <optgroup label="Upcoming:"> </optgroup>
+                    <option></option>
+                      <!--upcoming -->
+                    <optgroup label="Active:"> </optgroup>
+                    <!-- active -->
+                    <optgroup label="Completed:"> </optgroup>
+                    <!-- completed -->
+                    <!-- options generated here -->
+                  </select>
+                </div>
               </div>
             </div>
             <!--echo -->
@@ -481,10 +372,10 @@
                       </div>
                     </div>
                   </div>
-                <div class="boxed scaling bg-dark text-white">  
+                  
                   <h5> Challenge status:</h5>  
                   <h5 class="mb-2 fs-20 font-weight-normal">It's <b style="color:#ccff00;">week 5 of 8</b> and you have <b style="color:#ccff00;">4 days left</b> to log <b style="color:#ccff00;">2 more workouts</b> for the week.</h5>
-                </div>
+                
                 <td><button type="button" id="logBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Log</button></td>
                 <td><button type="button" id="claimBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Claim</button></td>
                 <td><button type="button" id="leaderboardBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Leaderboard</button></td>
