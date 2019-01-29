@@ -404,8 +404,10 @@
 
                       <!--new date picker -->
                         <label for="exampleFormControlSelect5">Starting Date:</label> 
-                        <div class="input-group">
-                          <input id="dateChoice" style="color:#ccff00;"  class="form-control docs-date" name="date" placeholder="MM/DD/YYYY" data-toggle="datepicker">
+                        <div class="input-group">                                                  
+                          <button style="color:#ccff00;" id="dateChoice" type="button" class="btn btn-outline-white docs-datepicker-trigger" data-toggle="datepicker" enabled>
+                            <p>Select Date</p>
+                          </button>
                         </div>
                       <!-- / new date picker -->                                                                                            
                       </form>
@@ -415,7 +417,6 @@
                           <label class="form-check-label" for="checker">I've read the <a href="instructions.html">instructions</a> and agree to the <a href="">terms</a>.</label>
                         </div>
                       <button onclick="echoGoal()" class="btn btn-primary" id="createBtn" data-toggle="modal" data-target="#popupCreate">Create this challenge</button>
-                      <button class="btn btn-primary" id="time" >echo time</button>
                   </div>
                 </div>
               </div>
