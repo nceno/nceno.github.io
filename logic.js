@@ -1,7 +1,7 @@
 /*<!--app logic -->
 <script>*/
 
-$('[data-toggle="datepicker"]').datepicker();
+$('[data-toggle="datepicker"]').datepicker({'autoHide': true});
 $("#time").click(function(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   console.log(time);
