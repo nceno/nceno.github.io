@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="app/assets/css/vendor.css" />
     <link rel="stylesheet" href="app/assets/css/style.css" />
 
+    <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133171787-1"></script>
     <script>
@@ -138,6 +141,7 @@
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#profile">Profile</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#host">Host</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makeList()">Manage</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#browse">Browse</a>
@@ -218,6 +222,121 @@
             </div>
           </div>
         <!-- / sign in -->
+
+        <!-- profile -->
+          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-8">             
+                <h5><b style="color:#ccff00;">Zoe16's</b> summary:</h5> 
+                <h5 class="mb-2 fs-20 font-weight-normal">You've completed <b style="color:#ccff00;">6 challenges</b> so far, with <b style="color:#ccff00;">82% success</b>. <br> You've <b style="color:#ccff00;">lost $12.82</b> from skipping workouts, <br>but <b style="color:#ccff00;">gained $75.30</b> from others' losses, <br>resulting in a <b style="color:#ccff00;">$62.48 net profit</b>.</h5>
+                  <form>
+                    <div class="form-group">
+                      <label for="pastChallenges">View one of your past challenges:</label>
+                      <select class="form-control" id="pastChallenges">
+                        <option></option>
+                        <!-- options generated here -->
+                      </select>
+                    </div>
+              </div>
+            </div>
+            <!--echo -->
+                <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-12">
+                  <h5 class="mb-2 fs-20 font-weight-normal">The challenge you selected: </h5>
+                  <div class="row">
+                    <div class="col">
+                      <div class="table-responsive-md">
+                        <table class="table table-lined" id="leaderboard">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Buy-in</th>
+                              <th scope="col">Duration</th>
+                              <th scope="col">Sessions</th>
+                              <th scope="col">Minutes</th>
+                              <th scope="col">Participants</th>
+                              <th scope="col">Starting Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>$50</td>
+                              <td>8 wks</td>
+                              <td>4 /wk</td>
+                              <td>45 min</td>
+                              <td>8 </td>
+                              <td>Jan 14</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- / echo--> 
+
+              <!--stats -->
+            <div class="row justify-content-center">
+              <div class="col-md-12 col-lg-12">
+                <h5 class="mb-2 fs-20 font-weight-normal">End-results for this challenge: </h5>
+                <div class="row">
+                  <div class="col">
+                    <div class="table-responsive-md">
+                      <table class="table table-lined" id="leaderboard">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Adherence %</th>
+                            <th scope="col">Participant</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Profit Claimed $</th>
+                            <th scope="col">Stake Returned $</th>
+                            <th scope="col">ROI %</th>      
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td> 94% </td>
+                            <td>MarkFit</td>
+                            <td>USA</td>
+                            <td>$22.03</td>
+                            <td>$25.10</td>
+                            <td> 94% </td>
+                          </tr>
+                          <tr>
+                            <td style="color:#ccff00;"> 86% </td>
+                            <td style="color:#ccff00;">Zoe16</td>
+                            <td style="color:#ccff00;">Taiwan</td>
+                            <td style="color:#ccff00;">$6.15</td>
+                            <td style="color:#ccff00;">$21.10</td>
+                            <td style="color:#ccff00;"> 55% </td>
+                          </tr>
+                          <tr>
+                            <td> 71% </td>
+                            <td>ZebraFish123</td>
+                            <td>Germany</td>
+                            <td>$8.54</td>
+                            <td>$16.03</td>
+                            <td> 49% </td>
+                          </tr>
+                          <tr>
+                            <td> 68% </td>
+                            <td>Ronnie041</td>
+                            <td>Japan</td>
+                            <td>$11.34</td>
+                            <td>$12.08</td>
+                            <td> 47% </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+              <!-- / stats -->  
+          </div>
+        <!-- / profile -->
     
         <!-- host -->
           <div class="tab-pane" id="host" role="tabpanel" aria-labelledby="host">
@@ -284,6 +403,7 @@
                             <option>5000</option>
                           </select>
                         </div>
+                        <input id="datepicker" width="276" />
                         <div class="form-group">
                           <label for="exampleFormControlSelect1">Starting time:</label>
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
@@ -353,7 +473,7 @@
                       </div>
                     </div>
                   </div>
-                <h5 class="mb-2 fs-20 font-weight-normal">It's <spam style="color:#ccff00;">week 5 of 8</spam> and you have <span style="color:#ccff00;">4 days left</span> to log <span style="color:#ccff00;">2 more workouts</span> for the week.</h5>
+                <h5 class="mb-2 fs-20 font-weight-normal">It's <b style="color:#ccff00;">week 5 of 8</b> and you have <b style="color:#ccff00;">4 days left</b> to log <b style="color:#ccff00;">2 more workouts</b> for the week.</h5>
                 <td><button type="button" id="logBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Log</button></td>
                 <td><button type="button" id="claimBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Claim</button></td>
                 <td><button type="button" id="leaderboardBtn" class="btn btn-primary" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Leaderboard</button></td>
@@ -375,7 +495,8 @@
                             <th scope="col">Participant</th>
                             <th scope="col">Country</th>
                             <th scope="col">Profit Claimed $</th>
-                            <th scope="col">Stake Returned $</th>      
+                            <th scope="col">Stake Returned $</th>
+                            <th scope="col">ROI %</th>      
                           </tr>
                         </thead>
                         <tbody>
@@ -385,6 +506,7 @@
                             <td>USA</td>
                             <td>$22.03</td>
                             <td>$25.10</td>
+                            <td> 94% </td>
                           </tr>
                           <tr>
                             <td style="color:#ccff00;"> 86% </td>
@@ -392,20 +514,23 @@
                             <td style="color:#ccff00;">Taiwan</td>
                             <td style="color:#ccff00;">$6.15</td>
                             <td style="color:#ccff00;">$21.10</td>
+                            <td style="color:#ccff00;"> 55% </td>
                           </tr>
                           <tr>
                             <td> 71% </td>
                             <td>ZebraFish123</td>
                             <td>Germany</td>
-                            <td>-$8.54</td>
+                            <td>$8.54</td>
                             <td>$16.03</td>
+                            <td> 49% </td>
                           </tr>
                           <tr>
                             <td> 68% </td>
                             <td>Ronnie041</td>
                             <td>Japan</td>
-                            <td>-$11.34</td>
+                            <td>$11.34</td>
                             <td>$12.08</td>
+                            <td> 47% </td>
                           </tr>
                         </tbody>
                       </table>
@@ -1002,6 +1127,12 @@
 
         <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/portis/dist/bundle.min.js"></script>
+
+        <script>
+          $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+          });
+        </script>
 
       <script src="logic.js"></script>
     <!-- / scripts -->  
