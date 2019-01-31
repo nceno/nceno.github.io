@@ -1066,7 +1066,7 @@ var config = {
       }
     };
 window.onload = function() {
-  var ctx = $("#canvas").getContext('2d');
+  var ctx = document.getElementById('canvas').getContext('2d');
   window.myLine = new Chart(ctx, config);
 };
 //</script>
