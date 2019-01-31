@@ -697,21 +697,18 @@ var Nceno = new web3.eth.Contract([
           "type": "event"
         }], '0xed2bcfbe945ae7de0eb480510ff7290b223929ae');
 
-               console.log(Nceno);
-              
-
-              
-              $("#createBtn").hide();
-              //show create button only if user agrees to terms
-              $("#checker").on('click', function() {
-                if($("#checker").is(':checked')) {
-                  $("#createBtn").show();
-                  
-                } else {
-                  $("#createBtn").hide();
-                  
-                }
-              });
+console.log(Nceno);
+$("#createBtn").hide();
+//show create button only if user agrees to terms
+$("#checker").on('click', function() {
+if($("#checker").is(':checked')) {
+  $("#createBtn").show();
+  
+} else {
+  $("#createBtn").hide();
+  
+}
+});
 
 //call fitbit api with user creds
 //getting the access token from url
