@@ -969,9 +969,9 @@ function updateEthPrice() {
 var config = {
       type: 'line',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
         datasets: [{
-          label: 'dataset - individual point sizes',
+          label: 'Locked stake %',
           data: [
             randomScalingFactor(),
             randomScalingFactor(),
@@ -987,7 +987,7 @@ var config = {
           borderDash: [5, 5],
           pointRadius: [2, 4, 6, 18, 0, 12, 20],
         },{
-          label: 'dataset - large pointHitRadius',
+          label: 'Lost stake $',
           data: [
             randomScalingFactor(),
             randomScalingFactor(),
