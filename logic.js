@@ -1039,15 +1039,15 @@ var config = {
               display: true,
               labelString: 'Value'
             }
+          }],
+          gridlines: [{
+          display: true,
+          color: '#848484'
           }]
         },
         title: {
           display: true,
           text: 'Weekly payouts'
-        },
-        gridlines: {
-          display: true,
-          color: '#a00b0b'
         }
       }
     };
