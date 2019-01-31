@@ -372,10 +372,7 @@ var config1 = {
         }
       }
     };
-window.onload = function() {
-  var ctx1 = document.getElementById('canvas1').getContext('2d');
-  window.myLine = new Chart(ctx1, config1);
-};
+
 //</script>
 // end chart1
 
@@ -466,10 +463,7 @@ var config2 = {
         }
       }
     };
-window.onload = function() {
-  var ctx2 = document.getElementById('canvas2').getContext('2d');
-  window.myLine = new Chart(ctx2, config2);
-};
+
 //</script>
 // end chart2
 
@@ -561,8 +555,14 @@ var config3 = {
       }
     };
 window.onload = function() {
+  var ctx1 = document.getElementById('canvas1').getContext('2d');
+  window.myLine1 = new Chart(ctx1, config1);
+
+  var ctx2 = document.getElementById('canvas2').getContext('2d');
+  window.myLine2 = new Chart(ctx2, config2);
+
   var ctx3 = document.getElementById('canvas3').getContext('2d');
-  window.myLine = new Chart(ctx3, config3);
+  window.myLine3 = new Chart(ctx3, config3);
 };
 //</script>
 // end chart3
