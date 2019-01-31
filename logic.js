@@ -971,23 +971,6 @@ var config = {
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
-          label: 'dataset - big points',
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: window.chartColors.red,
-          borderColor: window.chartColors.red,
-          fill: false,
-          borderDash: [5, 5],
-          pointRadius: 15,
-          pointHoverRadius: 10,
-        }, {
           label: 'dataset - individual point sizes',
           data: [
             randomScalingFactor(),
@@ -1003,22 +986,7 @@ var config = {
           fill: false,
           borderDash: [5, 5],
           pointRadius: [2, 4, 6, 18, 0, 12, 20],
-        }, {
-          label: 'dataset - large pointHoverRadius',
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: window.chartColors.green,
-          borderColor: window.chartColors.green,
-          fill: false,
-          pointHoverRadius: 30,
-        }, {
+        },{
           label: 'dataset - large pointHitRadius',
           data: [
             randomScalingFactor(),
@@ -1061,7 +1029,7 @@ var config = {
         },
         title: {
           display: true,
-          text: 'Chart.js Line Chart - Different point sizes'
+          text: 'Your profits for this challenge'
         }
       }
     };
