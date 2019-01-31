@@ -7377,7 +7377,10 @@ a.text-cyan:hover, a.text-cyan:focus {
   color: #117a8b !important; }
 
 .text-white {
-  color: #fff !important; }
+  color: #ccff00 !important; }
+
+.text-nceno{
+  color: #ccff00;}
 
 a.text-white:hover, a.text-white:focus {
   color: #e6e6e6 !important; }
