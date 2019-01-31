@@ -841,7 +841,7 @@ function makeList(){
   }
 }
 
-$( document ).ready(function() {console.log("refreshed");});
+//$( document ).ready(function() {console.log("refreshed");});
 function echoSelectedGoal(){
   updateEthPrice();
   var goalid = web3.utils.padRight($("#chIDtools").val(),34)
@@ -981,8 +981,8 @@ var config = {
             randomScalingFactor(),
             randomScalingFactor()
           ],
-          backgroundColor: window.chartColors.blue,
-          borderColor: window.chartColors.blue,
+          backgroundColor: '#ccff00',
+          borderColor: '#ccff00',
           fill: false,
           borderDash: [5, 5],
           pointRadius: [2, 4, 6, 18, 0, 12, 20],
