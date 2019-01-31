@@ -302,16 +302,14 @@ window.onload = function() {
 
 
 
-  $.getJSON("https://api.ipstack.com/check?access_key=e2d79e5f7dfb7a441a78286a3967b7d9&format=1", function(data) {
-    var countryName = data.country_name;
-    var timezone = data.time_zone;
-    var flag = data.country_flag;
-    console.log("Country Name: " + countryName);
-    console.log("Time Zone: " + timezone);
-    console.log("Flag URL: " + flag);
-  });
+$.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
+  var countryName = data.country_name;
+  var timezone = data.time_zone.offset;
+  var flag = data.flag;
+  console.log("Country Name: " + countryName);
+  console.log("Time Zone: " + timezone);
+  console.log("Flag URL: " + flag);
+});             
 
-
-             
 /*</script>
 <!-- / app logic -->*/
