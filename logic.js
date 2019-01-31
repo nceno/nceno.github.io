@@ -950,7 +950,7 @@ function updateEthPrice() {
 
 //chart1
 //<script>
-
+window.onload = function() {
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -988,7 +988,7 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
+}
 //</script>
 // end chart1
              
