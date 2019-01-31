@@ -940,11 +940,12 @@ function updateEthPrice() {
       var resp = JSON.parse(xhr.responseText);
       //var obj = [resp];
       ethPrice = resp[0].price_usd;
-      //console.log(this.responseText);
+      console.log(this.responseText);
       console.log(ethPrice);
     }
   });
-  xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
+  //xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
+  xhr.open("GET", "https://crossorigin.me/https://api.coinmarketcap.com/v1/ticker/ethereum/");
   xhr.send();
 }
 
