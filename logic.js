@@ -162,7 +162,7 @@ function makeList(){
   }
 }
 
-//$( document ).ready(function() {console.log("refreshed");});
+
 function echoSelectedGoal(){
   updateEthPrice();
   var goalid = web3.utils.padRight($("#chIDtools").val(),34)
@@ -566,6 +566,22 @@ window.onload = function() {
 };
 //</script>
 // end chart3
+
+
+
+$( document ).ready(function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        $.getJSON('http://ws.geonames.org/countryCode', {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            type: 'JSON'
+        }, function(result) {
+            console.log(result.countryName);
+        });
+    });
+  }​;
+});
              
 /*</script>
 <!-- / app logic -->*/
