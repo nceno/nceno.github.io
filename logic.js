@@ -979,6 +979,13 @@ var config = {
             randomScalingFactor(),
             randomScalingFactor(),
             randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
             randomScalingFactor()
           ],
           backgroundColor: '#ccff00',
@@ -989,6 +996,13 @@ var config = {
         },{
           label: 'Competitor success rate',
           data: [
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
             randomScalingFactor(),
             randomScalingFactor(),
             randomScalingFactor(),
@@ -1016,7 +1030,7 @@ var config = {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Month'
+              labelString: 'Week'
             }
           }],
           yAxes: [{
