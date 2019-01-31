@@ -1049,11 +1049,10 @@ var config = {
         }
       }
     };
-
-    window.onload = function() {
-      var ctx = document.getElementById('canvas').getContext('2d');
-      window.myLine = new Chart(ctx, config);
-    };
+window.onload = function() {
+  var ctx = $("#canvas").getContext('2d');
+  window.myLine = new Chart(ctx, config);
+};
 //</script>
 // end chart1
              
