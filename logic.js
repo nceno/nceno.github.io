@@ -997,8 +997,8 @@ var config = {
             randomScalingFactor(),
             randomScalingFactor()
           ],
-          backgroundColor: window.chartColors.yellow,
-          borderColor: window.chartColors.yellow,
+          backgroundColor: '#f442b3',
+          borderColor: '#f442b3',
           fill: false,
           pointHitRadius: 20,
         }]
