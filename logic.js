@@ -1044,8 +1044,8 @@ var config = {
         title: {
           display: true,
           text: 'Weekly payouts'
-        }
-        gridlines:{
+        },
+        gridlines: {
           display: true,
           color: '#494949'
         }
