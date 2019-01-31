@@ -992,7 +992,7 @@ var config = {
           borderColor: '#ccff00',
           fill: false,
           borderDash: [5, 5],
-          pointRadius: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
+          pointRadius: [1, 2.5, 3.5, 2.5, 4.5, 7.5, 5, 1.5, 4, 9, 5.5, 3.5],
         },{
           label: 'Competitor success rate %',
           data: [
