@@ -302,7 +302,7 @@ window.onload = function() {
 
 
 
-  $.getJSON("http://api.ipstack.com/check?access_key=e2d79e5f7dfb7a441a78286a3967b7d9&format=1", function(data) {
+  $.getJSON("https://api.ipstack.com/check?access_key=e2d79e5f7dfb7a441a78286a3967b7d9&format=1", function(data) {
     var countryName = data.country_name;
     var timezone = data.time_zone;
     var flag = data.country_flag;
