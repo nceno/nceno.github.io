@@ -1047,7 +1047,7 @@ var config = {
         },
         gridlines: {
           display: true,
-          color: '#494949'
+          color: '#a00b0b'
         }
       }
     };
