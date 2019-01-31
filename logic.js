@@ -994,7 +994,7 @@ var config = {
           borderDash: [5, 5],
           pointRadius: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
         },{
-          label: 'Competitor success rate',
+          label: 'Competitor success rate %',
           data: [
             randomScalingFactor(),
             randomScalingFactor(),
