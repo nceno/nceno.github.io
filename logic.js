@@ -985,9 +985,9 @@ var config = {
           borderColor: '#ccff00',
           fill: false,
           borderDash: [5, 5],
-          pointRadius: [2, 4, 6, 18, 0, 12, 20],
+          pointRadius: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
         },{
-          label: 'Lost stake $',
+          label: 'Competitor success rate',
           data: [
             randomScalingFactor(),
             randomScalingFactor(),
@@ -1029,7 +1029,7 @@ var config = {
         },
         title: {
           display: true,
-          text: 'Your profits for this challenge'
+          text: 'Weekly payouts'
         }
       }
     };
