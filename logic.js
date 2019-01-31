@@ -569,19 +569,17 @@ window.onload = function() {
 
 
 
-$( document ).ready(function() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        $.getJSON('http://ws.geonames.org/countryCode', {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            type: 'JSON'
-        }, function(result) {
-            console.log(result.countryName);
-        });
-    });
-  }​;
-});
+
+  $.getJSON("http://api.ipstack.com/check?access_key=e2d79e5f7dfb7a441a78286a3967b7d9&format=1", function(data) {
+    var countryName = data.country_name;
+    var timezone = data.time_zone;
+    var flag = data.country_flag;
+    console.log("Country Name: " + countryName);
+    console.log("Time Zone: " + timezone);
+    console.log("Flag URL: " + flag);
+  });
+
+
              
 /*</script>
 <!-- / app logic -->*/
