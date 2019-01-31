@@ -16187,7 +16187,7 @@ footer {
   .text-white .accordion-group .accordion:not(:first-child) {
     margin-top: 2px; }
   .text-white .accordion-group .accordion:hover {
-    background-color: rgba(255, 255, 255, 0.1); }
+    background-color: rgba(255, 255, 255, 0.05); }
 
 .text-white .accordion-group .accordion-control h5 {
   color: inherit; }
