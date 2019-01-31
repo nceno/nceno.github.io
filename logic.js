@@ -713,15 +713,15 @@ var Nceno = new web3.eth.Contract([
                 }
               });
 
-              //call fitbit api with user creds
-              //getting the access token from url
-              var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
-              // get the userID
-              var fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-              var userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
-              //log them
-              console.log(access_token);
-              console.log(fitbitUser);
+//call fitbit api with user creds
+//getting the access token from url
+var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
+// get the userID
+var fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+var userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
+//log them
+console.log(access_token);
+console.log(fitbitUser);
               
 //creating a competitor account
 $("#makeAcctBtn").click(function() {
@@ -950,45 +950,110 @@ function updateEthPrice() {
 
 //chart1
 //<script>
-//window.onload = function() {
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+var config = {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(204, 255, 0, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+          label: 'dataset - big points',
+          data: [
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor()
+          ],
+          backgroundColor: window.chartColors.red,
+          borderColor: window.chartColors.red,
+          fill: false,
+          borderDash: [5, 5],
+          pointRadius: 15,
+          pointHoverRadius: 10,
+        }, {
+          label: 'dataset - individual point sizes',
+          data: [
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor()
+          ],
+          backgroundColor: window.chartColors.blue,
+          borderColor: window.chartColors.blue,
+          fill: false,
+          borderDash: [5, 5],
+          pointRadius: [2, 4, 6, 18, 0, 12, 20],
+        }, {
+          label: 'dataset - large pointHoverRadius',
+          data: [
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor()
+          ],
+          backgroundColor: window.chartColors.green,
+          borderColor: window.chartColors.green,
+          fill: false,
+          pointHoverRadius: 30,
+        }, {
+          label: 'dataset - large pointHitRadius',
+          data: [
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor()
+          ],
+          backgroundColor: window.chartColors.yellow,
+          borderColor: window.chartColors.yellow,
+          fill: false,
+          pointHitRadius: 20,
         }]
-    },
-    options: {
+      },
+      options: {
+        responsive: true,
+        legend: {
+          position: 'bottom',
+        },
+        hover: {
+          mode: 'index'
+        },
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Month'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Value'
+            }
+          }]
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Line Chart - Different point sizes'
         }
-    }
-});
-//}
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('canvas').getContext('2d');
+      window.myLine = new Chart(ctx, config);
+    };
 //</script>
 // end chart1
              
