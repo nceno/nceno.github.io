@@ -1045,6 +1045,10 @@ var config = {
           display: true,
           text: 'Weekly payouts'
         }
+        gridlines:{
+          display: true,
+          color: '#494949'
+        }
       }
     };
 window.onload = function() {
