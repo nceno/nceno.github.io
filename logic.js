@@ -933,7 +933,7 @@ xhr.onload = function() {
   xhr.send()
 });//close click(function(){
 
-function updateEthPrice() {
+/*function updateEthPrice() {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
@@ -944,8 +944,23 @@ function updateEthPrice() {
       console.log(ethPrice);
     }
   });
-  //xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
-  xhr.open("GET", "https://crossorigin.me/https://api.coinmarketcap.com/v1/ticker/ethereum/");
+  xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
+
+  xhr.send();
+}*/
+
+function updateEthPrice() {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      var resp = JSON.parse(xhr.responseText);
+      //var obj = [resp];
+      ethPrice = resp.USD;
+      console.log(this.responseText);
+      console.log(ethPrice);
+    }
+  });
+  xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
   xhr.send();
 }
 
