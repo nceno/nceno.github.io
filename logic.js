@@ -311,5 +311,18 @@ $.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
   console.log("Flag URL: " + flag);
 });             
 
+
+$(document).ready(function() {
+      $('[role="range"]').rangeslider({
+          polyfill : false,
+          onInit : function() {
+              this.output = $( '[role="input-range"]' ).html( this.$element.val() );
+          },
+          onSlide : function( position, value ) {
+              this.output.html( value );
+          }
+      });
+  });
+
 /*</script>
 <!-- / app logic -->*/
