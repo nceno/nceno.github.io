@@ -1,3 +1,5 @@
+$('.ui-slider-handle').draggable();
+
 $(document).ready(function() {
   $("#slider").slider({
       animate: true,
