@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="app/assets/css/style.css" />
 
     <link  href="app/datepicker/dist/datepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="app/assets/css/sliders.css" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133171787-1"></script>
@@ -229,6 +230,22 @@
                     <h5 class="mb-2 fs-20 font-weight-normal">Host a new challenge</h5>
                       <form>
                         <div class="form-group">
+
+                          <div class="price-slider">
+                            <h4 class="great">Amount</h4>
+                            <span>Minimum $10 is required</span>
+                            <div class="col-sm-12">
+                              <div id="slider"></div>
+                            </div>
+                          </div>
+                          <div class="price-slider">
+                            <h4 class="great">Duration</h4>
+                            <span>Minimum 1 day is required</span>
+                            <div class="col-sm-12">
+                              <div id="slider2"></div>
+                            </div>
+                          </div>
+
                           <label for="exampleFormControlInput3">Minutes per exercise session:</label>
                           <select class="form-control" id="activeMinsDD">
                             <option>20</option>
@@ -1335,6 +1352,7 @@
       <script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
       <script src="utils.js"></script>
+      <script src="sliders.js"></script>
       <script src="w3.js"></script>
       <script src="abi.js"></script>
       <script src="chartdata.js"></script>
