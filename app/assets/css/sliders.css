@@ -15,7 +15,7 @@ body {
 	border: 1px solid #bdc3c7;
 	background: #e1e1e1;
 	color: #222222;
-	margin-top: 4px;
+	margin-top: 20px;
 }
 
 .ui-slider .ui-slider-handle {
@@ -48,8 +48,8 @@ body {
 
 .ui-state-default,
 .ui-widget-content .ui-state-default {
-	border: 1px solid #f9f9f9;
-	background: #3498db;
+	
+	background: #ccff00;
 }
 
 .ui-slider-horizontal .ui-slider-handle {
@@ -74,10 +74,10 @@ body {
 }
 
 h4.great {
-	background: #00ac98;
+	background: #ccff00;
 	margin: 0 0 25px -60px;
 	padding: 7px 15px;
-	color: #ffffff;
+	color: #000000;
 	font-size: 18px;
 	font-weight: 600;
 	border-radius: 5px;
@@ -114,7 +114,7 @@ h4.great {
 .price-slider span {
 	font-weight: 200;
 	display: inline-block;
-	color: #7f8c8d;
+	color: #000000;
 	font-size: 13px;
 }
 
@@ -161,6 +161,7 @@ h4.great {
 .price-form label {
 	font-weight: 200;
 	font-size: 21px;
+	color: #000000;
 }
 
 img.payment {
