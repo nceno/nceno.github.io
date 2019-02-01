@@ -16176,15 +16176,6 @@ footer {
     -moz-transition-delay: 0s;
     transition-delay: 0s; }
 
-.rangeslider__handle {
-  width: 42px;
-  height: 42px;
-}
-
-output {
-  display: block;
-  font-size: 3em;
-}
 
 .accordion-content {
   overflow: hidden; }

@@ -312,18 +312,8 @@ $.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
 });             
 
 
-//custom slider javascript
-$(function() {
-  var output = document.querySelectorAll('output')[0];
 
-  $(document).on('input', 'input[type="range"]', function(e) {
-    output.innerHTML = e.currentTarget.value;
-  });
 
-  $('input[type=range]').rangeslider({
-    polyfill: false
-  });
-});
 
 /*</script>
 <!-- / app logic -->*/
