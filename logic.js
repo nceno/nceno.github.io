@@ -296,7 +296,10 @@ window.onload = function() {
   var ctx3 = document.getElementById('canvas3').getContext('2d');
   window.myLine3 = new Chart(ctx3, config3);
 
-  $("#slider").roundSlider();
+  $("#slider1").roundSlider();
+  $("#slider2").roundSlider();
+  $("#slider3").roundSlider();
+  $("#slider4").roundSlider();
 };
 //</script>
 // end chart3
