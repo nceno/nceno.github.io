@@ -297,8 +297,8 @@ window.onload = function() {
   window.myLine3 = new Chart(ctx3, config3);
 
   $("#appearance1").roundSlider({
-    radius: 40,
-    width: 10,
+    radius: 80,
+    width: 14,
     handleSize: "24,12",
     handleShape: "square",
     sliderType: "min-range",
