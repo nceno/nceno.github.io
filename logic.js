@@ -295,6 +295,8 @@ window.onload = function() {
 
   var ctx3 = document.getElementById('canvas3').getContext('2d');
   window.myLine3 = new Chart(ctx3, config3);
+
+  $("#slider").roundSlider();
 };
 //</script>
 // end chart3
@@ -311,7 +313,7 @@ $.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
   console.log("Flag URL: " + flag);
 });             
 
-
+$("#slider").roundSlider();
 
 
 
