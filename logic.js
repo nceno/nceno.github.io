@@ -307,7 +307,7 @@ window.onload = function() {
     step: 5,
     value: 45,
     sliderType: "min-range",
-    tooltipFormat: "tooltipVal2"
+    tooltipFormat: "tooltipVal1"
   });
   $("#slider2").roundSlider();
   $("#slider3").roundSlider();
@@ -316,8 +316,20 @@ window.onload = function() {
 //</script>
 // end chart3
 
-function tooltipVal2(args) {
+function tooltipVal1(args) {
     return args.value + " mins";
+}
+
+function tooltipVal2(args) {
+    return args.value + "x per week";
+}
+
+function tooltipVal3(args) {
+    return "for "+args.value + " weeks";
+}
+
+function tooltipVal4(args) {
+    return "$"+args.value + " stake";
 }
 
 
