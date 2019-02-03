@@ -336,13 +336,13 @@ window.onload = function() {
     tooltipFormat: "tooltipVal3"
   });
   $("#slider4").roundSlider({
-    editableTooltip: false,
+    editableTooltip: true,
     radius: 80,
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
     min: 10,
-    max: 1000,
+    max: 300,
     step: 1,
     value: 55,
     sliderType: "min-range",
