@@ -298,7 +298,7 @@ window.onload = function() {
 
   $("#slider1").roundSlider({
     editableTooltip: false,
-    radius: 70,
+    radius: 75,
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
@@ -311,7 +311,7 @@ window.onload = function() {
   });
   $("#slider2").roundSlider({
     editableTooltip: false,
-    radius: 70,
+    radius: 75,
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
@@ -324,7 +324,7 @@ window.onload = function() {
   });
   $("#slider3").roundSlider({
     editableTooltip: false,
-    radius: 70,
+    radius: 75,
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
@@ -337,7 +337,7 @@ window.onload = function() {
   });
   $("#slider4").roundSlider({
     editableTooltip: false,
-    radius: 70,
+    radius: 75,
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
