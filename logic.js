@@ -309,9 +309,45 @@ window.onload = function() {
     sliderType: "min-range",
     tooltipFormat: "tooltipVal1"
   });
-  $("#slider2").roundSlider();
-  $("#slider3").roundSlider();
-  $("#slider4").roundSlider();
+  $("#slider2").roundSlider({
+    editableTooltip: false,
+    radius: 80,
+    width: 14,
+    handleSize: "24,12",
+    handleShape: "square",
+    min: 2,
+    max: 7,
+    step: 1,
+    value: 3,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal2"
+  });
+  $("#slider3").roundSlider({
+    editableTooltip: false,
+    radius: 80,
+    width: 14,
+    handleSize: "24,12",
+    handleShape: "square",
+    min: 2,
+    max: 12,
+    step: 2,
+    value: 6,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal3"
+  });
+  $("#slider4").roundSlider({
+    editableTooltip: false,
+    radius: 80,
+    width: 14,
+    handleSize: "24,12",
+    handleShape: "square",
+    min: 10,
+    max: 1000,
+    step: 1,
+    value: 55,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal4"
+  });
 };
 //</script>
 // end chart3
