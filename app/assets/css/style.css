@@ -40,23 +40,76 @@
   --font-family-sans-serif: "Rubik", sans-serif;
   --font-family-monospace: "Roboto Mono", monospace; }
 
-.rs-range-color  {
+#slider1 .rs-range-color  {
     background-color: #f442b3;
 }
-.rs-path-color  {
+#slider1 .rs-path-color  {
     background-color: #151515;
 }
-.rs-handle  {
+#slider1 .rs-handle  {
     background-color: #ccff00;
 }
-.rs-border  {
+#slider1 .rs-border  {
     border-color: #151515;
 }
 
-.rs-bg-color {
+#slider1 .rs-bg-color {
     background-color: #151515;
 }
 
+
+#slider2 .rs-range-color  {
+    background-color: #f442b3;
+}
+#slider2 .rs-path-color  {
+    background-color: #151515;
+}
+#slider2 .rs-handle  {
+    background-color: #ccff00;
+}
+#slider2 .rs-border  {
+    border-color: #151515;
+}
+
+#slider2 .rs-bg-color {
+    background-color: #151515;
+}
+
+
+#slider3 .rs-range-color  {
+    background-color: #f442b3;
+}
+#slider3 .rs-path-color  {
+    background-color: #151515;
+}
+#slider3 .rs-handle  {
+    background-color: #ccff00;
+}
+#slider3 .rs-border  {
+    border-color: #151515;
+}
+
+#slider3 .rs-bg-color {
+    background-color: #151515;
+}
+
+
+#slider4 .rs-range-color  {
+    background-color: #f442b3;
+}
+#slider4 .rs-path-color  {
+    background-color: #151515;
+}
+#slider4 .rs-handle  {
+    background-color: #ccff00;
+}
+#slider4 .rs-border  {
+    border-color: #151515;
+}
+
+#slider4 .rs-bg-color {
+    background-color: #151515;
+}
 
 *,
 *::before,
