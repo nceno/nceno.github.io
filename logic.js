@@ -365,7 +365,7 @@ function tooltipVal3(args) {
 }
 
 function tooltipVal4(args) {
-    return "$"+args.value + " stake";
+    return "$"+args.value + " at stake";
 }
 
 
