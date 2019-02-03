@@ -296,7 +296,14 @@ window.onload = function() {
   var ctx3 = document.getElementById('canvas3').getContext('2d');
   window.myLine3 = new Chart(ctx3, config3);
 
-  $("#slider1").roundSlider();
+  $("#slider1").roundSlider({
+    radius: 80,
+    width: 14,
+    handleSize: "24,12",
+    handleShape: "square",
+    sliderType: "min-range",
+    value: 28
+  });
   $("#slider2").roundSlider();
   $("#slider3").roundSlider();
   $("#slider4").roundSlider();
