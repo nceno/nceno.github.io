@@ -40,6 +40,20 @@
   --font-family-sans-serif: "Rubik", sans-serif;
   --font-family-monospace: "Roboto Mono", monospace; }
 
+#slider1 .rs-range-color  {
+    background-color: #5673E7;
+}
+#slider1 .rs-path-color  {
+    background-color: #dedede;
+}
+#slider1 .rs-handle  {
+    background-color: #000000;
+}
+#slider1 .rs-border  {
+    border-color: white;
+}
+
+
 *,
 *::before,
 *::after {
