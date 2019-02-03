@@ -306,7 +306,8 @@ window.onload = function() {
     max: 120,
     step: 5,
     value: 45,
-    sliderType: "min-range"
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal2"
   });
   $("#slider2").roundSlider();
   $("#slider3").roundSlider();
@@ -314,6 +315,10 @@ window.onload = function() {
 };
 //</script>
 // end chart3
+
+function tooltipVal2(args) {
+    return args.value + " mins";
+}
 
 
 
