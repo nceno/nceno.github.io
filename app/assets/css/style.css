@@ -53,6 +53,10 @@
     border-color: white;
 }
 
+#slider1 .rs-bg-color {
+    color: transparent;
+}
+
 
 *,
 *::before,
