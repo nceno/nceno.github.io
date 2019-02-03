@@ -41,20 +41,20 @@
   --font-family-monospace: "Roboto Mono", monospace; }
 
 #slider1 .rs-range-color  {
-    background-color: #151515;
+    background-color: #f442b3;
 }
 #slider1 .rs-path-color  {
-    background-color: #f442b3;
+    background-color: #151515;
 }
 #slider1 .rs-handle  {
     background-color: #ccff00;
 }
 #slider1 .rs-border  {
-    border-color: white;
+    border-color: #151515;
 }
 
 #slider1 .rs-bg-color {
-    color: #151515;
+    background-color: #151515;
 }
 
 
