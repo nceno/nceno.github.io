@@ -297,12 +297,16 @@ window.onload = function() {
   window.myLine3 = new Chart(ctx3, config3);
 
   $("#slider1").roundSlider({
+    editableTooltip: false,
     radius: 80,
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
-    sliderType: "min-range",
-    value: 28
+    min: 20,
+    max: 120,
+    step: 5,
+    value: 45,
+    sliderType: "min-range"
   });
   $("#slider2").roundSlider();
   $("#slider3").roundSlider();
