@@ -304,7 +304,7 @@ window.onload = function() {
     handleShape: "square",
     min: 20,
     max: 120,
-    step: 5,
+    step: 1,
     value: 45,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal1"
