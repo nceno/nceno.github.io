@@ -107,11 +107,14 @@ function echoGoal(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   //echo modal
   $("#host").tab('show');
-  $('#popupCreate').modal('show');        
-  $("#goalEcho").html("You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
-  $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
-  $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically at "+ $("#dateChoice").datepicker('getDate', true); +
-  ". The challenge ID is: "+ goalID+".");
+  $('#popupCreate').modal('show');
+
+  $("#goalEcho").html(
+    "You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
+    $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
+    $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically at "+ $("#dateChoice").datepicker('getDate', true) +
+    ". The challenge ID is: "+ goalID+"."
+  );
 }
 
 function echoJoinedGoal(){
