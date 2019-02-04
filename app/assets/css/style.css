@@ -40,74 +40,74 @@
   --font-family-sans-serif: "Rubik", sans-serif;
   --font-family-monospace: "Roboto Mono", monospace; }
 
-#slider1 .rs-range-color  {
+#sliderMins .rs-range-color  {
     background-color: #f442b3;
 }
-#slider1 .rs-path-color  {
+#sliderMins .rs-path-color  {
     background-color: #151515;
 }
-#slider1 .rs-handle  {
+#sliderMins .rs-handle  {
     background-color: #ccff00;
 }
-#slider1 .rs-border  {
+#sliderMins .rs-border  {
     border-color: #151515;
 }
 
-#slider1 .rs-bg-color {
+#sliderMins .rs-bg-color {
     background-color: #151515;
 }
 
 
-#slider2 .rs-range-color  {
+#sliderSes .rs-range-color  {
     background-color: #f442b3;
 }
-#slider2 .rs-path-color  {
+#sliderSes .rs-path-color  {
     background-color: #151515;
 }
-#slider2 .rs-handle  {
+#sliderSes .rs-handle  {
     background-color: #ccff00;
 }
-#slider2 .rs-border  {
+#sliderSes .rs-border  {
     border-color: #151515;
 }
 
-#slider2 .rs-bg-color {
+#sliderSes .rs-bg-color {
     background-color: #151515;
 }
 
 
-#slider3 .rs-range-color  {
+#sliderWks .rs-range-color  {
     background-color: #f442b3;
 }
-#slider3 .rs-path-color  {
+#sliderWks .rs-path-color  {
     background-color: #151515;
 }
-#slider3 .rs-handle  {
+#sliderWks .rs-handle  {
     background-color: #ccff00;
 }
-#slider3 .rs-border  {
+#sliderWks .rs-border  {
     border-color: #151515;
 }
 
-#slider3 .rs-bg-color {
+#sliderWks .rs-bg-color {
     background-color: #151515;
 }
 
 
-#slider4 .rs-range-color  {
+#sliderStake .rs-range-color  {
     background-color: #f442b3;
 }
-#slider4 .rs-path-color  {
+#sliderStake .rs-path-color  {
     background-color: #151515;
 }
-#slider4 .rs-handle  {
+#sliderStake .rs-handle  {
     background-color: #ccff00;
 }
-#slider4 .rs-border  {
+#sliderStake .rs-border  {
     border-color: #151515;
 }
 
-#slider4 .rs-bg-color {
+#sliderStake .rs-bg-color {
     background-color: #151515;
 }
 
