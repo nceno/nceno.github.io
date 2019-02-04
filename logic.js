@@ -2,8 +2,9 @@
 <script>*/
 
 
-var today = new Date();
-$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': today});
+var tomorrow = new Date();
+tomorrow.setDate(currentDate.getDate() + 1);
+$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': tomorrow});
 $("#time").click(function(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   console.log(time);
