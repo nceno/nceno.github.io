@@ -289,6 +289,11 @@ function updateEthPrice() {
 }
 
 
+$("#stuff").click(function() {
+  console.log($('#slider1').val(), $('#slider2').val(), $('#slider3').val(), $('#slider4').val());
+}
+
+
 window.onload = function() {
   var ctx1 = document.getElementById('canvas1').getContext('2d');
   window.myLine1 = new Chart(ctx1, config1);
