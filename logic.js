@@ -65,7 +65,7 @@ $("#makeAcctBtn").click(function() {
 }); 
 
 //creating a goal
-var goalID = web3.utils.randomHex(5);
+var goalID = web3.utils.randomHex(2);
 $("#hostBtn").click(function() {
   updateEthPrice();
   var msgValueHost = Math.floor($("#stakeDD").val()*1000000000000000000/ethPrice);
