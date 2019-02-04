@@ -106,7 +106,7 @@ function echoGoal(){
   $('#popupCreate').modal('show');        
   $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + 
   $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+
-  " weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID.slice(2, 6)+".");
+  " weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID+".");
 }
 
 function echoJoinedGoal(){
