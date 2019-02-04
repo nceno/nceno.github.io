@@ -290,7 +290,7 @@ function updateEthPrice() {
 
 
 $("#stuff").click(function() {
-  console.log($('#slider1').val(), $('#slider2').val(), $('#slider3').val(), $('#slider4').val());
+  console.log($('#slider1').getValue(), $('#slider2').getValue(), $('#slider3').getValue(), $('#slider4').getValue());
 });
 
 
