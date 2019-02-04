@@ -107,9 +107,10 @@ function echoGoal(){
   //echo modal
   $("#host").tab('show');
   $('#popupCreate').modal('show');        
-  $("#goalEcho").html("You're commiting $" + $("#stakeDD").val() + " to working out for " + 
-  $("#activeMinsDD").val() +"mins " + $("#sesPerWkDD").val()+" times per week for "+ $("#wksDD").val()+
-  " weeks, starting automatically at "+ $("#datetimepicker1").data('date') +". The challenge ID is: "+ goalID+".");
+  $("#goalEcho").html("You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
+  $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
+  $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically at "+ $("#dateChoice").val() +
+  ". The challenge ID is: "+ goalID+".");
 }
 
 function echoJoinedGoal(){
@@ -290,9 +291,9 @@ function updateEthPrice() {
 
 
 $("#stuff").click(function() {
-  console.log($("#slider1").roundSlider("getValue"));
+  console.log($("#dateChoice").val());
 });
-
+//$("#sliderMins").roundSlider("getValue")
 
 window.onload = function() {
   var ctx1 = document.getElementById('canvas1').getContext('2d');
@@ -304,7 +305,7 @@ window.onload = function() {
   var ctx3 = document.getElementById('canvas3').getContext('2d');
   window.myLine3 = new Chart(ctx3, config3);
 
-  $("#slider1").roundSlider({
+  $("#sliderMins").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -317,7 +318,7 @@ window.onload = function() {
     sliderType: "min-range",
     tooltipFormat: "tooltipVal1"
   });
-  $("#slider2").roundSlider({
+  $("#sliderSes").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -330,7 +331,7 @@ window.onload = function() {
     sliderType: "min-range",
     tooltipFormat: "tooltipVal2"
   });
-  $("#slider3").roundSlider({
+  $("#sliderWks").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -343,7 +344,7 @@ window.onload = function() {
     sliderType: "min-range",
     tooltipFormat: "tooltipVal3"
   });
-  $("#slider4").roundSlider({
+  $("#sliderStake").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
