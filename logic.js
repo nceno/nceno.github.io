@@ -290,7 +290,7 @@ function updateEthPrice() {
 
 
 $("#stuff").click(function() {
-  console.log(slider1.getValue());
+  console.log($("#slider1").roundSlider("getValue"));
 });
 
 
