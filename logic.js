@@ -37,15 +37,23 @@ if($("#checker").is(':checked')) {
 }
 });
 
-//call fitbit api with user creds
-//getting the access token from url
-var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
-// get the userID
-var fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-var userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
-//log them
-console.log(access_token);
-console.log(fitbitUser);
+var access_token
+var fitbitUser
+var userID
+function(){
+  if (window.location.href = 'https://www.nceno.app/app.html'){fitbitUser = "demoUser"; console.log(fitbitUser);}
+    else{
+      //call fitbit api with user creds
+      //getting the access token from url
+      var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
+      // get the userID
+      var fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+      var userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
+      //log them
+      console.log(access_token);
+      console.log(fitbitUser);
+    }
+}
               
 //creating a competitor account
 $("#makeAcctBtn").click(function() {
