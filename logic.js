@@ -38,7 +38,7 @@ if($("#checker").is(':checked')) {
 });
 
 var access_token
-var fitbitUser = 'demoUser';
+var fitbitUser 
 var userID
 
              
