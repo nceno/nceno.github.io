@@ -357,11 +357,7 @@ window.onload = function() {
     tooltipFormat: "tooltipVal4"
   });
 
-  if (window.location.href = 'https://www.nceno.app/app.html'){
-    fitbitUser = "demoUser"; 
-    console.log(fitbitUser);
-  }
-  else{
+  if (window.location.href != 'https://www.nceno.app/app.html'){
     //call fitbit api with user creds
     //getting the access token from url
     var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
