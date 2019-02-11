@@ -68,8 +68,8 @@ $("#hostBtn").click(function() {
   updateEthPrice();
   var msgValueHost = Math.floor($("#sliderStake").roundSlider("getValue")*1000000000000000000/ethPrice);
   var usdStakeInWei = msgValueHost.toString();
-  var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000 + sign*pad;
-
+  //var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000 + sign*pad;
+  var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
   console.log(
     goalID,
     $("#sliderMins").roundSlider("getValue"),
