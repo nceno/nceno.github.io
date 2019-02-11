@@ -159,6 +159,8 @@ function makeList(){
     $("#chIDtoolsActive").selectric();
     $("#chIDtoolsCompleted").selectric(); 
     var i = 0;
+    var j = 0;
+    var k = 0;
     var goals = new Array();
     //implement this method
     for (i = 0; i < 15; i++){
@@ -172,23 +174,23 @@ function makeList(){
       });    
     }
 
-    for (i = 0; i < 15; i++){
-      Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+    for (j = 0; j < 15; j++){
+      Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
-          goals[i] = result;
-          console.log(goals[i]);
-          $("#chIDtoolsActive").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+          goals[j] = result;
+          console.log(goals[j]);
+          $("#chIDtoolsActive").append('<option>'+ goals[j].slice(0, 12) +'</option>');
           $('#chIDtoolsActive').selectric('refresh');
         }
       });    
     }
     //implement this method 
-    for (i = 0; i < 15; i++){
-      Nceno.methods.getCompletedGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+    for (k = 0; k < 15; k++){
+      Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
-          goals[i] = result;
-          console.log(goals[i]);
-          $("#chIDtoolsCompleted").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+          goals[k] = result;
+          console.log(goals[k]);
+          $("#chIDtoolsCompleted").append('<option>'+ goals[k].slice(0, 12) +'</option>');
           $('#chIDtoolsCompleted').selectric('refresh');
         }
       });    
