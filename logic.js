@@ -155,16 +155,41 @@ var populated = false;
 function makeList(){
   //makes a list of active goals for a user
   if(populated === false){
-    $("#chIDtools").selectric(); 
+    $("#chIDtoolsUpcoming").selectric();
+    $("#chIDtoolsActive").selectric();
+    $("#chIDtoolsCompleted").selectric(); 
     var i = 0;
     var goals = new Array();
+    //implement this method
+    for (i = 0; i < 15; i++){
+      Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != undefined){
+          goals[i] = result;
+          console.log(goals[i]);
+          $("#chIDtoolsUpcoming").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+          $('#chIDtoolsUpcoming').selectric('refresh');
+        }
+      });    
+    }
+
     for (i = 0; i < 15; i++){
       Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
           goals[i] = result;
           console.log(goals[i]);
-          $("#chIDtools").append('<option>'+ goals[i].slice(0, 12) +'</option>');
-          $('#chIDtools').selectric('refresh');
+          $("#chIDtoolsActive").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+          $('#chIDtoolsActive').selectric('refresh');
+        }
+      });    
+    }
+    //implement this method 
+    for (i = 0; i < 15; i++){
+      Nceno.methods.getCompletedGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != undefined){
+          goals[i] = result;
+          console.log(goals[i]);
+          $("#chIDtoolsCompleted").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+          $('#chIDtoolsCompleted').selectric('refresh');
         }
       });    
     }
