@@ -169,11 +169,11 @@ function makeList(){
           goals[i] = result;
           console.log(goals[i]);
           $("#chIDtoolsUpcoming").append('<option>'+ goals[i].slice(0, 8) +'</option>');
-          //$('#chIDtoolsUpcoming').selectric('refresh');
+          $('#chIDtoolsUpcoming').selectric('refresh');
         }
       });    
     }
-
+/*
     for (j = 0; j < 15; j++){
       Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
@@ -194,7 +194,7 @@ function makeList(){
           $('#chIDtoolsCompleted').selectric('refresh');
         }
       });    
-    }
+    }*/
     populated = true;
   }
 }
