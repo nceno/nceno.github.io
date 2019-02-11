@@ -173,6 +173,7 @@ function makeList(){
 }
 
 
+
 function echoSelectedGoal(){
   updateEthPrice();
   var goalid = web3.utils.padRight($("#chIDtools").val(),34)
@@ -201,6 +202,28 @@ function echoSelectedGoal(){
       console.error(error);
     }
   );
+}
+
+function populateDashboard(){
+  var goalid = web3.utils.padRight($("#chIDtools").val(),34)
+  Nceno.methods.getGoalParams(goalid)
+  .call({from: web3.eth.defaultAccount},
+    function(error, result) {
+      if (!error){
+        var tstamp = new Date(result[4]*1000);
+        $("#echStake").html(result[1]);
+        $("#echWks").html(result[3]);
+        $("#echSes").html(result[2]);
+        $("#echMins").html(result[0]);
+        $("#echComp").html(result[6]);
+        $("#echStart").html(tstamp);  
+      }
+      else
+      console.error(error);
+    }
+  );
+
+
 }
 
 $("#claimBtn").click(function() {
@@ -236,7 +259,7 @@ xhr.onload = function() {
     var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
     var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
     var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
-    var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000;
+    var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000 - sign*pad;
 
     console.log(fitbitUser +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
     console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
