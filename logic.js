@@ -66,20 +66,27 @@ $("#makeAcctBtn").click(function() {
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
   updateEthPrice();
-  var msgValueHost = Math.floor($("#stakeDD").val()*1000000000000000000/ethPrice);
+  var msgValueHost = Math.floor($("#sliderStake").roundSlider("getValue")*1000000000000000000/ethPrice);
   var usdStakeInWei = msgValueHost.toString();
+  var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000 + sign*pad;
+
+  console.log(
+    goalID,
+    $("#sliderMins").roundSlider("getValue"),
+    usdStakeInWei,
+    $("#sliderSes").roundSlider("getValue"),
+    $("#sliderWks").roundSlider("getValue"),
+    start,
+    userID);
   
-  var start = moment.unix($("#datetimepicker1").datetimepicker('date'));
-  var trimmed = Math.floor(new Date(start).getTime()/1000000);
-  console.log(usdStakeInWei, start, trimmed);
   //function call:
   Nceno.methods.createGoal(
     goalID,
-    $("#activeMinsDD").val(),
+    $("#sliderMins").roundSlider("getValue"),
     usdStakeInWei,
-    $("#sesPerWkDD").val(),
-    $("#wksDD").val(),
-    trimmed,
+    $("#sliderSes").roundSlider("getValue"),
+    $("#sliderWks").roundSlider("getValue"),
+    start,
     userID
   )
   .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValueHost},
@@ -107,7 +114,7 @@ function echoGoal(){
   $("#goalEcho").html(
     "You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
     $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
-    $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically at "+ $("#dateChoice").datepicker('getDate', true) +
+    $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +
     ". The challenge ID is: "+ goalID+"."
   );
 }
@@ -390,13 +397,18 @@ function tooltipVal4(args) {
 
 
 
-
+var pad;
+var sign;
 $.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
   var countryName = data.country_name;
   var timezone = data.time_zone.offset;
   var flag = data.country_code;
   console.log("Country Name: " + countryName);
   console.log("Time Zone: " + timezone);
+  sign = parseInt(timezone.slice(0, 1)+1);
+  pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
+  //pad = parseInt(timezone.slice(0, 1)+1)
+  console.log(pad);
   console.log("Flag URL: " + flag);
 });             
 
