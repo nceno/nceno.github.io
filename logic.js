@@ -168,7 +168,7 @@ function makeList(){
         if(result != undefined){
           goals[i] = result;
           console.log(goals[i]);
-          $("#chIDtoolsUpcoming").append('<option>'+ goals[i].slice(0, 12) +'</option>');
+          $("#chIDtoolsUpcoming").append('<option>'+ goals[i].slice(0, 8) +'</option>');
           $('#chIDtoolsUpcoming').selectric('refresh');
         }
       });    
@@ -179,7 +179,7 @@ function makeList(){
         if(result != undefined){
           goals[j] = result;
           console.log(goals[j]);
-          $("#chIDtoolsActive").append('<option>'+ goals[j].slice(0, 12) +'</option>');
+          $("#chIDtoolsActive").append('<option>'+ goals[j].slice(0, 8) +'</option>');
           $('#chIDtoolsActive').selectric('refresh');
         }
       });    
@@ -190,7 +190,7 @@ function makeList(){
         if(result != undefined){
           goals[k] = result;
           console.log(goals[k]);
-          $("#chIDtoolsCompleted").append('<option>'+ goals[k].slice(0, 12) +'</option>');
+          $("#chIDtoolsCompleted").append('<option>'+ goals[k].slice(0, 8) +'</option>');
           $('#chIDtoolsCompleted').selectric('refresh');
         }
       });    
