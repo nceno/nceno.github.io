@@ -155,7 +155,7 @@ var populated = false;
 function makeList(){
   //makes a list of active goals for a user
   if(populated === false){
-    $("#chIDtoolsUpcoming").selectric();
+    $("#goalCategories").selectric();
     //$("#chIDtoolsActive").selectric();
     //$("#chIDtoolsCompleted").selectric(); 
     var i = 0;
@@ -168,8 +168,8 @@ function makeList(){
         if(result != undefined){
           goals[i] = result;
           console.log(goals[i]);
-          $("#chIDtoolsUpcoming").append('<option>'+ goals[i].slice(0, 8) +'</option>');
-          $('#chIDtoolsUpcoming').selectric('refresh');
+          $("#goalCategories").append('<option>'+ goals[i].slice(0, 8) +'</option>');
+          $('#goalCategories').selectric('refresh');
         }
       });    
     }
