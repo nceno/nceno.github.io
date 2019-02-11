@@ -89,7 +89,7 @@ $("#hostBtn").click(function() {
     start,
     userID
   )
-  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: msgValueHost},
+  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -210,13 +210,23 @@ function populateDashboard(){
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
+        //echo challenge
         var tstamp = new Date(result[4]*1000);
         $("#echStake").html(result[1]);
         $("#echWks").html(result[3]);
         $("#echSes").html(result[2]);
         $("#echMins").html(result[0]);
         $("#echComp").html(result[6]);
-        $("#echStart").html(tstamp);  
+        $("#echStart").html(tstamp);
+
+        //week by week breakdown
+
+
+        //charts and stats
+
+
+        //leaderboard
+
       }
       else
       console.error(error);
