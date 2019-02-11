@@ -360,10 +360,10 @@ window.onload = function() {
   if (window.location.href != 'https://www.nceno.app/app.html'){
     //call fitbit api with user creds
     //getting the access token from url
-    var access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
+    access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
     // get the userID
-    var fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-    var userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
+    fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+    userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
     //log them
     console.log(access_token);
     console.log(fitbitUser);
