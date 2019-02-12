@@ -151,10 +151,10 @@ function echoJoinedGoal(){
   );
 }
 
-//var populated = false;
+var populated = false;
 function makeList(){
   //makes a list of active goals for a user
-  //if(populated === false){
+  if(populated === false){
     $("#goalCategories").selectric();
     //$("#chIDtoolsActive").selectric();
     //$("#chIDtoolsCompleted").selectric(); 
@@ -197,8 +197,8 @@ function makeList(){
         }
       });    
     }
-    //populated = true;
-  //}
+    populated = true;
+  }
 }
 
 
