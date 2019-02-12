@@ -4,7 +4,8 @@
 
 var first = new Date();
 first.setDate(first.getDate() + 1);
-$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
+//$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
+$('[data-toggle="datepicker"]').datepicker({'autoHide': true});
 $("#time").click(function(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   console.log(time);
@@ -261,8 +262,6 @@ function populateDashboard(){
       console.error(error);
     }
   );
-
-
 }
 
 $("#claimBtn").click(function() {
