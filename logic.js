@@ -165,14 +165,13 @@ function makeList(){
     var goals1 = new Array();
     var goals2 = new Array();
     var goals3 = new Array();
-    //implement this method
-    for (i = 0; i < 15; i++){
-      Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+    
+    for (k = 0; k < 15; k++){
+      Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals1[i] = result;
-          console.log(goals1[i]);
-          $("#upcomingGoals").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
-          //$('#goalCategories').selectric('refresh');
+          goals3[k] = result;
+          console.log(goals3[k]);
+          $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
         }
       });    
     }
@@ -183,21 +182,20 @@ function makeList(){
           goals2[j] = result;
           console.log(goals2[j]);
           $("#activeGoals").append('<option>'+ goals2[j].slice(0, 8) +'</option>');
-          //$('#goalCategories').selectric('refresh');
         }
       });    
     }
-    //implement this method 
-    for (k = 0; k < 15; k++){
-      Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
+    
+    for (i = 0; i < 15; i++){
+      Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals3[k] = result;
-          console.log(goals3[k]);
-          $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
-          
+          goals1[i] = result;
+          console.log(goals1[i]);
+          $("#upcomingGoals").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
         }
       });    
-    }
+    } 
+    
     $('#goalCategories').selectric('refresh');
     populated = true;
   }
