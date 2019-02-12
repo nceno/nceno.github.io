@@ -168,8 +168,8 @@ function makeList(){
     for (i = 0; i < 15; i++){
       Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
-          goals[i] = result;
-          console.log(goals[i]);
+          goals1[i] = result;
+          console.log(goals1[i]);
           $("#upcompingGoals").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
@@ -179,8 +179,8 @@ function makeList(){
     for (j = 0; j < 15; j++){
       Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
-          goals[j] = result;
-          console.log(goals[j]);
+          goals2[j] = result;
+          console.log(goals2[j]);
           $("#activeGoals").append('<option>'+ goals2[j].slice(0, 8) +'</option>');
           //$('#chIDtoolsActive').selectric('refresh');
           $('#goalCategories').selectric('refresh');
@@ -191,8 +191,8 @@ function makeList(){
     for (k = 0; k < 15; k++){
       Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
-          goals[k] = result;
-          console.log(goals[k]);
+          goals3[k] = result;
+          console.log(goals3[k]);
           $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
           //$('#chIDtoolsCompleted').selectric('refresh');
           $('#goalCategories').selectric('refresh');
