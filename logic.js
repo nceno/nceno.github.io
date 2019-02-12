@@ -171,7 +171,7 @@ function makeList(){
           goals1[i] = result;
           console.log(goals1[i]);
           $("#goalCategories").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
+          //$('#goalCategories').selectric('refresh');
         }
       });    
     }
@@ -182,8 +182,7 @@ function makeList(){
           goals2[j] = result;
           console.log(goals2[j]);
           $("#activeGoals").append('<option>'+ goals2[j].slice(0, 8) +'</option>');
-          //$('#chIDtoolsActive').selectric('refresh');
-          $('#goalCategories').selectric('refresh');
+          //$('#goalCategories').selectric('refresh');
         }
       });    
     }
@@ -194,7 +193,6 @@ function makeList(){
           goals3[k] = result;
           console.log(goals3[k]);
           $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
-          //$('#chIDtoolsCompleted').selectric('refresh');
           $('#goalCategories').selectric('refresh');
         }
       });    
