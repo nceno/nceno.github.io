@@ -194,10 +194,11 @@ function makeList(){
           goals3[k] = result;
           console.log(goals3[k]);
           $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
+          
         }
       });    
     }
+    $('#goalCategories').selectric('refresh');
     populated = true;
   }
 }
