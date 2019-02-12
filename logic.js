@@ -156,8 +156,8 @@ function makeList(){
   //makes a list of active goals for a user
   if(populated === false){
     $("#goalCategories").selectric();
-    $("#chIDtoolsActive").selectric();
-    $("#chIDtoolsCompleted").selectric(); 
+    //$("#chIDtoolsActive").selectric();
+    //$("#chIDtoolsCompleted").selectric(); 
     var i = 0;
     var j = 0;
     var k = 0;
@@ -170,7 +170,7 @@ function makeList(){
         if(result != undefined){
           goals[i] = result;
           console.log(goals[i]);
-          $("#goalCategories").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
+          $("#upcompingGoals").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });    
@@ -181,7 +181,7 @@ function makeList(){
         if(result != undefined){
           goals[j] = result;
           console.log(goals[j]);
-          $("#chIDtoolsActive").append('<option>'+ goals2[j].slice(0, 8) +'</option>');
+          $("#activeGoals").append('<option>'+ goals2[j].slice(0, 8) +'</option>');
           //$('#chIDtoolsActive').selectric('refresh');
           $('#goalCategories').selectric('refresh');
         }
@@ -193,7 +193,7 @@ function makeList(){
         if(result != undefined){
           goals[k] = result;
           console.log(goals[k]);
-          $("#chIDtoolsCompleted").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
+          $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
           //$('#chIDtoolsCompleted').selectric('refresh');
           $('#goalCategories').selectric('refresh');
         }
