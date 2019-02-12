@@ -151,7 +151,7 @@ function echoJoinedGoal(){
   );
 }
 
-var populated = false;
+//var populated = false;
 function makeList(){
   //makes a list of active goals for a user
   if(populated === false){
@@ -170,7 +170,7 @@ function makeList(){
         if(result != undefined){
           goals1[i] = result;
           console.log(goals1[i]);
-          $("#upcompingGoals").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
+          $("#goalCategories").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });    
@@ -199,7 +199,7 @@ function makeList(){
         }
       });    
     }
-    populated = true;
+    //populated = true;
   }
 }
 
