@@ -156,31 +156,34 @@ function makeList(){
   //makes a list of active goals for a user
   if(populated === false){
     $("#goalCategories").selectric();
-    //$("#chIDtoolsActive").selectric();
-    //$("#chIDtoolsCompleted").selectric(); 
+    $("#chIDtoolsActive").selectric();
+    $("#chIDtoolsCompleted").selectric(); 
     var i = 0;
     var j = 0;
     var k = 0;
-    var goals = new Array();
+    var goals1 = new Array();
+    var goals2 = new Array();
+    var goals3 = new Array();
     //implement this method
     for (i = 0; i < 15; i++){
       Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
           goals[i] = result;
           console.log(goals[i]);
-          $("#goalCategories").append('<option>'+ goals[i].slice(0, 8) +'</option>');
+          $("#goalCategories").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });    
     }
-/*
+
     for (j = 0; j < 15; j++){
       Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != undefined){
           goals[j] = result;
           console.log(goals[j]);
-          $("#chIDtoolsActive").append('<option>'+ goals[j].slice(0, 8) +'</option>');
+          $("#chIDtoolsActive").append('<option>'+ goals2[j].slice(0, 8) +'</option>');
           //$('#chIDtoolsActive').selectric('refresh');
+          $('#goalCategories').selectric('refresh');
         }
       });    
     }
@@ -190,11 +193,12 @@ function makeList(){
         if(result != undefined){
           goals[k] = result;
           console.log(goals[k]);
-          $("#chIDtoolsCompleted").append('<option>'+ goals[k].slice(0, 8) +'</option>');
-          $('#chIDtoolsCompleted').selectric('refresh');
+          $("#chIDtoolsCompleted").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
+          //$('#chIDtoolsCompleted').selectric('refresh');
+          $('#goalCategories').selectric('refresh');
         }
       });    
-    }*/
+    }
     populated = true;
   }
 }
