@@ -197,7 +197,7 @@ function makeList(){
       });    
     }
     $('#goalCategories').selectric('refresh');
-    populated = true;
+    //populated = true;
   }
 }
 
