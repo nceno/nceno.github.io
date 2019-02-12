@@ -171,7 +171,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i]);
-          $("#goalCategories").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
+          $("#upcomingGoals").append('<option>'+ goals1[i].slice(0, 8) +'</option>');
           //$('#goalCategories').selectric('refresh');
         }
       });    
