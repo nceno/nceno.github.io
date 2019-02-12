@@ -190,7 +190,7 @@ function makeList(){
     //implement this method 
     for (k = 0; k < 15; k++){
       Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != '0x0000000000000000000000000000000000000000000000000000000000000000'){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000){
           goals3[k] = result;
           console.log(goals3[k]);
           $("#completedGoals").append('<option>'+ goals3[k].slice(0, 8) +'</option>');
