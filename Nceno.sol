@@ -17,6 +17,7 @@ contract Nceno {
     bytes32 wearableModel; //fitbit, garmin, apple, xiaomi, samsung, etc.
     bytes32 name;
     bytes32 email;
+    bytes32 flag;
     address walletAdr;
     mapping(uint => goalObject) goalAt; //index of historical goals
       uint goalTotal;
@@ -42,13 +43,14 @@ contract Nceno {
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
-  function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email) external {
+  function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, bytes32 _flag) external {
     require(userExists[_userID] == false);
     competitorObject memory createdCompetitor;
     createdCompetitor.userID = _userID;
     createdCompetitor.wearableModel = _wearableModel;
     createdCompetitor.name = _name;
     createdCompetitor.email = _email;
+    createdCompetitor.flag = _flag;
     createdCompetitor.walletAdr = msg.sender;
 
     //add to registry
@@ -134,7 +136,7 @@ contract Nceno {
     }
   }
     
-  function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint, uint[12], uint){
+  function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
     if(0<=wk && wk<theGoal.wks+1){
@@ -152,9 +154,9 @@ contract Nceno {
         my.bonusTotal+= my.wkBonuses[j];
         totalPay+= my.wkPayouts[j];
       }
-      my.roi =100*(totalPay+my.bonusTotal)/theGoal.stakeWEI;
       
-      return(my.wkPayouts, my.roi, my.lostStake, my.wkBonuses, my.bonusTotal);
+      
+      return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay);
     }
   }
 
