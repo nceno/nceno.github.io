@@ -170,7 +170,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i]);
-          $("#goalCategories").append('<option style = "color:#f442b3">'+ goals1[i].slice(0, 8) +'</option>');
+          $("#goalCategories").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });    
@@ -181,7 +181,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[j] = result;
           console.log(goals2[j]);
-          $("#activeGoals").append('<option><p style = "color:#f442b3">'+ goals2[j].slice(0, 8) +'</p></option>');
+          $("#activeGoals").after('<option>'+ goals2[j].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });    
@@ -192,7 +192,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals3[k] = result;
           console.log(goals3[k]);
-          $("#completedGoals").append('<option style = "color:#f442b3">'+ goals3[k].slice(0, 8) +'</option>');
+          $("#completedGoals").after('<option>'+ goals3[k].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });    
