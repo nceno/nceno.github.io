@@ -207,7 +207,7 @@ function makePage(){
 }
 
 function makeLeaderboard(){
-  $('#leaderboard').find('tbody:last').append('<td> 94% </td> <td>BenShape84</td> <td><img src="https://ipdata.co/flags/us.png"></td> <td>$22.03</td> <td>$25.10</td> <td>$1.56</td>');
+  $$('#leaderboard tr:last').after('<td> 94% </td> <td>BenShape84</td> <td><img src="https://ipdata.co/flags/us.png"></td> <td>$22.03</td> <td>$25.10</td> <td>$1.56</td>');
 }
 
 
