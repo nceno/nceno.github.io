@@ -59,7 +59,7 @@ contract Nceno {
 
     //fire event: _userID made a profile with params: @1, @2, ...
     bytes32 _eventName = 0x50726f66696c65437265617465640000;
-    emit ProfileCreated(_eventName, _userID, _wearableModel, _name, _email, msg.sender);
+    emit ProfileCreated(_eventName, _userID, _wearableModel, _name, _email, _flag, msg.sender);
   }
   
   event ProfileCreated(bytes32 _eventName, bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, address _walletAdr);

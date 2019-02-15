@@ -59,7 +59,8 @@ $("#makeAcctBtn").click(function() {
       else
       console.error(error);
     }
-  );
+  ).on('confirmation', function(confNumber, receipt){ console.log("success!") })
+    .on('error', function(error){console.log(error);});
 }); 
 
 //creating a goal
