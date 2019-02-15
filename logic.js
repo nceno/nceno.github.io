@@ -17,8 +17,8 @@ function showPortis() {
   // will only open the portis menu
   web3.currentProvider.showPortis(() => {
     web3.eth.getAccounts().then(e => { 
-      //web3.eth.defaultAccount = e[0];
-      web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
+      web3.eth.defaultAccount = e[0];
+      //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
     });
   })
@@ -31,12 +31,10 @@ $("#createBtn").hide();
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
 if($("#checker").is(':checked')) {
-  $("#createBtn").show();
-  
+  $("#createBtn").show(); 
 } else {
-  $("#createBtn").hide();
-  
-}
+  $("#createBtn").hide(); 
+  }
 });
 
 var access_token
