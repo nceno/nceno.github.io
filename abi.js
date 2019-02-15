@@ -604,6 +604,11 @@ var Nceno = new web3.eth.Contract([
         },
         {
           "indexed": false,
+          "name": "_flag",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
           "name": "_walletAdr",
           "type": "address"
         }
@@ -744,4 +749,4 @@ var Nceno = new web3.eth.Contract([
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0x1E159b4a990034BA715BEC574800e37E6aFD12B7');
+  ], '0x5e81717eCD826D1c3501026e4e76425Bca94539A');

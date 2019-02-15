@@ -62,7 +62,7 @@ contract Nceno {
     emit ProfileCreated(_eventName, _userID, _wearableModel, _name, _email, _flag, msg.sender);
   }
   
-  event ProfileCreated(bytes32 _eventName, bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, address _walletAdr);
+  event ProfileCreated(bytes32 _eventName, bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, bytes32 _flag, address _walletAdr);
 
   struct stampList{
     mapping(uint256 => bool) stampExists; //checks if a timestamp exists. each user in a goal will have one of these
