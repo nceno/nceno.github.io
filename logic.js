@@ -4,8 +4,8 @@
 
 var first = new Date();
 first.setDate(first.getDate() + 1);
-//$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
-$('[data-toggle="datepicker"]').datepicker({'autoHide': true});
+$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
+//$('[data-toggle="datepicker"]').datepicker({'autoHide': true});
 $("#time").click(function(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   console.log(time);
@@ -207,7 +207,21 @@ function makePage(){
 }
 
 function makeLeaderboard(){
-  $('#leaderboard tr:last').after('<td> 94% </td> <td>BenShape84</td> <td><img src="https://ipdata.co/flags/us.png"></td> <td>$22.03</td> <td>$25.10</td> <td>$1.56</td>');
+  Nceno.methods.getGoalParams(goalid)
+  .call({from: web3.eth.defaultAccount},
+    function(error, result) {
+      if (!error){
+        
+      }
+      else
+      console.error(error);
+    }
+  );
+  var i=0;
+  for(i = 0; i < 10; i++){
+    if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined)
+      $('#leaderboard tr:last').after('<td>'+ adherence '</td> <td>'+ username +'</td> <td><img src="https://ipdata.co/flags/'+flag+'.png"></td> <td>'+bonus+'</td> <td>'+returned+'</td> <td>'+lost+'</td>');
+  }
 }
 
 

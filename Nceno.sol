@@ -116,7 +116,7 @@ contract Nceno {
     uint totalAtStake;
   }
  
-    function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint){
+    function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
     if(0<=wk && wk<theGoal.wks+1){
@@ -132,7 +132,7 @@ contract Nceno {
         my.totalAtStake += partitions[theGoal.wks/2 -1][p]*theGoal.stakeWEI*theGoal.competitorCount/100;
       }  
                  
-      return(my.adherenceRate, my.totalAtStake);
+      return(my.adherenceRate, my.totalAtStake, successCount);
     }
   }
     
@@ -160,6 +160,11 @@ contract Nceno {
     }
   }
 
+  function getPotentialPayout(bytes32 _goalID)external view returns(uint){
+    goalObject memory theGoal = goalRegistry[_goalID];
+    uint wk = (now - theGoal.startTime)/604800;
+    return(partitions[goalRegistry[_goalID].wks/2 -1][wk]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk));
+  }
   //get the leaderboard
   function getLeaderBoard(bytes32 _goalID) external view returns(bytes32[10], uint[12][10]){
     goalObject memory theGoal = goalRegistry[_goalID];
