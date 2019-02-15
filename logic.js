@@ -50,8 +50,8 @@ $("#makeAcctBtn").click(function() {
     userID,
     web3.utils.padRight(web3.utils.toHex($("#wearable").val()),34),
     web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
-    web3.utils.padRight(web3.utils.toHex($("#email").val()),34)
-  )
+    web3.utils.padRight(web3.utils.toHex($("#email").val()),34),
+    web3.utils.padRight(web3.utils.toHex(flag),34))
   .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
     function(error, result) {
       if (!error){
