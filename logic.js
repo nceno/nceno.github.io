@@ -17,7 +17,8 @@ function showPortis() {
   // will only open the portis menu
   web3.currentProvider.showPortis(() => {
     web3.eth.getAccounts().then(e => { 
-      web3.eth.defaultAccount = e[0];
+      //web3.eth.defaultAccount = e[0];
+      web3.eth.defaultAccount = 0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a;
       console.log("default: " + web3.eth.defaultAccount);
     });
   })
@@ -206,7 +207,7 @@ function makePage(){
   makeLeaderboard();
 }
 
-function makeLeaderboard(){
+/*function makeLeaderboard(){
   Nceno.methods.getGoalParams(goalid)
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
@@ -222,7 +223,7 @@ function makeLeaderboard(){
     if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined)
       $('#leaderboard tr:last').after('<td>'+ adherence '</td> <td>'+ username +'</td> <td><img src="https://ipdata.co/flags/'+flag+'.png"></td> <td>'+bonus+'</td> <td>'+returned+'</td> <td>'+lost+'</td>');
   }
-}
+}*/
 
 
 function echoSelectedGoal(){
