@@ -1,5 +1,54 @@
 var Nceno = new web3.eth.Contract([
     {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_goalID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPotentialPayout",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_userID",
+          "type": "bytes32"
+        },
+        {
+          "name": "_wearableModel",
+          "type": "bytes32"
+        },
+        {
+          "name": "_name",
+          "type": "bytes32"
+        },
+        {
+          "name": "_email",
+          "type": "bytes32"
+        },
+        {
+          "name": "_flag",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createCompetitor",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -61,6 +110,10 @@ var Nceno = new web3.eth.Contract([
         },
         {
           "name": "email",
+          "type": "bytes32"
+        },
+        {
+          "name": "flag",
           "type": "bytes32"
         },
         {
@@ -257,11 +310,11 @@ var Nceno = new web3.eth.Contract([
         },
         {
           "name": "",
-          "type": "uint256"
+          "type": "uint256[12]"
         },
         {
           "name": "",
-          "type": "uint256[12]"
+          "type": "uint256"
         },
         {
           "name": "",
@@ -316,32 +369,6 @@ var Nceno = new web3.eth.Contract([
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_userID",
-          "type": "bytes32"
-        },
-        {
-          "name": "_wearableModel",
-          "type": "bytes32"
-        },
-        {
-          "name": "_name",
-          "type": "bytes32"
-        },
-        {
-          "name": "_email",
-          "type": "bytes32"
-        }
-      ],
-      "name": "createCompetitor",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -473,6 +500,10 @@ var Nceno = new web3.eth.Contract([
       ],
       "name": "getMyGoalStats1",
       "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
         {
           "name": "",
           "type": "uint256"
@@ -713,4 +744,4 @@ var Nceno = new web3.eth.Contract([
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0xB25c265D14F00f8d1E471e16E590cEff682Fe39C');
+  ], '0x1E159b4a990034BA715BEC574800e37E6aFD12B7');
