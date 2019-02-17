@@ -101,6 +101,7 @@ $("#makeAcctBtn").click(function() {
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
   updateEthPrice();
+  var instantPrice = web3.utils.toWei(ethPrice, 'ether')
   var msgValueHost = Math.floor($("#sliderStake").roundSlider("getValue")*1000000000000000000/ethPrice);
   var usdStakeInWei = msgValueHost.toString();
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
@@ -113,7 +114,7 @@ $("#hostBtn").click(function() {
     $("#sliderWks").roundSlider("getValue"),
     start,
     userID,
-    web3.utils.toWei(ethPrice, 'ether')
+    instantPrice
   )
   .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
