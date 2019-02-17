@@ -222,7 +222,7 @@ function makeList(){
 
 function makePage(){
   makeList();
-  makeLeaderboard();
+  //makeLeaderboard();
 }
 
 /*function makeLeaderboard(){
