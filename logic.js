@@ -115,7 +115,7 @@ $("#hostBtn").click(function() {
     userID,
     web3.utils.toWei(ethPrice, 'ether')
   )
-  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
