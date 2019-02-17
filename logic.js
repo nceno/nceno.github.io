@@ -21,6 +21,7 @@ function showPortis() {
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
       $("#portisBtn").hide();
+      $("portisSuccess").html("Your address: "+web3.eth.defaultAccount);
     });
   })
 }
@@ -38,6 +39,8 @@ $("#logLoader").hide();
 $("#logSuccess").hide();
 $("#claimLoader").hide();
 $("#claimSuccess").hide();
+$("fitbitSuccess").hide();
+$("portisSuccess").hide();
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
@@ -120,7 +123,7 @@ $("#hostBtn").click(function() {
   ).on('confirmation', function(confNumber, receipt){ 
     $("#createLoader").hide();
     $("#createSuccess").show();
-    console.log("challenge creation successful!") })
+    console.log("challenge creation successful!"); })
     .on('error', function(error){console.log(error);});;
 });
 
@@ -488,6 +491,7 @@ window.onload = function() {
     console.log(access_token);
     console.log(fitbitUser);
     $("#fitbitBtn").hide();
+    $("fitbitSuccess").html("Your device ID: "+ fitbitUser);
   }
 };
 //</script>
