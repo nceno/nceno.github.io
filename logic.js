@@ -26,6 +26,22 @@ function showPortis() {
   })
 }
 
+function checkUserbase(){
+  Nceno.methods.userExists(
+    userID
+  )
+  .call({from: web3.eth.defaultAccount},
+    function(error, result) {
+      if (!error){
+        
+        $("#makeAcctBtn").hide();
+      }
+      else
+      console.error(error);
+    }
+  );
+}
+
 //ABI would go here ----->>
 
 console.log(Nceno);
@@ -54,6 +70,7 @@ if($("#checker").is(':checked')) {
 var access_token
 var fitbitUser 
 var userID
+
 
              
 //creating a competitor account
