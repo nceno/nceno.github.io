@@ -49,44 +49,6 @@ var Nceno = new web3.eth.Contract([
       "type": "function"
     },
     {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_goalID",
-          "type": "bytes32"
-        },
-        {
-          "name": "_activeMins",
-          "type": "uint256"
-        },
-        {
-          "name": "_stakeWEI",
-          "type": "uint256"
-        },
-        {
-          "name": "_sesPerWk",
-          "type": "uint256"
-        },
-        {
-          "name": "_wks",
-          "type": "uint256"
-        },
-        {
-          "name": "_startTime",
-          "type": "uint256"
-        },
-        {
-          "name": "_userID",
-          "type": "bytes32"
-        }
-      ],
-      "name": "createGoal",
-      "outputs": [],
-      "payable": true,
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
       "constant": true,
       "inputs": [
         {
@@ -179,6 +141,48 @@ var Nceno = new web3.eth.Contract([
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_goalID",
+          "type": "bytes32"
+        },
+        {
+          "name": "_activeMins",
+          "type": "uint256"
+        },
+        {
+          "name": "_stakeWEI",
+          "type": "uint256"
+        },
+        {
+          "name": "_sesPerWk",
+          "type": "uint256"
+        },
+        {
+          "name": "_wks",
+          "type": "uint256"
+        },
+        {
+          "name": "_startTime",
+          "type": "uint256"
+        },
+        {
+          "name": "_userID",
+          "type": "bytes32"
+        },
+        {
+          "name": "_ethPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "createGoal",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
       "type": "function"
     },
     {
@@ -658,6 +662,11 @@ var Nceno = new web3.eth.Contract([
           "indexed": false,
           "name": "_userID",
           "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "_ethPrice",
+          "type": "uint256"
         }
       ],
       "name": "GoalCreated",
@@ -749,4 +758,4 @@ var Nceno = new web3.eth.Contract([
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0xc9AcFCDC51558Ce90167158a1087D11AE1821439');
+  ], '0x05A99E7E25b4223aC6A1A55aF38e6227b699463D');
