@@ -44,7 +44,7 @@ contract Nceno {
   }
 
   function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, bytes32 _flag) external {
-    require(userExists[_userID] == false);
+    require(userExists[_userID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
     createdCompetitor.userID = _userID;
     createdCompetitor.wearableModel = _wearableModel;
@@ -206,7 +206,7 @@ contract Nceno {
 
   //spawn a new goal with intended parameters
   function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID) external payable {
-    require(msg.value >= _stakeWEI && userExists[_userID] == true);
+    require(msg.value >= _stakeWEI && userExists[_userID] == true, "User does not exist, or else message value is less than intended stake.");
     goalObject memory createdGoal; 
     //initialize params
     createdGoal.goalID = _goalID;
@@ -236,7 +236,7 @@ contract Nceno {
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
-    require(now < goalRegistry[_goalID].startTime && msg.value == goalRegistry[_goalID].stakeWEI); //time check and stake check
+    require(now < goalRegistry[_goalID].startTime && msg.value == goalRegistry[_goalID].stakeWEI, "Challenge already started, or else message value is less than intended stake."); //time check and stake check
       
     //add self to goal
     goalRegistry[_goalID].isCompetitor[_userID] = true;
@@ -257,7 +257,7 @@ contract Nceno {
   //simple payout function when someone logs a workout
   function simplePayout(bytes32 _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
     //can only call if in challenge, and challenge is active
-    require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && (goalRegistry[_goalID].startTime < now) && (now < goalRegistry[_goalID].startTime + goalRegistry[_goalID].wks*1 weeks));
+    require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && (goalRegistry[_goalID].startTime < now) && (now < goalRegistry[_goalID].startTime + goalRegistry[_goalID].wks*1 weeks), "wallet-user mismatch, user is not competitor, goal has not started, or goal has already finished.");
     
     uint wk = (now - goalRegistry[_goalID].startTime)/604800;
     
@@ -272,6 +272,7 @@ contract Nceno {
       bytes32 _eventName = 0x5061796f757452656465656d65644279;
       emit PayoutRedeemedBy(_eventName, _userID, _goalID, wk, payout);
     }
+    else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
 
   event PayoutRedeemedBy(bytes32 _eventName, bytes32 _userID, bytes32 _goalID, uint _wk, uint _payout);
@@ -280,7 +281,10 @@ contract Nceno {
   function claimBonus(bytes32 _goalID, bytes32 _userID) external{
     //must have 100% adherence for the previous week, and can only claim once.
     
-    require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && goalRegistry[_goalID].successes[_userID][(now-goalRegistry[_goalID].startTime)/604800-1]==goalRegistry[_goalID].sesPerWk && goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0);
+    require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && 
+      goalRegistry[_goalID].successes[_userID][(now-goalRegistry[_goalID].startTime)/604800-1]==goalRegistry[_goalID].sesPerWk && 
+      goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0,
+      "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
     
     uint wk = (now-goalRegistry[_goalID].startTime)/604800;
     uint winners;
@@ -297,6 +301,7 @@ contract Nceno {
         }
       }
     }
+    
     msg.sender.transfer(pot/(2*winners)); //initiate the payout
     goalRegistry[_goalID].bonusWasClaimed[_userID][wk-1] = 1; //protect against bonus double spending
     goalRegistry[_goalID].potWk[wk-1] = pot; //write to the global goal stats
