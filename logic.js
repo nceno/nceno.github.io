@@ -1,11 +1,7 @@
-/*<!--app logic -->
-<script>*/
-
-
+//datepicker initializer
 var first = new Date();
 first.setDate(first.getDate() + 1);
 $('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
-//$('[data-toggle="datepicker"]').datepicker({'autoHide': true});
 $("#time").click(function(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   console.log(time);
@@ -13,6 +9,7 @@ $("#time").click(function(){
 
 //web3 definition would go here ----->>
 
+//signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
   // will only open the portis menu
   web3.currentProvider.showPortis(() => {
@@ -26,6 +23,8 @@ function showPortis() {
   })
 }
 
+//helper function that will hide the create account button if the user already made an account.
+//i.e. if a fitbit ID already has a competitor object associated to it, this function hides the create button.
 function checkUserbase(){
   Nceno.methods.userExists(
     userID
@@ -42,11 +41,11 @@ function checkUserbase(){
   );
 }
 
-//ABI would go here ----->>
-
+//sanity check for debugging
 console.log(Nceno);
-$("#createBtn").hide();
 
+//hides all the loaders
+$("#createBtn").hide();
 $("#acctLoader").hide();
 $("#acctSuccess").hide();
 $("#createLoader").hide();
@@ -67,13 +66,12 @@ if($("#checker").is(':checked')) {
   }
 });
 
+//global variables for when a user auths with fitbit
 var access_token
 var fitbitUser 
 var userID
-
-
              
-//creating a competitor account
+//creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
   Nceno.methods.createCompetitor(
     userID,
@@ -99,24 +97,14 @@ $("#makeAcctBtn").click(function() {
     .on('error', function(error){console.log(error);});
 }); 
 
-//creating a goal
+//creating a goal from the slider values and live ethereum price
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
   updateEthPrice();
   var msgValueHost = Math.floor($("#sliderStake").roundSlider("getValue")*1000000000000000000/ethPrice);
   var usdStakeInWei = msgValueHost.toString();
-  //var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000 + sign*pad;
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
-  console.log(
-    goalID,
-    $("#sliderMins").roundSlider("getValue"),
-    usdStakeInWei,
-    $("#sliderSes").roundSlider("getValue"),
-    $("#sliderWks").roundSlider("getValue"),
-    start,
-    userID);
-  
-  //function call:
+
   Nceno.methods.createGoal(
     goalID,
     $("#sliderMins").roundSlider("getValue"),
@@ -124,7 +112,8 @@ $("#hostBtn").click(function() {
     $("#sliderSes").roundSlider("getValue"),
     $("#sliderWks").roundSlider("getValue"),
     start,
-    userID
+    userID,
+    web3.utils.toWei(ethPrice, 'ether')
   )
   .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
@@ -144,6 +133,7 @@ $("#hostBtn").click(function() {
     .on('error', function(error){console.log(error);});;
 });
 
+//function that displays in a modal, a summary of the goal you are setting.
 var ethPrice;
 function echoGoal(){
   //get live eth price
@@ -161,6 +151,7 @@ function echoGoal(){
   );
 }
 
+//needs work
 function echoJoinedGoal(){
   updateEthPrice();
   var goalid = web3.utils.padRight($("#col[i]").val(),34)
@@ -193,9 +184,9 @@ function echoJoinedGoal(){
   );
 }
 
+//an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;
 function makeList(){
-  //makes a list of active goals for a user
   if(populated === false){
     $("#goalCategories").selectric();
  
@@ -242,6 +233,7 @@ function makeList(){
   }
 }
 
+//helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
   makeList();
   //makeLeaderboard();
@@ -265,7 +257,7 @@ function makePage(){
   }
 }*/
 
-
+// needs work... not even sure.
 function echoSelectedGoal(){
   updateEthPrice();
   var goalid = web3.utils.padRight($("#chIDtools").val(),34)
@@ -296,6 +288,7 @@ function echoSelectedGoal(){
   );
 }
 
+//gets the selected goal so it can populate the manage page. needs work. 
 function populateDashboard(){
   var goalid = web3.utils.padRight($("#chIDtools").val(),34)
   Nceno.methods.getGoalParams(goalid)
@@ -326,6 +319,7 @@ function populateDashboard(){
   );
 }
 
+//button to claim lost stake from previous week. needs work.
 $("#claimBtn").click(function() {
   var goalid = web3.utils.padRight($("#chIDtools").val(),34);
   //function call:
@@ -350,14 +344,13 @@ $("#claimBtn").click(function() {
     .on('error', function(error){console.log(error);});;
 });
 
+//button to log active minutes for a payout. Needs work. Could probably simplify the api get request..
 $("#logBtn").click(function() {
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
 xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
 xhr.onload = function() {
  if (xhr.status === 200) {
-    //console.log(xhr.responseText);
-    //document.write(xhr.responseText);
     
     var data = JSON.parse(xhr.responseText);
     var obj = [data];
@@ -375,7 +368,6 @@ xhr.onload = function() {
     var sessionMins = fatBurn + cardio + peak;
     //var sessionMins = 32; //debug only
     console.log("total session minutes to be logged: "+sessionMins);
-
   
     Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#chIDtools").val(),34)).send(
       {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
@@ -397,6 +389,8 @@ xhr.onload = function() {
   xhr.send()
 });//close click(function(){
 
+
+//old code to get live eth price that was killed by a cors violation.
 /*function updateEthPrice() {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
@@ -413,6 +407,7 @@ xhr.onload = function() {
   xhr.send();
 }*/
 
+//gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
 function updateEthPrice() {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
@@ -428,13 +423,10 @@ function updateEthPrice() {
   xhr.send();
 }
 
-
-$("#stuff").click(function() {
-  console.log($("#dateChoice").val());
-});
-//$("#sliderMins").roundSlider("getValue")
-
+//not sure if using window.onload correctly... but,
+//this initializes a bunch of stuff as soon as the user navigates to the app page.
 window.onload = function() {
+  //charts
   var ctx1 = document.getElementById('canvas1').getContext('2d');
   window.myLine1 = new Chart(ctx1, config1);
 
@@ -444,6 +436,7 @@ window.onload = function() {
   var ctx3 = document.getElementById('canvas3').getContext('2d');
   window.myLine3 = new Chart(ctx3, config3);
 
+  //sliders
   $("#sliderMins").roundSlider({
     editableTooltip: false,
     radius: 75,
@@ -497,6 +490,7 @@ window.onload = function() {
     tooltipFormat: "tooltipVal4"
   });
 
+  //delays extraction of the fitbit creds until the user has authed.
   if (window.location.href != 'https://www.nceno.app/app.html'){
     //call fitbit api with user creds
     //getting the access token from url
@@ -511,27 +505,22 @@ window.onload = function() {
     $("#fitbitSuccess").html("Your device ID: "+ fitbitUser);
   }
 };
-//</script>
-// end chart3
 
+//chart tool tips
 function tooltipVal1(args) {
     return args.value + " mins";
 }
-
 function tooltipVal2(args) {
     return args.value + "x per week";
 }
-
 function tooltipVal3(args) {
     return "for "+args.value + " weeks";
 }
-
 function tooltipVal4(args) {
     return "$"+args.value + " at stake";
 }
 
-
-
+//global variables that will sync logged minutes to UTC time from the local time.
 var pad;
 var sign;
 var flag;
@@ -547,8 +536,3 @@ $.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
   console.log(pad);
   console.log("Flag URL: " + flag);
 });             
-
-
-
-/*</script>
-<!-- / app logic -->*/

@@ -75,7 +75,8 @@ contract Nceno {
     uint stakeWEI;
     uint sesPerWk; //exercise days per week (1,2,3,4,5,6,7)
     uint wks; //duration (2,4,6,8,10,12) in weeks
-    uint256 startTime;
+    uint startTime;
+    uint ethPrice; //reminder: in the app, the dollar value is converted to wei as if it were ether, not USD, and stored here.
         
     mapping(bytes32 => uint[12]) successes; //number of successes in a given week by a given competitor (simplePayout)
     mapping(bytes32 => stampList) timeLog; //timestamps used by a user, for each user
@@ -205,7 +206,7 @@ contract Nceno {
   }
 
   //spawn a new goal with intended parameters
-  function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID) external payable {
+  function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint _startTime, bytes32 _userID, uint _ethPrice) external payable {
     require(msg.value >= _stakeWEI && userExists[_userID] == true, "User does not exist, or else message value is less than intended stake.");
     goalObject memory createdGoal; 
     //initialize params
@@ -229,10 +230,10 @@ contract Nceno {
 
     //fire event: _userID created _goalID with params: @1, @2, ...
     bytes32 _eventName = 0x476f616c437265617465640000000000;
-    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID);
+    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
   }
   
-  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID);
+  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID, uint _ethPrice);
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
