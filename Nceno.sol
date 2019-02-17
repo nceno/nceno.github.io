@@ -76,7 +76,7 @@ contract Nceno {
     uint sesPerWk; //exercise days per week (1,2,3,4,5,6,7)
     uint wks; //duration (2,4,6,8,10,12) in weeks
     uint startTime;
-    uint ethPrice; //reminder: in the app, the dollar value is converted to wei as if it were ether, not USD, and stored here.
+    uint ethPrice; //reminder: in the app, the dollar value is multiplied by 100 and stored here.
         
     mapping(bytes32 => uint[12]) successes; //number of successes in a given week by a given competitor (simplePayout)
     mapping(bytes32 => stampList) timeLog; //timestamps used by a user, for each user
