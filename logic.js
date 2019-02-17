@@ -20,6 +20,7 @@ function showPortis() {
       web3.eth.defaultAccount = e[0];
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
+      $("#portisBtn").hide();
     });
   })
 }
@@ -73,7 +74,8 @@ $("#makeAcctBtn").click(function() {
   ).on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
     $("#acctSuccess").show();
-    console.log("account creation successful!") })
+    console.log("account creation successful!");
+    $("#makeAcctBtn").hide(); })
     .on('error', function(error){console.log(error);});
 }); 
 
@@ -485,6 +487,7 @@ window.onload = function() {
     //log them
     console.log(access_token);
     console.log(fitbitUser);
+    $("#fitbitBtn").hide();
   }
 };
 //</script>
