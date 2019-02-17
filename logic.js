@@ -54,12 +54,15 @@ $("#makeAcctBtn").click(function() {
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
+        $("#acctLoader").show();
         console.log(result);
       }
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ console.log("success!") })
+  ).on('confirmation', function(confNumber, receipt){ 
+    $("#acctLoader").hide();
+    console.log("account creation successful!") })
     .on('error', function(error){console.log(error);});
 }); 
 
@@ -95,12 +98,16 @@ $("#hostBtn").click(function() {
       if (!error){
         $("#hostBtn").hide();
         $("#cancelBtn").hide();
+        $("#createLoader").show();
         console.log(result);
       }
       else
       console.error(error);
     }
-  );
+  ).on('confirmation', function(confNumber, receipt){ 
+    $("#createLoader").hide();
+    console.log("challenge creation successful!") })
+    .on('error', function(error){console.log(error);});;
 });
 
 var ethPrice;
@@ -296,12 +303,16 @@ $("#claimBtn").click(function() {
     function(error, result) {
       if (!error){
         $("#claimBtn").hide();
+        $("#claimLoader").show();
         console.log(result);
       }
       else
       console.error(error);
     }
-  );
+  ).on('confirmation', function(confNumber, receipt){ 
+    $("#claimLoader").hide();
+    console.log("lost stake claim was successful!") })
+    .on('error', function(error){console.log(error);});;
 });
 
 $("#logBtn").click(function() {
@@ -336,11 +347,15 @@ xhr.onload = function() {
         function(error, result) {
           if (!error){
             $("#logBtn").hide();
+            $("#logLoader").show();
             console.log(result);
           }
           else
           console.error(error);
-        });
+        }).on('confirmation', function(confNumber, receipt){ 
+          $("#logLoader").hide();
+          console.log("activity minutes logged successfully!") })
+    .on('error', function(error){console.log(error);});;
   }
   };
   xhr.send()

@@ -212,6 +212,7 @@
                                 </select>
                               </div>
                               <a style="color:black;" class="btn btn-primary btn-block" id="makeAcctBtn">Create Nceno profile</a>
+                              <img id="acctLoader" src="app/assets/images/loader.svg">
                             </form>
                           </div>
                         </div>
@@ -269,15 +270,15 @@
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col text-center">
-                <h5><b style="color:#ccff00;">Zoe16</b>'s stats to-date:<br> 
+                <h5><b style="color:#ccff00;">Zoe16</b>'s quick stats:<br> 
                 <span id="typed"></span>
                 <div id="typed-strings">
                  <p><b>47</b> activity minutes today</p>
-                  <p><b>6</b> total challenges</p>
-                  <p><b>82%</b> success rate</p>. 
-                  <p><b>$12.82</b> total lost</p> 
-                  <p><b>$75.30</b> total gained</p> 
-                  <p><b>$62.48</b> net profit</p>
+                  <p><b>6</b> active challenges</p>
+                  <p><b>82%</b> overall success rate</p>. 
+                  <p><b>$12.82</b> lost to-date</p> 
+                  <p><b>$75.30</b> gained to-date</p> 
+                  <p><b>$62.48</b> net profit to-date</p>
                 </div></h5>
                 <div class="col text-center">
                   <button class="btn btn-outline-white btn-rounded px-1 py-1 ml-0 mt-0" data-toggle="modal" data-target="#popupCreate">View full stats</button>
@@ -376,7 +377,9 @@
                                                           <b style="color:#ccff00;">87%</b> of participants were successful
                                                         </h6>
                                                         <a href="app.html" class="btn btn-sm btn-outline-white">Log</a>
+                                                        <img id="logLoader" src="app/assets/images/loader.svg">
                                                         <a href="app.html" class="btn btn-sm btn-outline-white">Claim</a>
+                                                        <img id="claimLoader" src="app/assets/images/loader.svg">
                                                       
                                                       </div>
                                                     </div>
@@ -940,6 +943,7 @@
                   <div class="col-8">
                     <button id="hostBtn" type="button" class="btn btn-block btn-primary">Host this challenge</button>
                   </div>
+                  <img id="createLoader" src="app/assets/images/loader.svg">
                   <div class="col-4">
                     <button id="cancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
                   </div>
