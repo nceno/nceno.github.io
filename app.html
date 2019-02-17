@@ -212,8 +212,10 @@
                                 </select>
                               </div>
                               <a style="color:black;" class="btn btn-primary btn-block" id="makeAcctBtn">Create Nceno profile</a>
-                              
-                                <img id="acctLoader" src="app/assets/images/loader.svg">
+                               <div id="acctLoader">
+                                  <p>Writing your challenge to the blockchain...</p> 
+                                  <img  src="app/assets/images/loader.svg">
+                                </div>
                                 <p id="acctSuccess">Success!<p>
                               
                             </form>
@@ -949,9 +951,8 @@
                     <button id="hostBtn" type="button" class="btn btn-block btn-primary">Host this challenge</button>
                   </div>
                   <div id="createLoader">
-                    <p>Wait a sec while we write your challenge to the blockchain</p>
-                    <img  src="app/assets/images/loader.svg">
-                    
+                    <p>Writing your challenge to the blockchain...</p>
+                    <img  src="app/assets/images/loader.svg"> 
                   </div>
                   <p id="createSuccess">Success!</p>
                   <div class="col-4">
