@@ -21,7 +21,8 @@ function showPortis() {
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
       $("#portisBtn").hide();
-      $("#portisSuccess").html("Your address: "+web3.eth.defaultAccount);
+      $("#portisSuccess").html("Your address: "+web3.eth.defaultAccount.slice(0, 11)+web3.eth.defaultAccount.slice(12, 22)+
+        web3.eth.defaultAccount.slice(23, 33)+web3.eth.defaultAccount.slice(34, 42));
     });
   })
 }
