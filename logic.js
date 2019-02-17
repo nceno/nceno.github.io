@@ -28,6 +28,16 @@ function showPortis() {
 
 console.log(Nceno);
 $("#createBtn").hide();
+
+$("#acctLoader").hide();
+$("#acctSuccess").hide();
+$("#createLoader").hide();
+$("#createSuccess").hide();
+$("#logLoader").hide();
+$("#logSuccess").hide();
+$("#claimLoader").hide();
+$("#claimSuccess").hide();
+
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
 if($("#checker").is(':checked')) {
@@ -62,6 +72,7 @@ $("#makeAcctBtn").click(function() {
     }
   ).on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
+    $("#acctSuccess").show();
     console.log("account creation successful!") })
     .on('error', function(error){console.log(error);});
 }); 
@@ -106,6 +117,7 @@ $("#hostBtn").click(function() {
     }
   ).on('confirmation', function(confNumber, receipt){ 
     $("#createLoader").hide();
+    $("#createSuccess").show();
     console.log("challenge creation successful!") })
     .on('error', function(error){console.log(error);});;
 });
@@ -311,6 +323,7 @@ $("#claimBtn").click(function() {
     }
   ).on('confirmation', function(confNumber, receipt){ 
     $("#claimLoader").hide();
+    $("#claimSuccess").show();
     console.log("lost stake claim was successful!") })
     .on('error', function(error){console.log(error);});;
 });
@@ -354,6 +367,7 @@ xhr.onload = function() {
           console.error(error);
         }).on('confirmation', function(confNumber, receipt){ 
           $("#logLoader").hide();
+          $("#logSuccess").show();
           console.log("activity minutes logged successfully!") })
     .on('error', function(error){console.log(error);});;
   }
