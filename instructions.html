@@ -136,10 +136,17 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-10 col-lg-8">
-            <h2>The interface rundown</h2>
+            <h2><strong>The interface rundown</strong></h2>
             <h3>Sign in</h3>
             <p>Assuming you have a compatible wearable, click &ldquo;link wearable&rdquo;. You will be prompted to sign in with fitbit. Accept the permissions when asked.</p>
             <p>Next, you need to activate the blockchain. If you have metamask installed in your browser, go to extensions and disable it. Nceno uses Portis for transaction handling and wallet services, and it won&rsquo;t work if metamask is enabled. Click &ldquo;activate blockchain&rdquo; and a window will pop up. Register for a new wallet or sign in and you will see your wallet balance. Now is the time to send some ether to this wallet. Click the settings tab and &ldquo;receive&rdquo;. Send ether here how you normally would. If you don&rsquo;t know how, here&rsquo;s a good resource. After you have ether in this wallet, close the window</p>
+            <div class="row justify-content-center">
+              <figure class="photo col-md-4 col-lg-4">
+                <a class="lightbox" href="app/assets/images/success.jpg" title="This is how you know account creation was successful.">
+                  <img src="app/assets/images/success.jpg">
+                </a>
+              </figure>
+            </div>
             <h3>Register</h3>
             <p>You need to make a profile on Nceno to make challenges. You need to use a real email address in case we need to contact you. Fill in the fields and click &ldquo;create account&rdquo;. This is your first transaction on Nceno. How exciting! You&rsquo;ll get a popup from Portis asking you to confirm the transaction. Blockchain transactions cost Ether to make happen, so it will show you how much eth it takes (in USD) and asks you to confirm. Do it, and wait a few seconds while it updates the blockchain. You will see &ldquo;success&rdquo; if everything went through ok. Note: you may only have one profile associated to each wearable</p>
             <h3>Host</h3>
@@ -176,7 +183,25 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-10 col-lg-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae vero molestias odit voluptatem eum sit, laboriosam tempora officiis, ullam eaque modi beatae voluptate incidunt consequatur assumenda perferendis unde natus hic!</p>
+            <h2><strong>During the challenge</strong></h2>
+            <h3>Rules:</h3>
+            <p>Log however many activity minutes you want to; but note that surplus minutes do not affect your payout, progress, or standing in a challenge. (i.e. if your challenge is for 30mins 2x per week and you do 45mins 2x per week, or 30mins 3x per week, the result is the same as doing just 30mins 2x per week. Similarly, if you were to do one 20min workout and one 40min workout on separate days, the result is the same as if you only did one 30min workout and you would have to log an additional day containing the appropriate number of minutes.</p>
+            <p>The bottom line is that Nceno simply looks for the appropriate number of days in a week, each containing at least as many activity minutes as are set in the challenge parameters.</p>
+            <p>Cheating in the form of false reporting is made nearly impossible by our use of sensor fusion algorithms and machine learning. However, if a user is caught cheating via this or other means, their stake will be frozen, the case investigated, and their stake automatically redistributed to their challenge participants. They will be permanently banned from the platform and legal action will be taken against them.</p>
+            <p><strong>What&rsquo;s an activity minute?</strong> Nceno uses a combination of motion and heart rate data as recorded by your fitness tracker to identify to what extent exercise is being performed and for how many minutes. Rest assured, if you are exercising in a capacity exceeding a normal walking pace, your activity will count. Tip: elevated heart rate matters more than steps counted. If you regularly sync your tracker with your phone, Nceno will display the number of minutes you have available to log on the Manage tab as a quick-stat before you decide to log them.</p>
+            <p>A single participant (person) may not enter a single challenge representing multiple participants. And yes, thanks to the wonders of science, we have ways of detecting this ;)</p>
+            <h3>After the challenge</h3>
+            <p>Alright, so you set or joined a challenge, regularly did your workouts, even made a nice little profit. Now what?</p>
+            <p>Well, for starters, your challenge will still be visible under the Manage tab as a completed challenge. You can see the stats and week-by-week breakdown.</p>
+            <p>But how about your money? Well, you could roll it over to a new challenge. Or, you can take your winnings and cash out. See below.</p>
+            <p><strong>Cashing out</strong></p>
+            <p>Currently, Nceno is based on the cryptocurrency Ethereum which is widely available to purchase and convert with USD and other currencies. There are even debit cards you can purchase which can hold your ETH and BTC so you can spend them like real money without going through your bank. Options differ depending where you live, but here are some resources to get you started.</p>
+            <ul>
+            <li>Coinbase- to bank or to paypal</li>
+            <li>Maicoin- to bank</li>
+            <li>Bitpay- refillable debit card</li>
+            </ul>
+            <p>A note on cashing out: A common question is &ldquo;crypto is so volatile. What happens if the market takes a dive while my stake is locked up?&rdquo; Nceno uses the magic of stablecoins on our backend, so your $50 now, is your same $50 later, no matter what happens to the market. Alternatively, crypto traders might want to know what happens if the market shoots way up while their ETH is locked in Nceno. Same story, your stake is pegged to the USD. However, in the future, we are implementing many additional features for advanced users- one of which is the option to &ldquo;unpeg&rdquo; their stake (in the case of a sudden bull market).</p>
           </div>
         </div>
       </div>
