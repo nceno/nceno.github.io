@@ -528,11 +528,11 @@ $.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
   var countryName = data.country_name;
   var timezone = data.time_zone.offset;
   flag = data.country_code;
-  console.log("Country Name: " + countryName);
-  console.log("Time Zone: " + timezone);
+  //console.log("Country Name: " + countryName);
+  //console.log("Time Zone: " + timezone);
   sign = parseInt(timezone.slice(0, 1)+1);
   pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
   //pad = parseInt(timezone.slice(0, 1)+1)
-  console.log(pad);
-  console.log("Flag URL: " + flag);
+  //console.log(pad);
+  //console.log("Flag URL: " + flag);
 });             
