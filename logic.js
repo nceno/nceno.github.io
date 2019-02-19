@@ -114,7 +114,7 @@ $("#hostBtn").click(function() {
     $("#sliderWks").roundSlider("getValue"),
     start,
     userID,
-    ethPrice*100
+    ethPrice*100/100
   )
   .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
