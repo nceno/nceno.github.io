@@ -240,7 +240,7 @@ function makePage(){
   // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     console.log("changed!");
-    $("#echo").text($('#goalCategories').val());
+    //$("#echo").text($('#goalCategories').val());
     var goalid = web3.utils.padRight($('#goalCategories').val(),34)
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
