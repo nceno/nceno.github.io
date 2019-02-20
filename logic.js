@@ -254,7 +254,7 @@ function selectedChallenge(){
           //echo challenge
 
           var tstamp = new Date(result[4]*1000);
-          var buyin = result[1]*result[5]/100000000000000000000;
+          var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
 
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
@@ -281,7 +281,7 @@ function makeLeaderboard(){
         if (!error){
             //echo challenge
             var tstamp = new Date(result[4]*1000);
-            $("#echStake").html(Math.floor(result[1]*ethPrice/1000000000000000000));
+            $("#echStake").html(Math.round(result[1]*ethPrice/1000000000000000000));
             $("#echWks").html(result[3]);
             $("#echSes").html(result[2]);
             $("#echMins").html(result[0]);
