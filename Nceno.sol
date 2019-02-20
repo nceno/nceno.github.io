@@ -95,8 +95,8 @@ contract Nceno {
     mapping(bytes32 => goalObject) internal goalRegistry; //dictionary of goals, accessible by goalID
 
   //get goal
-  function getGoalParams(bytes32 _goalID) external view returns(uint, uint, uint, uint, uint, bytes32[10], uint){
-    return(goalRegistry[_goalID].activeMins, goalRegistry[_goalID].stakeWEI, goalRegistry[_goalID].sesPerWk, goalRegistry[_goalID].wks, goalRegistry[_goalID].startTime, goalRegistry[_goalID].competitor, goalRegistry[_goalID].competitorCount);
+  function getGoalParams(bytes32 _goalID) external view returns(uint, uint, uint, uint, uint, uint, uint){
+    return(goalRegistry[_goalID].activeMins, goalRegistry[_goalID].stakeWEI, goalRegistry[_goalID].sesPerWk, goalRegistry[_goalID].wks, goalRegistry[_goalID].startTime, goalRegistry[_goalID].ethPrice, goalRegistry[_goalID].competitorCount);
   }
 
   //get future goal: only returns a goal if it hasn't started yet

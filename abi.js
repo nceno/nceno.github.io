@@ -567,7 +567,7 @@ var Nceno = new web3.eth.Contract([
         },
         {
           "name": "",
-          "type": "bytes32[10]"
+          "type": "uint256"
         },
         {
           "name": "",
@@ -758,4 +758,4 @@ var Nceno = new web3.eth.Contract([
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0x6E18Bb3cc794B23600d30109a02a01102671b36A');
+  ], '0x75d4eb5F8fce611e83AC6604EfC79e78470dC46D');

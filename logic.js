@@ -237,11 +237,42 @@ function makeList(){
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
   makeList();
-  // Initialize Selectric and bind to 'change' event
+  selectedChallenge();
+  //makeLeaderboard();
+}
+
+function selectedChallenge(){
+    // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     console.log("changed!");
     //$("#echo").text($('#goalCategories').val());
     var goalid = web3.utils.padRight($('#goalCategories').val(),34)
+    Nceno.methods.getGoalParams(goalid)
+    .call({from: web3.eth.defaultAccount},
+        function(error, result) {
+        if (!error){
+          //echo challenge
+          var tstamp = new Date(result[4]*1000);
+          var buyin = Math.floor(result[1]*result[5]/1000000000000000000);
+          $("#echStake").html(buyin);
+          $("#echWks").html(result[3]);
+          $("#echSes").html(result[2]);
+          $("#echMins").html(result[0]);
+          $("#echComp").html(result[6]);
+          $("#echStart").html(tstamp);
+        }
+        else
+        console.error(error);
+    });
+  });
+}
+
+//working on it... alter contract to only intake buy-in and eth price.
+function makeLeaderboard(){
+    // Initialize Selectric and bind to 'change' event
+  $('#goalCategories').selectric().on('change', function() {
+    var goalid = web3.utils.padRight($('#goalCategories').val(),34)
+    
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
@@ -267,26 +298,7 @@ function makePage(){
         console.error(error);
     });
   });
-  //makeLeaderboard();
 }
-
-/*function makeLeaderboard(){
-  Nceno.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
-    function(error, result) {
-      if (!error){
-        
-      }
-      else
-      console.error(error);
-    }
-  );
-  var i=0;
-  for(i = 0; i < 10; i++){
-    if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined)
-      $('#leaderboard tr:last').after('<td>'+ adherence '</td> <td>'+ username +'</td> <td><img src="https://ipdata.co/flags/'+flag+'.png"></td> <td>'+bonus+'</td> <td>'+returned+'</td> <td>'+lost+'</td>');
-  }
-}*/
 
 // needs work... not even sure.
 function echoSelectedGoal(){
