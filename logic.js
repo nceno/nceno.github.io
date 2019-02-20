@@ -240,7 +240,6 @@ function makePage(){
   selectedChallenge();
   //makeLeaderboard();
 }
-
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
