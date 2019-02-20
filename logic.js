@@ -241,7 +241,30 @@ function makePage(){
   $('#goalCategories').selectric().on('change', function() {
     console.log("changed!");
     $("#echo").text($('#goalCategories').val());
-    
+    var goalid = web3.utils.padRight($('#goalCategories').val(),34)
+    Nceno.methods.getGoalParams(goalid)
+    .call({from: web3.eth.defaultAccount},
+        function(error, result) {
+        if (!error){
+            //echo challenge
+            $("#echStake").html(result[1]);
+            $("#echWks").html(result[3]);
+            $("#echSes").html(result[2]);
+            $("#echMins").html(result[0]);
+            $("#echComp").html(result[6]);
+            $("#echStart").html(tstamp);
+
+            //week by week breakdown
+
+
+            //charts and stats
+
+
+            //leaderboard
+        }
+        else
+        console.error(error);
+    }
   });
   //makeLeaderboard();
 }
