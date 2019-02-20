@@ -216,7 +216,8 @@ contract Nceno {
     createdGoal.sesPerWk = _sesPerWk;
     createdGoal.wks = _wks;
     createdGoal.startTime = _startTime;
-          
+    createdGoal.ethPrice = _ethPrice;
+
     createdGoal.competitorCount = 1; //incriment competitor count
     createdGoal.competitor[0] = _userID; //add self to competitor list
     
