@@ -257,7 +257,7 @@ function selectedChallenge(){
           var buyin = result[1]*result[5]/100000000000000000000;
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
-          $("#echSes").html(result[2]+"x/wk");
+          $("#echSes").html(result[2]+" x/wk");
           $("#echMins").html(result[0]+ "mins");
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
