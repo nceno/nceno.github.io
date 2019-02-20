@@ -241,6 +241,7 @@ function makePage(){
   $('#goalCategories').selectric().on('change', function() {
     console.log("changed!");
     $("#echo").text($('#goalCategories').val());
+    
   });
   //makeLeaderboard();
 }
