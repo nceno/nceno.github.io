@@ -253,7 +253,7 @@ function selectedChallenge(){
         if (!error){
           //echo challenge
           var tstamp = new Date(result[4]*1000);
-          var buyin = Math.floor(result[1]*result[5]/1000000000000000000);
+          var buyin = result[1]*result[5]/1000000000000000000;
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+"x/wk");
