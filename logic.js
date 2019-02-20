@@ -254,11 +254,11 @@ function selectedChallenge(){
           //echo challenge
           var tstamp = new Date(result[4]*1000);
           var buyin = Math.floor(result[1]*result[5]/1000000000000000000);
-          $("#echStake").html(buyin);
-          $("#echWks").html(result[3]);
-          $("#echSes").html(result[2]);
-          $("#echMins").html(result[0]);
-          $("#echComp").html(result[6]);
+          $("#echStake").html("$"+buyin);
+          $("#echWks").html(result[3]+" wks");
+          $("#echSes").html(result[2]+"x/wk");
+          $("#echMins").html(result[0]+ "mins");
+          $("#echComp").html(result[6]+ "ppl");
           $("#echStart").html(tstamp);
         }
         else
