@@ -237,6 +237,10 @@ function makeList(){
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
   makeList();
+  // Initialize Selectric and bind to 'change' event
+  $('#goalCategories').selectric().on('change', function() {
+    $("#echo").text($(this).val());
+  });
   //makeLeaderboard();
 }
 
