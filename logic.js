@@ -247,6 +247,7 @@ function makePage(){
         function(error, result) {
         if (!error){
             //echo challenge
+            var tstamp = new Date(result[4]*1000);
             $("#echStake").html(result[1]);
             $("#echWks").html(result[3]);
             $("#echSes").html(result[2]);
