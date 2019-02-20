@@ -259,7 +259,7 @@ function selectedChallenge(){
           $("#echSes").html(result[2]+"x/wk");
           $("#echMins").html(result[0]+ "mins");
           $("#echComp").html(result[6]);
-          $("#echStart").html(tstamp);
+          $("#echStart").html(tstamp.toDateString());
         }
         else
         console.error(error);
