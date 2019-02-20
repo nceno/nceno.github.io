@@ -318,36 +318,7 @@ function echoSelectedGoal(){
   );
 }
 
-//gets the selected goal so it can populate the manage page. needs work. 
-function populateDashboard(){
-  var goalid = web3.utils.padRight($("#chIDtools").val(),34)
-  Nceno.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
-    function(error, result) {
-      if (!error){
-        //echo challenge
-        var tstamp = new Date(result[4]*1000);
-        $("#echStake").html(result[1]);
-        $("#echWks").html(result[3]);
-        $("#echSes").html(result[2]);
-        $("#echMins").html(result[0]);
-        $("#echComp").html(result[6]);
-        $("#echStart").html(tstamp);
 
-        //week by week breakdown
-
-
-        //charts and stats
-
-
-        //leaderboard
-
-      }
-      else
-      console.error(error);
-    }
-  );
-}
 
 //button to claim lost stake from previous week. needs work.
 $("#claimBtn").click(function() {
