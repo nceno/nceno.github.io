@@ -240,6 +240,7 @@ function makePage(){
   selectedChallenge();
   //makeLeaderboard();
 }
+
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
@@ -252,7 +253,7 @@ function selectedChallenge(){
         if (!error){
           //echo challenge
           var tstamp = new Date(result[4]*1000);
-          var buyin = result[5];
+          var buyin = result[1]*result[5]/1000000000000000000;
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+"x/wk");
