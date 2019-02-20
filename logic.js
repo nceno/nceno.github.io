@@ -302,6 +302,30 @@ function makeLeaderboard(){
   });
 }
 
+function search(){
+  var goalid = web3.utils.padRight($('#searchField').val(),34)
+  Nceno.methods.getGoalParams(goalid)
+  .call({from: web3.eth.defaultAccount},
+      function(error, result) {
+      if (!error){
+        //echo challenge
+
+        var tstamp = new Date(result[4]*1000);
+        var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
+        
+        $("#srStake").html("$"+buyin);
+        $("#srWks").html(result[3]+" wks");
+        $("#srSes").html(result[2]+" x/wk");
+        $("#srMins").html(result[0]+ "mins");
+        $("#srComp").html(result[6]);
+        $("#srStart").html(tstamp.toDateString());
+      }
+      else
+      console.error(error);
+  });
+  
+}
+
 // needs work... not even sure.
 function echoSelectedGoal(){
   updateEthPrice();

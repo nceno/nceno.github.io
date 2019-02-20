@@ -727,9 +727,9 @@
               <div class="col-md-10 col-lg-8">
                 <h5 class="mb-2 fs-20 font-weight-normal">Browse upcoming challenges or search for a friend's to join.</h5>
                   <div class="input-group rounded">
-                    <input type="text" class="form-control px-2" placeholder="Search by challenge ID ..." aria-label="Search challenges">
+                    <input id="searchField" type="text" class="form-control px-2" placeholder="Search by challenge ID ..." aria-label="Search challenges">
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">Search</button>
+                      <button onclick="search()" class="btn btn-primary" type="button">Search</button>
                     </div>
                   </div>
               </div>
@@ -745,32 +745,28 @@
                   <div class="row">
                     <div class="col">
                       <div class="table-responsive-md">
-                        <table class="table table-lined" id="leaderboard">
-                          <thead class="thead-dark">
-                            <tr>
-                              <th scope="col">Buy-in</th>
-                              <th scope="col">Duration</th>
-                              <th scope="col">Sessions</th>
-                              <th scope="col">Minutes</th>
-                              <th scope="col">Participants</th>
-                              <th scope="col">Starting Date</th>
-                              <th scope="col">Host</th>
-                              <th scope="col"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>$50</td>
-                              <td>8 wks</td>
-                              <td>4 /wk</td>
-                              <td>45 min</td>
-                              <td>8 </td>
-                              <td>Jan 14</td>
-                              <td>Zoefit91</td>
-                              <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <table class="table table-lined" id="echoParams">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Buy-in</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Sessions</th>
+                                <th scope="col">Minutes</th>
+                                <th scope="col">Participants</th>
+                                <th scope="col">Starting Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="color:#ccff00" id="srStake"></td>
+                                <td style="color:#ccff00" id="srWks"></td>
+                                <td style="color:#ccff00" id="srSes"></td>
+                                <td style="color:#ccff00" id= "srMins"></td>
+                                <td style="color:#ccff00" id= "srComp"></td>
+                                <td style="color:#ccff00" id= "srStart"></td>
+                              </tr>
+                            </tbody>
+                          </table>
                       </div>
                     </div>
                   </div>
