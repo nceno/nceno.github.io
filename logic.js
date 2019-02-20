@@ -264,7 +264,7 @@ function makePage(){
         }
         else
         console.error(error);
-    }
+    });
   });
   //makeLeaderboard();
 }
