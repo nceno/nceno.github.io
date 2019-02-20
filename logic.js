@@ -239,7 +239,7 @@ function makePage(){
   makeList();
   // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
-    console.log("changed!")
+    console.log("changed!");
     $("#echo").text($('#goalCategories').val());
   });
   //makeLeaderboard();
