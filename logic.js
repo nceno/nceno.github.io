@@ -324,8 +324,8 @@ function selectedChallenge(){
                               );
                               console.log("the echo is: ", compcount, adherence[0], ids[0], convertedName, convertedFlag);*/
 
-                              $("#leaderboard").append(
-                                '<tr><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td></tr>'
+                              $("#leaderboard").after(
+                                '<tr><td>'+ convertedName +'</td></tr>'
                               );
                            
                             }
