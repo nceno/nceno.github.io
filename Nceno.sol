@@ -286,23 +286,24 @@ contract Nceno {
     require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && 
       goalRegistry[_goalID].successes[_userID][(now-goalRegistry[_goalID].startTime)/604800-1]==goalRegistry[_goalID].sesPerWk && 
       goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0,
-      "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
+      "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week."
+    );
     
     uint createFee = 0;
     uint logFee = goalRegistry[_goalID].sesPerWk * 12580920000000000;
     uint claimFee = 12580920000000000;
-
-    uint wk = (now-goalRegistry[_goalID].startTime)/604800;
+    
+    //uint wk = (now-goalRegistry[_goalID].startTime)/604800;
     uint winners;
     uint pot;
-    uint payout = partitions[goalRegistry[_goalID].wks/2 -1][wk-1]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
+    uint payout = partitions[goalRegistry[_goalID].wks/2 -1][(now-goalRegistry[_goalID].startTime)/604800-1]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
     //loop over everyone's weekly logs and increase the weeks pot from when someone skipped a workout
     for(uint i =0; i<10; i++){
     if(goalRegistry[_goalID].competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
       //if(bytes(goalRegistry[_goalID].competitor[i]).length != 0){
-        pot+= (goalRegistry[_goalID].sesPerWk - goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]][wk-1])*payout;
+        pot+= (goalRegistry[_goalID].sesPerWk - goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]][(now-goalRegistry[_goalID].startTime)/604800-1])*payout;
         //keep track of the number of winners, those with 100% adherence, in the previous week. 
-        if(goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]][wk-1]==goalRegistry[_goalID].sesPerWk){
+        if(goalRegistry[_goalID].successes[goalRegistry[_goalID].competitor[i]][(now-goalRegistry[_goalID].startTime)/604800-1]==goalRegistry[_goalID].sesPerWk){
           winners++;
         }
       }
@@ -316,18 +317,18 @@ contract Nceno {
 
 
     msg.sender.transfer(claimFee + logFee + createFee + pot/(2*winners)); //initiate the payout, refund fees
-    goalRegistry[_goalID].bonusWasClaimed[_userID][wk-1] = 1; //protect against bonus double spending
-    goalRegistry[_goalID].potWk[wk-1] = pot; //write to the global goal stats
-    goalRegistry[_goalID].winnersWk[wk-1] = winners; //write to the global goal stats
-
+    goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800-1] = 1; //protect against bonus double spending
+    goalRegistry[_goalID].potWk[(now-goalRegistry[_goalID].startTime)/604800-1] = pot; //write to the global goal stats
+    goalRegistry[_goalID].winnersWk[(now-goalRegistry[_goalID].startTime)/604800-1] = winners; //write to the global goal stats
+    
 
     //fire event: _userID claimed _amount of lost stake from week _wk of _goalID.
-    bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
-    emit BonusClaimedBy(_eventName, _userID, _goalID, pot/(2*winners), wk);
+    //bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
+    emit BonusClaimedBy(_userID, _goalID, pot/(2*winners));
     
   }
 
-  event BonusClaimedBy(bytes32 _eventName, bytes32 _userID, bytes32 _goalID, uint _amount, uint _wk);
+  event BonusClaimedBy(bytes32 _userID, bytes32 _goalID, uint _amount);
 
   //replaces numerous "require()" statements, restricts caller to admin (nceno)
   modifier onlyNceno(){

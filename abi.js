@@ -731,11 +731,6 @@ var Nceno = new web3.eth.Contract([
       "inputs": [
         {
           "indexed": false,
-          "name": "_eventName",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
           "name": "_userID",
           "type": "bytes32"
         },
@@ -748,14 +743,9 @@ var Nceno = new web3.eth.Contract([
           "indexed": false,
           "name": "_amount",
           "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "_wk",
-          "type": "uint256"
         }
       ],
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0x25a50d32bc33d19Fe1b84632Ee1C7508976D8725');
+  ], '0xaC937e0bF5CD245976F655FBAd15259cE14E2dcE');
