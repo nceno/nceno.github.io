@@ -96,7 +96,7 @@ $("#makeAcctBtn").click(function() {
   ).on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
     $("#acctSuccess").show();
-    console.log("account creation successful!");
+    
     $("#makeAcctBtn").hide(); })
     .on('error', function(error){console.log(error);});
 }); 
@@ -133,7 +133,7 @@ $("#hostBtn").click(function() {
   ).on('confirmation', function(confNumber, receipt){ 
     $("#createLoader").hide();
     $("#createSuccess").show();
-    console.log("challenge creation successful!"); })
+    })
     .on('error', function(error){console.log(error);});;
 });
 
@@ -192,7 +192,7 @@ function joinSearch(){
         ).on('confirmation', function(confNumber, receipt){ 
           $("#joinLoader").hide();
           $("#joinSuccess").show();
-          console.log("join was successful!"); })
+           })
           .on('error', function(error){console.log(error);});;
       }
       else
