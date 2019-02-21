@@ -318,6 +318,8 @@ function selectedChallenge(){
 
                               var convertedName = web3.utils.hexToAscii(name[k]);
                               var convertedFlag = web3.utils.hexToAscii(flag[k]);
+
+                              var utf8Name = web3.utils.hexToUtf8(name[k]);
                               
                               /*$("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
@@ -327,7 +329,8 @@ function selectedChallenge(){
                               $("#leaderboard").after(
                                 '<tr><td>'+ convertedName +'</td> <td>'+ 5*4 +'</td></tr>'
                               );
-                              console.log(convertedName);
+                              console.log("ascii is: "+convertedName);
+                              console.log("utf8 is: "+ utf8Name);
                            
                             }
                             else
