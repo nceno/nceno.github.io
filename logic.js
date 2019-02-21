@@ -318,6 +318,8 @@ function makeLeaderboard(){
   });
 }
 
+//todo: separate the results from the html so they can be passed as join() params.
+//searches for a specific goal and displays it with an option to join.
 function search(){
   $("#request").show();
   var goalid = web3.utils.padRight($('#searchField').val(),34)
@@ -344,6 +346,7 @@ function search(){
   }); 
 }
 
+//populates the challenges starting soon table
 function browse(){
   var i = 0;
   var goals1 = new Array();
@@ -377,37 +380,6 @@ function browse(){
       else
       console.error(error);
   }); 
-}
-
-// needs work... not even sure.
-function echoSelectedGoal(){
-  updateEthPrice();
-  var goalid = web3.utils.padRight($("#chIDtools").val(),34)
-  Nceno.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
-    function(error, result) {
-      if (!error){
-        var tstamp = new Date(result[4]*1000);
-        $("#echoSelectedGoal").html(
-          "Details for challenge "+ goalid.slice(0, 12) +
-          ": You commited $" + 
-          Math.floor(result[1]*ethPrice/1000000000000000000) + 
-          " to working out for " + 
-          result[0] +
-          "mins " + 
-          result[2] +
-          " times per week for "+ 
-          result[3] +
-          " weeks, starting automatically at "+ 
-          tstamp + 
-          "."
-        );
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  );
 }
 
 //button to claim lost stake from previous week. needs work.
