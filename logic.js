@@ -178,7 +178,7 @@ function joinSearch(){
           goalid,
           userID
         )
-        .send({from: web3.eth.defaultAccount, gas: 9000000, gasPrice: 15000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
           function(error, result) {
             if (!error){
               $("#joinSearch").hide();
