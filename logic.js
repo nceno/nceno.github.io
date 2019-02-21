@@ -410,8 +410,6 @@ function echoSelectedGoal(){
   );
 }
 
-
-
 //button to claim lost stake from previous week. needs work.
 $("#claimBtn").click(function() {
   var goalid = web3.utils.padRight($("#goalCategories").val(),34);
