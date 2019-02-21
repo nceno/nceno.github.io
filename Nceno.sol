@@ -238,7 +238,7 @@ contract Nceno {
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
-    require(now < goalRegistry[_goalID].startTime && msg.value == goalRegistry[_goalID].stakeWEI, "Challenge already started, or else message value is less than intended stake."); //time check and stake check
+    require(now < goalRegistry[_goalID].startTime && msg.value == goalRegistry[_goalID].stakeWEI && goalRegistry[_goalID].isCompetitor[_userID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake."); //time check and stake check
       
     //add self to goal
     goalRegistry[_goalID].isCompetitor[_userID] = true;
