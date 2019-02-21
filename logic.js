@@ -155,14 +155,14 @@ function echoGoal(){
   );
 }
 
-//populates the modal when you want to join a searched goal
+/*//populates the modal when you want to join a searched goal
 function srEcho(){
   $("#srEcho").html(
     "You're commiting $" + $("#srStake").val() + " to working out for " + 
     $("#srMins").val() +"mins " + $("#srSes").val()+" times per week for "+ 
     $("#srWks").val()+  " weeks, starting automatically on "+ $("#srStart").val()
   );
-}
+}*/
 
 //joins the searched goal
 function joinSearch(){
@@ -341,6 +341,12 @@ function search(){
         $("#srComp").html(result[6]);
         $("#srStart").html(tstamp.toDateString());
         if(result[4]*1000>Date.now()){$("#joinSearch").show();}
+
+        $("#srEcho").html(
+          "You're commiting $" + buyin + " to working out for " + 
+          result[0] +"mins " + result[2]+" times per week for "+ 
+          result[3]+  " weeks, starting automatically on "+ tstamp.toDateString()
+        );
       }
       else
       console.error(error);
