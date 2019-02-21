@@ -154,6 +154,7 @@ function echoGoal(){
   );
 }
 
+//populates the modal when you want to join a searched goal
 function srEcho(){
   $("#srEcho").html(
     "You're commiting $" + $("#srStake").val() + " to working out for " + 
@@ -162,6 +163,7 @@ function srEcho(){
   );
 }
 
+//joins the searched goal
 function joinSearch(){
   var goalid = web3.utils.padRight($('#searchField').val(),34);
   Nceno.methods.getGoalParams(
@@ -178,12 +180,19 @@ function joinSearch(){
         .send({from: web3.eth.defaultAccount, gas: 9000000, gasPrice: 15000000000, value: stakewei},
           function(error, result) {
             if (!error){
-              console.log("attempting to join...");
+              $("#joinSearch").hide();
+              $("#srCancelBtn").hide();
+              $("#joinLoader").show();
+              console.log(result);
             }
             else
             console.error(error);
           }
-        );
+        ).on('confirmation', function(confNumber, receipt){ 
+          $("#joinLoader").hide();
+          $("#joinSuccess").show();
+          console.log("join was successful!"); })
+          .on('error', function(error){console.log(error);});;
       }
       else
       console.error(error);
