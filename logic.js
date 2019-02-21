@@ -290,9 +290,9 @@ function selectedChallenge(){
                 
                 var j=0;
                 for (j = 0; j < compcount; j++){
-                  ids[j] = result[j][0];
-                  name[j] = result[j][1];
-                  flag[j] = result[j][2];
+                  ids = result[0];
+                  name = result[1];
+                  flag = result[2];
                 }
 
                 var k=0;
