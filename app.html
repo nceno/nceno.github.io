@@ -138,9 +138,9 @@
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#host">Host</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateEthPrice()">Host</a>
               <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">Manage</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#browse">Browse</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse()">Browse</a>
             </div>
           </div>
         </div>
@@ -328,7 +328,7 @@
                                 <th scope="col">Duration</th>
                                 <th scope="col">Sessions</th>
                                 <th scope="col">Minutes</th>
-                                <th scope="col">Participants</th>
+                                <th scope="col">People</th>
                                 <th scope="col">Starting Date</th>
                               </tr>
                             </thead>
@@ -764,6 +764,7 @@
                                 <td style="color:#ccff00" id= "srMins"></td>
                                 <td style="color:#ccff00" id= "srComp"></td>
                                 <td style="color:#ccff00" id= "srStart"></td>
+                                <td><button onclick="joinSearch()" type="button" id="joinSearch" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                               </tr>
                             </tbody>
                           </table>
@@ -779,16 +780,15 @@
                 <div class="row">
                   <div class="col">
                     <div class="table-responsive-md">
-                      <table class="table table-lined" id="leaderboard">
+                      <table class="table table-lined" id="soonGoals">
                         <thead class="thead-dark">
                           <tr>
                             <th scope="col">Buy-in</th>
                             <th scope="col">Duration</th>
                             <th scope="col">Sessions</th>
                             <th scope="col">Minutes</th>
-                            <th scope="col">Participants</th>
+                            <th scope="col">People</th>
                             <th scope="col">Starting Date</th>
-                            <th scope="col">Host</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -801,7 +801,7 @@
                             <td>20 min</td>
                             <td>10 </td>
                             <td>Jan 19</td>
-                            <td>Ronnie773</td>
+                            
                             <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
@@ -812,7 +812,7 @@
                             <td>60 min</td>
                             <td>12 </td>
                             <td>Jan 15</td>
-                            <td>BenShape3</td>
+                            
                             <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
@@ -823,7 +823,7 @@
                             <td>40 min</td>
                             <td>20 </td>
                             <td>Feb 1</td>
-                            <td>Kylez1023</td>
+                            
                             <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
@@ -834,7 +834,7 @@
                             <td style="color:#ccff00;" >45 min</td>
                             <td style="color:#ccff00;" >8 </td>
                             <td style="color:#ccff00;" >Jan 14</td>
-                            <td style="color:#ccff00;" >Zoefit91</td>
+                            
                             <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
@@ -845,7 +845,7 @@
                             <td>60 min</td>
                             <td>12 </td>
                             <td>Jan 15</td>
-                            <td>BenShape3</td>
+                            
                             <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
                           <tr>
@@ -856,7 +856,7 @@
                             <td>40 min</td>
                             <td>20 </td>
                             <td>Feb 1</td>
-                            <td>Kylez1023</td>
+                            
                             <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
 

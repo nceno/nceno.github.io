@@ -312,7 +312,7 @@ function search(){
 
         var tstamp = new Date(result[4]*1000);
         var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
-        
+
         $("#srStake").html("$"+buyin);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
@@ -322,8 +322,42 @@ function search(){
       }
       else
       console.error(error);
-  });
-  
+  }); 
+}
+
+function browse(){
+  var i = 0;
+  var goals1 = new Array();
+  for (i = 0; i < 15; i++){
+      Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+          goals1[i] = result;
+          console.log(goals1[i]);
+          $("#soonGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
+          
+        }
+      });    
+    }
+  var goalid = web3.utils.padRight($('#searchField').val(),34)
+  Nceno.methods.getGoalParams(goalid)
+  .call({from: web3.eth.defaultAccount},
+      function(error, result) {
+      if (!error){
+        //echo challenge
+
+        var tstamp = new Date(result[4]*1000);
+        var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
+
+        $("#srStake").html("$"+buyin);
+        $("#srWks").html(result[3]+" wks");
+        $("#srSes").html(result[2]+" x/wk");
+        $("#srMins").html(result[0]+ "mins");
+        $("#srComp").html(result[6]);
+        $("#srStart").html(tstamp.toDateString());
+      }
+      else
+      console.error(error);
+  }); 
 }
 
 // needs work... not even sure.
@@ -361,7 +395,7 @@ function echoSelectedGoal(){
 
 //button to claim lost stake from previous week. needs work.
 $("#claimBtn").click(function() {
-  var goalid = web3.utils.padRight($("#chIDtools").val(),34);
+  var goalid = web3.utils.padRight($("#goalCategories").val(),34);
   //function call:
   Nceno.methods.claimBonus(
     goalid,
@@ -409,7 +443,7 @@ xhr.onload = function() {
     //var sessionMins = 32; //debug only
     console.log("total session minutes to be logged: "+sessionMins);
   
-    Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#chIDtools").val(),34)).send(
+    Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
       {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
         function(error, result) {
           if (!error){
