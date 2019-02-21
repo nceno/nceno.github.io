@@ -106,6 +106,24 @@ contract Nceno {
     }
   }
 
+  function getParticipants( bytes32 _goalID) external view returns(bytes32[10], bytes32[10], bytes32[10]){
+    bytes32[10] memory ids;
+    bytes32[10] memory names;
+    bytes32[10] memory flags;
+
+    goalObject memory theGoal = goalRegistry[_goalID];
+
+    for(uint i =0; i<10; i++){
+    if(theGoal.competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
+      //if(bytes(theGoal.competitor[i]).length != 0){
+        ids[i] = theGoal.competitor[i];
+        names[i] = profileOf[theGoal.competitor[i]].name;
+        flags[i] = profileOf[theGoal.competitor[i]].flag;
+      }
+    }
+    return(ids, names, flags);
+  }
+
   //get personal stats
   struct myStatsObject{
     uint adherenceRate; //
@@ -113,7 +131,6 @@ contract Nceno {
     uint lostStake;
     uint[12] wkBonuses;
     uint bonusTotal;
-    uint roi;
     uint totalAtStake;
   }
  
@@ -220,6 +237,7 @@ contract Nceno {
 
     createdGoal.competitorCount = 1; //incriment competitor count
     createdGoal.competitor[0] = _userID; //add self to competitor list
+    createdGoal.isCompetitor[_userID] = true;
     
     goalRegistry[_goalID] = createdGoal; //add goal to the registry
     iterableGoals[goalCount] = createdGoal; //add goal to iterable registry ***expensive!

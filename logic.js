@@ -269,50 +269,71 @@ function selectedChallenge(){
         function(error, result) {
         if (!error){
           //echo challenge
-
+          var compcount = result[6];
           var tstamp = new Date(result[4]*1000);
           var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
-
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+" x/wk");
           $("#echMins").html(result[0]+ "mins");
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
-        }
-        else
-        console.error(error);
-    });
-  });
-}
 
-//working on it... alter contract to only intake buy-in and eth price.
-function makeLeaderboard(){
-    // Initialize Selectric and bind to 'change' event
-  $('#goalCategories').selectric().on('change', function() {
-    var goalid = web3.utils.padRight($('#goalCategories').val(),34)
-    
-    Nceno.methods.getGoalParams(goalid)
-    .call({from: web3.eth.defaultAccount},
-        function(error, result) {
-        if (!error){
-            //echo challenge
-            var tstamp = new Date(result[4]*1000);
-            $("#echStake").html(Math.round(result[1]*ethPrice/1000000000000000000));
-            $("#echWks").html(result[3]);
-            $("#echSes").html(result[2]);
-            $("#echMins").html(result[0]);
-            $("#echComp").html(result[6]);
-            $("#echStart").html(tstamp);
+          //leaderboard
+          Nceno.methods.getParticipants(goalid)
+          .call({from: web3.eth.defaultAccount},
+            function(error, result) {
+              if (!error){
+                var ids = new Array();
+                var name = new Array();
+                var flag = new Array();
+                
+                var j=0;
+                for (j = 0; j < compcount; j++){
+                  ids[j] = result[0][j];
+                  name[j] = result[1][j];
+                  flag[j] = result[2][j];
+                }
 
-            //week by week breakdown
+                var k=0;
+                for (k = 0; k < compcount; k++){
+                  Nceno.methods.getMyGoalStats1(ids[k], goalid)
+                  .call({from: web3.eth.defaultAccount},
+                    function(error, result) {
+                      if (!error){
+                        var adherence = new Array();
+                        adherence[k] = result[0];
 
+                        Nceno.methods.getMyGoalStats2(ids[k], goalid)
+                        .call({from: web3.eth.defaultAccount},
+                          function(error, result) {
+                            if (!error){
+                              var bonusTotal = new Array();
+                              var totalPay = new Array();
+                              var lostStake = new Array();
 
-            //charts and stats
-
-
-            //leaderboard
-        }
+                              bonusTotal[k] = result[3];
+                              totalPay[k] = result[4];
+                              lostStake[k] = result[1];
+                              
+                              $("#leaderboard").after(
+                                '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ name[k] +'</td><td><img src="https://ipdata.co/flags/'+flag[k]+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
+                              );
+                              
+                            }
+                            else
+                            console.error(error);
+                        });
+                      }
+                      else
+                      console.error(error);
+                  });
+                }
+              }
+              else
+              console.error(error);
+          });
+        } 
         else
         console.error(error);
     });
@@ -458,24 +479,6 @@ xhr.onload = function() {
   };
   xhr.send()
 });//close click(function(){
-
-
-//old code to get live eth price that was killed by a cors violation.
-/*function updateEthPrice() {
-  var xhr = new XMLHttpRequest();
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      var resp = JSON.parse(xhr.responseText);
-      //var obj = [resp];
-      ethPrice = resp[0].price_usd;
-      console.log(this.responseText);
-      console.log(ethPrice);
-    }
-  });
-  xhr.open("GET", "https://cors-escape.herokuapp.com/https://api.coinmarketcap.com/v1/ticker/ethereum/");
-
-  xhr.send();
-}*/
 
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
 function updateEthPrice() {
