@@ -154,54 +154,43 @@ function echoGoal(){
   );
 }
 
-function joinSearch(){
-  var goalid = web3.utils.padRight($('#goalCategories').val(),34);
-  Nceno.methods.join(
-    goalid,
-    userID)
-  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: $("#srStake").val()/ethPrice*1000000000000000000},
-    function(error, result) {
-      if (!error){
-        
-      }
-      else
-      console.error(error);
-    }
+function srEcho(){
+  $("#srEcho").html(
+    "You're commiting $" + $("#srStake").val() + " to working out for " + 
+    $("#srMins").val() +"mins " + $("#srSes").val()+" times per week for "+ 
+    $("#srWks").val()+  " weeks, starting automatically on "+ $("#srStart").val()
   );
 }
 
-//needs work
-function echoJoinedGoal(){
-  updateEthPrice();
-  var goalid = web3.utils.padRight($("#col[i]").val(),34)
+function joinSearch(){
+  var goalid = web3.utils.padRight($('#searchField').val(),34);
   Nceno.methods.getGoalParams(
     goalid
   )
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
-        var tstamp = new Date(result[4]*1000);
-        $("#echoSelectedGoal").html(
-          "Details for challenge "+ goalid.slice(0, 12) +
-          ": You commited $" + 
-          Math.floor(result[1]*ethPrice/1000000000000000000) + 
-          " to working out for " + 
-          result[0] +
-          "mins " + 
-          result[2] +
-          " times per week for "+ 
-          result[3] +
-          " weeks, starting automatically at "+ 
-          tstamp + 
-          "."
+        var stakewei= result[1];
+        Nceno.methods.join(
+          goalid,
+          userID
+        )
+        .send({from: web3.eth.defaultAccount, gas: 9000000, gasPrice: 15000000000, value: stakewei},
+          function(error, result) {
+            if (!error){
+              console.log("attempting to join...");
+            }
+            else
+            console.error(error);
+          }
         );
-        console.log(result);
       }
       else
       console.error(error);
     }
-  );
+  ); 
 }
+
 
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;

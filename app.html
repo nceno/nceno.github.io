@@ -763,7 +763,7 @@
                                 <td style="color:#ccff00" id= "srMins"></td>
                                 <td style="color:#ccff00" id= "srComp"></td>
                                 <td style="color:#ccff00" id= "srStart"></td>
-                                <td><button onclick="joinSearch()" type="button" id="joinSearch" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                                <td><button type="button" onclick="srEcho()" id="srJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">Join</button></td>
                               </tr>
                             </tbody>
                           </table>
@@ -961,7 +961,43 @@
           </div>
         </div>
       </div>
-      <!-- / create modal-->      
+      <!-- / create modal-->
+
+      <!--search join modal-->
+      <div class="modal fade" id="popupSrJoin" tabindex="-1" role="dialog" aria-labelledby="popupSrJoin" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
+            <div class="modal-header justify-content-end">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="icon-x"></span>
+              </button>
+            </div>
+            <div class="modal-body text-center text-white">
+              <h3>You're about to join this challenge:</h3>
+              <p id="srEcho"></p>
+            </div>
+            <div class="modal-footer gutter-1">
+              <div class="container-fluid">
+                <div class="row gutter-1">
+                  <div class="col-8">
+                    <button id="joinSearch" type="button" onclick="joinSearch()" class="btn btn-block btn-primary">Join this challenge</button>
+                  </div>
+                  <div id="joinLoader">
+                    <p>Writing to the blockchain...</p>
+                    <img  src="app/assets/images/loader.svg"> 
+                  </div>
+                  <p id="joinSuccess">Success!</p>
+                  <div class="col-4">
+                    <button id="cancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / search join modal-->          
 
     <!--legal modal-->
       <div class="modal fade" id="legalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
