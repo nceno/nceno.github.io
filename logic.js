@@ -327,6 +327,7 @@ function selectedChallenge(){
                               $("#leaderboard").after(
                                 '<tr><td>'+ convertedName +'</td> <td>'+ 5*4 +'</td></tr>'
                               );
+                              console.log(convertedName);
                            
                             }
                             else
