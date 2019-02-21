@@ -57,6 +57,7 @@ $("#claimLoader").hide();
 $("#claimSuccess").hide();
 $("fitbitSuccess").hide();
 $("portisSuccess").hide();
+$("#request").hide();
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
@@ -303,6 +304,7 @@ function makeLeaderboard(){
 }
 
 function search(){
+  $("#request").show();
   var goalid = web3.utils.padRight($('#searchField').val(),34)
   Nceno.methods.getGoalParams(goalid)
   .call({from: web3.eth.defaultAccount},
