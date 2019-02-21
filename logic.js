@@ -289,14 +289,14 @@ function selectedChallenge(){
                 var flag = new Array();
                 
                 var j=0;
-                for (j = 0; j < compcount; j++){
+                for (j = 0; j < 1; j++){
                   ids = result[0];
                   name = result[1];
                   flag = result[2];
                 }
 
                 var k=0;
-                for (k = 0; k < compcount; k++){
+                for (k = 0; k < 1; k++){
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {

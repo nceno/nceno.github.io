@@ -112,10 +112,9 @@ contract Nceno {
     bytes32[10] memory flags;
 
     goalObject memory theGoal = goalRegistry[_goalID];
-
-    for(uint i =0; i<10; i++){
-    if(theGoal.competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
-      //if(bytes(theGoal.competitor[i]).length != 0){
+    uint compcount = theGoal.competitorCount;
+    for(uint i =0; i<compcount; i++){
+      if(theGoal.competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
         ids[i] = theGoal.competitor[i];
         names[i] = profileOf[theGoal.competitor[i]].name;
         flags[i] = profileOf[theGoal.competitor[i]].flag;
