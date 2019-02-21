@@ -316,14 +316,15 @@ function selectedChallenge(){
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
 
-                              var convertedName = web3.utils.hexToAscii(name[0]);
-                              var convertedFlag = web3.utils.hexToAscii(flag[0]);
+                              var convertedName = web3.utils.hexToUtf8(name[0]);
+                              var convertedFlag = web3.utils.hexToUtf8(flag[0]);
 
                               
                               $("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );
                               console.log("the echo is: ", compcount, adherence[0], ids[0], convertedName, convertedFlag);
+                              console.log("value of k: "+k);
                           
                             }
                             else
