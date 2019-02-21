@@ -319,10 +319,14 @@ function selectedChallenge(){
                               var convertedName = web3.utils.hexToUtf8(name[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flag[k]);
                               
-                              $("#leaderboard").after(
+                              /*$("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );
-                              console.log("the echo is: ", compcount, adherence[0], ids[0], convertedName, convertedFlag);
+                              console.log("the echo is: ", compcount, adherence[0], ids[0], convertedName, convertedFlag);*/
+
+                              $("#leaderboard").after(
+                                '<tr><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td></tr>'
+                              );
                            
                             }
                             else
