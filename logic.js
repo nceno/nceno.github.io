@@ -316,8 +316,8 @@ function selectedChallenge(){
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
 
-                              convertedName = web3.utils.hexToUtf8(name[k]);
-                              convertedFlag = web3.utils.hexToUtf8(flag[k]);
+                              var convertedName = web3.utils.hexToUtf8(name[k]);
+                              var convertedFlag = web3.utils.hexToUtf8(flag[k]);
                               
                               $("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
