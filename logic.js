@@ -325,7 +325,7 @@ function selectedChallenge(){
                               console.log("the echo is: ", compcount, adherence[0], ids[0], convertedName, convertedFlag);*/
 
                               $("#leaderboard").after(
-                                '<tr><td>'+ convertedName +'</td></tr>'
+                                '<tr><td>'+ convertedName +'</td> <td>'+ 5*4 +'</td></tr>'
                               );
                            
                             }
