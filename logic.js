@@ -289,14 +289,14 @@ function selectedChallenge(){
                 var flag = new Array();
                 
                 var j=0;
-                for (j = 0; j < 1; j++){
+                for (j = 0; j < compcount; j++){
                   ids = result[0];
                   name = result[1];
                   flag = result[2];
                 }
 
                 var k=0;
-                for (k = 0; k < 1; k++){
+                for (k = 0; k < compcount; k++){
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
@@ -329,8 +329,8 @@ function selectedChallenge(){
                               $("#leaderboard").after(
                                 '<tr><td>'+ convertedName +'</td> <td>'+ 5*4 +'</td></tr>'
                               );
-                              console.log("ascii is: "+convertedName);
-                              console.log("utf8 is: "+ utf8Name);
+                              console.log(k+" ascii is: "+convertedName);
+                              console.log(k+" utf8 is: "+ utf8Name);
                            
                             }
                             else
