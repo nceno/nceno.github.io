@@ -237,9 +237,10 @@ contract Nceno {
 
     createdGoal.competitorCount = 1; //incriment competitor count
     createdGoal.competitor[0] = _userID; //add self to competitor list
-    createdGoal.isCompetitor[_userID] = true;
     
     goalRegistry[_goalID] = createdGoal; //add goal to the registry
+    goalRegistry[_goalID].isCompetitor[_userID] = true; //add self to the competitor bool list
+    
     iterableGoals[goalCount] = createdGoal; //add goal to iterable registry ***expensive!
     goalCount++; //incriment global count
     partitions = partitionChoices[now%2];
