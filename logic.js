@@ -58,6 +58,7 @@ $("#claimSuccess").hide();
 $("fitbitSuccess").hide();
 $("portisSuccess").hide();
 $("#request").hide();
+$("#joinSearch").hide();
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
@@ -150,6 +151,22 @@ function echoGoal(){
     $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
     $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +
     ". The challenge ID is: "+ goalID+"."
+  );
+}
+
+function joinSearch(){
+  var goalid = web3.utils.padRight($('#goalCategories').val(),34);
+  Nceno.methods.join(
+    goalid,
+    userID)
+  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: $("#srStake").val()/ethPrice*1000000000000000000},
+    function(error, result) {
+      if (!error){
+        
+      }
+      else
+      console.error(error);
+    }
   );
 }
 
@@ -247,7 +264,7 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     console.log("changed!");
     //$("#echo").text($('#goalCategories').val());
-    var goalid = web3.utils.padRight($('#goalCategories').val(),34)
+    var goalid = web3.utils.padRight($('#goalCategories').val(),34);
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
@@ -306,6 +323,7 @@ function makeLeaderboard(){
 function search(){
   $("#request").show();
   var goalid = web3.utils.padRight($('#searchField').val(),34)
+
   Nceno.methods.getGoalParams(goalid)
   .call({from: web3.eth.defaultAccount},
       function(error, result) {
@@ -321,6 +339,7 @@ function search(){
         $("#srMins").html(result[0]+ "mins");
         $("#srComp").html(result[6]);
         $("#srStart").html(tstamp.toDateString());
+        if(result[4]*1000>Date.now()){$("#joinSearch").show();}
       }
       else
       console.error(error);
