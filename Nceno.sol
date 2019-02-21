@@ -288,6 +288,10 @@ contract Nceno {
       goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0,
       "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
     
+    uint createFee = 0;
+    uint logFee = goalRegistry[_goalID].sesPerWk * 12580920000000000;
+    uint claimFee = 12580920000000000;
+
     uint wk = (now-goalRegistry[_goalID].startTime)/604800;
     uint winners;
     uint pot;
@@ -304,10 +308,18 @@ contract Nceno {
       }
     }
     
-    msg.sender.transfer(pot/(2*winners)); //initiate the payout
+    //if caller is the host, set the create fee to Create, if not, set to Join
+    if(msg.sender == profileOf[goalRegistry[_goalID].competitor[0]].walletAdr){
+      createFee = 12580920000000000/goalRegistry[_goalID].wks;
+    }
+    else createFee = 4423005000000000/goalRegistry[_goalID].wks;
+
+
+    msg.sender.transfer(claimFee + logFee + createFee + pot/(2*winners)); //initiate the payout, refund fees
     goalRegistry[_goalID].bonusWasClaimed[_userID][wk-1] = 1; //protect against bonus double spending
     goalRegistry[_goalID].potWk[wk-1] = pot; //write to the global goal stats
     goalRegistry[_goalID].winnersWk[wk-1] = winners; //write to the global goal stats
+
 
     //fire event: _userID claimed _amount of lost stake from week _wk of _goalID.
     bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
