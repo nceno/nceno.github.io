@@ -58,7 +58,8 @@ $("#claimSuccess").hide();
 $("fitbitSuccess").hide();
 $("portisSuccess").hide();
 $("#request").hide();
-$("#joinSearch").hide();
+$("#joinLoader").hide();
+$("#joinSuccess").hide();
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
