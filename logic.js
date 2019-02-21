@@ -319,7 +319,7 @@ function selectedChallenge(){
                               $("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ name[k] +'</td><td><img src="https://ipdata.co/flags/'+flag[k]+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );
-                              
+                           
                             }
                             else
                             console.error(error);
