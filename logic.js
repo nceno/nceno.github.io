@@ -319,7 +319,7 @@ function selectedChallenge(){
                               $("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ web3.utils.hexToUtf8(name[k]) +'</td><td><img src="https://ipdata.co/flags/'+web3.utils.hexToUtf8(flag[k])+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );
-                              console.log("the echo is: ", compcount, adherence, ids, name, flag);
+                              console.log("the echo is: ", compcount, adherence[0], ids[0], web3.utils.hexToUtf8(name[0]), web3.utils.hexToUtf8(flag[0]));
                            
                             }
                             else
