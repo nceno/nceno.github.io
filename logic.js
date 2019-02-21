@@ -275,7 +275,7 @@ function selectedChallenge(){
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+" x/wk");
-          $("#echMins").html(result[0]+ "mins");
+          $("#echMins").html(result[0]+ " mins");
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
 
@@ -290,9 +290,9 @@ function selectedChallenge(){
                 
                 var j=0;
                 for (j = 0; j < compcount; j++){
-                  ids[j] = result[0][j];
-                  name[j] = result[1][j];
-                  flag[j] = result[2][j];
+                  ids[j] = result[j][0];
+                  name[j] = result[j][1];
+                  flag[j] = result[j][2];
                 }
 
                 var k=0;
