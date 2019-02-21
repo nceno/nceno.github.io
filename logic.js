@@ -316,10 +316,10 @@ function selectedChallenge(){
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
 
-                              var convertedName = web3.utils.hexToAscii(name[k]);
-                              var convertedFlag = web3.utils.hexToAscii(flag[k]);
+                              var convertedName = web3.utils.hexToAscii(name[0]);
+                              var convertedFlag = web3.utils.hexToAscii(flag[0]);
 
-                              var utf8Name = web3.utils.hexToUtf8(name[k]);
+                              var utf8Name = web3.utils.hexToUtf8(name[0]);
                               
                               /*$("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
@@ -329,8 +329,8 @@ function selectedChallenge(){
                               $("#leaderboard").after(
                                 '<tr><td>'+ convertedName +'</td> <td>'+ 5*4 +'</td></tr>'
                               );
-                              console.log(k+" ascii is: "+convertedName);
-                              console.log(k+" utf8 is: "+ utf8Name);
+                              console.log(0+" ascii is: "+convertedName);
+                              console.log(0+" utf8 is: "+ utf8Name);
                            
                             }
                             else
