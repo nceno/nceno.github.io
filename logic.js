@@ -337,7 +337,7 @@ function search(){
         $("#srStake").html("$"+buyin);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
-        $("#srMins").html(result[0]+ "mins");
+        $("#srMins").html(result[0]+ " mins");
         $("#srComp").html(result[6]);
         $("#srStart").html(tstamp.toDateString());
         if(result[4]*1000>Date.now()){$("#joinSearch").show();}
@@ -380,7 +380,7 @@ function browse(){
         $("#srStake").html("$"+buyin);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
-        $("#srMins").html(result[0]+ "mins");
+        $("#srMins").html(result[0]+ " mins");
         $("#srComp").html(result[6]);
         $("#srStart").html(tstamp.toDateString());
       }
