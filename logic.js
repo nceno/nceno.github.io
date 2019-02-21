@@ -317,7 +317,7 @@ function selectedChallenge(){
                               lostStake[k] = result[1];
                               
                               $("#leaderboard").after(
-                                '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ name[k] +'</td><td><img src="https://ipdata.co/flags/'+flag[k]+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
+                                '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ web3.utils.hexToAscii(name[k]) +'</td><td><img src="https://ipdata.co/flags/'+web3.utils.hexToAscii(flag[k])+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );
                            
                             }
