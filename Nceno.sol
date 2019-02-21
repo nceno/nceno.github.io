@@ -311,7 +311,7 @@ contract Nceno {
     
     //if caller is the host, set the create fee to Create, if not, set to Join
     if(msg.sender == profileOf[goalRegistry[_goalID].competitor[0]].walletAdr){
-      createFee = 12580920000000000/goalRegistry[_goalID].wks;
+      createFee = 22623960000000000/goalRegistry[_goalID].wks;
     }
     else createFee = 4423005000000000/goalRegistry[_goalID].wks;
 

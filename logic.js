@@ -571,6 +571,7 @@ window.onload = function() {
     //log them
     console.log(access_token);
     console.log(fitbitUser);
+    console.log(userID);
     $("#fitbitBtn").hide();
     $("#fitbitSuccess").html("Your device ID: "+ fitbitUser);
   }
