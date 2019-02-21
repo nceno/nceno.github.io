@@ -174,7 +174,7 @@ function joinSearch(){
     function(error, result) {
       if (!error){
         var stakewei= result[1];
-        Nceno.methods.join(
+        Nceno.methods.joinGoal(
           goalid,
           userID
         )
