@@ -317,7 +317,7 @@ function selectedChallenge(){
                               lostStake[k] = result[1];
 
                               var convertedName = web3.utils.hexToUtf8(name[0]);
-                              var convertedFlag = web3.utils.hexToUtf8(flag[0]);
+                              var convertedFlag = web3.utils.hexToUtf8(flag[0]).toLowerCase();
 
                               
                               $("#leaderboard").after(
