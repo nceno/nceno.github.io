@@ -319,8 +319,8 @@ function makeLeaderboard(){
   });
 }
 
-//todo: separate the results from the html so they can be passed as join() params.
 //searches for a specific goal and displays it with an option to join.
+//also populates the join modal.
 function search(){
   $("#request").show();
   var goalid = web3.utils.padRight($('#searchField').val(),34)
