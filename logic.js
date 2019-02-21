@@ -19,7 +19,7 @@ function showPortis() {
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
       $("#portisBtn").hide();
-      $("#portisSuccess").html("Your address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
+      $("#portisSuccess").html(web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
     });
   })
 }
@@ -582,7 +582,7 @@ window.onload = function() {
     console.log(fitbitUser);
     console.log(userID);
     $("#fitbitBtn").hide();
-    $("#fitbitSuccess").html("Your device ID: "+ fitbitUser);
+    $("#fitbitSuccess").html(fitbitUser);
   }
 };
 
