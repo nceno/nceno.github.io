@@ -203,9 +203,9 @@ function joinSearch(){
   ); 
 }
 
-//joins the searched goal
+//joins the browsed goal
 function joinSoon(){
-  var goalid = web3.utils.padRight($('#rowChallenge').val(),34);
+  var goalid = browsedGoal;
   Nceno.methods.getGoalParams(
     goalid
   )
@@ -511,12 +511,17 @@ function browse(){
         $("#startingSoon").after('<tr><td>$'+buyin+'</td><td>'+result[3]+
           ' wks</td><td>'+result[2]+' x/wk</td><td>'+result[0]+' min</td><td>'+
           result[6]+' </td><td>'+tstamp.toDateString()+
-          '</td><td><button type="button" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
+          '</td><td><button type="button" onclick="setGoalID('+goalid+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
       }
       else
       console.error(error);
     });
   } 
+}
+
+var browsedGoal;
+function setGoalID(id){
+  browsedGoal= id;
 }
 
 //button to claim lost stake from previous week. needs work.
