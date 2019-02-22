@@ -251,6 +251,7 @@ function makeList(){
   }
 }
 
+//generates the typed quick stats at the top of the manage tab
 function quickStats(){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
@@ -322,11 +323,10 @@ function makePage(){
   quickStats();
 }
 
+var currentWeek = 0;
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
-    
-    //$("#echo").text($('#goalCategories').val());
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
@@ -335,13 +335,16 @@ function selectedChallenge(){
           //echo challenge
           var compcount = result[6];
           var tstamp = new Date(result[4]*1000);
-          var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
+          var buyin = Math.round(result[1]*result[5]/100000000000000000000);
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+" x/wk");
           $("#echMins").html(result[0]+ " mins");
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
+
+          //set current challenge week globally
+          currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
 
           //leaderboard
           Nceno.methods.getParticipants(goalid)
@@ -420,7 +423,7 @@ function search(){
         //echo challenge
 
         var tstamp = new Date(result[4]*1000);
-        var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
+        var buyin = Math.round(result[1]*result[5]/100000000000000000000);
 
         $("#srStake").html("$"+buyin);
         $("#srWks").html(result[3]+" wks");
@@ -463,7 +466,7 @@ function browse(){
         //echo challenge
 
         var tstamp = new Date(result[4]*1000);
-        var buyin = Math.floor(result[1]*result[5]/100000000000000000000);
+        var buyin = Math.round(result[1]*result[5]/100000000000000000000);
 
         $("#srStake").html("$"+buyin);
         $("#srWks").html(result[3]+" wks");
