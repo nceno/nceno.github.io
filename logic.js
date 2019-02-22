@@ -508,9 +508,12 @@ function browse(){
         var tstamp = new Date(result[4]*1000);
         var buyin = Math.round(result[1]*result[5]/100000000000000000000);
 
-        $("#startingSoon").after('<tr><td>$'+buyin+'</td><td>'+result[3]+
-          ' wks</td><td>'+result[2]+' x/wk</td><td>'+result[0]+' min</td><td>'+
-          result[6]+' </td><td>'+tstamp.toDateString()+
+        $("#startingSoon").after('<tr><td>$'+buyin+
+          '</td><td>'+result[3]+
+          ' wks</td><td>'+result[2]+
+          ' x/wk</td><td>'+result[0]+
+          ' min</td><td>'+result[6]+
+          ' </td><td>'+tstamp.toDateString()+
           '</td><td><button type="button" onclick="setGoalID('+goalid+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
       }
       else
@@ -522,6 +525,11 @@ function browse(){
 var browsedGoal;
 function setGoalID(id){
   browsedGoal= id;
+  $("#soonEcho").html(
+    "You're commiting $" + buyin + " to working out for " + 
+    result[0] +"mins " + result[2]+" times per week for "+ 
+    result[3]+  " weeks, starting automatically on "+ tstamp.toDateString()
+  );
 }
 
 //button to claim lost stake from previous week. needs work.
