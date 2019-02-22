@@ -251,11 +251,46 @@ function makeList(){
   }
 }
 
+function quickStats(){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
+  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      
+      //activity minutes  
+      var data = JSON.parse(xhr.responseText);
+      var obj = [data];
+      var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
+      var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
+      var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
+      var sessionMins = fatBurn + cardio + peak;      
+      $("#qsMins").html(sessionMins);
+      console.log("total session minutes to be logged: "+sessionMins);
+
+      //active challenges
+      var j=0;
+      var count = 0;
+      for (j = 0; j < 15; j++){
+      Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+          count++;
+        }
+        $("#qsActive").html(count);
+      });}
+
+      //
+
+    }
+  };
+  xhr.send();
+}
+
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
   makeList();
   selectedChallenge();
-  //makeLeaderboard();
+  quickStats();
 }
 
 function selectedChallenge(){
@@ -480,7 +515,7 @@ xhr.onload = function() {
     .on('error', function(error){console.log(error);});;
   }
   };
-  xhr.send()
+  xhr.send();
 });//close click(function(){
 
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.

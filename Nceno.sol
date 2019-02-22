@@ -133,7 +133,7 @@ contract Nceno {
     uint totalAtStake;
   }
  
-    function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint){
+  function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
     if(0<=wk && wk<theGoal.wks+1){
@@ -150,6 +150,24 @@ contract Nceno {
       }  
                  
       return(my.adherenceRate, my.totalAtStake, successCount);
+    }
+  }
+
+  function successPerGoal(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint, uint){
+    goalObject memory theGoal = goalRegistry[_goalID];
+    uint wk = (now - theGoal.startTime)/604800;
+    if(wk>theGoal.wks){
+      myStatsObject memory my;
+      uint successCount;
+      for(uint j =0; j<wk; j++){
+        successCount += goalRegistry[_goalID].successes[_userID][j];
+        my.wkPayouts[j] = partitions[theGoal.wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*theGoal.stakeWEI/(100*theGoal.sesPerWk);
+        my.lostStake+=(partitions[theGoal.wks/2 -1][j]*theGoal.stakeWEI/100-my.wkPayouts[j]);
+        my.wkBonuses[j] = goalRegistry[_goalID].bonusWasClaimed[_userID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
+        my.bonusTotal+= my.wkBonuses[j];
+        
+      }       
+      return(successCount, theGoal.sesPerWk, my.lostStake, my.bonusTotal);
     }
   }
     

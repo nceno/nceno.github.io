@@ -278,19 +278,17 @@
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col text-center">
-                <h5><b style="color:#ccff00;">Zoe16</b>'s quick stats:<br> 
+                <h5><b style="color:#ccff00;">Zoe16</b>, you have:<br> 
                 <span id="typed"></span>
                 <div id="typed-strings">
-                 <p><b>47</b> activity minutes today</p>
-                  <p><b>6</b> active challenges</p>
-                  <p><b>82%</b> overall success rate</p>. 
-                  <p><b>$12.82</b> lost to-date</p> 
-                  <p><b>$75.30</b> gained to-date</p> 
-                  <p><b>$62.48</b> net profit to-date</p>
+                 <p><b id="qsMins"></b> activity minutes today</p>
+                  <p><b id="qsActive">6</b> active challenges</p>
+                  <p><b id="qsAdherence">82%</b> overall success rate</p>. 
+                  <p><b id="qsLost">$12.82</b> lost to-date</p> 
+                  <p><b id="qsGain">$75.30</b> gained to-date</p> 
+                  <p><b id="qsProfit">$62.48</b> net profit to-date</p>
                 </div></h5>
-                <div class="col text-center">
-                  <button class="btn btn-outline-white btn-rounded px-1 py-1 ml-0 mt-0" data-toggle="modal" data-target="#popupCreate">View full stats</button>
-                </div>
+                
                 <p>&nbsp;</p>
 
 
@@ -632,10 +630,13 @@
                                       <div class="accordion-content-wrapper">
 
                                         <div class="owl-carousel" data-dots="true" data-autoplay="false">
-                                          <div><p style="color:#ffffff">Note: Charts appear best when mobile device is in landscape (horizontal) mode.</div>
+                                          <div class="col text-center"><p style="color:#ffffff">Note: Charts appear best when mobile device is in landscape (horizontal) mode.</div>
                                           <div><canvas id="canvas1" ></canvas></div>
                                           <div><canvas id="canvas2" ></canvas></div>
                                           <div><canvas id="canvas3" ></canvas></div>
+                                          <div class="col text-center">
+                                            <button class="btn btn-outline-white btn-rounded px-1 py-1 ml-0 mt-0" data-toggle="modal" data-target="#popupCreate">View full stats</button>
+                                        </div>
                                         </div>
 
                                       </div>
