@@ -270,17 +270,46 @@ function quickStats(){
 
       //active challenges
       var j=0;
-      var count = 0;
-      for (j = 0; j < 15; j++){
+      var active = 0;
+      for (j = 0; j < 20; j++){
       Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          count++;
+          active++;
         }
-        $("#qsActive").html(count);
+        $("#qsActive").html(active);
       });}
 
-      //
+      //completed challenges
+      var k=0;
+      var completed = 0;
+      var goals2 = new Array();
+      for (k = 0; k < 20; k++){
+      Nceno.methods.getActiveGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+          goals2[k] = result;
+          completed++;
+        }
+      });}
 
+      //the rest
+      var i=0;
+      var successCount=0; 
+      var sesPerWk=0;
+      var lostStake=0;
+      var bonusTotal=0;
+      for (i = 0; i < completed; i++){
+      Nceno.methods.successPerGoal(userID, goals2[i]).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+          successCount+=result[0];
+          sesPerWk+=result[1];
+          lostStake+=result[2];
+          bonusTotal+=result[3];
+        }
+      });}
+      $("#qsAdherence").html(successCount/sesPerWk*100);
+      $("#qsLost").html(lostStake);
+      $("#qsGain").html(bonusTotal);
+      $("#qsProfit").html(bonusTotal-lostStake);
     }
   };
   xhr.send();

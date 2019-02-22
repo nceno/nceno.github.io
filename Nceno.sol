@@ -159,7 +159,7 @@ contract Nceno {
     if(wk>theGoal.wks){
       myStatsObject memory my;
       uint successCount;
-      for(uint j =0; j<wk; j++){
+      for(uint j =0; j<theGoal.wks; j++){
         successCount += goalRegistry[_goalID].successes[_userID][j];
         my.wkPayouts[j] = partitions[theGoal.wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*theGoal.stakeWEI/(100*theGoal.sesPerWk);
         my.lostStake+=(partitions[theGoal.wks/2 -1][j]*theGoal.stakeWEI/100-my.wkPayouts[j]);
