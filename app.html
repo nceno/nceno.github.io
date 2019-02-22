@@ -746,13 +746,12 @@
               </div>
             <!-- / echo-->
 
-
                 <h5 class="mb-2 fs-20 font-weight-normal">Here's the challenges that are starting soon: </h5>
                 <div class="row">
                   <div class="col">
                     <div class="table-responsive-md">
                       <table class="table table-lined" id="soonGoals">
-                        <thead class="thead-dark">
+                        <thead id="startingSoon" class="thead-dark">
                           <tr>
                             <th scope="col">Buy-in</th>
                             <th scope="col">Duration</th>
@@ -765,18 +764,16 @@
                         </thead>
                         <tbody>
                           <tr>
-                            
                             <td>$100</td>
                             <td>12 wks</td>
                             <td>4 /wk</td>
                             <td>20 min</td>
                             <td>10 </td>
                             <td>Jan 19</td>
-                            
-                            <td><button onclick="echoJoinedGoal()" type="button" id="claim" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupJoin" data-whatever="@mdo">Join</button></td>
+                            <td><button type="button" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td>
                           </tr>
+
                           <tr>
-                            
                             <td>$110</td>
                             <td>12 wks</td>
                             <td>4 /wk</td>
@@ -937,6 +934,42 @@
         </div>
       </div>
       <!-- / create modal-->
+
+      <!--Soon join modal-->
+      <div class="modal fade" id="popupSoonJoin" tabindex="-1" role="dialog" aria-labelledby="popupSoonJoin" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
+            <div class="modal-header justify-content-end">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="icon-x"></span>
+              </button>
+            </div>
+            <div class="modal-body text-center text-white">
+              <h3>You're about to join this challenge:</h3>
+              <p id="soonEcho"></p>
+            </div>
+            <div class="modal-footer gutter-1">
+              <div class="container-fluid">
+                <div class="row gutter-1">
+                  <div class="col-8">
+                    <button id="joinSoon" type="button" onclick="joinSoon()" class="btn btn-block btn-primary">Join this challenge</button>
+                  </div>
+                  <div id="joinSoonLoader">
+                    <p>Writing to the blockchain...</p>
+                    <img  src="app/assets/images/loader.svg"> 
+                  </div>
+                  <p id="joinSoonSuccess">Success!</p>
+                  <div class="col-4">
+                    <button id="soonCancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / Soon join modal-->
 
       <!--search join modal-->
       <div class="modal fade" id="popupSrJoin" tabindex="-1" role="dialog" aria-labelledby="popupSrJoin" aria-hidden="true">

@@ -60,6 +60,8 @@ $("portisSuccess").hide();
 $("#request").hide();
 $("#joinLoader").hide();
 $("#joinSuccess").hide();
+$("#joinSoonLoader").hide();
+$("#joinSoonSuccess").hide();
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
@@ -192,6 +194,43 @@ function joinSearch(){
         ).on('confirmation', function(confNumber, receipt){ 
           $("#joinLoader").hide();
           $("#joinSuccess").show();
+           })
+          .on('error', function(error){console.log(error);});;
+      }
+      else
+      console.error(error);
+    }
+  ); 
+}
+
+//joins the searched goal
+function joinSoon(){
+  var goalid = web3.utils.padRight($('#rowChallenge').val(),34);
+  Nceno.methods.getGoalParams(
+    goalid
+  )
+  .call({from: web3.eth.defaultAccount},
+    function(error, result) {
+      if (!error){
+        var stakewei= result[1];
+        Nceno.methods.joinGoal(
+          goalid,
+          userID
+        )
+        .send({from: web3.eth.defaultAccount, gas: 310000, gasPrice: 15000000000, value: stakewei},
+          function(error, result) {
+            if (!error){
+              $("#joinSoon").hide();
+              $("#soonCancelBtn").hide();
+              $("#joinSoonLoader").show();
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
+        ).on('confirmation', function(confNumber, receipt){ 
+          $("#joinSoonLoader").hide();
+          $("#joinSoonSuccess").show();
            })
           .on('error', function(error){console.log(error);});;
       }
@@ -448,36 +487,36 @@ function search(){
 function browse(){
   var i = 0;
   var goals1 = new Array();
-  for (i = 0; i < 15; i++){
-      Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals1[i] = result;
-          console.log(goals1[i]);
-          $("#soonGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
-          
-        }
-      });    
-    }
-  var goalid = web3.utils.padRight($('#searchField').val(),34)
-  Nceno.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
+  for (i = 0; i < 20; i++){
+    Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
+      if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+        goals1[i] = result;
+        //console.log(goals1[i]);
+        //goes here
+      }
+    });    
+  }
+  var j=0;
+  for(j = 0; j < 20; j++){
+    var goalid = goals1[j];
+    Nceno.methods.getGoalParams(goalid)
+    .call({from: web3.eth.defaultAccount},
       function(error, result) {
       if (!error){
-        //echo challenge
-
+        
+        //list it in the table
         var tstamp = new Date(result[4]*1000);
         var buyin = Math.round(result[1]*result[5]/100000000000000000000);
 
-        $("#srStake").html("$"+buyin);
-        $("#srWks").html(result[3]+" wks");
-        $("#srSes").html(result[2]+" x/wk");
-        $("#srMins").html(result[0]+ " mins");
-        $("#srComp").html(result[6]);
-        $("#srStart").html(tstamp.toDateString());
+        $("#startingSoon").after('<tr><td>$'+buyin+'</td><td>'+result[3]+
+          ' wks</td><td>'+result[2]+' x/wk</td><td>'+result[0]+' min</td><td>'+
+          result[6]+' </td><td>'+tstamp.toDateString()+
+          '</td><td><button type="button" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
       }
       else
       console.error(error);
-  }); 
+    });
+  } 
 }
 
 //button to claim lost stake from previous week. needs work.
