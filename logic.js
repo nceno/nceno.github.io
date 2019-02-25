@@ -51,6 +51,7 @@ $("#acctLoader").hide();
 $("#acctSuccess").hide();
 $("#createLoader").hide();
 $("#createSuccess").hide();
+$("#dashboard").hide();
 $("#logLoader").hide();
 $("#logSuccess").hide();
 $("#claimLoader").hide();
@@ -381,6 +382,7 @@ function selectedChallenge(){
           $("#echMins").html(result[0]+ " mins");
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
+          $("#dashboard").show();
 
           //set current challenge week globally
           currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
