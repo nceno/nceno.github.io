@@ -762,7 +762,7 @@
                             <th scope="col"></th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="emptyThis">
                           
                           <!--upcoming challenges go here -->
 
@@ -857,11 +857,13 @@
                   <div class="col-8">
                     <button id="hostBtn" type="button" class="btn btn-block btn-primary">Host this challenge</button>
                   </div>
-                  <div id="createLoader">
+                  <div id="createLoader" class="col text-center mb-2">
                     <p>Writing your challenge to the blockchain...</p>
                     <img  src="app/assets/images/loader.svg"> 
                   </div>
-                  <p id="createSuccess">Success!</p>
+                  <div class="col text-center mb-2">
+                    <p id="createSuccess">Success!</p>
+                  </div>
                   <div class="col-4">
                     <button id="cancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
                   </div>

@@ -245,7 +245,9 @@ function joinSoon(){
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;
 function makeList(){
-  if(populated === false){
+    $("#upcomingGoals").empty();
+    $("#activeGoals").empty();
+    $("#completedGoals").empty();
     $("#goalCategories").selectric();
  
     var goals1 = new Array();
@@ -284,8 +286,8 @@ function makeList(){
         }
       });  
     }
-    populated = true;
-  }
+    
+  
 }
 
 //generates the typed quick stats at the top of the manage tab
@@ -482,7 +484,7 @@ function search(){
 
 //populates the challenges starting soon table
 function browse(){
-
+  $("#emptyThis").empty();
   //var goals1 = new Array();
   for (let i = 0; i < 20; i++){
     Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
