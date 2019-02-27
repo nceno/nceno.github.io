@@ -11,6 +11,7 @@ $("#time").click(function(){
 //web3 definition would go here ----->>
 
 //signs user into portis and stores their wallet address as the default wallet address in web3
+var authed = false;
 function showPortis() {
   // will only open the portis menu
   web3.currentProvider.showPortis(() => {
@@ -18,6 +19,7 @@ function showPortis() {
       web3.eth.defaultAccount = e[0];
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
+      authed = true;
       $("#portisBtn").hide();
       $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
     });
