@@ -409,6 +409,7 @@ function selectedChallenge(){
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
                       if (!error){
+                        console.log("passed!");
                         var adherence = new Array();
                         adherence[k] = result[0];
 
@@ -416,7 +417,7 @@ function selectedChallenge(){
                         .call({from: web3.eth.defaultAccount},
                           function(error, result) {
                             if (!error){
-                              console.log("passed!");
+
                               var bonusTotal = new Array();
                               var totalPay = new Array();
                               var lostStake = new Array();
