@@ -258,6 +258,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i] + " is an upcoming goal");
+          $("#placeholder").remove();
           $("#upcomingGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
@@ -267,6 +268,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[i] = result;
           console.log(goals2[i]  + " is an active goal");
+          $("#placeholder").remove();
           $("#activeGoals").after('<option>'+ goals2[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
@@ -276,6 +278,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals3[i] = result;
           console.log(goals3[i]  + " is a completed goal");
+          $("#placeholder").remove();
           $("#completedGoals").after('<option>'+ goals3[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
