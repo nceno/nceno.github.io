@@ -244,19 +244,16 @@ function joinSoon(){
 
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;
-function makeList(){
+async function makeList(){
   if(populated === false){
     $("#goalCategories").selectric();
  
-    var i = 0;
-    var j = 0;
-    var k = 0;
     var goals1 = new Array();
     var goals2 = new Array();
     var goals3 = new Array();
 
-    for (i = 0; i < 15; i++){
-      Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+    for (let i = 0; i < 15; i++){
+      await Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i] + " is an upcoming goal");
@@ -266,8 +263,8 @@ function makeList(){
       });    
     }
 
-    for (j = 0; j < 15; j++){
-      Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
+    for (let j = 0; j < 15; j++){
+      await Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[j] = result;
           console.log(goals2[j]  + " is an active goal");
@@ -277,8 +274,8 @@ function makeList(){
       });    
     }
 
-    for (k = 0; k < 15; k++){
-      Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
+    for (let k = 0; k < 15; k++){
+      await Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals3[k] = result;
           console.log(goals3[k]  + " is a completed goal");
@@ -310,9 +307,8 @@ function quickStats(){
       console.log("total session minutes to be logged: "+sessionMins);
 
       //active challenges
-      var j=0;
       var active = 0;
-      for (j = 0; j < 20; j++){
+      for (let j = 0; j < 20; j++){
       Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           active++;
@@ -321,10 +317,9 @@ function quickStats(){
       });}
 
       //completed challenges
-      var k=0;
       var completed = 0;
       var goals2 = new Array();
-      for (k = 0; k < 20; k++){
+      for (let k = 0; k < 20; k++){
       Nceno.methods.getActiveGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[k] = result;
@@ -333,12 +328,11 @@ function quickStats(){
       });}
 
       //the rest
-      var i=0;
       var successCount=0; 
       var sesPerWk=0;
       var lostStake=0;
       var bonusTotal=0;
-      for (i = 0; i < completed; i++){
+      for (let i = 0; i < completed; i++){
       Nceno.methods.successPerGoal(userID, goals2[i]).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           successCount+=result[0];
@@ -396,15 +390,15 @@ function selectedChallenge(){
                 var name = new Array();
                 var flag = new Array();
                 
-                var j=0;
-                for (j = 0; j < compcount; j++){
+                
+                for (let j = 0; j < compcount; j++){
                   ids = result[0];
                   name = result[1];
                   flag = result[2];
                 }
 
-                var k=0;
-                for (k = 0; k < compcount; k++){
+                
+                for (let k = 0; k < compcount; k++){
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
@@ -487,9 +481,9 @@ function search(){
 
 //populates the challenges starting soon table
 function browse(){
-  var i = 0;
+
   var goals1 = new Array();
-  for (i = 0; i < 20; i++){
+  for (let i = 0; i < 20; i++){
     Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
       if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
         goals1[i] = result;
@@ -498,8 +492,8 @@ function browse(){
       }
     });    
   }
-  var j=0;
-  for(j = 0; j < 20; j++){
+
+  for(let j = 0; j < 20; j++){
     var goalid = goals1[j];
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
