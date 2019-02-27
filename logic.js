@@ -245,9 +245,8 @@ function joinSoon(){
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;
 function makeList(){
-  if(populated =false){
-    $("#goalCategories").selectric();
- 
+  $("#goalCategories").selectric();
+  if(populated = false){
     var goals1 = new Array();
     var goals2 = new Array();
     var goals3 = new Array();
@@ -284,8 +283,9 @@ function makeList(){
         }
       });  
     }
+    populated=true;
   }
-  populated=true;
+  
 }
 
 function resetCreate(){
