@@ -252,16 +252,16 @@ async function makeList(){
     var goals2 = new Array();
     var goals3 = new Array();
 
-    /*for (let i = 0; i < 15; i++){
-      await Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals1[i] = result;
-          console.log(goals1[i] + " is an upcoming goal");
-          $("#goalCategories").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
-        }
-      });    
-    }*/
+    for (let i = 0; i < 15; i++){
+      let result = await Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount});
+      if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+        goals1[i] = result;
+        console.log(goals1[i] + " is an upcoming goal");
+        $("#upcomingGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
+        $('#goalCategories').selectric('refresh');
+      }
+         
+    }
 
     for (let j = 0; j < 15; j++){
       let result = await Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount});
@@ -273,16 +273,15 @@ async function makeList(){
       }
     }
 
-    /*for (let k = 0; k < 15; k++){
-      await Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals3[k] = result;
-          console.log(goals3[k]  + " is a completed goal");
-          $("#completedGoals").after('<option>'+ goals3[k].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
-        }
-      });    
-    }*/
+    for (let k = 0; k < 15; k++){
+      let result = await Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount});
+      if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+        goals3[k] = result;
+        console.log(goals3[k]  + " is a completed goal");
+        $("#completedGoals").after('<option>'+ goals3[k].slice(0, 8) +'</option>');
+        $('#goalCategories').selectric('refresh');
+      }    
+    }
     populated = true;
   }
 }
