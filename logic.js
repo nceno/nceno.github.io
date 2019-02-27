@@ -489,8 +489,6 @@ function search(){
 var browsePopulated = false;
 function browse(){
   if(browsePopulated===false){
-    $("#emptyThis").empty();
-    //var goals1 = new Array();
     for (let i = 0; i < 20; i++){
       Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
