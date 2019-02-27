@@ -243,10 +243,10 @@ function joinSoon(){
 
 
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
-//var populated = false;
+var populated = false;
 function makeList(){
   $("#goalCategories").selectric();
-  //if(populated = false){
+  if(populated === false){
     var goals1 = new Array();
     var goals2 = new Array();
     var goals3 = new Array();
@@ -283,8 +283,8 @@ function makeList(){
         }
       });  
     }
-    //populated=true;
-  //}
+    populated=true;
+  }
   
 }
 
@@ -486,52 +486,32 @@ function search(){
 }
 
 //populates the challenges starting soon table
+var browsePopulated = false;
 function browse(){
-  $("#emptyThis").empty();
-  //var goals1 = new Array();
-  for (let i = 0; i < 20; i++){
-    Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
-      if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
-        //var goalid = result[0];
+  if(browsePopulated===false){
+    $("#emptyThis").empty();
+    //var goals1 = new Array();
+    for (let i = 0; i < 20; i++){
+      Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
+          //var goalid = result[0];
 
-        //list it in the table
-        var tstamp = new Date(result[5]*1000);
-        var buyin = Math.round(result[2]/100000000000000000000);
+          //list it in the table
+          var tstamp = new Date(result[5]*1000);
+          var buyin = Math.round(result[2]/100000000000000000000);
 
-        $("#startingSoon").after('<tr><td>$'+buyin+
-          '</td><td>'+result[4]+
-          ' wks</td><td>'+result[3]+
-          ' x/wk</td><td>'+result[1]+
-          ' min</td><td>'+result[6]+
-          ' </td><td>'+tstamp.toDateString()+
-          '</td><td><button type="button" onclick="setGoalID('+result[0]+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
-      }
-    });    
+          $("#startingSoon").after('<tr><td>$'+buyin+
+            '</td><td>'+result[4]+
+            ' wks</td><td>'+result[3]+
+            ' x/wk</td><td>'+result[1]+
+            ' min</td><td>'+result[6]+
+            ' </td><td>'+tstamp.toDateString()+
+            '</td><td><button type="button" onclick="setGoalID('+result[0]+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
+        }
+      });    
+    }
+    browsePopulated = true;
   }
-
-  /*for(let j = 0; j < 20; j++){
-    var goalid = goals1[j];
-    Nceno.methods.getGoalParams(goalid)
-    .call({from: web3.eth.defaultAccount},
-      function(error, result) {
-      if (!error){
-        
-        //list it in the table
-        var tstamp = new Date(result[4]*1000);
-        var buyin = Math.round(result[1]*result[5]/100000000000000000000);
-
-        $("#startingSoon").after('<tr><td>$'+buyin+
-          '</td><td>'+result[3]+
-          ' wks</td><td>'+result[2]+
-          ' x/wk</td><td>'+result[0]+
-          ' min</td><td>'+result[6]+
-          ' </td><td>'+tstamp.toDateString()+
-          '</td><td><button type="button" onclick="setGoalID('+goalid+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
-      }
-      else
-      console.error(error);
-    });
-  }*/ 
 }
 
 var browsedGoal;
