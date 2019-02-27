@@ -288,6 +288,11 @@ function makeList(){
   populated=true;
 }
 
+function resetCreate(){
+  $("#hostBtn").show();
+  $("#cancelBtn").show();
+}
+
 //generates the typed quick stats at the top of the manage tab
 function quickStats(){
   var xhr = new XMLHttpRequest();
