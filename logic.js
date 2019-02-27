@@ -245,9 +245,7 @@ function joinSoon(){
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;
 function makeList(){
-    $("#upcomingGoals").empty();
-    $("#activeGoals").empty();
-    $("#completedGoals").empty();
+  if(populated =false){
     $("#goalCategories").selectric();
  
     var goals1 = new Array();
@@ -286,8 +284,8 @@ function makeList(){
         }
       });  
     }
-    
-  
+  }
+  populated=true;
 }
 
 //generates the typed quick stats at the top of the manage tab
