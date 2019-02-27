@@ -181,7 +181,7 @@ function joinSearch(){
           goalid,
           userID
         )
-        .send({from: web3.eth.defaultAccount, gas: 310000, gasPrice: 15000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, gas: 910000, gasPrice: 15000000000, value: stakewei},
           function(error, result) {
             if (!error){
               $("#joinSearch").hide();
@@ -405,18 +405,17 @@ function selectedChallenge(){
 
                 
                 for (let k = 0; k < compcount; k++){
-                  console.log("k value= "+k);
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
+                      
                       if (!error){
-
                         var adherence = new Array();
                         adherence[k] = result[0];
-
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
                           function(error, result) {
+                            
                             if (!error){
                               console.log("passed!");
                               var bonusTotal = new Array();
