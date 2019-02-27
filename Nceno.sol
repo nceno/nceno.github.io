@@ -27,19 +27,19 @@ contract Nceno {
   
   //get upcoming goal: only returns a user's goal if it hasn't yet started
   function getUpcomingGoal(bytes32 _userID, uint _index) external view returns(bytes32){
-    require(now - profileOf[_userID].goalAt[_index].startTime < 0);
+    require(now < profileOf[_userID].goalAt[_index].startTime );
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
   //get active goal: only returns a user's goal if it has already started
   function getActiveGoal(bytes32 _userID, uint _index) external view returns(bytes32){
-    require(now - profileOf[_userID].goalAt[_index].startTime < profileOf[_userID].goalAt[_index].wks*1 weeks);
+    require(now < profileOf[_userID].goalAt[_index].startTime + profileOf[_userID].goalAt[_index].wks*1 weeks);
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
   //get completed goal: only returns a user's goal if it has completed
   function getCompletedGoal(bytes32 _userID, uint _index) external view returns(bytes32){
-    require(now - profileOf[_userID].goalAt[_index].startTime > profileOf[_userID].goalAt[_index].wks*1 weeks);
+    require(now > profileOf[_userID].goalAt[_index].startTime + profileOf[_userID].goalAt[_index].wks*1 weeks);
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
