@@ -405,11 +405,12 @@ function selectedChallenge(){
 
                 
                 for (let k = 0; k < compcount; k++){
+                  console.log("k value= "+k);
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
                       if (!error){
-                        console.log("passed!");
+
                         var adherence = new Array();
                         adherence[k] = result[0];
 
@@ -417,7 +418,7 @@ function selectedChallenge(){
                         .call({from: web3.eth.defaultAccount},
                           function(error, result) {
                             if (!error){
-
+                              console.log("passed!");
                               var bonusTotal = new Array();
                               var totalPay = new Array();
                               var lostStake = new Array();
