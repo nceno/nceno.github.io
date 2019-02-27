@@ -252,7 +252,7 @@ async function makeList(){
     var goals2 = new Array();
     var goals3 = new Array();
 
-    for (let i = 0; i < 15; i++){
+    /*for (let i = 0; i < 15; i++){
       await Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
@@ -261,20 +261,19 @@ async function makeList(){
           $('#goalCategories').selectric('refresh');
         }
       });    
-    }
+    }*/
 
     for (let j = 0; j < 15; j++){
-      await Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals2[j] = result;
-          console.log(goals2[j]  + " is an active goal");
-          $("#activeGoals").after('<option>'+ goals2[j].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
-        }
-      });    
+      let result = await Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount});
+      if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+        goals2[j] = result;
+        console.log(goals2[j]  + " is an active goal");
+        $("#activeGoals").after('<option>'+ goals2[j].slice(0, 8) +'</option>');
+        $('#goalCategories').selectric('refresh');
+      }
     }
 
-    for (let k = 0; k < 15; k++){
+    /*for (let k = 0; k < 15; k++){
       await Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals3[k] = result;
@@ -283,7 +282,7 @@ async function makeList(){
           $('#goalCategories').selectric('refresh');
         }
       });    
-    }
+    }*/
     populated = true;
   }
 }
