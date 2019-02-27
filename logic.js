@@ -253,16 +253,35 @@ function makeList(){
     var goals3 = new Array();
 
     for (let i = 0; i < 15; i++){
+      //upcoming
       Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i] + " is an upcoming goal");
-          $("#goalCategories").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
+          $("#upcomingGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
-      });    
+      });
+      //active
+      Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+          goals2[i] = result;
+          console.log(goals2[i]  + " is an active goal");
+          $("#activeGoals").after('<option>'+ goals2[i].slice(0, 8) +'</option>');
+          $('#goalCategories').selectric('refresh');
+        }
+      });
+      //completed
+      Nceno.methods.getCompletedGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
+          goals3[i] = result;
+          console.log(goals3[i]  + " is a completed goal");
+          $("#completedGoals").after('<option>'+ goals3[i].slice(0, 8) +'</option>');
+          $('#goalCategories').selectric('refresh');
+        }
+      });  
     }
-
+/*
     for (let j = 0; j < 15; j++){
       Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
@@ -283,7 +302,7 @@ function makeList(){
           $('#goalCategories').selectric('refresh');
         }
       });    
-    }
+    }*/
     populated = true;
   }
 }
@@ -692,7 +711,7 @@ window.onload = function() {
     //log them
     console.log(access_token);
     console.log(fitbitUser);
-    console.log(userID);
+
     $("#fitbitBtn").hide();
     $("#fitbitSuccess").html("Wearable ID: "+fitbitUser);
   }
