@@ -100,9 +100,9 @@ contract Nceno {
   }
 
   //get future goal: only returns a goal if it hasn't started yet
-  function getFutureGoal(uint _index) external view returns(bytes32, uint, uint, uint, uint, uint, bytes32[10]){
+  function getFutureGoal(uint _index) external view returns(bytes32, uint, uint, uint, uint, uint, uint){
     if(now < iterableGoals[_index].startTime){
-      return(iterableGoals[_index].goalID, iterableGoals[_index].activeMins, iterableGoals[_index].stakeWEI, iterableGoals[_index].sesPerWk, iterableGoals[_index].wks, iterableGoals[_index].startTime,iterableGoals[_index].competitor);
+      return(iterableGoals[_index].goalID, iterableGoals[_index].activeMins, iterableGoals[_index].stakeWEI, iterableGoals[_index].sesPerWk, iterableGoals[_index].wks, iterableGoals[_index].startTime,iterableGoals[_index].competitorCount);
     }
   }
 
