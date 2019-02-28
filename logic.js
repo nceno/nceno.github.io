@@ -376,10 +376,12 @@ function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
+    
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
         if (!error){
+          console.log("got GoalParams....");
           //echo challenge
           var compcount = result[6];
           var tstamp = new Date(result[4]*1000);
@@ -397,36 +399,35 @@ function selectedChallenge(){
 
           //leaderboard
           $("#rows").empty();
+          
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
             function(error, result) {
               if (!error){
+                console.log("got perticipants...");
                 var ids = new Array();
                 var name = new Array();
                 var flag = new Array();
-                
-                
                 for (let j = 0; j < compcount; j++){
                   ids = result[0];
                   name = result[1];
                   flag = result[2];
                 }
-
-                
                 for (let k = 0; k < compcount; k++){
+                  
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
-                      
                       if (!error){
+                        console.log("got GoalStats1...");
                         var adherence = new Array();
                         adherence[k] = result[0];
+                        
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
-                          function(error, result) {
-                            
+                          function(error, result) {  
                             if (!error){
-                              console.log("passed!");
+                              console.log("got GoalStats2...");
                               var bonusTotal = new Array();
                               var totalPay = new Array();
                               var lostStake = new Array();

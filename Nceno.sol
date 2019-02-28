@@ -144,7 +144,8 @@ contract Nceno {
     //if(0<=wk && wk<theGoal.wks+1){
       
       myStatsObject memory my;
-      uint successCount;
+      uint successCount=0;
+      
       for(uint i =0; i<wk; i++){
         successCount += goalRegistry[_goalID].successes[_userID][i];
       }
