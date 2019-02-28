@@ -141,11 +141,13 @@ contract Nceno {
   function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
-    //if(0<=wk && wk<theGoal.wks+1){
-      
+    
       myStatsObject memory my;
+      my.adherenceRate=0;
+      my.totalAtStake=0;
       uint successCount=0;
       
+    if(0<=wk && wk<theGoal.wks+1){
       for(uint i =0; i<wk; i++){
         successCount += goalRegistry[_goalID].successes[_userID][i];
       }
@@ -153,10 +155,9 @@ contract Nceno {
       
       for(uint p =wk; p<theGoal.wks; p++){
         my.totalAtStake += partitions[theGoal.wks/2 -1][p]*theGoal.stakeWEI*theGoal.competitorCount/100;
-      }  
-                 
-      return(my.adherenceRate, my.totalAtStake, successCount);
-    //}
+      }
+    }
+    return(my.adherenceRate, my.totalAtStake, successCount);
   }
 
   function successPerGoal(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint, uint){
@@ -180,9 +181,15 @@ contract Nceno {
   function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
-    //if(0<=wk && wk<theGoal.wks+1){
+    
       myStatsObject memory my;
-      uint totalPay;
+      my.wkPayouts = [0,0,0,0,0,0,0,0,0,0,0,0];
+      my.lostStake = 0;
+      my.wkBonuses = [0,0,0,0,0,0,0,0,0,0,0,0];
+      my.bonusTotal = 0;
+      uint totalPay=0;
+
+    if(0<=wk && wk<theGoal.wks+1){
       for(uint j =0; j<wk; j++){
         
         //stack too deep********************
@@ -195,8 +202,8 @@ contract Nceno {
         my.bonusTotal+= my.wkBonuses[j];
         totalPay+= my.wkPayouts[j];
       }
-      return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay);
-    //}
+    }
+    return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay);
   }
 
   function getPotentialPayout(bytes32 _goalID)external view returns(uint){
