@@ -382,7 +382,6 @@ function selectedChallenge(){
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
         if (!error){
-          console.log("got GoalParams....");
           //echo challenge
           var compcount = result[6];
           var tstamp = new Date(result[4]*1000);
@@ -394,28 +393,27 @@ function selectedChallenge(){
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
+          console.log("got GoalParams....");
 
           //set current challenge week globally
-          //currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
+          currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
 
           //leaderboard
-          //$("#rows").empty();
+          $("#rows").empty();
           
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
             function(error, result) {
               if (!error){
-                console.log("got Participants...");
+                
                 var ids = new Array();
                 var names = new Array();
                 var flags = new Array();
                 
                 ids = result[0];
-                //debug
-                console.log(ids);
-
                 names = result[1];
                 flags = result[2];
+                console.log("got Participants...");
                 
                 for (let k = 0; k < compcount; k++){
                   
@@ -423,15 +421,16 @@ function selectedChallenge(){
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
                       if (!error){
-                        console.log("got GoalStats1...");
+                        
                         var adherence = new Array();
                         adherence[k] = result[0];
+                        console.log(adherence[k]);
+                        console.log("got GoalStats1...");
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
                           function(error, result) {  
                             if (!error){
-                              console.log("got GoalStats2...");
                               var bonusTotal = new Array();
                               var totalPay = new Array();
                               var lostStake = new Array();
@@ -439,6 +438,7 @@ function selectedChallenge(){
                               bonusTotal[k] = result[3];
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
+                              console.log("got GoalStats2...");
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();

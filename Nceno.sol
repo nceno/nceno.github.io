@@ -183,9 +183,9 @@ contract Nceno {
     uint wk = (now - theGoal.startTime)/604800;
     
       myStatsObject memory my;
-      my.wkPayouts = [0,0,0,0,0,0,0,0,0,0,0,0];
+      //my.wkPayouts = [0,0,0,0,0,0,0,0,0,0,0,0];
       my.lostStake = 0;
-      my.wkBonuses = [0,0,0,0,0,0,0,0,0,0,0,0];
+      //my.wkBonuses = [0,0,0,0,0,0,0,0,0,0,0,0];
       my.bonusTotal = 0;
       uint totalPay=0;
 
