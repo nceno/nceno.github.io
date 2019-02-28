@@ -837,4 +837,4 @@ var Nceno = new web3.eth.Contract([
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0x95EfeFBA6D7432944F72d5DfEB45742f9b88a27d');
+  ], '0x603f7425ab8fbcCb0919c64086201336f3248B00');
