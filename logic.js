@@ -711,7 +711,7 @@ function tooltipVal4(args) {
 var pad;
 var sign;
 var flag;
-$.getJSON("https://api.ipdata.co/?api-key=test", function(data) {
+$.getJSON("https://api.ipdata.co/?api-key=25948172f6d73640c781a87df67ef61f03bf5948cbc333f56fd0baf6", function(data) {
   var countryName = data.country_name;
   var timezone = data.time_zone.offset;
   flag = data.country_code;
