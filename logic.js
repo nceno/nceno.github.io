@@ -396,10 +396,10 @@ function selectedChallenge(){
           $("#dashboard").show();
 
           //set current challenge week globally
-          currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
+          //currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
 
           //leaderboard
-          $("#rows").empty();
+          //$("#rows").empty();
           
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
@@ -407,13 +407,13 @@ function selectedChallenge(){
               if (!error){
                 console.log("got Participants...");
                 var ids = new Array();
-                var name = new Array();
-                var flag = new Array();
-                //for (let j = 0; j < compcount; j++){
-                  ids = result[0];
-                  name = result[1];
-                  flag = result[2];
-                //}
+                var names = new Array();
+                var flags = new Array();
+                
+                ids = result[0];
+                names = result[1];
+                flags = result[2];
+                
                 for (let k = 0; k < compcount; k++){
                   
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
@@ -437,8 +437,8 @@ function selectedChallenge(){
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
 
-                              var convertedName = web3.utils.hexToUtf8(name[k]);
-                              var convertedFlag = web3.utils.hexToUtf8(flag[k]).toLowerCase();
+                              var convertedName = web3.utils.hexToUtf8(names[k]);
+                              var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
 
                               //bug: values of k are not being hit. maybe something wrong with blockchain call latency?
                               $("#leaderboard").after(
