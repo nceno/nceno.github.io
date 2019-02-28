@@ -405,15 +405,15 @@ function selectedChallenge(){
           .call({from: web3.eth.defaultAccount},
             function(error, result) {
               if (!error){
-                console.log("got perticipants...");
+                console.log("got Participants...");
                 var ids = new Array();
                 var name = new Array();
                 var flag = new Array();
-                for (let j = 0; j < compcount; j++){
+                //for (let j = 0; j < compcount; j++){
                   ids = result[0];
                   name = result[1];
                   flag = result[2];
-                }
+                //}
                 for (let k = 0; k < compcount; k++){
                   
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
