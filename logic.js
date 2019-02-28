@@ -550,45 +550,46 @@ $("#claimBtn").click(function() {
 
 //button to log active minutes for a payout. Needs work. Could probably simplify the api get request..
 $("#logBtn").click(function() {
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
-xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-xhr.onload = function() {
- if (xhr.status === 200) {
+  localize();
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
+  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.onload = function() {
+   if (xhr.status === 200) {
+      
+      var data = JSON.parse(xhr.responseText);
+      var obj = [data];
+      var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
+      var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
+      var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
+      var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000 - sign*pad;
+
+      console.log(fitbitUser +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
+      console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
+      console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
+      console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
+      console.log("time stamp: "+formattedTime);
+
+      var sessionMins = fatBurn + cardio + peak;
+      //var sessionMins = 32; //debug only
+      console.log("total session minutes to be logged: "+sessionMins);
     
-    var data = JSON.parse(xhr.responseText);
-    var obj = [data];
-    var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
-    var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
-    var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
-    var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000 - sign*pad;
-
-    console.log(fitbitUser +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
-    console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
-    console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
-    console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
-    console.log("time stamp: "+formattedTime);
-
-    var sessionMins = fatBurn + cardio + peak;
-    //var sessionMins = 32; //debug only
-    console.log("total session minutes to be logged: "+sessionMins);
-  
-    Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
-      {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
-        function(error, result) {
-          if (!error){
-            $("#logBtn").hide();
-            $("#logLoader").show();
-            console.log(result);
-          }
-          else
-          console.error(error);
-        }).on('confirmation', function(confNumber, receipt){ 
-          $("#logLoader").hide();
-          $("#logSuccess").show();
-          console.log("activity minutes logged successfully!") })
-    .on('error', function(error){console.log(error);});;
-  }
+      Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
+        {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
+          function(error, result) {
+            if (!error){
+              $("#logBtn").hide();
+              $("#logLoader").show();
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }).on('confirmation', function(confNumber, receipt){ 
+            $("#logLoader").hide();
+            $("#logSuccess").show();
+            console.log("activity minutes logged successfully!") })
+      .on('error', function(error){console.log(error);});;
+    }
   };
   xhr.send();
 });//close click(function(){
@@ -711,15 +712,17 @@ function tooltipVal4(args) {
 var pad;
 var sign;
 var flag;
-$.getJSON("https://api.ipdata.co/?api-key=25948172f6d73640c781a87df67ef61f03bf5948cbc333f56fd0baf6", function(data) {
-  var countryName = data.country_name;
-  var timezone = data.time_zone.offset;
-  flag = data.country_code;
-  //console.log("Country Name: " + countryName);
-  //console.log("Time Zone: " + timezone);
-  sign = parseInt(timezone.slice(0, 1)+1);
-  pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
-  //pad = parseInt(timezone.slice(0, 1)+1)
-  //console.log(pad);
-  //console.log("Flag URL: " + flag);
-});             
+function localize(){
+  $.getJSON("https://api.ipdata.co/?api-key=25948172f6d73640c781a87df67ef61f03bf5948cbc333f56fd0baf6", function(data) {
+    var countryName = data.country_name;
+    var timezone = data.time_zone.offset;
+    flag = data.country_code;
+    //console.log("Country Name: " + countryName);
+    //console.log("Time Zone: " + timezone);
+    sign = parseInt(timezone.slice(0, 1)+1);
+    pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
+    //pad = parseInt(timezone.slice(0, 1)+1)
+    //console.log(pad);
+    //console.log("Flag URL: " + flag);
+  });
+}       
