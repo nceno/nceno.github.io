@@ -106,6 +106,11 @@ $("#makeAcctBtn").click(function() {
     .on('error', function(error){console.log(error);});
 }); 
 
+//randomizes the goalID
+function randGoalID(){
+  goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
+}
+
 //creating a goal from the slider values and live ethereum price
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
@@ -293,6 +298,8 @@ function makeList(){
 function resetCreate(){
   $("#hostBtn").show();
   $("#cancelBtn").show();
+  $("#createSuccess").hide();
+  randGoalID();
 }
 
 //generates the typed quick stats at the top of the manage tab
