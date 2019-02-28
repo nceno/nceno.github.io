@@ -502,7 +502,7 @@ function search(){
 
 //populates the challenges starting soon table
 var browsePopulated = false;
-function browse(){
+async function browse(){
   if(browsePopulated===false){
     for (let i = 0; i < 20; i++){
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
