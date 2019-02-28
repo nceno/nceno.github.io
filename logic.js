@@ -114,7 +114,7 @@ function randGoalID(){
 //creating a goal from the slider values and live ethereum price
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
-  updateEthPrice();
+  //updateEthPrice();
   var msgValueHost = Math.floor($("#sliderStake").roundSlider("getValue")*1000000000000000000/ethPrice);
   var usdStakeInWei = msgValueHost.toString();
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
