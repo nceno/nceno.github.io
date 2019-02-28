@@ -424,7 +424,6 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log(adherence[k]);
                         console.log("got GoalStats1...");
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
@@ -503,10 +502,10 @@ function search(){
 
 //populates the challenges starting soon table
 var browsePopulated = false;
-async function browse(){
+function browse(){
   if(browsePopulated===false){
     for (let i = 0; i < 20; i++){
-      var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
+      var result = Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
         if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
           //list it in the table
           var tstamp = new Date(result[5]*1000);

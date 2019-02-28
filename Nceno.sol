@@ -95,7 +95,7 @@ contract Nceno {
     mapping(bytes32 => uint[12]) bonusWasClaimed; //to check if a weekly bonus was claimed by each user (claim)
   }
  
-  mapping(uint => goalObject) iterableGoals; //iterable registry of all goals created, (only indexed by order of deployment).
+  mapping(uint => goalObject) public iterableGoals; //iterable registry of all goals created, (only indexed by order of deployment).
     uint public goalCount; //total number of goals
     mapping(bytes32 => goalObject) internal goalRegistry; //dictionary of goals, accessible by goalID
 
@@ -107,7 +107,7 @@ contract Nceno {
   //get future goal: only returns a goal if it hasn't started yet
   function getFutureGoal(uint _index) external view returns(bytes32, uint, uint, uint, uint, uint, uint){
     if(now < iterableGoals[_index].startTime){
-      return(iterableGoals[_index].goalID, iterableGoals[_index].activeMins, iterableGoals[_index].stakeWEI, iterableGoals[_index].sesPerWk, iterableGoals[_index].wks, iterableGoals[_index].startTime,iterableGoals[_index].competitorCount);
+      return(iterableGoals[_index].goalID, iterableGoals[_index].activeMins, iterableGoals[_index].stakeWEI, iterableGoals[_index].sesPerWk, iterableGoals[_index].wks, iterableGoals[_index].startTime, iterableGoals[_index].competitorCount);
     }
   }
 
@@ -183,9 +183,8 @@ contract Nceno {
     uint wk = (now - theGoal.startTime)/604800;
     
       myStatsObject memory my;
-      //my.wkPayouts = [0,0,0,0,0,0,0,0,0,0,0,0];
-      my.lostStake = 0;
-      //my.wkBonuses = [0,0,0,0,0,0,0,0,0,0,0,0];
+        my.lostStake = 0;
+      
       my.bonusTotal = 0;
       uint totalPay=0;
 
