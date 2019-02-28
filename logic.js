@@ -29,6 +29,7 @@ function showPortis() {
 //helper function that will hide the create account button if the user already made an account.
 //i.e. if a fitbit ID already has a competitor object associated to it, this function hides the create button.
 function checkUserbase(){
+  localize();
   Nceno.methods.userExists(
     userID
   )
