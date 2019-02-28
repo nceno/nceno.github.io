@@ -505,7 +505,7 @@ var browsePopulated = false;
 function browse(){
   if(browsePopulated===false){
     for (let i = 0; i < 20; i++){
-      var result = Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
+      var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
         if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
           //list it in the table
           var tstamp = new Date(result[5]*1000);
