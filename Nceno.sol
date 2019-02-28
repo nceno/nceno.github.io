@@ -33,7 +33,7 @@ contract Nceno {
 
   //get active goal: only returns a user's goal if it has already started
   function getActiveGoal(bytes32 _userID, uint _index) external view returns(bytes32){
-    require(now < (profileOf[_userID].goalAt[_index].startTime + profileOf[_userID].goalAt[_index].wks*604800));
+    require((0 < now - profileOf[_userID].goalAt[_index].startTime) && (now-profileOf[_userID].goalAt[_index].startTime < profileOf[_userID].goalAt[_index].wks*604800));
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
@@ -41,6 +41,11 @@ contract Nceno {
   function getCompletedGoal(bytes32 _userID, uint _index) external view returns(bytes32){
     require(now > profileOf[_userID].goalAt[_index].startTime + profileOf[_userID].goalAt[_index].wks*604800);
     return(profileOf[_userID].goalAt[_index].goalID);    
+  }
+
+  //replaces all the getGoal temporal categories
+  function getStartTime(bytes32 _userID, uint _index) external view returns(uint, bytes32){
+    return(profileOf[_userID].goalAt[_index].startTime, profileOf[_userID].goalAt[_index].goalID);
   }
 
   function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, bytes32 _flag) external {
@@ -136,7 +141,7 @@ contract Nceno {
   function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
-    if(0<=wk && wk<theGoal.wks+1){
+    //if(0<=wk && wk<theGoal.wks+1){
       
       myStatsObject memory my;
       uint successCount;
@@ -150,13 +155,13 @@ contract Nceno {
       }  
                  
       return(my.adherenceRate, my.totalAtStake, successCount);
-    }
+    //}
   }
 
   function successPerGoal(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
-    uint wk = (now - theGoal.startTime)/604800;
-    if(wk>theGoal.wks){
+    //uint wk = (now - theGoal.startTime)/604800;
+    //if(wk>theGoal.wks){
       myStatsObject memory my;
       uint successCount;
       for(uint j =0; j<theGoal.wks; j++){
@@ -168,13 +173,13 @@ contract Nceno {
         
       }       
       return(successCount, theGoal.sesPerWk, my.lostStake, my.bonusTotal);
-    }
+    //}
   }
     
   function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
-    if(0<=wk && wk<theGoal.wks+1){
+    //if(0<=wk && wk<theGoal.wks+1){
       myStatsObject memory my;
       uint totalPay;
       for(uint j =0; j<wk; j++){
@@ -189,10 +194,8 @@ contract Nceno {
         my.bonusTotal+= my.wkBonuses[j];
         totalPay+= my.wkPayouts[j];
       }
-      
-      
       return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay);
-    }
+    //}
   }
 
   function getPotentialPayout(bytes32 _goalID)external view returns(uint){

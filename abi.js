@@ -641,6 +641,33 @@ var Nceno = new web3.eth.Contract([
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_userID",
+          "type": "bytes32"
+        },
+        {
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getStartTime",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
@@ -810,4 +837,4 @@ var Nceno = new web3.eth.Contract([
       "name": "BonusClaimedBy",
       "type": "event"
     }
-  ], '0x0717D5517ccdC671b1a259b0d7E6b95E3ca91C8C');
+  ], '0xd640b6E11D609374961a9B14e42EFd160E118918');
