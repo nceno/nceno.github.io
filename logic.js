@@ -411,6 +411,9 @@ function selectedChallenge(){
                 var flags = new Array();
                 
                 ids = result[0];
+                //debug
+                console.log(ids);
+
                 names = result[1];
                 flags = result[2];
                 
