@@ -168,7 +168,10 @@
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
                             <form>
-                              <a id="fitbitBtn" href="https://www.strava.com/oauth/authorize?client_id=33084&response_type=code&redirect_uri=http://www.nceno.app&approval_prompt=force" class="btn btn-primary btn-block">Step 1: Link Wearable</a>
+                              <a id="stravaBtn" href="https://www.strava.com/oauth/authorize?client_id=33084&response_type=code&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fapp.html%23&approval_prompt=force" class="btn btn-primary btn-block">Step 1: Link strava</a>
+
+                              <a id="fitbitBtn" href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fapp.html&scope=activity%20heartrate%20location%20profile&expires_in=604800" class="btn btn-primary btn-block">Step 1: Link fitbit</a>
+
                               <div class="text-center col-sm-5 mb-1">
                                 <span id="fitbitSuccess"></span>
                               </div>https%3A%2F%2Fwww.nceno.app%2Fapp.html
@@ -185,8 +188,6 @@
                           </div>
                         </div>
                       </div>
-                      <!-- https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22D5SN&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fapp.html&scope=activity%20heartrate%20location%20profile&expires_in=604800 -->
-
                       
                       <div class="accordion" data-accordion>
                         <a id="register" onclick="checkUserbase()" class="accordion-control" data-control>
