@@ -736,4 +736,23 @@ function localize(){
     //console.log(pad);
     //console.log("Flag URL: " + flag);
   });
-}       
+}
+
+/*
+var testUser = e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3;
+var cached = testUser;
+var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+xhr.open('POST', 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+cached+'&code='+code+'&grant_type=authorization_code');
+var data = JSON.parse(xhr.responseText);
+var access_token = data.access_token;
+var stravID = data.athlete[id];
+var stravaUsername = data.athlete[username];
+var userCreated = data.athlete[created_at];
+var uniqueUserString = stravaID.toString() + userCreated.toString();
+
+xhr.open('GET', 'https://www.strava.com/api/v3/athlete/activities?before=NOW&after=YESTERDAY');
+xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+var data = JSON.parse(xhr.responseText);
+var stravaMins = Math.round(data.ellapsed_time/60);
+var avgHR = data.average_heartrate;
+*/
