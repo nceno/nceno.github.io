@@ -77,9 +77,9 @@ if($("#checker").is(':checked')) {
 });
 
 //global variables for when a user auths with fitbit
-var access_token
+/*var access_token
 var fitbitUser 
-var userID
+var userID*/
              
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
@@ -369,7 +369,8 @@ function quickStats(){
 function makePage(){
   makeList();
   selectedChallenge();
-  quickStats();
+  //quickStats();
+  getToken();
 }
 
 var currentWeek = 0;
@@ -605,21 +606,7 @@ $("#logBtn").click(function() {
   xhr.send();
 });//close click(function(){
 
-//gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
-function updateEthPrice() {
-  var xhr = new XMLHttpRequest();
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      var resp = JSON.parse(xhr.responseText);
-      //var obj = [resp];
-      ethPrice = resp.USD;
-      console.log(this.responseText);
-      console.log(ethPrice);
-    }
-  });
-  xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
-  xhr.send();
-}
+
 
 //not sure if using window.onload correctly... but,
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
@@ -689,7 +676,7 @@ window.onload = function() {
   });
 
   //delays extraction of the fitbit creds until the user has authed.
-  if (window.location.href != 'https://www.nceno.app/app.html'){
+  /*if (window.location.href != 'https://www.nceno.app/app.html'){
     //call fitbit api with user creds
     //getting the access token from url
     access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
@@ -702,7 +689,7 @@ window.onload = function() {
 
     $("#fitbitBtn").hide();
     $("#fitbitSuccess").html("Wearable ID: "+fitbitUser);
-  }
+  }*/
 };
 
 //chart tool tips
@@ -737,22 +724,75 @@ function localize(){
     //console.log("Flag URL: " + flag);
   });
 }
+//gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
+function updateEthPrice() {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      var resp = JSON.parse(xhr.responseText);
+      ethPrice = resp.USD;
+      console.log(this.responseText);
+      console.log(ethPrice);
+    }
+  });
+  xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
+  xhr.send();
+}
 
-/*
-var testUser = e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3;
-var cached = testUser;
+
+//gets the access token to make GET request. Valid for 6 hours.
+var access_token;
+var stravID;
+var stravaUsername;
+var userCreated;
+var uniqueUserString;
+var e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3 = 'e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3';
 var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-xhr.open('POST', 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+cached+'&code='+code+'&grant_type=authorization_code');
-var data = JSON.parse(xhr.responseText);
-var access_token = data.access_token;
-var stravID = data.athlete[id];
-var stravaUsername = data.athlete[username];
-var userCreated = data.athlete[created_at];
-var uniqueUserString = stravaID.toString() + userCreated.toString();
 
-xhr.open('GET', 'https://www.strava.com/api/v3/athlete/activities?before=NOW&after=YESTERDAY');
-xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-var data = JSON.parse(xhr.responseText);
-var stravaMins = Math.round(data.ellapsed_time/60);
-var avgHR = data.average_heartrate;
-*/
+function getToken(){
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      var data = JSON.parse(xhr.responseText);
+      access_token = data.access_token;
+      //stravID = data.athlete[id];
+      //stravaUsername = data.athlete[username];
+      //userCreated = data.athlete[created_at];
+      //uniqueUserString = stravaID.toString() + userCreated.toString();
+    }
+  });
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3+'&code='+code+'&grant_type=authorization_code');
+  //xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send(stuff);
+}
+
+//gets activity minutes from strava
+var stravaMins;
+var avgHR;
+var placeholderDate = new Date();
+placeholderDate.setDate(placeholderDate.getDate() - 1);
+var yesterday = placeholderDate;
+var nowDate = new Date();
+
+function getActivities(){
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      var data = JSON.parse(xhr.responseText);
+      //stravaMins = Math.round(data.moving_time/60);
+      //avgHR = data.average_heartrate;
+    }
+  });
+
+  xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities');
+  //xhr.open('GET', 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
+  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  //xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send(stuff);
+}
