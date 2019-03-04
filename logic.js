@@ -761,7 +761,7 @@ function getToken(){
       access_token = data.access_token;
       stravaID = data.athlete.id;
       stravaUsername = data.athlete.username;
-      $("#stravaSuccess").hide();
+      $("#stravaOk").hide();
       $("#stravaSuccess").html("Signed in as: "+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
