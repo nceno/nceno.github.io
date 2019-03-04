@@ -61,6 +61,7 @@ $("#logSuccess").hide();
 $("#claimLoader").hide();
 $("#claimSuccess").hide();
 $("stravaSuccess").hide();
+$("stravaOk").hide();
 $("portisSuccess").hide();
 $("#request").hide();
 $("#joinLoader").hide();
@@ -86,9 +87,7 @@ var userID*/
 $("#makeAcctBtn").click(function() {
   Nceno.methods.createCompetitor(
     userID,
-    web3.utils.padRight(web3.utils.toHex($("#wearable").val()),34),
-    web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
-    web3.utils.padRight(web3.utils.toHex($("#email").val()),34),
+    //web3.utils.padRight(web3.utils.toHex($("#name").val()),34),
     web3.utils.padRight(web3.utils.toHex(flag),34))
   .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
     function(error, result) {
@@ -689,6 +688,8 @@ window.onload = function() {
     //console.log(fitbitUser);
 
     $("#stravaBtn").hide();
+    $("#stravaOk").html("Proceed to step 2...")
+    $("#stravaOk").show();
   }
 };
 
@@ -760,6 +761,7 @@ function getToken(){
       access_token = data.access_token;
       stravaID = data.athlete.id;
       stravaUsername = data.athlete.username;
+      $("#stravaSuccess").hide();
       $("#stravaSuccess").html("Signed in as: "+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
