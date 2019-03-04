@@ -689,7 +689,7 @@ window.onload = function() {
     //console.log(fitbitUser);
 
     $("#stravaBtn").hide();
-    $("#stravaSuccess").html("Wearable ID: "+fitbitUser);
+    $("#stravaSuccess").html("Wearable ID: "+access_token);
   }
 };
 
