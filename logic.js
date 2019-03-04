@@ -59,7 +59,7 @@ $("#logLoader").hide();
 $("#logSuccess").hide();
 $("#claimLoader").hide();
 $("#claimSuccess").hide();
-$("fitbitSuccess").hide();
+$("stravaSuccess").hide();
 $("portisSuccess").hide();
 $("#request").hide();
 $("#joinLoader").hide();
@@ -676,20 +676,20 @@ window.onload = function() {
   });
 
   //delays extraction of the fitbit creds until the user has authed.
-  /*if (window.location.href != 'https://www.nceno.app/app.html'){
+  if (window.location.href != 'https://www.nceno.app/app.html'){
     //call fitbit api with user creds
     //getting the access token from url
     access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
     // get the userID
-    fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+    //fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
     userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
     //log them
     console.log(access_token);
-    console.log(fitbitUser);
+    //console.log(fitbitUser);
 
-    $("#fitbitBtn").hide();
-    $("#fitbitSuccess").html("Wearable ID: "+fitbitUser);
-  }*/
+    $("#stravaBtn").hide();
+    $("#stravaSuccess").html("Wearable ID: "+fitbitUser);
+  }
 };
 
 //chart tool tips
