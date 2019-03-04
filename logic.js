@@ -758,10 +758,9 @@ function getToken(){
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
-      console.log(access_token);
-      $("#stravaSuccess").html("Wearable ID: "+access_token);
       //stravID = data.athlete[id];
-      //stravaUsername = data.athlete[username];
+      stravaUsername = data.athlete[username];
+      $("#stravaSuccess").html("Signed in as: "+stravaUsername);
       //userCreated = data.athlete[created_at];
       //uniqueUserString = stravaID.toString() + userCreated.toString();
     }
