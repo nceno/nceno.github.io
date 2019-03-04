@@ -78,10 +78,9 @@ if($("#checker").is(':checked')) {
   }
 });
 
-//global variables for when a user auths with fitbit
-/*var access_token
-var fitbitUser 
-var userID*/
+//global variables for when a user auths with strava
+//var fitbitUser 
+var userID
              
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
@@ -765,6 +764,7 @@ function getToken(){
       $("#stravaSuccess").html("Signed in as: "+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
+      userID = uniqueUserString;
       //console.log(uniqueUserString);
     }
   });
