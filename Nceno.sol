@@ -13,49 +13,45 @@ contract Nceno {
   
   //the competitor object
   struct competitorObject{
-    bytes32 userID; //unique
-    bytes32 wearableModel; //fitbit, garmin, apple, xiaomi, samsung, etc.
-    bytes32 name;
-    bytes32 email;
+    uint userID; //unique
     bytes32 flag;
+    bytes32 userName;
     address walletAdr;
     mapping(uint => goalObject) goalAt; //index of historical goals
       uint goalTotal;
   }
-  mapping(bytes32 => competitorObject) public profileOf; //registry of ALL users' info, indexed by userID
-    mapping(bytes32 => bool) public userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
+  mapping(uint => competitorObject) public profileOf; //registry of ALL users' info, indexed by userID
+    mapping(uint => bool) public userExists; //to check if a user is registered with Nceno (used only when creating a new competitor)
   
   //get upcoming goal: only returns a user's goal if it hasn't yet started
-  function getUpcomingGoal(bytes32 _userID, uint _index) external view returns(bytes32){
+  function getUpcomingGoal(uint _userID, uint _index) external view returns(bytes32){
     require(now < profileOf[_userID].goalAt[_index].startTime );
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
   //get active goal: only returns a user's goal if it has already started
-  function getActiveGoal(bytes32 _userID, uint _index) external view returns(bytes32){
+  function getActiveGoal(uint _userID, uint _index) external view returns(bytes32){
     require((0 < now - profileOf[_userID].goalAt[_index].startTime) && (now-profileOf[_userID].goalAt[_index].startTime < profileOf[_userID].goalAt[_index].wks*604800));
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
   //get completed goal: only returns a user's goal if it has completed
-  function getCompletedGoal(bytes32 _userID, uint _index) external view returns(bytes32){
+  function getCompletedGoal(uint _userID, uint _index) external view returns(bytes32){
     require(now > profileOf[_userID].goalAt[_index].startTime + profileOf[_userID].goalAt[_index].wks*604800);
     return(profileOf[_userID].goalAt[_index].goalID);    
   }
 
   //replaces all the getGoal temporal categories
-  function getStartTime(bytes32 _userID, uint _index) external view returns(uint, bytes32){
+  function getStartTime(uint _userID, uint _index) external view returns(uint, bytes32){
     return(profileOf[_userID].goalAt[_index].startTime, profileOf[_userID].goalAt[_index].goalID);
   }
 
-  function createCompetitor(bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, bytes32 _flag) external {
+  function createCompetitor(uint _userID, bytes32 _userName, bytes32 _flag) external {
     require(userExists[_userID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
     createdCompetitor.userID = _userID;
-    createdCompetitor.wearableModel = _wearableModel;
-    createdCompetitor.name = _name;
-    createdCompetitor.email = _email;
     createdCompetitor.flag = _flag;
+    createdCompetitor.userName = _userName;
     createdCompetitor.walletAdr = msg.sender;
 
     //add to registry
@@ -64,13 +60,13 @@ contract Nceno {
 
     //fire event: _userID made a profile with params: @1, @2, ...
     bytes32 _eventName = 0x50726f66696c65437265617465640000;
-    emit ProfileCreated(_eventName, _userID, _wearableModel, _name, _email, _flag, msg.sender);
+    emit ProfileCreated(_eventName, _userID, _userName, _flag, msg.sender);
   }
   
-  event ProfileCreated(bytes32 _eventName, bytes32 _userID, bytes32 _wearableModel, bytes32 _name, bytes32 _email, bytes32 _flag, address _walletAdr);
+  event ProfileCreated(bytes32 _eventName, uint _userID, bytes32 _userName, bytes32 _flag, address _walletAdr);
 
   struct stampList{
-    mapping(uint256 => bool) stampExists; //checks if a timestamp exists. each user in a goal will have one of these
+    mapping(uint => bool) stampExists; //checks if a timestamp exists. each user in a goal will have one of these
   }
 
   //the goal object
@@ -83,16 +79,16 @@ contract Nceno {
     uint startTime;
     uint ethPrice; //reminder: in the app, the dollar value is multiplied by 100 and stored here.
         
-    mapping(bytes32 => uint[12]) successes; //number of successes in a given week by a given competitor (simplePayout)
-    mapping(bytes32 => stampList) timeLog; //timestamps used by a user, for each user
+    mapping(uint => uint[12]) successes; //number of successes in a given week by a given competitor (simplePayout)
+    mapping(uint => stampList) timeLog; //timestamps used by a user, for each user
     
-    mapping(bytes32 => bool) isCompetitor; //checks whether a user is a competitor (join, createGoal)
+    mapping(uint => bool) isCompetitor; //checks whether a user is a competitor (join, createGoal)
       uint competitorCount; //number of competitors in the goal
-      bytes32[10] competitor; //iterable list of competitors
+      uint[10] competitor; //iterable list of competitors
     
     uint[12] potWk; //amt of lost stakeWEI ether available to claim as bonus for each week (claim, simplePayout)
     uint[12] winnersWk; //number of 100% adherers for a given week (simplePayout)
-    mapping(bytes32 => uint[12]) bonusWasClaimed; //to check if a weekly bonus was claimed by each user (claim)
+    mapping(uint => uint[12]) bonusWasClaimed; //to check if a weekly bonus was claimed by each user (claim)
   }
  
   mapping(uint => goalObject) internal iterableGoals; //iterable registry of all goals created, (only indexed by order of deployment).
@@ -111,8 +107,8 @@ contract Nceno {
     }
   }
 
-  function getParticipants( bytes32 _goalID) external view returns(bytes32[10], bytes32[10], bytes32[10]){
-    bytes32[10] memory ids;
+  function getParticipants( bytes32 _goalID) external view returns(uint[10], bytes32[10], bytes32[10]){
+    uint[10] memory ids;
     bytes32[10] memory names;
     bytes32[10] memory flags;
 
@@ -121,7 +117,7 @@ contract Nceno {
     for(uint i =0; i<compcount; i++){
       if(theGoal.competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
         ids[i] = theGoal.competitor[i];
-        names[i] = profileOf[theGoal.competitor[i]].name;
+        names[i] = profileOf[theGoal.competitor[i]].userName;
         flags[i] = profileOf[theGoal.competitor[i]].flag;
       }
     }
@@ -138,7 +134,7 @@ contract Nceno {
     uint totalAtStake;
   }
  
-  function getMyGoalStats1(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint){
+  function getMyGoalStats1(uint _userID, bytes32 _goalID) external view returns(uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
     
@@ -160,7 +156,7 @@ contract Nceno {
     return(my.adherenceRate, my.totalAtStake, successCount);
   }
 
-  function successPerGoal(bytes32 _userID, bytes32 _goalID) external view returns(uint, uint, uint, uint){
+  function successPerGoal(uint _userID, bytes32 _goalID) external view returns(uint, uint, uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     //uint wk = (now - theGoal.startTime)/604800;
     //if(wk>theGoal.wks){
@@ -178,7 +174,7 @@ contract Nceno {
     //}
   }
     
-  function getMyGoalStats2(bytes32 _userID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
+  function getMyGoalStats2(uint _userID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
     goalObject memory theGoal = goalRegistry[_goalID];
     uint wk = (now - theGoal.startTime)/604800;
     
@@ -218,7 +214,7 @@ contract Nceno {
     for(uint i =0; i<10; i++){
     if(theGoal.competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
       //if(bytes(theGoal.competitor[i]).length != 0){
-        competitorName[i] = profileOf[theGoal.competitor[i]].name;
+        competitorName[i] = profileOf[theGoal.competitor[i]].userName;
         performances[i] = goalRegistry[_goalID].successes[theGoal.competitor[i]];
       }
     }
@@ -250,7 +246,7 @@ contract Nceno {
   }
 
   //spawn a new goal with intended parameters
-  function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint _startTime, bytes32 _userID, uint _ethPrice) external payable {
+  function createGoal(bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint _startTime, uint _userID, uint _ethPrice) external payable {
     require(msg.value >= _stakeWEI && userExists[_userID] == true, "User does not exist, or else message value is less than intended stake.");
     goalObject memory createdGoal; 
     //initialize params
@@ -270,7 +266,7 @@ contract Nceno {
     
     iterableGoals[goalCount] = createdGoal; //add goal to iterable registry ***expensive!
     goalCount++; //incriment global count
-    partitions = partitionChoices[now%2];
+    partitions = partitionChoices[now % 2];
 
     profileOf[_userID].goalAt[profileOf[_userID].goalTotal] = createdGoal; //add goal to self's registry
     profileOf[_userID].goalTotal++;
@@ -280,10 +276,10 @@ contract Nceno {
     emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
   }
   
-  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, bytes32 _userID, uint _ethPrice);
+  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, uint _userID, uint _ethPrice);
 
   //the function used to join a challenge, if you know the goalID
-  function joinGoal(bytes32 _goalID, bytes32 _userID) external payable{
+  function joinGoal(bytes32 _goalID, uint _userID) external payable{
     require(now < goalRegistry[_goalID].startTime && msg.value == goalRegistry[_goalID].stakeWEI && goalRegistry[_goalID].isCompetitor[_userID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake."); //time check and stake check
       
     //add self to goal
@@ -300,10 +296,10 @@ contract Nceno {
     emit CompetitorJoined(_eventName, _userID, _goalID);
   }
   
-  event CompetitorJoined(bytes32 _eventName, bytes32 _userID, bytes32 _goalID);
+  event CompetitorJoined(bytes32 _eventName, uint _userID, bytes32 _goalID);
 
   //simple payout function when someone logs a workout
-  function simplePayout(bytes32 _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
+  function simplePayout(uint _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
     //can only call if in challenge, and challenge is active
     require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && (goalRegistry[_goalID].startTime < now) && (now < goalRegistry[_goalID].startTime + goalRegistry[_goalID].wks*1 weeks), "wallet-user mismatch, user is not competitor, goal has not started, or goal has already finished.");
     
@@ -323,10 +319,10 @@ contract Nceno {
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
 
-  event PayoutRedeemedBy(bytes32 _eventName, bytes32 _userID, bytes32 _goalID, uint _wk, uint _payout);
+  event PayoutRedeemedBy(bytes32 _eventName, uint _userID, bytes32 _goalID, uint _wk, uint _payout);
 
   //claims the bonus from lost stakeWEI of the previous week
-  function claimBonus(bytes32 _goalID, bytes32 _userID) external{
+  function claimBonus(bytes32 _goalID, uint _userID) external{
     //must have 100% adherence for the previous week, and can only claim once.
     
     require(profileOf[_userID].walletAdr == msg.sender && goalRegistry[_goalID].isCompetitor[_userID]==true && 
@@ -374,7 +370,7 @@ contract Nceno {
     
   }
 
-  event BonusClaimedBy(bytes32 _userID, bytes32 _goalID, uint _amount);
+  event BonusClaimedBy(uint _userID, bytes32 _goalID, uint _amount);
 
   //replaces numerous "require()" statements, restricts caller to admin (nceno)
   modifier onlyNceno(){
