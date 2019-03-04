@@ -755,7 +755,7 @@ function getToken(){
   xhr.withCredentials = true;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
-      console.log(this.responseText);
+      //console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
       stravaID = data.athlete.id;
@@ -763,7 +763,7 @@ function getToken(){
       $("#stravaSuccess").html("Signed in as: "+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
-      console.log(uniqueUserString);
+      //console.log(uniqueUserString);
     }
   });
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3+'&code='+code+'&grant_type=authorization_code');
