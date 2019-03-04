@@ -680,6 +680,7 @@ window.onload = function() {
     //call fitbit api with user creds
     //getting the access token from url
     access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
+    console.log(access_token);
     // get the userID
     //fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
     //userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
