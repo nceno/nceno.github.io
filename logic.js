@@ -758,7 +758,7 @@ function getToken(){
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
-      stravID = data.athlete.id;
+      stravaID = data.athlete.id;
       stravaUsername = data.athlete.username;
       $("#stravaSuccess").html("Signed in as: "+stravaUsername);
       userCreated = data.athlete.created_at;
