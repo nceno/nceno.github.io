@@ -682,7 +682,7 @@ window.onload = function() {
     access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
     // get the userID
     //fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-    userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
+    //userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
     //log them
     console.log(access_token);
     //console.log(fitbitUser);
