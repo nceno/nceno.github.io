@@ -680,17 +680,15 @@ window.onload = function() {
   if (window.location.href != 'https://www.nceno.app/app.html'){
     //call fitbit api with user creds
     //getting the access token from url
-    access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
-    console.log(access_token);
+    //access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
+    //console.log(access_token);
     // get the userID
     //fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
     //userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
     //log them
-    console.log(access_token);
     //console.log(fitbitUser);
 
     $("#stravaBtn").hide();
-    $("#stravaSuccess").html("Wearable ID: "+access_token);
   }
 };
 
@@ -760,6 +758,8 @@ function getToken(){
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
+      console.log(access_token);
+      $("#stravaSuccess").html("Wearable ID: "+access_token);
       //stravID = data.athlete[id];
       //stravaUsername = data.athlete[username];
       //userCreated = data.athlete[created_at];
