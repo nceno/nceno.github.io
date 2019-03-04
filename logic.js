@@ -20,6 +20,7 @@ function showPortis() {
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
       authed = true;
+      getToken();
       $("#portisBtn").hide();
       $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
     });
@@ -743,7 +744,7 @@ function updateEthPrice() {
 
 //gets the access token to make GET request. Valid for 6 hours.
 var access_token;
-var stravID;
+var stravaID;
 var stravaUsername;
 var userCreated;
 var uniqueUserString;
