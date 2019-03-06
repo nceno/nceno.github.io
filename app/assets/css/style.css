@@ -20158,7 +20158,7 @@ pre[class*="language-"] {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(204, 255, 0, 0.75);
       z-index: -1;
       animation-timing-function: cubic-bezier(0.1, 0.2, 0.3, 1); }
   .presentation-circle.with-delay > figure::before {
