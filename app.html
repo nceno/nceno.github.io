@@ -31,6 +31,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.css" rel="stylesheet" />
     <!---slider stuff -->
 
+    <!--kyber style-->
+    <link rel='stylesheet' href='https://widget.kyber.network/v0.6.2/widget.css'>
+    <!-- /kyber style -->
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133171787-1"></script>
     <script>
@@ -179,11 +183,23 @@
                               <div class="text-center col-sm-5 mb-1">
                                 <span id="portisSuccess"></span>
                               </div>
+                              
+                              <div class="col text-center mb-2">
+                                <a style="color:black;" class="btn btn-primary btn-block mb-2" id="makeAcctBtn">Create Nceno profile</a>
+                              </div>
+
+                              <div id="acctLoader" class="col text-center mb-2">
+                                <p>Making space for you on the blockchain...</p> 
+                                <img  src="app/assets/images/loader.svg">
+                              </div>
+
+                                <p id="acctSuccess">Success!<p>
                               <div class="row">
                                 <div class="col text-center mb-2">
                                   <a href="instructions.html" class="btn btn-outline-white btn-rounded px-2 ml-1 mt-2">Read the instructions</a>
                                 </div>
                               </div>
+
                             </form>
                           </div>
                         </div>
@@ -192,23 +208,11 @@
                       
                       <div class="accordion" data-accordion>
                         <a id="register" onclick="checkUserbase()" class="accordion-control" data-control>
-                          <h5 style="color:#ffffff">Register</h5>
-                          <p>(One-time only)</p>
+                          <h5 style="color:#ffffff">Convert or buy crypto</h5>
                         </a>
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
-                            <form>
-                              
-                              <div class="col text-center mb-2">
-                                <a style="color:black;" class="btn btn-primary btn-block mb-2" id="makeAcctBtn">Create Nceno profile</a>
-                              </div>
-                               <div id="acctLoader" class="col text-center mb-2">
-                                  <p>Making space for you on the blockchain...</p> 
-                                  <img  src="app/assets/images/loader.svg">
-                                </div>
-                                <p id="acctSuccess">Success!<p>
-                              
-                            </form>
+                            <a href='https://widget.kyber.network/v0.6.2/?type=swap&mode=popup&callback=https%3A%2F%2Fwww.nceno.app%2Fapp.html&paramForwarding=true&network=mainnet&pinnedTokens=ETH_USDC_DAI&defaultPair=DAI_ETH&theme=theme-sunset'class='kyber-widget-button theme-sunset theme-supported' name='KyberWidget - Powered by KyberNetwork' title='Pay with tokens'target='_blank'>Convert</a>
                           </div>
                         </div>
                       </div>
@@ -1285,6 +1289,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.js"></script>
 
       <script src="logic.js"></script>
+
+      <script async src='https://widget.kyber.network/v0.6.2/widget.js'></script>
     <!-- / scripts -->  
   </body>
 </html>
