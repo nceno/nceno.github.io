@@ -19,7 +19,7 @@ function showPortis() {
       web3.eth.defaultAccount = e[0];
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
       console.log("default: " + web3.eth.defaultAccount);
-      checkUserbase();
+      localize();
       authed = true;
       getToken();
       $("#portisBtn").hide();
