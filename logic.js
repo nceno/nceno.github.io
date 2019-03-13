@@ -721,7 +721,7 @@ function localize(){
     pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
     //pad = parseInt(timezone.slice(0, 1)+1)
     //console.log(pad);
-    //console.log("Flag URL: " + flag);
+    console.log("Flag URL: " + flag);
   });
 }
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
