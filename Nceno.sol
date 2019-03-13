@@ -59,14 +59,14 @@ contract Nceno {
     userExists[_userID] = true;
 
     //fire event: _userID made a profile with params: @1, @2, ...
-    bytes32 _eventName = 0x50726f66696c65437265617465640000;
-    emit ProfileCreated(_eventName, _userID, _userName, _flag, msg.sender);
+    //bytes32 _eventName = 0x50726f66696c65437265617465640000;
+    //emit ProfileCreated(_eventName, _userID, _userName, _flag, msg.sender);
   }
   
-  event ProfileCreated(bytes32 _eventName, uint _userID, bytes32 _userName, bytes32 _flag, address _walletAdr);
+  //event ProfileCreated(bytes32 _eventName, uint _userID, bytes32 _userName, bytes32 _flag, address _walletAdr);
 
   struct stampList{
-    mapping(uint => bool) stampExists; //checks if a timestamp exists. each user in a goal will have one of these
+    mapping(uint => bool) stampExists; //checks if an activity session id exists. each user in a goal will have one of these structs
   }
 
   //the goal object
@@ -272,11 +272,11 @@ contract Nceno {
     profileOf[_userID].goalTotal++;
 
     //fire event: _userID created _goalID with params: @1, @2, ...
-    bytes32 _eventName = 0x476f616c437265617465640000000000;
-    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
+    //bytes32 _eventName = 0x476f616c437265617465640000000000;
+    //emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
   }
   
-  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, uint _userID, uint _ethPrice);
+  //event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, uint _userID, uint _ethPrice);
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, uint _userID) external payable{
@@ -292,8 +292,8 @@ contract Nceno {
     profileOf[_userID].goalTotal++;
 
     //fire event: _userID joined _goalID
-    bytes32 _eventName = 0x436f6d70657469746f724a6f696e6564;
-    emit CompetitorJoined(_eventName, _userID, _goalID);
+    //bytes32 _eventName = 0x436f6d70657469746f724a6f696e6564;
+    //emit CompetitorJoined(_eventName, _userID, _goalID);
   }
   
   event CompetitorJoined(bytes32 _eventName, uint _userID, bytes32 _goalID);
@@ -313,13 +313,13 @@ contract Nceno {
       goalRegistry[_goalID].successes[_userID][wk]++; //note the success
       goalRegistry[_goalID].timeLog[_userID].stampExists[_timeStamp]=true; //protect timestamp from double spending
       //fire event: _userID was refunded _amount from _goalID on _wk
-      bytes32 _eventName = 0x5061796f757452656465656d65644279;
-      emit PayoutRedeemedBy(_eventName, _userID, _goalID, wk, payout);
+      //bytes32 _eventName = 0x5061796f757452656465656d65644279;
+      //emit PayoutRedeemedBy(_eventName, _userID, _goalID, wk, payout);
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
 
-  event PayoutRedeemedBy(bytes32 _eventName, uint _userID, bytes32 _goalID, uint _wk, uint _payout);
+  //event PayoutRedeemedBy(bytes32 _eventName, uint _userID, bytes32 _goalID, uint _wk, uint _payout);
 
   //claims the bonus from lost stakeWEI of the previous week
   function claimBonus(bytes32 _goalID, uint _userID) external{
@@ -330,11 +330,7 @@ contract Nceno {
       goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800] == 0,
       "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week."
     );
-    
-    uint createFee = 0;
-    uint logFee = goalRegistry[_goalID].sesPerWk * 12580920000000000;
-    uint claimFee = 12580920000000000;
-    
+
     //uint wk = (now-goalRegistry[_goalID].startTime)/604800;
     uint winners;
     uint pot;
@@ -351,14 +347,7 @@ contract Nceno {
       }
     }
     
-    //if caller is the host, set the create fee to Create, if not, set to Join
-    if(msg.sender == profileOf[goalRegistry[_goalID].competitor[0]].walletAdr){
-      createFee = 22623960000000000/goalRegistry[_goalID].wks;
-    }
-    else createFee = 4423005000000000/goalRegistry[_goalID].wks;
-
-
-    msg.sender.transfer(claimFee + logFee + createFee + pot/(2*winners)); //initiate the payout, refund fees
+    msg.sender.transfer(pot/(2*winners)); //initiate the payout, refund fees
     goalRegistry[_goalID].bonusWasClaimed[_userID][(now-goalRegistry[_goalID].startTime)/604800-1] = 1; //protect against bonus double spending
     goalRegistry[_goalID].potWk[(now-goalRegistry[_goalID].startTime)/604800-1] = pot; //write to the global goal stats
     goalRegistry[_goalID].winnersWk[(now-goalRegistry[_goalID].startTime)/604800-1] = winners; //write to the global goal stats
@@ -366,11 +355,11 @@ contract Nceno {
 
     //fire event: _userID claimed _amount of lost stake from week _wk of _goalID.
     //bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
-    emit BonusClaimedBy(_userID, _goalID, pot/(2*winners));
+    //emit BonusClaimedBy(_userID, _goalID, pot/(2*winners));
     
   }
 
-  event BonusClaimedBy(uint _userID, bytes32 _goalID, uint _amount);
+  //event BonusClaimedBy(uint _userID, bytes32 _goalID, uint _amount);
 
   //replaces numerous "require()" statements, restricts caller to admin (nceno)
   modifier onlyNceno(){
