@@ -38,8 +38,10 @@ function checkUserbase(){
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
-        if(result)
+        if(result){
           $("#makeAcctBtn").hide();
+        }
+        //else
       }
       else
       console.error(error);

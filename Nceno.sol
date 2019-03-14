@@ -296,7 +296,7 @@ contract Nceno {
     //emit CompetitorJoined(_eventName, _userID, _goalID);
   }
   
-  event CompetitorJoined(bytes32 _eventName, uint _userID, bytes32 _goalID);
+  //event CompetitorJoined(bytes32 _eventName, uint _userID, bytes32 _goalID);
 
   //simple payout function when someone logs a workout
   function simplePayout(uint _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
@@ -369,6 +369,12 @@ contract Nceno {
     _;
   }
 
+  //sends entire contract balance to nceno wallet in case of emergency
+  function ncenoEmergencyCashout() onlyNceno external{
+    nceno.transfer(address(this).balance);
+  }
+}
+/*
   //see our revenue from a single goal
   function getSingleRev(bytes32 _goalID) onlyNceno external view returns (uint){
     uint revenue;
@@ -441,9 +447,10 @@ contract Nceno {
 
     nceno.transfer(pastRev/2);
   }
+*/
+//end of contract
 
-  //sends entire contract balance to nceno wallet in case of emergency
-  function ncenoEmergencyCashout() onlyNceno external{
-    nceno.transfer(address(this).balance);
-  }
-}//end of contract
+//gas= 126343. Cost= 0.000379029. createcomp: "123456789","0x436f6d70657469746f724a6f696e6564","0x436f6d70657469746f724a6f696e6564"
+//gas= 1525325 (1st), 855661 (next). Cost= 0.004575975 (1st), 0.002566983 (next) . create goal (add msg value!): "0x436f6d70657469746f724a6f696e65","20","1122334455","1","6","1552461369","123456789","12455"
+//gas= 76814. Cost= 0.000230442. simple payout: "123456789","21","667","0x436f6d70657469746f724a6f696e65"
+//gas= 73014. Cost= 0.000219042. claim bonus: "0x436f6d70657469746f724a6f696e65","123456789"
