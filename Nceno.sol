@@ -187,10 +187,8 @@ contract Nceno {
     if(0<=wk && wk<theGoal.wks+1){
       for(uint j =0; j<wk; j++){
         
-        //stack too deep********************
         my.wkPayouts[j] = partitions[theGoal.wks/2 -1][j]*goalRegistry[_goalID].successes[_userID][j]*theGoal.stakeWEI/(100*theGoal.sesPerWk);
       
-        //stack too deep*******************
         my.lostStake+=(partitions[theGoal.wks/2 -1][j]*theGoal.stakeWEI/100-my.wkPayouts[j]);
       
         my.wkBonuses[j] = goalRegistry[_goalID].bonusWasClaimed[_userID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
