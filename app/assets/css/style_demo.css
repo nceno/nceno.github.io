@@ -16319,7 +16319,7 @@ footer {
     border: 0; }
     .accordion-group-steps .accordion.open .accordion-control::before {
       background: #4829B2;
-      border-color: #4829B2;
+      border-color: #aa8420;
       color: #fff;
       -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
       -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
