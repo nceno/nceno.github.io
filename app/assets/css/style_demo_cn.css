@@ -8764,16 +8764,9 @@ a.text-rss:hover, a.text-rss:focus {
   font-weight: normal;
   font-style: normal; }
 
-@font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?q2xewv");
-  src: url("../fonts/icomoon.eot?q2xewv#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?q2xewv") format("truetype"), url("../fonts/icomoon.woff?q2xewv") format("woff"), url("../fonts/icomoon.svg?q2xewv#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: 'chinese' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
