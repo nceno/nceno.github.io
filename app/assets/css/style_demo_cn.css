@@ -37,8 +37,8 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 1200px;
   --breakpoint-xl: 1600px;
-  --font-family-sans-serif: "Rubik", sans-serif;
-  --font-family-monospace: "Roboto Mono", monospace; }
+  --font-family-sans-serif: "chinese";
+  --font-family-monospace: "chinese"; }
 
 #sliderMins .rs-range-color  {
     background-color: #f442b3;
@@ -132,7 +132,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Rubik", sans-serif;
+  font-family: "chinese";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -235,7 +235,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: "Roboto Mono", monospace;
+  font-family: "chinese";
   font-size: 1em; }
 
 pre {
@@ -377,7 +377,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 1em;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "chinese";
   font-weight: 300;
   line-height: 1.25;
   color: inherit; }
@@ -3943,7 +3943,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Rubik", sans-serif;
+  font-family: "chinese";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
