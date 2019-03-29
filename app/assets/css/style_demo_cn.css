@@ -117,7 +117,7 @@
   box-sizing: border-box; }
 
 html {
-  font-family: "icomoon";
+  font-family: "chinese";
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -132,7 +132,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "icomoon";
+  font-family: "chinese";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -235,7 +235,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: "icomoon";
+  font-family: "chinese";
   font-size: 1em; }
 
 pre {
@@ -377,7 +377,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 1em;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "chinese";
   font-weight: 300;
   line-height: 1.25;
   color: inherit; }
@@ -3943,7 +3943,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Rubik", sans-serif;
+  font-family: "chinese";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -4028,7 +4028,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Rubik", sans-serif;
+  font-family: "chinese";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6939,7 +6939,7 @@ button.bg-dark:focus {
     margin-left: auto !important; } }
 
 .text-monospace {
-  font-family: "Roboto Mono", monospace; }
+  font-family: "chinese"; }
 
 .text-justify {
   text-align: justify !important; }
@@ -8758,15 +8758,15 @@ a.text-rss:hover, a.text-rss:focus {
   width: 20% !important; }
 
 @font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?q2xewv");
-  src: url("../fonts/icomoon.eot?q2xewv#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?q2xewv") format("truetype"), url("../fonts/icomoon.woff?q2xewv") format("woff"), url("../fonts/icomoon.svg?q2xewv#icomoon") format("svg");
+  font-family: 'chinese';
+  src: url("../fonts/chinese.otf");
+  src: url("../fonts/chinese.otf") ;
   font-weight: normal;
   font-style: normal; }
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: 'chinese' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -15366,7 +15366,7 @@ footer {
   display: block;
   margin-bottom: .5rem;
   line-height: 1.25;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "chinese";
   font-size: 1.5rem;
   font-weight: 400; }
 
@@ -15711,7 +15711,7 @@ footer {
     left: 0;
     color: #000;
     line-height: 3.75rem;
-    font-family: 'icomoon';
+    font-family: 'chinese';
     font-size: 1.5rem; }
   .swiper-button-prev:hover,
   .swiper-button-next:hover {
@@ -16228,7 +16228,7 @@ footer {
     max-width: 100%;
     margin: 0;
     font-size: 1rem;
-    font-family: "Rubik", sans-serif;
+    font-family: "chinese";
     font-weight: 400;
     vertical-align: middle; }
   .accordion-control h5 {
@@ -16240,7 +16240,7 @@ footer {
     line-height: 1em;
     right: 1rem;
     top: 50%;
-    font-family: 'icomoon' !important;
+    font-family: 'chinese' !important;
     font-size: 1.5rem;
     margin-top: -0.5em;
     -webkit-transition: all 0.2s;
@@ -16426,7 +16426,7 @@ footer {
       content: "\ec7d"; }
     .accordion-group-portal .accordion-control h5 {
       font-size: 1.25rem;
-      font-family: "Rubik", sans-serif; }
+      font-family: "chinese"; }
   .accordion-group-portal .accordion-content > div {
     padding-bottom: 2rem; }
 
@@ -16466,7 +16466,7 @@ footer {
     bottom: 0;
     left: 0;
     line-height: 4rem;
-    font-family: 'icomoon';
+    font-family: 'chinese';
     font-size: 1.8rem;
     color: #fff; }
   .owl-carousel .owl-nav button.owl-prev:hover,
@@ -16758,7 +16758,7 @@ footer {
     cursor: pointer;
     color: #000; }
     .user-panel .collapse::before {
-      font-family: 'icomoon';
+      font-family: 'chinese';
       font-size: 1.875rem;
       content: "\ecce";
       color: #fff; }
@@ -16895,7 +16895,7 @@ footer {
     display: block;
     content: "\f105";
     font-size: 1.375rem;
-    font-family: "icomoon";
+    font-family: "chinese";
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     transition: all 0.2s;
@@ -16912,7 +16912,7 @@ footer {
 
 .entry-title {
   font-size: 1rem;
-  font-family: "Rubik", sans-serif;
+  font-family: "chinese";
   font-weight: 400; }
 
 .text-white .entry:not(:first-child) {
@@ -16952,7 +16952,7 @@ footer {
 .news-title {
   margin: 0;
   font-size: 1rem;
-  font-family: "Rubik", sans-serif;
+  font-family: "chinese";
   font-weight: 400; }
 
 .text-white .news a {
@@ -17158,7 +17158,7 @@ footer {
     display: block;
     content: "\ebde";
     font-size: 1.375rem;
-    font-family: "icomoon"; }
+    font-family: "chinese"; }
   .card-price .card-footer:hover {
     background: #e5e5e5; }
     .card-price .card-footer:hover::after {
@@ -19122,7 +19122,7 @@ footer {
     top: -3rem;
     left: -1rem;
     color: inherit;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "chinese";
     font-size: 30rem;
     color: rgba(0, 0, 0, 0.1);
     line-height: 1em;
@@ -19131,7 +19131,7 @@ footer {
     position: relative;
     color: inherit;
     font-size: 1.625rem;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "chinese";
     font-weight: 300;
     line-height: 1.5em;
     z-index: 5; }
@@ -19187,7 +19187,7 @@ footer {
 .review p {
   margin-top: 50px;
   font-size: 1.25rem;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "chinese";
   font-weight: 300; }
 
 .review hr {
@@ -19635,7 +19635,7 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
  */
 code[class*="language-"],
 pre[class*="language-"] {
-  font-family: "Roboto Mono", monospace;
+  font-family: "chinese";
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -20330,7 +20330,7 @@ pre[class*="language-"] {
     transform: translate(-362%, -50%);
     position: absolute;
     font-size: 1rem;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "chinese";
     font-weight: 400;
     top: 50%;
     left: 50%; }
