@@ -672,10 +672,10 @@ window.onload = function() {
     //min: 10,*********************************************smaller values used for testing
     //max: 300,
     min: 1,
-    max: 2,
+    max: 20,
     step: 1,
     //value: 55,******************
-    value: 55,
+    value: 2,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal4"
   });
