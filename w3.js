@@ -8,6 +8,6 @@ if (typeof web3 !== 'undefined') {
     // Fallback - use Portis
     web3 = new Web3(new PortisProvider({
       apiKey: "332bfe3ea28174fa515d478e23a1b31c",
-      network: 'rinkeby'
+      network: 'ropsten'
     }));
 }
