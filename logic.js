@@ -672,7 +672,7 @@ window.onload = function() {
     //min: 10,*********************************************smaller values used for testing
     //max: 300,
     min: 1,
-    max: 20,
+    max: 2,
     step: 1,
     //value: 55,******************
     value: 55,
