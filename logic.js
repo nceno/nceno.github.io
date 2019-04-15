@@ -435,7 +435,8 @@ function selectedChallenge(){
                 console.log("got Participants..."); //****************************
                 
                 for (let k = 0; k < compcount; k++){
-                  
+                  console.log("compcount =" compcount);
+                  console.log("k= "+k);
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     function(error, result) {
@@ -463,7 +464,7 @@ function selectedChallenge(){
 
                               
                               $("#rows").after(
-                                '<tr id="player['+k+']"><td>'+ k+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
+                                '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );                        
                             }
                             else
