@@ -435,7 +435,7 @@ function selectedChallenge(){
                 console.log("got Participants..."); //****************************
                 
                 for (let k = 0; k < compcount; k++){
-                  console.log("compcount =" compcount);
+                  console.log("compcount =" +compcount);
                   console.log("k= "+k);
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
