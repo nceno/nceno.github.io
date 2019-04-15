@@ -522,7 +522,7 @@ function search(){
 //populates the challenges starting soon table
 
 async function browse(){
-  //$("#startingSoon").empty();
+  $("#startingSoon").empty();
   if(browsePopulated==false){
     for (let i = 0; i < 20; i++){
 
