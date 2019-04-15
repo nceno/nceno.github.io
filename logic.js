@@ -24,7 +24,7 @@ function showPortis() {
       getToken();
       $("#portisBtn").hide();
       $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
-      
+
     });
   })
 }
@@ -88,26 +88,42 @@ var userID
              
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
-  Nceno.methods.createCompetitor(
-    userID,
-    web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
-    web3.utils.padRight(web3.utils.toHex(flag),34))
-  .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
+  localize();
+  Nceno.methods.userExists(
+    userID
+  )
+  .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
-        $("#makeAcctBtn").hide();
-        $("#acctLoader").show();
-        console.log(result);
+        if(result){
+          $("#makeAcctBtn").hide();
+          $("#alreadyExists").html("Your account already exists!");
+        }
+        else Nceno.methods.createCompetitor(
+          userID,
+          web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
+          web3.utils.padRight(web3.utils.toHex(flag),34))
+        .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
+          function(error, result) {
+            if (!error){
+              $("#makeAcctBtn").hide();
+              $("#acctLoader").show();
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
+        ).on('confirmation', function(confNumber, receipt){ 
+          $("#acctLoader").hide();
+          $("#acctSuccess").show();
+          
+          $("#makeAcctBtn").hide(); })
+          .on('error', function(error){console.log(error);});
       }
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ 
-    $("#acctLoader").hide();
-    $("#acctSuccess").show();
-    
-    $("#makeAcctBtn").hide(); })
-    .on('error', function(error){console.log(error);});
+  );
 }); 
 
 //randomizes the goalID
