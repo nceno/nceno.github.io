@@ -397,9 +397,7 @@ function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
-    
-    //$("#rows").empty();
-    
+            
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
@@ -421,7 +419,7 @@ function selectedChallenge(){
           currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
 
           //leaderboard
-          //$("#rows").empty();
+          $("#rows").empty();
           
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
