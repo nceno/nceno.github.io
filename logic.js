@@ -398,7 +398,7 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
     
-    $("#rows").empty();
+    //$("#rows").empty();
     
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
@@ -525,7 +525,7 @@ function search(){
 //populates the challenges starting soon table
 //var browsePopulated = false;
 async function browse(){
-  $("#startingSoon").empty();
+  //$("#startingSoon").empty();
   //if(browsePopulated=false){
     for (let i = 0; i < 20; i++){
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
