@@ -398,7 +398,7 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
     
-    $("#rows").empty();
+    $("rows").empty();
     
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
