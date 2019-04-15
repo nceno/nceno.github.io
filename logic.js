@@ -24,9 +24,8 @@ function showPortis() {
       getToken();
       $("#portisBtn").hide();
       $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
-      
     });
-  }).then(browse());
+  });
 }
 
 //helper function that will hide the create account button if the user already made an account.
@@ -521,10 +520,10 @@ function search(){
 }
 
 //populates the challenges starting soon table
-//var browsePopulated = false;
+
 async function browse(){
   $("#startingSoon").empty();
-  //if(browsePopulated=false){
+  if(browsePopulated==false){
     for (let i = 0; i < 20; i++){
 
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
@@ -542,8 +541,8 @@ async function browse(){
           '</td><td><button type="button" onclick="setGoalID('+result[0]+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
       }   
     }
-    //browsePopulated = true;
-  //}
+    browsePopulated = true;
+  }
 }
 
 var browsedGoal;
@@ -632,6 +631,7 @@ $("#logBtn").click(function() {
 //not sure if using window.onload correctly... but,
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
 window.onload = function() {
+  var browsePopulated = false;
   //charts
   var ctx1 = document.getElementById('canvas1').getContext('2d');
   window.myLine1 = new Chart(ctx1, config1);
