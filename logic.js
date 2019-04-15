@@ -432,7 +432,7 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
-                console.log("got Participants...");
+                console.log("got Participants..."); //****************************
                 
                 for (let k = 0; k < compcount; k++){
                   
@@ -443,7 +443,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("got GoalStats1...");
+                        console.log("got GoalStats1..."); //**********************************
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -456,13 +456,13 @@ function selectedChallenge(){
                               bonusTotal[k] = result[3];
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
-                              console.log("got GoalStats2...");
+                              console.log("got GoalStats2..."); //***************************
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
 
                               
-                              $("#leaderboard").after(
+                              $("#rows").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );                        
                             }
