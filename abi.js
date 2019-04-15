@@ -1,15 +1,6 @@
 var Nceno = new web3.eth.Contract([
   {
     "constant": false,
-    "inputs": [],
-    "name": "activeCashout",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "name": "_goalID",
@@ -119,15 +110,6 @@ var Nceno = new web3.eth.Contract([
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "pastCashout",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "name": "_newChoices",
@@ -167,42 +149,6 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "singleCashout",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_eventName",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_userID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "CompetitorJoined",
-    "type": "event"
-  },
-  {
     "constant": true,
     "inputs": [
       {
@@ -219,20 +165,6 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "",
         "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getActiveRev",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
       }
     ],
     "payable": false,
@@ -470,20 +402,6 @@ var Nceno = new web3.eth.Contract([
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getPastRev",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [
       {
         "name": "_goalID",
@@ -491,25 +409,6 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "getPotentialPayout",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getSingleRev",
     "outputs": [
       {
         "name": "",
@@ -673,4 +572,4 @@ var Nceno = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x2c77b1a8efb61405668bdcb6b0edbd4df2868f00');
+], '0x6a27c6c29c26d63aee33e5788b0fe6df20efc1ed');

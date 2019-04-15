@@ -9,7 +9,7 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 
 contract Nceno {
   //addresses where lost stakeWEI goes
-  address nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //metamask rinkeby account (admin also)
+  //address nceno = 0xa53f4A461c4f109D31ADA8a02c0A73F5762603dD; //metamask rinkeby account (admin also)
   address nceno = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F; //metamask ropsten
   
   //the competitor object
