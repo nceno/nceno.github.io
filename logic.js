@@ -523,26 +523,26 @@ function search(){
 }
 
 //populates the challenges starting soon table
-var browsePopulated = false;
-async function browse(){
-  if(browsePopulated=false){
-    for (let i = 0; i < 20; i++){
-      var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
-        if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
-          //list it in the table
-          var tstamp = new Date(result[5]*1000);
-          var buyin = Math.round(result[2]/100000000000000000000);
 
-          $("#startingSoon").after('<tr><td>$'+buyin+
-            '</td><td>'+result[4]+
-            ' wks</td><td>'+result[3]+
-            ' x/wk</td><td>'+result[1]+
-            ' min</td><td>'+result[6]+
-            ' </td><td>'+tstamp.toDateString()+
-            '</td><td><button type="button" onclick="setGoalID('+result[0]+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
-        }   
-    }
-    browsePopulated = true;
+async function browse(){
+  $("#startingSoon").empty();
+
+  for (let i = 0; i < 20; i++){
+    var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
+    if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
+      //list it in the table
+      var tstamp = new Date(result[5]*1000);
+      var buyin = Math.round(result[2]/100000000000000000000);
+
+      $("#startingSoon").after('<tr><td>$'+buyin+
+        '</td><td>'+result[4]+
+        ' wks</td><td>'+result[3]+
+        ' x/wk</td><td>'+result[1]+
+        ' min</td><td>'+result[6]+
+        ' </td><td>'+tstamp.toDateString()+
+        '</td><td><button type="button" onclick="setGoalID('+result[0]+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>'
+      );
+    }   
   }
 }
 
