@@ -398,6 +398,7 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
     $("#leaderboard").empty();
+    $("#rows").empty();
     
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
@@ -420,7 +421,7 @@ function selectedChallenge(){
           currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
 
           //leaderboard
-          $("#rows").empty();
+          //$("#rows").empty();
           
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
