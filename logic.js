@@ -24,7 +24,7 @@ function showPortis() {
       getToken();
       $("#portisBtn").hide();
       $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
-      checkUserbase();
+      
     });
   })
 }
