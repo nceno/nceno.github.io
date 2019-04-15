@@ -397,7 +397,7 @@ function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
-    $("#leaderboard").empty();
+    
     $("#rows").empty();
     
     Nceno.methods.getGoalParams(goalid)
