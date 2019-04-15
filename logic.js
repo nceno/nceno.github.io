@@ -528,6 +528,7 @@ async function browse(){
   //$("#startingSoon").empty();
   //if(browsePopulated=false){
     for (let i = 0; i < 20; i++){
+      console.log("looking");
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
       if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
         //list it in the table
