@@ -397,6 +397,7 @@ function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
+    $("#leaderboard").empty();
     
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
@@ -462,7 +463,7 @@ function selectedChallenge(){
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
 
-                              //bug: values of k are not being hit. maybe something wrong with blockchain call latency?
+                              
                               $("#leaderboard").after(
                                 '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );                        
