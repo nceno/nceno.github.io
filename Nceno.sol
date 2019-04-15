@@ -127,7 +127,7 @@ contract Nceno {
 
   //get personal stats
   struct myStatsObject{
-    uint adherenceRate; //
+    uint adherenceRate;
     uint[12] wkPayouts;
     uint lostStake;
     uint[12] wkBonuses;
@@ -312,13 +312,13 @@ contract Nceno {
       goalRegistry[_goalID].successes[_userID][wk]++; //note the success
       goalRegistry[_goalID].timeLog[_userID].stampExists[_timeStamp]=true; //protect timestamp from double spending
       //fire event: _userID was refunded _amount from _goalID on _wk
-      //bytes32 _eventName = 0x5061796f757452656465656d65644279;
-      //emit PayoutRedeemedBy(_eventName, _userID, _goalID, wk, payout);
+      bytes32 _eventName = 0x5061796f757452656465656d65644279;
+      emit PayoutRedeemedBy(_eventName, _userID, _goalID, wk, payout);
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
 
-  //event PayoutRedeemedBy(bytes32 _eventName, uint _userID, bytes32 _goalID, uint _wk, uint _payout);
+  event PayoutRedeemedBy(bytes32 _eventName, uint _userID, bytes32 _goalID, uint _wk, uint _payout);
 
   //claims the bonus from lost stakeWEI of the previous week
   function claimBonus(bytes32 _goalID, uint _userID) external{
