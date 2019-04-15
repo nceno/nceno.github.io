@@ -412,13 +412,13 @@ function selectedChallenge(){
           $("#echComp").html(result[6]);
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
-          console.log("got GoalParams....");
+          console.log("got GoalParams...."); //*********************************************
 
           //set current challenge week globally
           currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
 
           //leaderboard
-          $("#rows").empty();
+          //$("#rows").empty();
           
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
@@ -463,7 +463,7 @@ function selectedChallenge(){
 
                               
                               $("#rows").after(
-                                '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
+                                '<tr id="player['+k+']"><td>'+ k+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
                               );                        
                             }
                             else
