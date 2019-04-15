@@ -525,7 +525,7 @@ function search(){
 //populates the challenges starting soon table
 
 async function browse(){
-  $("#startingSoon").empty();
+  $("startingSoon").empty();
 
   for (let i = 0; i < 20; i++){
     var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
@@ -534,7 +534,7 @@ async function browse(){
       var tstamp = new Date(result[5]*1000);
       var buyin = Math.round(result[2]/100000000000000000000);
 
-      $("#startingSoon").after('<tr><td>$'+buyin+
+      $("startingSoon").after('<tr><td>$'+buyin+
         '</td><td>'+result[4]+
         ' wks</td><td>'+result[3]+
         ' x/wk</td><td>'+result[1]+
