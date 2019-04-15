@@ -541,8 +541,8 @@ async function browse(){
           '</td><td><button type="button" onclick="setGoalID('+result[0]+')" id="soonJoin" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join</button></td></tr>');
       }   
     }
-    browsePopulated = true;
   }
+  browsePopulated = true;
 }
 
 var browsedGoal;
