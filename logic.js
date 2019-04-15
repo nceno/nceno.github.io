@@ -523,7 +523,7 @@ function search(){
 //populates the challenges starting soon table
 var browsePopulated = false;
 async function browse(){
-  if(browsePopulated===false){
+  if(browsePopulated=false){
     for (let i = 0; i < 20; i++){
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
         if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
