@@ -97,7 +97,7 @@ $("#makeAcctBtn").click(function() {
       if (!error){
         if(result){
           $("#makeAcctBtn").hide();
-          $("#alreadyExists").html("Your account already exists!");
+          $("#alreadyExists").html("Your account already exists.");
         }
         else Nceno.methods.createCompetitor(
           userID,
