@@ -630,8 +630,9 @@ $("#logBtn").click(function() {
 
 //not sure if using window.onload correctly... but,
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
+var browsePopulated
 window.onload = function() {
-  var browsePopulated = false;
+  browsePopulated = false;
   //charts
   var ctx1 = document.getElementById('canvas1').getContext('2d');
   window.myLine1 = new Chart(ctx1, config1);
