@@ -521,10 +521,10 @@ function search(){
 }
 
 //populates the challenges starting soon table
-
+var browsePopulated
 async function browse(){
   $("#startingSoon").empty();
-  if(browsePopulated==false){
+  if(browsePopulated!=true){
     for (let i = 0; i < 20; i++){
 
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
@@ -631,9 +631,9 @@ $("#logBtn").click(function() {
 
 //not sure if using window.onload correctly... but,
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
-var browsePopulated
+
 window.onload = function() {
-  browsePopulated = false;
+
   //charts
   var ctx1 = document.getElementById('canvas1').getContext('2d');
   window.myLine1 = new Chart(ctx1, config1);
