@@ -271,11 +271,11 @@ contract Nceno {
     profileOf[_userID].goalTotal++;
 
     //fire event: _userID created _goalID with params: @1, @2, ...
-    //bytes32 _eventName = 0x476f616c437265617465640000000000;
-    //emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
+    bytes32 _eventName = 0x476f616c437265617465640000000000;
+    emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
   }
   
-  //event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, uint _userID, uint _ethPrice);
+  event GoalCreated(bytes32 _eventName, bytes32 _goalID, uint _activeMins, uint _stakeWEI, uint _sesPerWk, uint _wks, uint256 _startTime, uint _userID, uint _ethPrice);
 
   //the function used to join a challenge, if you know the goalID
   function joinGoal(bytes32 _goalID, uint _userID) external payable{
@@ -290,12 +290,12 @@ contract Nceno {
     profileOf[_userID].goalAt[profileOf[_userID].goalTotal] = goalRegistry[_goalID];
     profileOf[_userID].goalTotal++;
 
-    //fire event: _userID joined _goalID
-    //bytes32 _eventName = 0x436f6d70657469746f724a6f696e6564;
-    //emit CompetitorJoined(_eventName, _userID, _goalID);
+    fire event: _userID joined _goalID
+    bytes32 _eventName = 0x436f6d70657469746f724a6f696e6564;
+    emit CompetitorJoined(_eventName, _userID, _goalID);
   }
   
-  //event CompetitorJoined(bytes32 _eventName, uint _userID, bytes32 _goalID);
+  event CompetitorJoined(bytes32 _eventName, uint _userID, bytes32 _goalID);
 
   //simple payout function when someone logs a workout
   function simplePayout(uint _userID, uint _reportedMins, uint256 _timeStamp, bytes32 _goalID) external{
@@ -353,12 +353,12 @@ contract Nceno {
     
 
     //fire event: _userID claimed _amount of lost stake from week _wk of _goalID.
-    //bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
-    //emit BonusClaimedBy(_userID, _goalID, pot/(2*winners));
+    bytes32 _eventName = 0x426f6e7573436c61696d656442790000;
+    emit BonusClaimedBy(_userID, _goalID, pot/(2*winners));
     
   }
 
-  //event BonusClaimedBy(uint _userID, bytes32 _goalID, uint _amount);
+  event BonusClaimedBy(uint _userID, bytes32 _goalID, uint _amount);
 
   //replaces numerous "require()" statements, restricts caller to admin (nceno)
   modifier onlyNceno(){
