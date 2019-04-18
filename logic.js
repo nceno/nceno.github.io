@@ -535,22 +535,22 @@ async function browse(){
 
         var n = i+1;
         var buyinKey = 'buyinU'+n;
-        var wksKey = '"#wksU'+n+'"';
-        var sesKey = '"#sesU'+n+'"';
-        var minKey = '"#minU'+n+'"';
-        var pplKey = '"#pplU'+n+'"';
-        var startKey = '"#startU'+n+'"';
-        var btnKey = '"#btnU'+n+'"';
+        var wksKey = 'wksU'+n;
+        var sesKey = 'sesU'+n;
+        var minKey = 'minU'+n;
+        var pplKey = 'pplU'+n;
+        var startKey = 'startU'+n;
+        var btnKey = 'btnU'+n;
 
         console.log(buyinKey);
 
         $('#'+buyinKey).html('$'+buyin);
-        $(wksKey).html(result[4]+' wks');
-        $(sesKey).html(result[3]+' x/wk');
-        $(minKey).html(result[1]+' min');
-        $(pplKey).html(result[6]);
-        $(startKey).html(tstamp.toDateString());
-        $(btnKey).show();
+        $('#'+wksKey).html(result[4]+' wks');
+        $('#'+sesKey).html(result[3]+' x/wk');
+        $('#'+minKey).html(result[1]+' min');
+        $('#'+pplKey).html(result[6]);
+        $('#'+startKey).html(tstamp.toDateString());
+        $('#'+btnKey).show();
 
       }   
     }
