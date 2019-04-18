@@ -665,6 +665,7 @@ async function browse(){
       var pplKey = 'pplU'+n;
       var startKey = 'startU'+n;
       var btnKey = 'btnU'+n;
+      var idKey = 'idNumberU'+n;
 
       $('#'+buyinKey).html('$'+buyin);
       $('#'+wksKey).html(result[4]+' wks');
@@ -673,7 +674,18 @@ async function browse(){
       $('#'+pplKey).html(result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
-      //joinID(n);
+      $('#'+idKey).val(result[0]);
+      console.log($('#idNumberU1').val());
+      console.log($('#idNumberU2').val());
+      console.log($('#idNumberU3').val());
+      console.log($('#idNumberU4').val());
+      console.log($('#idNumberU5').val());
+      console.log($('#idNumberU6').val());
+      console.log($('#idNumberU7').val());
+      console.log($('#idNumberU8').val());
+      console.log($('#idNumberU9').val());
+      console.log($('#idNumberU10').val());
+
     }   
   }
 }
