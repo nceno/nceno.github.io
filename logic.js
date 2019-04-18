@@ -451,6 +451,13 @@ function makeWktl(){
   $('#'+currentwklogKey).show();
   $('#'+pastwkclaimKey).show();
 
+  //hide all weeks, in case previously selected goal was longer.
+  for (let i = 0; i < 12; i++){
+    var wkindex = i+1;
+    var currentwkKey = 'week'+wkindex;
+    $('#'+currentwkKey).hide();
+  }
+
   for (let i = 0; i < currentWeek; i++){
     var wkindex = i+1;
     var currentwkKey = 'week'+wkindex;
@@ -458,6 +465,7 @@ function makeWktl(){
     console.log(currentwkKey)
     $('#'+currentwkKey).show();
   }
+
 
 }
 
@@ -582,23 +590,7 @@ function selectedChallenge(){
               else
               console.error(error);
           });
-          //overwrite artifacts from perviously selected goal if current has lower compcount.
-          /*for (let k = compcount; k < 10; k++){
-            var n = k+1;
-            var adhKey = 'adhP'+n;
-            var nameKey = 'nameP'+n;
-            var flagKey = 'flagP'+n;
-            var bonusKey = 'bonusP'+n;
-            var payKey = 'payP'+n;
-            var lostKey = 'lostP'+n;
-
-            $('#'+adhKey).html('');
-            $('#'+nameKey).html('');
-            $('#'+flagKey).html('');
-            $('#'+bonusKey).html('');
-            $('#'+payKey).html('');
-            $('#'+lostKey).html('');
-          }*/
+          
         } 
         else
         console.error(error);
@@ -668,6 +660,7 @@ async function browse(){
       $('#'+pplKey).html(result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
+      //joinID(n);
     }   
   }
 }
