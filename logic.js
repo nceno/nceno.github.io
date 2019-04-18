@@ -463,7 +463,7 @@ function makeWktl(){
   if(currentWeek<=wkLimit){
     $('#'+currentwklogKey).show();
   }
-  if(currentWeek>wkLimit){
+ if(currentWeek<=wkLimit+1){
     $('#'+pastwkclaimKey).show();
   }
  
