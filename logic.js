@@ -16,17 +16,17 @@ function showPortis() {
   portis.showPortis(() => {
     
   });
-  
+
   portis.onLogin((walletAddress, email) => {
-      web3.eth.getAccounts().then(e => { 
-        web3.eth.defaultAccount = e[0];
-        console.log("default: " + web3.eth.defaultAccount);
-        localize();
-        getToken();
-        $("#portisBtn").hide();
-        $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
-      });
+    web3.eth.getAccounts().then(e => { 
+      web3.eth.defaultAccount = e[0];
+      console.log("default: " + web3.eth.defaultAccount);
+      localize();
+      getToken();
+      $("#portisBtn").hide();
+      $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
     });
+  });
 }
 
 //helper function that will hide the create account button if the user already made an account.
@@ -765,6 +765,17 @@ $("#logBtn").click(function() {
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
 
 window.onload = function() {
+
+  portis.onLogin((walletAddress, email) => {
+    web3.eth.getAccounts().then(e => { 
+      web3.eth.defaultAccount = e[0];
+      console.log("default: " + web3.eth.defaultAccount);
+      localize();
+      getToken();
+      $("#portisBtn").hide();
+      $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
+    });
+  });
 
   //charts
   var ctx1 = document.getElementById('canvas1').getContext('2d');
