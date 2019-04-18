@@ -458,6 +458,8 @@ function makeWktl(){
   for (let i = 0; i < currentWeek; i++){
     var wkindex = i+1;
     var currentwkKey = 'week'+wkindex;
+    console.log("current week is: "+currentWeek);
+    console.log(currentwkKey);
     $('#'+currentwkKey).show();
   }
 
