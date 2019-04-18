@@ -7,7 +7,7 @@ if (typeof web3 !== 'undefined') {
   // Use Mist/MetaMask's provider
   web3 = new Web3(web3.currentProvider);
 } else {
-	const web3 = new Web3(portis.provider);
+	web3 = new Web3(portis.provider);
     // Fallback - use Portis
     /*web3 = new Web3(new PortisProvider({
       apiKey: "332bfe3ea28174fa515d478e23a1b31c",
