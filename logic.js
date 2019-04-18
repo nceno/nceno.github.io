@@ -483,6 +483,7 @@ function selectedChallenge(){
       $('#'+bonusKey).html('');
       $('#'+payKey).html('');
       $('#'+lostKey).html('');
+      console.log("clearing leaderboard...");
     }
     
     Nceno.methods.getGoalParams(goalid)
