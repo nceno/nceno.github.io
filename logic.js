@@ -71,6 +71,17 @@ $("#joinLoader").hide();
 $("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 $("#joinSoonSuccess").hide();
+$('#btnU1').hide();
+$('#btnU2').hide();
+$('#btnU3').hide();
+$('#btnU4').hide();
+$('#btnU5').hide();
+$('#btnU6').hide();
+$('#btnU7').hide();
+$('#btnU8').hide();
+$('#btnU9').hide();
+$('#btnU10').hide();
+
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
