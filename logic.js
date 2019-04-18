@@ -524,7 +524,7 @@ function search(){
 //var browsePopulated
 async function browse(){
   //$("#startingSoon1").empty();
-  if(browsePopulated!=true){
+  //if(browsePopulated!=true){
     for (let i = 0; i < 10; i++){
 
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
@@ -543,7 +543,7 @@ async function browse(){
 
       }   
     }
-  }
+  //}
   //browsePopulated = true;
 }
 
