@@ -534,7 +534,7 @@ async function browse(){
         var buyin = Math.round(result[2]/100000000000000000000);
 
         var n = i+1;
-        var buyinKey = '"#buyinU'+n+'"';
+        var buyinKey = 'buyinU'+n;
         var wksKey = '"#wksU'+n+'"';
         var sesKey = '"#sesU'+n+'"';
         var minKey = '"#minU'+n+'"';
@@ -544,7 +544,7 @@ async function browse(){
 
         console.log(buyinKey);
 
-        $("#buyinU1").html('$'+buyin);
+        $('#'+buyinKey).html('$'+buyin);
         $(wksKey).html(result[4]+' wks');
         $(sesKey).html(result[3]+' x/wk');
         $(minKey).html(result[1]+' min');
