@@ -462,6 +462,9 @@ function makeWktl(){
     console.log(currentwkKey)
     $('#'+currentwkKey).show();
   }
+  var caroIndex = currentWeek-1;
+  $('#caro').carousel(caroIndex);
+  $('#caro').carousel('pause');
 
 
 }
