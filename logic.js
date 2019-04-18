@@ -441,7 +441,6 @@ function makePage(){
   //quickStats();
   getToken();
 }
-
 var wkLimit = 0;
 var currentWeek = 0;
 function makeWktl(){
@@ -468,7 +467,9 @@ function makeWktl(){
     $('#'+pastwkclaimHide).hide();
   }
 
+  var mostRecentWk = 0;
   if(currentWeek>wkLimit){mostRecentWk = wkLimit;}
+  else mostRecentWk = currentWeek;
 
   for (let i = 0; i < mostRecentWk; i++){
     var wkindex = i+1;
