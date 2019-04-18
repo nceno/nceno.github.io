@@ -563,6 +563,23 @@ function selectedChallenge(){
               else
               console.error(error);
           });
+          //overwrite artifacts from perviously selected goal if current has lower compcount.
+          for (let k = compcount; k < 10; k++){
+            var n = k+1;
+            var adhKey = 'adhP'+n;
+            var nameKey = 'nameP'+n;
+            var flagKey = 'flagP'+n;
+            var bonusKey = 'bonusP'+n;
+            var payKey = 'payP'+n;
+            var lostKey = 'lostP'+n;
+                              
+            $('#'+adhKey).html('');
+            $('#'+nameKey).html('');
+            $('#'+flagKey).html('');
+            $('#'+bonusKey).html('');
+            $('#'+payKey).html('');
+            $('#'+lostKey).html('');
+          }
         } 
         else
         console.error(error);
