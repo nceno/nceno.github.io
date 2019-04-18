@@ -462,10 +462,24 @@ function selectedChallenge(){
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
 
+                              var n = k+1;
+                              var adhKey = 'adhP'+n;
+                              var nameKey = 'nameP'+n;
+                              var flagKey = 'flagP'+n;
+                              var bonusKey = 'bonusP'+n;
+                              var payKey = 'payP'+n;
+                              var lostKey = 'lostP'+n;
                               
-                              $("#rows").after(
-                                '<tr id="player['+k+']"><td>'+ adherence[k]+'% </td><td>'+ convertedName +'</td><td><img src="https://ipdata.co/flags/'+convertedFlag+'.png"></td><td>$'+bonusTotal[k]+'</td><td>$'+totalPay[k]+'</td><td>$'+lostStake[k]+'</td></tr>'
-                              );                        
+
+                              $('#'+adhKey).html(adherence[k]+'%');
+                              $('#'+nameKey).html(convertedName);
+                              $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
+                              $('#'+bonusKey).html('$'+bonusTotal[k]);
+                              $('#'+payKey).html('$'+totalPay[k]);
+                              $('#'+lostKey).html('$'+lostStake[k]);
+                              
+
+
                             }
                             else
                             console.error(error);
@@ -541,8 +555,6 @@ async function browse(){
         var pplKey = 'pplU'+n;
         var startKey = 'startU'+n;
         var btnKey = 'btnU'+n;
-
-        console.log(buyinKey);
 
         $('#'+buyinKey).html('$'+buyin);
         $('#'+wksKey).html(result[4]+' wks');
