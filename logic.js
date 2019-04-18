@@ -532,14 +532,23 @@ async function browse(){
         //list it in the table
         var tstamp = new Date(result[5]*1000);
         var buyin = Math.round(result[2]/100000000000000000000);
+        var buyinKey = "#buyinU"+i+1+'"';
+        var wksKey = "#wksU"+i+1+'"';
+        var sesKey = "#sesU"+i+1+'"';
+        var minKey = "#minU"+i+1+'"';
+        var pplKey = "#pplU"+i+1+'"';
+        var startKey = "#startU"+i+1+'"';
+        var btnKey = "#btnU"+i+1+'"';
 
-        $("#buyinU"+i+1).html('$'+buyin);
-        $("#wksU"+i+1).html(result[4]+' wks');
-        $("#sesU"+i+1).html(result[3]+' x/wk');
-        $("#minU"+i+1).html(result[1]+' min');
-        $("#pplU"+i+1).html(result[6]);
-        $("#startU"+i+1).html(tstamp.toDateString());
-        $("#btnU"+i+1).show();
+        console.log(buyinKey);
+
+        $(buyinKey).html('$'+buyin);
+        $(wksKey).html(result[4]+' wks');
+        $(sesKey).html(result[3]+' x/wk');
+        $(minKey).html(result[1]+' min');
+        $(pplKey).html(result[6]);
+        $(startKey).html(tstamp.toDateString());
+        $(btnKey).show();
 
       }   
     }
