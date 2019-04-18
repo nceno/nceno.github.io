@@ -1,4 +1,4 @@
-//$("#loader").hide();
+
 var PortisProvider = window.Portis.PortisProvider;
 // Check if Web3 has been injected by the browser (Mist/MetaMask)
 if (typeof web3 !== 'undefined') {
