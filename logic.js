@@ -441,7 +441,7 @@ function quickStats(){
 function makePage(){
   makeList();
   selectedChallenge();
-  makeWktl();
+ 
   //quickStats();
   getToken();
 }
@@ -459,7 +459,7 @@ function makeWktl(){
     var wkindex = i+1;
     var currentwkKey = 'week'+wkindex;
     console.log("current week is: "+currentWeek);
-    console.log(currentwkKey);
+    console.log(currentwkKey)
     $('#'+currentwkKey).show();
   }
 
@@ -471,7 +471,7 @@ function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
-            
+    
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
@@ -492,6 +492,7 @@ function selectedChallenge(){
           //set current challenge week globally
           currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
           console.log(currentWeek);
+          makeWktl();
        
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
