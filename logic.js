@@ -544,7 +544,7 @@ async function browse(){
 
         console.log(buyinKey);
 
-        $(buyinKey).html('$'+buyin);
+        $("#buyinU1").html('$'+buyin);
         $(wksKey).html(result[4]+' wks');
         $(sesKey).html(result[3]+' x/wk');
         $(minKey).html(result[1]+' min');
