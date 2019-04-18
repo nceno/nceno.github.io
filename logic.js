@@ -14,7 +14,7 @@ $("#time").click(function(){
 var authed = false;
 function showPortis() {
   // will only open the portis menu
-  web3.currentProvider.showPortis(() => {
+  portis.showPortis(() => {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
