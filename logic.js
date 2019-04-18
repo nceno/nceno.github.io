@@ -454,8 +454,12 @@ function makeWktl(){
   //hide all weeks, in case previously selected goal was longer.
   for (let i = 0; i < 12; i++){
     var wkindex = i+1;
-    var currentwkKey = 'week'+wkindex;
-    $('#'+currentwkKey).hide();
+    var currentwkHide = 'week'+wkindex;
+    var currentwklogHide  = 'w'+wkindex+'log';
+    var pastwkclaimHide  = 'w'+wkindex+'claim';
+    $('#'+currentwkHide).hide();
+    $('#'+currentwklogHide).hide();
+    $('#'+pastwkclaimHide).hide();
   }
 
   for (let i = 0; i < currentWeek; i++){
