@@ -455,7 +455,7 @@ function makeWktl(){
     $('#'+currentwklogHide).hide();
     $('#'+pastwkclaimHide).hide();
   }
-  
+
   var pastWeek = currentWeek-1;
   var currentwklogKey  = 'w'+currentWeek+'log';
   var pastwkclaimKey  = 'w'+pastWeek+'claim'; 
@@ -466,10 +466,7 @@ function makeWktl(){
   if(currentWeek>wkLimit){
     $('#'+pastwkclaimKey).show();
   }
-  
-
-  
-
+ 
   var mostRecentWk = 0;
   if(currentWeek>wkLimit){mostRecentWk = wkLimit;}
   else mostRecentWk = currentWeek;
