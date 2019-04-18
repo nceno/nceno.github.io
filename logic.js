@@ -71,6 +71,7 @@ $("#joinLoader").hide();
 $("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 $("#joinSoonSuccess").hide();
+
 $('#btnU1').hide();
 $('#btnU2').hide();
 $('#btnU3').hide();
@@ -81,6 +82,48 @@ $('#btnU7').hide();
 $('#btnU8').hide();
 $('#btnU9').hide();
 $('#btnU10').hide();
+
+$('#w1log').hide();
+$('#w1claim').hide();
+$('#w2log').hide();
+$('#w2claim').hide();
+$('#w3log').hide();
+$('#w3claim').hide();
+$('#w4log').hide();
+$('#w4claim').hide();
+$('#w5log').hide();
+$('#w5claim').hide();
+$('#w6log').hide();
+$('#w6claim').hide();
+$('#w7log').hide();
+$('#w7claim').hide();
+$('#w8log').hide();
+$('#w8claim').hide();
+$('#w9log').hide();
+$('#w9claim').hide();
+$('#w10log').hide();
+$('#w10claim').hide();
+$('#w11log').hide();
+$('#w11claim').hide();
+$('#w12log').hide();
+$('#w12claim').hide();
+
+$('#week1').hide();
+$('#week2').hide();
+$('#week3').hide();
+$('#week4').hide();
+$('#week5').hide();
+$('#week6').hide();
+$('#week7').hide();
+$('#week8').hide();
+$('#week9').hide();
+$('#week10').hide();
+$('#week11').hide();
+$('#week12').hide();
+
+
+
+
 
 
 //show create button only if user agrees to terms
@@ -398,11 +441,30 @@ function quickStats(){
 function makePage(){
   makeList();
   selectedChallenge();
+  makeWktl();
   //quickStats();
   getToken();
 }
 
 var currentWeek = 0;
+function makeWktl(){
+  var pastWeek = currentWeek-1;
+  var currentwklogKey  = 'w'+currentWeek+'log';
+  var pastwkclaimKey  = 'w'+pastWeek+'claim'; 
+
+  $('#'+currentwklogKey).show();
+  $('#'+pastwkclaimKey).show();
+
+  for (let i = 0; i < currentWeek; i++){
+    var wkindex = i+1;
+    var currentwkKey = 'week'+wkindex;
+    $('#'+currentwkKey).show();
+  }
+
+
+}
+
+
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
@@ -427,10 +489,8 @@ function selectedChallenge(){
 
           //set current challenge week globally
           currentWeek = Math.round((Date.now()/1000 - result[4])/604800);
-
-          //leaderboard
-          //$("#rows").empty();
-          
+          console.log(currentWeek);
+       
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
             function(error, result) {
@@ -443,7 +503,7 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
-                console.log("got Participants..."); //****************************
+                console.log("got Participants..."); 
                 
                 for (let k = 0; k < compcount; k++){
                   console.log("compcount =" +compcount);
@@ -455,7 +515,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("got GoalStats1..."); //**********************************
+                        console.log("got GoalStats1..."); 
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -468,7 +528,7 @@ function selectedChallenge(){
                               bonusTotal[k] = result[3];
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
-                              console.log("got GoalStats2..."); //***************************
+                              console.log("got GoalStats2..."); 
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
@@ -548,8 +608,7 @@ function search(){
 //populates the challenges starting soon table
 //var browsePopulated
 async function browse(){
-  //$("#startingSoon1").empty();
-  //if(browsePopulated!=true){
+
     for (let i = 0; i < 10; i++){
 
       var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
@@ -577,8 +636,7 @@ async function browse(){
 
       }   
     }
-  //}
-  //browsePopulated = true;
+
 }
 
 var browsedGoal;
