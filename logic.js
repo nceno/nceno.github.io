@@ -489,7 +489,7 @@ function selectedChallenge(){
           console.log("got GoalParams...."); //*********************************************
 
           //set current challenge week globally
-          currentWeek = Math.round((Date.now()/1000 - result[4])/604800)+1;
+          currentWeek = Math.floor((Date.now()/1000 - result[4])/604800)+1;
           //currentWeek = (Date.now()/1000 - result[4])/604800;
           console.log("blockchain says current week is: "+currentWeek);
           makeWktl();
