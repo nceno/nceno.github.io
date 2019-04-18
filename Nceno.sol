@@ -334,7 +334,7 @@ contract Nceno {
     uint winners;
     uint pot;
     uint payout = partitions[goalRegistry[_goalID].wks/2 -1][(now-goalRegistry[_goalID].startTime)/604800-1]*goalRegistry[_goalID].stakeWEI/(100*goalRegistry[_goalID].sesPerWk);
-    //loop over everyone's weekly logs and increase the weeks pot from when someone skipped a workout
+    //loop over everyone's weekly logs and increase the week's pot from when someone skipped a workout
     for(uint i =0; i<10; i++){
     if(goalRegistry[_goalID].competitor[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
       //if(bytes(goalRegistry[_goalID].competitor[i]).length != 0){
