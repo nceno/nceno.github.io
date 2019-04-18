@@ -442,6 +442,7 @@ function makePage(){
   getToken();
 }
 
+var wkLimit = 0;
 var currentWeek = 0;
 function makeWktl(){
   var pastWeek = currentWeek-1;
@@ -478,7 +479,7 @@ function makeWktl(){
 
 }
 
-var wkLimit = 0;
+
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
