@@ -14,7 +14,10 @@ $("#time").click(function(){
 function showPortis() {
   // will only open the portis menu
   portis.showPortis(() => {
-    portis.onLogin((walletAddress, email) => {
+    
+  });
+  
+  portis.onLogin((walletAddress, email) => {
       web3.eth.getAccounts().then(e => { 
         web3.eth.defaultAccount = e[0];
         console.log("default: " + web3.eth.defaultAccount);
@@ -24,7 +27,6 @@ function showPortis() {
         $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
       });
     });
-  });
 }
 
 //helper function that will hide the create account button if the user already made an account.

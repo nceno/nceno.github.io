@@ -15,3 +15,20 @@ const web3 = new Web3(portis.provider);
       network: 'ropsten'
     }));*/
 //}
+
+//old method to initialize from wallet close
+/*function showPortis() {
+  // will only open the portis menu
+  portis.showPortis(() => {
+    web3.eth.getAccounts().then(e => { 
+      web3.eth.defaultAccount = e[0];
+      //web3.eth.defaultAccount = '0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a';
+      console.log("default: " + web3.eth.defaultAccount);
+      localize();
+      authed = true;
+      getToken();
+      $("#portisBtn").hide();
+      $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
+    });
+  });
+}*/
