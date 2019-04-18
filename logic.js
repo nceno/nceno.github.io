@@ -444,6 +444,18 @@ function makePage(){
 var wkLimit = 0;
 var currentWeek = 0;
 function makeWktl(){
+
+  //hide all weeks and buttons, in case previously selected goal was longer.
+  for (let i = 0; i < 12; i++){
+    var wkindex = i+1;
+    var currentwkHide = 'week'+wkindex;
+    var currentwklogHide  = 'w'+wkindex+'log';
+    var pastwkclaimHide  = 'w'+wkindex+'claim';
+    $('#'+currentwkHide).hide();
+    $('#'+currentwklogHide).hide();
+    $('#'+pastwkclaimHide).hide();
+  }
+  
   var pastWeek = currentWeek-1;
   var currentwklogKey  = 'w'+currentWeek+'log';
   var pastwkclaimKey  = 'w'+pastWeek+'claim'; 
@@ -456,16 +468,7 @@ function makeWktl(){
   }
   
 
-  //hide all weeks and buttons, in case previously selected goal was longer.
-  for (let i = 0; i < 12; i++){
-    var wkindex = i+1;
-    var currentwkHide = 'week'+wkindex;
-    var currentwklogHide  = 'w'+wkindex+'log';
-    var pastwkclaimHide  = 'w'+wkindex+'claim';
-    $('#'+currentwkHide).hide();
-    $('#'+currentwklogHide).hide();
-    $('#'+pastwkclaimHide).hide();
-  }
+  
 
   var mostRecentWk = 0;
   if(currentWeek>wkLimit){mostRecentWk = wkLimit;}
