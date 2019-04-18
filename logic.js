@@ -491,7 +491,7 @@ function selectedChallenge(){
           //set current challenge week globally
           currentWeek = Math.floor((Date.now()/1000 - result[4])/604800)+1;
           //currentWeek = (Date.now()/1000 - result[4])/604800;
-          console.log("blockchain says current week is: "+currentWeek);
+          console.log("blockchain says we're in week: "+currentWeek);
           makeWktl();
        
           Nceno.methods.getParticipants(goalid)
