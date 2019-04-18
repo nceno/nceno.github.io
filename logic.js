@@ -521,7 +521,7 @@ function search(){
 }
 
 //populates the challenges starting soon table
-var browsePopulated
+//var browsePopulated
 async function browse(){
   //$("#startingSoon1").empty();
   if(browsePopulated!=true){
