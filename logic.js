@@ -478,7 +478,7 @@ function makeWktl(){
 
 }
 
-
+var wkLimit = 0;
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
@@ -511,7 +511,7 @@ function selectedChallenge(){
           var compcount = result[6];
           var tstamp = new Date(result[4]*1000);
           var buyin = Math.round(result[1]*result[5]/100000000000000000000);
-          var wkLimit = result[3];
+          wkLimit = result[3];
           $("#echStake").html("$"+buyin);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+" x/wk");
