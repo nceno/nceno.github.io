@@ -647,7 +647,21 @@ function search(){
 
 //populates the challenges starting soon table
 //var browsePopulated
+var selBrowsedGoal = 0x0000000000000000000000000000000000000000000000000000000000000000;
 async function browse(){
+
+  //clear out the goalIDs from old elements
+  $('#idNumberU1').val('');
+  $('#idNumberU2').val('');
+  $('#idNumberU3').val('');
+  $('#idNumberU4').val('');
+  $('#idNumberU5').val('');
+  $('#idNumberU6').val('');
+  $('#idNumberU7').val('');
+  $('#idNumberU8').val('');
+  $('#idNumberU9').val('');
+  $('#idNumberU10').val('');
+
 
   for (let i = 0; i < 10; i++){
 
@@ -971,8 +985,11 @@ function getActivities(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
+      //sesID = data.id
       //stravaMins = Math.round(data.moving_time/60);
       //avgHR = data.average_heartrate;
+      //let i = arr.indexOf(Math.max(...arr));
+
     }
   });
 
