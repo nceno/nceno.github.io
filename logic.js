@@ -12,11 +12,12 @@ $("#time").click(function(){
 
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
+  $("#portisBtn").hide();
+  $("#portisLoader").show(0).delay(3000).hide(0);
+  $("#portisBtn").show();
   // will only open the portis menu
   portis.showPortis(() => {
-    $("#portisBtn").hide();
-    $('#portisLoader').show(0).delay(3000).hide(0);
-    $("#portisBtn").show();
+    
   });
 
   portis.onLogin((walletAddress, email) => {
