@@ -14,7 +14,9 @@ $("#time").click(function(){
 function showPortis() {
   // will only open the portis menu
   portis.showPortis(() => {
-    
+    $("#portisBtn").hide();
+    $('#portisLoader').show(0).delay(3000).hide(0);
+    $("#portisBtn").show();
   });
 
   portis.onLogin((walletAddress, email) => {
@@ -75,6 +77,7 @@ $("#joinSoonLoader").hide();
 $("#joinSoonSuccess").hide();
 $("#makeAcctBtn").hide();
 $("#openWallet").hide();
+$("#portisLoader").hide();
 
 $('#btnU1').hide();
 $('#btnU2').hide();
