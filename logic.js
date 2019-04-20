@@ -974,8 +974,8 @@ var stravaMins;
 var avgHR;
 var placeholderDate = new Date();
 placeholderDate.setDate(placeholderDate.getDate() - 1);
-var yesterday =parseInt(placeholderDate.getTime())/1000;
-var nowDate = parseInt(new Date().getTime())/1000;
+var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
+var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 
 function getActivities(){
   var stuff = null;
