@@ -988,12 +988,14 @@ function getActivities(){
       var cleaned = new Array();
       console.log("number of workouts is: "+data.length);
 
+      let indexOfMax = data.indexOf(Math.max(...data.average_heartrate));
+      console.log("index is: "+indexOfMax);
+
       //sesID = data.id
       //stravaMins = Math.round(data.moving_time/60);
       //avgHR = data.average_heartrate;
       //let i = arr.indexOf(Math.max(...arr));
-      console.log("date is: "+nowDate);
-      console.log("yesterday is: "+yesterday);
+
 
     }
   });
