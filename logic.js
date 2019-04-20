@@ -973,7 +973,7 @@ function getToken(){
 var stravaMins;
 var avgHR;
 var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 3);
+placeholderDate.setDate(placeholderDate.getDate() - 5);
 var yesterday = placeholderDate;
 var nowDate = new Date();
 
