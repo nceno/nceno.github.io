@@ -270,6 +270,11 @@ contract Nceno {
     profileOf[_userID].goalAt[profileOf[_userID].goalTotal] = createdGoal; //add goal to self's registry
     profileOf[_userID].goalTotal++;
 
+    //------todo: call KyberSwap to convert to USDC directly. SwapEtherToToken()
+    swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
+    //------- /kyber
+
+
     //fire event: _userID created _goalID with params: @1, @2, ...
     bytes32 _eventName = 0x476f616c437265617465640000000000;
     emit GoalCreated(_eventName, _goalID, _activeMins, _stakeWEI, _sesPerWk, _wks, _startTime, _userID, _ethPrice);
@@ -290,7 +295,11 @@ contract Nceno {
     profileOf[_userID].goalAt[profileOf[_userID].goalTotal] = goalRegistry[_goalID];
     profileOf[_userID].goalTotal++;
 
-    fire event: _userID joined _goalID
+    //------todo: call KyberSwap to convert to USDC directly. SwapEtherToToken()
+    swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
+    //------- /kyber
+
+    //fire event: _userID joined _goalID
     bytes32 _eventName = 0x436f6d70657469746f724a6f696e6564;
     emit CompetitorJoined(_eventName, _userID, _goalID);
   }
