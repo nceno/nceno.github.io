@@ -988,7 +988,7 @@ function getActivities(){
       var cleaned = new Array();
       console.log("number of workouts is: "+data.length);
 
-      let indexOfMax = data.indexOf(Math.max(...data.average_heartrate));
+      let indexOfMax = data.indexOf(Math.max.apply(null, data.average_heartrate));
       console.log("index is: "+indexOfMax);
 
       //sesID = data.id
