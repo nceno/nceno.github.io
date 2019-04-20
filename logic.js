@@ -985,9 +985,8 @@ function getActivities(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
-      var workouts = [data];
       var cleaned = new Array();
-      console.log("number of workouts is: "+workouts.length);
+      console.log("number of workouts is: "+data.length);
 
       //sesID = data.id
       //stravaMins = Math.round(data.moving_time/60);
