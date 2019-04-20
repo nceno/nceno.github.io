@@ -25,6 +25,7 @@ function showPortis() {
       getToken();
       $("#portisBtn").hide();
       $("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
+      $("#openWallet").show();
     });
   });
 }
@@ -72,8 +73,8 @@ $("#joinLoader").hide();
 $("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 $("#joinSoonSuccess").hide();
-
 $("#makeAcctBtn").hide();
+$("#openWallet").hide();
 
 $('#btnU1').hide();
 $('#btnU2').hide();
