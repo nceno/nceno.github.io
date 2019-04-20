@@ -973,7 +973,7 @@ function getToken(){
 var stravaMins;
 var avgHR;
 var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 5);
+placeholderDate.setDate(placeholderDate.getDate() - 1);
 var yesterday = placeholderDate;
 var nowDate = new Date();
 
@@ -989,6 +989,8 @@ function getActivities(){
       //stravaMins = Math.round(data.moving_time/60);
       //avgHR = data.average_heartrate;
       //let i = arr.indexOf(Math.max(...arr));
+      console.log("date is: "+nowDate);
+      console.log("yesterday is: "+yesterday);
 
     }
   });
