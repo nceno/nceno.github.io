@@ -973,7 +973,7 @@ function getToken(){
 var stravaMins;
 var avgHR;
 var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 1);
+placeholderDate.setDate(placeholderDate.getDate() - 3);
 var yesterday = placeholderDate;
 var nowDate = new Date();
 
@@ -993,7 +993,7 @@ function getActivities(){
     }
   });
 
-  xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities');
+  xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
   //xhr.open('GET', 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   //xhr.setRequestHeader("cache-control", "no-cache");
