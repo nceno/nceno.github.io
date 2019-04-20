@@ -73,6 +73,8 @@ $("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 $("#joinSoonSuccess").hide();
 
+$("#makeAcctBtn").hide();
+
 $('#btnU1').hide();
 $('#btnU2').hide();
 $('#btnU3').hide();
@@ -139,41 +141,26 @@ var userID
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
   localize();
-  Nceno.methods.userExists(
-    userID
-  )
-  .call({from: web3.eth.defaultAccount},
+  Nceno.methods.createCompetitor(
+    userID,
+    web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
+    web3.utils.padRight(web3.utils.toHex(flag),34))
+  .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
     function(error, result) {
       if (!error){
-        if(result){
-          $("#makeAcctBtn").hide();
-          $("#alreadyExists").html("Your account already exists.");
-        }
-        else Nceno.methods.createCompetitor(
-          userID,
-          web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
-          web3.utils.padRight(web3.utils.toHex(flag),34))
-        .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
-          function(error, result) {
-            if (!error){
-              $("#makeAcctBtn").hide();
-              $("#acctLoader").show();
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-        ).on('confirmation', function(confNumber, receipt){ 
-          $("#acctLoader").hide();
-          $("#acctSuccess").show();
-          
-          $("#makeAcctBtn").hide(); })
-          .on('error', function(error){console.log(error);});
+        $("#makeAcctBtn").hide();
+        $("#acctLoader").show();
+        console.log(result);
       }
       else
       console.error(error);
     }
-  );
+  ).on('confirmation', function(confNumber, receipt){ 
+    $("#acctLoader").hide();
+    $("#acctSuccess").show();
+    
+    $("#makeAcctBtn").hide(); })
+    .on('error', function(error){console.log(error);});
 }); 
 
 //randomizes the goalID
@@ -962,6 +949,20 @@ function getToken(){
       uniqueUserString = stravaID.toString() + userCreated.toString();
       userID = uniqueUserString;
       //console.log(uniqueUserString);
+      Nceno.methods.userExists(userID
+      )
+      .call({from: web3.eth.defaultAccount},
+        function(error, result) {
+          if (!error){
+            if(!result){
+              $("#makeAcctBtn").show();          
+            }
+          }
+          else
+          console.error(error);
+        }
+      );
+
     }
   });
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3+'&code='+code+'&grant_type=authorization_code');
