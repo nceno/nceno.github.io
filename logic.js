@@ -992,11 +992,26 @@ function getActivities(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
-      var cleaned = new Array();
       console.log("number of workouts is: "+data.length);
+      //clean the data and make a list of valid workouts.
+      var cleaned = new Array();
+      for(let i=0, i<data.length, i++){
+        if(data[i].average_heartrate>124 && data[i].moving_time/60>=sesmins){
+          cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
+        }
+      }
+      //if there is at least one valid workout, log it in the contract, triggering payout.
+      if(cleaned.length>0){
+        //Nceno.log(
+          console.log(cleaned[0][0]);
+          //...
+        //);
+      }
+      //if no valid workouts, don't log, and alert the user.
+      else console.log("No valid workouts today...");
 
-      let indexOfMax = data.indexOf(Math.max.apply(null, data.average_heartrate));
-      console.log("index is: "+indexOfMax);
+      //let indexOfMax = data.indexOf(Math.max.apply(null, data.average_heartrate));
+      //console.log("index is: "+indexOfMax);
 
       //sesID = data.id
       //stravaMins = Math.round(data.moving_time/60);
