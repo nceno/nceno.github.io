@@ -200,6 +200,7 @@
 
                               <div id="acctLoader" class="col text-center ">
                                 <p>Making space for you on the blockchain...</p> 
+                                <span id="acctFail"></span>
                                 <img  src="app/assets/images/loader.svg">
                               </div>
 
@@ -266,7 +267,7 @@
                       <p>&nbsp;</p>
                       <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="checker">
-                        <label class="form-check-label" for="checker">I've read the <a href="instructions.html">instructions</a> and agree to the <a href="#" data-toggle="modal" data-target="#legalModal">terms</a>.</label>
+                        <label class="form-check-label" for="checker">I've read the <a href="instructions.html">instructions</a> and agree to the <a href="legal.html" >terms</a>.</label>
                         </div>
                       
                       <button onclick="echoGoal()" class="btn btn-primary" id="createBtn" data-toggle="modal" data-target="#popupCreate">Create this challenge</button>
@@ -370,8 +371,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w1log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w1claim" class="btn btn-sm btn-outline-white">Claim</a>
+                                                        <a id="w1log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w1claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
                                                       </div>            
                                                     </div>
 
@@ -384,8 +385,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w2log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w2claim" class="btn btn-sm btn-outline-white">Claim</a>
+                                                        <a id="w2log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w2claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
                                                       </div>
                                                     </div>
 
@@ -398,8 +399,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w3log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w3claim" class="btn btn-sm btn-outline-white">Claim</a>        
+                                                        <a id="w3log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w3claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>        
                                                       </div>
                                                     </div>
 
@@ -412,8 +413,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w4log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w4claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w4log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w4claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                      </div> 
 
@@ -426,8 +427,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w5log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w5claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w5log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w5claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                     </div>
 
@@ -441,8 +442,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w6log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w6claim" class="btn btn-sm btn-outline-white">Claim</a>                   
+                                                        <a id="w6log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w6claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                   
                                                       </div>
                                                     </div>
 
@@ -455,8 +456,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w7log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w7claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w7log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w7claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                     </div>
 
@@ -469,8 +470,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w8log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w8claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w8log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w8claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                     </div>
 
@@ -483,8 +484,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w9log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w9claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w9log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w9claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                     </div>
 
@@ -497,8 +498,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w10log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w10claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w10log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w10claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                     </div>
 
@@ -511,8 +512,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w11log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w11claim" class="btn btn-sm btn-outline-white">Claim</a>                    
+                                                        <a id="w11log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w11claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                    
                                                       </div>
                                                     </div>
 
@@ -525,8 +526,8 @@
                                                           <b style="color:#ffffff;">$4.32</b> unlocked<br>
                                                           <b style="color:#ffffff;">4 of 7</b> people finished this week
                                                         </p>
-                                                        <a id="w12log" class="btn btn-sm btn-outline-white">Log</a>
-                                                        <a id="w12claim" class="btn btn-sm btn-outline-white">Claim</a>                   
+                                                        <a id="w12log" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal">Log</a>
+                                                        <a id="w12claim" class="btn btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>                   
                                                       </div>
                                                     </div>
 
@@ -992,7 +993,9 @@
                 </div>
                 <div id="createSuccess" class="col text-center mb-2">
                   <p>Success!</p>
+                  <span id="createFail"><span>
                 </div>
+
               </div>
             </div>
           </div>

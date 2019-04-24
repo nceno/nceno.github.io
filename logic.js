@@ -169,12 +169,12 @@ $("#makeAcctBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       $("#acctLoader").hide();
-      $("#acctSuccess").show();
       $("#makeAcctBtn").hide();
     }
     else{
       $("#acctLoader").hide();
       $("#makeAcctBtn").hide();
+      $('#acctFail').html('<p>Transaction failed. That profile already exists!</p>');
       console.log("profile already exists!");
     } 
   }).on('error', function(error){console.log(error);});
@@ -219,11 +219,12 @@ $("#hostBtn").click(function() {
     if(receipt.status === true){
       $("#createLoader").hide();
       $("#createSuccess").show();
-      $("#makeAcctBtn").hide();
+      $("#hostBtn").hide();
     }
     else{
-      $("#acctLoader").hide();
-      $("#makeAcctBtn").hide();
+      $("#createLoader").hide();
+      $("#hostBtn").hide();
+      $('#createFail').html('<p>Transaction failed. User account does not exist, or else message value is less than intended stake.</p>');
       console.log("User does not exist, or else message value is less than intended stake.");
     }
     })
