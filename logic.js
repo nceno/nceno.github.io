@@ -169,7 +169,7 @@ $("#makeAcctBtn1").click(function() {
     $("#acctLoader").hide();
     $("#acctSuccess").show();
     $("#makeAcctBtn").hide();
-    console.log("receipt is: "+receipt);
+    console.log(receipt.status);
   }).on('error', function(error){console.log(error);});
 }); 
 
