@@ -149,7 +149,7 @@ if($("#checker").is(':checked')) {
 var userID
 
 //a clue to load the join or log/claim txn with the right ID or week....... needs work.        
-function loadRowID{
+function loadRowID(){
   var id = $("button").closest("div").prop("id");
 }
 
