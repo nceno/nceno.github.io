@@ -1047,11 +1047,11 @@ function getActivities(){
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
       var cleaned = new Array();
-      var sesmins = 2;
-      console.log("cleaned workout (id,hr,mins): ("+data[0].id+","+ data[0].average_heartrate+","+ data[0].moving_time+")");
+      //var sesmins = 2;
+      //console.log("cleaned workout (id,hr,mins): ("+data[0].id+","+ data[0].average_heartrate+","+ data[0].moving_time+")");
 
       for(let i=0; i<data.length; i++){
-        if(data[i].average_heartrate>60 && data[i].moving_time/60>=sesmins){
+        if(data[i].average_heartrate>124 && data[i].moving_time/60>=sesmins){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
         }
       }
