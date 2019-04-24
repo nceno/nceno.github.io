@@ -147,7 +147,13 @@ if($("#checker").is(':checked')) {
 //global variables for when a user auths with strava
 //var fitbitUser 
 var userID
-             
+
+//a clue to load the join or log/claim txn with the right ID or week....... needs work.        
+function loadRowID{
+  var id = $("button").closest("div").prop("id");
+}
+
+
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
   localize();
@@ -820,6 +826,7 @@ $("#logBtn").click(function() {
             else{
               $("#acctLoader").hide();
               $("#makeAcctBtn").hide();
+              $('#logFail').html('<p>Transaction failed. No valid workouts, workout already redeemed, or weekly workout submission quota already met.</p>');
               console.log("Reported minutes not enough, timestamp already used, or weekly submission quota already met.");
             } 
 
