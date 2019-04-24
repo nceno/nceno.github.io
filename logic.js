@@ -16,8 +16,8 @@ $("#time").click(function(){
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
-  $("#portisLoader").show();
-  setTimeout("$('#portisLoader').hide();", 6000);
+  $('#portisLoader').show();
+  setTimeout("$('#portisLoader').hide();", 5000);
 
   // will only open the portis menu
   portis.showPortis(() => {
