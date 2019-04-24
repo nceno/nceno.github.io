@@ -319,9 +319,7 @@ function joinSoon(){
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 var populated = false;
 function makeList(){
-  $("#goalCategories").selectric({
-  responsive: true
-});
+  $("#goalCategories").selectric();
   if(populated === false){
     var goals1 = new Array();
     var goals2 = new Array();
@@ -483,9 +481,7 @@ function makeWktl(){
 
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
-  $('#goalCategories').selectric({
-  responsive: true
-}).on('change', function() {
+  $('#goalCategories').selectric().on('change', function() {
     var goalid = web3.utils.padRight($('#goalCategories').val(),34);
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
