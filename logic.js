@@ -149,7 +149,7 @@ if($("#checker").is(':checked')) {
 var userID
              
 //creating a competitor account from the input form and flag
-$("#makeAcctBtn1").click(function() {
+$("#makeAcctBtn").click(function() {
   localize();
   Nceno.methods.createCompetitor(
     userID,
@@ -172,7 +172,11 @@ $("#makeAcctBtn1").click(function() {
       $("#acctSuccess").show();
       $("#makeAcctBtn").hide();
     }
-    else console.log("profile already exists!");
+    else{
+      $("#acctLoader").hide();
+      $("#makeAcctBtn").hide();
+      console.log("profile already exists!");
+    } 
   }).on('error', function(error){console.log(error);});
 }); 
 
@@ -210,9 +214,18 @@ $("#hostBtn").click(function() {
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ 
-    $("#createLoader").hide();
-    $("#createSuccess").show();
+  ).on('confirmation', function(confNumber, receipt){
+    console.log(receipt.status);
+    if(receipt.status === true){
+      $("#createLoader").hide();
+      $("#createSuccess").show();
+      $("#makeAcctBtn").hide();
+    }
+    else{
+      $("#acctLoader").hide();
+      $("#makeAcctBtn").hide();
+      console.log("User does not exist, or else message value is less than intended stake.");
+    }
     })
     .on('error', function(error){console.log(error);});;
 });
@@ -269,9 +282,18 @@ function joinSearch(){
             else
             console.error(error);
           }
-        ).on('confirmation', function(confNumber, receipt){ 
-          $("#joinLoader").hide();
-          $("#joinSuccess").show();
+        ).on('confirmation', function(confNumber, receipt){
+          console.log(receipt.status);
+          if(receipt.status === true){
+            $("#joinLoader").hide();
+            $("#joinSuccess").show();
+            $("#makeAcctBtn").hide();
+          }
+          else{
+            $("#acctLoader").hide();
+            $("#makeAcctBtn").hide();
+            console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
+          } 
            })
           .on('error', function(error){console.log(error);});;
       }
@@ -732,9 +754,20 @@ $("#claimBtn").click(function() {
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ 
-    $("#claimLoader").hide();
-    $("#claimSuccess").show();
+  ).on('confirmation', function(confNumber, receipt){
+
+    console.log(receipt.status);
+    if(receipt.status === true){
+      $("#claimLoader").hide();
+      $("#claimSuccess").show();
+      $("#makeAcctBtn").hide();
+    }
+    else{
+      $("#acctLoader").hide();
+      $("#makeAcctBtn").hide();
+      console.log("wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
+    }  
+    
     console.log("lost stake claim was successful!") })
     .on('error', function(error){console.log(error);});;
 });
@@ -776,8 +809,20 @@ $("#logBtn").click(function() {
             else
             console.error(error);
           }).on('confirmation', function(confNumber, receipt){ 
-            $("#logLoader").hide();
-            $("#logSuccess").show();
+
+            console.log(receipt.status);
+            if(receipt.status === true){
+              $("#logLoader").hide();
+              $("#logSuccess").show();
+              $("#makeAcctBtn").hide();
+            }
+            else{
+              $("#acctLoader").hide();
+              $("#makeAcctBtn").hide();
+              console.log("Reported minutes not enough, timestamp already used, or weekly submission quota already met.");
+            } 
+
+
             console.log("activity minutes logged successfully!") })
       .on('error', function(error){console.log(error);});;
     }
