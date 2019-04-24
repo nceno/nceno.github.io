@@ -11,12 +11,13 @@ $("#time").click(function(){
 //web3 definition would go here ----->>
 
 
-setTimeout("$('#portisLoader').hide();", 3500);
+
 
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
   $("#portisLoader").show();
+  setTimeout("$('#portisLoader').hide();", 3500);
 
   // will only open the portis menu
   portis.showPortis(() => {
@@ -30,7 +31,7 @@ function showPortis() {
       localize();
       getToken();
       $("#portisBtn").hide();
-      setTimeout("$('#portisLoader').hide();", 3500);///////////////////
+
       $("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
       $("#openWallet").show();
     });
