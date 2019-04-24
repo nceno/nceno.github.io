@@ -17,7 +17,7 @@ $("#time").click(function(){
 function showPortis() {
 
   $("#portisLoader").show();
-  setTimeout("$('#portisLoader').hide();", 3500);
+  setTimeout("$('#portisLoader').hide();", 6000);
 
   // will only open the portis menu
   portis.showPortis(() => {
