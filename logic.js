@@ -151,7 +151,6 @@ var userID
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn1").click(function() {
   localize();
-  var thisHash = null;
   Nceno.methods.createCompetitor(
     userID,
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
@@ -162,18 +161,16 @@ $("#makeAcctBtn1").click(function() {
         $("#makeAcctBtn").hide();
         $("#acctLoader").show();
         console.log(result);
-        thisHash = result;
       }
       else
       console.error(error);
     }
-  ).then(web3.eth.getTransactionReceipt(thisHash).then(console.log));
-/*  .on('confirmation', function(confNumber, receipt){ 
+  ).on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
     $("#acctSuccess").show();
-    
-    $("#makeAcctBtn").hide(); })
-    .on('error', function(error){console.log(error);});*/
+    $("#makeAcctBtn").hide();
+    console.log("receipt is: "+receipt);
+  }).on('error', function(error){console.log(error);});
 }); 
 
 //randomizes the goalID
