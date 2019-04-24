@@ -166,7 +166,7 @@ $("#makeAcctBtn1").click(function() {
       console.error(error);
     }
   ).once('transactionHash', function(hash){
-      web3.eth.getTransactionReceipt(hash).then(console.log("stauts is: "+result[7]));
+      web3.eth.getTransactionReceipt(hash).then(console.log("status is: "+status));
     })
 /*  .on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
