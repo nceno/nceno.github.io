@@ -165,12 +165,15 @@ $("#makeAcctBtn1").click(function() {
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ 
+  ).once('transactionHash', function(hash){
+      web3.eth.getTransactionReceipt(hash).then(console.log("stauts is: "+result[7]));
+    })
+/*  .on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
     $("#acctSuccess").show();
     
     $("#makeAcctBtn").hide(); })
-    .on('error', function(error){console.log("big ass error, homeboy! "+error);});
+    .on('error', function(error){console.log(error);});*/
 }); 
 
 //randomizes the goalID
