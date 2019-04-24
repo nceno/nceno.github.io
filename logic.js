@@ -149,7 +149,7 @@ if($("#checker").is(':checked')) {
 var userID
              
 //creating a competitor account from the input form and flag
-$("#makeAcctBtn").click(function() {
+$("#makeAcctBtn1").click(function() {
   localize();
   Nceno.methods.createCompetitor(
     userID,
@@ -170,7 +170,7 @@ $("#makeAcctBtn").click(function() {
     $("#acctSuccess").show();
     
     $("#makeAcctBtn").hide(); })
-    .on('error', function(error){console.log(error);});
+    .on('error', function(error){console.log("big ass error, homeboy! "+error);});
 }); 
 
 //randomizes the goalID
