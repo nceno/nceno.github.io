@@ -162,13 +162,12 @@ $("#makeAcctBtn1").click(function() {
         $("#makeAcctBtn").hide();
         $("#acctLoader").show();
         console.log(result);
+        thisHash = result;
       }
       else
       console.error(error);
     }
-  ).once('transactionHash', function(hash){
-      thisHash = hash;
-    }).then(web3.eth.getTransactionReceipt(hash).then(console.log));
+  ).then(web3.eth.getTransactionReceipt(thisHash).then(console.log));
 /*  .on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
     $("#acctSuccess").show();
