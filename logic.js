@@ -151,6 +151,7 @@ var userID
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn1").click(function() {
   localize();
+  var thisHash = null;
   Nceno.methods.createCompetitor(
     userID,
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
@@ -166,8 +167,8 @@ $("#makeAcctBtn1").click(function() {
       console.error(error);
     }
   ).once('transactionHash', function(hash){
-      web3.eth.getTransactionReceipt(hash).then(console.log("status is: "+status));
-    })
+      thisHash = hash;
+    }).then(web3.eth.getTransactionReceipt(hash).then(console.log));
 /*  .on('confirmation', function(confNumber, receipt){ 
     $("#acctLoader").hide();
     $("#acctSuccess").show();
