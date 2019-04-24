@@ -995,9 +995,9 @@ function getActivities(){
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
       var cleaned = new Array();
-      for(let t=0, t<data.length, t++){
-        if(data[t].average_heartrate>124 && data[t].moving_time/60>=sesmins){
-          cleaned[t] = [data[t].id, data[t].average_heartrate, data[t].moving_time/60];
+      for(let i=0; i<data.length; i++){
+        if(data[i].average_heartrate>124 && data[i].moving_time/60>=sesmins){
+          cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
         }
       }
       //if there is at least one valid workout, log it in the contract, triggering payout.
