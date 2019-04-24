@@ -13,7 +13,7 @@ $("#time").click(function(){
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
-  $("#portisLoader").show();
+  $("#portisLoader").show().delay(3500).hide();
 
   // will only open the portis menu
   portis.showPortis(() => {
@@ -27,7 +27,7 @@ function showPortis() {
       localize();
       getToken();
       $("#portisBtn").hide();
-      $("#portisLoader").hide();
+      //$("#portisLoader").hide();
       $("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
       $("#openWallet").show();
     });
