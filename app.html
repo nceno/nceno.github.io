@@ -1113,7 +1113,7 @@
       <!-- / log modal-->
 
       <!--claim modal-->
-      <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModal" aria-hidden="true">
+      <div class="modal fade" id="claimModal" tabindex="-1" role="dialog" aria-labelledby="claimModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
@@ -1123,7 +1123,7 @@
               </button>
             </div>
             <div class="modal-body text-center text-white">
-              <h3>Let's get you a payout for that workout...</h3>
+              <h3>Did you have a good week? Let's see...</h3>
               <p id="srEcho"></p>
             </div>
             <div class="modal-footer gutter-1">
@@ -1132,14 +1132,14 @@
                   <div class="col-8">
                     <button id="joinSearch" type="button" onclick="something()" class="btn btn-block btn-primary">Pay me</button>
                   </div>
-                  <div id="logLoader">
+                  <div id="claimLoader">
                     <p>Writing to the blockchain...</p>
                     <img  src="app/assets/images/loader.svg"> 
                   </div>
-                  <p id="logSuccess">Payout complete! Check your wallet for USDC coins.</p>
-                  <span id=logFail></span>
+                  <p id="claimSuccess">Payout complete! Check your wallet for USDC coins.</p>
+                  <span id=claimFail></span>
                   <div class="col-4">
-                    <button id="logCancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
+                    <button id="claimCancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
                   </div>
                 </div>
               </div>
