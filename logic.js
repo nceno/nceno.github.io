@@ -166,10 +166,13 @@ $("#makeAcctBtn1").click(function() {
       console.error(error);
     }
   ).on('confirmation', function(confNumber, receipt){ 
-    $("#acctLoader").hide();
-    $("#acctSuccess").show();
-    $("#makeAcctBtn").hide();
     console.log(receipt.status);
+    if(receipt.status === true){
+      $("#acctLoader").hide();
+      $("#acctSuccess").show();
+      $("#makeAcctBtn").hide();
+    }
+    else console.log("profile already exists!");
   }).on('error', function(error){console.log(error);});
 }); 
 
