@@ -1062,22 +1062,10 @@ function getActivities(){
       }
       //if no valid workouts, don't log, and alert the user.
       else console.log("No valid workouts today...");
-
-      //let indexOfMax = data.indexOf(Math.max.apply(null, data.average_heartrate));
-      //console.log("index is: "+indexOfMax);
-
-      //sesID = data.id
-      //stravaMins = Math.round(data.moving_time/60);
-      //avgHR = data.average_heartrate;
-      //let i = arr.indexOf(Math.max(...arr));
-
-
     }
   });
 
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
-  //xhr.open('GET', 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-  //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
