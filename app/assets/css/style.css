@@ -19774,7 +19774,7 @@ pre[class*="language-"] {
       max-width: 80%; } }
   .component > .tab-content > .tab-pane {
     border-radius: 0.25rem;
-    overflow: hidden; }
+    /*overflow: hidden;*/ }
     .component > .tab-content > .tab-pane[class*="bg-light"] {
       border: 1px solid #e5e5e5; }
 
