@@ -236,25 +236,21 @@ $("#hostBtn").click(function() {
 var OS = 0;
 function getMobileOS() {
   var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-      // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        OS = 3;
-        console.log("OS is: Windows Phone");
-    }
-
-    if (/android/i.test(userAgent)) {
-        OS = 2;
-        console.log("OS is: Android");
-    }
-
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        OS = 1;
-        console.log("OS is: iOS");
-    }
-
-    console.log("OS is: unknown");
+  // Windows Phone must come first because its UA also contains "Android"
+  if (/windows phone/i.test(userAgent)) {
+    OS = 3;
+    console.log("OS is: Windows Phone");
+  }
+  else if (/android/i.test(userAgent)) {
+    OS = 2;
+    console.log("OS is: Android");
+  }
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    OS = 1;
+    console.log("OS is: iOS");
+  }
+  else console.log("OS is: unknown");
 }
 
 //function that displays in a modal, a summary of the goal you are setting.
@@ -1085,7 +1081,7 @@ function getActivities(){
       //console.log("cleaned workout (id,hr,mins): ("+data[0].id+","+ data[0].average_heartrate+","+ data[0].moving_time+")");
 
       for(let i=0; i<data.length; i++){
-        if(data[i].average_heartrate>50 && data[i].moving_time/60>=0){
+        if(data[i].average_heartrate>100 && data[i].moving_time/60>=20){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
         }
       }
