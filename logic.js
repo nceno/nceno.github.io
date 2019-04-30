@@ -1067,6 +1067,17 @@ var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 
 function getActivities(){
+  var goalMovingTime;
+  Nceno.methods.getGoalParams(goalid)
+  .call({from: web3.eth.defaultAccount},
+      function(error, result) {
+      if (!error){
+        goalMovingTime = result[0];
+      }
+      else
+      console.error(error);
+  });
+
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
@@ -1077,23 +1088,58 @@ function getActivities(){
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
       var cleaned = new Array();
-      //var sesmins = 2;
-      //console.log("cleaned workout (id,hr,mins): ("+data[0].id+","+ data[0].average_heartrate+","+ data[0].moving_time+")");
-
+      
       for(let i=0; i<data.length; i++){
-        if(data[i].average_heartrate>100 && data[i].moving_time/60>=20){
+        if(data[i].average_heartrate>100 && data[i].moving_time/60>=goalMovingTime){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
         }
       }
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
-        //Nceno.log(
-          console.log("0x42362d"+","+stravaID+","+ cleaned[0][0]+","+cleaned[0][1]+","+cleaned[0][2]);
-          //...
-        //);
+        console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
+        console.log("Good news, your workout is being logged for a payout!")
+        
+
+        //log the data to get a payout
+        Nceno.methods.log(
+          goalid,
+          stravaID,
+          cleaned[0][0],
+          Math.round(cleaned[0][1]),
+          Math.round(cleaned[0][2])
+        )
+        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
+          function(error, result) {
+            if (!error){
+              /*$("#joinSearch").hide();
+              $("#srCancelBtn").hide();
+              $("#joinLoader").show();*/
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
+        ).on('confirmation', function(confNumber, receipt){
+          console.log(receipt.status);
+          if(receipt.status === true){
+            console.log("You just unlocked 4% of your stake. Check your wallet in a couple minutes.");
+            /*$("#joinLoader").hide();
+            $("#joinSuccess").show();
+            $("#makeAcctBtn").hide();*/
+          }
+          else{
+            /*$("#acctLoader").hide();
+            $("#makeAcctBtn").hide();*/
+            console.log("wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.");
+          } 
+        })
+        .on('error', function(error){console.log(error);});;
       }
       //if no valid workouts, don't log, and alert the user.
-      else console.log("No valid workouts today...");
+      else{
+        console.log("No valid workouts today...");
+
+      } 
     }
   });
 
