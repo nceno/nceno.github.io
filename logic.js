@@ -8,11 +8,6 @@ $("#time").click(function(){
   console.log(time);
 })
 
-//web3 definition would go here ----->>
-
-
-
-
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
@@ -43,7 +38,7 @@ function showPortis() {
 function checkUserbase(){
   localize();
   Nceno.methods.userExists(
-    userID
+    stravaID
   )
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
@@ -153,15 +148,15 @@ function loadRowID(){
   var id = $("button").closest("div").prop("id");
 }
 
-
 //creating a competitor account from the input form and flag
 $("#makeAcctBtn").click(function() {
   localize();
-  Nceno.methods.createCompetitor(
-    userID,
+  Nceno.methods.makeProfile(
+    stravaID,
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
-    web3.utils.padRight(web3.utils.toHex(flag),34))
-  .send({from: web3.eth.defaultAccount, gas: 200000, gasPrice: 15000000000},
+    web3.utils.padRight(web3.utils.toHex(flag),34),
+    OS)
+  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: 15000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
@@ -199,15 +194,15 @@ $("#hostBtn").click(function() {
   var usdStakeInWei = msgValueHost.toString();
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
 
-  Nceno.methods.createGoal(
+  Nceno.methods.host(
     goalID,
     $("#sliderMins").roundSlider("getValue"),
-    usdStakeInWei,
+    usdStakeInWei, //should change to just stake in USD
     $("#sliderSes").roundSlider("getValue"),
     $("#sliderWks").roundSlider("getValue"),
     start,
-    userID,
-    Math.floor((ethPrice*10000)*1/100)
+    stravaID,
+    Math.floor((ethPrice*10000)*1/100) //check the math
   )
   .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {
@@ -236,6 +231,31 @@ $("#hostBtn").click(function() {
     })
     .on('error', function(error){console.log(error);});;
 });
+
+//gets the user's operating system
+var OS = 0;
+function getMobileOS() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        OS = 3;
+        console.log("Windows Phone");
+    }
+
+    if (/android/i.test(userAgent)) {
+        OS = 2;
+        console.log("Android");
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        OS = 1;
+        console.log("iOS");
+    }
+
+    console.log("unknown");
+}
 
 //function that displays in a modal, a summary of the goal you are setting.
 var ethPrice;
@@ -266,6 +286,7 @@ function srEcho(){
 
 //joins the searched goal
 function joinSearch(){
+  updateEthPrice();
   var goalid = web3.utils.padRight($('#searchField').val(),34);
   Nceno.methods.getGoalParams(
     goalid
@@ -274,9 +295,10 @@ function joinSearch(){
     function(error, result) {
       if (!error){
         var stakewei= result[1];
-        Nceno.methods.joinGoal(
+        Nceno.methods.join(
           goalid,
-          userID
+          stravaID,
+          ethPrice
         )
         .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
           function(error, result) {
@@ -312,6 +334,7 @@ function joinSearch(){
 
 //joins the browsed goal
 function joinSoon(){
+  updateEthPrice();
   var goalid = browsedGoal;
   Nceno.methods.getGoalParams(
     goalid
@@ -320,9 +343,10 @@ function joinSoon(){
     function(error, result) {
       if (!error){
         var stakewei= result[1];
-        Nceno.methods.joinGoal(
+        Nceno.methods.join(
           goalid,
-          userID
+          stravaID,
+          ethPrice
         )
         .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
           function(error, result) {
@@ -359,7 +383,7 @@ function makeList(){
 
     for (let i = 0; i < 15; i++){
       //upcoming
-      Nceno.methods.getUpcomingGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+      Nceno.methods.getUpcomingGoal(stravaID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i] + " is an upcoming goal");
@@ -369,7 +393,7 @@ function makeList(){
         }
       });
       //active
-      Nceno.methods.getActiveGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+      Nceno.methods.getActiveGoal(stravaID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[i] = result;
           console.log(goals2[i]  + " is an active goal");
@@ -379,7 +403,7 @@ function makeList(){
         }
       });
       //completed
-      Nceno.methods.getCompletedGoal(userID, i).call({from: web3.eth.defaultAccount}, function(error, result){
+      Nceno.methods.getCompletedGoal(stravaID, i).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals3[i] = result;
           console.log(goals3[i]  + " is a completed goal");
@@ -422,7 +446,7 @@ function quickStats(){
       //active challenges
       var active = 0;
       for (let j = 0; j < 20; j++){
-      Nceno.methods.getActiveGoal(userID, j).call({from: web3.eth.defaultAccount}, function(error, result){
+      Nceno.methods.getActiveGoal(stravaID, j).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           active++;
         }
@@ -433,7 +457,7 @@ function quickStats(){
       var completed = 0;
       var goals2 = new Array();
       for (let k = 0; k < 20; k++){
-      Nceno.methods.getCompletedGoal(userID, k).call({from: web3.eth.defaultAccount}, function(error, result){
+      Nceno.methods.getCompletedGoal(stravaID, k).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[k] = result;
           completed++;
@@ -446,7 +470,7 @@ function quickStats(){
       var lostStake=0;
       var bonusTotal=0;
       for (let i = 0; i < completed; i++){
-      Nceno.methods.successPerGoal(userID, goals2[i]).call({from: web3.eth.defaultAccount}, function(error, result){
+      Nceno.methods.successPerGoal(stravaID, goals2[i]).call({from: web3.eth.defaultAccount}, function(error, result){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           successCount+=result[0];
           sesPerWk+=result[1];
@@ -747,9 +771,9 @@ function setGoalID(id){
 $("#claimBtn").click(function() {
   var goalid = web3.utils.padRight($("#goalCategories").val(),34);
   //function call:
-  Nceno.methods.claimBonus(
+  Nceno.methods.claim(
     goalid,
-    userID
+    stravaID
   )
   .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000},
     function(error, result) {
@@ -806,7 +830,7 @@ $("#logBtn").click(function() {
       //var sessionMins = 32; //debug only
       console.log("total session minutes to be logged: "+sessionMins);
     
-      Nceno.methods.simplePayout(userID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
+      Nceno.methods.log(stravaID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
         {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
           function(error, result) {
             if (!error){
@@ -930,9 +954,9 @@ window.onload = function() {
     //getting the access token from url
     //access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
     //console.log(access_token);
-    // get the userID
+    // get the stravaID
     //fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-    //userID = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
+    //userID1 = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
     //log them
     //console.log(fitbitUser);
 
@@ -957,21 +981,22 @@ function tooltipVal4(args) {
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
-var pad;
-var sign;
+//var pad;
+//var sign;
 var flag;
 function localize(){
   $.getJSON("https://api.ipdata.co/?api-key=25948172f6d73640c781a87df67ef61f03bf5948cbc333f56fd0baf6", function(data) {
     var countryName = data.country_name;
-    var timezone = data.time_zone.offset;
+    //var timezone = data.time_zone.offset;
     flag = data.country_code;
     //console.log("Country Name: " + countryName);
     //console.log("Time Zone: " + timezone);
-    sign = parseInt(timezone.slice(0, 1)+1);
-    pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
+    //sign = parseInt(timezone.slice(0, 1)+1);
+    //pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
     //pad = parseInt(timezone.slice(0, 1)+1)
     //console.log(pad);
     console.log("Flag URL: " + flag);
+    getMobileOS();
   });
 }
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
@@ -1014,9 +1039,9 @@ function getToken(){
       $("#stravaSuccess").html('<a style="color:white;">Signed in as: </a>'+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
-      userID = uniqueUserString;
+      userID1 = uniqueUserString;
       //console.log(uniqueUserString);
-      Nceno.methods.userExists(userID
+      Nceno.methods.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
         function(error, result) {
@@ -1038,10 +1063,10 @@ function getToken(){
 }
 
 //gets activity minutes from strava
-var stravaMins;
-var avgHR;
+//var stravaMins;
+//var avgHR;
 var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 14);
+placeholderDate.setDate(placeholderDate.getDate() - 30);
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 
@@ -1067,7 +1092,7 @@ function getActivities(){
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
         //Nceno.log(
-          console.log(cleaned[0][0]);
+          console.log("0x42362d"+","+stravaID+","+ cleaned[0]+","+cleaned[1]+","+cleaned[2]);
           //...
         //);
       }

@@ -7,33 +7,11 @@ var Nceno = new web3.eth.Contract([
         "type": "bytes32"
       },
       {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       }
     ],
-    "name": "claimBonus",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_userID",
-        "type": "uint256"
-      },
-      {
-        "name": "_userName",
-        "type": "bytes32"
-      },
-      {
-        "name": "_flag",
-        "type": "bytes32"
-      }
-    ],
-    "name": "createCompetitor",
+    "name": "claim",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -51,7 +29,7 @@ var Nceno = new web3.eth.Contract([
         "type": "uint256"
       },
       {
-        "name": "_stakeWEI",
+        "name": "_stakeUSD10e18",
         "type": "uint256"
       },
       {
@@ -67,15 +45,15 @@ var Nceno = new web3.eth.Contract([
         "type": "uint256"
       },
       {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
-        "name": "_ethPrice",
+        "name": "_ethPriceUSD",
         "type": "uint256"
       }
     ],
-    "name": "createGoal",
+    "name": "host",
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
@@ -89,11 +67,15 @@ var Nceno = new web3.eth.Contract([
         "type": "bytes32"
       },
       {
-        "name": "_userID",
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "_ethPriceUSD",
         "type": "uint256"
       }
     ],
-    "name": "joinGoal",
+    "name": "join",
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
@@ -101,8 +83,69 @@ var Nceno = new web3.eth.Contract([
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "ncenoEmergencyCashout",
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "_activityID",
+        "type": "uint256"
+      },
+      {
+        "name": "_avgHR",
+        "type": "uint256"
+      },
+      {
+        "name": "_reportedMins",
+        "type": "uint256"
+      }
+    ],
+    "name": "log",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "_userName",
+        "type": "bytes32"
+      },
+      {
+        "name": "_flag",
+        "type": "bytes32"
+      },
+      {
+        "name": "_OS",
+        "type": "uint256"
+      }
+    ],
+    "name": "makeProfile",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "setAdmin",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -126,23 +169,11 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_userID",
+        "name": "_amount",
         "type": "uint256"
-      },
-      {
-        "name": "_reportedMins",
-        "type": "uint256"
-      },
-      {
-        "name": "_timeStamp",
-        "type": "uint256"
-      },
-      {
-        "name": "_goalID",
-        "type": "bytes32"
       }
     ],
-    "name": "simplePayout",
+    "name": "takeRevenue",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -152,7 +183,7 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
@@ -175,7 +206,7 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
@@ -270,10 +301,6 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "",
         "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
       }
     ],
     "payable": false,
@@ -284,30 +311,7 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getLeaderBoard",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32[10]"
-      },
-      {
-        "name": "",
-        "type": "uint256[12][10]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
@@ -338,7 +342,7 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
@@ -404,53 +408,7 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getPotentialPayout",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userID",
-        "type": "uint256"
-      },
-      {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getStartTime",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
@@ -471,20 +429,6 @@ var Nceno = new web3.eth.Contract([
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "goalCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [
       {
         "name": "",
@@ -494,12 +438,8 @@ var Nceno = new web3.eth.Contract([
     "name": "profileOf",
     "outputs": [
       {
-        "name": "userID",
+        "name": "stravaID",
         "type": "uint256"
-      },
-      {
-        "name": "flag",
-        "type": "bytes32"
       },
       {
         "name": "userName",
@@ -510,7 +450,19 @@ var Nceno = new web3.eth.Contract([
         "type": "address"
       },
       {
-        "name": "goalTotal",
+        "name": "born",
+        "type": "uint256"
+      },
+      {
+        "name": "flag",
+        "type": "bytes32"
+      },
+      {
+        "name": "OS",
+        "type": "uint256"
+      },
+      {
+        "name": "myGoalCount",
         "type": "uint256"
       }
     ],
@@ -522,7 +474,7 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_userID",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
@@ -572,4 +524,4 @@ var Nceno = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x6a27c6c29c26d63aee33e5788b0fe6df20efc1ed');
+], '0x488e95bfb34d27dcc7e8eb59d58d8478512d358c');
