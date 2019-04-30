@@ -240,21 +240,21 @@ function getMobileOS() {
       // Windows Phone must come first because its UA also contains "Android"
     if (/windows phone/i.test(userAgent)) {
         OS = 3;
-        console.log("Windows Phone");
+        console.log("OS is: Windows Phone");
     }
 
     if (/android/i.test(userAgent)) {
         OS = 2;
-        console.log("Android");
+        console.log("OS is: Android");
     }
 
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         OS = 1;
-        console.log("iOS");
+        console.log("OS is: iOS");
     }
 
-    console.log("unknown");
+    console.log("OS is: unknown");
 }
 
 //function that displays in a modal, a summary of the goal you are setting.
