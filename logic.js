@@ -1088,7 +1088,7 @@ function getActivities(){
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
         //Nceno.log(
-          console.log("0x42362d"+","+stravaID+","+ cleaned[0]+","+cleaned[1]+","+cleaned[2]);
+          console.log("0x42362d"+","+stravaID+","+ cleaned[0][0]+","+cleaned[0][1]+","+cleaned[0][2]);
           //...
         //);
       }
