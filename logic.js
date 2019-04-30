@@ -1085,7 +1085,7 @@ function getActivities(){
       //console.log("cleaned workout (id,hr,mins): ("+data[0].id+","+ data[0].average_heartrate+","+ data[0].moving_time+")");
 
       for(let i=0; i<data.length; i++){
-        if(data[i].average_heartrate>50 && data[i].moving_time/60>=sesmins){
+        if(data[i].average_heartrate>50 && data[i].moving_time/60>=0){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
         }
       }
