@@ -241,6 +241,13 @@ contract Nceno {
     return(goalAt[_goalID].activeMins, goalAt[_goalID].stakeUSD10e18, goalAt[_goalID].sesPerWk, goalAt[_goalID].wks, goalAt[_goalID].startTime, goalAt[_goalID].competitorCount);
   }
 
+  //called when a user logs a workout. returns the percent earned per workout, and the amount $ earned per workout
+  function getGoalPartitions(bytes32 _goalID) external view returns (uint, uint){
+    uint wk = (now - theGoal.startTime)/604800;
+    return(goalAt[_goalID].lockedPercent[wk-1]/goalAt[_goalID].sesPerWk, goalAt[_goalID].stakeUSD10e18*goalAt[_goalID].lockedPercent[wk-1]*100/goalAt[_goalID].sesPerWk);
+
+  }
+
   //get future goal: only returns a goal if it hasn't started yet
   function getFutureGoal(uint _index) external view returns(bytes32, uint, uint, uint, uint, uint, uint){
     if(now < goalNumber[_index].startTime){
