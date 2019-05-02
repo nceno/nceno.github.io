@@ -190,6 +190,7 @@ function randGoalID(){
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
   //updateEthPrice();
+  var sliderStake = $("#sliderStake").roundSlider("getValue").toString();
   var msgValueHost = Math.floor($("#sliderStake").roundSlider("getValue")*1000000000000000000/ethPrice);
   var usdStakeInWei = msgValueHost.toString();
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
@@ -197,7 +198,7 @@ $("#hostBtn").click(function() {
   Nceno.methods.host(
     goalID,
     $("#sliderMins").roundSlider("getValue"),
-    usdStakeInWei, //should change to just stake in USD
+    sliderStake, //should change to just stake in USD
     $("#sliderSes").roundSlider("getValue"),
     $("#sliderWks").roundSlider("getValue"),
     start,
@@ -1088,7 +1089,7 @@ function getActivities(){
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
       var cleaned = new Array();
-      
+
       for(let i=0; i<data.length; i++){
         if(data[i].average_heartrate>100 && data[i].moving_time/60>=goalMovingTime){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
