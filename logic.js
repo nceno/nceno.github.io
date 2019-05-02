@@ -1094,6 +1094,7 @@ function getActivities(){
       for(let i=0; i<data.length; i++){
         if(data[i].average_heartrate>100 && data[i].moving_time/60>=goalMovingTime){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].moving_time/60];
+          //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
         }
       }
       //if there is at least one valid workout, log it in the contract, triggering payout.
