@@ -1101,7 +1101,6 @@ function getActivities(){
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
         //console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
-        console.log(cleaned);
         console.log("Good news, your workout is being logged for a payout!")
         
 
@@ -1114,7 +1113,7 @@ function getActivities(){
           Math.round(cleaned[0][1]),
           Math.round(cleaned[0][2])
         )
-        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
           function(error, result) {
             if (!error){
               /*$("#joinSearch").hide();
