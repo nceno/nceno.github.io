@@ -531,11 +531,11 @@ function makeWktl(){
 
 }
 
-
+var goalid;
 function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
-    var goalid = web3.utils.padRight($('#goalCategories').val(),34);
+    goalid = web3.utils.padRight($('#goalCategories').val(),34);
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
     for (let k = 0; k < 10; k++){
