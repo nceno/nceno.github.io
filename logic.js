@@ -1124,7 +1124,7 @@ function getActivities(){
             else
             console.error(error);
           }
-        ).on('confirmation', function(confNumber, receipt){
+        ).once('confirmation', function(confNumber, receipt){
           console.log(receipt.status);
           if(receipt.status === true){
             console.log("You just unlocked 4% of your stake. Check your wallet in a couple minutes.");
