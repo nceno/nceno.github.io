@@ -168,16 +168,14 @@ contract Nceno {
     if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= 125 && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
       
       //payout a refund- needs kyberswap adjustment
-           uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][wk]*goalAt[_goalID].stakeUSD10e18/(100*goalAt[_goalID].sesPerWk);  //remember there is an offset by 1 for lockedPercent array index
-           msg.sender.transfer(payout); //get_sender()
+      uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][wk]*goalAt[_goalID].stakeUSD10e18/(100*goalAt[_goalID].sesPerWk);  //remember there is an offset by 1 for lockedPercent array index
+      msg.sender.transfer(payout); //get_sender()
+      //IERC20Token(tokenContractAddress).transfer(msg.sender, payout); //get_sender()
 
       //note the success     
       goalAt[_goalID].successes[_stravaID][wk]++;
       //protect activity from double spending 
       goalAt[_goalID].activitySpent[_activityID]=true;
-
-      //USDC step
-      //transfer payout from USDC[Nceno]-->USDC[msg.sender] //get_sender()
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
@@ -216,18 +214,12 @@ contract Nceno {
 
     //needs USDC adjustment
     msg.sender.transfer(cut); //get_sender()
-
-    //USDC step
-    //transfer payout from USDC[Nceno]-->USDC[msg.sender] //get_sender()
-
+    //IERC20Token(tokenContractAddress).transfer(msg.sender, payout); //get_sender()
   }
 
   function takeRevenue(uint _amount) onlyAdmin external{
-    require(_amount < address(this).balance);
     admin.transfer(_amount);
-
-    //USDC step
-    //transfer payout from USDC[Nceno]-->USDC[admin]
+    //IERC20Token(tokenContractAddress).transfer(admin, _amount);
   }
 
   modifier onlyAdmin(){
