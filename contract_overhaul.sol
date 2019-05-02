@@ -235,7 +235,7 @@ contract Nceno {
 
   //called when a user logs a workout. returns the percent earned per workout, and the amount $ earned per workout
   function getGoalPartitions(bytes32 _goalID) external view returns (uint, uint){
-    uint wk = (now - theGoal.startTime)/604800;
+    uint wk = (now - goalAt[_goalID].startTime)/604800;
     return(goalAt[_goalID].lockedPercent[wk-1]/goalAt[_goalID].sesPerWk, goalAt[_goalID].stakeUSD10e18*goalAt[_goalID].lockedPercent[wk-1]*100/goalAt[_goalID].sesPerWk);
 
   }
