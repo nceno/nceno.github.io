@@ -1093,7 +1093,7 @@
               <div class="container-fluid">
                 <div class="row gutter-1">
                   <div class="col-8">
-                    <button id="joinSearch" type="button" onclick="something()" class="btn btn-block btn-primary">Pay me</button>
+                    <button id="payMeBtn" type="button" onclick="getActivities()" class="btn  btn-primary">Pay me</button>
                   </div>
                   <div id="logLoader">
                     <p>Writing to the blockchain...</p>
@@ -1101,9 +1101,6 @@
                   </div>
                   <p id="logSuccess">Payout complete! Check your wallet for USDC coins.</p>
                   <span id=logFail></span>
-                  <div class="col-4">
-                    <button id="logCancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
-                  </div>
                 </div>
               </div>
             </div>

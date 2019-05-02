@@ -216,7 +216,7 @@ $("#hostBtn").click(function() {
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){
+  ).once('confirmation', function(confNumber, receipt){
     console.log(receipt.status);
     if(receipt.status === true){
       $("#createLoader").hide();
