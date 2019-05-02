@@ -161,11 +161,11 @@ contract Nceno {
   function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external{
     require(profileOf[_stravaID].walletAdr == msg.sender && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
-      "wallet-user mismatch, user is not competitor, goal has not started, or goal has already finished."); //get_sender()
+      "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
     uint wk = (now - goalAt[_goalID].startTime)/604800;
     
     //payment logic for activity comparison, HR check, timestamp double spending, and limited payouts per week
-    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= 125 && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
+    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= 100 && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
       
       //payout a refund- needs kyberswap adjustment
       uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][wk]*goalAt[_goalID].stakeUSD10e18/(100*goalAt[_goalID].sesPerWk);  //remember there is an offset by 1 for lockedPercent array index
