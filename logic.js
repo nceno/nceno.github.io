@@ -284,7 +284,7 @@ function srEcho(){
 //joins the searched goal
 function joinSearch(){
   updateEthPrice();
-  var goalid = web3.utils.padRight($('#searchField').val(),34);
+  goalid = web3.utils.padRight($('#searchField').val(),34);
   Nceno.methods.getGoalParams(
     goalid
   )
@@ -332,7 +332,7 @@ function joinSearch(){
 //joins the browsed goal
 function joinSoon(){
   updateEthPrice();
-  var goalid = browsedGoal;
+  goalid = browsedGoal;
   Nceno.methods.getGoalParams(
     goalid
   )
@@ -536,6 +536,7 @@ function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
+    console.log("selected goal is: "+goalid);
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
     for (let k = 0; k < 10; k++){
@@ -1104,6 +1105,7 @@ function getActivities(){
         //log the data to get a payout
         Nceno.methods.log(
           goalid,
+          //$('#goalCategories').val();
           stravaID,
           cleaned[0][0],
           Math.round(cleaned[0][1]),
