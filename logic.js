@@ -1113,7 +1113,7 @@ function getActivities(){
           Math.round(cleaned[0][1]),
           Math.round(cleaned[0][2])
         )
-        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
+        .send({from: web3.eth.defaultAccount, gas: 6000000, gasPrice: 15000000000},
           function(error, result) {
             if (!error){
               /*$("#joinSearch").hide();
