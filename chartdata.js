@@ -12,14 +12,14 @@ var config1 = {
         borderColor: '#ccff00',
         fill: true
     }, {
-        //line
-        label: '% Competitors finished the week',
+        //line data
+        label: 'Your cumulative % stake earned back',
         yAxisID: 'B',
-        data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43],
-        type: 'line',
+        data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
         backgroundColor: '#f442b3',
         borderColor: '#f442b3',
-        fill: false
+        fill: false,
+        type: 'line'
     }],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
   },
@@ -101,14 +101,14 @@ var config2 = {
         borderColor: '#ccff00',
         fill: true
     }, {
-        //line data
-        label: 'Your cumulative % stake earned back',
+        //line
+        label: '% Competitors finished the week',
         yAxisID: 'B',
-        data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
+        data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43],
+        type: 'line',
         backgroundColor: '#f442b3',
         borderColor: '#f442b3',
-        fill: false,
-        type: 'line'
+        fill: false
     }],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
   },

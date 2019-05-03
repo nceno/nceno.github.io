@@ -2,15 +2,15 @@
 //week stats
 //------------------
 
-profileOf[_stravaID].myGoal[_goalID].successes[_stravaID][weekIndex]  "of" profileOf[_stravaID].myGoal[_goalID].sesPerWk " workouts completed"
+goalAt[_goalID].successes[_stravaID][weekIndex]  "of" goalAt[_goalID].sesPerWk " workouts completed"
 
-profileOf[_stravaID].myGoal[_goalID].lockedPercent[weekIndex]*profileOf[_stravaID].myGoal[_goalID].stakeUSD  "pennies locked up"
+goalAt[_goalID].lockedPercent[weekIndex]*goalAt[_goalID].stakeUSD  "pennies locked up"
 
 getMyGoalStats2[2][weekIndex] "bonus"
 
 getMyGoalStats2[0][weekIndex] "unlocked"
 
-profileOf[_stravaID].myGoal[_goalID].winnersWk[weekIndex] "of" profileOf[_stravaID].myGoal[_goalID].competitorCount "ppl finished"
+goalAt[_goalID].winnersWk[weekIndex] "of" goalAt[_goalID].competitorCount "ppl finished"
 
 //------------------
 //charts
@@ -18,13 +18,21 @@ profileOf[_stravaID].myGoal[_goalID].winnersWk[weekIndex] "of" profileOf[_strava
 
 //ctx1-------
 xaxis data: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
+	numWeeks = goalAt[_goalID].wks;
+	var xaxis = new Array();
+	for(let i = 0; i<numWeeks){
+		xaxis[i] = "Week "+i+1;
+	}
+	data = xaxis;
+
 
 bar: Workouts you completed
 yaxis data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3]
+	goalAt[_goalID].successes[_stravaID]
 
 line: % Competitors finished the week
 yaxis data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43]
-
+	goalAt[_goalID].winnersWk.map(function(value) Math.round(100*value/goalAt[_goalID].competitorCount))
 
 //ctx2-------
 xaxis data: same
