@@ -51,6 +51,10 @@ var config1 = {
               position: 'right',
               ticks: {
                 beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Workouts'
               }
               },
             {
@@ -60,6 +64,10 @@ var config1 = {
               position: 'left',
               ticks: {
                 beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: '%'
               }
             }
           ],
@@ -132,6 +140,10 @@ var config2 = {
               position: 'right',
               ticks: {
                 beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: '% locked'
               }
               },
             {
@@ -141,6 +153,10 @@ var config2 = {
               position: 'left',
               ticks: {
                 beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: '% returned'
               }
             }
           ],
