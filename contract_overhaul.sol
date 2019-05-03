@@ -14,6 +14,11 @@ contract Nceno {
     admin = _newAdmin;
   }
 
+  uint hrThresh = 100;
+  function setHRthresh(uint _newThresh) onlyAdmin external{
+    hrThresh = _newThresh;
+  }
+
   //gas station init
   /*function Nceno(){
     init_relay_hub(RelayHub(0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87));
@@ -165,7 +170,7 @@ contract Nceno {
     uint wk = (now - goalAt[_goalID].startTime)/604800;
     
     //payment logic for activity comparison, HR check, timestamp double spending, and limited payouts per week
-    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= 100 && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
+    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
       
       //payout a refund- needs kyberswap adjustment
       uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][wk]*goalAt[_goalID].stakeUSD10e18/(100*goalAt[_goalID].sesPerWk);  //remember there is an offset by 1 for lockedPercent array index
