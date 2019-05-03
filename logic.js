@@ -885,16 +885,6 @@ window.onload = function() {
 
   //delays extraction of the fitbit creds until the user has authed.
   if (window.location.href != 'https://www.nceno.app/app.html'){
-    //call fitbit api with user creds
-    //getting the access token from url
-    //access_token = window.location.href.split('#')[1].split('=')[1].split('&')[0];
-    //console.log(access_token);
-    // get the stravaID
-    //fitbitUser = window.location.href.split('#')[1].split('=')[2].split('&')[0];
-    //userID1 = web3.utils.padRight(web3.utils.toHex(fitbitUser),34);
-    //log them
-    //console.log(fitbitUser);
-
     $("#stravaBtn").hide();
     $("#stravaOk").html("Proceed to step 2...")
     $("#stravaOk").show();
