@@ -156,7 +156,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: 15000000000},
+  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: 3000000000},
     function(error, result) {
       if (!error){
         $("#makeAcctBtn").hide();
@@ -205,7 +205,7 @@ $("#hostBtn").click(function() {
     stravaID,
     Math.round(ethPrice*100) //eth price in pennies. Gets rid of decimals
   )
-  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 3000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -297,7 +297,7 @@ function joinSearch(){
           stravaID,
           ethPrice
         )
-        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 3000000000, value: stakewei},
           function(error, result) {
             if (!error){
               $("#joinSearch").hide();
@@ -345,7 +345,7 @@ function joinSoon(){
           stravaID,
           ethPrice
         )
-        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 3000000000, value: stakewei},
           function(error, result) {
             if (!error){
               $("#joinSoon").hide();
@@ -570,7 +570,7 @@ function selectedChallenge(){
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+" x/wk");
           $("#echMins").html(result[0]+ " mins");
-          $("#echComp").html(result[6]);
+          $("#echComp").html(result[5]);
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
           console.log("got GoalParams...."); //*********************************************
@@ -773,7 +773,7 @@ $("#claimBtn").click(function() {
     goalid,
     stravaID
   )
-  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 15000000000},
+  .send({from: web3.eth.defaultAccount, gas: 2000000, gasPrice: 3000000000},
     function(error, result) {
       if (!error){
         $("#claimBtn").hide();
@@ -829,7 +829,7 @@ $("#logBtn").click(function() {
       console.log("total session minutes to be logged: "+sessionMins);
     
       Nceno.methods.log(stravaID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
-        {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000},
+        {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 3000000000},
           function(error, result) {
             if (!error){
               $("#logBtn").hide();
@@ -1113,7 +1113,7 @@ function getActivities(){
           Math.round(cleaned[0][1]),
           Math.round(cleaned[0][2])
         )
-        .send({from: web3.eth.defaultAccount, gas: 6000000, gasPrice: 15000000000},
+        .send({from: web3.eth.defaultAccount, gas: 6000000, gasPrice: 3000000000},
           function(error, result) {
             if (!error){
               /*$("#joinSearch").hide();
