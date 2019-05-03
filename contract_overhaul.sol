@@ -136,7 +136,6 @@ contract Nceno {
     goalAt[_goalID] = createdGoal;
     goalNumber[goalCount] = createdGoal;
     goalCount++;
-    goalAt[_goalID].competitorCount++;
 
     //add goal to self's registry
     profileOf[_stravaID].myGoal[_goalID] = createdGoal;
