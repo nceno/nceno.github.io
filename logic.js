@@ -198,12 +198,12 @@ $("#hostBtn").click(function() {
   Nceno.methods.host(
     goalID,
     $("#sliderMins").roundSlider("getValue"),
-    sliderStake, //should change to just stake in USD
+    sliderStake, //plain whole dollar amount
     $("#sliderSes").roundSlider("getValue"),
     $("#sliderWks").roundSlider("getValue"),
     start,
     stravaID,
-    Math.floor((ethPrice*10000)*1/100) //check the math
+    Math.round(ethPrice*100) //eth price in pennies. Gets rid of decimals
   )
   .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 15000000000, value: usdStakeInWei},
     function(error, result) {

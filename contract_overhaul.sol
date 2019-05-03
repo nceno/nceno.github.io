@@ -29,8 +29,10 @@ contract Nceno {
     uint startTime;
     uint activeMins;
     uint wks;
-    uint stakeUSD10e18; //stake in usd, but multiplied by 10e18
+    uint stakeUSD; //stake in usd, but multiplied by 10e18
     uint sesPerWk;
+    uint ethPricePennies; //this is the usd price of eth, but multiplied by 100.
+
     uint[12] lockedPercent;
     uint[10] competitorIDs;
     uint competitorCount;
@@ -38,7 +40,7 @@ contract Nceno {
     uint[12] winnersWk;
     mapping(uint=>uint[12]) successes;
     mapping(uint=>uint[12]) claims;
-    mapping(uint=>uint) ethPriceAtJoin;
+    mapping(uint=>uint) ethPricePenniesAtJoin;
     mapping(uint=>bool) activitySpent;
     mapping(uint=>bool) isCompetitor;
   }
@@ -106,8 +108,8 @@ contract Nceno {
     stravaIDs.push(_stravaID);
   }
 
-  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD10e18, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPriceUSD) external payable {
-    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == msg.sender && msg.value>= _stakeUSD10e18*_ethPriceUSD,
+  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) external payable {
+    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == msg.sender && msg.value>= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
      "User does not exist, or wallet-user pair does not match."); //get_sender()
     goalObject memory createdGoal;
 
@@ -116,8 +118,9 @@ contract Nceno {
     createdGoal.startTime = _startTime;
     createdGoal.activeMins = _activeMins;
     createdGoal.wks = _wks;
-    createdGoal.stakeUSD10e18 = _stakeUSD10e18;
+    createdGoal.stakeUSD = _stakeUSD;
     createdGoal.sesPerWk = _sesPerWk;
+    createdGoal.ethPricePennies = _ethPricePennies;
 
     //set logs and claims to [0]?
 
@@ -145,8 +148,8 @@ contract Nceno {
 
   }
 
-  function join(bytes32 _goalID, uint _stravaID, uint _ethPriceUSD) external payable {
-    require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD10e18*_ethPriceUSD && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
+  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) external payable {
+    require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
     goalAt[_goalID].competitorCount++;
@@ -173,7 +176,8 @@ contract Nceno {
     if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
       
       //payout a refund- needs kyberswap adjustment
-      uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][wk]*goalAt[_goalID].stakeUSD10e18/(100*goalAt[_goalID].sesPerWk);  //remember there is an offset by 1 for lockedPercent array index
+     
+      uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
       msg.sender.transfer(payout); //get_sender()
       //IERC20Token(tokenContractAddress).transfer(msg.sender, payout); //get_sender()
 
@@ -197,7 +201,7 @@ contract Nceno {
     uint cut;
     uint pot;
     uint logs;
-    uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][(now-goalAt[_goalID].startTime)/604800-1]*goalAt[_goalID].stakeUSD10e18/(100*goalAt[_goalID].sesPerWk);
+    uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][(now-goalAt[_goalID].startTime)/604800-1]*goalAt[_goalID].stakeUSD/(100*goalAt[_goalID].sesPerWk);
     //loop over everyone's weekly logs and increase the week's pot from when someone skipped a workout
     for(uint i =0; i<10; i++){
     if(goalAt[_goalID].competitorIDs[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
@@ -235,20 +239,20 @@ contract Nceno {
   //getters for UI
   //get goal
   function getGoalParams(bytes32 _goalID) external view returns(uint, uint, uint, uint, uint, uint){
-    return(goalAt[_goalID].activeMins, goalAt[_goalID].stakeUSD10e18, goalAt[_goalID].sesPerWk, goalAt[_goalID].wks, goalAt[_goalID].startTime, goalAt[_goalID].competitorCount);
+    return(goalAt[_goalID].activeMins, goalAt[_goalID].stakeUSD, goalAt[_goalID].sesPerWk, goalAt[_goalID].wks, goalAt[_goalID].startTime, goalAt[_goalID].competitorCount);
   }
 
   //called when a user logs a workout. returns the percent earned per workout, and the amount $ earned per workout
   function getGoalPartitions(bytes32 _goalID) external view returns (uint, uint){
     uint wk = (now - goalAt[_goalID].startTime)/604800;
-    return(goalAt[_goalID].lockedPercent[wk-1]/goalAt[_goalID].sesPerWk, goalAt[_goalID].stakeUSD10e18*goalAt[_goalID].lockedPercent[wk-1]*100/goalAt[_goalID].sesPerWk);
+    return(goalAt[_goalID].lockedPercent[wk-1]/goalAt[_goalID].sesPerWk, goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk-1]*100/goalAt[_goalID].sesPerWk);
 
   }
 
   //get future goal: only returns a goal if it hasn't started yet
   function getFutureGoal(uint _index) external view returns(bytes32, uint, uint, uint, uint, uint, uint){
     if(now < goalNumber[_index].startTime){
-      return(goalNumber[_index].goalID, goalNumber[_index].activeMins, goalNumber[_index].stakeUSD10e18, goalNumber[_index].sesPerWk, goalNumber[_index].wks, goalNumber[_index].startTime,goalNumber[_index].competitorCount);
+      return(goalNumber[_index].goalID, goalNumber[_index].activeMins, goalNumber[_index].stakeUSD, goalNumber[_index].sesPerWk, goalNumber[_index].wks, goalNumber[_index].startTime,goalNumber[_index].competitorCount);
     }
   }
 
@@ -295,7 +299,7 @@ contract Nceno {
       my.adherenceRate = 100*successCount/(wk*theGoal.sesPerWk); 
       
       for(uint p =wk; p<theGoal.wks; p++){
-        my.totalAtStake += lockedPercent[theGoal.wks/2 -1][p]*theGoal.stakeUSD10e18*theGoal.competitorCount/100;
+        my.totalAtStake += lockedPercent[theGoal.wks/2 -1][p]*theGoal.stakeUSD*theGoal.competitorCount/100;
       }
     }
     return(my.adherenceRate, my.totalAtStake, successCount);
@@ -309,8 +313,8 @@ contract Nceno {
       uint successCount;
       for(uint j =0; j<theGoal.wks; j++){
         successCount += goalAt[_goalID].successes[_stravaID][j];
-        my.wkPayouts[j] = lockedPercent[theGoal.wks/2 -1][j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD10e18/(100*theGoal.sesPerWk);
-        my.lostStake+=(lockedPercent[theGoal.wks/2 -1][j]*theGoal.stakeUSD10e18/100-my.wkPayouts[j]);
+        my.wkPayouts[j] = lockedPercent[theGoal.wks/2 -1][j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
+        my.lostStake+=(lockedPercent[theGoal.wks/2 -1][j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
         my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
         my.bonusTotal+= my.wkBonuses[j];
         
@@ -332,9 +336,9 @@ contract Nceno {
     if(0<=wk && wk<theGoal.wks+1){
       for(uint j =0; j<wk; j++){
         
-        my.wkPayouts[j] = lockedPercent[theGoal.wks/2 -1][j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD10e18/(100*theGoal.sesPerWk);
+        my.wkPayouts[j] = lockedPercent[theGoal.wks/2 -1][j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
       
-        my.lostStake+=(lockedPercent[theGoal.wks/2 -1][j]*theGoal.stakeUSD10e18/100-my.wkPayouts[j]);
+        my.lostStake+=(lockedPercent[theGoal.wks/2 -1][j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
       
         my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
         my.bonusTotal+= my.wkBonuses[j];
