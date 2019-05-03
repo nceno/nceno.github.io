@@ -48,7 +48,7 @@ var config1 = {
           //bar axis
           id: 'A',
           type: 'linear',
-          position: 'right',
+          position: 'left',
           ticks: {
             beginAtZero: true
           },
@@ -61,7 +61,7 @@ var config1 = {
           //line axis
           id: 'B',
           type: 'linear',
-          position: 'left',
+          position: 'right',
           ticks: {
             beginAtZero: true
           },
@@ -137,7 +137,7 @@ var config2 = {
           //bar axis
           id: 'A',
           type: 'linear',
-          position: 'right',
+          position: 'left',
           ticks: {
             beginAtZero: true
           },
@@ -150,7 +150,7 @@ var config2 = {
           //line axis
           id: 'B',
           type: 'linear',
-          position: 'left',
+          position: 'right',
           ticks: {
             beginAtZero: true
           },
