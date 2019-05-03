@@ -7,12 +7,12 @@ var config1 = {
             //bar
             label: 'Workouts you completed',
             yAxisID: 'A',
-            data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3, ]
+            data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3]
         }, {
             //line
             label: '% Competitors finished the week',
             yAxisID: 'B',
-            data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43, ],
+            data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43],
             type: 'line'
         }],
         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
@@ -78,56 +78,25 @@ var config1 = {
 //chart2
 //<script>
 var config2 = {
-      type: 'line',
+      type: 'bar',
       data: {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
         datasets: [{
-          label: 'Locked stake %',
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: '#ccff00',
-          borderColor: '#ccff00',
-          fill: false,
-          borderDash: [5, 5],
-          pointRadius: [1, 2.5, 3.5, 2.5, 4.5, 7.5, 5, 1.5, 4, 9, 5.5, 3.5],
-        },{
-          label: 'Competitor success rate %',
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: '#f442b3',
-          borderColor: '#f442b3',
-          fill: false,
-          pointHitRadius: 20,
-        }]
+            //bar data
+            label: '% stake locked up',
+            yAxisID: 'A',
+            data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]
+        }, {
+            //line data
+            label: 'Your cumulative % stake earned back',
+            yAxisID: 'B',
+            data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
+            type: 'line'
+        }],
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
       },
+      
+
+
       options: {
         responsive: true,
         legend: {
@@ -144,13 +113,30 @@ var config2 = {
               labelString: 'Week'
             }
           }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Value'
+
+          yAxes: [
+            {
+              //bar axis
+              id: 'A',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                max: 100,
+                min: 0
+              }
+              },
+            {
+              //line axis
+              id: 'B',
+              type: 'linear',
+              position: 'left',
+              ticks: {
+                max: 3,
+                min: 0
+              }
             }
-          }],
+          ],
+
           gridlines: [{
           display: true,
           color: '#848484'
@@ -165,91 +151,3 @@ var config2 = {
 
 //</script>
 // end chart2
-
-//chart3
-//<script>
-var config3 = {
-      type: 'line',
-      data: {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'],
-        datasets: [{
-          label: 'Locked stake %',
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: '#ccff00',
-          borderColor: '#ccff00',
-          fill: false,
-          borderDash: [5, 5],
-          pointRadius: [1, 2.5, 3.5, 2.5, 4.5, 7.5, 5, 1.5, 4, 9, 5.5, 3.5],
-        },{
-          label: 'Competitor success rate %',
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: '#f442b3',
-          borderColor: '#f442b3',
-          fill: false,
-          pointHitRadius: 20,
-        }]
-      },
-      options: {
-        responsive: true,
-        legend: {
-          position: 'bottom',
-        },
-        hover: {
-          mode: 'index'
-        },
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Week'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Value'
-            }
-          }],
-          gridlines: [{
-          display: true,
-          color: '#848484'
-          }]
-        },
-        title: {
-          display: true,
-          text: 'Weekly payouts'
-        }
-      }
-    };
