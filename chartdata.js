@@ -143,7 +143,7 @@ var config2 = {
           },
           scaleLabel: {
             display: true,
-            labelString: '% locked'
+            labelString: '% stake'
           }
           },
         {
@@ -156,7 +156,7 @@ var config2 = {
           },
           scaleLabel: {
             display: true,
-            labelString: '%'
+            labelString: '% competitors'
           }
         }
       ],
