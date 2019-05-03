@@ -28,7 +28,7 @@ function showPortis() {
       $("#portisBtn").hide();
 
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
-      $("#portisSuccess").html('<a style="color:#ffffff;">Blockchain connection: </a><a style="color:#ccff00;">successful!</a>');
+      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Blockchain connection: </a></h5><a style="color:#ccff00;">successful!</a>');
       $("#openWallet").show();
     });
   });
@@ -971,7 +971,7 @@ function getToken(){
       stravaID = data.athlete.id;
       stravaUsername = data.athlete.username;
       $("#stravaOk").hide();
-      $("#stravaSuccess").html('<a style="color:white;">Strava user: </a>'+stravaUsername);
+      $("#stravaSuccess").html('<h5><a style="color:white;">Strava user: </a></h5>'+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
       userID1 = uniqueUserString;
