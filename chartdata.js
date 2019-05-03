@@ -133,7 +133,7 @@ var config2 = {
               type: 'linear',
               position: 'right',
               ticks: {
-                max: 70,
+                max: 60,
                 min: 0
               }
               },
