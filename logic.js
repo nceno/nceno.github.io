@@ -802,67 +802,6 @@ $("#claimBtn").click(function() {
     .once('error', function(error){console.log(error);});;
 });
 
-//button to log active minutes for a payout. Needs work. Could probably simplify the api get request..
-$("#logBtn").click(function() {
-  localize();
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
-  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-  xhr.onload = function() {
-   if (xhr.status === 200) {
-      
-      var data = JSON.parse(xhr.responseText);
-      var obj = [data];
-      var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
-      var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
-      var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
-      var formattedTime = Date.parse(obj[0]["activities-heart"][0].dateTime)/1000 - sign*pad;
-
-      console.log(fitbitUser +"'s active minutes for "+ obj[0]["activities-heart"][0].dateTime);
-      console.log(obj[0]["activities-heart"][0].value.heartRateZones[1].minutes);
-      console.log(obj[0]["activities-heart"][0].value.heartRateZones[2].minutes);
-      console.log(obj[0]["activities-heart"][0].value.heartRateZones[3].minutes);
-      console.log("time stamp: "+formattedTime);
-
-      var sessionMins = fatBurn + cardio + peak;
-      //var sessionMins = 32; //debug only
-      console.log("total session minutes to be logged: "+sessionMins);
-    
-      Nceno.methods.log(stravaID, sessionMins, formattedTime+2, web3.utils.padRight($("#goalCategories").val(),34)).send(
-        {from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 3000000000},
-          function(error, result) {
-            if (!error){
-              $("#logBtn").hide();
-              $("#logLoader").show();
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }).once('confirmation', function(confNumber, receipt){ 
-
-            console.log(receipt.status);
-            if(receipt.status === true){
-              $("#logLoader").hide();
-              $("#logSuccess").show();
-              $("#makeAcctBtn").hide();
-            }
-            else{
-              $("#acctLoader").hide();
-              $("#makeAcctBtn").hide();
-              $('#logFail').html('<p>Transaction failed. No valid workouts, workout already redeemed, or weekly workout submission quota already met.</p>');
-              console.log("Reported minutes not enough, timestamp already used, or weekly submission quota already met.");
-            } 
-
-
-            console.log("activity minutes logged successfully!") })
-      .once('error', function(error){console.log(error);});;
-    }
-  };
-  xhr.send();
-});//close click(function(){
-
-
-
 //not sure if using window.onload correctly... but,
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
 
@@ -885,9 +824,6 @@ window.onload = function() {
 
   var ctx2 = document.getElementById('canvas2').getContext('2d');
   window.myLine2 = new Chart(ctx2, config2);
-
- /* var ctx3 = document.getElementById('canvas3').getContext('2d');
-  window.myLine3 = new Chart(ctx3, config3);*/
 
   //sliders
   $("#sliderMins").roundSlider({
