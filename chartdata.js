@@ -50,8 +50,7 @@ var config1 = {
               type: 'linear',
               position: 'right',
               ticks: {
-                max: 100,
-                min: 0
+                beginAtZero: true
               }
               },
             {
@@ -60,8 +59,7 @@ var config1 = {
               type: 'linear',
               position: 'left',
               ticks: {
-                max: 3,
-                min: 0
+                beginAtZero: true
               }
             }
           ],
@@ -133,8 +131,7 @@ var config2 = {
               type: 'linear',
               position: 'right',
               ticks: {
-                max: 60,
-                min: 0
+                beginAtZero: true
               }
               },
             {
@@ -143,8 +140,7 @@ var config2 = {
               type: 'linear',
               position: 'left',
               ticks: {
-                max: 120,
-                min: 0
+                beginAtZero: true
               }
             }
           ],
