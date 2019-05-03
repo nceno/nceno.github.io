@@ -166,7 +166,7 @@ $("#makeAcctBtn").click(function() {
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ 
+  ).once('confirmation', function(confNumber, receipt){ 
     console.log(receipt.status);
     if(receipt.status === true){
       $("#acctLoader").hide();
@@ -178,7 +178,7 @@ $("#makeAcctBtn").click(function() {
       $('#acctFail').html('<p>Transaction failed. That profile already exists!</p>');
       console.log("profile already exists!");
     } 
-  }).on('error', function(error){console.log(error);});
+  }).once('error', function(error){console.log(error);});
 }); 
 
 //randomizes the goalID
@@ -230,7 +230,7 @@ $("#hostBtn").click(function() {
       console.log("User does not exist, or else message value is less than intended stake.");
     }
     })
-    .on('error', function(error){console.log(error);});;
+    .once('error', function(error){console.log(error);});;
 });
 
 //gets the user's operating system
@@ -308,7 +308,7 @@ function joinSearch(){
             else
             console.error(error);
           }
-        ).on('confirmation', function(confNumber, receipt){
+        ).once('confirmation', function(confNumber, receipt){
           console.log(receipt.status);
           if(receipt.status === true){
             $("#joinLoader").hide();
@@ -321,7 +321,7 @@ function joinSearch(){
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
           } 
            })
-          .on('error', function(error){console.log(error);});;
+          .once('error', function(error){console.log(error);});;
       }
       else
       console.error(error);
@@ -356,11 +356,11 @@ function joinSoon(){
             else
             console.error(error);
           }
-        ).on('confirmation', function(confNumber, receipt){ 
+        ).once('confirmation', function(confNumber, receipt){ 
           $("#joinSoonLoader").hide();
           $("#joinSoonSuccess").show();
            })
-          .on('error', function(error){console.log(error);});;
+          .once('error', function(error){console.log(error);});;
       }
       else
       console.error(error);
@@ -783,7 +783,7 @@ $("#claimBtn").click(function() {
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){
+  ).once('confirmation', function(confNumber, receipt){
 
     console.log(receipt.status);
     if(receipt.status === true){
@@ -799,7 +799,7 @@ $("#claimBtn").click(function() {
     }  
     
     console.log("lost stake claim was successful!"); })
-    .on('error', function(error){console.log(error);});;
+    .once('error', function(error){console.log(error);});;
 });
 
 //button to log active minutes for a payout. Needs work. Could probably simplify the api get request..
@@ -838,7 +838,7 @@ $("#logBtn").click(function() {
             }
             else
             console.error(error);
-          }).on('confirmation', function(confNumber, receipt){ 
+          }).once('confirmation', function(confNumber, receipt){ 
 
             console.log(receipt.status);
             if(receipt.status === true){
@@ -855,7 +855,7 @@ $("#logBtn").click(function() {
 
 
             console.log("activity minutes logged successfully!") })
-      .on('error', function(error){console.log(error);});;
+      .once('error', function(error){console.log(error);});;
     }
   };
   xhr.send();
@@ -1138,7 +1138,7 @@ function getActivities(){
             console.log("wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.");
           } 
         })
-        .on('error', function(error){console.log(error);});;
+        .once('error', function(error){console.log(error);});;
       }
       //if no valid workouts, don't log, and alert the user.
       else{
