@@ -28,7 +28,7 @@ function showPortis() {
       $("#portisBtn").hide();
 
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
-      $("#portisSuccess").html('<a style="color:#ffffff;">Blockchain connection </p><a style="color:#ccff00;">successful.</a>');
+      $("#portisSuccess").html('<a style="color:#ffffff;">Blockchain connection: </a><a style="color:#ccff00;">successful.</a>');
       $("#openWallet").show();
     });
   });
