@@ -129,11 +129,8 @@ var config2 = {
               //line axis
               id: 'B',
               type: 'linear',
-              position: 'left',
-              ticks: {
-                max: 3,
-                min: 0
-              }
+              position: 'left'
+              
             }
           ],
 
