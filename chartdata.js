@@ -67,7 +67,7 @@ var config1 = {
           },
           scaleLabel: {
             display: true,
-            labelString: '%'
+            labelString: '% returned'
           }
         }
       ],
@@ -156,7 +156,7 @@ var config2 = {
           },
           scaleLabel: {
             display: true,
-            labelString: '% returned'
+            labelString: '%'
           }
         }
       ],
