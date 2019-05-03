@@ -1,7 +1,6 @@
 //------------------
 //week stats
 //------------------
-
 goalAt[_goalID].successes[_stravaID][weekIndex]  "of" goalAt[_goalID].sesPerWk " workouts completed"
 
 goalAt[_goalID].lockedPercent[weekIndex]*goalAt[_goalID].stakeUSD  "pennies locked up"
@@ -40,16 +39,12 @@ yaxis data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43]
 	}
 	data = roi;
 
-
-
 //ctx2-------
 xaxis data: same
 
 bar: % stake locked
 yaxis data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]
 	goalAt[_goalID].lockedPercent
-
-
 
 line: % Competitors finished the week
 yaxis data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43]
