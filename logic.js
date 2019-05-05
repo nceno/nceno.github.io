@@ -594,7 +594,9 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
-                console.log("step 2/4, got Participants..."); 
+                console.log("step 2/4, got Participants...");
+
+                console.log("k= "+k+", compcount= "+compcount+", id[0]= "+ ids[k]+ ", goalid= "+ goalid); 
                 
                 for (let k = 0; k < compcount; k++){
                   console.log("compcount =" +compcount);
