@@ -619,8 +619,8 @@ function selectedChallenge(){
                               var lostStake = new Array();
 
                               bonusTotal[k] = result[3];
-                              totalPay[k] = result[4];
-                              lostStake[k] = result[1];
+                              totalPay[k] = result[4]/100;
+                              lostStake[k] = result[1]/100;
                               console.log("payouts= "+result[0]); //debug
                               console.log("lost= "+result[1]); //debug
                               console.log("step 4/4, got GoalStats2..."); 
