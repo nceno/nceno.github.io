@@ -607,7 +607,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("successes= "+result[2]);
+                        console.log("successes= "+result[2]);//debug
                         console.log("step 3/4, got GoalStats1..."); 
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
