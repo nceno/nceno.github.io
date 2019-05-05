@@ -312,8 +312,8 @@ contract Nceno {
       uint successCount;
       for(uint j =0; j<theGoal.wks; j++){
         successCount += goalAt[_goalID].successes[_stravaID][j];
-        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
-        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
+        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
+        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
         my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
         my.bonusTotal+= my.wkBonuses[j];
         
@@ -335,16 +335,16 @@ contract Nceno {
     if(0<=wk && wk<theGoal.wks+1){
       for(uint j =0; j<wk; j++){
         
-        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
+        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
       
-        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
+        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
       
         my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
         my.bonusTotal+= my.wkBonuses[j];
-        totalPay+= my.wkPayouts[j];
+        totalPay+= my.wkPayouts[j]; //in pennies
       }
     }
-    return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay);
+    return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
 
   //get upcoming goal: only returns a user's goal if it hasn't yet started
