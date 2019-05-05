@@ -284,20 +284,20 @@ contract Nceno {
  
   function getMyGoalStats1(uint _stravaID, bytes32 _goalID) external view returns(uint, uint, uint){
     goalObject memory theGoal = goalAt[_goalID];
-    uint wk = (now - theGoal.startTime)/604800;
+    uint wk = 1+(now - theGoal.startTime)/604800;
     
       myStatsObject memory my;
       my.adherenceRate=0;
       my.totalAtStake=0;
       uint successCount=0;
       
-    if(0<=wk && wk<theGoal.wks+1){
+    if(wk>=1 && wk<theGoal.wks+1){
       for(uint i =0; i<wk; i++){
         successCount += goalAt[_goalID].successes[_stravaID][i];
       }
       my.adherenceRate = 100*successCount/(wk*theGoal.sesPerWk); 
       
-      for(uint p =wk; p<theGoal.wks; p++){
+      for(uint p=wk; p<theGoal.wks; p++){
         my.totalAtStake += lockedPercent[theGoal.wks/2 -1][p]*theGoal.stakeUSD*theGoal.competitorCount/100;
       }
     }
