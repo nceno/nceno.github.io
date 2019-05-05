@@ -596,7 +596,7 @@ function selectedChallenge(){
                 flags = result[2];
                 console.log("step 2/4, got Participants...");
 
-                console.log("k= "+k+", compcount= "+compcount+", id[0]= "+ ids[k]+ ", goalid= "+ goalid); 
+                console.log("compcount= "+compcount+", id[0]= "+ ids[k]+ ", goalid= "+ goalid); 
                 
                 for (let k = 0; k < compcount; k++){
                   console.log("compcount =" +compcount);
@@ -642,8 +642,6 @@ function selectedChallenge(){
                               $('#'+payKey).html('$'+totalPay[k]);
                               $('#'+lostKey).html('$'+lostStake[k]);
                               
-
-
                             }
                             else{
                               console.log("step 4/4 getGoalStats2 failed.");  
