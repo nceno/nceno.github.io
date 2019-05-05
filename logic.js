@@ -596,7 +596,6 @@ function selectedChallenge(){
                 flags = result[2];
                 console.log("step 2/4, got Participants...");
 
-                console.log("compcount= "+compcount+", id[0]= "+ ids[0]+ ", goalid= "+ goalid); 
                 
                 for (let k = 0; k < compcount; k++){
                   console.log("compcount =" +compcount);
@@ -608,6 +607,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
+                        console.log("successes= "+result[2]);
                         console.log("step 3/4, got GoalStats1..."); 
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
