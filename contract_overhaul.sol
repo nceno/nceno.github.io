@@ -29,7 +29,7 @@ contract Nceno {
     uint startTime;
     uint activeMins;
     uint wks;
-    uint stakeUSD; //stake in usd, but multiplied by 10e18
+    uint stakeUSD; //stake in usd
     uint sesPerWk;
     uint ethPricePennies; //this is the usd price of eth, but multiplied by 100.
 

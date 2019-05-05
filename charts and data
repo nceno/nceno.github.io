@@ -1,5 +1,14 @@
 //------------------
-//week stats
+//csv stats
+//------------------
+
+
+
+
+
+
+//------------------
+//csv stats
 //------------------
 goalAt[_goalID].successes[_stravaID][weekIndex]  "of" goalAt[_goalID].sesPerWk " workouts completed"
 

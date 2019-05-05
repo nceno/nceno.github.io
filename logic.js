@@ -721,7 +721,7 @@ async function browse(){
     if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
       //list it in the table
       var tstamp = new Date(result[5]*1000);
-      var buyin = Math.round(result[2]/100000000000000000000);
+      //var buyin = Math.round(result[2]/100000000000000000000);
 
       var n = i+1;
       var buyinKey = 'buyinU'+n;
@@ -733,7 +733,7 @@ async function browse(){
       var btnKey = 'btnU'+n;
       var idKey = 'idNumberU'+n;
 
-      $('#'+buyinKey).html('$'+buyin);
+      $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+' wks');
       $('#'+sesKey).html(result[3]+' x/wk');
       $('#'+minKey).html(result[1]+' min');
