@@ -200,7 +200,7 @@ contract Nceno {
     uint cut;
     uint pot;
     uint logs;
-    uint payout = lockedPercent[goalAt[_goalID].wks/2 -1][(now-goalAt[_goalID].startTime)/604800-1]*goalAt[_goalID].stakeUSD/(100*goalAt[_goalID].sesPerWk);
+    uint payout = goalAt[_goalID].lockedPercent[(now-goalAt[_goalID].startTime)/604800-1]*goalAt[_goalID].stakeUSD/(100*goalAt[_goalID].sesPerWk);
     //loop over everyone's weekly logs and increase the week's pot from when someone skipped a workout
     for(uint i =0; i<10; i++){
     if(goalAt[_goalID].competitorIDs[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
@@ -298,7 +298,7 @@ contract Nceno {
       my.adherenceRate = 100*successCount/(wk*theGoal.sesPerWk); 
       
       for(uint p=wk; p<theGoal.wks; p++){
-        my.totalAtStake += lockedPercent[theGoal.wks/2 -1][p]*theGoal.stakeUSD*theGoal.competitorCount/100;
+        my.totalAtStake += theGoal.lockedPercent[p]*theGoal.stakeUSD*theGoal.competitorCount/100;
       }
     }
     return(my.adherenceRate, my.totalAtStake, successCount);
@@ -312,8 +312,8 @@ contract Nceno {
       uint successCount;
       for(uint j =0; j<theGoal.wks; j++){
         successCount += goalAt[_goalID].successes[_stravaID][j];
-        my.wkPayouts[j] = lockedPercent[theGoal.wks/2 -1][j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
-        my.lostStake+=(lockedPercent[theGoal.wks/2 -1][j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
+        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
+        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
         my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
         my.bonusTotal+= my.wkBonuses[j];
         
@@ -335,9 +335,9 @@ contract Nceno {
     if(0<=wk && wk<theGoal.wks+1){
       for(uint j =0; j<wk; j++){
         
-        my.wkPayouts[j] = lockedPercent[theGoal.wks/2 -1][j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
+        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/(100*theGoal.sesPerWk);
       
-        my.lostStake+=(lockedPercent[theGoal.wks/2 -1][j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
+        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD/100-my.wkPayouts[j]);
       
         my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
         my.bonusTotal+= my.wkBonuses[j];
