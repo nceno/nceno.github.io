@@ -340,7 +340,7 @@ function joinSoon(){
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
-        var stakewei= result[1];
+        //var stakewei= result[1];
         Nceno.methods.join(
           goalid,
           stravaID,
@@ -567,7 +567,7 @@ function selectedChallenge(){
           var tstamp = new Date(result[4]*1000);
           var buyin = Math.round(result[1]*result[5]/100000000000000000000);
           wkLimit = result[3];
-          $("#echStake").html("$"+buyin);
+          $("#echStake").html("$"+result[1]);
           $("#echWks").html(result[3]+" wks");
           $("#echSes").html(result[2]+" x/wk");
           $("#echMins").html(result[0]+ " mins");
@@ -678,7 +678,7 @@ function search(){
         var tstamp = new Date(result[4]*1000);
         var buyin = Math.round(result[1]*result[5]/100000000000000000000);
 
-        $("#srStake").html("$"+buyin);
+        $("#srStake").html("$"+result[1]);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
         $("#srMins").html(result[0]+ " mins");
