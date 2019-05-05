@@ -645,12 +645,16 @@ function selectedChallenge(){
 
 
                             }
-                            else
-                            console.error(error);
+                            else{
+                              console.log("step 4/4 getGoalStats2 failed.");  
+                              console.error(error);
+                            }
                         });
                       }
-                      else
-                      console.error(error);
+                      else{
+                        console.log("step 3/4 getGoalStats1 failed.");  
+                        console.error(error);
+                      }
                   });
                 }
               }
