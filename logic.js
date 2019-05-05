@@ -574,7 +574,7 @@ function selectedChallenge(){
           $("#echComp").html(result[5]);
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
-          console.log("got GoalParams...."); //*********************************************
+          console.log("step 1/4, got GoalParams...."); //*********************************************
 
           //set current challenge week globally
           currentWeek = Math.floor((Date.now()/1000 - result[4])/604800)+1;
@@ -594,7 +594,7 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
-                console.log("got Participants..."); 
+                console.log("step 2/4, got Participants..."); 
                 
                 for (let k = 0; k < compcount; k++){
                   console.log("compcount =" +compcount);
@@ -606,7 +606,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("got GoalStats1..."); 
+                        console.log("step 3/4, got GoalStats1..."); 
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -619,7 +619,7 @@ function selectedChallenge(){
                               bonusTotal[k] = result[3];
                               totalPay[k] = result[4];
                               lostStake[k] = result[1];
-                              console.log("got GoalStats2..."); 
+                              console.log("step 4/4, got GoalStats2..."); 
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
