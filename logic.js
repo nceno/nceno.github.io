@@ -691,6 +691,11 @@ function selectedChallenge(){
                                         var bonusKey = 'bonus'+n;
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
+                                        var lost = 0;
+                                        if(currentWeek>k+1){
+                                          lost = lockedPercent[k]*USDstake-wkPayout[k]/100;
+                                        }
+                                        else lost = 0;
                                         
                                        
                                                     
@@ -699,7 +704,7 @@ function selectedChallenge(){
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
-                                        $('#'+finKey).html("$" +lockedPercent[k]*USDstake-wkPayout[k]/100);
+                                        $('#'+finKey).html("$" +lost);
                                         
                                         console.log("timeline populated...");
                                       }
