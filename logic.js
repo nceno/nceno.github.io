@@ -699,6 +699,7 @@ function selectedChallenge(){
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
+                                        $('#'+finKey).html("$" +lockedPercent[k]*USDstake-wkPayout[k]/100);
                                         
                                         console.log("timeline populated...");
                                       }
