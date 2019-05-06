@@ -1,3 +1,4 @@
+var increasing = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 //chart1
 //<script>
 var config1 = {
@@ -7,7 +8,8 @@ var config1 = {
         //bar
         label: 'Workouts you completed',
         yAxisID: 'A',
-        data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3],
+        //data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3],
+        data: increasing,
         backgroundColor: '#ccff00',
         borderColor: '#ccff00',
         fill: true
@@ -16,12 +18,14 @@ var config1 = {
         label: 'Your cumulative % stake earned back',
         yAxisID: 'B',
         data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
+        //data: 
         backgroundColor: '#f442b3',
         borderColor: '#f442b3',
         fill: false,
         type: 'line'
     }],
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
+    //labels: xaxis
   },
   
 
