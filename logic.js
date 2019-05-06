@@ -691,12 +691,13 @@ function selectedChallenge(){
                                         var bonusKey = 'bonus'+n;
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
-                                        var dollars = lockedPercentWk[k]*USDstake/100;
+                                        //var dollars = (lockedPercentWk[k]*USDstake/100).toString();
+                                       
                                                     
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
-                                        $('#'+lockKey).html("$"+dollars);
+                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake*0.01);
                                         $('#'+bonusKey).html("$" +wkBonus[k]);
-                                        $('#'+unKey).html("$" +wkPayout[k]);
+                                        $('#'+unKey).html("$" +wkPayout[k]*.01);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         
                                         console.log("timeline populated...");
