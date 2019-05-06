@@ -726,7 +726,10 @@ function selectedChallenge(){
 
                                       //% Competitors finished the week
                                       var finishers = new Array();
-                                      finishers = winnersWk.map(function(value) Math.round(100*value/competitors));
+                                      for(let i = 0; i<wks; i++){
+                                        finishers[i] = winnersWk[i]*100/competitors;
+                                      }
+                                      
                                       //********************************************************************************************
 
                                     }
