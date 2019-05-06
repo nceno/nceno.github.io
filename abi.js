@@ -288,6 +288,37 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "_goalID",
         "type": "bytes32"
+      },
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      }
+    ],
+    "name": "getGoalArrays",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256[12]"
+      },
+      {
+        "name": "",
+        "type": "uint256[12]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
       }
     ],
     "name": "getGoalParams",
@@ -561,4 +592,4 @@ var Nceno = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x48cc402609fb28e46e5fb16bbd9e50949dcbcbd6');
+], '0xbe923685cd10df31ab722feb207e58067ddc9925');
