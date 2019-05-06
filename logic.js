@@ -723,7 +723,7 @@ function selectedChallenge(){
                                       //Cumulative % stake returned
                                       var roi = new Array();
                                       for(let i = 0; i<wks; i++){
-                                        roi[i] = (wkPayout[i]+wkBonus[i])/USDstake;
+                                        roi[i] = 0.01*(wkPayout[i]+wkBonus[i])/USDstake;
                                       }
 
                                       //% Competitors finished the week
