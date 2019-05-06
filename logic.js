@@ -758,7 +758,7 @@ function selectedChallenge(){
                                                 yAxisID: 'B',
                                                 //data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
                                                 data: roi,
-                                                backgroundColor: '#f442b3',
+                                                backgroundColor: 'rgba(244, 66, 179, 0.5)',
                                                 borderColor: '#f442b3',
                                                 fill: false,
                                                 type: 'line'
