@@ -714,8 +714,7 @@ function selectedChallenge(){
                                       //make chart data ****************************************************************************
                                       //x axis
                                       var xaxis = new Array();
-                                      var weekIndex = i+1;
-                                      for(let i = 0; i<wks+1; i++){
+                                        for(let i = 0; i<wks+1; i++){
                                         var weekIndex = i+1;
                                         xaxis[i] = "Week "+weekIndex;
                                       }
@@ -723,7 +722,11 @@ function selectedChallenge(){
                                       //Cumulative % stake returned
                                       var roi = new Array();
                                       for(let i = 0; i<wks; i++){
-                                        roi[i] = (wkPayout[i]+wkBonus[i])/USDstake;
+                                        var sum = 0;
+                                        for(let k = 0; k<i; k++){
+                                          sum += 0.01*(wkPayout[k]+wkBonus[k])/USDstake;
+                                        }
+                                        roi[i] = sum;
                                       }
 
                                       //% Competitors finished the week
