@@ -241,11 +241,14 @@ contract Nceno {
     return(goalAt[_goalID].activeMins, goalAt[_goalID].stakeUSD, goalAt[_goalID].sesPerWk, goalAt[_goalID].wks, goalAt[_goalID].startTime, goalAt[_goalID].competitorCount);
   }
 
+  function getGoalArrays(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12], uint[12]){
+    return(goalAt[_goalID].lockedPercent, goalAt[_goalID].successes[_stravaID], goalAt[_goalID].winnersWk);
+  }
+
   //called when a user logs a workout. returns the percent earned per workout, and the amount $ earned per workout
   function getGoalPartitions(bytes32 _goalID) external view returns (uint, uint){
     uint wk = (now - goalAt[_goalID].startTime)/604800;
     return(goalAt[_goalID].lockedPercent[wk-1]/goalAt[_goalID].sesPerWk, goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk-1]*100/goalAt[_goalID].sesPerWk);
-
   }
 
   //get future goal: only returns a goal if it hasn't started yet

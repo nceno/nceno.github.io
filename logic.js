@@ -8,6 +8,7 @@ $("#time").click(function(){
   console.log(time);
 })
 
+var nonce = 0;
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
@@ -30,9 +31,11 @@ function showPortis() {
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
       $("#portisSuccess").html('<h5><a style="color:#ffffff;">Blockchain connection: </a></h5><a style="color:#ccff00;">successful!</a>');
       $("#openWallet").show();
+      web3.eth.getTransactionCount("web3.eth.defaultAccount").then(nonce = result);
     });
   });
 }
+
 
 //helper function that will hide the create account button if the user already made an account.
 //i.e. if a fitbit ID already has a competitor object associated to it, this function hides the create button.
@@ -530,6 +533,7 @@ function makeWktl(){
   }
 
 
+
 }
 
 var goalid;
@@ -538,6 +542,16 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
+
+    var sessions = 0;
+    var USDstake = 0;
+    var competitors = 0;
+    var wkBonus = new Array();
+    var wkPayout = new Array();
+    var lockedPercentWk = new Array();
+    var successesWk = new Array();
+    var winnersWk = new Array();
+
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
     for (let k = 0; k < 10; k++){
@@ -557,7 +571,7 @@ function selectedChallenge(){
       $('#'+lostKey).html('');
       console.log("clearing leaderboard...");
     }
-    
+
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         function(error, result) {
@@ -575,6 +589,11 @@ function selectedChallenge(){
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
           console.log("step 1/4, got GoalParams...."); //*********************************************
+
+          //set the timeline variables
+          sessions = result[2];
+          USDstake = result[1];
+          competitors = result[5];
 
           //set current challenge week globally
           currentWeek = Math.floor((Date.now()/1000 - result[4])/604800)+1;
@@ -623,7 +642,13 @@ function selectedChallenge(){
                               lostStake[k] = result[1]/100;
                               console.log("payouts= "+result[0]); //debug
                               console.log("lost= "+result[1]); //debug
-                              console.log("step 4/4, got GoalStats2..."); 
+                              console.log("step 4/4, got GoalStats2...");
+
+                              if(k=0){
+                                //set the timeline variables
+                                wkBonus = result[2];
+                                wkPayout = result[0];
+                              }
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
@@ -643,30 +668,67 @@ function selectedChallenge(){
                               $('#'+bonusKey).html('$'+bonusTotal[k]);
                               $('#'+payKey).html('$'+totalPay[k]);
                               $('#'+lostKey).html('$'+lostStake[k]);
+
+                              if(k=0){
+                                //get the timeline variables and set them
+                                Nceno.methods.getGoalArrays(goalid, stravaID)
+                                .call({from: web3.eth.defaultAccount},
+                                  function(error, result) {
+                                    if (!error){
+                                      lockedPercentWk = result[0];
+                                      successesWk = result[1];
+                                      winnersWk = result[2];
+
+                                      //populate the timeline
+                                      for (let k = 0; k < currentWeek; k++){
+                                        var n = k+1;
+                                        var complKey = 'compl'+n;
+                                        var lockKey = 'lock'+n;
+                                        var bonusKey = 'bonus'+n;
+                                        var unKey = 'un'+n;
+                                        var finKey = 'fin'+n;
+                                                    
+                                        $('#'+complKey).html(successesWk[k] +"of"+ sessions +" workouts completed");
+                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100  +" locked up");
+                                        $('#'+bonusKey).html("$" +wkBonus[k] +"bonus");
+                                        $('#'+unKey).html("$" +wkPayout[k] +"unlocked");
+                                        $('#'+finKey).html(winnersWk[k] +"of"+ competitors +"people dominated");
+                                        
+                                        console.log("timeline populated...");
+                                      }
+
+                                    }
+                                    else{
+                                      console.log("step 5/5 getGoalArrays failed.");  
+                                      console.error(error);
+                                    }
+                                });
+                              }
+
                               
                             }
                             else{
-                              console.log("step 4/4 getGoalStats2 failed.");  
+                              console.log("step 4/5 getGoalStats2 failed.");  
                               console.error(error);
                             }
                         });
                       }
                       else{
-                        console.log("step 3/4 getGoalStats1 failed.");  
+                        console.log("step 3/5 getGoalStats1 failed.");  
                         console.error(error);
                       }
                   });
                 }
               }
               else{
-                console.log("step 2/4 got participants failed.");  
+                console.log("step 2/5 got participants failed.");  
                 console.error(error);
               }
           });
           
         } 
         else{
-          console.log("step 1/4 getGoalParams failed.");  
+          console.log("step 1/5 getGoalParams failed.");  
           console.error(error);
         }
     });
@@ -1066,6 +1128,9 @@ function getActivities(){
           console.log(receipt.status);
           if(receipt.status === true){
             console.log("You just unlocked 4% of your stake. Check your wallet in a couple minutes.");
+            //refreshStats();
+            //refreshLeaderboard();
+
             /*$("#joinLoader").hide();
             $("#joinSuccess").show();
             $("#makeAcctBtn").hide();*/

@@ -8,17 +8,34 @@
 
 
 //------------------
-//csv stats
+//week stats
 //------------------
-goalAt[_goalID].successes[_stravaID][weekIndex]  "of" goalAt[_goalID].sesPerWk " workouts completed"
+successesWk[k]  +"of"+ sessions +" workouts completed"
 
-goalAt[_goalID].lockedPercent[weekIndex]*goalAt[_goalID].stakeUSD  "pennies locked up"
+lockedPercentWk[k]*USDstake/100  +" locked up"
 
-getMyGoalStats2[2][weekIndex] "bonus"
+wkBonus[k] +"bonus"
 
-getMyGoalStats2[0][weekIndex] "unlocked"
+wkPayout[k] +"unlocked"
 
-goalAt[_goalID].winnersWk[weekIndex] "of" goalAt[_goalID].competitorCount "ppl finished"
+winnersWk[k] +"of"+ competitors +"people dominated this week"
+
+getGoalParams()
+	sessions
+	USDstake
+	competitors
+
+getMyGoalStats2()
+	wkBonus[]
+	wkPayout[]
+
+getGoalArrays()
+	lockedPercentWk[]
+	successesWk[]
+	winnersWk[]
+
+
+
 
 //------------------
 //charts
