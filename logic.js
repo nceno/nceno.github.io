@@ -691,9 +691,10 @@ function selectedChallenge(){
                                         var bonusKey = 'bonus'+n;
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
+                                        var dollars = lockedPercentWk[k]*USDstake/100;
                                                     
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
-                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
+                                        $('#'+lockKey).html("$"+dollars);
                                         $('#'+bonusKey).html("$" +wkBonus[k]);
                                         $('#'+unKey).html("$" +wkPayout[k]);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
