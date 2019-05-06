@@ -748,7 +748,7 @@ function selectedChallenge(){
                                                 yAxisID: 'A',
                                                 //data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3],
                                                 data: successesWk,
-                                                backgroundColor: rgba(204, 255, 0, 0.5),
+                                                backgroundColor: 'rgba(204, 255, 0, 0.5)',
 
                                                 borderColor: '#ccff00',
                                                 fill: true
@@ -840,7 +840,7 @@ function selectedChallenge(){
                                                 yAxisID: 'A',
                                                 //data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
                                                 data: lockedPercentWk,
-                                                backgroundColor: rgba(204, 255, 0, 0.5),
+                                                backgroundColor: 'rgba(204, 255, 0, 0.5)',
                                                 borderColor: '#ccff00',
                                                 fill: true
                                             }, {
