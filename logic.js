@@ -31,7 +31,7 @@ function showPortis() {
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
       $("#portisSuccess").html('<h5><a style="color:#ffffff;">Blockchain connection: </a></h5><a style="color:#ccff00;">successful!</a>');
       $("#openWallet").show();
-      web3.eth.getTransactionCount("web3.eth.defaultAccount").then(nonce = result);
+      
     });
   });
 }
@@ -41,6 +41,7 @@ function showPortis() {
 //i.e. if a fitbit ID already has a competitor object associated to it, this function hides the create button.
 function checkUserbase(){
   localize();
+
   Nceno.methods.userExists(
     stravaID
   )
@@ -1039,6 +1040,8 @@ function getToken(){
       uniqueUserString = stravaID.toString() + userCreated.toString();
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
+      web3.eth.getTransactionCount("web3.eth.defaultAccount").then(nonce = result);
+      console.log("nonce is: "+nonce);
       Nceno.methods.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
