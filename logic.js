@@ -206,7 +206,7 @@ $("#hostBtn").click(function() {
     stravaID,
     Math.round(ethPrice*100) //eth price in pennies. Gets rid of decimals
   )
-  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: 3000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, gas: 4000000, gasPrice: 3000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
