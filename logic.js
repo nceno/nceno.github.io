@@ -8,7 +8,10 @@ $("#time").click(function(){
   console.log(time);
 })
 
-var nonce = 0;
+//var nonce = 0;
+//web3.eth.getTransactionCount("web3.eth.defaultAccount").then(nonce = result);
+//console.log("nonce is: "+nonce);
+
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
@@ -689,11 +692,11 @@ function selectedChallenge(){
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
                                                     
-                                        $('#'+complKey).html(successesWk[k] +"of"+ sessions +" workouts completed");
-                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100  +" locked up");
-                                        $('#'+bonusKey).html("$" +wkBonus[k] +"bonus");
-                                        $('#'+unKey).html("$" +wkPayout[k] +"unlocked");
-                                        $('#'+finKey).html(winnersWk[k] +"of"+ competitors +"people dominated");
+                                        $('#'+complKey).html(successesWk[k] +" of "+ sessions);
+                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
+                                        $('#'+bonusKey).html("$" +wkBonus[k]);
+                                        $('#'+unKey).html("$" +wkPayout[k]);
+                                        $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         
                                         console.log("timeline populated...");
                                       }
@@ -1040,8 +1043,8 @@ function getToken(){
       uniqueUserString = stravaID.toString() + userCreated.toString();
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
-      web3.eth.getTransactionCount("web3.eth.defaultAccount").then(nonce = result);
-      console.log("nonce is: "+nonce);
+      
+      
       Nceno.methods.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
