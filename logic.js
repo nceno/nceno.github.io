@@ -723,7 +723,7 @@ function selectedChallenge(){
                                       var roi = new Array();
                                       for(let i = 0; i<wks; i++){
                                         var sum = 0;
-                                        for(let k = 0; k<i; k++){
+                                        for(let k = 0; k<i+1; k++){
                                           sum += 0.01*(wkPayout[k]+wkBonus[k])/USDstake;
                                         }
                                         roi[i] = sum;
@@ -749,7 +749,7 @@ function selectedChallenge(){
                                                 //data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3],
                                                 data: successesWk,
                                                 backgroundColor: rgba(204, 255, 0, 0.5),
-                                                
+
                                                 borderColor: '#ccff00',
                                                 fill: true
                                             }, {
