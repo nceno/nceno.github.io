@@ -695,7 +695,7 @@ function selectedChallenge(){
                                         var finKey = 'fin'+n;
                                         var lost = 0;
                                         if(currentWeek>k+1){
-                                          lost = lockedPercentWk[k]*USDstake-wkPayout[k]/100;
+                                          lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
                                         
