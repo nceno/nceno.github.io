@@ -943,6 +943,7 @@ function updateEthPrice() {
       ethPrice = resp.USD;
       console.log(this.responseText);
       console.log(ethPrice);
+      //$('#hostBtn').show();
     }
   });
   xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
