@@ -714,8 +714,10 @@ function selectedChallenge(){
                                       //make chart data ****************************************************************************
                                       //x axis
                                       var xaxis = new Array();
-                                      for(let i = 0; i<wks; i++){
-                                        xaxis[i] = "Week "+i+1;
+                                      var weekIndex = i+1;
+                                      for(let i = 0; i<wks+1; i++){
+                                        var weekIndex = i+1;
+                                        xaxis[i] = "Week "+weekIndex;
                                       }
 
                                       //Cumulative % stake returned
