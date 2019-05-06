@@ -645,7 +645,7 @@ function selectedChallenge(){
                               console.log("lost= "+result[1]); //debug
                               console.log("step 4/4, got GoalStats2...");
 
-                              if(k=0){
+                              if(k>=0){
                                 //set the timeline variables
                                 wkBonus = result[2];
                                 wkPayout = result[0];
@@ -670,7 +670,7 @@ function selectedChallenge(){
                               $('#'+payKey).html('$'+totalPay[k]);
                               $('#'+lostKey).html('$'+lostStake[k]);
 
-                              if(k=0){
+                              if(k>=0){
                                 //get the timeline variables and set them
                                 Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
