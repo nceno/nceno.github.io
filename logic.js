@@ -714,7 +714,7 @@ function selectedChallenge(){
                                       //make chart data ****************************************************************************
                                       //x axis
                                       var xaxis = new Array();
-                                        for(let i = 0; i<currentWeek+5; i++){
+                                        for(let i = 0; i<currentWeek; i++){
                                         var weekIndex = i+1;
                                         xaxis[i] = "Week "+weekIndex;
                                       }
