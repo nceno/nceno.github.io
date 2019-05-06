@@ -333,7 +333,7 @@ contract Nceno {
       uint totalPay=0;
 
     if(0<=wk && wk<theGoal.wks+1){
-      for(uint j =0; j<wk; j++){
+      for(uint j =0; j<1+wk; j++){
         
         my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
       
