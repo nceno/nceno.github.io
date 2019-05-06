@@ -695,9 +695,9 @@ function selectedChallenge(){
                                        
                                                     
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
-                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake*0.01);
+                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
                                         $('#'+bonusKey).html("$" +wkBonus[k]);
-                                        $('#'+unKey).html("$" +wkPayout[k]*.01);
+                                        $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         
                                         console.log("timeline populated...");
