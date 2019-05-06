@@ -724,7 +724,7 @@ function selectedChallenge(){
                                       for(let i = 0; i<wks; i++){
                                         var sum = 0;
                                         for(let k = 0; k<i+1; k++){
-                                          sum += 0.01*(wkPayout[k]+wkBonus[k])/USDstake;
+                                          sum += 0.1*(wkPayout[k]+wkBonus[k])/USDstake;
                                         }
                                         roi[i] = sum;
                                       }
@@ -760,7 +760,7 @@ function selectedChallenge(){
                                                 data: roi,
                                                 backgroundColor: 'rgba(244, 66, 179, 0.5)',
                                                 borderColor: '#f442b3',
-                                                fill: false,
+                                                fill: true,
                                                 type: 'line'
                                             }],
                                             //labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
