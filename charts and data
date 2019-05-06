@@ -36,15 +36,30 @@ getGoalArrays()
 //------------------
 //charts
 //------------------
+wks
+USDstake
+competitors
+
+lockedPercentWk[]
+successesWk[]
+winnersWk[]
+
+wkBonus[]
+wkPayout[]
+
+
+
+
+
 
 //ctx1-------
 xaxis data: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
-	var numWeeks = goalAt[_goalID].wks;
+
 	var xaxis = new Array();
-	for(let i = 0; i<numWeeks; i++){
+	for(let i = 0; i<wks; i++){
 		xaxis[i] = "Week "+i+1;
 	}
-	data = xaxis;
+
 
 
 bar: Workouts you completed
@@ -53,13 +68,11 @@ yaxis data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3]
 
 line: Cumulative % stake returned
 yaxis data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43]
-	var numWeeks = goalAt[_goalID].wks;
-	var myStake = goalAt[_goalID].stakeUSD;
+	
 	var roi = new Array();
-	for(let i = 0; i<numWeeks; i++){
-		roi[i] = (getMyGoalStats2[0][i]+getMyGoalStats2[1][i])/myStake;
+	for(let i = 0; i<wks; i++){
+		roi[i] = (wkPayout[i]+wkBonus[i])/USDstake;
 	}
-	data = roi;
 
 //ctx2-------
 xaxis data: same
@@ -70,4 +83,6 @@ yaxis data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]
 
 line: % Competitors finished the week
 yaxis data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43]
-	goalAt[_goalID].winnersWk.map(function(value) Math.round(100*value/goalAt[_goalID].competitorCount))
+	
+	var finishers = new Array();
+	finishers = winnersWk.map(function(value) Math.round(100*value/competitors));
