@@ -666,6 +666,11 @@ function selectedChallenge(){
                               var bonusKey = 'bonusP'+n;
                               var payKey = 'payP'+n;
                               var lostKey = 'lostP'+n;
+
+                              var lostSum = 0;
+                              for(let k = 0; k<currentWeek; k++){
+                                lostSum += lostStake[k];
+                              }
                               
 
                               $('#'+adhKey).html(adherence[k]+'%');
@@ -673,7 +678,7 @@ function selectedChallenge(){
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
                               $('#'+bonusKey).html('$'+bonusTotal[k]);
                               $('#'+payKey).html('$'+totalPay[k]);
-                              $('#'+lostKey).html('$'+lostStake[k]);
+                              $('#'+lostKey).html('$'+lostSum);
 
                               if(k>=0){
                                 //get the timeline variables and set them
