@@ -565,6 +565,7 @@ function selectedChallenge(){
     var lockedPercentWk = new Array();
     var successesWk = new Array();
     var winnersWk = new Array();
+    var startingTime = 0;
 
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
@@ -593,6 +594,7 @@ function selectedChallenge(){
           //echo challenge
           var compcount = result[5];
           var tstamp = new Date(result[4]*1000);
+          startingTime = result[4];
           //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
           wkLimit = result[3];
           $("#echStake").html("$"+result[1]);
@@ -706,6 +708,7 @@ function selectedChallenge(){
                                       //populate the timeline
                                       for (let k = 0; k < currentWeek; k++){
                                         var n = k+1;
+                                        var dlKey = 'dl'+n;
                                         var complKey = 'compl'+n;
                                         var lockKey = 'lock'+n;
                                         var bonusKey = 'bonus'+n;
@@ -716,9 +719,11 @@ function selectedChallenge(){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
+                                        nowTime = parseInt(parseInt(new Date().getTime())/1000);
+                                        daysRem = Math.ceil((nowTime-startingTime)/86400) 
                                         
                                        
-                                                    
+                                        $('#'+dlKey).html(daysRem);            
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
                                         $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
