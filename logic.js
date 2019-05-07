@@ -720,7 +720,7 @@ function selectedChallenge(){
                                         }
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
-                                        daysRem = Math.ceil((nowTime-startingTime)/86400) 
+                                        daysRem = Math.ceil((nowTime-startingTime)/(*currentWeek*86400) 
                                         
                                        
                                         $('#'+dlKey).html(daysRem);            
