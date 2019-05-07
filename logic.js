@@ -720,10 +720,12 @@ function selectedChallenge(){
                                         }
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
-                                        daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400)); 
+                                        daysRem = 1+Math.ceil((nowTime-startingTime)/(currentWeek*86400)); 
                                         
-                                       
-                                        $('#'+dlKey).html(daysRem);            
+                                        if(k+1 == currentWeek){
+                                          $('#'+dlKey).html(daysRem);
+                                        }
+
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
                                         $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
