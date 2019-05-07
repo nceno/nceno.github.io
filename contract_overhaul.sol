@@ -246,7 +246,7 @@ contract Nceno {
     return(goalAt[_goalID].lockedPercent, goalAt[_goalID].successes[_stravaID], goalAt[_goalID].winnersWk, goalAt[_goalID].competitorIDs);
   }
 
-  function getSuccessesClaims(bytes32 _goalID, uint _stravaID){
+  function getSuccessesClaims(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12]){
     return(goalAt[_goalID].successes[_stravaID], goalAt[_goalID].claims[_stravaID]);
   }
 
@@ -382,14 +382,13 @@ contract Nceno {
     return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
   }
 
-  function getProfile(uint _stravaID) external view returns(address, uint, bytes32, bytes32, uint){
+  function getProfile(uint _stravaID) external view returns(address, uint, bytes32, uint, uint){
     return(profileOf[_stravaID].walletAdr, profileOf[_stravaID].born , profileOf[_stravaID].flag , profileOf[_stravaID].OS , profileOf[_stravaID].myGoalCount);
   }
 
-  function getMyGoalInstance(uint _stravaID, uint _instance) eternal view returns(bytes32){
+  function getMyGoalInstance(uint _stravaID, uint _instance) external view returns(bytes32){
     return(profileOf[_stravaID].mygoalInstance[_instance].goalID);
   }
-
 
   //-----------------------------------------------
   //kyber stuff
