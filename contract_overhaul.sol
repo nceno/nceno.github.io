@@ -340,10 +340,7 @@ contract Nceno {
         
         my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
       
-        //delete the conditional and put it in the JS.
-        
-        my.lostStake+=(theGoal.lockedPercent[j-1]*theGoal.stakeUSD-my.wkPayouts[j-1]); //in pennies
-        
+
         
         if(theGoal.winnersWk[j]>0){
           my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
@@ -351,7 +348,13 @@ contract Nceno {
         }
 
         totalPay+= my.wkPayouts[j]; //in pennies
+
+        if(j<wk){
+          my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
+        }
+
       }
+
     }
     return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
