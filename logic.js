@@ -645,7 +645,10 @@ function selectedChallenge(){
 
                               bonusTotal[k] = result[3];
                               totalPay[k] = result[4]/100;
-                              lostStake[k] = result[1]/100;
+                              if(currentWeek>1){
+                                lostStake[k] = result[1]/100;
+                              }
+                              else lostStake[k] = 0;
                               console.log("payouts= "+result[0]); //debug
                               console.log("lost= "+result[1]); //debug
                               console.log("step 4/4, got GoalStats2...");
@@ -667,10 +670,10 @@ function selectedChallenge(){
                               var payKey = 'payP'+n;
                               var lostKey = 'lostP'+n;
 
-                              var lostSum = 0;
+                              /*var lostSum = 0;
                               for(let k = 0; k<currentWeek; k++){
                                 lostSum += lostStake[k];
-                              }
+                              }*/
                               
 
                               $('#'+adhKey).html(adherence[k]+'%');
@@ -678,7 +681,7 @@ function selectedChallenge(){
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
                               $('#'+bonusKey).html('$'+bonusTotal[k]);
                               $('#'+payKey).html('$'+totalPay[k]);
-                              $('#'+lostKey).html('$'+lostSum);
+                              $('#'+lostKey).html('$'+lostStake[k]);
 
                               if(k>=0){
                                 //get the timeline variables and set them
