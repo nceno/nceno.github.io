@@ -3,7 +3,7 @@
 //-----------------
 "goal_object":{
 	"goalID": "0xcc3f62",
-	//goalIDs
+	//.goalIDs;
 	"start_time": 1500177413,
 	"mins": 20,
 	"wks": 6,
@@ -20,12 +20,14 @@
 
 "participant_object":{
 	"stravaID": 33413452,
+	//.stravaIDs;
 	"wallet_adr": "0x6120676f616c20696400000000000000",
 	"joined_Nceno": 150017995,
-	"timezone": "+0800",
 	"country": "TW",
 	"strava_os": "android",
+	//getProfle();
 	"goal_history": ["0xcd554", "0xcc3f62", "0xcc3d0e", "0xd13f62", "0xc44e2"]
+	//getMyGoalInstance();
 }
 
 
