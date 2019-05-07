@@ -8,7 +8,7 @@ $("#time").click(function(){
   console.log(time);
 })
 
-var correctNonce = -1;
+var correctNonce = 0;
 function updateNonce(){
   web3.eth.getTransactionCount(web3.eth.defaultAccount).then(nonce => {
     correctNonce = nonce;
@@ -169,7 +169,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 400000, gasPrice: (standard+1)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: (standard+1)*1000000000},
     function(error, result) {
       if (!error){
 
