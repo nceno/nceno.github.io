@@ -725,7 +725,7 @@ function selectedChallenge(){
                                         daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
                                         
                                         if(k+1 == currentWeek){
-                                          $('#'+dlKey).html("<h3><b>"+daysRem+"</b> days left this week</h3>");
+                                          $('#'+dlKey).html("<h3><b>"+daysRem+"</b> more days left this week</h3>");
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
