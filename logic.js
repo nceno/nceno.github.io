@@ -499,6 +499,7 @@ function quickStats(){
 function makePage(){
   makeList();
   selectedChallenge();
+  updateNonce();
  
   //quickStats();
   getToken();
@@ -1010,6 +1011,7 @@ function search(){
 var selBrowsedGoal = 0x0000000000000000000000000000000000000000000000000000000000000000;
 async function browse(){
 
+  updateNonce();
   //clear out the goalIDs from old elements
   $('#idNumberU1').val('');
   $('#idNumberU2').val('');
@@ -1234,10 +1236,10 @@ function updateGasPrice(){
   $.getJSON("https://www.etherchain.org/api/gasPriceOracle", function(data) {
     standard = data.standard;
     fast = data.fast;
-    console.log(standard+" < gasPrice < "+fast);
-    
+    console.log(standard+" < gasPrice < "+fast);    
   });
 }
+
 
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
 function updateEthPrice() {
@@ -1283,8 +1285,8 @@ function getToken(){
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
       
-      updateNonce();
       
+
       Nceno.methods.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
