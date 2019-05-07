@@ -45,9 +45,9 @@ contract Nceno {
     mapping(uint=>bool) isCompetitor;
   }
   mapping(bytes32=>goalObject) internal goalAt;
-  mapping(uint=>goalObject) internal goalNumber;
-  uint goalCount;
-  bytes32[] internal goalIDs;
+  mapping(uint=>goalObject) public goalInstance;
+  uint public goalCount;
+  bytes32[] public goalIDs;
 
   //payout lockedPercent based on wks parameter
   uint[12][6] lockedPercent = partitionChoices[0];
@@ -82,7 +82,8 @@ contract Nceno {
     uint OS;
     mapping(bytes32=>goalObject) myGoal;
     uint myGoalCount;
-    mapping(uint=>goalObject) myGoalNumber;
+    mapping(uint=>goalObject) mygoalInstance;
+
   }
 
   mapping(uint=>competitorObject) public profileOf;
@@ -134,12 +135,12 @@ contract Nceno {
 
     //push goal to registry
     goalAt[_goalID] = createdGoal;
-    goalNumber[goalCount] = createdGoal;
+    goalInstance[goalCount] = createdGoal;
     goalCount++;
 
     //add goal to self's registry
     profileOf[_stravaID].myGoal[_goalID] = createdGoal;
-    profileOf[_stravaID].myGoalNumber[profileOf[_stravaID].myGoalCount] = createdGoal;
+    profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = createdGoal;
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step
@@ -158,7 +159,7 @@ contract Nceno {
 
     //add goal to own registry
     profileOf[_stravaID].myGoal[_goalID] = goalAt[_goalID];
-    profileOf[_stravaID].myGoalNumber[profileOf[_stravaID].myGoalCount] = goalAt[_goalID];
+    profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = goalAt[_goalID];
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step
@@ -241,8 +242,12 @@ contract Nceno {
     return(goalAt[_goalID].activeMins, goalAt[_goalID].stakeUSD, goalAt[_goalID].sesPerWk, goalAt[_goalID].wks, goalAt[_goalID].startTime, goalAt[_goalID].competitorCount);
   }
 
-  function getGoalArrays(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12], uint[12]){
-    return(goalAt[_goalID].lockedPercent, goalAt[_goalID].successes[_stravaID], goalAt[_goalID].winnersWk);
+  function getGoalArrays(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12], uint[12], uint[10]){
+    return(goalAt[_goalID].lockedPercent, goalAt[_goalID].successes[_stravaID], goalAt[_goalID].winnersWk, goalAt[_goalID].competitorIDs);
+  }
+
+  function getSuccessesClaims(bytes32 _goalID, uint _stravaID){
+    return(goalAt[_goalID].successes[_stravaID], goalAt[_goalID].claims[_stravaID]);
   }
 
   //called when a user logs a workout. returns the percent earned per workout, and the amount $ earned per workout
@@ -253,8 +258,8 @@ contract Nceno {
 
   //get future goal: only returns a goal if it hasn't started yet
   function getFutureGoal(uint _index) external view returns(bytes32, uint, uint, uint, uint, uint, uint){
-    if(now < goalNumber[_index].startTime){
-      return(goalNumber[_index].goalID, goalNumber[_index].activeMins, goalNumber[_index].stakeUSD, goalNumber[_index].sesPerWk, goalNumber[_index].wks, goalNumber[_index].startTime,goalNumber[_index].competitorCount);
+    if(now < goalInstance[_index].startTime){
+      return(goalInstance[_index].goalID, goalInstance[_index].activeMins, goalInstance[_index].stakeUSD, goalInstance[_index].sesPerWk, goalInstance[_index].wks, goalInstance[_index].startTime,goalInstance[_index].competitorCount);
     }
   }
 
@@ -361,20 +366,28 @@ contract Nceno {
 
   //get upcoming goal: only returns a user's goal if it hasn't yet started
   function getUpcomingGoal(uint _stravaID, uint _index) external view returns(bytes32){
-    require(now < profileOf[_stravaID].myGoalNumber[_index].startTime );
-    return(profileOf[_stravaID].myGoalNumber[_index].goalID);    
+    require(now < profileOf[_stravaID].mygoalInstance[_index].startTime );
+    return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
   }
 
   //get active goal: only returns a user's goal if it has already started
   function getActiveGoal(uint _stravaID, uint _index) external view returns(bytes32){
-    require((0 < now - profileOf[_stravaID].myGoalNumber[_index].startTime) && (now-profileOf[_stravaID].myGoalNumber[_index].startTime < profileOf[_stravaID].myGoalNumber[_index].wks*604800));
-    return(profileOf[_stravaID].myGoalNumber[_index].goalID);    
+    require((0 < now - profileOf[_stravaID].mygoalInstance[_index].startTime) && (now-profileOf[_stravaID].mygoalInstance[_index].startTime < profileOf[_stravaID].mygoalInstance[_index].wks*604800));
+    return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
   }
 
   //get completed goal: only returns a user's goal if it has completed
   function getCompletedGoal(uint _stravaID, uint _index) external view returns(bytes32){
-    require(now > profileOf[_stravaID].myGoalNumber[_index].startTime + profileOf[_stravaID].myGoalNumber[_index].wks*604800);
-    return(profileOf[_stravaID].myGoalNumber[_index].goalID);    
+    require(now > profileOf[_stravaID].mygoalInstance[_index].startTime + profileOf[_stravaID].mygoalInstance[_index].wks*604800);
+    return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
+  }
+
+  function getProfile(uint _stravaID) external view returns(address, uint, bytes32, bytes32, uint){
+    return(profileOf[_stravaID].walletAdr, profileOf[_stravaID].born , profileOf[_stravaID].flag , profileOf[_stravaID].OS , profileOf[_stravaID].myGoalCount);
+  }
+
+  function getMyGoalInstance(uint _stravaID, uint _instance) eternal view returns(bytes32){
+    return(profileOf[_stravaID].mygoalInstance[_instance].goalID);
   }
 
 

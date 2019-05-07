@@ -1,0 +1,26 @@
+"goal_object":{
+	"goalID": "0xcc3f62",
+	"start_time": 1500177413,
+	"mins": 20,
+	"wks": 6,
+	"stake": 55,
+	"sessions": 3,
+	"partitions": [7, 12, 24, 13, 26, 18],
+	"participant_IDs": [33413452, 33412352, 12213462, 3325532, 1241344],
+	"weekly_logs_each_participant": [[2,3,2,1,0,3], [2,3,0,1,0,1], [3,3,2,1,1,3], [3,3,3,1,0,3], [2,3,3,3,0,3]],
+	"weekly_claims_each_participant": [[0,1,0,0,0,1], [0,1,0,0,0,0], [1,1,0,0,0,1], [1,1,1,0,0,1], [0,1,1,1,0,1]]
+}
+
+"participant_object":{
+	"stravaID": 33413452,
+	"wallet_adr": "0x6120676f616c20696400000000000000",
+	"joined_Nceno": 150017995,
+	"timezone": "+0800",
+	"country": "TW",
+	"strava_os": "android",
+	"goal_history": ["0xcd554", "0xcc3f62", "0xcc3d0e", "0xd13f62", "0xc44e2"]
+}
+
+//I can obtain a list of "goal_object"s and a list of "participant_object"s by using "web3.py" that queries the ethereum blockchain/smartcontract
+//I want to be able to gather interesting statistics and plots from collections/mergers/relations of the two lists, using pandas and seaborn.
+//Question: Do these two objects need to be broken up further since there are 1d and 2d arrays as values?
