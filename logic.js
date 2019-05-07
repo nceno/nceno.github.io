@@ -670,10 +670,11 @@ function selectedChallenge(){
                               var payKey = 'payP'+n;
                               var lostKey = 'lostP'+n;
 
-                              /*var lostSum = 0;
+                              var lostSum = 0;
                               for(let k = 0; k<currentWeek; k++){
-                                lostSum += lostStake[k];
-                              }*/
+                                if(currentWeek>1){lostSum += lostStake[k];}
+                                else lostSum = 0;
+                              }
                               
 
                               $('#'+adhKey).html(adherence[k]+'%');
@@ -681,7 +682,7 @@ function selectedChallenge(){
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
                               $('#'+bonusKey).html('$'+bonusTotal[k]);
                               $('#'+payKey).html('$'+totalPay[k]);
-                              $('#'+lostKey).html('$'+lostStake[k]);
+                              $('#'+lostKey).html('$'+lostSum);
 
                               if(k>=0){
                                 //get the timeline variables and set them
@@ -702,7 +703,7 @@ function selectedChallenge(){
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
                                         var lost = 0;
-                                        if(currentWeek>1){
+                                        if(currentWeek>k+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
