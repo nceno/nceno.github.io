@@ -183,8 +183,7 @@ $("#makeAcctBtn").click(function() {
   ).once('confirmation', function(confNumber, receipt){ 
     console.log(receipt.status);
     if(receipt.status === true){
-
-      correctNonce++;
+      updateNonce();
       $("#acctLoader").hide();
       $("#makeAcctBtn").hide();
     }
@@ -221,7 +220,7 @@ $("#hostBtn").click(function() {
     stravaID,
     Math.round(ethPrice*100) //eth price in pennies. Gets rid of decimals
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce+1, gas: 4000000, gasPrice: (standard+1)*1000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4000000, gasPrice: (standard+1)*1000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
