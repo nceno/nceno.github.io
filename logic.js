@@ -8,9 +8,11 @@ $("#time").click(function(){
   console.log(time);
 })
 
-//var nonce = 0;
-//web3.eth.getTransactionCount("web3.eth.defaultAccount").then(nonce = result);
-//console.log("nonce is: "+nonce);
+function updateNonce(){
+  var correctNonce = 0;
+  web3.eth.getTransactionCount("web3.eth.defaultAccount").then(correctNonce = result);
+  console.log("nonce is: "+correctNonce);
+}
 
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
@@ -1281,6 +1283,7 @@ function getToken(){
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
       
+      updateNonce();
       
       Nceno.methods.userExists(stravaID
       )
