@@ -847,7 +847,7 @@ function selectedChallenge(){
                                             },
                                             title: {
                                               display: true,
-                                              text: 'Your progress snapshot'
+                                              text: 'Your Progress'
                                             }
                                           }
                                         }
@@ -938,7 +938,7 @@ function selectedChallenge(){
                                             },
                                             title: {
                                               display: true,
-                                              text: 'Challenge snapshot'
+                                              text: 'Challenge Snapshot'
                                             }
                                           }
                                         }
