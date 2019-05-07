@@ -722,7 +722,7 @@ function selectedChallenge(){
                                         }
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
-                                        daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6+1;
+                                        daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
                                         
                                         if(k+1 == currentWeek){
                                           $('#'+dlKey).html("<h3><b>"+daysRem+"</b> days left this week</h3>");
