@@ -10,7 +10,7 @@ $("#time").click(function(){
 
 function updateNonce(){
   var correctNonce = 0;
-  web3.eth.getTransactionCount("web3.eth.defaultAccount").then(correctNonce = result);
+  web3.eth.getTransactionCount(web3.eth.defaultAccount).then(correctNonce = result);
   console.log("nonce is: "+correctNonce);
 }
 
