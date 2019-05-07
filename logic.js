@@ -832,7 +832,7 @@ function selectedChallenge(){
                                             },
                                             title: {
                                               display: true,
-                                              text: 'Weekly payouts'
+                                              text: 'Your progress snapshot'
                                             }
                                           }
                                         }
@@ -923,7 +923,7 @@ function selectedChallenge(){
                                             },
                                             title: {
                                               display: true,
-                                              text: 'Weekly payouts'
+                                              text: 'Challenge snapshot'
                                             }
                                           }
                                         }
