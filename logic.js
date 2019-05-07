@@ -8,7 +8,7 @@ $("#time").click(function(){
   console.log(time);
 })
 
-var correctNonce = 0
+var correctNonce = 0;
 function updateNonce(){
   web3.eth.getTransactionCount(web3.eth.defaultAccount).then(nonce => {
     correctNonce = nonce;
