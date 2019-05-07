@@ -577,7 +577,7 @@ function selectedChallenge(){
       var bonusKey = 'bonusP'+n;
       var payKey = 'payP'+n;
       var lostKey = 'lostP'+n;
-      var dlKey = 'dl'+n;
+      var dlKey1 = 'dl'+n;
                         
       $('#'+adhKey).html('');
       $('#'+nameKey).html('');
@@ -585,7 +585,7 @@ function selectedChallenge(){
       $('#'+bonusKey).html('');
       $('#'+payKey).html('');
       $('#'+lostKey).html('');
-      $('#'+dlKey).html('');
+      $('#'+dlKey1).html('');
       console.log("clearing leaderboard...");
     }
 
