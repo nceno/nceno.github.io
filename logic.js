@@ -702,7 +702,7 @@ function selectedChallenge(){
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
                                         var lost = 0;
-                                        if(currentWeek>k+1){
+                                        if(currentWeek>1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
