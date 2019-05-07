@@ -169,7 +169,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: (standard+1)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(standard)*1000000000},
     function(error, result) {
       if (!error){
 
@@ -220,7 +220,7 @@ $("#hostBtn").click(function() {
     stravaID,
     Math.round(ethPrice*100) //eth price in pennies. Gets rid of decimals
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4000000, gasPrice: (standard+1)*1000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4000000, gasPrice: Math.ceil(standard)*1000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -313,7 +313,7 @@ function joinSearch(){
           stravaID,
           ethPrice
         )
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: (standard+1)*1000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(standard)*1000000000, value: stakewei},
           function(error, result) {
             if (!error){
               $("#joinSearch").hide();
@@ -362,7 +362,7 @@ function joinSoon(){
           stravaID,
           ethPrice
         )
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: (standard+1)*1000000000, value: stakewei},
+        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(standard)*1000000000, value: stakewei},
           function(error, result) {
             if (!error){
               $("#joinSoon").hide();
@@ -1090,7 +1090,7 @@ $("#claimBtn").click(function() {
     goalid,
     stravaID
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 2000000, gasPrice: (standard+1)*1000000000},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 2000000, gasPrice: Math.ceil(standard)*1000000000},
     function(error, result) {
       if (!error){
         $("#claimBtn").hide();
@@ -1368,7 +1368,7 @@ function getActivities(){
           Math.round(cleaned[0][1]),
           Math.round(cleaned[0][2])
         )
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 6000000, gasPrice: (standard+1)*1000000000},
+        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 6000000, gasPrice: Math.ceil(standard)*1000000000},
           function(error, result) {
             if (!error){
               /*$("#joinSearch").hide();
