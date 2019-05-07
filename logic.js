@@ -577,6 +577,7 @@ function selectedChallenge(){
       var bonusKey = 'bonusP'+n;
       var payKey = 'payP'+n;
       var lostKey = 'lostP'+n;
+      var dlKey = 'dl'+n;
                         
       $('#'+adhKey).html('');
       $('#'+nameKey).html('');
