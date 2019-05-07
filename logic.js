@@ -30,6 +30,7 @@ function showPortis() {
       localize();
       getToken();
       $("#portisBtn").hide();
+      updateGasPrice();
 
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
       $("#portisSuccess").html('<h5><a style="color:#ffffff;">Blockchain connection: </a></h5><a style="color:#ccff00;">successful!</a>');
@@ -1224,6 +1225,18 @@ function localize(){
     getMobileOS();
   });
 }
+
+var standard;
+var fast;
+function updateGasPrice(){
+  $.getJSON("https://www.etherchain.org/api/gasPriceOracle", function(data) {
+    standard = data.standard;
+    fast = data.fast;
+    console.log(standard+" < gasPrice < "+fast);
+    
+  });
+}
+
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
 function updateEthPrice() {
   var xhr = new XMLHttpRequest();
