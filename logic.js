@@ -584,6 +584,7 @@ function selectedChallenge(){
       $('#'+bonusKey).html('');
       $('#'+payKey).html('');
       $('#'+lostKey).html('');
+      $('#'+dlKey).html('');
       console.log("clearing leaderboard...");
     }
 
@@ -720,7 +721,7 @@ function selectedChallenge(){
                                         }
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
-                                        daysRem = 1+Math.ceil((nowTime-startingTime)/(currentWeek*86400)); 
+                                        daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400)); 
                                         
                                         if(k+1 == currentWeek){
                                           $('#'+dlKey).html("<h3><b>"+daysRem+"</b> days left this week</h3>");
