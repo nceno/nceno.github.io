@@ -370,6 +370,7 @@
                                                     
                                                     <div class="step ">
                                                       <div id= "week1">
+                                                        <h3><b id="dl1"></b> days left</h3>
                                                         <h4 id= "progW1" class="step-title"><b id="compl1" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock1" style="color:#ffffff;"></b> locked up<br>
@@ -384,6 +385,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week2">
+                                                        <h3><b id="dl2"></b> days left</h3>
                                                         <h4 id= "progW2" class="step-title"><b id="compl2" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock2" style="color:#ffffff;"></b> locked up<br>
@@ -398,6 +400,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week3">
+                                                        <h3><b id="dl3"></b> days left</h3>
                                                         <h4 id= "progW3" class="step-title"><b id="compl3" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock3" style="color:#ffffff;"></b> locked up<br>
@@ -412,6 +415,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week4">
+                                                        <h3><b id="dl4"></b> days left</h3>
                                                         <h4 id= "progW4" class="step-title"><b id="compl4" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock4" style="color:#ffffff;"></b> locked up<br>
@@ -426,6 +430,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week5">
+                                                        <h3><b id="dl5"></b> days left</h3>
                                                         <h4 id= "progW5" class="step-title"><b id="compl5" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock5" style="color:#ffffff;"></b> locked up<br>
@@ -441,6 +446,7 @@
                                                     
                                                     <div class="step ">
                                                       <div id= "week6">
+                                                        <h3><b id="dl6"></b> days left</h3>
                                                         <h4 id= "progW6" class="step-title"><b id="compl6" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock6" style="color:#ffffff;"></b> locked up<br>
@@ -455,6 +461,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week7">
+                                                        <h3><b id="dl7"></b> days left</h3>
                                                         <h4 id= "progW7" class="step-title"><b id="compl7" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock7" style="color:#ffffff;"></b> locked up<br>
@@ -469,6 +476,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week8">
+                                                        <h3><b id="dl8"></b> days left</h3>
                                                         <h4 id= "progW8" class="step-title"><b id="compl8" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock8" style="color:#ffffff;"></b> locked up<br>
@@ -483,6 +491,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week9">
+                                                        <h3><b id="dl9"></b> days left</h3>
                                                         <h4 id= "progW9" class="step-title"><b id="compl9" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock9" style="color:#ffffff;"></b> locked up<br>
@@ -497,6 +506,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week10">
+                                                        <h3><b id="dl10"></b> days left</h3>
                                                         <h4 id= "progW10" class="step-title"><b id="compl10" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock10" style="color:#ffffff;"></b> locked up<br>
@@ -511,6 +521,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week11">
+                                                        <h3><b id="dl11"></b> days left</h3>
                                                         <h4 id= "progW11" class="step-title"><b id="compl11" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock11" style="color:#ffffff;"></b> locked up<br>
@@ -525,6 +536,7 @@
 
                                                     <div class="step ">
                                                       <div id= "week12">
+                                                        <h3><b id="dl12"></b> days left</h3>
                                                         <h4 id= "progW12" class="step-title"><b id="compl12" style="color:#ccff00;"></b> workouts completed</h4>
                                                         <p>
                                                           <b id="lock12" style="color:#ffffff;"></b> locked up<br>
@@ -1141,16 +1153,18 @@
               <div class="container-fluid">
                 <div class="row gutter-1">
                   
-                    <div class="col-8">
+                    <div class="col text-center mb-2">
                       <button id="claimBtn" type="button" class="btn btn-block btn-primary">Show me the money</button>
                     </div>
                   
-                  <div id="claimLoader">
+                  <div id="claimLoader" class="col text-center mb-2">
                     <p>Writing to the blockchain...</p>
                     <img  src="app/assets/images/loader.svg"> 
                   </div>
-                  <p id="claimSuccess">Payout complete! Check your wallet for USDC coins.</p>
-                  <span id=claimFail></span>
+                  <div class="col text-center mb-2">
+                    <p id="claimSuccess">Payout complete! Check your wallet for USDC coins.</p>
+                    <span id=claimFail></span>
+                  </div>
                 </div>
               </div>
             </div>

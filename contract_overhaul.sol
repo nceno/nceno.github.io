@@ -1,4 +1,11 @@
 pragma solidity ^0.4.24;
+//log()
+  //_goalID: 0x9c2a96-00000000000000000000000000000000000000000000000000000000
+  //_stravaID: 39706111
+  //_activityID: 122333
+  //_avgHR: 125
+  //_reportedMins: 90
+
 //pragma experimental ABIEncoderV2; //to return a struct in a function
 //import "./ERC20Interface.sol";
 //import "./KyberNetworkProxy.sol";
