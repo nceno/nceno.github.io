@@ -170,6 +170,7 @@ $("#makeAcctBtn").click(function() {
   .send({from: web3.eth.defaultAccount, nonce: correctNonce+1, gas: 400000, gasPrice: standard*1000000000},
     function(error, result) {
       if (!error){
+
         $("#makeAcctBtn").hide();
         $("#acctLoader").show();
         console.log(result);
@@ -180,6 +181,8 @@ $("#makeAcctBtn").click(function() {
   ).once('confirmation', function(confNumber, receipt){ 
     console.log(receipt.status);
     if(receipt.status === true){
+
+      correctNonce++;
       $("#acctLoader").hide();
       $("#makeAcctBtn").hide();
     }
@@ -230,6 +233,7 @@ $("#hostBtn").click(function() {
   ).once('confirmation', function(confNumber, receipt){
     console.log(receipt.status);
     if(receipt.status === true){
+      correctNonce++;
       $("#createLoader").hide();
       $("#createSuccess").show();
       $("#hostBtn").hide();
@@ -322,6 +326,7 @@ function joinSearch(){
         ).once('confirmation', function(confNumber, receipt){
           console.log(receipt.status);
           if(receipt.status === true){
+            correctNonce++;
             $("#joinLoader").hide();
             $("#joinSuccess").show();
             $("#makeAcctBtn").hide();
@@ -1098,6 +1103,7 @@ $("#claimBtn").click(function() {
 
     console.log(receipt.status);
     if(receipt.status === true){
+      correctNonce++;
       $("#claimLoader").hide();
       $("#claimSuccess").show();
       $("#makeAcctBtn").hide();
@@ -1375,6 +1381,7 @@ function getActivities(){
         ).once('confirmation', function(confNumber, receipt){
           console.log(receipt.status);
           if(receipt.status === true){
+            correctNonce++;
             console.log("You just unlocked 4% of your stake. Check your wallet in a couple minutes.");
             //refreshStats();
             //refreshLeaderboard();
