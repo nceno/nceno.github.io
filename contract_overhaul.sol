@@ -4,7 +4,6 @@ pragma solidity ^0.4.24;
 //import "./KyberNetworkProxy.sol";
 //import "tabookey-gasless/contracts/RelayRecipient.sol";
 
-
 //inherit gas station relay contract
 //contract Nceno is RelayRecipient
 contract Nceno {
@@ -83,13 +82,11 @@ contract Nceno {
     mapping(bytes32=>goalObject) myGoal;
     uint myGoalCount;
     mapping(uint=>goalObject) mygoalInstance;
-
   }
 
   mapping(uint=>competitorObject) public profileOf;
   uint[] stravaIDs;
   mapping(uint=>bool) public userExists;
-
 
   function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS) external{
     require(userExists[_stravaID] == false, "This profile already exists.");
@@ -145,7 +142,6 @@ contract Nceno {
 
     //kyber step
     //swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
-
   }
 
   function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) external payable {
@@ -345,8 +341,6 @@ contract Nceno {
         
         my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
       
-
-        
         if(theGoal.winnersWk[j]>0){
           my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
           my.bonusTotal+= my.wkBonuses[j];
@@ -357,9 +351,7 @@ contract Nceno {
         if(j<wk){
           my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
         }
-
       }
-
     }
     return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
