@@ -723,7 +723,11 @@ function selectedChallenge(){
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
                                         //daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
-                                        daysRem = Math.ceil((startingTime/1000 + wks*604800 - nowTime)/86400); //could work
+                                        daysRem = Math.ceil((startingTime + wks*604800 - nowTime)/86400); //could work
+                                        console.log("startingTime is: "+startingTime);
+                                        console.log("wks is: "+wks);
+                                        console.log("nowTime is: "+nowTime);
+                                        console.log("daysRem is: "+ daysRem);
                                         /////////////////////////////////////////////////////////////////////////////////////////////////
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
