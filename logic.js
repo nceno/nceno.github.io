@@ -722,13 +722,14 @@ function selectedChallenge(){
                                         }
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
-                                        daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
-                                        
+                                        //daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
+                                        daysRem = Math.ceil((startingTime + wks*604800 - nowTime)/86400); //could work
+                                        /////////////////////////////////////////////////////////////////////////////////////////////////
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
-                                            $('#'+dlKey).html("<h3><b>"+daysRem+"</b> more days left this week</h3>");
+                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h3>");
                                           }
-                                          else{$('#'+dlKey).html("<h3><b>"+daysRem+"</b> more day left this week</h3>");}
+                                          else{$('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more day left this week</h3>");}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
