@@ -730,7 +730,7 @@ function selectedChallenge(){
                                         //daysRem = (startingTime + wks*604800 - nowTime)/(86400)-(wks-currentWeek)*7; //could work
                                         daysRem = Math.ceil((startingTime + wks*604800 - nowTime - (wks-currentWeek)*604800)/86400);
                                         
-                                        console.log("daysRem is: "+ daysRem);
+                                        console.log('daysRem is: ('+startingTime +'+'+ wks+'*'+604800 +'-'+ nowTime +'- ('+wks+'-'+currentWeek+')*'+604800+')/'+86400);
                                         /////////////////////////////////////////////////////////////////////////////////////////////////
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
