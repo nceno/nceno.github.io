@@ -1089,7 +1089,8 @@ function browse(){
       $('#'+pplKey).html(result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
-      $('#'+idKey).val(result[0]);      
+      $('#'+idKey).val(result[0]);
+      console.log("upcoming goal: "+result[0]);      
     }   
   }
 
