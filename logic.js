@@ -509,6 +509,8 @@ function makePage(){
   //quickStats();
   getToken();
 }
+
+
 var wkLimit = 0;
 var currentWeek = 0;
 function makeWktl(){
@@ -1043,6 +1045,12 @@ function search(){
 //var browsePopulated
 var selBrowsedGoal = 0x0000000000000000000000000000000000000000000000000000000000000000;
 async function browse(){
+  var targetGoalID;
+  var targetStake;
+  var targetWks;
+  var targetSes;
+  var targetMin ;
+  var targetStart
 
   updateNonce();
   //clear out the goalIDs from old elements
@@ -1057,15 +1065,13 @@ async function browse(){
   $('#idNumberU9').val('');
   $('#idNumberU10').val('');
 
-
+  
   for (let i = 0; i < 10; i++){
-
     var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
     if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
       //list it in the table
       var tstamp = new Date(result[5]*1000);
       //var buyin = Math.round(result[2]/100000000000000000000);
-
       var n = i+1;
       var buyinKey = 'buyinU'+n;
       var wksKey = 'wksU'+n;
@@ -1075,28 +1081,139 @@ async function browse(){
       var startKey = 'startU'+n;
       var btnKey = 'btnU'+n;
       var idKey = 'idNumberU'+n;
-
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+' wks');
       $('#'+sesKey).html(result[3]+' x/wk');
-      $('#'+minKey).html(result[1]+' min');
+      $('#'+minKey).html(result[1]+'  min');
       $('#'+pplKey).html(result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
-      $('#'+idKey).val(result[0]);
-      console.log($('#idNumberU1').val());
-      console.log($('#idNumberU2').val());
-      console.log($('#idNumberU3').val());
-      console.log($('#idNumberU4').val());
-      console.log($('#idNumberU5').val());
-      console.log($('#idNumberU6').val());
-      console.log($('#idNumberU7').val());
-      console.log($('#idNumberU8').val());
-      console.log($('#idNumberU9').val());
-      console.log($('#idNumberU10').val());
-
+      $('#'+idKey).val(result[0]);      
     }   
   }
+
+  $('#soonJoin1').click(function(){
+    targetGoalID = $('#idNumberU1').text();
+    targetStake = $('#buyinU1').text().slice(1);
+    targetWks = $('#wksU1').text();
+    targetSes = $('#sesU1').text().slice(0,2);
+    targetMin = $('#minU1').text().slice(0,3);
+    targetStart = $('#startU1').text();
+  });
+  $('#soonJoin2').click(function(){
+    targetGoalID = $('#idNumberU2').text();
+    targetStake = $('#buyinU2').text().slice(1);
+    targetWks = $('#wksU2').text();
+    targetSes = $('#sesU2').text().slice(0,2);
+    targetMin = $('#minU2').text().slice(0,3);
+    targetStart = $('#startU2').text();
+  });
+  $('#soonJoin3').click(function(){
+    targetGoalID = $('#idNumberU3').text();
+    targetStake = $('#buyinU3').text().slice(1);
+    targetWks = $('#wksU3').text();
+    targetSes = $('#sesU3').text().slice(0,2);
+    targetMin = $('#minU3').text().slice(0,3);
+    targetStart = $('#startU3').text();
+  });
+  $('#soonJoin4').click(function(){
+    targetGoalID = $('#idNumberU4').text();
+    targetStake = $('#buyinU4').text().slice(1);
+    targetWks = $('#wksU4').text();
+    targetSes = $('#sesU4').text().slice(0,2);
+    targetMin = $('#minU4').text().slice(0,3);
+    targetStart = $('#startU4').text();
+  });
+  $('#soonJoin5').click(function(){
+    targetGoalID = $('#idNumberU5').text();
+    targetStake = $('#buyinU5').text().slice(1);
+    targetWks = $('#wksU5').text();
+    targetSes = $('#sesU5').text().slice(0,2);
+    targetMin = $('#minU5').text().slice(0,3);
+    targetStart = $('#startU5').text();
+  });
+  $('#soonJoin6').click(function(){
+    targetGoalID = $('#idNumberU6').text();
+    targetStake = $('#buyinU6').text().slice(1);
+    targetWks = $('#wksU6').text();
+    targetSes = $('#sesU6').text().slice(0,2);
+    targetMin = $('#minU6').text().slice(0,3);
+    targetStart = $('#startU6').text();
+  });
+  $('#soonJoin7').click(function(){
+    targetGoalID = $('#idNumberU7').text();
+    targetStake = $('#buyinU7').text().slice(1);
+    targetWks = $('#wksU7').text();
+    targetSes = $('#sesU7').text().slice(0,2);
+    targetMin = $('#minU7').text().slice(0,3);
+    targetStart = $('#startU7').text();
+  });
+  $('#soonJoin8').click(function(){
+    targetGoalID = $('#idNumberU8').text();
+    targetStake = $('#buyinU8').text().slice(1);
+    targetWks = $('#wksU8').text();
+    targetSes = $('#sesU8').text().slice(0,2);
+    targetMin = $('#minU8').text().slice(0,3);
+    targetStart = $('#startU8').text();
+  });
+  $('#soonJoin9').click(function(){
+    targetGoalID = $('#idNumberU9').text();
+    targetStake = $('#buyinU9').text().slice(1);
+    targetWks = $('#wksU9').text();
+    targetSes = $('#sesU9').text().slice(0,2);
+    targetMin = $('#minU9').text().slice(0,3);
+    targetStart = $('#startU9').text();
+  });
+  $('#soonJoin10').click(function(){
+    targetGoalID = $('#idNumberU10').text();
+    targetStake = $('#buyinU10').text().slice(1);
+    targetWks = $('#wksU10').text();
+    targetSes = $('#sesU10').text().slice(0,2);
+    targetMin = $('#minU10').text().slice(0,3);
+    targetStart = $('#startU10').text();
+  });
+}
+
+function joinTarget(){
+  updateEthPrice();
+
+  $("#soonEcho").html(
+    "You're commiting $" + targetStake + " to working out for " + 
+    targetMin +", "+ targetSes+" times per week, for "+ 
+    targetWks+  " weeks, starting automatically on "+ targetStart
+  );
+
+  Nceno.methods.join(
+    targetGoalID,
+    stravaID,
+    ethPrice
+  )
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(standard)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
+    function(error, result) {
+      if (!error){
+        $("#joinSearch").hide();
+        $("#srCancelBtn").hide();
+        $("#joinLoader").show();
+        console.log(result);
+      }
+      else
+      console.error(error);
+    }
+  ).once('confirmation', function(confNumber, receipt){
+    console.log(receipt.status);
+    if(receipt.status === true){
+      correctNonce++;
+      $("#joinSoonLoader").hide();
+      $("#joinSoonSuccess").show();
+      $("#joinSoonModalBtn").hide();
+    }
+    else{
+      $("#joinSoonLoader").hide();
+      $("#joinSoonModalBtn").hide();
+      console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
+    } 
+     })
+    .once('error', function(error){console.log(error);});;
 }
 
 var browsedGoal;
