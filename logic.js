@@ -721,29 +721,10 @@ function selectedChallenge(){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
-                                        nowTime = new Date().getTime()/1000;
-                                        //daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
-                                        console.log("startingTime is: "+startingTime);
-                                        console.log("wks is: "+wks);
-                                        console.log("nowTime is: "+nowTime);
+                                        nowTime = Math.floor(new Date().getTime()/1000);
+                                        daysRem = Math.ceil((startingTime + wks*604800 - nowTime - (wks-currentWeek)*604800)/86400);
+                                        //console.log('daysRem is: ('+startingTime +'+'+ wks+'*'+604800 +'-'+ nowTime +'- ('+wks+'-'+currentWeek+')*'+604800+')/'+86400);
 
-                                        //daysRem = (startingTime + wks*604800 - nowTime)/(86400)-(wks-currentWeek)*7; //could work
-                                        operation1 = startingTime + wks*604800;
-                                        operation2 = (wks-currentWeek)*604800;
-                                        operation3 = operation1 - nowTime;
-                                        operation4 = operation3 - operation2;
-                                        operation5 = operation4/86400;
-                                        //daysRem = Math.ceil((startingTime + wks*604800 - nowTime - (wks-currentWeek)*604800)/86400);
-                                        daysRem = operation5;
-                                        
-                                        console.log('daysRem is: ('+startingTime +'+'+ wks+'*'+604800 +'-'+ nowTime +'- ('+wks+'-'+currentWeek+')*'+604800+')/'+86400);
-                                        console.log('operation1: '+operation1);
-                                        console.log('operation2: '+operation2);
-                                        console.log('operation3: '+operation3);
-                                        console.log('operation4: '+operation4);
-                                        console.log('operation5: '+operation5);
-                                        console.log('daysRem is: '+daysRem);
-                                        /////////////////////////////////////////////////////////////////////////////////////////////////
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
                                             $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h3>");
