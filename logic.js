@@ -571,6 +571,9 @@ function selectedChallenge(){
     var ctx1 = null;
     var ctx2 = null;
 
+    $('#canvas1Div').html('');
+    $('#canvas2Div').html('');
+
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
     for (let k = 0; k < 10; k++){
@@ -775,7 +778,8 @@ function selectedChallenge(){
                                         finishers[i] = winnersWk[i]*100/competitors;
                                       }
 
-                                      
+                                      $('#canvas1Div').html('<canvas id="canvas1" ></canvas>');
+                                      $('#canvas2Div').html('<canvas id="canvas1" ></canvas>');  
 
                                       //draw charts**************************************************************************************************
                                       ctx1 = document.getElementById('canvas1').getContext('2d');
