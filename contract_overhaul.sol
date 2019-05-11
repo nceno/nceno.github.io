@@ -1,15 +1,9 @@
 pragma solidity ^0.4.24;
-//log()
-  //_goalID: 0x9c2a96-00000000000000000000000000000000000000000000000000000000
-  //_stravaID: 39706111
-  //_activityID: 122333
-  //_avgHR: 125
-  //_reportedMins: 90
-
 //pragma experimental ABIEncoderV2; //to return a struct in a function
 //import "./ERC20Interface.sol";
 //import "./KyberNetworkProxy.sol";
 //import "tabookey-gasless/contracts/RelayRecipient.sol";
+
 
 //inherit gas station relay contract
 //contract Nceno is RelayRecipient
@@ -89,11 +83,13 @@ contract Nceno {
     mapping(bytes32=>goalObject) myGoal;
     uint myGoalCount;
     mapping(uint=>goalObject) mygoalInstance;
+
   }
 
   mapping(uint=>competitorObject) public profileOf;
   uint[] stravaIDs;
   mapping(uint=>bool) public userExists;
+
 
   function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS) external{
     require(userExists[_stravaID] == false, "This profile already exists.");
@@ -149,6 +145,7 @@ contract Nceno {
 
     //kyber step
     //swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
+
   }
 
   function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) external payable {
@@ -335,19 +332,24 @@ contract Nceno {
     
   function getMyGoalStats2(uint _stravaID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
     goalObject memory theGoal = goalAt[_goalID];
-    uint wk = (now - theGoal.startTime)/604800;
+    //uint wk = (now - theGoal.startTime)/604800;
+
+    //catches completed goals
+    uint wkLimit;
+    if((now - theGoal.startTime)/604800<theGoal.wks+1){
+      wkLimit = 1+(now - theGoal.startTime)/604800; //active
+    }else wkLimit = theGoal.wks; //completed
     
-      myStatsObject memory my;
-        my.lostStake = 0;
-      
+    myStatsObject memory my;
+      my.lostStake = 0;
       my.bonusTotal = 0;
       uint totalPay=0;
 
-    if(wk<theGoal.wks+1){
-      for(uint j =0; j<1+wk; j++){
-        
+    //if((now - theGoal.startTime)/604800<theGoal.wks+1){  //only fires if goal still active
+      for(uint j =0; j<wkLimit; j++){
+
         my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
-      
+
         if(theGoal.winnersWk[j]>0){
           my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
           my.bonusTotal+= my.wkBonuses[j];
@@ -355,29 +357,11 @@ contract Nceno {
 
         totalPay+= my.wkPayouts[j]; //in pennies
 
-        if(j<wk){
+        if(j<(now - theGoal.startTime)/604800){
           my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
         }
       }
-    }
-    else{
-      for(uint j =0; j<theGoal.wks; j++){
-        
-        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
-      
-        if(theGoal.winnersWk[j]>0){
-          my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
-          my.bonusTotal+= my.wkBonuses[j];
-        }
-
-        totalPay+= my.wkPayouts[j]; //in pennies
-
-        if(j<wk){
-          my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
-        }
-      }
-
-    }
+    //}
     return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
 
@@ -406,6 +390,7 @@ contract Nceno {
   function getMyGoalInstance(uint _stravaID, uint _instance) external view returns(bytes32){
     return(profileOf[_stravaID].mygoalInstance[_instance].goalID);
   }
+
 
   //-----------------------------------------------
   //kyber stuff
