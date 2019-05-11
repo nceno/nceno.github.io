@@ -779,7 +779,7 @@ function selectedChallenge(){
                                       }
 
                                       $('#canvas1Div').html('<canvas id="canvas1" ></canvas>');
-                                      $('#canvas2Div').html('<canvas id="canvas1" ></canvas>');  
+                                      $('#canvas2Div').html('<canvas id="canvas2" ></canvas>');  
 
                                       //draw charts**************************************************************************************************
                                       ctx1 = document.getElementById('canvas1').getContext('2d');
