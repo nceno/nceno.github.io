@@ -567,6 +567,10 @@ function selectedChallenge(){
     var winnersWk = new Array();
     var startingTime = 0;
 
+    //empty previous charts
+    var ctx1 = null;
+    var ctx2 = null;
+
 
     //overwrite artifacts from perviously selected goal if current has lower compcount.
     for (let k = 0; k < 10; k++){
@@ -771,12 +775,10 @@ function selectedChallenge(){
                                         finishers[i] = winnersWk[i]*100/competitors;
                                       }
 
-                                      //empty previous charts
-                                      $('#canvas1').empty();
-                                      $('#canvas2').empty();
+                                      
 
                                       //draw charts**************************************************************************************************
-                                      var ctx1 = document.getElementById('canvas1').getContext('2d');
+                                      ctx1 = document.getElementById('canvas1').getContext('2d');
                                       window.myLine1 = new Chart(ctx1, 
                                         //config1
                                         {
@@ -868,7 +870,7 @@ function selectedChallenge(){
                                         }
                                       );
 
-                                      var ctx2 = document.getElementById('canvas2').getContext('2d');
+                                      ctx2 = document.getElementById('canvas2').getContext('2d');
                                       window.myLine2 = new Chart(ctx2, 
                                         //config2
                                         {
