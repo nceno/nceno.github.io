@@ -721,7 +721,7 @@ function selectedChallenge(){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
-                                        nowTime = parseInt(parseInt(new Date().getTime())/1000);
+                                        nowTime = new Date().getTime()/1000;
                                         //daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
                                         console.log("startingTime is: "+startingTime);
                                         console.log("wks is: "+wks);
