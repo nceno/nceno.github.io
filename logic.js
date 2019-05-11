@@ -1042,17 +1042,15 @@ function search(){
 }
 
 //populates the challenges starting soon table
-//var browsePopulated
-var selBrowsedGoal = 0x0000000000000000000000000000000000000000000000000000000000000000;
+
+var targetGoalID;
+var targetStake;
+var targetWks;
+var targetSes;
+var targetMin;
+var targetStart;
+
 function browse(){
-
-  var targetGoalID;
-  var targetStake;
-  var targetWks;
-  var targetSes;
-  var targetMin;
-  var targetStart;
-
   updateNonce();
   //clear out the goalIDs from old elements
   $('#idNumberU1').val('');
