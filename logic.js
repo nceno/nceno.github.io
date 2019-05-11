@@ -1188,6 +1188,7 @@ async function browse(){
 }
 
 function populateTargetModal(){
+  updateEthPrice();
   $("#soonEcho").html(
     "You're commiting $" + targetStake + " to working out for " + 
     targetMin +"minutes, "+ targetSes+" times per week, for "+ 
@@ -1196,8 +1197,6 @@ function populateTargetModal(){
 }
 
 function joinTarget(){
-  updateEthPrice();
-
   console.log("goalID is: "+targetGoalID+", stravaID is: "+stravaID+", ethprice is: "+ethPrice);
   Nceno.methods.join(
     targetGoalID,
