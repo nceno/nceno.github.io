@@ -615,10 +615,11 @@ function selectedChallenge(){
           wks = result[3];
 
           //set current challenge week globally
+          currentWeek = Math.floor((Date.now()/1000 - startingTime)/604800)+1;
           if(Date.now()/1000 < (startingTime+wkLimit*604800)){
-            currentWeek = Math.floor((Date.now()/1000 - startingTime)/604800)+1;
+            chartWeek = currentWeek
           }
-          else {currentWeek = wkLimit;}
+          else {chartWeek = wkLimit;}
           //currentWeek = (Date.now()/1000 - result[4])/604800;
           console.log("blockchain says we're in week: "+currentWeek);
           makeWktl();
@@ -748,7 +749,7 @@ function selectedChallenge(){
                                       //make chart data ****************************************************************************
                                       //x axis
                                       var xaxis = new Array();
-                                        for(let i = 0; i<currentWeek; i++){
+                                        for(let i = 0; i<chartWeek; i++){
                                         var weekIndex = i+1;
                                         xaxis[i] = "Week "+weekIndex;
                                       }
