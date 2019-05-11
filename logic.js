@@ -723,17 +723,19 @@ function selectedChallenge(){
                                         else lost = 0;
                                         nowTime = parseInt(parseInt(new Date().getTime())/1000);
                                         //daysRem = Math.ceil((nowTime-startingTime)/(currentWeek*86400))%6;
-                                        daysRem = Math.ceil((startingTime + wks*604800 - nowTime)/(86400)-(wks-currentWeek)*7); //could work
                                         console.log("startingTime is: "+startingTime);
                                         console.log("wks is: "+wks);
                                         console.log("nowTime is: "+nowTime);
+                                        
+                                        daysRem = (startingTime + wks*604800 - nowTime)/(86400)-(wks-currentWeek)*7; //could work
+                                        
                                         console.log("daysRem is: "+ daysRem);
                                         /////////////////////////////////////////////////////////////////////////////////////////////////
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
                                             $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h3>");
                                           }
-                                          else{$('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more day left this week</h3>");}
+                                          else{$('#'+dlKey).html('<h3>today is the last day for this week!</h3>');}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
