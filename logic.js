@@ -1066,30 +1066,38 @@ function browse(){
 
   
   for (let i = 0; i < 10; i++){
-    var result = Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
-    if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
-      //list it in the table
-      var tstamp = new Date(result[5]*1000);
-      //var buyin = Math.round(result[2]/100000000000000000000);
-      var n = i+1;
-      var buyinKey = 'buyinU'+n;
-      var wksKey = 'wksU'+n;
-      var sesKey = 'sesU'+n;
-      var minKey = 'minU'+n;
-      var pplKey = 'pplU'+n;
-      var startKey = 'startU'+n;
-      var btnKey = 'btnU'+n;
-      var idKey = 'idNumberU'+n;
-      $('#'+buyinKey).html('$'+result[2]);
-      $('#'+wksKey).html(result[4]+' wks');
-      $('#'+sesKey).html(result[3]+' x/wk');
-      $('#'+minKey).html(result[1]+'  min');
-      $('#'+pplKey).html(result[6]);
-      $('#'+startKey).html(tstamp.toDateString());
-      $('#'+btnKey).show();
-      $('#'+idKey).val(result[0]);
-      console.log("upcoming goal: "+result[0]);      
-    }   
+    //var result = Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
+    Nceno.methods.getFutureGoal(i)
+    .call({from: web3.eth.defaultAccount},
+      function(error, result) {
+        if (!error){
+          //echo challenge
+          if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
+            //list it in the table
+            var tstamp = new Date(result[5]*1000);
+            //var buyin = Math.round(result[2]/100000000000000000000);
+            var n = i+1;
+            var buyinKey = 'buyinU'+n;
+            var wksKey = 'wksU'+n;
+            var sesKey = 'sesU'+n;
+            var minKey = 'minU'+n;
+            var pplKey = 'pplU'+n;
+            var startKey = 'startU'+n;
+            var btnKey = 'btnU'+n;
+            var idKey = 'idNumberU'+n;
+            $('#'+buyinKey).html('$'+result[2]);
+            $('#'+wksKey).html(result[4]+' wks');
+            $('#'+sesKey).html(result[3]+' x/wk');
+            $('#'+minKey).html(result[1]+'  min');
+            $('#'+pplKey).html(result[6]);
+            $('#'+startKey).html(tstamp.toDateString());
+            $('#'+btnKey).show();
+            $('#'+idKey).val(result[0]);
+            console.log("upcoming goal: "+result[0]);      
+          }
+          else console.error(error);
+        }
+      });
   }
 
   $('#soonJoin1').click(function(){
