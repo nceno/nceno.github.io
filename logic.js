@@ -617,7 +617,7 @@ function selectedChallenge(){
           //set current challenge week globally
           currentWeek = Math.floor((Date.now()/1000 - startingTime)/604800)+1;
           if(Date.now()/1000 < (startingTime+wkLimit*604800)){
-            chartWeek = currentWeek
+            chartWeek = currentWeek;
           }
           else {chartWeek = wkLimit;}
           //currentWeek = (Date.now()/1000 - result[4])/604800;
