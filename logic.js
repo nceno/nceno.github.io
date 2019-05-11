@@ -596,7 +596,7 @@ function selectedChallenge(){
           //echo challenge
           var compcount = result[5];
           var tstamp = new Date(result[4]*1000);
-          startingTime = result[4];
+          startingTime = result[4]*1.0;
           //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
           wkLimit = result[3];
           $("#echStake").html("$"+result[1]);
