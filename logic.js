@@ -1201,7 +1201,7 @@ function joinTarget(){
   Nceno.methods.join(
     targetGoalID,
     stravaID,
-    ethPrice
+    ethPrice*100 //ethprice in pennies, gets rid of decimals
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(standard)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
     function(error, result) {
