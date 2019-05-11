@@ -1118,7 +1118,7 @@ function browse(){
     targetSes = $('#sesU3').text().slice(0,2);
     targetMin = $('#minU3').text().slice(0,3);
     targetStart = $('#startU3').text();
-    //console.log("targets are: "+targetStart, targetStake, targetSes);
+    console.log("targets are: "+targetStart, targetStake, targetSes);
     populateTargetModal();
   });
   $('#soonJoin4').click(function(){
