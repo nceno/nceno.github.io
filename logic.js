@@ -1050,8 +1050,8 @@ function browse(){
   var targetStake;
   var targetWks;
   var targetSes;
-  var targetMin ;
-  var targetStart
+  var targetMin;
+  var targetStart;
 
   updateNonce();
   //clear out the goalIDs from old elements
