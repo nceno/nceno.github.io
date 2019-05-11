@@ -615,7 +615,10 @@ function selectedChallenge(){
           wks = result[3];
 
           //set current challenge week globally
-          currentWeek = Math.floor((Date.now()/1000 - result[4])/604800)+1;
+          if(Date.now()/(1000*604800) < (startingTime+wkLimit)/604800){
+            currentWeek = Math.floor((Date.now()/1000 - startingTime)/604800)+1;
+          }
+          else {currentWeek = wkLimit;}
           //currentWeek = (Date.now()/1000 - result[4])/604800;
           console.log("blockchain says we're in week: "+currentWeek);
           makeWktl();
