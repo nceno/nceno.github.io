@@ -1217,14 +1217,14 @@ function joinTarget(){
 }
 
 var browsedGoal;
-function setGoalID(id){
+/*function setGoalID(id){
   browsedGoal= id;
   $("#soonEcho").html(
     "You're commiting $" + buyin + " to working out for " + 
     result[0] +"mins " + result[2]+" times per week for "+ 
     result[3]+  " weeks, starting automatically on "+ tstamp.toDateString()
   );
-}
+}*/
 
 //button to claim lost stake from previous week. needs work.
 $("#claimBtn").click(function() {
