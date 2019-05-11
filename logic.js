@@ -662,6 +662,7 @@ function selectedChallenge(){
 
                               bonusTotal[k] = result[3];
                               totalPay[k] = result[4]/100;
+
                               if(currentWeek>1){
                                 lostStake[k] = result[1]/100;
                               }

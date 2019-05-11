@@ -343,7 +343,7 @@ contract Nceno {
       my.bonusTotal = 0;
       uint totalPay=0;
 
-    if(0<=wk && wk<theGoal.wks+1){
+    if(wk<theGoal.wks+1){
       for(uint j =0; j<1+wk; j++){
         
         my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
@@ -359,6 +359,24 @@ contract Nceno {
           my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
         }
       }
+    }
+    else{
+      for(uint j =0; j<theGoal.wks; j++){
+        
+        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
+      
+        if(theGoal.winnersWk[j]>0){
+          my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
+          my.bonusTotal+= my.wkBonuses[j];
+        }
+
+        totalPay+= my.wkPayouts[j]; //in pennies
+
+        if(j<wk){
+          my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
+        }
+      }
+
     }
     return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
