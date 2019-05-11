@@ -1083,7 +1083,7 @@ async function browse(){
       var btnKey = 'btnU'+n;
       var idKey = 'idNumberU'+n;
       $('#'+buyinKey).html('$'+result[2]);
-      $('#'+wksKey).html(result[4]+' wks');
+      $('#'+wksKey).html(result[4]+'  wks');
       $('#'+sesKey).html(result[3]+' x/wk');
       $('#'+minKey).html(result[1]+'  min');
       $('#'+pplKey).html(result[6]);
@@ -1097,7 +1097,7 @@ async function browse(){
   $('#soonJoin1').click(function(){
     targetGoalID = $('#idNumberU1').text();
     targetStake = $('#buyinU1').text().slice(1);
-    targetWks = $('#wksU1').text();
+    targetWks = $('#wksU1').text().slice(0,3);
     targetSes = $('#sesU1').text().slice(0,2);
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
@@ -1106,7 +1106,7 @@ async function browse(){
   $('#soonJoin2').click(function(){
     targetGoalID = $('#idNumberU2').text();
     targetStake = $('#buyinU2').text().slice(1);
-    targetWks = $('#wksU2').text();
+    targetWks = $('#wksU2').text().slice(0,3);;
     targetSes = $('#sesU2').text().slice(0,2);
     targetMin = $('#minU2').text().slice(0,3);
     targetStart = $('#startU2').text();
@@ -1115,17 +1115,16 @@ async function browse(){
   $('#soonJoin3').click(function(){
     targetGoalID = $('#idNumberU3').text();
     targetStake = $('#buyinU3').text().slice(1);
-    targetWks = $('#wksU3').text();
+    targetWks = $('#wksU3').text().slice(0,3);;
     targetSes = $('#sesU3').text().slice(0,2);
     targetMin = $('#minU3').text().slice(0,3);
     targetStart = $('#startU3').text();
-    console.log("targets are: "+targetStart, targetStake, targetSes);
     populateTargetModal();
   });
   $('#soonJoin4').click(function(){
     targetGoalID = $('#idNumberU4').text();
     targetStake = $('#buyinU4').text().slice(1);
-    targetWks = $('#wksU4').text();
+    targetWks = $('#wksU4').text().slice(0,3);;
     targetSes = $('#sesU4').text().slice(0,2);
     targetMin = $('#minU4').text().slice(0,3);
     targetStart = $('#startU4').text();
@@ -1134,7 +1133,7 @@ async function browse(){
   $('#soonJoin5').click(function(){
     targetGoalID = $('#idNumberU5').text();
     targetStake = $('#buyinU5').text().slice(1);
-    targetWks = $('#wksU5').text();
+    targetWks = $('#wksU5').text().slice(0,3);;
     targetSes = $('#sesU5').text().slice(0,2);
     targetMin = $('#minU5').text().slice(0,3);
     targetStart = $('#startU5').text();
@@ -1143,7 +1142,7 @@ async function browse(){
   $('#soonJoin6').click(function(){
     targetGoalID = $('#idNumberU6').text();
     targetStake = $('#buyinU6').text().slice(1);
-    targetWks = $('#wksU6').text();
+    targetWks = $('#wksU6').text().slice(0,3);;
     targetSes = $('#sesU6').text().slice(0,2);
     targetMin = $('#minU6').text().slice(0,3);
     targetStart = $('#startU6').text();
@@ -1152,7 +1151,7 @@ async function browse(){
   $('#soonJoin7').click(function(){
     targetGoalID = $('#idNumberU7').text();
     targetStake = $('#buyinU7').text().slice(1);
-    targetWks = $('#wksU7').text();
+    targetWks = $('#wksU7').text().slice(0,3);;
     targetSes = $('#sesU7').text().slice(0,2);
     targetMin = $('#minU7').text().slice(0,3);
     targetStart = $('#startU7').text();
@@ -1161,7 +1160,7 @@ async function browse(){
   $('#soonJoin8').click(function(){
     targetGoalID = $('#idNumberU8').text();
     targetStake = $('#buyinU8').text().slice(1);
-    targetWks = $('#wksU8').text();
+    targetWks = $('#wksU8').text().slice(0,3);;
     targetSes = $('#sesU8').text().slice(0,2);
     targetMin = $('#minU8').text().slice(0,3);
     targetStart = $('#startU8').text();
@@ -1170,7 +1169,7 @@ async function browse(){
   $('#soonJoin9').click(function(){
     targetGoalID = $('#idNumberU9').text();
     targetStake = $('#buyinU9').text().slice(1);
-    targetWks = $('#wksU9').text();
+    targetWks = $('#wksU9').text().slice(0,3);;
     targetSes = $('#sesU9').text().slice(0,2);
     targetMin = $('#minU9').text().slice(0,3);
     targetStart = $('#startU9').text();
@@ -1179,7 +1178,7 @@ async function browse(){
   $('#soonJoin10').click(function(){
     targetGoalID = $('#idNumberU10').text();
     targetStake = $('#buyinU10').text().slice(1);
-    targetWks = $('#wksU10').text();
+    targetWks = $('#wksU10').text().slice(0,3);;
     targetSes = $('#sesU10').text().slice(0,2);
     targetMin = $('#minU10').text().slice(0,3);
     targetStart = $('#startU10').text();
@@ -1190,7 +1189,7 @@ async function browse(){
 function populateTargetModal(){
   $("#soonEcho").html(
     "You're commiting $" + targetStake + " to working out for " + 
-    targetMin +", "+ targetSes+" times per week, for "+ 
+    targetMin +"minutes, "+ targetSes+" times per week, for "+ 
     targetWks+  " weeks, starting automatically on "+ targetStart
   );
 }
