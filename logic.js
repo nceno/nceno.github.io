@@ -771,7 +771,11 @@ function selectedChallenge(){
                                         finishers[i] = winnersWk[i]*100/competitors;
                                       }
 
-                                      //draw charts
+                                      //empty previous charts
+                                      $('#canvas1').empty();
+                                      $('#canvas2').empty();
+
+                                      //draw charts**************************************************************************************************
                                       var ctx1 = document.getElementById('canvas1').getContext('2d');
                                       window.myLine1 = new Chart(ctx1, 
                                         //config1
