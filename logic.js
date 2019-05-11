@@ -1113,7 +1113,7 @@ async function browse(){
     populateTargetModal();
   });
   $('#soonJoin3').click(function(){
-    targetGoalID = $('#idNumberU3').text();
+    targetGoalID = $('#idNumberU3').val();
     console.log("target goal ID is: "+targetGoalID);
     targetStake = $('#buyinU3').text().slice(1);
     targetWks = $('#wksU3').text().slice(0,3);;
@@ -1198,6 +1198,7 @@ function populateTargetModal(){
 function joinTarget(){
   updateEthPrice();
 
+  console.log("goalID is: "+targetGoalID+", stravaID is: "+stravaID+", ethprice is: "+ethPrice);
   Nceno.methods.join(
     targetGoalID,
     stravaID,
