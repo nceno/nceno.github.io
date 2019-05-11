@@ -1114,6 +1114,7 @@ async function browse(){
   });
   $('#soonJoin3').click(function(){
     targetGoalID = $('#idNumberU3').text();
+    console.log("target goal ID is: "+targetGoalID);
     targetStake = $('#buyinU3').text().slice(1);
     targetWks = $('#wksU3').text().slice(0,3);;
     targetSes = $('#sesU3').text().slice(0,2);
