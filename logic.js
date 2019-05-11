@@ -1044,7 +1044,8 @@ function search(){
 //populates the challenges starting soon table
 //var browsePopulated
 var selBrowsedGoal = 0x0000000000000000000000000000000000000000000000000000000000000000;
-async function browse(){
+function browse(){
+
   var targetGoalID;
   var targetStake;
   var targetWks;
@@ -1067,7 +1068,7 @@ async function browse(){
 
   
   for (let i = 0; i < 10; i++){
-    var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
+    var result = Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
     if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
       //list it in the table
       var tstamp = new Date(result[5]*1000);
@@ -1099,6 +1100,7 @@ async function browse(){
     targetSes = $('#sesU1').text().slice(0,2);
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
+    populateTargetModal();
   });
   $('#soonJoin2').click(function(){
     targetGoalID = $('#idNumberU2').text();
@@ -1107,6 +1109,7 @@ async function browse(){
     targetSes = $('#sesU2').text().slice(0,2);
     targetMin = $('#minU2').text().slice(0,3);
     targetStart = $('#startU2').text();
+    populateTargetModal();
   });
   $('#soonJoin3').click(function(){
     targetGoalID = $('#idNumberU3').text();
@@ -1115,7 +1118,8 @@ async function browse(){
     targetSes = $('#sesU3').text().slice(0,2);
     targetMin = $('#minU3').text().slice(0,3);
     targetStart = $('#startU3').text();
-    console.log("targets are: "+targetStart, targetStake, targetSes);
+    //console.log("targets are: "+targetStart, targetStake, targetSes);
+    populateTargetModal();
   });
   $('#soonJoin4').click(function(){
     targetGoalID = $('#idNumberU4').text();
@@ -1124,6 +1128,7 @@ async function browse(){
     targetSes = $('#sesU4').text().slice(0,2);
     targetMin = $('#minU4').text().slice(0,3);
     targetStart = $('#startU4').text();
+    populateTargetModal();
   });
   $('#soonJoin5').click(function(){
     targetGoalID = $('#idNumberU5').text();
@@ -1132,6 +1137,7 @@ async function browse(){
     targetSes = $('#sesU5').text().slice(0,2);
     targetMin = $('#minU5').text().slice(0,3);
     targetStart = $('#startU5').text();
+    populateTargetModal();
   });
   $('#soonJoin6').click(function(){
     targetGoalID = $('#idNumberU6').text();
@@ -1140,6 +1146,7 @@ async function browse(){
     targetSes = $('#sesU6').text().slice(0,2);
     targetMin = $('#minU6').text().slice(0,3);
     targetStart = $('#startU6').text();
+    populateTargetModal();
   });
   $('#soonJoin7').click(function(){
     targetGoalID = $('#idNumberU7').text();
@@ -1148,6 +1155,7 @@ async function browse(){
     targetSes = $('#sesU7').text().slice(0,2);
     targetMin = $('#minU7').text().slice(0,3);
     targetStart = $('#startU7').text();
+    populateTargetModal();
   });
   $('#soonJoin8').click(function(){
     targetGoalID = $('#idNumberU8').text();
@@ -1156,6 +1164,7 @@ async function browse(){
     targetSes = $('#sesU8').text().slice(0,2);
     targetMin = $('#minU8').text().slice(0,3);
     targetStart = $('#startU8').text();
+    populateTargetModal();
   });
   $('#soonJoin9').click(function(){
     targetGoalID = $('#idNumberU9').text();
@@ -1164,6 +1173,7 @@ async function browse(){
     targetSes = $('#sesU9').text().slice(0,2);
     targetMin = $('#minU9').text().slice(0,3);
     targetStart = $('#startU9').text();
+    populateTargetModal();
   });
   $('#soonJoin10').click(function(){
     targetGoalID = $('#idNumberU10').text();
@@ -1172,17 +1182,20 @@ async function browse(){
     targetSes = $('#sesU10').text().slice(0,2);
     targetMin = $('#minU10').text().slice(0,3);
     targetStart = $('#startU10').text();
+    populateTargetModal();
   });
 }
 
-function joinTarget(){
-  updateEthPrice();
-
+function populateTargetModal(){
   $("#soonEcho").html(
     "You're commiting $" + targetStake + " to working out for " + 
     targetMin +", "+ targetSes+" times per week, for "+ 
     targetWks+  " weeks, starting automatically on "+ targetStart
   );
+}
+
+function joinTarget(){
+  updateEthPrice();
 
   Nceno.methods.join(
     targetGoalID,
