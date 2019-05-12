@@ -2,7 +2,7 @@ pragma solidity ^0.4.24;
 //pragma experimental ABIEncoderV2; //to return a struct in a function
 //import "kyber/contracts/ERC20Interface.sol";
 //import "kyber/contracts/KyberNetworkProxy.sol";
-//import "tabookey-gasless/contracts/RelayRecipient.sol";
+import "./RelayRecipient.sol";
 
 //stravaID: 0123456
 //username: 0x6d6574616d61736b5f6a6e
@@ -12,8 +12,8 @@ pragma solidity ^0.4.24;
 
 
 //inherit gas station relay contract
-//contract Nceno is RelayRecipient
-contract Nceno {
+contract Nceno is RelayRecipient{
+//contract Nceno {
   //adr 1 on metamask ropsten
   address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
   function setAdmin(address _newAdmin) onlyAdmin external{
@@ -25,10 +25,11 @@ contract Nceno {
     hrThresh = _newThresh;
   }
 
+  address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
   //gas station init
-  /*function Nceno(){
-    init_relay_hub(RelayHub(0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87));
-  }*/
+  function Nceno(){
+    init_relay_hub(RelayHub(hubAddress));
+  }
 
   struct goalObject{
     bytes32 goalID;
@@ -104,7 +105,7 @@ contract Nceno {
     //poulate identifiers
     createdCompetitor.stravaID = _stravaID;
     createdCompetitor.userName = _userName;
-    createdCompetitor.walletAdr = msg.sender; //get_sender()
+    createdCompetitor.walletAdr = get_sender();
     createdCompetitor.born = now;
     createdCompetitor.flag = _flag;
     createdCompetitor.OS = _OS;
@@ -116,7 +117,7 @@ contract Nceno {
   }
 
   function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) external payable {
-    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == msg.sender && msg.value>= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
+    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value>= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
      "User does not exist, or wallet-user pair does not match."); //get_sender()
     goalObject memory createdGoal;
 
@@ -173,7 +174,7 @@ contract Nceno {
   }
 
   function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external{
-    require(profileOf[_stravaID].walletAdr == msg.sender && goalAt[_goalID].isCompetitor[_stravaID]==true && 
+    require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
     uint wk = (now - goalAt[_goalID].startTime)/604800;
@@ -184,8 +185,8 @@ contract Nceno {
       //payout a refund- needs kyberswap adjustment
      
       uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
-      msg.sender.transfer(payout); //get_sender()
-      //IERC20Token(tokenContractAddress).transfer(msg.sender, payout); //get_sender()
+      get_sender().transfer(payout); //get_sender()
+      //IERC20Token(tokenContractAddress).transfer(get_sender(), payout); //get_sender()
 
       //note the success     
       goalAt[_goalID].successes[_stravaID][wk]++;
@@ -197,7 +198,7 @@ contract Nceno {
 
   function claim(bytes32 _goalID, uint _stravaID) external{
     //must have 100% adherence for the previous week, and can only claim once.
-    require(profileOf[_stravaID].walletAdr == msg.sender && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
+    require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
       goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
       goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800] == 0,
       "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week."
@@ -228,8 +229,8 @@ contract Nceno {
     goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] = 1;
 
     //needs USDC adjustment
-    msg.sender.transfer(cut); //get_sender()
-    //IERC20Token(tokenContractAddress).transfer(msg.sender, payout); //get_sender()
+    get_sender().transfer(cut); //get_sender()
+    //IERC20Token(tokenContractAddress).transfer(get_sender(), payout); //get_sender()
   }
 
   function takeRevenue(uint _amount) onlyAdmin external{
@@ -238,7 +239,7 @@ contract Nceno {
   }
 
   modifier onlyAdmin(){
-    require(msg.sender == admin,"Sender not authorized."); //get_sender()
+    require(get_sender() == admin,"Sender not authorized."); //get_sender()
     _;
   }
 
@@ -360,7 +361,6 @@ contract Nceno {
       my.bonusTotal = 0;
       uint totalPay=0;
 
-    //if((now - theGoal.startTime)/604800<theGoal.wks+1){  //only fires if goal still active
       for(uint j =0; j<wkLimit; j++){
 
         my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
@@ -376,7 +376,6 @@ contract Nceno {
           my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
         }
       }
-    //}
     return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
 
@@ -428,16 +427,16 @@ contract Nceno {
         uint change = this.balance - (startEthBalance - msg.value);
         SwapEtherChange(startEthBalance, this.balance, change);
         
-        //return change to msg.sender
-        msg.sender.transfer(change); //get_sender()
+        //return change to get_sender()
+        get_sender().transfer(change); //get_sender()
     }*/
 
   //-----------------------------------------------
   //gas station relay stuff
   //-----------------------------------------------
 
-  //replace all msg.sender with get_sender()
-  /*
+  //replace all get_sender() with get_sender()
+ 
   //Returning 0 means you accept sponsoring the relayed transaction. Anything else indicates rejection.
   function accept_relayed_call(address relay, address from, bytes memory encoded_function, uint gas_price, uint transaction_fee) public view returns(uint32) {return 0;}
 
@@ -445,5 +444,5 @@ contract Nceno {
   function post_relayed_call(address relay, address from, bytes memory encoded_function, bool success, uint used_gas, uint transaction_fee) public {
   //This is where you would usually subtract from the user's remaining credit (if success == true), throw an event, etc.
   }
-  */
+  
 }

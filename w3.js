@@ -1,7 +1,7 @@
 
 //var PortisProvider = window.Portis.PortisProvider;
-const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten');
-//const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten', { gasRelay: true });
+//const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten');
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten', { gasRelay: true });
 const web3 = new Web3(portis.provider);
 
 // Check if Web3 has been injected by the browser (Mist/MetaMask)
