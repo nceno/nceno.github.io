@@ -11,7 +11,6 @@ import "./IERC20Token.sol";
 //web3.utils.toHex('');
 //1000100000000000000*targetStake/ethPrice
 
-
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 //contract Nceno {
@@ -188,7 +187,6 @@ contract Nceno is RelayRecipient{
     //emit Hosted();
   }
   //event Hosted();
-
 
   function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) external payable {
     require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
