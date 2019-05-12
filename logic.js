@@ -743,7 +743,7 @@ function selectedChallenge(){
                                           if(daysRem!=1){
                                             $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h3>");
                                           }
-                                          else{$('#'+dlKey).html('<h3>today is the last day for this week!</h3>');}
+                                          else{$('#'+dlKey).html('<h3>Today is the last day for this week!</h3>');}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
