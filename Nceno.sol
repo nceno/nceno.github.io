@@ -3,6 +3,7 @@ pragma solidity ^0.4.24;
 //import "./ERC20Interface.sol";
 //import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
+import "./IERC20Token.sol";
 
 //stravaID: 0123456
 //username: 0x6d6574616d61736b5f6a6e
@@ -26,9 +27,36 @@ contract Nceno is RelayRecipient{
   }
 
   address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
+  address USDC = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48; //mainnet
+  address DAI = 0xaD6D458402F60fD3Bd25163575031ACDce07538D; //ropsten
+
   //gas station init
   function Nceno(){
     init_relay_hub(RelayHub(hubAddress));
+  }
+
+  function liquidateGoalInstance(uint _index) onlyAdmin external returns(uint){
+    //can only see a week after a goal is finished
+    require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
+    //transfer the money
+    IERC20Token(USDC).transfer(admin, goalInstance[_index].unclaimedStake);
+    //close the goal
+    goalInstance[_index].liquidated = true;
+    return(goalInstance[_index].unclaimedStake);
+  }
+
+  function liquidateGoalAt(bytes32 _goalID) onlyAdmin external returns(uint){
+    //can only see a week after a goal is finished
+    require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
+    //transfer the money
+    IERC20Token(USDC).transfer(admin, goalAt[_goalID].unclaimedStake);
+    //close the goal
+    goalAt[_goalID].liquidated = true;
+    return(goalAt[_goalID].unclaimedStake);
+  }
+
+  function getGoalCount() external returns(uint){
+    return(goalCount);
   }
 
   struct goalObject{
@@ -45,6 +73,9 @@ contract Nceno is RelayRecipient{
     uint competitorCount;
     uint[12] potWk;
     uint[12] winnersWk;
+    uint unclaimedStake; //gets adjusted by join(), host(), log(), and claim()
+    bool liquidated;
+
     mapping(uint=>uint[12]) successes;
     mapping(uint=>uint[12]) claims;
     mapping(uint=>uint) ethPricePenniesAtJoin;
@@ -130,7 +161,8 @@ contract Nceno is RelayRecipient{
     createdGoal.sesPerWk = _sesPerWk;
     createdGoal.ethPricePennies = _ethPricePennies;
 
-    //set logs and claims to [0]?
+    //adjust the unclaimedStake
+    createdGoal.unclaimedStake+= _stakeUSD;
 
     //set weekly lockup percentages
     createdGoal.lockedPercent = partitionChoices[now % 2][_wks/2 -1];
@@ -165,7 +197,8 @@ contract Nceno is RelayRecipient{
     goalAt[_goalID].competitorCount++;
     goalAt[_goalID].isCompetitor[_stravaID] = true;
 
-    //set logs and claims to [0]?
+    //adjust the unclaimedStake
+    goalAt[_goalID].unclaimedStake+= goalAt[_goalID].stakeUSD;
 
     //add goal to own registry
     profileOf[_stravaID].myGoal[_goalID] = goalAt[_goalID];
@@ -195,6 +228,9 @@ contract Nceno is RelayRecipient{
       goalAt[_goalID].successes[_stravaID][wk]++;
       //protect activity from double spending 
       goalAt[_goalID].activitySpent[_activityID]=true;
+
+      //adjust the unclaimedStake
+      goalAt[_goalID].unclaimedStake-= payout; //convert to usd
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
@@ -234,11 +270,9 @@ contract Nceno is RelayRecipient{
     //needs USDC adjustment
     get_sender().transfer(cut); //get_sender()
     //IERC20Token(tokenContractAddress).transfer(get_sender(), payout); //get_sender()
-  }
 
-  function takeRevenue(uint _amount) onlyAdmin external{
-    admin.transfer(_amount);
-    //IERC20Token(tokenContractAddress).transfer(admin, _amount);
+    //adjust the unclaimedStake
+    goalAt[_goalID].unclaimedStake-= cut; //convert to usd
   }
 
   modifier onlyAdmin(){
@@ -397,7 +431,7 @@ contract Nceno is RelayRecipient{
   //get completed goal: only returns a user's goal if it has completed
   function getCompletedGoal(uint _stravaID, uint _index) external view returns(bytes32){
     require(now > profileOf[_stravaID].mygoalInstance[_index].startTime + profileOf[_stravaID].mygoalInstance[_index].wks*604800);
-    return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
+    return(profileOf[_stravaID].mygoalInstance[_index].goalID);
   }
 
   function getProfile(uint _stravaID) external view returns(address, uint, bytes32, uint, uint){
@@ -408,6 +442,20 @@ contract Nceno is RelayRecipient{
     return(profileOf[_stravaID].mygoalInstance[_instance].goalID);
   }
 
+  //-----------------------------------------------
+  //gas station relay stuff
+  //-----------------------------------------------
+  
+  //replaced all get_sender() with get_sender()
+ 
+  //Returning 0 means you accept sponsoring the relayed transaction. Anything else indicates rejection.
+  function accept_relayed_call(address relay, address from, bytes memory encoded_function, uint gas_price, uint transaction_fee) public view returns(uint32) {
+    return 0;
+  }
+
+  function post_relayed_call(address relay, address from, bytes memory encoded_function, bool success, uint used_gas, uint transaction_fee) public {
+  //This is where you would usually subtract from the user's remaining credit (if success == true), throw an event, etc.
+  }
 
   //-----------------------------------------------
   //kyber stuff
@@ -432,20 +480,5 @@ contract Nceno is RelayRecipient{
         
         //return change to get_sender()
         get_sender().transfer(change); //get_sender()
-    }*/
-
-  //-----------------------------------------------
-  //gas station relay stuff
-  //-----------------------------------------------
-
-  //replaced all get_sender() with get_sender()
- 
-  //Returning 0 means you accept sponsoring the relayed transaction. Anything else indicates rejection.
-  function accept_relayed_call(address relay, address from, bytes memory encoded_function, uint gas_price, uint transaction_fee) public view returns(uint32) {return 0;}
-
-
-  function post_relayed_call(address relay, address from, bytes memory encoded_function, bool success, uint used_gas, uint transaction_fee) public {
-  //This is where you would usually subtract from the user's remaining credit (if success == true), throw an event, etc.
-  }
-  
+    }*/ 
 }
