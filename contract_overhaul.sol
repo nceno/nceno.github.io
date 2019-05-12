@@ -8,7 +8,7 @@ pragma solidity ^0.4.24;
 //username: 0x6d6574616d61736b5f6a6e
 //flag: 0x7573
 //web3.utils.toHex('');
-
+//1000100000000000000*targetStake/ethPrice
 
 
 //inherit gas station relay contract
