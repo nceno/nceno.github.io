@@ -1,8 +1,8 @@
 pragma solidity >=0.4.0 <0.6.0;
 
-import "RelayHubApi.sol";
-import "RelayRecipient.sol";
-import "RLPReader.sol";
+import "./RelayHubApi.sol";
+import "./RelayRecipient.sol";
+import "./RLPReader.sol";
 
 contract RelayHub is RelayHubApi {
 

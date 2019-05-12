@@ -7,8 +7,8 @@ pragma solidity >=0.4.0 <0.6.0;
 // * Implement accept_relayed_call, which acts as a whitelist/blacklist of senders.  It is advised that the recipient's owner will be able to update that list to remove abusers.
 // * In every function that cares about the sender, use "address sender = get_sender()" instead of msg.sender.  It'll return msg.sender for non-relayed transactions, or the real sender in case of relayed transactions.
 
-import "RelayRecipientApi.sol";
-import "RelayHub.sol";
+import "./RelayRecipientApi.sol";
+import "./RelayHub.sol";
 
 contract RelayRecipient is RelayRecipientApi {
 
