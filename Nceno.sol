@@ -153,7 +153,10 @@ contract Nceno is RelayRecipient{
     //kyber step
     //swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
 
+    //emit Hosted();
   }
+  //event Hosted();
+
 
   function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) external payable {
     require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
