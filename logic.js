@@ -1031,7 +1031,7 @@ function search(){
         if(result[4]*1000>Date.now()){$("#joinSearch").show();}
 
         $("#srEcho").html(
-          "You're commiting $" + buyin + " to working out for " + 
+          "You're commiting $" + result[1] + " to working out for " + 
           result[0] +"mins " + result[2]+" times per week for "+ 
           result[3]+  " weeks, starting automatically on "+ tstamp.toDateString()
         );
