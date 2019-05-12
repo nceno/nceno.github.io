@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 //pragma experimental ABIEncoderV2; //to return a struct in a function
-//import "kyber/contracts/ERC20Interface.sol";
-//import "kyber/contracts/KyberNetworkProxy.sol";
+//import "./ERC20Interface.sol";
+//import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
 
 //stravaID: 0123456
@@ -435,7 +435,7 @@ contract Nceno is RelayRecipient{
   //gas station relay stuff
   //-----------------------------------------------
 
-  //replace all get_sender() with get_sender()
+  //replaced all get_sender() with get_sender()
  
   //Returning 0 means you accept sponsoring the relayed transaction. Anything else indicates rejection.
   function accept_relayed_call(address relay, address from, bytes memory encoded_function, uint gas_price, uint transaction_fee) public view returns(uint32) {return 0;}

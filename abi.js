@@ -1,3 +1,7 @@
+//initialize portis
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten', { gasRelay: true });
+const web3 = new Web3(portis.provider);
+
 var Nceno = new web3.eth.Contract([
   {
     "constant": true,
