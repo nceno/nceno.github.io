@@ -541,9 +541,9 @@ function makeWktl(){
   if(currentWeek>wkLimit){mostRecentWk = wkLimit;}
   else mostRecentWk = currentWeek;
 
-  for (let j = 0; j < mostRecentWk; j++){ //j < wkLimit;
-    var wkindex1 = j+1;
-    var currentwkKey = 'week'+wkindex1;
+  for (let i = 0; i < mostRecentWk; i++){ //i < wkLimit;
+    var wkindex = i+1;
+    var currentwkKey = 'week'+wkindex;
     $('#'+currentwkKey).show();
   }
 
