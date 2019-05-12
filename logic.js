@@ -1020,13 +1020,13 @@ function search(){
         //echo challenge
 
         var tstamp = new Date(result[4]*1000);
-        var buyin = Math.round(result[1]*result[5]/100000000000000000000);
+        //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
 
         $("#srStake").html("$"+result[1]);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
         $("#srMins").html(result[0]+ " mins");
-        $("#srComp").html(result[6]);
+        $("#srComp").html(result[5]);
         $("#srStart").html(tstamp.toDateString());
         if(result[4]*1000>Date.now()){$("#joinSearch").show();}
 

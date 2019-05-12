@@ -4,6 +4,12 @@ pragma solidity ^0.4.24;
 //import "./KyberNetworkProxy.sol";
 //import "tabookey-gasless/contracts/RelayRecipient.sol";
 
+//stravaID: 0123456
+//username: 0x6d6574616d61736b5f6a6e
+//flag: 0x7573
+//web3.utils.toHex('');
+
+
 
 //inherit gas station relay contract
 //contract Nceno is RelayRecipient
