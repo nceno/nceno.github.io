@@ -1,5 +1,5 @@
 pragma solidity ^0.4.24;
-//pragma experimental ABIEncoderV2; //to return a struct in a function
+pragma experimental ABIEncoderV2; //to return a struct in a function
 //import "./ERC20Interface.sol";
 //import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
@@ -13,7 +13,37 @@ import "./IERC20Token.sol";
 
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
-//contract Nceno {
+
+  function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
+    return(admin,
+      hrThresh,
+      hubAddress,
+      USDC,
+      DAI,
+      goalCount
+    );
+  }
+
+  /*function migrateVars(address _admin, uint _hrThresh, address _hubAddress, address _USDC, address _DAI, uint _goalCount) onlyAdmin public{
+
+  }*/
+
+  function downloadGoal(uint _index) onlyAdmin internal returns(goalObject){
+    return(goalInstance[_index]);
+  }
+
+  /*function migrateGoal(goalObject _goal) onlyAdmin internal{
+
+  }*/
+
+  function downloadCompetitor(uint _index) onlyAdmin internal returns(competitorObject){
+    return(profileOf[stravaIDs[_index]]);
+  }
+
+  /*function migrateCompetitor(competitorObject _competitor) internal{
+
+  }*/
+
   //adr 1 on metamask ropsten
   address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
   function setAdmin(address _newAdmin) onlyAdmin external{
@@ -54,10 +84,13 @@ contract Nceno is RelayRecipient{
     return(goalAt[_goalID].unclaimedStake);
   }
 
-  function getGoalCount() external returns(uint){
+  function getGoalCount() external view returns(uint){
     return(goalCount);
   }
 
+  function getUserCount() external view returns(uint){
+    return(stravaIDs.length);
+  }
   struct goalObject{
     bytes32 goalID;
     uint startTime;
@@ -67,9 +100,10 @@ contract Nceno is RelayRecipient{
     uint sesPerWk;
     uint ethPricePennies; //this is the usd price of eth, but multiplied by 100.
 
-    uint[12] lockedPercent;
-    uint[10] competitorIDs;
     uint competitorCount;
+    uint[10] competitorIDs;
+
+    uint[12] lockedPercent;
     uint[12] potWk;
     uint[12] winnersWk;
     uint unclaimedStake; //gets adjusted by join(), host(), log(), and claim()
@@ -120,7 +154,6 @@ contract Nceno is RelayRecipient{
     mapping(bytes32=>goalObject) myGoal;
     uint myGoalCount;
     mapping(uint=>goalObject) mygoalInstance;
-
   }
 
   mapping(uint=>competitorObject) public profileOf;
