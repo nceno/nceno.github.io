@@ -1044,7 +1044,7 @@ function search(){
         $("#srMins").html(result[0]+ " mins");
         $("#srComp").html(result[5]);
         $("#srStart").html(tstamp.toDateString());
-        if(result[4]*1000>Date.now()){$("#joinSearch").show();}
+        if(result[4]*1000>Date.now()){$("#srJoin").show();}
 
         $("#srEcho").html(
           "You're commiting $" + result[1] + " to working out for " + 
