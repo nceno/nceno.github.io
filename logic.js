@@ -1559,6 +1559,7 @@ function getActivities(){
           console.log(receipt.status);
           if(receipt.status === true){
             $('#logLoader').hide();
+            $('#getYouPaid').hide();
             correctNonce++;
             console.log("You just unlocked part of your stake.");
             $('#logSuccess').html('<p>Great job, you just earned back part of your stake! Check your wallet.</p>');
@@ -1566,6 +1567,7 @@ function getActivities(){
           }
           else{
             $('#logLoader').hide();
+            $('#getYouPaid').hide();
             $('#logFail').html('<p>"wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.</p>');
             console.log("wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.");
           } 
@@ -1575,6 +1577,7 @@ function getActivities(){
       //if no valid workouts, don't log, and alert the user.
       else{
         console.log("No valid workouts today...");
+        $('#getYouPaid').hide();
         $('#logFail').html('<p>You don’t have any valid workouts today. </p>');
 
       } 
