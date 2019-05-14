@@ -1431,7 +1431,7 @@ function updateEthPrice(btn) {
       ethPrice = resp.USD;
       console.log(this.responseText);
       console.log(ethPrice);
-      $('"#'+btn+'"').show();
+      $('#'+btn).show();
       /*$('#hostBtn').show();
       $('#joinSoonModalBtn').show();
       $("#joinSearch").show();*/
