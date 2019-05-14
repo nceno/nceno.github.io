@@ -1563,6 +1563,7 @@ function getActivities(){
             correctNonce++;
             console.log("You just unlocked part of your stake.");
             $('#logSuccess').html('<p>Great job, you just earned back part of your stake! Check your wallet.</p>');
+            $('#logSuccess').show();
 
           }
           else{
