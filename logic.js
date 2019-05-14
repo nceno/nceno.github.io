@@ -1423,7 +1423,7 @@ function updateGasPrice(){
     fast = data.fast;
     fastest = data.fastest;
     //admin can control the gas price
-    gasPriceChoice = safeLow;
+    gasPriceChoice = standard+1;
     console.log(standard+" < gasPrice < "+fast);    
   });
 }
