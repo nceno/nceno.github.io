@@ -276,7 +276,7 @@ function getMobileOS() {
 var ethPrice;
 function echoGoal(){
   //get live eth price
-  updateEthPrice();
+  updateEthPrice(hostBtn);
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   //echo modal
   $("#host").tab('show');
@@ -301,7 +301,6 @@ function srEcho(){
 
 //joins the searched goal
 function joinSearch(){
-  updateEthPrice();
   goalid = web3.utils.padRight($('#searchField').val(),34);
   Nceno.methods.getGoalParams(
     goalid
@@ -1424,7 +1423,7 @@ function updateGasPrice(){
 
 
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
-function updateEthPrice() {
+function updateEthPrice(btn) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
@@ -1432,9 +1431,10 @@ function updateEthPrice() {
       ethPrice = resp.USD;
       console.log(this.responseText);
       console.log(ethPrice);
-      $('#hostBtn').show();
+      $('"#'+btn+'"').show();
+      /*$('#hostBtn').show();
       $('#joinSoonModalBtn').show();
-      $("#joinSearch").show();
+      $("#joinSearch").show();*/
     }
   });
   xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
