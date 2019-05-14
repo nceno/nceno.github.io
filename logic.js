@@ -1498,6 +1498,8 @@ var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 
 function getActivities(){
+  $('#payMeBtn').hide();
+  $('#logLoader').show();
   var goalMovingTime;
   Nceno.methods.getGoalParams(goalid)
   .call({from: web3.eth.defaultAccount},
@@ -1556,18 +1558,15 @@ function getActivities(){
         ).once('confirmation', function(confNumber, receipt){
           console.log(receipt.status);
           if(receipt.status === true){
+            $('#logLoader').hide();
             correctNonce++;
-            console.log("You just unlocked 4% of your stake. Check your wallet in a couple minutes.");
-            //refreshStats();
-            //refreshLeaderboard();
+            console.log("You just unlocked part of your stake.");
+            $('#logSuccess').html('<p>Great job, you just earned back part of your stake! Check your wallet.</p>');
 
-            /*$("#joinLoader").hide();
-            $("#joinSuccess").show();
-            $("#makeAcctBtn").hide();*/
           }
           else{
-            /*$("#acctLoader").hide();
-            $("#makeAcctBtn").hide();*/
+            $('#logLoader').hide();
+            $('#logFail').html('<p>"wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.</p>');
             console.log("wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.");
           } 
         })
@@ -1576,6 +1575,7 @@ function getActivities(){
       //if no valid workouts, don't log, and alert the user.
       else{
         console.log("No valid workouts today...");
+        $('#logFail').html('<p>You don’t have any valid workouts today. </p>');
 
       } 
     }
