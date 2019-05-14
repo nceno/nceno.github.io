@@ -91,6 +91,9 @@ $("#joinSoonSuccess").hide();
 $("#makeAcctBtn").hide();
 $("#openWallet").hide();
 $("#portisLoader").hide();
+$("#hostBtn").hide();
+$("#joinSearch").hide();
+$('#joinSoonModalBtn').hide();
 
 $('#btnU1').hide();
 $('#btnU2').hide();
@@ -1429,7 +1432,9 @@ function updateEthPrice() {
       ethPrice = resp.USD;
       console.log(this.responseText);
       console.log(ethPrice);
-      //$('#hostBtn').show();
+      $('#hostBtn').show();
+      $('#joinSoonModalBtn').show();
+      $("#joinSearch").show();
     }
   });
   xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
