@@ -276,7 +276,7 @@ function getMobileOS() {
 var ethPrice;
 function echoGoal(){
   //get live eth price
-  updateEthPrice(hostBtn);
+  updateEthPrice('hostBtn');
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   //echo modal
   $("#host").tab('show');
