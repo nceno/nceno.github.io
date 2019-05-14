@@ -752,6 +752,18 @@ function selectedChallenge(){
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost);
+
+
+                                        //disallow logging and claiming if quotas are met
+                                        if(k>0 && successesWk[k-1] != sessions){
+                                          $('#w'+k+'claim').hide();
+                                        }
+
+                                        if(successesWk[k] === sessions){
+                                          var m = k+1;
+                                          $('#w'+m+'log').hide();
+                                        }
+
                                         
                                         console.log("timeline populated...");
                                       }
@@ -1006,6 +1018,7 @@ function selectedChallenge(){
     });
   });
 }
+
 
 //searches for a specific goal and displays it with an option to join.
 //also populates the join modal.
@@ -1432,6 +1445,7 @@ var userCreated;
 var uniqueUserString;
 var e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3 = 'e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3';
 var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+//var tokenExpire = 0;
 
 function getToken(){
   var stuff = null;
@@ -1442,6 +1456,7 @@ function getToken(){
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
+      //tokenExpire = data.expires_in;
       stravaID = data.athlete.id;
       stravaUsername = data.athlete.username;
       $("#stravaOk").hide();

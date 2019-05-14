@@ -5,11 +5,14 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 import "./RelayRecipient.sol";
 import "./IERC20Token.sol";
 
-//stravaID: 0123456
+//stravaID: 39706111
+//other stravaID: 0123456
 //username: 0x6d6574616d61736b5f6a6e
 //flag: 0x7573
 //web3.utils.toHex('');
 //1000100000000000000*targetStake/ethPrice
+//goalID: 0x70fd580000000000000000000000000000
+
 
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
@@ -178,6 +181,13 @@ contract Nceno is RelayRecipient{
     userExists[_stravaID] = true;
     stravaIDs.push(_stravaID);
   }
+  
+  //when a user logs in, this sets a secret which must be passed when a log, claim, host, or join is made.
+  //quick fix until we have an oracle.
+    //pass: , uint _tokenExpire
+    //require: _tokenExpire==profileOf[_stravaID].tokenExpire && 
+    //alert: , or log not from strava.
+
 
   function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) external payable {
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value>= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
