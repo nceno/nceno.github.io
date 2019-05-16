@@ -87,6 +87,7 @@ contract Nceno is RelayRecipient{
     return(goalAt[_goalID].unclaimedStake);
   }
 
+  //useful for liquidating
   function getGoalCount() external view returns(uint){
     return(goalCount);
   }
@@ -94,6 +95,7 @@ contract Nceno is RelayRecipient{
   function getUserCount() external view returns(uint){
     return(stravaIDs.length);
   }
+  
   struct goalObject{
     bytes32 goalID;
     uint startTime;
