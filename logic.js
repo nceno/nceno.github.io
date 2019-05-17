@@ -330,12 +330,11 @@ function joinSearch(){
           if(receipt.status === true){
             correctNonce++;
             $("#joinLoader").hide();
-            $("#joinSuccess").show();
-            $("#makeAcctBtn").hide();
+            $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
           }
           else{
-            $("#acctLoader").hide();
-            $("#makeAcctBtn").hide();
+            $("#joinLoader").hide();
+            $("#joinFail").html('<p>You are already in this challenge. Go check your upcoming goals! </p>');
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
           } 
            })
@@ -1221,7 +1220,7 @@ function joinTarget(){
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
     function(error, result) {
       if (!error){
-        $("#joinSearch").hide();
+        $("#joinSoonModalBtn").hide();
         $("#srCancelBtn").hide();
         $("#joinLoader").show();
         console.log(result);
@@ -1234,12 +1233,13 @@ function joinTarget(){
     if(receipt.status === true){
       correctNonce++;
       $("#joinSoonLoader").hide();
-      $("#joinSoonSuccess").show();
+      $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
       $("#joinSoonModalBtn").hide();
     }
     else{
       $("#joinSoonLoader").hide();
       $("#joinSoonModalBtn").hide();
+      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals!</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
      })
