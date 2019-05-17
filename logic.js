@@ -314,7 +314,8 @@ function joinSearch(){
           stravaID,
           ethPrice
         )
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakewei},
+        //subsidized joining fee in "value:" expression..
+        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakewei - 1200400},
           function(error, result) {
             if (!error){
               $("#joinSearch").hide();
