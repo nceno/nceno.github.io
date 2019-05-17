@@ -1145,8 +1145,11 @@
             </div>
             <div class="modal-body text-center text-white">
               <h3>Some people didn't make it last week. Their loss could be your gain!</h3>
-              <p id="srEcho"></p>
             </div>
+            <span id="claimSuccess"><span>
+            <span id=claimFail></span>
+
+
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
                 <div class="row gutter-1">
@@ -1155,14 +1158,11 @@
                       <button id="claimBtn" type="button" class="btn btn-block btn-primary">Show me the money</button>
                     </div>
                   
-                  <div id="claimLoader" class="col text-center mb-2">
-                    <p>Writing to the blockchain...</p>
-                    <img  src="app/assets/images/loader.svg"> 
-                  </div>
-                  <div class="col text-center mb-2">
-                    <p id="claimSuccess">Payout complete! Check your wallet for USDC coins.</p>
-                    <span id=claimFail></span>
-                  </div>
+                  <span id="claimLoader">
+                    <p>Calculating your payout...</p>
+                    <img  src="app/assets/images/loader.svg">
+                  </span>
+                  
                 </div>
               </div>
             </div>

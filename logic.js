@@ -1280,17 +1280,14 @@ $("#claimBtn").click(function() {
     if(receipt.status === true){
       correctNonce++;
       $("#claimLoader").hide();
-      $("#claimSuccess").show();
-      $("#makeAcctBtn").hide();
+      $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
     }
     else{
       $("#acctLoader").hide();
-      $("#makeAcctBtn").hide();
-      $('#claimFail').html('<p>Transaction failed. Your wallet does not match your Strava account, you are not a competitor in this challenge, you were not 100% adherent for the week, or you already claimed your bonus for this week.</p>');
+      $('#claimFail').html('<p>Good job on the success, but you already claimed your cut this week. Keep up the good work!</p>');
       console.log("wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
-    }  
-    
-    console.log("lost stake claim was successful!"); })
+    }   
+  })
     .once('error', function(error){console.log(error);});;
 });
 

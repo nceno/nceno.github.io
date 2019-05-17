@@ -267,8 +267,15 @@ contract Nceno is RelayRecipient{
       get_sender().transfer(payout); //get_sender()
       //IERC20Token(tokenContractAddress).transfer(get_sender(), payout); //get_sender()
 
+      
+      //increase winnersWk if this is the final workout of the week
+      if(goalAt[_goalID].successes[_stravaID][wk] == goalAt[_goalID].sesPerWk-1){
+        goalAt[_goalID].winnersWk[wk]++;
+      }
+
       //note the success     
       goalAt[_goalID].successes[_stravaID][wk]++;
+
       //protect activity from double spending 
       goalAt[_goalID].activitySpent[_activityID]=true;
 
@@ -298,7 +305,7 @@ contract Nceno is RelayRecipient{
         logs+= goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1];
         //keep track of the number of winners, those with 100% adherence, in the previous week. 
         if(goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk){
-          winners++;
+          winners++; //could decrease gas by just referencing winnersWk[]...
         }
       }
     }
