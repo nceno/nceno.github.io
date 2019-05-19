@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 pragma experimental ABIEncoderV2; //to return a struct in a function
-//import "./ERC20Interface.sol";
-//import "./KyberNetworkProxy.sol";
+import "./ERC20Interface.sol";
+import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
 import "./IERC20Token.sol";
 
@@ -17,12 +17,32 @@ import "./IERC20Token.sol";
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 
+  //kyber stuff:
+  
+  ERC20 constant internal ETH_TOKEN_ADDRESS = ERC20(0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee); //kyber ether on ropsten
+  event SwapTokenChange(uint balanceBefore, uint balanceAfter, uint change);
+  event SwapEtherChange(uint startBalance, uint currentBalance, uint change);
+
+  address USDCKyberAddress = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//kyber mainnet address
+  address DAIKyberAddress = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//kyber ropsten address
+  address KyberNetworkProxyAddress = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten
+
+  ERC20 constant internal USDCKyber = ERC20(USDCKyberAddress);
+  ERC20 constant internal DAIKyber = ERC20(DAIKyberAddress);
+  KyberNetworkProxyInterface constant internal KNP = KyberNetworkProxyInterface(KyberNetworkProxyAddress);
+
+
+  //must have default payable since this contract expected to receive change
+  function() public payable {}
+  
+  //--/kyber stuff
+
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
       hrThresh,
       hubAddress,
-      USDC,
-      DAI,
+      USDCKyber,
+      DAIKyber,
       goalCount
     );
   }
@@ -59,8 +79,6 @@ contract Nceno is RelayRecipient{
   }
 
   address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
-  address USDC = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48; //mainnet
-  address DAI = 0xaD6D458402F60fD3Bd25163575031ACDce07538D; //ropsten
 
   //gas station init
   function Nceno(){
@@ -71,7 +89,7 @@ contract Nceno is RelayRecipient{
     //can only see a week after a goal is finished
     require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
-    IERC20Token(USDC).transfer(admin, goalInstance[_index].unclaimedStake);
+                //IERC20Token(USDC).transfer(admin, goalInstance[_index].unclaimedStake);
     //close the goal
     goalInstance[_index].liquidated = true;
     return(goalInstance[_index].unclaimedStake);
@@ -81,7 +99,7 @@ contract Nceno is RelayRecipient{
     //can only see a week after a goal is finished
     require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
-    IERC20Token(USDC).transfer(admin, goalAt[_goalID].unclaimedStake);
+                //IERC20Token(USDC).transfer(admin, goalAt[_goalID].unclaimedStake);
     //close the goal
     goalAt[_goalID].liquidated = true;
     return(goalAt[_goalID].unclaimedStake);
@@ -227,7 +245,7 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step
-    //swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
+    swapEtherToTokenWithChange (KNP, DAIKyber, this, goalAt[_goalID].stakeUSD, goalAt[_goalID].stakeUSD-1);
 
     //emit Hosted();
   }
@@ -249,7 +267,7 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step
-    //swapEtherToTokenWithChange (0x818E6FECD516Ecc3849DAf6845e3EC868087B755, 0xaD6D458402F60fD3Bd25163575031ACDce07538D, this, max, rate);
+    swapEtherToTokenWithChange (KNP, DAIKyber, this, goalAt[_goalID].stakeUSD, goalAt[_goalID].stakeUSD-1);
   }
 
   function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external{
@@ -511,17 +529,19 @@ contract Nceno is RelayRecipient{
   //kyber stuff
   //-----------------------------------------------
 
-  //@param _kyberNetworkProxy kyberNetworkProxy contract address
-    //@param token destination token contract address
-    //@param destAddress address to send swapped tokens to
-    //@param maxDestQty max number of tokens in swap outcome. will be sent to destAddress
-    //@param minRate minimum conversion rate for the swap
-    /*function swapEtherToTokenWithChange (KyberNetworkProxyInterface _kyberNetworkProxy,ERC20 token,address destAddress,uint maxDestQty,uint minRate) public payable{
+    //@param _kyberNetworkProxy: kyberNetworkProxy contract address
+    //@param token: destination token contract address
+    //@param destAddress: address to send swapped tokens to
+    //@param maxDestQty: max number of tokens in swap outcome. will be sent to destAddress
+    //@param minRate: minimum conversion rate for the swap
+    
+    //Bug: "trade" was not found in the interface....
+    function swapEtherToTokenWithChange (KyberNetworkProxyInterface _kyberNetworkProxy, ERC20 _token, address destAddress, uint maxDestQty, uint minRate) public payable{
         //note that this.balance has increased by msg.value before the execution of this function
         uint startEthBalance = this.balance;
         
         //send swapped tokens to dest address. change will be sent to this contract.
-        _kyberNetworkProxy.trade.value(msg.value)(ETH_TOKEN_ADDRESS, msg.value, token, destAddress, maxDestQty, minRate, 0);
+        _kyberNetworkProxy.trade.value(msg.value)(ETH_TOKEN_ADDRESS, msg.value, _token, destAddress, maxDestQty, minRate, 0);
         
         //calculate contract starting ETH balance before receiving msg.value (startEthBalance - msg.value)
         //change = current balance after trade - starting ETH contract balance (this.balance - (startEthBalance - msg.value))
@@ -530,5 +550,8 @@ contract Nceno is RelayRecipient{
         
         //return change to get_sender()
         get_sender().transfer(change); //get_sender()
-    }*/ 
+    }
+
+    //function UpgraderToken(UpgradeableToken _oldToken) TestMigrationTarget(_oldToken) public { }
+    
 }
