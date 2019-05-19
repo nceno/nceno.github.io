@@ -89,7 +89,7 @@ contract Nceno is RelayRecipient{
     //can only see a week after a goal is finished
     require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
-                //IERC20Token(USDC).transfer(admin, goalInstance[_index].unclaimedStake);
+    DAIKyber.transfer(admin, goalInstance[_index].unclaimedStake);
     //close the goal
     goalInstance[_index].liquidated = true;
     return(goalInstance[_index].unclaimedStake);
@@ -99,7 +99,7 @@ contract Nceno is RelayRecipient{
     //can only see a week after a goal is finished
     require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
-                //IERC20Token(USDC).transfer(admin, goalAt[_goalID].unclaimedStake);
+    DAIKyber.transfer(admin, goalAt[_goalID].unclaimedStake);
     //close the goal
     goalAt[_goalID].liquidated = true;
     return(goalAt[_goalID].unclaimedStake);
@@ -201,13 +201,6 @@ contract Nceno is RelayRecipient{
     userExists[_stravaID] = true;
     stravaIDs.push(_stravaID);
   }
-  
-  //when a user logs in, this sets a secret which must be passed when a log, claim, host, or join is made.
-  //quick fix until we have an oracle.
-    //pass: , uint _tokenExpire
-    //require: _tokenExpire==profileOf[_stravaID].tokenExpire && 
-    //alert: , or log not from strava.
-
 
   function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) external payable {
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value>= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
@@ -245,7 +238,7 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step
-    swapEtherToTokenWithChange (KNP, DAIKyber, this, goalAt[_goalID].stakeUSD, goalAt[_goalID].stakeUSD-1);
+    swapEtherToTokenWithChange (KNP, DAIKyber, this, _stakeUSD, _stakeUSD-1);
 
     //emit Hosted();
   }
@@ -282,10 +275,10 @@ contract Nceno is RelayRecipient{
       //payout a refund- needs kyberswap adjustment
      
       uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
-      get_sender().transfer(payout); //get_sender()
-      //IERC20Token(tokenContractAddress).transfer(get_sender(), payout); //get_sender()
-
+      //get_sender().transfer(payout); //ether payout
       
+      DAIKyber.transfer(get_sender(), payout); //stablecoin payout
+
       //increase winnersWk if this is the final workout of the week
       if(goalAt[_goalID].successes[_stravaID][wk] == goalAt[_goalID].sesPerWk-1){
         goalAt[_goalID].winnersWk[wk]++;
@@ -335,9 +328,9 @@ contract Nceno is RelayRecipient{
     //protect against bonus double spending
     goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] = 1;
 
-    //needs USDC adjustment
-    get_sender().transfer(cut); //get_sender()
-    //IERC20Token(tokenContractAddress).transfer(get_sender(), payout); //get_sender()
+    //get_sender().transfer(cut); //ether payout
+    
+    DAIKyber.transfer(get_sender(), cut); //stablecoin payout
 
     //adjust the unclaimedStake
     goalAt[_goalID].unclaimedStake-= cut; //convert to usd
@@ -529,29 +522,26 @@ contract Nceno is RelayRecipient{
   //kyber stuff
   //-----------------------------------------------
 
-    //@param _kyberNetworkProxy: kyberNetworkProxy contract address
-    //@param token: destination token contract address
-    //@param destAddress: address to send swapped tokens to
-    //@param maxDestQty: max number of tokens in swap outcome. will be sent to destAddress
-    //@param minRate: minimum conversion rate for the swap
+  //@param _kyberNetworkProxy: kyberNetworkProxy contract address
+  //@param token: destination token contract address
+  //@param destAddress: address to send swapped tokens to
+  //@param maxDestQty: max number of tokens in swap outcome. will be sent to destAddress
+  //@param minRate: minimum conversion rate for the swap
+  
+  //Bug: "trade" was not found in the interface.... had to alter the contract myself.
+  function swapEtherToTokenWithChange (KyberNetworkProxyInterface _kyberNetworkProxy, ERC20 _token, address destAddress, uint maxDestQty, uint minRate) public payable{
+    //note that this.balance has increased by msg.value before the execution of this function
+    uint startEthBalance = this.balance;
     
-    //Bug: "trade" was not found in the interface....
-    function swapEtherToTokenWithChange (KyberNetworkProxyInterface _kyberNetworkProxy, ERC20 _token, address destAddress, uint maxDestQty, uint minRate) public payable{
-        //note that this.balance has increased by msg.value before the execution of this function
-        uint startEthBalance = this.balance;
-        
-        //send swapped tokens to dest address. change will be sent to this contract.
-        _kyberNetworkProxy.trade.value(msg.value)(ETH_TOKEN_ADDRESS, msg.value, _token, destAddress, maxDestQty, minRate, 0);
-        
-        //calculate contract starting ETH balance before receiving msg.value (startEthBalance - msg.value)
-        //change = current balance after trade - starting ETH contract balance (this.balance - (startEthBalance - msg.value))
-        uint change = this.balance - (startEthBalance - msg.value);
-        SwapEtherChange(startEthBalance, this.balance, change);
-        
-        //return change to get_sender()
-        get_sender().transfer(change); //get_sender()
-    }
-
-    //function UpgraderToken(UpgradeableToken _oldToken) TestMigrationTarget(_oldToken) public { }
+    //send swapped tokens to dest address. change will be sent to this contract.
+    _kyberNetworkProxy.trade.value(msg.value)(ETH_TOKEN_ADDRESS, msg.value, _token, destAddress, maxDestQty, minRate, 0);
     
+    //calculate contract starting ETH balance before receiving msg.value (startEthBalance - msg.value)
+    //change = current balance after trade - starting ETH contract balance (this.balance - (startEthBalance - msg.value))
+    uint change = this.balance - (startEthBalance - msg.value);
+    SwapEtherChange(startEthBalance, this.balance, change);
+    
+    //return change to get_sender()
+    get_sender().transfer(change); //get_sender()
+  }    
 }
