@@ -1108,8 +1108,9 @@ async function browse(){
       console.log("upcoming goal: "+result[0]);      
     }   
   }
-
-  $('#soonJoin1').click(function(){
+}
+//must be outside, so accessible globally.
+$('#soonJoin1').click(function(){
     targetGoalID = $('#idNumberU1').text();
     targetStake = $('#buyinU1').text().slice(1);
     targetWks = $('#wksU1').text().slice(0,3);
@@ -1200,7 +1201,6 @@ async function browse(){
     targetStart = $('#startU10').text();
     populateTargetModal();
   });
-}
 
 function populateTargetModal(){
   updateEthPrice();
