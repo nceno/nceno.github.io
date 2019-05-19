@@ -312,7 +312,7 @@ function joinSearch(){
         Nceno.methods.join(
           goalid,
           stravaID,
-          ethPrice
+          ethPrice*100
         )
         //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
         .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakewei - 0},
@@ -1477,8 +1477,6 @@ function getToken(){
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
       
-      
-
       Nceno.methods.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
