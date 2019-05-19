@@ -274,7 +274,10 @@ contract Nceno is RelayRecipient{
       
       //payout a refund- needs kyberswap adjustment
      
-      uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
+      //TODO: ensure this is USD, not Wei...
+      //and pay pennies, not whol usd. Since this expression will zero out.
+      //uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
+      uint payout = goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(100*goalAt[_goalID].sesPerWk);
       //get_sender().transfer(payout); //ether payout
       
       DAIKyber.transfer(get_sender(), payout); //stablecoin payout
@@ -315,15 +318,19 @@ contract Nceno is RelayRecipient{
         //pot equals total weekly sessions minus total logs, all times payout
         logs+= goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1];
         //keep track of the number of winners, those with 100% adherence, in the previous week. 
-        if(goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk){
-          winners++; //could decrease gas by just referencing winnersWk[]...
-        }
+        /*if(goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk){
+          winners++; //TODO: could decrease gas by just referencing winnersWk[]...
+        }*/
+
       }
     }
     pot = payout*(goalAt[_goalID].competitorCount*goalAt[_goalID].sesPerWk - logs);
     goalAt[_goalID].potWk[(now-goalAt[_goalID].startTime)/604800-1] = pot; //write to the global goal stats
 
-    cut = pot/(2*winners);
+    //TODO: ensure this is in USD, not Wei. 
+    //and previous week...
+    //and it pays pennies, not full usd since this expression will zero out.
+    cut = pot/(2*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); 
     
     //protect against bonus double spending
     goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] = 1;
