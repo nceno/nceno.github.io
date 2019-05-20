@@ -221,8 +221,8 @@ contract Nceno is RelayRecipient{
     //kyber step -- old
     //swapEtherToTokenWithChange (KNP, DAI_ERC20, this, _stakeUSD, _stakeUSD-1);
 
-    //kyber step
-    executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, _stakeUSD );
+    //kyber step... must use correct decimals. DAI has 18, USDC has 6
+    executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, _stakeUSD*(10**18) );
 
     //emit Hosted();
   }
@@ -524,12 +524,12 @@ contract Nceno is RelayRecipient{
   //must have default payable since this contract expected to receive change
   function() public payable {}
 
-  address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//kyber mainnet address
-  address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//kyber ropsten address
-  address DAI_ERC20_Address_Main = 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359; //kyber mainnet address
+  address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
+  address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
+  address DAI_ERC20_Address_Main = 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359; //mainnet 
   address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten
   
-  ERC20 public ETH_ERC20 = ERC20(0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee); //kyber ether proxy on ropsten
+  ERC20 public ETH_ERC20 = ERC20(0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee); //kyber ether proxy
   ERC20 public USDC_ERC20 = ERC20(USDC_ERC20_Address);
   ERC20 public DAI_ERC20 = ERC20(DAI_ERC20_Address);
   KyberNetworkProxy public kyberNetworkProxyContract = KyberNetworkProxy(KyberNetworkProxy_Address);
