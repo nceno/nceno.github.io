@@ -171,7 +171,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
