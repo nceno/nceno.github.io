@@ -198,18 +198,6 @@ $("#makeAcctBtn").click(function() {
   }).once('error', function(error){console.log(error);});
 });
 
-async function showgas(){
-  let maxGasPrice = await KyberNetworkProxyContract.methods.maxGasPrice()
-  .call(
-    {from: web3.eth.defaultAccount},
-    function(error, result) {
-      if (!error){
-        console.log("max gas price is: "+result);
-      }
-      else console.log(error);
-    }
-  );
-} 
 
 //randomizes the goalID
 function randGoalID(){
