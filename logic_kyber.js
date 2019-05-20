@@ -198,7 +198,7 @@ $("#makeAcctBtn").click(function() {
   }).once('error', function(error){console.log(error);});
 });
 
-function showgas(){
+async function showgas(){
   let maxGasPrice = await KyberNetworkProxyContract.methods.maxGasPrice()
   .call(
     {from: web3.eth.defaultAccount},
