@@ -3,7 +3,6 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 import "./ERC20Interface.sol";
 import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
-import "./IERC20Token.sol";
 
 //stravaID: 39706111
 //other stravaID: 0123456
@@ -17,32 +16,14 @@ import "./IERC20Token.sol";
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 
-  //kyber stuff:
   
-  ERC20 constant internal ETH_TOKEN_ADDRESS = ERC20(0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee); //kyber ether on ropsten
-  event SwapTokenChange(uint balanceBefore, uint balanceAfter, uint change);
-  event SwapEtherChange(uint startBalance, uint currentBalance, uint change);
-
-  address USDCKyberAddress = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//kyber mainnet address
-  address DAIKyberAddress = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//kyber ropsten address
-  address KyberNetworkProxyAddress = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten
-
-  ERC20 constant internal USDCKyber = ERC20(USDCKyberAddress);
-  ERC20 constant internal DAIKyber = ERC20(DAIKyberAddress);
-  KyberNetworkProxyInterface constant internal KNP = KyberNetworkProxyInterface(KyberNetworkProxyAddress);
-
-
-  //must have default payable since this contract expected to receive change
-  function() public payable {}
-  
-  //--/kyber stuff
 
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
       hrThresh,
       hubAddress,
-      USDCKyber,
-      DAIKyber,
+      USDC_ERC20,
+      DAI_ERC20,
       goalCount
     );
   }
@@ -89,7 +70,7 @@ contract Nceno is RelayRecipient{
     //can only see a week after a goal is finished
     require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
-    DAIKyber.transfer(admin, goalInstance[_index].unclaimedStake);
+    DAI_ERC20.transfer(admin, goalInstance[_index].unclaimedStake);
     //close the goal
     goalInstance[_index].liquidated = true;
     return(goalInstance[_index].unclaimedStake);
@@ -99,7 +80,7 @@ contract Nceno is RelayRecipient{
     //can only see a week after a goal is finished
     require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
-    DAIKyber.transfer(admin, goalAt[_goalID].unclaimedStake);
+    DAI_ERC20.transfer(admin, goalAt[_goalID].unclaimedStake);
     //close the goal
     goalAt[_goalID].liquidated = true;
     return(goalAt[_goalID].unclaimedStake);
@@ -237,8 +218,11 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = createdGoal;
     profileOf[_stravaID].myGoalCount++;
 
+    //kyber step -- old
+    //swapEtherToTokenWithChange (KNP, DAI_ERC20, this, _stakeUSD, _stakeUSD-1);
+
     //kyber step
-    swapEtherToTokenWithChange (KNP, DAIKyber, this, _stakeUSD, _stakeUSD-1);
+    executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, _stakeUSD );
 
     //emit Hosted();
   }
@@ -260,7 +244,7 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step
-    swapEtherToTokenWithChange (KNP, DAIKyber, this, goalAt[_goalID].stakeUSD, goalAt[_goalID].stakeUSD-1);
+    executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, goalAt[_goalID].stakeUSD );
   }
 
   function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external{
@@ -274,13 +258,12 @@ contract Nceno is RelayRecipient{
       
       //payout a refund- needs kyberswap adjustment
      
-      //TODO: ensure this is USD, not Wei...
-      //and pay pennies, not whol usd. Since this expression will zero out.
+      //TODO: ensure this is pennies
       //uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
-      uint payout = goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(100*goalAt[_goalID].sesPerWk);
+      uint payout = goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].sesPerWk);
       //get_sender().transfer(payout); //ether payout
       
-      DAIKyber.transfer(get_sender(), payout); //stablecoin payout
+      DAI_ERC20.transfer(get_sender(), payout); //stablecoin payout
 
       //increase winnersWk if this is the final workout of the week
       if(goalAt[_goalID].successes[_stravaID][wk] == goalAt[_goalID].sesPerWk-1){
@@ -295,9 +278,12 @@ contract Nceno is RelayRecipient{
 
       //adjust the unclaimedStake
       goalAt[_goalID].unclaimedStake-= payout; //convert to usd
+
+      emit Paid(payout);
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
+  event Paid(uint _payout);
 
   function claim(bytes32 _goalID, uint _stravaID) external{
     //must have 100% adherence for the previous week, and can only claim once.
@@ -327,9 +313,8 @@ contract Nceno is RelayRecipient{
     pot = payout*(goalAt[_goalID].competitorCount*goalAt[_goalID].sesPerWk - logs);
     goalAt[_goalID].potWk[(now-goalAt[_goalID].startTime)/604800-1] = pot; //write to the global goal stats
 
-    //TODO: ensure this is in USD, not Wei. 
-    //and previous week...
-    //and it pays pennies, not full usd since this expression will zero out.
+    //TODO: ensure this is in pennies, not Wei. 
+    //and indexed as previous week...
     cut = pot/(2*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); 
     
     //protect against bonus double spending
@@ -337,11 +322,14 @@ contract Nceno is RelayRecipient{
 
     //get_sender().transfer(cut); //ether payout
     
-    DAIKyber.transfer(get_sender(), cut); //stablecoin payout
+    DAI_ERC20.transfer(get_sender(), cut); //stablecoin payout
 
     //adjust the unclaimedStake
     goalAt[_goalID].unclaimedStake-= cut; //convert to usd
+
+    emit Cut(cut);
   }
+  event Cut(uint _cut);
 
   modifier onlyAdmin(){
     require(get_sender() == admin,"Sender not authorized."); //get_sender()
@@ -526,29 +514,69 @@ contract Nceno is RelayRecipient{
   }
 
   //-----------------------------------------------
-  //kyber stuff
+  //---  /gas station relay stuff
   //-----------------------------------------------
 
-  //@param _kyberNetworkProxy: kyberNetworkProxy contract address
-  //@param token: destination token contract address
-  //@param destAddress: address to send swapped tokens to
-  //@param maxDestQty: max number of tokens in swap outcome. will be sent to destAddress
-  //@param minRate: minimum conversion rate for the swap
+  //-----------------------
+  //kyber stuff --new
+  //-----------------------
+
+  //must have default payable since this contract expected to receive change
+  function() public payable {}
+
+  address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//kyber mainnet address
+  address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//kyber ropsten address
+  address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten
   
-  //Bug: "trade" was not found in the interface.... had to alter the contract myself.
-  function swapEtherToTokenWithChange (KyberNetworkProxyInterface _kyberNetworkProxy, ERC20 _token, address destAddress, uint maxDestQty, uint minRate) public payable{
-    //note that this.balance has increased by msg.value before the execution of this function
-    uint startEthBalance = this.balance;
+  ERC20 public ETH_ERC20 = ERC20(0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee); //kyber ether proxy on ropsten
+  ERC20 public USDC_ERC20 = ERC20(USDC_ERC20_Address);
+  ERC20 public DAI_ERC20 = ERC20(DAI_ERC20_Address);
+  KyberNetworkProxy public kyberNetworkProxyContract = KyberNetworkProxy(KyberNetworkProxy_Address);
+
+  event Swap(address indexed sender, ERC20 srcToken, ERC20 destToken);
+  
+  /**
+   * @dev Gets the conversion rate for the destToken given the srcQty.
+   * @param srcToken source token contract address
+   * @param srcQty amount of source tokens
+   * @param destToken destination token contract address
+  */
+  function getConversionRates(ERC20 srcToken, uint srcQty, ERC20 destToken) public view returns (uint, uint){
+    return kyberNetworkProxyContract.getExpectedRate(srcToken, destToken, srcQty);
+  }
+
+
+  /**
+   * @dev Swap the user's ERC20 token to another ERC20 token/ETH
+   * @param srcToken source token contract address
+   * @param srcQty amount of source tokens
+   * @param destToken destination token contract address
+   * @param destAddress address to send swapped tokens to
+   * @param maxDestAmount max destination amount to swap
+  */
+  function executeSwap(ERC20 srcToken, uint srcQty, ERC20 destToken, address destAddress, uint maxDestAmount) public {
     
-    //send swapped tokens to dest address. change will be sent to this contract.
-    _kyberNetworkProxy.trade.value(msg.value)(ETH_TOKEN_ADDRESS, msg.value, _token, destAddress, maxDestQty, minRate, 0);
-    
-    //calculate contract starting ETH balance before receiving msg.value (startEthBalance - msg.value)
-    //change = current balance after trade - starting ETH contract balance (this.balance - (startEthBalance - msg.value))
-    uint change = this.balance - (startEthBalance - msg.value);
-    SwapEtherChange(startEthBalance, this.balance, change);
-    
-    //return change to get_sender()
-    get_sender().transfer(change); //get_sender()
-  }    
+    uint minConversionRate;
+
+    // Check that the token transferFrom has succeeded
+    require(srcToken.transferFrom(get_sender(), address(this), srcQty));
+    // Mitigate ERC20 Approve front-running attack, by initially setting allowance to 0
+    require(srcToken.approve(address(kyberNetworkProxyContract), 0));
+    // Set the spender's token allowance to tokenQty
+    require(srcToken.approve(address(kyberNetworkProxyContract), srcQty));
+
+    // Get the minimum conversion rate
+    (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(srcToken, destToken, srcQty);
+
+    // Swap the ERC20 token and send to destAddress. "0" is the wallet id for sharing program
+    kyberNetworkProxyContract.trade(srcToken, srcQty, destToken, destAddress, maxDestAmount, minConversionRate, 0);
+
+    // Log the event
+    Swap(get_sender(), srcToken, destToken);
+  }
+
+
+  //--------------------------
+  //--- /kyber stuff --new   
+  //--------------------------
 }
