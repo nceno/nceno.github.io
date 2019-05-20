@@ -184,7 +184,7 @@ contract Nceno is RelayRecipient{
   }
 
   function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) external payable {
-    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value>= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
+    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && 100*(100*1000000000000000000*_stakeUSD/_ethPricePennies - msg.value)<1,
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //get_sender()
     goalObject memory createdGoal;
 
