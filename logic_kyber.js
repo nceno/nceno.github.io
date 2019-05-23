@@ -94,6 +94,7 @@ $("#portisLoader").hide();
 $("#hostBtn").hide();
 $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
+$("#claimBtn").show();
 
 $('#btnU1').hide();
 $('#btnU2').hide();
