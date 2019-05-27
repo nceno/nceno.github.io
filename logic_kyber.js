@@ -325,6 +325,7 @@ function joinSearch(){
               $("#joinLoader").show();
               console.log(result);
             }
+            
             else
             console.error(error);
           }
