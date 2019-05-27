@@ -14,7 +14,7 @@ function stravaShare(){
       var data = JSON.parse(xhr.responseText);
     }
   });
-  xhr.open("POST", 'https://www.strava.com/api/v3/activities" name='+value+' type='+value+' start_date_local='+value+' elapsed_time='+value+' description='+value);
+  xhr.open("POST", "https://www.strava.com/api/v3/activities" name='value' type='value' start_date_local='value' elapsed_time='value' description='value');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
