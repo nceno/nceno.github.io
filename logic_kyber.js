@@ -1591,7 +1591,7 @@ function getActivities(){
         //if no valid workouts, don't log, and alert the user.
         $('#getYouPaid').hide();
         $('#logLoader').hide();
-        $('#logFail').show();
+        //$('#logFail').show();
         $('#logFail').html('<p>You don’t have any valid workouts today. </p>');
 
       } 
