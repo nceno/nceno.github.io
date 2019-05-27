@@ -1586,9 +1586,9 @@ function getActivities(){
         })
         .once('error', function(error){console.log(error);});;
       }
-      //if no valid workouts, don't log, and alert the user.
       else{
         console.log("No valid workouts today...");
+        //if no valid workouts, don't log, and alert the user.
         $('#getYouPaid').hide();
         $('#logFail').html('<p>You don’t have any valid workouts today. </p>');
 
