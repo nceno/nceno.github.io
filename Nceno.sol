@@ -249,7 +249,7 @@ contract Nceno is RelayRecipient{
     execSwap(DAI_ERC20, this);
   }
 
-  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external{
+  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external returns(uint){
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
@@ -281,13 +281,14 @@ contract Nceno is RelayRecipient{
       //adjust the unclaimedStake
       goalAt[_goalID].unclaimedStake-= payout; //convert to usd
 
+      return(payout);
       emit Paid(payout);
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
   event Paid(uint _payout);
 
-  function claim(bytes32 _goalID, uint _stravaID) external{
+  function claim(bytes32 _goalID, uint _stravaID) external returns(uint){
     //must have 100% adherence for the previous week, and can only claim once.
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
       goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
@@ -330,6 +331,7 @@ contract Nceno is RelayRecipient{
     goalAt[_goalID].unclaimedStake-= cut; //convert to usd
 
     emit Cut(cut);
+    return(cut);
   }
   event Cut(uint _cut);
 

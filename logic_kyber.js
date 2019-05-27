@@ -1278,11 +1278,12 @@ $("#claimBtn").click(function() {
       else
       console.error(error);
     }
-  ).once('confirmation', function(confNumber, receipt){
+  ).once('confirmation', function(confNumber, receipt, result){
 
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
+      console.log("your cut is: "+result);
       $("#claimLoader").hide();
       $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
     }
@@ -1566,13 +1567,14 @@ function getActivities(){
             else
             console.error(error);
           }
-        ).once('confirmation', function(confNumber, receipt){
+        ).once('confirmation', function(confNumber, receipt, result){
           console.log(receipt.status);
           if(receipt.status === true){
             $('#logLoader').hide();
             $('#getYouPaid').hide();
             correctNonce++;
-            console.log("You just unlocked part of your stake.");
+            console.log("your payout is: "+result);
+            $('#logEcho').html('<p>Avg heart rate: '+Math.round(cleaned[0][1])+ 'bpm. Session length: '+Math.round(cleaned[0][2])+'mins.</p>');
             $('#logSuccess').html('<p>Great job, you just earned back part of your stake! Check your wallet.</p>');
             $('#logSuccess').show();
 
