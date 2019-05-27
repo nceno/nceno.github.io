@@ -1243,7 +1243,7 @@ function joinTarget(){
     else{
       $("#joinSoonLoader").hide();
       $("#joinSoonModalBtn").hide();
-      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals!</p>');
+      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
      })
