@@ -1535,7 +1535,7 @@ function getActivities(){
 
       for(let i=0; i<data.length; i++){
         console.log("["+data[i].id+", "+data[i].average_heartrate+", "+data[i].elapsed_time/60+"]");
-        if(data[i].average_heartrate!= "undefined" && data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
+        if(data[i].has_heartrate === true && data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
           //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
         }
