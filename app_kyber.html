@@ -998,7 +998,7 @@
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
             </div>
-            <div class="modal-body text-center text-white">
+            <div class="modal-body text-center  text-white">
               <h3>Confirm your challenge:</h3>
               <p id="goalEcho"></p>
             </div>
@@ -1127,21 +1127,23 @@
               <span id="logSuccess"></span>
               <span id="logFail"></span>
             </div>
+
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
                 <div class="row gutter-1">
-                  <div class="row">
-                    <div class="col md-8 text-center">
-                      <button id="payMeBtn" type="button" onclick="getActivities()" class="btn btn-block btn-rounded btn-primary">Pay me</button>
-                      <span class="col md-8 text-center" id="logLoader">
-                        <p>Writing your workout to the blockchain...</p>
-                        <img  src="app/assets/images/loader.svg">
-                      </span>
-                    </div>
+                  <div class="col-8">
+                    <button id="payMeBtn" type="button" onclick="getActivities()" class="btn btn-block btn-rounded btn-primary">Pay me</button>
                   </div>
                 </div>
+                
+                <span class="col text-center mb-2" id="logLoader">
+                  <p>Writing your workout to the blockchain...</p>
+                  <img  src="app/assets/images/loader.svg">
+                </span>
+
               </div>
             </div>
+
           </div>
         </div>
       </div>
