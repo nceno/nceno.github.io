@@ -444,6 +444,34 @@ function resetCreate(){
   randGoalID();
 }
 
+function resetLog(){
+  $("#Btn").show();
+  $("#Success").hide();
+  $("#Fail").hide();
+  $("#title").show();
+}
+
+function resetClaim(){
+  $("#Btn").show();
+  $("#Success").hide();
+  $("#Fail").hide();
+  $("#title").show();
+}
+
+function resetJoinSoon(){
+  $("#Btn").show();
+  $("#Success").hide();
+  $("#Fail").hide();
+  $("#title").show();
+}
+
+function resetJoinSr(){
+  $("#Btn").show();
+  $("#Success").hide();
+  $("#Fail").hide();
+  $("#title").show();
+}
+
 //generates the typed quick stats at the top of the manage tab
 function quickStats(){
   var xhr = new XMLHttpRequest();
@@ -747,9 +775,9 @@ function selectedChallenge(){
 
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
-                                            $('#'+dlKey).html('<h2><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h2>");
+                                            $('#'+dlKey).html('<h2><b style="color:#ccff00;">'+daysRem+"</b> days left this week</h2>");
                                           }
-                                          else{$('#'+dlKey).html('<h2>Today is the last day for this week!</h2>');}
+                                          else{$('#'+dlKey).html('<h2>Last day this week!</h2>');}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
