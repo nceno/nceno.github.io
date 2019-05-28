@@ -1035,31 +1035,39 @@
           <div class="modal-content">
             <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <!--reset content onclick -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetJoinSoon()">
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
+              <!--/reset content onclick -->
             </div>
             <div class="modal-body text-center text-white">
-              <h3>You're about to join this challenge:</h3>
+              <!--title -->
+              <h3 id="soonJoinTitle">You're about to join this challenge:</h3>
+              <!--/title -->
+
+              <!--echo, success, fail -->
               <span id="soonEcho"></span>
               <span id="joinSoonSuccess"></span>
               <span id="joinSoonFail"></span>
-
-
+              <!--/echo, success, fail -->
             </div>
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
-                <div class="row gutter-1">
-                  
-                  <div class="col-8 text-center">
+                <div class="row">
+                  <div class="col text-center">
+                    <!--buttons -->
                     <button id="joinSoonModalBtn" type="button" onclick="joinTarget()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
+                    <!--/buttons -->
                   </div>
-
+                </div>
+                <div class="row">
                   <div id="joinSoonLoader" class="col text-center mb-2">
+                    <!--loaders -->
                     <p>Adding you to the challenge...</p>
                     <img  src="app/assets/images/loader.svg"> 
+                    <!--/loaders -->
                   </div>
-
                 </div>
               </div>
             </div>
@@ -1074,35 +1082,39 @@
           <div class="modal-content">
             <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <!--reset content onclick -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetJoinSr()">
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
+              <!--/reset content onclick -->
             </div>
             <div class="modal-body text-center text-white">
-              <h3>You're about to join this challenge:</h3>
+              <!--title -->
+              <h3 id="aboutToJoin">You're about to join this challenge:</h3>
+              <!--/title -->
+
+              <!--echo, success, fail -->
               <span id="srEcho"></span>
               <span id="joinSuccess"></span>
-              <span id="joinfail"></span>
-
-
+              <span id="joinFail"></span>
+              <!--/echo, success, fail -->
             </div>
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
-                <div class="row gutter-1">
-                  
-
-
-                  <div class="col-8 text-center">
+                <div class="row">
+                  <div class="col text-center">
+                    <!--buttons -->
                     <button id="joinSearch" type="button" onclick="joinSearch()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
+                    <!--/buttons -->
                   </div>
-
+                </div>
+                <div class="row">
                   <div id="joinLoader" class="col text-center mb-2">
+                    <!--loaders -->
                     <p>Adding you to the challenge...</p>
                     <img  src="app/assets/images/loader.svg"> 
-                  </div>
-
-                  
-                  
+                    <!--/loaders -->
+                  </div>  
                 </div>
               </div>
             </div>
@@ -1162,36 +1174,44 @@
       <div class="modal fade" id="claimModal" tabindex="-1" role="dialog" aria-labelledby="claimModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            
             <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <!--reset content onclick -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetClaim()">
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
+              <!--/reset content onclick -->
             </div>
             <div class="modal-body text-center text-white">
-              <h3>Some people didn't make it last week. Their loss could be your gain!</h3>
-            </div>
-            <span id="claimSuccess"></span>
-            <span id="claimFail"></span>
+              <!--title -->
+              <h3 id="claimTitle">Some people didn't make it last week. Their loss could be your gain!</h3>
+              <!--/title -->
 
+              <!--echo, success, fail -->
+              <span id="claimSuccess"></span>
+              <span id="claimFail"></span>
+
+              <!--/echo, success, fail -->
+            </div>
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
-                <div class="row gutter-1">
-                  <div class="row align-items-center ">
-                    <div class="col md-8 text-center">
-                      <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">Pay me</button>
-                      <span class="col md-8 text-center" id="claimLoader">
-                        <p>Calculating your payout...</p>
-                        <img  src="app/assets/images/loader.svg">
-                      </span>
-                    </div>
+                <div class="row">
+                  <div class="col text-center">
+                    <!--buttons -->
+                    <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">Pay me</button>
+                    <!--/buttons -->
                   </div>
-                  
                 </div>
-              </div>
+                <div class="row">
+                  <span class="col md-8 text-center mb-2" id="claimLoader">
+                    <!--loaders -->
+                    <p>Calculating your payout...</p>
+                    <img  src="app/assets/images/loader.svg">
+                    <!--/loaders -->
+                  </span>
+                </div>
+              </div> 
             </div>
-
           </div>
         </div>
       </div>

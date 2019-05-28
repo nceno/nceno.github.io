@@ -338,7 +338,7 @@ function joinSearch(){
           }
           else{
             $("#joinLoader").hide();
-            $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
+            $("#joinFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
 
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
           } 
@@ -445,31 +445,34 @@ function resetCreate(){
 }
 
 function resetLog(){
-  $("#Btn").show();
-  $("#Success").hide();
-  $("#Fail").hide();
-  $("#title").show();
+  $("#payMeBtn").show();
+  $("#logSuccess").html('');
+  $("#logFail").html('');
+  $("#logEcho").html('');
+  $("#getYouPaid").show();
 }
 
 function resetClaim(){
-  $("#Btn").show();
-  $("#Success").hide();
-  $("#Fail").hide();
-  $("#title").show();
-}
-
-function resetJoinSoon(){
-  $("#Btn").show();
-  $("#Success").hide();
-  $("#Fail").hide();
-  $("#title").show();
+  $("#claimBtn").show();
+  $("#claimSuccess").html('');
+  $("#claimFail").html('');
+  $("#claimTitle").show();
 }
 
 function resetJoinSr(){
-  $("#Btn").show();
-  $("#Success").hide();
-  $("#Fail").hide();
-  $("#title").show();
+  $("#joinSearch").show();
+  $("#joinSuccess").html('');
+  $("#joinFail").html('');
+  $("#aboutToJoin").show();
+  $("#srEcho").html('');
+}
+
+function resetJoinSoon(){
+  $("#joinSoonModalBtn").show();
+  $("#soonEcho").html('');
+  $("#joinSoonSuccess").html('');
+  $("#joinSoonFail").html('');
+  $("#soonJoinTitle").show();
 }
 
 //generates the typed quick stats at the top of the manage tab
@@ -1272,6 +1275,7 @@ function joinTarget(){
     }
     else{
       $("#joinSoonLoader").hide();
+      $("#soonJoinTitle").hide();
       $("#joinSoonModalBtn").hide();
       $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 7)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
