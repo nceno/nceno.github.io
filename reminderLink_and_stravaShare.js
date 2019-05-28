@@ -14,7 +14,7 @@ function stravaShare(){
       var data = JSON.parse(xhr.responseText);
     }
   });
-  xhr.open("POST", "https://www.strava.com/api/v3/activities" name='value' type='value' start_date_local='value' elapsed_time='value' description='value');
+  xhr.open("POST", "https://www.strava.com/api/v3/activities" name='Anyone wanna join me?' type='workout' start_date_local='value' elapsed_time='value' description='I’m hosting a challenge worth $50 to workout for 40mins, 3x per week, for 6 weeks. If you wanna join me, the challenge ID is 0x123456. Go to www.nceno.app/app and search for it.');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
