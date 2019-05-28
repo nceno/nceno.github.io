@@ -197,20 +197,6 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "takeRevenue",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
         "name": "relay",
         "type": "address"
       },
@@ -319,6 +305,24 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "name": "destAddress",
+        "type": "address"
+      }
+    ],
+    "name": "execSwap",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_goalID",
         "type": "bytes32"
       },
@@ -409,6 +413,54 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getGoalCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "downloadVars",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -460,6 +512,25 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "liquidateGoalAt",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -498,6 +569,53 @@ var Nceno = new web3.eth.Contract([
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "cashout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getUserCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "liquidateGoalInstance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -564,6 +682,14 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "competitorCount",
         "type": "uint256"
+      },
+      {
+        "name": "unclaimedStake",
+        "type": "uint256"
+      },
+      {
+        "name": "liquidated",
+        "type": "bool"
       }
     ],
     "payable": false,
@@ -745,6 +871,20 @@ var Nceno = new web3.eth.Contract([
   {
     "constant": true,
     "inputs": [],
+    "name": "proxy",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "get_recipient_balance",
     "outputs": [
       {
@@ -918,5 +1058,56 @@ var Nceno = new web3.eth.Contract([
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_payout",
+        "type": "uint256"
+      }
+    ],
+    "name": "Paid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_cut",
+        "type": "uint256"
+      }
+    ],
+    "name": "Cut",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "destToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Swap",
+    "type": "event"
   }
-], '0x983a307df91c4580611e53c3fa36ee12733a01e2');
+], '0x3ac6c23e66028c1384d1509a410eef9f04ed8ecb');

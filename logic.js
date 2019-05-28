@@ -79,7 +79,6 @@ $("#dashboard").hide();
 $("#logLoader").hide();
 $("#logSuccess").hide();
 $("#claimLoader").hide();
-$("#claimSuccess").hide();
 $("stravaSuccess").hide();
 $("stravaOk").hide();
 $("portisSuccess").hide();
@@ -94,6 +93,7 @@ $("#portisLoader").hide();
 $("#hostBtn").hide();
 $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
+$("#claimBtn").show();
 
 $('#btnU1').hide();
 $('#btnU2').hide();
@@ -171,7 +171,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
@@ -196,7 +196,8 @@ $("#makeAcctBtn").click(function() {
       console.log("profile already exists!");
     } 
   }).once('error', function(error){console.log(error);});
-}); 
+});
+
 
 //randomizes the goalID
 function randGoalID(){
@@ -237,6 +238,7 @@ $("#hostBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
+      stravaShare(_a,_b,_c);
       $("#createLoader").hide();
       $("#createSuccess").show();
       $("#hostBtn").hide();
@@ -323,6 +325,7 @@ function joinSearch(){
               $("#joinLoader").show();
               console.log(result);
             }
+
             else
             console.error(error);
           }
@@ -330,12 +333,14 @@ function joinSearch(){
           console.log(receipt.status);
           if(receipt.status === true){
             correctNonce++;
+            stravaShare(_a,_b,_c);
             $("#joinLoader").hide();
             $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
           }
           else{
             $("#joinLoader").hide();
-            $("#joinFail").html('<p>You are already in this challenge. Go check your upcoming goals! </p>');
+            $("#joinFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
+
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
           } 
            })
@@ -348,7 +353,7 @@ function joinSearch(){
 }
 
 //joins the browsed goal
-function joinSoon(){
+/*function joinSoon(){
   updateEthPrice();
   goalid = browsedGoal;
   Nceno.methods.getGoalParams(
@@ -384,7 +389,7 @@ function joinSoon(){
       console.error(error);
     }
   ); 
-}
+}*/
 
 
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
@@ -438,6 +443,37 @@ function resetCreate(){
   $("#cancelBtn").show();
   $("#createSuccess").hide();
   randGoalID();
+}
+
+function resetLog(){
+  $("#payMeBtn").show();
+  $("#logSuccess").html('');
+  $("#logFail").html('');
+  $("#logEcho").html('');
+  $("#getYouPaid").show();
+}
+
+function resetClaim(){
+  $("#claimBtn").show();
+  $("#claimSuccess").html('');
+  $("#claimFail").html('');
+  $("#claimTitle").show();
+}
+
+function resetJoinSr(){
+  $("#joinSearch").show();
+  $("#joinSuccess").html('');
+  $("#joinFail").html('');
+  $("#aboutToJoin").show();
+  $("#srEcho").html('');
+}
+
+function resetJoinSoon(){
+  $("#joinSoonModalBtn").show();
+  $("#soonEcho").html('');
+  $("#joinSoonSuccess").html('');
+  $("#joinSoonFail").html('');
+  $("#soonJoinTitle").show();
 }
 
 //generates the typed quick stats at the top of the manage tab
@@ -720,6 +756,7 @@ function selectedChallenge(){
                                   function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
+                                      visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek-1);
                                       successesWk = result[1];
                                       winnersWk = result[2];
 
@@ -743,9 +780,9 @@ function selectedChallenge(){
 
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
-                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h3>");
+                                            $('#'+dlKey).html('<h2><b style="color:#ccff00;">'+daysRem+"</b> days left this week</h2>");
                                           }
-                                          else{$('#'+dlKey).html('<h3>Today is the last day for this week!</h3>');}
+                                          else{$('#'+dlKey).html('<h2>Last day this week!</h2>');}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
@@ -901,7 +938,7 @@ function selectedChallenge(){
                                                 label: '% stake locked up',
                                                 yAxisID: 'A',
                                                 //data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
-                                                data: lockedPercentWk,
+                                                data: visibleLockedPercentWk,
                                                 backgroundColor: 'rgba(204, 255, 0, 0.5)',
                                                 borderColor: '#ccff00',
                                                 fill: true
@@ -1041,7 +1078,7 @@ function search(){
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
         $("#srMins").html(result[0]+ " mins");
-        $("#srComp").html(result[5]);
+        $("#srComp").html(10-result[5]);
         $("#srStart").html(tstamp.toDateString());
         if(result[4]*1000>Date.now()){$("#srJoin").show();}
 
@@ -1101,7 +1138,7 @@ async function browse(){
       $('#'+wksKey).html(result[4]+'  wks');
       $('#'+sesKey).html(result[3]+' x/wk');
       $('#'+minKey).html(result[1]+'  min');
-      $('#'+pplKey).html(result[6]);
+      $('#'+pplKey).html(10-result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
       $('#'+idKey).hide();
@@ -1234,14 +1271,16 @@ function joinTarget(){
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
+      stravaShare(_a,_b,_c);
       $("#joinSoonLoader").hide();
       $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
       $("#joinSoonModalBtn").hide();
     }
     else{
       $("#joinSoonLoader").hide();
+      $("#soonJoinTitle").hide();
       $("#joinSoonModalBtn").hide();
-      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals!</p>');
+      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 7)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
      })
@@ -1276,12 +1315,15 @@ $("#claimBtn").click(function() {
       else
       console.error(error);
     }
-  ).once('confirmation', function(confNumber, receipt){
+  ).once('confirmation', function(confNumber, receipt, result){
 
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
+      $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
+      console.log("your cut is: "+result);
       $("#claimLoader").hide();
+      $("#claimTitle").hide();
       $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
     }
     else{
@@ -1533,7 +1575,7 @@ function getActivities(){
 
       for(let i=0; i<data.length; i++){
         console.log("["+data[i].id+", "+data[i].average_heartrate+", "+data[i].elapsed_time/60+"]");
-        if(data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
+        if(data[i].has_heartrate === "true" && data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
           //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
         }
@@ -1564,13 +1606,14 @@ function getActivities(){
             else
             console.error(error);
           }
-        ).once('confirmation', function(confNumber, receipt){
+        ).once('confirmation', function(confNumber, receipt, result){
           console.log(receipt.status);
           if(receipt.status === true){
             $('#logLoader').hide();
             $('#getYouPaid').hide();
             correctNonce++;
-            console.log("You just unlocked part of your stake.");
+            console.log("your payout is: "+result);
+            $('#logEcho').html('<p>Avg heart rate: '+Math.round(cleaned[0][1])+ 'bpm. Session length: '+Math.round(cleaned[0][2])+'mins.</p>');
             $('#logSuccess').html('<p>Great job, you just earned back part of your stake! Check your wallet.</p>');
             $('#logSuccess').show();
 
@@ -1584,10 +1627,12 @@ function getActivities(){
         })
         .once('error', function(error){console.log(error);});;
       }
-      //if no valid workouts, don't log, and alert the user.
       else{
-        console.log("No valid workouts today...");
+        console.log("No valid workouts today..."+cleaned.length);
+        //if no valid workouts, don't log, and alert the user.
         $('#getYouPaid').hide();
+        $('#logLoader').hide();
+        //$('#logFail').show();
         $('#logFail').html('<p>You don’t have any valid workouts today. </p>');
 
       } 
