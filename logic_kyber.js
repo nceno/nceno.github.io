@@ -79,7 +79,6 @@ $("#dashboard").hide();
 $("#logLoader").hide();
 $("#logSuccess").hide();
 $("#claimLoader").hide();
-//$("#claimSuccess").hide();
 $("stravaSuccess").hide();
 $("stravaOk").hide();
 $("portisSuccess").hide();
