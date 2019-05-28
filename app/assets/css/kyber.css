@@ -17,7 +17,7 @@
 }
 
 .kyber-widget-button:hover {
-    background-color: #02c2e0;
+    background-color: #ccff00;
 }
 
 .kyber-widget-button:active {
@@ -97,7 +97,7 @@
 }
 
 #kyber-widget-overlay::before {
-    content: "Ã—";
+    content: "x";
     position: absolute;
     top: 16px;
     right: 8px;
