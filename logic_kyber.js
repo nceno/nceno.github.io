@@ -755,7 +755,7 @@ function selectedChallenge(){
                                   function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
-                                      visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek);
+                                      visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek-1);
                                       successesWk = result[1];
                                       winnersWk = result[2];
 
