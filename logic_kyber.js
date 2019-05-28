@@ -1136,7 +1136,7 @@ async function browse(){
       $('#'+wksKey).html(result[4]+'  wks');
       $('#'+sesKey).html(result[3]+' x/wk');
       $('#'+minKey).html(result[1]+'  min');
-      $('#'+pplKey).html(result[6]);
+      $('#'+pplKey).html(10-result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
       $('#'+idKey).hide();
