@@ -755,6 +755,7 @@ function selectedChallenge(){
                                   function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
+                                      visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek);
                                       successesWk = result[1];
                                       winnersWk = result[2];
 
@@ -936,7 +937,7 @@ function selectedChallenge(){
                                                 label: '% stake locked up',
                                                 yAxisID: 'A',
                                                 //data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
-                                                data: lockedPercentWk,
+                                                data: visibleLockedPercentWk,
                                                 backgroundColor: 'rgba(204, 255, 0, 0.5)',
                                                 borderColor: '#ccff00',
                                                 fill: true
