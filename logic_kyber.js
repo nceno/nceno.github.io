@@ -1319,6 +1319,7 @@ $("#claimBtn").click(function() {
       correctNonce++;
       console.log("your cut is: "+result);
       $("#claimLoader").hide();
+      $("#claimTitle").hide();
       $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
     }
     else{
