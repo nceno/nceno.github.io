@@ -332,7 +332,12 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "claim",
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1017,7 +1022,12 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "log",
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1110,4 +1120,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0x3ac6c23e66028c1384d1509a410eef9f04ed8ecb');
+], '0x8c28a46baec749a3963756cd38221a45295c1a96');
