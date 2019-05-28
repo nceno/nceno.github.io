@@ -1117,35 +1117,42 @@
           <div class="modal-content">
             <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <!--reset content onclick -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetLog()">
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
+              <!--/reset content onclick -->
             </div>
             <div class="modal-body text-center text-white">
+              <!--title -->
               <h3 id="getYouPaid">Let's get you a payout for that workout!</h3>
+              <!--/title -->
+              
+              <!--echo, success, fail -->
               <span id="logEcho"></span>
               <span id="logSuccess"></span>
               <span id="logFail"></span>
+              <!--/echo, success, fail -->
             </div>
-
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
                 <div class="row">
                   <div class="col text-center">
+                    <!--buttons -->
                     <button id="payMeBtn" type="button" onclick="getActivities()" class="btn btn-block btn-rounded btn-primary">Pay me</button>
+                    <!--/buttons -->
                   </div>
                 </div>
-                
                 <div class="row">
                   <span class="col text-center mb-2" id="logLoader">
+                    <!--loaders -->
                     <p>Writing your workout to the blockchain...</p>
                     <img  src="app/assets/images/loader.svg">
+                    <!--/loaders -->
                   </span>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </div>

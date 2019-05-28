@@ -325,7 +325,7 @@ function joinSearch(){
               $("#joinLoader").show();
               console.log(result);
             }
-            
+
             else
             console.error(error);
           }
@@ -747,9 +747,9 @@ function selectedChallenge(){
 
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
-                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h3>");
+                                            $('#'+dlKey).html('<h2><b style="color:#ccff00;">'+daysRem+"</b> more days left this week</h2>");
                                           }
-                                          else{$('#'+dlKey).html('<h3>Today is the last day for this week!</h3>');}
+                                          else{$('#'+dlKey).html('<h2>Today is the last day for this week!</h2>');}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
