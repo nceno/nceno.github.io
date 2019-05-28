@@ -1050,11 +1050,12 @@
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
                 <div class="row gutter-1">
-                  <div class="col-8">
+                  
+                  <div class="col-8 text-center">
                     <button id="joinSoonModalBtn" type="button" onclick="joinTarget()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
                   </div>
 
-                  <div id="joinSoonLoader">
+                  <div id="joinSoonLoader" class="col text-center mb-2">
                     <p>Adding you to the challenge...</p>
                     <img  src="app/assets/images/loader.svg"> 
                   </div>
@@ -1088,19 +1089,20 @@
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
                 <div class="row gutter-1">
-                  <div class="col-8">
+                  
+
+
+                  <div class="col-8 text-center">
                     <button id="joinSearch" type="button" onclick="joinSearch()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
                   </div>
 
-                  <div id="joinLoader">
+                  <div id="joinLoader" class="col text-center mb-2">
                     <p>Adding you to the challenge...</p>
                     <img  src="app/assets/images/loader.svg"> 
                   </div>
 
                   
-                  <div class="col-4">
-                    <button id="srCancelBtn" type="button" class="btn btn-block" data-dismiss="modal">Cancel</button>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -1129,17 +1131,15 @@
               <div class="container-fluid">
                 <div class="row gutter-1">
                   <div class="row">
-                    <div class="col md-8">
+                    <div class="col md-8 text-center">
                       <button id="payMeBtn" type="button" onclick="getActivities()" class="btn btn-block btn-rounded btn-primary">Pay me</button>
+                      <span id="logLoader">
+                        <p>Writing your workout to the blockchain...</p>
+                        <img  src="app/assets/images/loader.svg">
+                      </span>
                     </div>
                   </div>
-
                 </div>
-                  <span id="logLoader">
-                    <p>Writing your workout to the blockchain...</p>
-                    <img  src="app/assets/images/loader.svg">
-                  </span> 
-
               </div>
             </div>
           </div>
@@ -1168,14 +1168,15 @@
               <div class="container-fluid">
                 <div class="row gutter-1">
                   <div class="row">
-                    <div class="col md-8">
-                      <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">Show me the money</button>
+                    <div class="col md-8 text-center">
+                      <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">Pay me</button>
+                      <span id="claimLoader">
+                        <p>Calculating your payout...</p>
+                        <img  src="app/assets/images/loader.svg">
+                      </span>
                     </div>
                   </div>
-                  <span id="claimLoader">
-                    <p>Calculating your payout...</p>
-                    <img  src="app/assets/images/loader.svg">
-                  </span>
+                  
                 </div>
               </div>
             </div>
