@@ -292,7 +292,7 @@ contract Nceno is RelayRecipient{
     //must have 100% adherence for the previous week, and can only claim once.
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
       goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
-      goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800] == 0,
+      goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] == 0,
       "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week."
     ); //get_sender()
 

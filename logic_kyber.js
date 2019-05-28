@@ -1317,6 +1317,7 @@ $("#claimBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
+      $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
       console.log("your cut is: "+result);
       $("#claimLoader").hide();
       $("#claimTitle").hide();
