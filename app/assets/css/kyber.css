@@ -27,11 +27,11 @@
 /* ========== Theme Sunset Settings ========== */
 
 .kyber-widget-button.theme-sunset {
-    background-color: #ccff00;
+    background-color: transparent;
 }
 
 .kyber-widget-button.theme-sunset:hover {
-    background-color: #ffb15e;
+    background-color: #ccff00;
 }
 
 /* ========== Theme Ocean Settings ========== */
