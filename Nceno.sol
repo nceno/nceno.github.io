@@ -162,7 +162,7 @@ contract Nceno is RelayRecipient{
   mapping(uint=>bool) public userExists;
 
 
-  function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS) notPaused external{
+  function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS)  external{
     require(userExists[_stravaID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
 
@@ -181,7 +181,7 @@ contract Nceno is RelayRecipient{
     emit MakeProfile(get_sender(), _stravaID, _userName, _flag, _OS);
   }
 
-  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) notPaused external payable {
+  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies)  external payable {
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value >= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //get_sender()
     goalObject memory createdGoal;
@@ -227,7 +227,7 @@ contract Nceno is RelayRecipient{
   }
   //event Hosted();
 
-  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) notPaused external payable {
+  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies)  external payable {
     require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
@@ -248,7 +248,7 @@ contract Nceno is RelayRecipient{
     emit Join(_goalID, _stravaID, _ethPricePennies);
   }
 
-  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) notHalted external {
+  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external {
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
@@ -286,7 +286,7 @@ contract Nceno is RelayRecipient{
   }
 
 
-  function claim(bytes32 _goalID, uint _stravaID) notHalted external {
+  function claim(bytes32 _goalID, uint _stravaID)  external {
     //must have 100% adherence for the previous week, and can only claim once.
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
       goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
