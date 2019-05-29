@@ -152,7 +152,7 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
 function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   var nameString = '$'+_stake+'... Anyone wanna join me?';
   var descriptionString = 'I’m hosting a challenge worth $'+_stake+ 'to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, the challenge ID is '+_goalid+'. Go to www.nceno.app/app and search for it.';
-  
+  var startDateLocal = new Date(_start).toISOString();
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
@@ -162,7 +162,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
         var data = JSON.parse(xhr.responseText);
     }
   });
-  xhr.open("POST", 'https://www.strava.com/api/v3/activities?name='+nameString+'&type=Workout&start_date_local='+_start+'&elapsed_time='+_minutes+'&description='+descriptionString);
+  xhr.open("POST", 'https://www.strava.com/api/v3/activities?name='+nameString+'&type=Workout&start_date_local='+startDateLocal+'&elapsed_time='+_minutes+'&description='+descriptionString);
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
