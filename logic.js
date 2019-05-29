@@ -146,8 +146,8 @@ $('#week12').hide();
 
 //timestamps are in this format: yyyymmddT160000Z
 function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _start, _end){
-  var start = new Date(_start*1000).toISOString();
-  var end = new Date(1000*(_start+_duration*604800)).toISOString();;
+  var start = new Date(_start*1000);
+  var end = new Date(1000*(_start+_duration*604800));
   $('#'+_target).html('<a target= "_blank" href =" https://www.google.com/calendar/r/eventedit?text=My%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'.&dates='+_start+'/'+_end+'target="_blank" style="color:#ccff00;" >Add to Google Calendar</a>');
 }
 
@@ -156,7 +156,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   var startDateLocal = new Date().toISOString();
 
   var nameString = '$'+_stake+'... Anyone wanna join me?';
-  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes*60+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid+'". It starts on '+ challengeStart+'.';
+  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid+'". It starts on '+ challengeStart+'.';
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
@@ -167,7 +167,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
         var data = JSON.parse(xhr.responseText);
     }
   });
-  xhr.open("POST", 'https://www.strava.com/api/v3/activities?name='+nameString+'&type=Workout&start_date_local='+startDateLocal+'&elapsed_time='+_minutes+'&description='+descriptionString);
+  xhr.open("POST", 'https://www.strava.com/api/v3/activities?name='+nameString+'&type=Workout&start_date_local='+startDateLocal+'&elapsed_time='+_minutes*60+'&description='+descriptionString);
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
