@@ -167,6 +167,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   xhr.send(stuff);
 }
 
+
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
 if($("#checker").is(':checked')) {
