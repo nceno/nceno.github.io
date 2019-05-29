@@ -1,7 +1,8 @@
-function reminder(_target, _minutes, _frequency, _duration, _goalid, _start, _end){
+//timestamps are in this format: yyyymmddT160000Z
+function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _start, _end){
 	$('#'+_target).html('<a href ="	https://www.google.com/calendar/render?action=TEMPLATE&sf=true&output=xml&text=Your%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' 
-		+ STAKE '%20to%20working%20out%20for%20' + MINUTES+ 'min,%20'+ FREQUENCY+ 'x%20per%20week,%20for%20'+ DURATION 
-		+ '%20weeks.%20The%20challenge%20ID%20is%20'+GOALID+'&dates='+STARTyyyymmddT160000Z+'/'+ENDyyyymmddT160000Z
+		+ _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration 
+		+ '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'&dates='+_start+'/'+_end
 		+'target="_blank" id="reminder">Add to Google Calendar</a>');
 }
 
