@@ -150,9 +150,12 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
 }
 
 function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
+  var challengeStart = new Date(_start*1000).toISOString();
+  var startDateLocal = new Date().toISOString();
+
   var nameString = '$'+_stake+'... Anyone wanna join me?';
-  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ 'to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, the challenge ID is '+_goalid+'. Go to www.nceno.app/app and search for it.';
-  var startDateLocal = new Date(_start*1000).toISOString();
+  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, the challenge ID is "'+_goalid+'". Go to www.nceno.app/app and search for it. It starts on '+ challengeStart+'.';
+
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
