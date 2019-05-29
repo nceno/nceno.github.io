@@ -238,10 +238,10 @@ $("#hostBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
-      stravaShare(_a,_b,_c);
+      //stravaShare(_a,_b,_c);
       $("#createLoader").hide();
       $("#createSuccess").show();
-      $("#hostBtn").hide();
+      //$("#hostBtn").hide();
     }
     else{
       $("#createLoader").hide();
