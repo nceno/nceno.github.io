@@ -145,6 +145,7 @@ $('#week11').hide();
 $('#week12').hide();
 
 //timestamps are in this format: yyyymmddT160000Z
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
 function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _start, _end){
   //need to convert these times
 
