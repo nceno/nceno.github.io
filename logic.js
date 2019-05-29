@@ -265,7 +265,7 @@ $("#hostBtn").click(function() {
       correctNonce++;
       $("#createLoader").hide();
       $("#createSuccess").show();
-      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+1);
+      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+$("#sliderWks").roundSlider("getValue")*604800);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
     }
     else{
@@ -343,7 +343,7 @@ function joinSearch(){
         var _duration = result[3];
         var _goalid = goalid;
         var _start = result[5];
-        var _end = _start + 1;
+        var _end = _start + 604800*result[3];
 
 
         Nceno.methods.join(
@@ -1313,7 +1313,7 @@ function joinTarget(){
       $("#joinSoonLoader").hide();
       $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
       $("#joinSoonModalBtn").hide();
-      reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+1);
+      reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
       stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
     }
     else{
