@@ -4,297 +4,36 @@ const web3 = new Web3(portis.provider);
 
 var Nceno = new web3.eth.Contract([
   {
-    "constant": true,
-    "inputs": [],
-    "name": "get_hub_addr",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getParticipants",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[10]"
-      },
-      {
-        "name": "",
-        "type": "bytes32[10]"
-      },
-      {
-        "name": "",
-        "type": "bytes32[10]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getFutureGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
-        "name": "_stravaID",
-        "type": "uint256"
+        "name": "_spender",
+        "type": "address"
       },
       {
-        "name": "_userName",
-        "type": "bytes32"
-      },
-      {
-        "name": "_flag",
-        "type": "bytes32"
-      },
-      {
-        "name": "_OS",
+        "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "makeProfile",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "profileOf",
+    "name": "approve",
     "outputs": [
-      {
-        "name": "stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "userName",
-        "type": "bytes32"
-      },
-      {
-        "name": "walletAdr",
-        "type": "address"
-      },
-      {
-        "name": "born",
-        "type": "uint256"
-      },
-      {
-        "name": "flag",
-        "type": "bytes32"
-      },
-      {
-        "name": "OS",
-        "type": "uint256"
-      },
-      {
-        "name": "myGoalCount",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newThresh",
-        "type": "uint256"
-      }
-    ],
-    "name": "setHRthresh",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getCompletedGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "relay",
-        "type": "address"
-      },
-      {
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "name": "encoded_function",
-        "type": "bytes"
-      },
       {
         "name": "success",
         "type": "bool"
-      },
-      {
-        "name": "used_gas",
-        "type": "uint256"
-      },
-      {
-        "name": "transaction_fee",
-        "type": "uint256"
       }
     ],
-    "name": "post_relayed_call",
-    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getMyGoalStats2",
+    "inputs": [],
+    "name": "totalSupply",
     "outputs": [
       {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
+        "name": "supply",
         "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "relay",
-        "type": "address"
-      },
-      {
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "name": "encoded_function",
-        "type": "bytes"
-      },
-      {
-        "name": "gas_price",
-        "type": "uint256"
-      },
-      {
-        "name": "transaction_fee",
-        "type": "uint256"
-      }
-    ],
-    "name": "accept_relayed_call",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint32"
       }
     ],
     "payable": false,
@@ -305,183 +44,37 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "token",
+        "name": "_from",
         "type": "address"
       },
       {
-        "name": "destAddress",
+        "name": "_to",
         "type": "address"
-      }
-    ],
-    "name": "execSwap",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
       },
       {
-        "name": "_stravaID",
+        "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "claim",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "userExists",
+    "name": "transferFrom",
     "outputs": [
       {
-        "name": "",
+        "name": "success",
         "type": "bool"
       }
     ],
     "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newAdmin",
-        "type": "address"
-      }
-    ],
-    "name": "setAdmin",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "goalIDs",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_instance",
-        "type": "uint256"
-      }
-    ],
-    "name": "getMyGoalInstance",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getGoalCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "downloadVars",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newChoices",
-        "type": "uint256[12][6][2]"
-      }
-    ],
-    "name": "setPartitionChoices",
-    "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
     "inputs": [],
-    "name": "get_message_data",
+    "name": "decimals",
     "outputs": [
       {
-        "name": "",
-        "type": "bytes"
+        "name": "digits",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -492,101 +85,14 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getActiveGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "liquidateGoalAt",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      }
-    ],
-    "name": "getSuccessesClaims",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256[12]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_sender",
-    "outputs": [
-      {
-        "name": "",
+        "name": "_owner",
         "type": "address"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "cashout",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getUserCount",
+    "name": "balanceOf",
     "outputs": [
       {
-        "name": "",
+        "name": "balance",
         "type": "uint256"
       }
     ],
@@ -598,445 +104,22 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "liquidateGoalInstance",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_status",
-        "type": "bool"
-      }
-    ],
-    "name": "setPause",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "orig_sender",
+        "name": "_to",
         "type": "address"
       },
       {
-        "name": "msg_data",
-        "type": "bytes"
+        "name": "_value",
+        "type": "uint256"
       }
     ],
-    "name": "get_sender_from_data",
+    "name": "transfer",
     "outputs": [
       {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "goalInstance",
-    "outputs": [
-      {
-        "name": "goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "startTime",
-        "type": "uint256"
-      },
-      {
-        "name": "activeMins",
-        "type": "uint256"
-      },
-      {
-        "name": "wks",
-        "type": "uint256"
-      },
-      {
-        "name": "stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "name": "sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "name": "ethPricePennies",
-        "type": "uint256"
-      },
-      {
-        "name": "competitorCount",
-        "type": "uint256"
-      },
-      {
-        "name": "unclaimedStake",
-        "type": "uint256"
-      },
-      {
-        "name": "liquidated",
+        "name": "success",
         "type": "bool"
       }
     ],
     "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      }
-    ],
-    "name": "getGoalArrays",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256[12]"
-      },
-      {
-        "name": "",
-        "type": "uint256[10]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getUpcomingGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "goalCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "successPerGoal",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getGoalPartitions",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_activeMins",
-        "type": "uint256"
-      },
-      {
-        "name": "_stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "name": "_sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "name": "_wks",
-        "type": "uint256"
-      },
-      {
-        "name": "_startTime",
-        "type": "uint256"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_ethPricePennies",
-        "type": "uint256"
-      }
-    ],
-    "name": "host",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "proxy",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_recipient_balance",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      }
-    ],
-    "name": "getProfile",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getGoalParams",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_status",
-        "type": "bool"
-      }
-    ],
-    "name": "setHalt",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_ethPricePennies",
-        "type": "uint256"
-      }
-    ],
-    "name": "join",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_activityID",
-        "type": "uint256"
-      },
-      {
-        "name": "_avgHR",
-        "type": "uint256"
-      },
-      {
-        "name": "_reportedMins",
-        "type": "uint256"
-      }
-    ],
-    "name": "log",
-    "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -1044,248 +127,45 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "_stravaID",
-        "type": "uint256"
+        "name": "_owner",
+        "type": "address"
       },
       {
-        "name": "_goalID",
-        "type": "bytes32"
+        "name": "_spender",
+        "type": "address"
       }
     ],
-    "name": "getMyGoalStats1",
+    "name": "allowance",
     "outputs": [
       {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
+        "name": "remaining",
         "type": "uint256"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-  },
-  {
-    "inputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "fallback"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_unclaimed",
-        "type": "uint256"
-      }
-    ],
-    "name": "LiquidateInstance",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_unclaimed",
-        "type": "uint256"
-      }
-    ],
-    "name": "LiquidatedAt",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_wallet",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_userName",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_flag",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_OS",
-        "type": "uint256"
-      }
-    ],
-    "name": "MakeProfile",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_activeMins",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_wks",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_startTime",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_ethPricePennies",
-        "type": "uint256"
-      }
-    ],
-    "name": "Host",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_ethPricePennies",
-        "type": "uint256"
-      }
-    ],
-    "name": "Join",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_activityID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_avgHR",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_reportedMins",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_payout",
-        "type": "uint256"
-      }
-    ],
-    "name": "Log",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "_goalID",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_cut",
-        "type": "uint256"
-      }
-    ],
-    "name": "Claim",
-    "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": true,
-        "name": "sender",
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "_spender",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "destToken",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "amount",
+        "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "Swap",
+    "name": "Approval",
     "type": "event"
   }
-], '0xfa925ead54ef37ac01f7fb1ddf9f2710dfe97a85');
+], '0xca750bc330b5602335de02e1904ac48ac76995b8');

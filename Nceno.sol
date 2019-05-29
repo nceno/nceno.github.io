@@ -337,13 +337,13 @@ contract Nceno is RelayRecipient{
     _;
   }
     
-  bool halted;
+  bool halted =false;
   modifier notHalted(){
     require(halted == false,"App is halted."); //get_sender()
     _;
   }
 
-  bool paused;
+  bool paused = false;
   modifier notPaused(){
     require(paused == false,"App is paused."); //get_sender()
     _;
