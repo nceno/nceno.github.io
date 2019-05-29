@@ -332,12 +332,7 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "claim",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -525,12 +520,7 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "liquidateGoalAt",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -613,12 +603,21 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "liquidateGoalInstance",
-    "outputs": [
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
-        "type": "uint256"
+        "name": "_status",
+        "type": "bool"
       }
     ],
+    "name": "setPause",
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -979,6 +978,20 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "setHalt",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_goalID",
         "type": "bytes32"
       },
@@ -1022,12 +1035,7 @@ var Nceno = new web3.eth.Contract([
       }
     ],
     "name": "log",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1079,11 +1087,11 @@ var Nceno = new web3.eth.Contract([
     "inputs": [
       {
         "indexed": false,
-        "name": "_payout",
+        "name": "_unclaimed",
         "type": "uint256"
       }
     ],
-    "name": "Paid",
+    "name": "LiquidateInstance",
     "type": "event"
   },
   {
@@ -1091,11 +1099,171 @@ var Nceno = new web3.eth.Contract([
     "inputs": [
       {
         "indexed": false,
+        "name": "_unclaimed",
+        "type": "uint256"
+      }
+    ],
+    "name": "LiquidatedAt",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_wallet",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_userName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_flag",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_OS",
+        "type": "uint256"
+      }
+    ],
+    "name": "MakeProfile",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_activeMins",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stakeUSD",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_ethPricePennies",
+        "type": "uint256"
+      }
+    ],
+    "name": "Host",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_ethPricePennies",
+        "type": "uint256"
+      }
+    ],
+    "name": "Join",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_activityID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_avgHR",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_reportedMins",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_payout",
+        "type": "uint256"
+      }
+    ],
+    "name": "Log",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
         "name": "_cut",
         "type": "uint256"
       }
     ],
-    "name": "Cut",
+    "name": "Claim",
     "type": "event"
   },
   {
@@ -1120,4 +1288,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0x8c28a46baec749a3963756cd38221a45295c1a96');
+], '0xfa925ead54ef37ac01f7fb1ddf9f2710dfe97a85');

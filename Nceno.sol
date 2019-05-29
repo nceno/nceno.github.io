@@ -16,7 +16,13 @@ import "./RelayRecipient.sol";
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 
-  
+  event LiquidateInstance(uint _unclaimed);
+  event LiquidatedAt(uint _unclaimed);
+  event MakeProfile(address _wallet, uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS);
+  event Host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies);
+  event Join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies);
+  event Log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint _payout);
+  event Claim(bytes32 _goalID, uint _stravaID, uint _cut);
 
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
@@ -28,25 +34,13 @@ contract Nceno is RelayRecipient{
     );
   }
 
-  /*function migrateVars(address _admin, uint _hrThresh, address _hubAddress, address _USDC, address _DAI, uint _goalCount) onlyAdmin public{
-
-  }*/
-
   function downloadGoal(uint _index) onlyAdmin internal returns(goalObject){
     return(goalInstance[_index]);
   }
 
-  /*function migrateGoal(goalObject _goal) onlyAdmin internal{
-
-  }*/
-
   function downloadCompetitor(uint _index) onlyAdmin internal returns(competitorObject){
     return(profileOf[stravaIDs[_index]]);
   }
-
-  /*function migrateCompetitor(competitorObject _competitor) internal{
-
-  }*/
 
   //adr 1 on metamask ropsten
   address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
@@ -66,24 +60,27 @@ contract Nceno is RelayRecipient{
     init_relay_hub(RelayHub(hubAddress));
   }
 
-  function liquidateGoalInstance(uint _index) onlyAdmin external returns(uint){
+  function liquidateGoalInstance(uint _index) onlyAdmin external{
     //can only see a week after a goal is finished
     require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
     DAI_ERC20.transfer(admin, goalInstance[_index].unclaimedStake);
     //close the goal
     goalInstance[_index].liquidated = true;
-    return(goalInstance[_index].unclaimedStake);
+
+    emit LiquidateInstance(goalInstance[_index].unclaimedStake);
+
   }
 
-  function liquidateGoalAt(bytes32 _goalID) onlyAdmin external returns(uint){
+  function liquidateGoalAt(bytes32 _goalID) onlyAdmin external {
     //can only see a week after a goal is finished
     require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
     //transfer the money
     DAI_ERC20.transfer(admin, goalAt[_goalID].unclaimedStake);
     //close the goal
     goalAt[_goalID].liquidated = true;
-    return(goalAt[_goalID].unclaimedStake);
+    
+    emit LiquidatedAt(goalAt[_goalID].unclaimedStake);
   }
 
   //useful for liquidating
@@ -165,7 +162,7 @@ contract Nceno is RelayRecipient{
   mapping(uint=>bool) public userExists;
 
 
-  function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS) external{
+  function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS) notPaused external{
     require(userExists[_stravaID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
 
@@ -181,9 +178,10 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID] = createdCompetitor;
     userExists[_stravaID] = true;
     stravaIDs.push(_stravaID);
+    emit MakeProfile(get_sender(), _stravaID, _userName, _flag, _OS);
   }
 
-  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) external payable {
+  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies) notPaused external payable {
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value >= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //get_sender()
     goalObject memory createdGoal;
@@ -225,11 +223,11 @@ contract Nceno is RelayRecipient{
     //executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, _stakeUSD*(10**18) );
     execSwap(DAI_ERC20, this);
 
-    //emit Hosted();
+    emit Host(_goalID, _activeMins, _stakeUSD, _sesPerWk, _wks, _startTime, _stravaID, _ethPricePennies);
   }
   //event Hosted();
 
-  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) external payable {
+  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies) notPaused external payable {
     require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
@@ -247,9 +245,10 @@ contract Nceno is RelayRecipient{
     //kyber step
     //executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, goalAt[_goalID].stakeUSD );
     execSwap(DAI_ERC20, this);
+    emit Join(_goalID, _stravaID, _ethPricePennies);
   }
 
-  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) external returns(uint){
+  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins) notHalted external {
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
@@ -281,14 +280,13 @@ contract Nceno is RelayRecipient{
       //adjust the unclaimedStake
       goalAt[_goalID].unclaimedStake-= payout; //convert to usd
 
-      return(payout);
-      emit Paid(payout);
+      emit Log(_goalID, _stravaID, _activityID, _avgHR, _reportedMins, payout);
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
   }
-  event Paid(uint _payout);
 
-  function claim(bytes32 _goalID, uint _stravaID) external returns(uint){
+
+  function claim(bytes32 _goalID, uint _stravaID) notHalted external {
     //must have 100% adherence for the previous week, and can only claim once.
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
       goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
@@ -330,15 +328,36 @@ contract Nceno is RelayRecipient{
     //adjust the unclaimedStake
     goalAt[_goalID].unclaimedStake-= cut; //convert to usd
 
-    emit Cut(cut);
-    return(cut);
+    emit Claim(_goalID, _stravaID, cut);
   }
-  event Cut(uint _cut);
+
 
   modifier onlyAdmin(){
     require(get_sender() == admin,"Sender not authorized."); //get_sender()
     _;
   }
+    
+  bool halted;
+  modifier notHalted(){
+    require(halted == false,"App is halted."); //get_sender()
+    _;
+  }
+
+  bool paused;
+  modifier notPaused(){
+    require(paused == false,"App is paused."); //get_sender()
+    _;
+  }
+
+  function setHalt(bool _status) onlyAdmin external {
+    halted = _status;
+    paused = _status;
+  }
+
+  function setPause(bool _status) onlyAdmin external {
+    paused = _status;
+  }
+
 
   //getters for UI
   //get goal
