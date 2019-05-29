@@ -1520,6 +1520,7 @@ function getToken(){
       access_token = data.access_token;
       //tokenExpire = data.expires_in;
       stravaID = data.athlete.id;
+      console.log("strava id is:"+stravaID);
       stravaUsername = data.athlete.username;
       $("#stravaOk").hide();
       $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
