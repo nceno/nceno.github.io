@@ -162,11 +162,10 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
         var data = JSON.parse(xhr.responseText);
     }
   });
-  xhr.open("POST", "https://www.strava.com/api/v3/activities" name='nameString' type='workout' start_date_local='_start' elapsed_time='_minutes' description='descriptionString');
+  xhr.open("POST", "https://www.strava.com/api/v3/activities+&name=+"nameString+"&type=workout&start_date_local="+_start+"&elapsed_time="+_minutes+"&description="+descriptionString);
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
-
 
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
