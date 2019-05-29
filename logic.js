@@ -152,7 +152,7 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
 }
 
 function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
-  var challengeStart = new Date(_start*1000).toString();
+  var challengeStart = new Date(_start*1000).toDateString();
   var startDateLocal = new Date().toISOString();
 
   var nameString = '$'+_stake+'... Anyone wanna join me?';
