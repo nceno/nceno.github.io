@@ -146,10 +146,7 @@ $('#week12').hide();
 
 //timestamps are in this format: yyyymmddT160000Z
 function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _start, _end){
-  $('#'+_target).html('<a href =" https://www.google.com/calendar/render?action=TEMPLATE&sf=true&output=xml&text=Your%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' 
-    + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration 
-    + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'&dates='+_start+'/'+_end
-    +'target="_blank" id="reminder">Add to Google Calendar</a>');
+  $('#'+_target).html('<a href =" https://www.google.com/calendar/render?action=TEMPLATE&sf=true&output=xml&text=Your%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'&dates='+_start+'/'+_end+'target="_blank" id="reminder"><p>Add to Google Calendar</p></a>');
 }
 
 //show create button only if user agrees to terms
@@ -248,7 +245,7 @@ $("#hostBtn").click(function() {
       //stravaShare(_a,_b,_c);
       $("#createLoader").hide();
       $("#createSuccess").show();
-      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+1 );
+      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+1);
     }
     else{
       $("#createLoader").hide();
