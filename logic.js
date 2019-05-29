@@ -248,7 +248,7 @@ $("#hostBtn").click(function() {
       //stravaShare(_a,_b,_c);
       $("#createLoader").hide();
       $("#createSuccess").show();
-      remind('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, _end );
+      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, _end );
     }
     else{
       $("#createLoader").hide();
