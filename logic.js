@@ -447,6 +447,7 @@ function resetCreate(){
   $("#hostBtn").show();
   $("#cancelBtn").show();
   $("#createSuccess").hide();
+  $("#createReminder").html('');
   randGoalID();
 }
 
@@ -471,6 +472,7 @@ function resetJoinSr(){
   $("#joinFail").html('');
   $("#aboutToJoin").show();
   $("#srEcho").html('');
+  $("#srJoinReminder").html('');
 }
 
 function resetJoinSoon(){
@@ -479,6 +481,7 @@ function resetJoinSoon(){
   $("#joinSoonSuccess").html('');
   $("#joinSoonFail").html('');
   $("#soonJoinTitle").show();
+  $("#joinReminder").html('');
 }
 
 //generates the typed quick stats at the top of the manage tab
