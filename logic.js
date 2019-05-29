@@ -149,6 +149,24 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
   $('#'+_target).html('<a target= "_blank" href =" https://www.google.com/calendar/render?action=TEMPLATE&sf=true&output=xml&text=Your%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'&dates='+_start+'/'+_end+'target="_blank" style="color:#ccff00;" >Add to Google Calendar</a>');
 }
 
+function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
+  var nameString = '$'+_stake+'... Anyone wanna join me?';
+  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ 'to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, the challenge ID is '+_goalid+'. Go to www.nceno.app/app and search for it.';
+  
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+        console.log(this.responseText);
+        var data = JSON.parse(xhr.responseText);
+    }
+  });
+  xhr.open("POST", "https://www.strava.com/api/v3/activities" name=nameString type='workout' start_date_local=_start elapsed_time=_minutes description=descriptionString);
+  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.send(stuff);
+}
+
 //show create button only if user agrees to terms
 $("#checker").on('click', function() {
 if($("#checker").is(':checked')) {
@@ -242,10 +260,10 @@ $("#hostBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
-      //stravaShare(_a,_b,_c);
       $("#createLoader").hide();
       $("#createSuccess").show();
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+1);
+      stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
     }
     else{
       $("#createLoader").hide();
@@ -314,7 +332,17 @@ function joinSearch(){
   .call({from: web3.eth.defaultAccount},
     function(error, result) {
       if (!error){
-        var stakewei= result[1];
+        var stakewei= result[1]*1000000000000000000/ethPrice;
+
+        var _stake =result[1]; 
+        var _minutes = result[0];
+        var _frequency =result[2] ;
+        var _duration = result[3];
+        var _goalid = goalid;
+        var _start = result[5];
+        var _end = _start + 1;
+
+
         Nceno.methods.join(
           goalid,
           stravaID,
@@ -337,10 +365,10 @@ function joinSearch(){
           console.log(receipt.status);
           if(receipt.status === true){
             correctNonce++;
-            //stravaShare(_a,_b,_c);
             $("#joinLoader").hide();
             $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
-            reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, $('#searchField').val(), _start, _end);
+            reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start, _end);
+            stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
           }
           else{
             $("#joinLoader").hide();
@@ -1279,11 +1307,11 @@ function joinTarget(){
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
-      //stravaShare(_a,_b,_c);
       $("#joinSoonLoader").hide();
       $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
       $("#joinSoonModalBtn").hide();
-      reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, _end);
+      reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+1);
+      stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
     }
     else{
       $("#joinSoonLoader").hide();
