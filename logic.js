@@ -513,7 +513,7 @@ function resetJoinSoon(){
 }
 
 //generates the typed quick stats at the top of the manage tab
-function quickStats(){
+/*function quickStats(){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
@@ -572,7 +572,7 @@ function quickStats(){
     }
   };
   xhr.send();
-}
+}*/
 
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
