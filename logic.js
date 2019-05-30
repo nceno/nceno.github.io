@@ -442,6 +442,9 @@ function resetCreate(){
   $("#createReminder").html('');
   randGoalID();
 }
+$('#popupCreate').on('hidden.bs.modal', function (e) {
+  resetCreate();
+})
 
 function resetLog(){
   $("#payMeBtn").show();
@@ -450,6 +453,9 @@ function resetLog(){
   $("#logEcho").html('');
   $("#getYouPaid").show();
 }
+$('#logModal').on('hidden.bs.modal', function (e) {
+  resetLog();
+})
 
 function resetClaim(){
   $("#claimBtn").show();
@@ -457,6 +463,9 @@ function resetClaim(){
   $("#claimFail").html('');
   $("#claimTitle").show();
 }
+$('#claimModal').on('hidden.bs.modal', function (e) {
+  resetClaim();
+})
 
 function resetJoinSr(){
   $("#joinSearch").show();
@@ -466,6 +475,9 @@ function resetJoinSr(){
   $("#srEcho").html('');
   $("#srJoinReminder").html('');
 }
+$('#popupSrJoin').on('hidden.bs.modal', function (e) {
+  resetJoinSr();
+})
 
 function resetJoinSoon(){
   $("#joinSoonModalBtn").show();
@@ -475,6 +487,9 @@ function resetJoinSoon(){
   $("#soonJoinTitle").show();
   $("#joinReminder").html('');
 }
+$('#popupSoonJoin').on('hidden.bs.modal', function (e) {
+  resetJoinSoon();
+})
 
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
