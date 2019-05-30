@@ -1532,8 +1532,9 @@ function getActivities(){
       console.log("cleaned length is: "+cleaned.length);
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
-        //console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
-        console.log("Good news, your workout is being logged for a payout!")
+        
+        console.log("Good news, your workout is being logged for a payout!");
+        console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
         
 
         //log the data to get a payout
