@@ -1568,7 +1568,9 @@ function getActivities(){
             Nceno.events.Log({
               filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
-            }, (error, event) => { console.log(event); 
+            }, (error, event) => { 
+                console.log(event);
+                console.log("payout was: "+event[5]); 
             })
             .on('data', (event) => {
               console.log(event); // same results as the optional callback above
