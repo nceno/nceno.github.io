@@ -1572,29 +1572,29 @@ function getActivities(){
             }, (error, event) => { 
                 console.log(event);
                 usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
-                console.log("payout was: "+usdPayout+"USD"); 
-                console.log(typeof event.returnValues._payout);
-            })
-            .on('data', (event) => {
-              //console.log(event); // same results as the optional callback above
-              //console.log("payout was: "+usdPayout+"USD"); 
+                console.log("payout was: $"+usdPayout);
+                //----begin other messages
+
+                $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
+                
+                if(usdPayout>0){
+                  $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout+' of your stake! Check your wallet.</p>');
+                  $('#logSuccess').show();
+                }
+                else{
+                  $('#logLoader').hide();
+                  $('#getYouPaid').hide();
+                  $('#logFail').html('<p>"Good job, but no payout for this one... You already logged a workout today.</p>');
+                }
+                //----end other messages
             })
             .on('error', console.error);
             //--------/end event listener
-
-
 
             $('#logLoader').hide();
             $('#getYouPaid').hide();
             correctNonce++;
             
-                    //-------------------------------
-                    //----need to add event listener result for the payout here..............
-                    //-------------------------------
-            $('#logEcho').html('<p>Avg heart rate: '+Math.round(cleaned[0][1])+ 'bpm. Session length: '+Math.round(cleaned[0][2])+'mins.</p>');
-            $('#logSuccess').html('<p style="color:white;">Great job, you just earned back part of your stake! Check your wallet.</p>');
-            $('#logSuccess').show();
-
           }
           else{
             $('#logLoader').hide();
