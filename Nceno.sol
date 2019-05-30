@@ -254,6 +254,7 @@ contract Nceno is RelayRecipient{
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks) && goalAt[_goalID].activitySpent[_activityID]==false, 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
     uint wk = (now - goalAt[_goalID].startTime)/604800;
+    uint payout =0;
     
     //payment logic for activity comparison, HR check, timestamp double spending, and limited payouts per week.. && goalAt[_goalID].activitySpent[_activityID]==false
     if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh  && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
@@ -262,7 +263,7 @@ contract Nceno is RelayRecipient{
      
       //TODO: ensure this is correct decimals. not wei or pennies.
       //uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
-      uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(100*goalAt[_goalID].sesPerWk);
+      payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(100*goalAt[_goalID].sesPerWk);
       //get_sender().transfer(payout); //ether payout
       
       DAI_ERC20.transfer(get_sender(), payout); //stablecoin payout
@@ -281,9 +282,10 @@ contract Nceno is RelayRecipient{
       //adjust the unclaimedStake
       goalAt[_goalID].unclaimedStake-= payout; //convert to usd
 
-      emit Log(_goalID, _stravaID, _activityID, _avgHR, _reportedMins, payout);
+      
     }
     else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
+    emit Log(_goalID, _stravaID, _activityID, _avgHR, _reportedMins, payout);
   }
 
 
