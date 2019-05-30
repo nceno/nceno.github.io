@@ -1263,6 +1263,33 @@ $("#claimBtn").click(function() {
 
     console.log(receipt.status);
     if(receipt.status === true){
+
+      //----------event listener
+      var usdPayout;
+      Nceno.events.Log({
+        filter: {_goalID: goalid, _stravaID: stravaID},
+        fromBlock: 0, toBlock: 'latest'
+      }, (error, event) => { 
+          console.log(event);
+          usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
+          console.log("payout was: $"+usdPayout);
+          //----begin other messages
+
+          $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
+          
+          if(usdCut>0){
+            $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout+' of your stake! Check your wallet.</p>');
+            $('#logSuccess').show();
+          }
+          else{
+            //already claimed
+          }
+          //----end other messages
+      })
+      .on('error', console.error);
+      //--------/end event listener
+
+
       correctNonce++;
       $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
       console.log("your cut is: "+result);
