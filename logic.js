@@ -1564,7 +1564,7 @@ function getActivities(){
           console.log(receipt.status);
           if(receipt.status === true){
             
-            //event listener
+            //----------event listener
             Nceno.events.Log({
               filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
@@ -1577,6 +1577,7 @@ function getActivities(){
               console.log("payout was: "+event[5]);
             })
             .on('error', console.error);
+            //--------/end event listener
 
 
 
