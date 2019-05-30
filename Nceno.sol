@@ -251,16 +251,14 @@ contract Nceno is RelayRecipient{
 
   function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external {
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
-      (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks) && goalAt[_goalID].activitySpent[_activityID]==false, 
+      (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
     uint wk = (now - goalAt[_goalID].startTime)/604800;
     uint payout =0;
     
     //payment logic for activity comparison, HR check, timestamp double spending, and limited payouts per week.. && goalAt[_goalID].activitySpent[_activityID]==false
-    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh  && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
-      
-      //payout a refund- needs kyberswap adjustment
-     
+    if(goalAt[_goalID].activitySpent[_activityID]==false && _reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh  && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
+          
       //TODO: ensure this is correct decimals. not wei or pennies.
       //uint payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(goalAt[_goalID].ethPricePennies*goalAt[_goalID].sesPerWk);
       payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(100*goalAt[_goalID].sesPerWk);
@@ -281,10 +279,8 @@ contract Nceno is RelayRecipient{
 
       //adjust the unclaimedStake
       goalAt[_goalID].unclaimedStake-= payout; //convert to usd
-
-      
     }
-    else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
+    //else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
     emit Log(_goalID, _stravaID, _activityID, _avgHR, _reportedMins, payout);
   }
 
