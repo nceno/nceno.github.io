@@ -324,14 +324,6 @@ function echoGoal(){
   );
 }
 
-/*//populates the modal when you want to join a searched goal
-function srEcho(){
-  $("#srEcho").html(
-    "You're commiting $" + $("#srStake").val() + " to working out for " + 
-    $("#srMins").val() +"mins " + $("#srSes").val()+" times per week for "+ 
-    $("#srWks").val()+  " weeks, starting automatically on "+ $("#srStart").val()
-  );
-}*/
 
 //joins the searched goal
 function joinSearch(){
@@ -395,44 +387,6 @@ function joinSearch(){
   ); 
 }
 
-//joins the browsed goal
-/*function joinSoon(){
-  updateEthPrice();
-  goalid = browsedGoal;
-  Nceno.methods.getGoalParams(
-    goalid
-  )
-  .call({from: web3.eth.defaultAccount},
-    function(error, result) {
-      if (!error){
-        //var stakewei= result[1];
-        Nceno.methods.join(
-          goalid,
-          stravaID,
-          ethPrice
-        )
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakewei},
-          function(error, result) {
-            if (!error){
-              $("#joinSoon").hide();
-              $("#soonCancelBtn").hide();
-              $("#joinSoonLoader").show();
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-        ).once('confirmation', function(confNumber, receipt){ 
-          $("#joinSoonLoader").hide();
-          $("#joinSoonSuccess").show();
-           })
-          .once('error', function(error){console.log(error);});;
-      }
-      else
-      console.error(error);
-    }
-  ); 
-}*/
 
 
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
@@ -521,68 +475,6 @@ function resetJoinSoon(){
   $("#soonJoinTitle").show();
   $("#joinReminder").html('');
 }
-
-//generates the typed quick stats at the top of the manage tab
-/*function quickStats(){
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.fitbit.com/1/user/'+ fitbitUser +'/activities/heart/date/today/1d.json');
-  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      
-      //activity minutes  
-      var data = JSON.parse(xhr.responseText);
-      var obj = [data];
-      var fatBurn = obj[0]["activities-heart"][0].value.heartRateZones[1].minutes;
-      var cardio = obj[0]["activities-heart"][0].value.heartRateZones[2].minutes;
-      var peak = obj[0]["activities-heart"][0].value.heartRateZones[3].minutes;
-      var sessionMins = fatBurn + cardio + peak;      
-      $("#qsMins").html(sessionMins);
-      console.log("total session minutes to be logged: "+sessionMins);
-
-      //active challenges
-      var active = 0;
-      for (let j = 0; j < 20; j++){
-      Nceno.methods.getActiveGoal(stravaID, j).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          active++;
-        }
-        $("#qsActive").html(active);
-      });}
-
-      //completed challenges
-      var completed = 0;
-      var goals2 = new Array();
-      for (let k = 0; k < 20; k++){
-      Nceno.methods.getCompletedGoal(stravaID, k).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals2[k] = result;
-          completed++;
-        }
-      });}
-
-      //the rest
-      var successCount=0; 
-      var sesPerWk=0;
-      var lostStake=0;
-      var bonusTotal=0;
-      for (let i = 0; i < completed; i++){
-      Nceno.methods.successPerGoal(stravaID, goals2[i]).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          successCount+=result[0];
-          sesPerWk+=result[1];
-          lostStake+=result[2];
-          bonusTotal+=result[3];
-        }
-      });}
-      $("#qsAdherence").html(successCount/sesPerWk*100);
-      $("#qsLost").html(lostStake);
-      $("#qsGain").html(bonusTotal);
-      $("#qsProfit").html(bonusTotal-lostStake);
-    }
-  };
-  xhr.send();
-}*/
 
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
@@ -779,14 +671,7 @@ function selectedChallenge(){
                               var flagKey = 'flagP'+n;
                               var bonusKey = 'bonusP'+n;
                               var payKey = 'payP'+n;
-                              var lostKey = 'lostP'+n;
-
-                              /*var lostSum = 0;
-                              for(let k = 0; k<currentWeek; k++){
-                                if(currentWeek>1){lostSum += lostStake[k];}
-                                else lostSum = 0;
-                              }*/
-                              
+                              var lostKey = 'lostP'+n;                            
 
                               $('#'+adhKey).html(adherence[k]+'%');
                               $('#'+nameKey).html(convertedName);
@@ -1335,14 +1220,6 @@ function joinTarget(){
 }
 
 var browsedGoal;
-/*function setGoalID(id){
-  browsedGoal= id;
-  $("#soonEcho").html(
-    "You're commiting $" + buyin + " to working out for " + 
-    result[0] +"mins " + result[2]+" times per week for "+ 
-    result[3]+  " weeks, starting automatically on "+ tstamp.toDateString()
-  );
-}*/
 
 //button to claim lost stake from previous week. needs work.
 $("#claimBtn").click(function() {
@@ -1527,9 +1404,7 @@ function updateEthPrice(btn) {
       console.log(this.responseText);
       console.log(ethPrice);
       $('#'+btn).show();
-      /*$('#hostBtn').show();
-      $('#joinSoonModalBtn').show();
-      $("#joinSearch").show();*/
+
     }
   });
   xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
