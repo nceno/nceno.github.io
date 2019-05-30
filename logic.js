@@ -1571,8 +1571,9 @@ function getActivities(){
               fromBlock: 0, toBlock: 'latest'
             }, (error, event) => { 
                 console.log(event);
-                usdPayout = parseInt(event._payout)/1000000000000000000;
-                console.log("payout was: "+usdPayout+"USD"); 
+                //usdPayout = parseInt(event._payout)/1000000000000000000;
+                //console.log("payout was: "+usdPayout+"USD"); 
+                console.log(typeof event._payout);
             })
             .on('data', (event) => {
               console.log(event); // same results as the optional callback above
