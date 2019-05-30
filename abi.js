@@ -1086,7 +1086,7 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_unclaimed",
         "type": "uint256"
       }
@@ -1098,7 +1098,7 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_unclaimed",
         "type": "uint256"
       }
@@ -1110,12 +1110,12 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_wallet",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_stravaID",
         "type": "uint256"
       },
@@ -1142,7 +1142,7 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_goalID",
         "type": "bytes32"
       },
@@ -1167,12 +1167,12 @@ var Nceno = new web3.eth.Contract([
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_startTime",
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_stravaID",
         "type": "uint256"
       },
@@ -1189,17 +1189,17 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_goalID",
         "type": "bytes32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_stravaID",
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_ethPricePennies",
         "type": "uint256"
       }
@@ -1211,12 +1211,12 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_goalID",
         "type": "bytes32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_stravaID",
         "type": "uint256"
       },
@@ -1236,7 +1236,7 @@ var Nceno = new web3.eth.Contract([
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_payout",
         "type": "uint256"
       }
@@ -1248,17 +1248,17 @@ var Nceno = new web3.eth.Contract([
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_goalID",
         "type": "bytes32"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_stravaID",
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_cut",
         "type": "uint256"
       }
@@ -1288,4 +1288,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xd1a682aaed1f302c992266481e3eb3574e850f41');
+], '0xea2c0077006257919d16fe1e765cc20a5e47bab8');

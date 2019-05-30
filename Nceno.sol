@@ -18,11 +18,11 @@ contract Nceno is RelayRecipient{
 
   event LiquidateInstance(uint indexed _unclaimed);
   event LiquidatedAt(uint indexed _unclaimed);
-  event MakeProfile(address indexed _wallet, uint indexed _stravaID, bytes32 indexed _userName, bytes32 indexed _flag, uint indexed _OS);
-  event Host(bytes32 indexed _goalID, uint indexed _activeMins,  uint indexed _stakeUSD, uint indexed _sesPerWk, uint indexed _wks, uint indexed _startTime, uint indexed _stravaID, uint indexed _ethPricePennies);
+  event MakeProfile(address indexed _wallet, uint indexed _stravaID, bytes32 _userName, bytes32 _flag, uint _OS);
+  event Host(bytes32 indexed _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint indexed _startTime, uint indexed _stravaID, uint _ethPricePennies);
   event Join(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _ethPricePennies);
   
-  event Log(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _activityID, uint indexed _avgHR, uint indexed _reportedMins, uint indexed _payout);
+  event Log(bytes32 indexed _goalID, uint indexed _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint indexed _payout);
   event Claim(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _cut);
 
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
