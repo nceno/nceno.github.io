@@ -21,6 +21,7 @@ contract Nceno is RelayRecipient{
   event MakeProfile(address _wallet, uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS);
   event Host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies);
   event Join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies);
+  
   event Log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint _payout);
   event Claim(bytes32 _goalID, uint _stravaID, uint _cut);
 

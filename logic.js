@@ -1563,6 +1563,21 @@ function getActivities(){
         ).once('confirmation', function(confNumber, receipt, result){
           console.log(receipt.status);
           if(receipt.status === true){
+            
+            //event listener
+            Nceno.events.Log({
+              filter: {_goalID=THEGOAL, _stravaID=USERID},
+              fromBlock: 0, toBlock: 'latest'
+            }, (error, event) => { console.log(event); 
+            })
+            .on('data', (event) => {
+              console.log(event); // same results as the optional callback above
+              console.log("payout was: "+event[5]);
+            })
+            .on('error', console.error);
+
+
+
             $('#logLoader').hide();
             $('#getYouPaid').hide();
             correctNonce++;
