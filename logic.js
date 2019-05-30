@@ -1501,7 +1501,7 @@ function getActivities(){
 
       for(let i=0; i<data.length; i++){
         //console.log("["+data[i].id+", "+data[i].average_heartrate+", "+data[i].elapsed_time/60+"]");
-        if(data[i].manual == "false" && data[i].has_heartrate == "true" && data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
+        if(data[i].manual == 'false' && data[i].has_heartrate == 'true' && data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
         //if(data[i].manual == "false" && data[i].has_heartrate == "true"){
 
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
