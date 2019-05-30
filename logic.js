@@ -1605,7 +1605,7 @@ function getActivities(){
                 else{
                   $('#logLoader').hide();
                   $('#getYouPaid').hide();
-                  $('#logFail').html('<p>"Good job, but no payout for this one... You already logged a workout today.</p>');
+                  $('#logFail').html('<p>Good job, but no payout for this one... You already logged a workout today.</p>');
                 }
                 //----end other messages
             })
