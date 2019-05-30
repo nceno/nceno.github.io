@@ -1527,11 +1527,12 @@ function getActivities(){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
           //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
           console.log("added: ["+cleaned[i]+"]");
-          console.log("first one is: ["+cleaned[0]+"]");
-          //console.log("and first part of that is: ["+cleaned[0]+"]");
+          
+          
         }
       }
       console.log("cleaned length is: "+cleaned.length);
+      console.log(cleaned);
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
         
