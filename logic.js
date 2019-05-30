@@ -154,7 +154,7 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
   var start = s.replace(/:/g, "").replace(/-/g, "").replace(".000", "");
   var e = new Date(1000*(_start+_duration*604800)).toISOString();
   var end = e.replace(/:/g, "").replace(/-/g, "").replace(".000", "");
-  $('#'+_target).html('<a style="color:#ccff00;" target= "_blank" href =" https://www.google.com/calendar/r/eventedit?text=My%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'.&dates='+start+'/'+end'>Add to Google Calendar</a>');
+  $('#'+_target).html('<a style="color:#ccff00;" target= "_blank" href ="https://www.google.com/calendar/r/eventedit?text=My%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'.&dates='+start+'/'+end+'">Add to Google Calendar</a>');
 }
 
 function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
