@@ -250,12 +250,12 @@ contract Nceno is RelayRecipient{
 
   function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external {
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
-      (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
+      (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks) && goalAt[_goalID].activitySpent[_activityID]==false, 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
     uint wk = (now - goalAt[_goalID].startTime)/604800;
     
-    //payment logic for activity comparison, HR check, timestamp double spending, and limited payouts per week
-    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh && goalAt[_goalID].activitySpent[_activityID]==false && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
+    //payment logic for activity comparison, HR check, timestamp double spending, and limited payouts per week.. && goalAt[_goalID].activitySpent[_activityID]==false
+    if(_reportedMins >= goalAt[_goalID].activeMins && _avgHR >= hrThresh  && goalAt[_goalID].successes[_stravaID][wk]<goalAt[_goalID].sesPerWk){
       
       //payout a refund- needs kyberswap adjustment
      

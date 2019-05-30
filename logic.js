@@ -1567,7 +1567,7 @@ function getActivities(){
                     //----need to add event listener result for the payout here..............
                     //-------------------------------
             $('#logEcho').html('<p>Avg heart rate: '+Math.round(cleaned[0][1])+ 'bpm. Session length: '+Math.round(cleaned[0][2])+'mins.</p>');
-            $('#logSuccess').html('<p>Great job, you just earned back part of your stake! Check your wallet.</p>');
+            $('#logSuccess').html('<p style="color:white;">Great job, you just earned back part of your stake! Check your wallet.</p>');
             $('#logSuccess').show();
 
           }
