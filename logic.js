@@ -1571,13 +1571,13 @@ function getActivities(){
               fromBlock: 0, toBlock: 'latest'
             }, (error, event) => { 
                 console.log(event);
-                //usdPayout = parseInt(event._payout)/1000000000000000000;
-                //console.log("payout was: "+usdPayout+"USD"); 
-                console.log(typeof event._payout);
+                usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
+                console.log("payout was: "+usdPayout+"USD"); 
+                console.log(typeof event.returnValues._payout);
             })
             .on('data', (event) => {
-              console.log(event); // same results as the optional callback above
-              console.log("payout was: "+usdPayout+"USD"); 
+              //console.log(event); // same results as the optional callback above
+              //console.log("payout was: "+usdPayout+"USD"); 
             })
             .on('error', console.error);
             //--------/end event listener
