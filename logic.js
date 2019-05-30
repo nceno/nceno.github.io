@@ -1566,7 +1566,7 @@ function getActivities(){
             
             //event listener
             Nceno.events.Log({
-              filter: {_goalID=goalid, _stravaID=stravaID},
+              filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
             }, (error, event) => { console.log(event); 
             })
