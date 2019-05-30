@@ -1570,11 +1570,11 @@ function getActivities(){
               fromBlock: 0, toBlock: 'latest'
             }, (error, event) => { 
                 console.log(event);
-                console.log("payout was: "+event._payout/1000000000000000000); 
+                console.log("payout was: "+event._payout/1000000000000000000+"USD"); 
             })
             .on('data', (event) => {
               console.log(event); // same results as the optional callback above
-              console.log("payout was: "+event._payout);
+              console.log("payout was: "+event._payout/1000000000000000000+"USD"); 
             })
             .on('error', console.error);
             //--------/end event listener
