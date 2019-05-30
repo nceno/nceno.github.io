@@ -1331,7 +1331,7 @@ window.onload = function() {
     handleShape: "square",
     min: 20,
     max: 120,
-    step: 1,
+    step: 5,
     value: 45,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal1"
@@ -1371,8 +1371,8 @@ window.onload = function() {
     //min: 10,*********************************************smaller values used for testing
     //max: 300,
     min: 1,
-    max: 20,
-    step: 1,
+    max: 200,
+    step: 5,
     //value: 55,******************
     value: 2,
     sliderType: "min-range",
