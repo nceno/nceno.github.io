@@ -1368,13 +1368,10 @@ window.onload = function() {
     width: 14,
     handleSize: "24,12",
     handleShape: "square",
-    //min: 10,*********************************************smaller values used for testing
-    //max: 300,
-    min: 1,
+    min: 10,
     max: 200,
     step: 5,
-    //value: 55,******************
-    value: 2,
+    value: 55,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal4"
   });
