@@ -1265,44 +1265,38 @@ $("#claimBtn").click(function() {
     if(receipt.status === true){
 
       //----------event listener
-      var usdPayout;
-      Nceno.events.Log({
+      var usdCut;
+      Nceno.events.Claim({
         filter: {_goalID: goalid, _stravaID: stravaID},
         fromBlock: 0, toBlock: 'latest'
       }, (error, event) => { 
           console.log(event);
-          usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
-          console.log("payout was: $"+usdPayout);
+          usdCut = parseInt(event.returnValues._cut)/1000000000000000000;
+          console.log("cut was: $"+usdCut);
           //----begin other messages
 
-          $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
           
           if(usdCut>0){
-            $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout+' of your stake! Check your wallet.</p>');
-            $('#logSuccess').show();
+            $("#claimLoader").hide();
+            $("#claimTitle").hide();
+            $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $'+usdCut+' from the people who skipped workouts.</p>');
           }
           else{
-            //already claimed
+            $("#acctLoader").hide();
+            $('#claimFail').html('<p>Your cut is $0.00 because everyone completed all of their workouts... Is this challenge too easy?</p>');
           }
           //----end other messages
       })
       .on('error', console.error);
       //--------/end event listener
-
-
       correctNonce++;
-      $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
       console.log("your cut is: "+result);
-            //-------------------------------
-            //----need to add event listener result for the payout here..............
-            //-------------------------------
-      $("#claimLoader").hide();
-      $("#claimTitle").hide();
-      $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $xyz from the people who skipped workouts.</p>');
+
+      
     }
     else{
       $("#acctLoader").hide();
-      $('#claimFail').html('<p>Good job on the success, but you already claimed your cut this week. Keep up the good work!</p>');
+      $('#claimFail').html('<p>Transaction failed. Did you already claim this week?</p>');
       console.log("wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
     }   
   })
