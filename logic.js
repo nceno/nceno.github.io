@@ -1565,12 +1565,13 @@ function getActivities(){
           if(receipt.status === true){
             
             //----------event listener
+            var usdPayout;
             Nceno.events.Log({
               filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
             }, (error, event) => { 
                 console.log(event);
-                var usdPayout = parseInt(event._payout)/1000000000000000000;
+                usdPayout = parseInt(event._payout)/1000000000000000000;
                 console.log("payout was: "+usdPayout+"USD"); 
             })
             .on('data', (event) => {
@@ -1585,7 +1586,7 @@ function getActivities(){
             $('#logLoader').hide();
             $('#getYouPaid').hide();
             correctNonce++;
-            console.log("your payout is: "+result);
+            
                     //-------------------------------
                     //----need to add event listener result for the payout here..............
                     //-------------------------------
