@@ -1519,7 +1519,7 @@ function getActivities(){
       //clean the data and make a list of valid workouts.
       var cleaned = new Array();
 
-      for(let i=0; i<data.length; i++){
+      for(let i=0; i<data.length){
         //console.log("["+data[i].id+", "+data[i].average_heartrate+", "+data[i].elapsed_time/60+"]");
         if(data[i].manual == false && data[i].has_heartrate == true && data[i].average_heartrate>100 && data[i].elapsed_time/60>=goalMovingTime){
         //if(data[i].manual == "false" && data[i].has_heartrate == "true"){
@@ -1527,6 +1527,7 @@ function getActivities(){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
           //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
           console.log("added: ["+cleaned[i]+"]");
+          i++;;
           
           
         }
