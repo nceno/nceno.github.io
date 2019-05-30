@@ -439,6 +439,7 @@ function resetCreate(){
   $("#hostBtn").show();
   $("#cancelBtn").show();
   $("#createSuccess").hide();
+  $("#createLoader").hide();
   $("#createReminder").html('');
   randGoalID();
 }
@@ -452,6 +453,7 @@ function resetLog(){
   $("#logFail").html('');
   $("#logEcho").html('');
   $("#getYouPaid").show();
+  $("#logLoader").hide();
 }
 $('#logModal').on('hidden.bs.modal', function (e) {
   resetLog();
@@ -462,6 +464,7 @@ function resetClaim(){
   $("#claimSuccess").html('');
   $("#claimFail").html('');
   $("#claimTitle").show();
+  $("#claimLoader").hide();
 }
 $('#claimModal').on('hidden.bs.modal', function (e) {
   resetClaim();
@@ -474,6 +477,7 @@ function resetJoinSr(){
   $("#aboutToJoin").show();
   $("#srEcho").html('');
   $("#srJoinReminder").html('');
+  $("#joinLoader").hide();
 }
 $('#popupSrJoin').on('hidden.bs.modal', function (e) {
   resetJoinSr();
@@ -486,6 +490,7 @@ function resetJoinSoon(){
   $("#joinSoonFail").html('');
   $("#soonJoinTitle").show();
   $("#joinReminder").html('');
+  $("#joinSoonLoader").hide();
 }
 $('#popupSoonJoin').on('hidden.bs.modal', function (e) {
   resetJoinSoon();
