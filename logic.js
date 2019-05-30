@@ -1528,7 +1528,7 @@ function getActivities(){
           cleaned[i] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
           //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
           console.log("added: ["+cleaned[i]+"]");
-          i++;;
+          i++;
           
           
         }
