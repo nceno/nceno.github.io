@@ -45,6 +45,15 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [],
+    "name": "getTestETH",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -1288,4 +1297,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xf7565c01f6e417f3e659b6f033092c9135179e2e');
+], '0xeb7763f4bc669460326f10ee6631c3072725ac70');

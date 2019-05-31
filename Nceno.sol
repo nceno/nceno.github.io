@@ -25,6 +25,13 @@ contract Nceno is RelayRecipient{
   event Log(bytes32 indexed _goalID, uint indexed _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint indexed _payout);
   event Claim(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _cut);
 
+  //---------for testing only!!!!!!!!!
+  function getTestETH() public{
+    get_sender().transfer(500000000000000000);
+  } 
+  //---------   /for testing only!!!!!!!!!
+
+  
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
       hrThresh,
