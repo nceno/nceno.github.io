@@ -1485,10 +1485,10 @@ function getToken(){
       stravaID = data.athlete.id;
       console.log("strava id is:"+stravaID);
       
-      if(data.athlete.username == undefined){
-        stravaUsername = portisEmail;
-      }
-      else {stravaUsername = data.athlete.username;}
+      //if(data.athlete.username == undefined){
+        stravaUsername = portisEmail.substring(0, email.lastIndexOf("@"));
+      //}
+      //else {stravaUsername = data.athlete.username;}
       
 
       $("#stravaOk").hide();
