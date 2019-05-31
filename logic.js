@@ -30,11 +30,13 @@ function showPortis() {
     
   });
 
+  var portisEmail;
   portis.onLogin((walletAddress, email) => {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       console.log("default: " + web3.eth.defaultAccount);
       portisEmail = email;
+      console.log("portis email is: "+ portisEmail);
       localize();
       getToken();
       $("#portisBtn").hide();
