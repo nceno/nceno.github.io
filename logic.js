@@ -1319,6 +1319,8 @@ window.onload = function() {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       console.log("default: " + web3.eth.defaultAccount);
+      portisEmail = email;
+      console.log("portis email is: "+ portisEmail);
       localize();
       getToken();
       $("#portisBtn").hide();
@@ -1483,7 +1485,7 @@ function getToken(){
       stravaID = data.athlete.id;
       console.log("strava id is:"+stravaID);
       
-      if(data.athlete.username == null){
+      if(data.athlete.username == undefined){
         stravaUsername = portisEmail;
       }
       else {stravaUsername = data.athlete.username;}
