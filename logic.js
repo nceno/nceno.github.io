@@ -34,6 +34,7 @@ function showPortis() {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       console.log("default: " + web3.eth.defaultAccount);
+      portisEmail = email;
       localize();
       getToken();
       $("#portisBtn").hide();
@@ -1479,7 +1480,13 @@ function getToken(){
       //tokenExpire = data.expires_in;
       stravaID = data.athlete.id;
       console.log("strava id is:"+stravaID);
-      stravaUsername = data.athlete.username;
+      
+      if(data.athlete.username == null){
+        stravaUsername = portisEmail;
+      }
+      else {stravaUsername = data.athlete.username;}
+      
+
       $("#stravaOk").hide();
       $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
