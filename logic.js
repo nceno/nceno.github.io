@@ -739,7 +739,7 @@ function selectedChallenge(){
                                       if(currentWeek>1){
                                         visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek-1);
                                       }
-                                      else(visibleLockedPercentWk=[0];)
+                                      else(visibleLockedPercentWk=[0])
 
                                       successesWk = result[1];
                                       winnersWk = result[2];
