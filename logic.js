@@ -734,7 +734,13 @@ function selectedChallenge(){
                                   function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
-                                      visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek-1);
+                                      
+                                      //hide the current locked stake percent from the user
+                                      if(currentWeek>1){
+                                        visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek-1);
+                                      }
+                                      else(visibleLockedPercentWk=[0];)
+
                                       successesWk = result[1];
                                       winnersWk = result[2];
 
