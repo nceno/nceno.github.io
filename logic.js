@@ -1229,7 +1229,7 @@ function populateTargetModal(){
   $("#soonEcho").html(
     "You're commiting $" + targetStake + " to working out for " + 
     targetMin +"minutes, "+ targetSes+" times per week, for "+ 
-    targetWks+  " weeks, starting automatically on "+ targetStart+". The challenge ID is "+ targetGoalID.slice(0, 7)
+    targetWks+  " weeks, starting automatically on "+ targetStart+". The challenge ID is "+ targetGoalID.slice(0, 8)
   );
 }
 
@@ -1265,7 +1265,7 @@ function joinTarget(){
       $("#joinSoonLoader").hide();
       $("#soonJoinTitle").hide();
       $("#joinSoonModalBtn").hide();
-      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 7)+')</p>');
+      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
      })
