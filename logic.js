@@ -1229,7 +1229,7 @@ function populateTargetModal(){
   $("#soonEcho").html(
     "You're commiting $" + targetStake + " to working out for " + 
     targetMin +"minutes, "+ targetSes+" times per week, for "+ 
-    targetWks+  " weeks, starting automatically on "+ targetStart+". The challenge ID is "+ targetGoalID
+    targetWks+  " weeks, starting automatically on "+ targetStart+". The challenge ID is "+ targetGoalID.slice(0, 7)
   );
 }
 
