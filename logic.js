@@ -401,7 +401,7 @@ function joinSearch(){
           }
           else{
             $("#joinLoader").hide();
-            $("#joinFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
+            $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
 
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
           } 
