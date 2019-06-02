@@ -387,11 +387,10 @@ function joinSearch(){
               $("#joinLoader").show();
               console.log(result);
             }
-
             else
             console.error(error);
           }
-        ).once('confirmation', function(confNumber, receipt){
+        ).once('confirmation', function(confNumber, receipt){ 
           console.log(receipt.status);
           if(receipt.status === true){
             correctNonce++;
@@ -403,11 +402,9 @@ function joinSearch(){
           else{
             $("#joinLoader").hide();
             $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
-
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
           } 
-           })
-          .once('error', function(error){console.log(error);});;
+        }).once('error', function(error){console.log(error);});
       }
       else
       console.error(error);
