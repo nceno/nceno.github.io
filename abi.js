@@ -1311,4 +1311,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0x65ebc2f608173c4f17b2d74f21fae104eeae5bbe');
+], '0x0272b4c148b73fa87a0a3aa0d716268ddd37be40');
