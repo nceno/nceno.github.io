@@ -399,6 +399,8 @@ function joinSearch(){
             stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
           }
           else{
+            
+            $("#aboutToJoin").hide();
             $("#srEcho").html('');
             $("#joinLoader").hide();
             $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
