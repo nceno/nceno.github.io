@@ -197,6 +197,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
     if (this.readyState === 4) {
         console.log(this.responseText);
         var data = JSON.parse(xhr.responseText);
+        console.log("shared to strava.");
     }
   });
   xhr.open("POST", 'https://www.strava.com/api/v3/activities?name='+nameString+'&type=Workout&start_date_local='+startDateLocal+'&elapsed_time='+_minutes*60+'&description='+descriptionString);
