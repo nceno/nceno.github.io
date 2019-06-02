@@ -185,7 +185,7 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
 
 function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   var challengeStart = new Date(_start*1000).toDateString();
-  var startDateLocal = new Date().toISOString();
+  var startDateLocal = new Date().toISOString(); //need to convert from UTC to local timezone.... will not affect the challenge.
 
   var nameString = '$'+_stake+'... Anyone wanna join me?';
   var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid+'". It starts on '+ challengeStart+'.';
