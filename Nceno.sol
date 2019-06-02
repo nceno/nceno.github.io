@@ -28,10 +28,14 @@ contract Nceno is RelayRecipient{
   //---------for testing only!!!!!!!!!
   function getTestETH() public{
     get_sender().transfer(500000000000000000);
-  } 
+  }
+
+  function recoverETH(uint _eth) public{
+    admin.transfer(_eth*1000000000000000000);
+  }
   //---------   /for testing only!!!!!!!!!
 
-  
+
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
       hrThresh,
@@ -575,9 +579,10 @@ contract Nceno is RelayRecipient{
       Swap(get_sender(), token, destAmount);
   }
   
-  function cashout(uint _amount) public onlyAdmin{
-      DAI_ERC20.transfer(admin, _amount);
+  function cashout(uint _dollars) public onlyAdmin{
+      DAI_ERC20.transfer(admin, _dollars*1000000000000000000);
   }
+
   //--------------------------
   //--- /kyber stuff 
   //--------------------------

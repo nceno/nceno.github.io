@@ -579,7 +579,7 @@ var Nceno = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_amount",
+        "name": "_dollars",
         "type": "uint256"
       }
     ],
@@ -652,6 +652,20 @@ var Nceno = new web3.eth.Contract([
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_eth",
+        "type": "uint256"
+      }
+    ],
+    "name": "recoverETH",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -1297,4 +1311,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xeb7763f4bc669460326f10ee6631c3072725ac70');
+], '0x65ebc2f608173c4f17b2d74f21fae104eeae5bbe');
