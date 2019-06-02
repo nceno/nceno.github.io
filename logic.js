@@ -383,7 +383,6 @@ function joinSearch(){
           function(error, result) {
             if (!error){
               $("#joinSearch").hide();
-              $("#srCancelBtn").hide();
               $("#joinLoader").show();
               console.log(result);
             }
@@ -400,6 +399,7 @@ function joinSearch(){
             stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
           }
           else{
+            $("#srEcho").html('');
             $("#joinLoader").hide();
             $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
             console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
