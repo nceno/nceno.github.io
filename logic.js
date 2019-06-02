@@ -356,61 +356,40 @@ function echoGoal(){
 //joins the searched goal
 function joinSearch(){
   goalid = web3.utils.padRight($('#searchField').val(),34);
-  Nceno.methods.getGoalParams(
-    goalid
+  Nceno.methods.join(
+    goalid,
+    stravaID,
+    Math.floor(ethPrice*100)
   )
-  .call({from: web3.eth.defaultAccount},
+  //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakewei - 0},
     function(error, result) {
       if (!error){
-        var stakewei= result[1]*1000000000000000000/ethPrice;
-
-        var _stake =result[1]; 
-        var _minutes = result[0];
-        var _frequency =result[2] ;
-        var _duration = result[3];
-        var _goalid = goalid;
-        var _start = result[5];
-        var _end = _start + 604800*result[3];
-
-
-        Nceno.methods.join(
-          goalid,
-          stravaID,
-          Math.floor(ethPrice*100)
-        )
-        //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakewei - 0},
-          function(error, result) {
-            if (!error){
-              $("#joinSearch").hide();
-              $("#joinLoader").show();
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-        ).once('confirmation', function(confNumber, receipt){ 
-          console.log(receipt.status);
-          if(receipt.status === true){
-            correctNonce++;
-            $("#joinLoader").hide();
-            $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
-            reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start, _end);
-            stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
-          }
-          else{
-            
-            $("#aboutToJoin").hide();
-            $("#srEcho").html('');
-            $("#joinLoader").hide();
-            $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
-            console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
-          } 
-        }).once('error', function(error){console.log(error);});
+        $("#joinSearch").hide();
+        $("#joinLoader").show();
+        console.log(result);
       }
-      else console.error(error);
+      else
+      console.error(error);
     }
-  ); 
+  ).once('confirmation', function(confNumber, receipt){ 
+    console.log(receipt.status);
+    if(receipt.status === true){
+      correctNonce++;
+      $("#joinLoader").hide();
+      $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
+      reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start, _end);
+      stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
+    }
+    else{
+      
+      $("#aboutToJoin").hide();
+      $("#srEcho").html('');
+      $("#joinLoader").hide();
+      $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
+      console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
+    } 
+  }).once('error', function(error){console.log(error);}); 
 }
 
 
