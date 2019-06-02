@@ -408,8 +408,7 @@ function joinSearch(){
           } 
         }).once('error', function(error){console.log(error);});
       }
-      else
-      console.error(error);
+      else console.error(error);
     }
   ); 
 }
