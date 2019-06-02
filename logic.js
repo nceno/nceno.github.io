@@ -468,6 +468,7 @@ function resetCreate(){
   $("#createSuccess").hide();
   $("#createLoader").hide();
   $("#createReminder").html('');
+  $("#createFail").html('');
   randGoalID();
 }
 $('#popupCreate').on('hidden.bs.modal', function (e) {
