@@ -1245,8 +1245,7 @@ function joinTarget(){
     function(error, result) {
       if (!error){
         $("#joinSoonModalBtn").hide();
-        $("#srCancelBtn").hide();
-        $("#joinLoader").show();
+        $("#joinSoonLoader").show();
         console.log(result);
       }
       else
@@ -1266,7 +1265,7 @@ function joinTarget(){
       $("#joinSoonLoader").hide();
       $("#soonJoinTitle").hide();
       $("#joinSoonModalBtn").hide();
-      $("#joinSoonFail").html('<p>You are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
+      $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
      })
