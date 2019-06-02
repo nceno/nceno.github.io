@@ -1263,6 +1263,7 @@ function joinTarget(){
       stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
     }
     else{
+      $("#soonEcho").html('');
       $("#joinSoonLoader").hide();
       $("#soonJoinTitle").hide();
       $("#joinSoonModalBtn").hide();
