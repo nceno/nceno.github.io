@@ -1046,6 +1046,7 @@ function selectedChallenge(){
 //searches for a specific goal and displays it with an option to join.
 //also populates the join modal.
 function search(){
+  updateEthPrice('joinSearch');
   $("#request").show();
   var goalid = web3.utils.padRight($('#searchField').val(),34)
 
