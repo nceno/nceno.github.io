@@ -754,7 +754,7 @@ function selectedChallenge(){
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
 
-                                        console.log("inner loop index= "+k+", and wkPayout= " wkPayout[k]);
+                                        console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[k]);
 
 
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
