@@ -665,14 +665,14 @@ function selectedChallenge(){
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
-                          function(error, result) {  
+                          async function(error, result) {  
                             if (!error){
                               var bonusTotal = new Array();
                               var totalPay = new Array();
                               var lostStake = new Array();
 
                               bonusTotal[k] = result[3];
-                              totalPay[k] = result[4]/100;
+                              totalPay[k] = await result[4]/100;
 
                               if(currentWeek>1){
                                 lostStake[k] = result[1]/100;
