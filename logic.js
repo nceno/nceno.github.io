@@ -554,7 +554,7 @@ function makeWktl(){
 }
 
 var goalid;
-function selectedChallenge(){
+async function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
@@ -600,12 +600,12 @@ function selectedChallenge(){
       //console.log("clearing leaderboard...");
     }
 
-    Nceno.methods.getGoalParams(goalid)
+    await Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         async function(error, result) {
         if (!error){
           //echo challenge
-          var compcount = await result[5];
+          var compcount = result[5];
           var tstamp = new Date(result[4]*1000);
           startingTime = result[4]*1.0;
           //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
@@ -635,7 +635,7 @@ function selectedChallenge(){
           console.log("blockchain says we're in week: "+currentWeek);
           makeWktl();
        
-          Nceno.methods.getParticipants(goalid)
+          await Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
             async function(error, result) {
               if (!error){
@@ -644,7 +644,7 @@ function selectedChallenge(){
                 var names = new Array();
                 var flags = new Array();
                 
-                ids = await result[0];
+                ids = result[0];
                 names = result[1];
                 flags = result[2];
                 //console.log("step 2/4, got Participants...");
@@ -653,7 +653,7 @@ function selectedChallenge(){
                 for (let k = 0; k < compcount; k++){
                   //console.log("compcount =" +compcount);
                   console.log("k= "+k);
-                  Nceno.methods.getMyGoalStats1(ids[k], goalid)
+                  await Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     async function(error, result) {
                       if (!error){
@@ -672,7 +672,7 @@ function selectedChallenge(){
                               var lostStake = new Array();
 
                               bonusTotal[k] = result[3];
-                              totalPay[k] = await result[4]/100;
+                              totalPay[k] = result[4]/100;
 
                               if(currentWeek>1){
                                 lostStake[k] = result[1]/100;
@@ -708,7 +708,7 @@ function selectedChallenge(){
 
                               //if(k>=0){
                                 //get the timeline variables and set them
-                                Nceno.methods.getGoalArrays(goalid, stravaID)
+                                await Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
                                   async function(error, result) {
                                     if (!error){
