@@ -565,7 +565,7 @@ function selectedChallenge(){
     var USDstake = 0;
     var competitors = 0;
     var wkBonus = new Array();
-    var wkPayout = new Array();
+    var wkPayout = new Array(); //maybe change to be local?
     var lockedPercentWk = new Array();
     var successesWk = new Array();
     var winnersWk = new Array();
