@@ -678,11 +678,11 @@ function selectedChallenge(){
                               else lostStake[k] = 0;
                               console.log("k= "+k+ " ,and user= "+ids[k]);
                               console.log("k= "+k+ " ,and payouts= "+result[0]);
-                              //var buggyPayoutArray = new Array();
 
                               var wkPayout = new Array(); //maybe change to be local?
                               wkBonus = result[2];
                               wkPayout = result[0];
+                              console.log("k= "+k+ " ,and wkPayout= "+wkPayout);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
