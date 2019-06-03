@@ -554,7 +554,7 @@ function makeWktl(){
 }
 
 var goalid;
-function selectedChallenge(){
+async function selectedChallenge(){
     // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
@@ -708,7 +708,7 @@ function selectedChallenge(){
 
                               //if(k>=0){
                                 //get the timeline variables and set them
-                                Nceno.methods.getGoalArrays(goalid, stravaID)
+                                var waiting = await Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
                                   function(error, result) {
                                     if (!error){
