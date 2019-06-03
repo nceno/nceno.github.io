@@ -743,7 +743,7 @@ function selectedChallenge(){
 
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
-                                            $('#'+dlKey).html('<h2><b style="color:#ccff00;">'+daysRem+"</b> days left this week</h2>");
+                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> days left this week</h3>");
                                           }
                                           else{$('#'+dlKey).html('<h2>Last day this week!</h2>');}
                                         }
