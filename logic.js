@@ -751,7 +751,7 @@ function selectedChallenge(){
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
 
                                         //hide locked stake from user
-                                        if(currentWeek<2){
+                                        if(k+1 == currentWeek){
                                           $('#'+lockKey).html("$???");
                                         }
                                         else $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
