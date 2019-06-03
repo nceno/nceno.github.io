@@ -752,6 +752,7 @@ function selectedChallenge(){
                                         
 
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
+                    /////////////////////////////////
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
 
                                         console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[k]);
@@ -772,7 +773,7 @@ function selectedChallenge(){
                                         }
                                       }
 
-                                      //make chart data ****************************************************************************
+                                      //make chart data 
                                       //x axis
                                       var xaxis = new Array();
                                         for(let i = 0; i<chartWeek; i++){
