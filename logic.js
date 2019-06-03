@@ -658,7 +658,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("successes= "+result[2]+", and k= "+k);
+                        console.log("k= "+k+ " ,and successes= "+result[2]);
 
                         
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
@@ -676,7 +676,7 @@ function selectedChallenge(){
                                 lostStake[k] = result[1]/100;
                               }
                               else lostStake[k] = 0;
-                              console.log("payouts= "+result[0]);
+                              console.log("k= "+k+ " ,and payouts= "+result[0]);
 
                               wkBonus = result[2];
                               wkPayout = result[0];
