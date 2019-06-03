@@ -597,7 +597,7 @@ function selectedChallenge(){
       $('#'+payKey).html('');
       $('#'+lostKey).html('');
       $('#'+dlKey1).html('');
-      console.log("clearing leaderboard...");
+      //console.log("clearing leaderboard...");
     }
 
     Nceno.methods.getGoalParams(goalid)
@@ -617,7 +617,7 @@ function selectedChallenge(){
           $("#echComp").html(result[5]);
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
-          console.log("step 1/4, got GoalParams...."); //*********************************************
+          //console.log("step 1/4, got GoalParams...."); //*********************************************
 
           //set the timeline variables
           sessions = result[2];
@@ -651,7 +651,7 @@ function selectedChallenge(){
 
                 
                 for (let k = 0; k < compcount; k++){
-                  console.log("compcount =" +compcount);
+                  //console.log("compcount =" +compcount);
                   console.log("k= "+k);
                   Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
