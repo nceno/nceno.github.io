@@ -659,11 +659,11 @@ function selectedChallenge(){
                       if (!error){
                         
                         var adherence = new Array();
-                        adherence[k] = await result[0];
+                        adherence[k] = result[0];
                         console.log("successes= "+result[2]);//debug
                         //console.log("step 3/4, got GoalStats1..."); 
                         
-                        Nceno.methods.getMyGoalStats2(ids[k], goalid)
+                        await Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
                           async function(error, result) {  
                             if (!error){
