@@ -676,6 +676,7 @@ function selectedChallenge(){
                                 lostStake[k] = result[1]/100;
                               }
                               else lostStake[k] = 0;
+                              console.log("k= "+k+ " ,and user= "+ids[k]);
                               console.log("k= "+k+ " ,and payouts= "+result[0]);
 
                               wkBonus = result[2];
