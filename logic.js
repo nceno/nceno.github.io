@@ -602,10 +602,10 @@ function selectedChallenge(){
 
     Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
-        function(error, result) {
+        async function(error, result) {
         if (!error){
           //echo challenge
-          var compcount = result[5];
+          var compcount = await result[5];
           var tstamp = new Date(result[4]*1000);
           startingTime = result[4]*1.0;
           //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
@@ -637,14 +637,14 @@ function selectedChallenge(){
        
           Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
-            function(error, result) {
+            async function(error, result) {
               if (!error){
                 
                 var ids = new Array();
                 var names = new Array();
                 var flags = new Array();
                 
-                ids = result[0];
+                ids = await result[0];
                 names = result[1];
                 flags = result[2];
                 //console.log("step 2/4, got Participants...");
@@ -710,9 +710,9 @@ function selectedChallenge(){
                                 //get the timeline variables and set them
                                 Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
-                                  function(error, result) {
+                                  async function(error, result) {
                                     if (!error){
-                                      lockedPercentWk = result[0];
+                                      lockedPercentWk = await result[0];
                                       
                                       //hide the current locked stake percent from the user
                                       if(currentWeek>1){
