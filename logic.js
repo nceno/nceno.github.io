@@ -712,7 +712,7 @@ function selectedChallenge(){
                                 .call({from: web3.eth.defaultAccount},
                                   async function(error, result) {
                                     if (!error){
-                                      lockedPercentWk = await result[0];
+                                      lockedPercentWk = result[0];
                                       
                                       //hide the current locked stake percent from the user
                                       if(currentWeek>1){
@@ -758,7 +758,7 @@ function selectedChallenge(){
                                         
 
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
-                                        $('#'+unKey).html("$" +wkPayout[k]/100);
+                                        await $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost);
 
