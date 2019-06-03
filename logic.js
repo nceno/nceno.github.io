@@ -749,7 +749,14 @@ function selectedChallenge(){
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
-                                        $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
+
+                                        //hide locked stake from user
+                                        if(currentWeek<2){
+                                          $('#'+lockKey).html("$???");
+                                        }
+                                        else $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
+                                        
+
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
