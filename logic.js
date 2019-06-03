@@ -554,8 +554,8 @@ function makeWktl(){
 }
 
 var goalid;
-async function selectedChallenge(){
-    // Initialize Selectric and bind to 'change' event
+function selectedChallenge(){
+  // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
@@ -600,7 +600,7 @@ async function selectedChallenge(){
       //console.log("clearing leaderboard...");
     }
 
-    await Nceno.methods.getGoalParams(goalid)
+    Nceno.methods.getGoalParams(goalid)
     .call({from: web3.eth.defaultAccount},
         async function(error, result) {
         if (!error){
