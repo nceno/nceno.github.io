@@ -597,7 +597,7 @@ function selectedChallenge(){
       $('#'+payKey).html('');
       $('#'+lostKey).html('');
       $('#'+dlKey1).html('');
-      //console.log("clearing leaderboard...");
+
     }
 
     Nceno.methods.getGoalParams(goalid)
@@ -608,7 +608,6 @@ function selectedChallenge(){
           var compcount = result[5];
           var tstamp = new Date(result[4]*1000);
           startingTime = result[4]*1.0;
-          //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
           wkLimit = result[3];
           $("#echStake").html("$"+result[1]);
           $("#echWks").html(result[3]+" wks");
@@ -617,7 +616,7 @@ function selectedChallenge(){
           $("#echComp").html(result[5]);
           $("#echStart").html(tstamp.toDateString());
           $("#dashboard").show();
-          //console.log("step 1/4, got GoalParams...."); //*********************************************
+
 
           //set the timeline variables
           sessions = result[2];
@@ -647,11 +646,10 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
-                //console.log("step 2/4, got Participants...");
+
 
                 
                 for (let k = 0; k < compcount; k++){
-                  //console.log("compcount =" +compcount);
                   console.log("k= "+k);
                   await Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
@@ -660,8 +658,8 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("successes= "+result[2]+", and k= "+k);//debug
-                        //console.log("step 3/4, got GoalStats1..."); 
+                        console.log("successes= "+result[2]+", and k= "+k);
+
                         
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -678,15 +676,10 @@ function selectedChallenge(){
                                 lostStake[k] = result[1]/100;
                               }
                               else lostStake[k] = 0;
-                              console.log("payouts= "+result[0]); //debug
-                              //console.log("lost= "+result[1]); //debug
-                              //console.log("step 4/4, got GoalStats2...");
+                              console.log("payouts= "+result[0]);
 
-                              //if(k>=0){
-                                //set the timeline variables
-                                wkBonus = result[2];
-                                wkPayout = result[0];
-                              //}
+                              wkBonus = result[2];
+                              wkPayout = result[0];
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
@@ -706,7 +699,6 @@ function selectedChallenge(){
                               $('#'+payKey).html('$'+totalPay[k]);
                               $('#'+lostKey).html('$'+lostStake[k]);
 
-                              //if(k>=0){
                                 //get the timeline variables and set them
                                 await Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
@@ -739,7 +731,6 @@ function selectedChallenge(){
                                         else lost = 0;
                                         nowTime = Math.floor(new Date().getTime()/1000);
                                         daysRem = Math.ceil((startingTime + wks*604800 - nowTime - (wks-currentWeek)*604800)/86400);
-                                        //console.log('daysRem is: ('+startingTime +'+'+ wks+'*'+604800 +'-'+ nowTime +'- ('+wks+'-'+currentWeek+')*'+604800+')/'+86400);
 
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
@@ -772,9 +763,6 @@ function selectedChallenge(){
                                           var m = k+1;
                                           $('#w'+m+'log').hide();
                                         }
-
-                                        
-                                        console.log("timeline populated...");
                                       }
 
                                       //make chart data ****************************************************************************
