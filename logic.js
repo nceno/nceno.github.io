@@ -647,7 +647,7 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
-                console.log("step 2/4, got Participants...");
+                //console.log("step 2/4, got Participants...");
 
                 
                 for (let k = 0; k < compcount; k++){
@@ -661,7 +661,7 @@ function selectedChallenge(){
                         var adherence = new Array();
                         adherence[k] = result[0];
                         console.log("successes= "+result[2]);//debug
-                        console.log("step 3/4, got GoalStats1..."); 
+                        //console.log("step 3/4, got GoalStats1..."); 
                         
                         Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -679,14 +679,14 @@ function selectedChallenge(){
                               }
                               else lostStake[k] = 0;
                               console.log("payouts= "+result[0]); //debug
-                              console.log("lost= "+result[1]); //debug
-                              console.log("step 4/4, got GoalStats2...");
+                              //console.log("lost= "+result[1]); //debug
+                              //console.log("step 4/4, got GoalStats2...");
 
-                              if(k>=0){
+                              //if(k>=0){
                                 //set the timeline variables
                                 wkBonus = result[2];
                                 wkPayout = result[0];
-                              }
+                              //}
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
@@ -706,7 +706,7 @@ function selectedChallenge(){
                               $('#'+payKey).html('$'+totalPay[k]);
                               $('#'+lostKey).html('$'+lostStake[k]);
 
-                              if(k>=0){
+                              //if(k>=0){
                                 //get the timeline variables and set them
                                 Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
@@ -996,7 +996,7 @@ function selectedChallenge(){
                                       console.error(error);
                                     }
                                 });
-                              }
+                              //}//end if
 
                               
                             }
