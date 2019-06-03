@@ -565,7 +565,7 @@ function selectedChallenge(){
     var USDstake = 0;
     var competitors = 0;
     var wkBonus = new Array();
-    var wkPayout = new Array(); //maybe change to be local?
+    
     var lockedPercentWk = new Array();
     var successesWk = new Array();
     var winnersWk = new Array();
@@ -678,7 +678,9 @@ function selectedChallenge(){
                               else lostStake[k] = 0;
                               console.log("k= "+k+ " ,and user= "+ids[k]);
                               console.log("k= "+k+ " ,and payouts= "+result[0]);
+                              //var buggyPayoutArray = new Array();
 
+                              var wkPayout = new Array(); //maybe change to be local?
                               wkBonus = result[2];
                               wkPayout = result[0];
 
@@ -703,7 +705,7 @@ function selectedChallenge(){
                                 //get the timeline variables and set them
                                 await Nceno.methods.getGoalArrays(goalid, stravaID)
                                 .call({from: web3.eth.defaultAccount},
-                                  async function(error, result) {
+                                  function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
                                       
@@ -750,7 +752,7 @@ function selectedChallenge(){
                                         
 
                                         $('#'+bonusKey).html("$" +wkBonus[k]/100);
-                                        await $('#'+unKey).html("$" +wkPayout[k]/100);
+                                        $('#'+unKey).html("$" +wkPayout[k]/100);
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost);
 
