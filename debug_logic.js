@@ -753,7 +753,7 @@ function selectedChallenge(){
                                         if(k+1 == currentWeek){
                                           $('#'+lockKey).html("$???");
                                         }
-                                        else $('#'+lockKey).html("$"+(lockedPercentWk[k]*USDstake/100).toFixed(2);
+                                        else $('#'+lockKey).html("$"+(lockedPercentWk[k]*USDstake/100).toFixed(2));
                                         
                     /////////////////////////////////
                                         $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
