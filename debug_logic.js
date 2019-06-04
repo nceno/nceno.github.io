@@ -655,7 +655,7 @@ function selectedChallenge(){
                         
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("k= "+k+ " ,and successes= "+result[2]);
+                        //console.log("k= "+k+ " ,and successes= "+result[2]);
 
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -672,8 +672,8 @@ function selectedChallenge(){
                                 lostStake[k] = result[1]/100;
                               }
                               else lostStake[k] = 0;
-                              console.log("k= "+k+ " ,and user= "+ids[k]);
-                              console.log("k= "+k+ " ,and payouts= "+result[0]);
+                              //console.log("k= "+k+ " ,and user= "+ids[k]);
+                              //console.log("k= "+k+ " ,and payouts= "+result[0]);
      /////////////////////////////
      //dictionary definitions
                               //var wkPayout = new Array(); //maybe change to be local?
@@ -681,12 +681,12 @@ function selectedChallenge(){
 
                               
                              
-                              console.log("first wkPayout[] entry is: "+result[0][0]);
+                              //console.log("first wkPayout[] entry is: "+result[0][0]);
 
                               wkBonus[ids[k]] = result[2];
                               wkPayout[ids[k]] = result[0];
 
-                              console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
+                              //console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
                               console.log("wkPayout["+ids[k]+"] is "+ wkPayout[ids[k]]);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
