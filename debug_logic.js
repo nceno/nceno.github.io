@@ -703,9 +703,9 @@ function selectedChallenge(){
                               $('#'+adhKey).html(adherence[k]+'%');
                               $('#'+nameKey).html(convertedName);
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
-                              $('#'+bonusKey).html('$'+bonusTotal[k]);
-                              $('#'+payKey).html('$'+totalPay[k]);
-                              $('#'+lostKey).html('$'+lostStake[k]);
+                              $('#'+bonusKey).html('$'+bonusTotal[k].toFixed(2));
+                              $('#'+payKey).html('$'+totalPay[k].toFixed(2));
+                              $('#'+lostKey).html('$'+lostStake[k].toFixed(2));
 
                                 //get the timeline variables and set them
                                 await Nceno.methods.getGoalArrays(goalid, stravaID)
