@@ -642,7 +642,7 @@ function selectedChallenge(){
                 flags = result[2];
 
 
-                
+      //////////////// warning: do you mean to call a for loop on the nested function as well?
                 for (let k = 0; k < compcount; k++){
                   console.log("k= "+k);
                   await Nceno.methods.getMyGoalStats1(ids[k], goalid)
@@ -654,7 +654,6 @@ function selectedChallenge(){
                         adherence[k] = result[0];
                         console.log("k= "+k+ " ,and successes= "+result[2]);
 
-                        
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
                           async function(error, result) {  
@@ -744,17 +743,14 @@ function selectedChallenge(){
                                         }
                                         else $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
                                         
-
-                                        $('#'+bonusKey).html("$" +wkBonus[k]/100);
                     /////////////////////////////////
+                                        $('#'+bonusKey).html("$" +wkBonus[k]/100);
                                         $('#'+unKey).html("$" +wkPayout[k]/100);
 
                                         console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[k]);
 
-
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost);
-
 
                                         //disallow logging and claiming if quotas are met
                                         if(k>0 && successesWk[k-1] != sessions){
