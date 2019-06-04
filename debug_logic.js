@@ -756,8 +756,8 @@ function selectedChallenge(){
                                         else $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
                                         
                     /////////////////////////////////
-                                        $('#'+bonusKey).html("$" +wkBonus[ids[k]][k]/100);
-                                        $('#'+unKey).html("$" +wkPayout[ids[k]][k]/100);
+                                        $('#'+bonusKey).html("$" +wkBonus[stravaID][k]/100);
+                                        $('#'+unKey).html("$" +wkPayout[stravaID][k]/100);
 
                                         console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
@@ -788,7 +788,7 @@ function selectedChallenge(){
                                       for(let i = 0; i<wks; i++){
                                         var sum = 0;
                                         for(let k = 0; k<i+1; k++){
-                                          sum += 0.1*(wkPayout[ids[k]][k]+wkBonus[ids[k]][k])/USDstake;
+                                          sum += 0.1*(wkPayout[stravaID][k]+wkBonus[stravaID][k])/USDstake;
                                         }
                                         roi[i] = sum;
                                       }
