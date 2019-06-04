@@ -680,8 +680,8 @@ function selectedChallenge(){
                               var wkPayout = {};
                               var wkBonus = {};
 
-                              wkBonus[ids[k]] = result[2];
-                              wkPayout[ids[k]] = result[0];
+                              wkBonus[ids[k]] = new Array (result[2]);
+                              wkPayout[ids[k]] = new Array (result[0]);
                               console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
