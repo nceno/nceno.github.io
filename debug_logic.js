@@ -665,7 +665,7 @@ function selectedChallenge(){
                               var totalPay = new Array();
                               var lostStake = new Array();
 
-                              bonusTotal[k] = result[3].toFixed(2);
+                              bonusTotal[k] = (result[3]*1).toFixed(2);
                               totalPay[k] = (result[4]/100).toFixed(2);
 
                               if(currentWeek>1){
