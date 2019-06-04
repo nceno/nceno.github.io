@@ -558,6 +558,7 @@ function selectedChallenge(){
     var wks = 0;
     var USDstake = 0;
     var competitors = 0;
+
     //try making these dictionaries instead
     var wkPayout = {};
     var wkBonus = {};
@@ -686,7 +687,7 @@ function selectedChallenge(){
                               wkPayout[ids[k]] = result[0];
 
                               console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
-                              console.log("wkPayout[39706111] is "+ wkPayout[39706111]);
+                              console.log("wkPayout["+ids[k]+"] is "+ wkPayout[ids[k]]);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
