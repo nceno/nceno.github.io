@@ -672,6 +672,7 @@ function selectedChallenge(){
                               console.log("k= "+k+ " ,and user= "+ids[k]);
                               console.log("k= "+k+ " ,and payouts= "+result[0]);
      /////////////////////////////
+     //dictionary definitions
                               //var wkPayout = new Array(); //maybe change to be local?
                               //var wkBonus = new Array(); //maybe change to be local?
 
@@ -681,7 +682,7 @@ function selectedChallenge(){
 
                               wkBonus[ids[k]] = result[2];
                               wkPayout[ids[k]] = result[0];
-                              console.log("k= "+k+ " ,and wkPayout= "+wkPayout);
+                              console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
