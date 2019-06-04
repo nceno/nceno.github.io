@@ -680,11 +680,11 @@ function selectedChallenge(){
                               var wkPayout = {};
                               var wkBonus = {};
 
-                              wkBonus[ids[k]] = result[2];
-                              wkPayout[ids[k]] = result[0];
+                              wkBonus[ids[k]] = Array.of(result[2]);
+                              wkPayout[ids[k]] = Array.of(result[0]);
 
                               console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
-                              console.log("wkPayout[ids[k]] is a "+ typeof wkPayout[39706111]);
+                              console.log("wkPayout[39706111] is an "+ typeof wkPayout[39706111]);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
