@@ -558,7 +558,9 @@ function selectedChallenge(){
     var wks = 0;
     var USDstake = 0;
     var competitors = 0;
-    
+    //try making these dictionaries instead
+    var wkPayout = {};
+    var wkBonus = {};
     
     var lockedPercentWk = new Array();
     var successesWk = new Array();
@@ -676,9 +678,7 @@ function selectedChallenge(){
                               //var wkPayout = new Array(); //maybe change to be local?
                               //var wkBonus = new Array(); //maybe change to be local?
 
-                              //try making these dictionaries instead
-                              var wkPayout = {};
-                              var wkBonus = {};
+                              
                              
                               console.log("first wkPayout[] entry is: "+result[0][0]);
 
