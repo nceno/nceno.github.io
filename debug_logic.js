@@ -687,8 +687,8 @@ function selectedChallenge(){
                               result2Array = Array.of(result[2]);
                               result0Array = Array.of(result[0]);
 
-                              console.log("here's the arrays: ");
-                              console.log(result2Array);
+                              
+                              console.log("first entry is: "+result2Array[0]);
                               console.log(result0Array);
 
                               wkBonus[ids[k]] = Array.of(result[2]);
