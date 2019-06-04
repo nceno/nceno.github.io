@@ -753,16 +753,16 @@ function selectedChallenge(){
                                         if(k+1 == currentWeek){
                                           $('#'+lockKey).html("$???");
                                         }
-                                        else $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
+                                        else $('#'+lockKey).html("$"+(lockedPercentWk[k]*USDstake/100).toFixed(2);
                                         
                     /////////////////////////////////
-                                        $('#'+bonusKey).html("$" +wkBonus[stravaID][k]/100);
-                                        $('#'+unKey).html("$" +wkPayout[stravaID][k]/100);
+                                        $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
+                                        $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
 
                                         console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
-                                        $('#'+finKey).html("$" +lost);
+                                        $('#'+finKey).html("$" +lost.toFixed(2));
 
                                         //disallow logging and claiming if quotas are met
                                         if(k>0 && successesWk[k-1] != sessions){
@@ -1290,7 +1290,7 @@ $("#claimBtn").click(function() {
       }, (error, event) => { 
           console.log(event);
           usdCut = parseInt(event.returnValues._cut)/1000000000000000000;
-          console.log("cut was: $"+usdCut);
+          console.log("cut was: $"+usdCut.toFixed(2));
           //----begin other messages
 
           
@@ -1616,7 +1616,7 @@ function getActivities(){
             }, (error, event) => { 
                 console.log(event);
                 usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
-                console.log("payout was: $"+usdPayout);
+                console.log("payout was: $"+usdPayout.toFixed(2));
                 //----begin other messages
 
                 $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
