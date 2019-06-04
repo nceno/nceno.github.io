@@ -680,8 +680,16 @@ function selectedChallenge(){
                               var wkPayout = {};
                               var wkBonus = {};
 
-                              console.log(result[2]);
-                              console.log(result[0]);
+
+                              var result2Array =  new Array();
+                              var result0Array =  new Array();
+
+                              result2Array = Array.of(result[2]);
+                              result0Array = Array.of(result[0]);
+
+                              console.log("here's the arrays: ");
+                              console.log(result2Array);
+                              console.log(result0Array);
 
                               wkBonus[ids[k]] = Array.of(result[2]);
                               wkPayout[ids[k]] = Array.of(result[0]);
