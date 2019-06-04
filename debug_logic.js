@@ -675,11 +675,7 @@ function selectedChallenge(){
                               //console.log("k= "+k+ " ,and user= "+ids[k]);
                               //console.log("k= "+k+ " ,and payouts= "+result[0]);
      /////////////////////////////
-     //dictionary definitions
-                              //var wkPayout = new Array(); //maybe change to be local?
-                              //var wkBonus = new Array(); //maybe change to be local?
-
-                              
+     //dictionary definitions                            
                              
                               //console.log("first wkPayout[] entry is: "+result[0][0]);
 
@@ -755,7 +751,11 @@ function selectedChallenge(){
                                         }
                                         else $('#'+lockKey).html("$"+(lockedPercentWk[k]*USDstake/100).toFixed(2));
                                         
-                    /////////////////////////////////
+      /////////////////////////////////
+      //this will error when user's stravaID is lower in the list than where the loop is at
+      //because bonusKey is updated before this function.
+      //need to test...
+      /////////////////////////////////
                                         $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
                                         $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
 
