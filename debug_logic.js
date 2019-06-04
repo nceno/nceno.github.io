@@ -679,20 +679,11 @@ function selectedChallenge(){
                               //try making these dictionaries instead
                               var wkPayout = {};
                               var wkBonus = {};
+                             
+                              console.log("first entry is: "+result[2][0]);
 
-
-                              var result2Array =  new Array();
-                              var result0Array =  new Array();
-
-                              result2Array = Array.of(result[2]);
-                              result0Array = Array.of(result[0]);
-
-                              
-                              console.log("first entry is: "+result2Array[0]);
-                              console.log(result0Array);
-
-                              wkBonus[ids[k]] = Array.of(result[2]);
-                              wkPayout[ids[k]] = Array.of(result[0]);
+                              wkBonus[ids[k]] = result[2];
+                              wkPayout[ids[k]] = result[0];
 
                               console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
                               console.log("wkPayout[39706111] is an "+ typeof wkPayout[39706111]);
