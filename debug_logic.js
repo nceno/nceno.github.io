@@ -756,8 +756,9 @@ function selectedChallenge(){
       //because bonusKey is updated before this function.
       //need to test...
       /////////////////////////////////
-                                        $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
-                                        $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
+                                        /*$('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
+                                        $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));*/
+      /////////////////////////////////
 
                                         console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
@@ -995,7 +996,13 @@ function selectedChallenge(){
                                     }
                                 });
                               //}//end if
-
+                              for (let k = 0; k < currentWeek; k++){
+                                var n = k+1;
+                                var bonusKey = 'bonus'+n;
+                                var unKey = 'un'+n;
+                                $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
+                                $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
+                              }
                               
                             }
                             else{
