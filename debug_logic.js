@@ -996,6 +996,8 @@ function selectedChallenge(){
                                     }
                                 });
                               //}//end if
+
+                              //we place this outside of the function so that the order of our specific ID doesn;t matter. Its key will be defined in the list always.
                               for (let k = 0; k < currentWeek; k++){
                                 var n = k+1;
                                 var bonusKey = 'bonus'+n;
