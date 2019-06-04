@@ -558,7 +558,7 @@ function selectedChallenge(){
     var wks = 0;
     var USDstake = 0;
     var competitors = 0;
-    var wkBonus = new Array();
+    
     
     var lockedPercentWk = new Array();
     var successesWk = new Array();
@@ -671,10 +671,16 @@ function selectedChallenge(){
                               else lostStake[k] = 0;
                               console.log("k= "+k+ " ,and user= "+ids[k]);
                               console.log("k= "+k+ " ,and payouts= "+result[0]);
+     /////////////////////////////
+                              //var wkPayout = new Array(); //maybe change to be local?
+                              //var wkBonus = new Array(); //maybe change to be local?
 
-                              var wkPayout = new Array(); //maybe change to be local?
-                              wkBonus = result[2];
-                              wkPayout = result[0];
+                              //try making these dictionaries instead
+                              var wkPayout = {};
+                              var wkBonus = {};
+
+                              wkBonus[ids[k]] = result[2];
+                              wkPayout[ids[k]] = result[0];
                               console.log("k= "+k+ " ,and wkPayout= "+wkPayout);
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
@@ -744,8 +750,8 @@ function selectedChallenge(){
                                         else $('#'+lockKey).html("$"+lockedPercentWk[k]*USDstake/100);
                                         
                     /////////////////////////////////
-                                        $('#'+bonusKey).html("$" +wkBonus[k]/100);
-                                        $('#'+unKey).html("$" +wkPayout[k]/100);
+                                        $('#'+bonusKey).html("$" +wkBonus[ids[k]][k]/100);
+                                        $('#'+unKey).html("$" +wkPayout[ids[k]][k]/100);
 
                                         console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[k]);
 
@@ -776,7 +782,7 @@ function selectedChallenge(){
                                       for(let i = 0; i<wks; i++){
                                         var sum = 0;
                                         for(let k = 0; k<i+1; k++){
-                                          sum += 0.1*(wkPayout[k]+wkBonus[k])/USDstake;
+                                          sum += 0.1*(wkPayout[ids[k]][k]+wkBonus[ids[k]][k])/USDstake;
                                         }
                                         roi[i] = sum;
                                       }
