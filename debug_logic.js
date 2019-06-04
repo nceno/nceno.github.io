@@ -680,8 +680,8 @@ function selectedChallenge(){
                               var wkPayout = {};
                               var wkBonus = {};
 
-                              wkBonus[ids[k]] = Array.of(result[2]);
-                              wkPayout[ids[k]] = Array.of(result[0]);
+                              wkBonus[ids[k]] = Array.from(result[2]);
+                              wkPayout[ids[k]] = Array.from(result[0]);
 
                               console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
                               console.log("wkPayout[39706111] is an "+ typeof wkPayout[39706111]);
