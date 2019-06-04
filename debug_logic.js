@@ -665,13 +665,13 @@ function selectedChallenge(){
                               var totalPay = new Array();
                               var lostStake = new Array();
 
-                              bonusTotal[k] = result[3];
-                              totalPay[k] = result[4]/100;
+                              bonusTotal[k] = result[3].toFixed(2);
+                              totalPay[k] = (result[4]/100).toFixed(2);
 
                               if(currentWeek>1){
-                                lostStake[k] = result[1]/100;
+                                lostStake[k] = (result[1]/100).toFixed(2);
                               }
-                              else lostStake[k] = 0;
+                              else lostStake[k] = (0).toFixed(2);
                               //console.log("k= "+k+ " ,and user= "+ids[k]);
                               //console.log("k= "+k+ " ,and payouts= "+result[0]);
      /////////////////////////////
@@ -703,9 +703,9 @@ function selectedChallenge(){
                               $('#'+adhKey).html(adherence[k]+'%');
                               $('#'+nameKey).html(convertedName);
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
-                              $('#'+bonusKey).html("$"+(bonusTotal[k]).toFixed(2));
-                              $('#'+payKey).html("$"+(totalPay[k]).toFixed(2));
-                              $('#'+lostKey).html("$"+(lostStake[k]).toFixed(2));
+                              $('#'+bonusKey).html('$'+bonusTotal[k]);
+                              $('#'+payKey).html('$'+totalPay[k]);
+                              $('#'+lostKey).html('$'+lostStake[k]);
 
                                 //get the timeline variables and set them
                                 await Nceno.methods.getGoalArrays(goalid, stravaID)
