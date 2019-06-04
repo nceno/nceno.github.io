@@ -1,3 +1,12 @@
+$('#circle').circleProgress({
+  value: 0.75,
+  size: 80,
+  fill: {
+    gradient: ["red", "orange"]
+  }
+});
+
+
 //get test ether that is stored in the contract
 function getTestETH(){
   Nceno.methods.getTestETH()
