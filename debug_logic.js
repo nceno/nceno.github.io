@@ -699,7 +699,7 @@ function selectedChallenge(){
                               $('#'+adhKey).html(adherence[k]+'%');
                               $('#'+nameKey).html(convertedName);
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
-                              $('#'+bonusKeyL).html('$'+(bonusTotal[k]/100*1000000000000000000).toFixed(2));
+                              $('#'+bonusKeyL).html('$'+(bonusTotal[k]/100000000000000000000).toFixed(2));
                               $('#'+payKey).html('$'+totalPay[k]);
                               $('#'+lostKey).html('$'+lostStake[k]);
 
@@ -1002,7 +1002,7 @@ function selectedChallenge(){
                                 var n = k+1;
                                 var bonusKey = 'bonus'+n;
                                 var unKey = 'un'+n;
-                                $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100*1000000000000000000).toFixed(2));
+                                $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100000000000000000000).toFixed(2));
                                 $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
                               }
                               
