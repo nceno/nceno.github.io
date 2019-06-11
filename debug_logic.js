@@ -1122,7 +1122,7 @@ async function browse(){
       $('#'+pplKey).html(10-result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
-      //$('#'+idKey).hide();
+      $('#'+idKey).hide();
       $('#'+idKey).html(result[0]+'');
       console.log("upcoming goal: "+result[0]);      
     }   
