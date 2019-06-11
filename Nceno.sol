@@ -344,7 +344,9 @@ contract Nceno is RelayRecipient{
 
     //TODO: ensure this is in correct decimals, not Wei. 
     //and indexed as previous week...
-    cut = pot/(2*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); 
+    //the big 1000.... is supposed to fix the chart scale problem since payout is in cents, and this *was* in 1000000...
+    //if it doesnt fix it, try more or less 0's
+    cut = pot/(2*1000000000000000000*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); 
     
     //protect against bonus double spending
     goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] = 1;
