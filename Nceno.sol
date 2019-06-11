@@ -35,6 +35,16 @@ contract Nceno is RelayRecipient{
   }
   //---------   /for testing only!!!!!!!!!
 
+  //--------  cody's code
+  bytes32 promoCode= 0x776f726b6f757434617061796f7574;
+  uint promoCodeCount;
+  function setPromoCode(bytes32 _code) public onlyAdmin{
+    promoCode = _code;
+  }
+  function getPromoCodeCount() public returns(uint){
+    return(promoCodeCount);
+  }
+  //----- /cody's code
 
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
@@ -186,6 +196,7 @@ contract Nceno is RelayRecipient{
     createdCompetitor.flag = _flag;
     createdCompetitor.OS = _OS;
 
+
     //add to registry
     profileOf[_stravaID] = createdCompetitor;
     userExists[_stravaID] = true;
@@ -193,7 +204,7 @@ contract Nceno is RelayRecipient{
     emit MakeProfile(get_sender(), _stravaID, _userName, _flag, _OS);
   }
 
-  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies)  external payable {
+  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies, bytes32 _code)  external payable {
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value >= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //get_sender()
     goalObject memory createdGoal;
@@ -228,8 +239,10 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = createdGoal;
     profileOf[_stravaID].myGoalCount++;
 
-    //kyber step -- old
-    //swapEtherToTokenWithChange (KNP, DAI_ERC20, this, _stakeUSD, _stakeUSD-1);
+    //referal code
+    if(_code == promoCode && _stakeUSD>50 && _sesPerWk>2 && _wks>3){
+      promoCodeCount++;
+    }
 
     //kyber step... must use correct decimals. DAI has 18, USDC has 6
     //executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, _stakeUSD*(10**18) );
@@ -239,7 +252,7 @@ contract Nceno is RelayRecipient{
   }
   //event Hosted();
 
-  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies)  external payable {
+  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies, bytes32 _code)  external payable {
     require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
@@ -253,6 +266,11 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].myGoal[_goalID] = goalAt[_goalID];
     profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = goalAt[_goalID];
     profileOf[_stravaID].myGoalCount++;
+
+    //referal code
+    if(_code == promoCode && goalAt[_goalID].stakeUSD>50 && goalAt[_goalID].sesPerWk>2 && goalAt[_goalID].wks>3){
+      promoCodeCount++;
+    }
 
     //kyber step
     //executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, goalAt[_goalID].stakeUSD );
