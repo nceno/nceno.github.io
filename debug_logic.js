@@ -282,7 +282,7 @@ $("#hostBtn").click(function() {
     start,
     stravaID,
     Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
-    $('#promoField').val()
+    web3.utils.toHex($('#promoField').val())
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
     function(error, result) {
@@ -361,7 +361,7 @@ function joinSearch(){
     goalid,
     stravaID,
     Math.floor(ethPrice*100),
-    $('#promoFieldSearch').val()
+    web3.utils.toHex($('#promoFieldSearch').val())
   )
   //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakeweiSearched - 0},
@@ -1236,7 +1236,7 @@ function joinTarget(){
     targetGoalID,
     stravaID,
     ethPrice*100, //ethprice in pennies, gets rid of decimals
-    $('#promoFieldSoon').val()
+    web3.utils.toHex($('#promoFieldSoon').val())
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
     function(error, result) {
