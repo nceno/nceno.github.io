@@ -1130,7 +1130,7 @@ async function browse(){
 }
 //must be outside, so accessible globally.
 $('#soonJoin1').click(function(){
-    targetGoalID = $('#idNumberU1').text();
+    targetGoalID = $('#idNumberU1').val();
     targetStake = $('#buyinU1').text().slice(1);
     targetWks = $('#wksU1').text().slice(0,3);
     targetSes = $('#sesU1').text().slice(0,2);
@@ -1139,7 +1139,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
-    targetGoalID = $('#idNumberU2').text();
+    targetGoalID = $('#idNumberU2').val();
     targetStake = $('#buyinU2').text().slice(1);
     targetWks = $('#wksU2').text().slice(0,3);;
     targetSes = $('#sesU2').text().slice(0,2);
@@ -1158,7 +1158,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin4').click(function(){
-    targetGoalID = $('#idNumberU4').text();
+    targetGoalID = $('#idNumberU4').val();
     targetStake = $('#buyinU4').text().slice(1);
     targetWks = $('#wksU4').text().slice(0,3);;
     targetSes = $('#sesU4').text().slice(0,2);
@@ -1167,7 +1167,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin5').click(function(){
-    targetGoalID = $('#idNumberU5').text();
+    targetGoalID = $('#idNumberU5').val();
     targetStake = $('#buyinU5').text().slice(1);
     targetWks = $('#wksU5').text().slice(0,3);;
     targetSes = $('#sesU5').text().slice(0,2);
@@ -1176,7 +1176,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin6').click(function(){
-    targetGoalID = $('#idNumberU6').text();
+    targetGoalID = $('#idNumberU6').val();
     targetStake = $('#buyinU6').text().slice(1);
     targetWks = $('#wksU6').text().slice(0,3);;
     targetSes = $('#sesU6').text().slice(0,2);
@@ -1185,7 +1185,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin7').click(function(){
-    targetGoalID = $('#idNumberU7').text();
+    targetGoalID = $('#idNumberU7').val();
     targetStake = $('#buyinU7').text().slice(1);
     targetWks = $('#wksU7').text().slice(0,3);;
     targetSes = $('#sesU7').text().slice(0,2);
@@ -1194,7 +1194,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin8').click(function(){
-    targetGoalID = $('#idNumberU8').text();
+    targetGoalID = $('#idNumberU8').val();
     targetStake = $('#buyinU8').text().slice(1);
     targetWks = $('#wksU8').text().slice(0,3);;
     targetSes = $('#sesU8').text().slice(0,2);
@@ -1203,7 +1203,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin9').click(function(){
-    targetGoalID = $('#idNumberU9').text();
+    targetGoalID = $('#idNumberU9').val();
     targetStake = $('#buyinU9').text().slice(1);
     targetWks = $('#wksU9').text().slice(0,3);;
     targetSes = $('#sesU9').text().slice(0,2);
@@ -1212,7 +1212,7 @@ $('#soonJoin1').click(function(){
     populateTargetModal();
   });
   $('#soonJoin10').click(function(){
-    targetGoalID = $('#idNumberU10').text();
+    targetGoalID = $('#idNumberU10').val();
     targetStake = $('#buyinU10').text().slice(1);
     targetWks = $('#wksU10').text().slice(0,3);;
     targetSes = $('#sesU10').text().slice(0,2);
