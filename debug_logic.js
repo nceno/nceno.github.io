@@ -789,7 +789,7 @@ function selectedChallenge(){
                                       for(let i = 0; i<wks; i++){
                                         var sum = 0;
                                         for(let k = 0; k<i+1; k++){
-                                          sum += 0.1*(wkPayout[stravaID][k]+wkBonus[stravaID][k])/USDstake;
+                                          sum += 0.1*(wkPayout[stravaID][k]+wkBonus[stravaID][k])/(1000000000000000000*USDstake);
                                         }
                                         roi[i] = sum;
                                       }
