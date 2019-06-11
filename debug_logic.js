@@ -880,7 +880,7 @@ function selectedChallenge(){
                                                   },
                                                   scaleLabel: {
                                                     display: true,
-                                                    labelString: '% returned'
+                                                    labelString: '% competitors'
                                                   }
                                                 }
                                               ],
@@ -973,7 +973,7 @@ function selectedChallenge(){
                                                   },
                                                   scaleLabel: {
                                                     display: true,
-                                                    labelString: '% competitors'
+                                                    labelString: '% returned'
                                                   }
                                                 }
                                               ],
