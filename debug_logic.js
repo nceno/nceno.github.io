@@ -829,7 +829,7 @@ function selectedChallenge(){
                                                 //data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43],
                                                 data: finishers,
                                                 type: 'line',
-                                                backgroundColor: '#f442b3',
+                                                backgroundColor: 'rgba(244, 66, 179, 0.5)',
                                                 borderColor: '#f442b3',
                                                 fill: true
                                             }],
