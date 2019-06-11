@@ -12,7 +12,7 @@ import "./RelayRecipient.sol";
 //1000100000000000000*targetStake/ethPrice
 //goalID: 0x70fd580000000000000000000000000000
 
-
+//"0x95c300","39706111","098887","123","78"
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 
