@@ -1411,7 +1411,7 @@ window.onload = function() {
     handleSize: "30,15",
     handleShape: "circle",
     min: 10,
-    max: 200,
+    max: 300,
     step: 5,
     value: 55,
     sliderType: "min-range",
