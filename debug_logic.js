@@ -1396,7 +1396,7 @@ window.onload = function() {
     tooltipFormat: "tooltipVal3"
   });
   $("#sliderStake").roundSlider({
-    editableTooltip: false,
+    editableTooltip: true,
     radius: 75,
     width: 14,
     handleSize: "24,12",
