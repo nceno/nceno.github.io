@@ -1367,7 +1367,10 @@ window.onload = function() {
     step: 5,
     value: 45,
     sliderType: "min-range",
-    tooltipFormat: "tooltipVal1"
+    tooltipFormat: "tooltipVal1",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20"
   });
   $("#sliderSes").roundSlider({
     editableTooltip: false,
@@ -1380,7 +1383,10 @@ window.onload = function() {
     step: 1,
     value: 3,
     sliderType: "min-range",
-    tooltipFormat: "tooltipVal2"
+    tooltipFormat: "tooltipVal2",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20"
   });
   $("#sliderWks").roundSlider({
     editableTooltip: false,
@@ -1393,7 +1399,10 @@ window.onload = function() {
     step: 2,
     value: 6,
     sliderType: "min-range",
-    tooltipFormat: "tooltipVal3"
+    tooltipFormat: "tooltipVal3",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20"
   });
   $("#sliderStake").roundSlider({
     editableTooltip: false,
