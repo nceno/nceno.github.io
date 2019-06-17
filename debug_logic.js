@@ -1370,7 +1370,8 @@ window.onload = function() {
     tooltipFormat: "tooltipVal1",
     circleShape: "pie",
     startAngle: 315,
-    handleSize: "+20"
+    handleSize: "+20",
+    lineCap: "round"
   });
   $("#sliderSes").roundSlider({
     editableTooltip: false,
@@ -1386,7 +1387,8 @@ window.onload = function() {
     tooltipFormat: "tooltipVal2",
     circleShape: "pie",
     startAngle: 315,
-    handleSize: "+20"
+    handleSize: "+20",
+    lineCap: "round"
   });
   $("#sliderWks").roundSlider({
     editableTooltip: false,
@@ -1402,7 +1404,8 @@ window.onload = function() {
     tooltipFormat: "tooltipVal3",
     circleShape: "pie",
     startAngle: 315,
-    handleSize: "+20"
+    handleSize: "+20",
+    lineCap: "round"
   });
   $("#sliderStake").roundSlider({
     editableTooltip: false,
@@ -1418,7 +1421,8 @@ window.onload = function() {
     tooltipFormat: "tooltipVal4",
     circleShape: "pie",
     startAngle: 315,
-    handleSize: "+20"
+    handleSize: "+20",
+    lineCap: "round"
   });
 
   //delays extraction of the fitbit creds until the user has authed.
