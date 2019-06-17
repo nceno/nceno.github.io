@@ -1400,7 +1400,7 @@ window.onload = function() {
     radius: 75,
     width: 14,
     handleSize: "24,12",
-    handleShape: "square",
+    handleShape: "circle",
     min: 10,
     max: 200,
     step: 5,
