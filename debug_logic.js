@@ -1406,7 +1406,10 @@ window.onload = function() {
     step: 5,
     value: 55,
     sliderType: "min-range",
-    tooltipFormat: "tooltipVal4"
+    tooltipFormat: "tooltipVal4",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20"
   });
 
   //delays extraction of the fitbit creds until the user has authed.
