@@ -110,7 +110,7 @@ $("stravaOk").hide();
 $("portisSuccess").hide();
 $("#request").hide();
 $("#joinLoader").hide();
-$("#joinSuccess").hide();
+//$("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 $("#joinSoonSuccess").hide();
 $("#makeAcctBtn").hide();
