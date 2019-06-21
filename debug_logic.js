@@ -301,6 +301,7 @@ $("#hostBtn").click(function() {
       correctNonce++;
       $("#createLoader").hide();
       $("#createSuccess").show();
+      $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+$("#sliderWks").roundSlider("getValue")*604800);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
     }
@@ -348,8 +349,7 @@ function echoGoal(){
   $("#goalEcho").html(
     "You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
     $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
-    $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +
-    ". The challenge ID is: "+ goalID+"."
+    $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
 }
 
@@ -450,6 +450,7 @@ function resetCreate(){
   $("#createReminder").html('');
   $("#createFail").html('');
   randGoalID();
+  $("#chalID").html('');
 }
 $('#popupCreate').on('hidden.bs.modal', function (e) {
   resetCreate();
