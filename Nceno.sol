@@ -46,6 +46,11 @@ contract Nceno is RelayRecipient{
   }
   //----- /cody's code
 
+  //to help with hiding the claim button in the UI
+  function seeClaims(uint _stravaID, bytes32 _goalID) external view returns(uint){
+    return(goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]);
+  }
+
   function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
       hrThresh,

@@ -516,7 +516,7 @@ function makePage(){
 
 var wkLimit = 0;
 var currentWeek = 0;
-function makeWktl(){
+function makeWktl(_claimStatus){
   //hide all weeks and buttons, in case previously selected goal was longer.
   for (let i = 0; i < 12; i++){
     var wkindex = i+1;
@@ -535,7 +535,7 @@ function makeWktl(){
   if(currentWeek<=wkLimit){
     $('#'+currentwklogKey).show();
   }
- if(currentWeek<=wkLimit+1){
+ if(currentWeek<=wkLimit+1 && _claimStatus === flase){
     $('#'+pastwkclaimKey).show();
   }
  
@@ -556,6 +556,26 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
+
+    var hasClaimed = false;
+    //-----hiding the claim button
+    Nceno.methods.seeClaims(
+      stravaID,
+      goalid
+    )
+    .call({from: web3.eth.defaultAccount},
+      function(error, result) {
+        if (!error){
+          if(result === 1){
+            hasClaimed = true;
+          }
+          //else
+        }
+        else
+        console.error(error);
+      }
+    );
+    //----/hiding the claim button
 
     var sessions = 0;
     var wks = 0;
@@ -632,7 +652,7 @@ function selectedChallenge(){
           else {chartWeek = wkLimit;}
           //currentWeek = (Date.now()/1000 - result[4])/604800;
           console.log("blockchain says we're in week: "+currentWeek);
-          makeWktl();
+          makeWktl(hasClaimed);
        
           await Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
