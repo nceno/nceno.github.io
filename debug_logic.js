@@ -558,7 +558,7 @@ function selectedChallenge(){
     console.log("selected goal is: "+goalid);
 
     var hasClaimed = false;
-    //-----hiding the claim button
+/*    //-----hiding the claim button
     Nceno.methods.seeClaims(
       stravaID,
       goalid
@@ -575,7 +575,7 @@ function selectedChallenge(){
         console.error(error);
       }
     );
-    //----/hiding the claim button
+    //----/hiding the claim button*/
 
     var sessions = 0;
     var wks = 0;
