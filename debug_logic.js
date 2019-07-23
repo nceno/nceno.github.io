@@ -781,14 +781,14 @@ function selectedChallenge(){
       //because bonusKey is updated before this function.
       //need to test...
       /////////////////////////////////
-                                        $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
+                                        $('#'+bonusKey).html("+ $" +(wkBonus[stravaID][k]/100).toFixed(2));
                                         $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
       /////////////////////////////////
 
                                         //console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
-                                        $('#'+finKey).html("$" +lost.toFixed(2));
+                                        $('#'+finKey).html("- $" +lost.toFixed(2));
 
                                         //disallow logging and claiming if quotas are met
                                         if(k>0 && successesWk[k-1] != sessions){
