@@ -476,6 +476,14 @@ contract Nceno is RelayRecipient{
         my.totalAtStake += theGoal.lockedPercent[p]*theGoal.stakeUSD*theGoal.competitorCount/100;
       }
     }
+    //this might get rid of the 0% success post-challenge bug
+    else if(wk>theGoal.wks){
+      for(uint i =0; i<theGoal.wks; i++){
+        successCount += goalAt[_goalID].successes[_stravaID][i];
+      }
+      my.adherenceRate = 100*successCount/(theGoal.wks*theGoal.sesPerWk);
+    }
+    
     return(my.adherenceRate, my.totalAtStake, successCount);
   }
 
