@@ -705,7 +705,6 @@ function selectedChallenge(){
 
                               wkBonus[ids[k]] = result[2];
                               wkPayout[ids[k]] = result[0];
-                              console.log("wkPayout[ids[k]] is:"+result[0])
 
                               //console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
                               console.log("wkPayout["+ids[k]+"] is "+ wkPayout[ids[k]]);
@@ -754,6 +753,8 @@ function selectedChallenge(){
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
                                         var lost = 0;
+                                        
+                                        //this inequality makes the NaN error.... 
                                         if(currentWeek>k+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
