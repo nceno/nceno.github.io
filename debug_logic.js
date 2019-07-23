@@ -583,10 +583,9 @@ function selectedChallenge(){
     var competitors = 0;
 
     //try making these dictionaries instead
-    //var wkPayout = {};
-    var wkPayout = new Array();
-    //var wkBonus = {};
-    var wkBonus = new Array();
+    var wkPayout = {};
+    var wkBonus = {};
+    
     
     var lockedPercentWk = new Array();
     var successesWk = new Array();
