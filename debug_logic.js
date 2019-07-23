@@ -787,7 +787,7 @@ function selectedChallenge(){
 
                                         //console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
-                                        $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
+                                        //$('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost.toFixed(2));
 
                                         //disallow logging and claiming if quotas are met
