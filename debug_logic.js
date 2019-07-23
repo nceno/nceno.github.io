@@ -785,7 +785,7 @@ function selectedChallenge(){
                                         $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));*/
       /////////////////////////////////
 
-                                        console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
+                                        //console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
                                         $('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost.toFixed(2));
