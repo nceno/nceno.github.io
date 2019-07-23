@@ -781,7 +781,7 @@ function selectedChallenge(){
       //because bonusKey is updated before this function.
       //need to test...
       /////////////////////////////////
-                                        $('#'+bonusKey).html("ass$" +(wkBonus[stravaID][k]/100).toFixed(2));
+                                        $('#'+bonusKey).html("?" +(wkBonus[stravaID][k]/100).toFixed(2));
                                         $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
       /////////////////////////////////
 
