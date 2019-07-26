@@ -671,7 +671,7 @@ function selectedChallenge(){
 
       //////////////// warning: do you mean to call a for loop on the nested function as well?
                 for (let k = 0; k < compcount; k++){
-                  console.log("k= "+k);
+
                   await Nceno.methods.getMyGoalStats1(ids[k], goalid)
                   .call({from: web3.eth.defaultAccount},
                     async function(error, result) {
@@ -696,18 +696,13 @@ function selectedChallenge(){
                                 lostStake[k] = (result[1]/100).toFixed(2);
                               }
                               else lostStake[k] = (0).toFixed(2);
-                              //console.log("k= "+k+ " ,and user= "+ids[k]);
-                              //console.log("k= "+k+ " ,and payouts= "+result[0]);
-     /////////////////////////////
-     //dictionary definitions                            
-                             
-                              //console.log("first wkPayout[] entry is: "+result[0][0]);
+
 
                               wkBonus[ids[k]] = result[2];
                               wkPayout[ids[k]] = result[0];
 
-                              //console.log("k= "+k+ " ,and wkPayout= "+wkPayout[ids[k]]);
-                              console.log("wkPayout["+ids[k]+"] is "+ wkPayout[ids[k]]);
+
+
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
@@ -763,8 +758,6 @@ function selectedChallenge(){
                                         //this inequality makes the NaN error.... 
                                         if(currentWeek > k+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[stravaID][k])/100;
-                                          console.log("NaN lost = "+lost);
-                                          console.log("wkPayout[k] is... "+wkPayout[stravaID][k]);
                                         }
                                         else lost = 0;
                                         nowTime = Math.floor(new Date().getTime()/1000);
