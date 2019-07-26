@@ -758,6 +758,7 @@ function selectedChallenge(){
                                         //if(currentWeek>k+1){
                                           if(currentWeek>wkLimit+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
+                                          console.log("NaN lost = "+lost);
                                         }
                                         else lost = 0;
                                         nowTime = Math.floor(new Date().getTime()/1000);
