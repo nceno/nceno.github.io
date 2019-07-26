@@ -678,9 +678,10 @@ function selectedChallenge(){
                       if (!error){
                         
 
-                        
+
                         var adherence = new Array();
                         adherence[k] = result[0];
+                        console.log("adherence rates: "+ adherence[k]);
 
 
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
