@@ -743,6 +743,14 @@ function selectedChallenge(){
                                       successesWk = result[1];
                                       winnersWk = result[2];
 
+                                        
+                                      //populate the timeline
+
+                                      /*var wkPointer;
+                                      if(currentWeek>wkLimit){wkPointer=wkLimit;}
+                                      else wkPointer=currentWeek;*/
+
+                                      for (let k = 0; k < currentWeek; k++){
                                         var n = k+1;
                                         var dlKey = 'dl'+n;
                                         var complKey = 'compl'+n;
@@ -751,13 +759,6 @@ function selectedChallenge(){
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
                                         var lost = 0;
-                                      //populate the timeline
-
-                                      /*var wkPointer;
-                                      if(currentWeek>wkLimit){wkPointer=wkLimit;}
-                                      else wkPointer=currentWeek;*/
-
-                                      for (let k = 0; k < currentWeek; k++){
                                         //this inequality makes the NaN error.... 
                                         if(currentWeek>k+1){
                                           lost = (lockedPercentWk[k]*USDstake*1.0-wkPayout[k]*1.0)/100;
