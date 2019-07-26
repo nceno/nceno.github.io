@@ -756,7 +756,7 @@ function selectedChallenge(){
                                         
                                         //this inequality makes the NaN error.... 
                                         //if(currentWeek>k+1){
-                                          if(currentWeek>wkLimit+1){
+                                        if(currentWeek>k+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                           console.log("NaN lost = "+lost);
                                         }
@@ -787,8 +787,6 @@ function selectedChallenge(){
                                         $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
                                         $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
       /////////////////////////////////
-
-                                        //console.log("inner loop index= "+k+", and wkPayout= "+ wkPayout[ids[k]][k]);
 
                                         //$('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost.toFixed(2));
