@@ -677,9 +677,11 @@ function selectedChallenge(){
                     async function(error, result) {
                       if (!error){
                         
+
+
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        //console.log("k= "+k+ " ,and successes= "+result[2]);
+
 
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
@@ -715,7 +717,12 @@ function selectedChallenge(){
                               var payKey = 'payP'+n;
                               var lostKey = 'lostP'+n;                            
 
-                              $('#'+adhKey).html(adherence[k]+'%');
+                              //0% success error root...
+                              if(currentWeek>wkLimit){
+                                $('#'+adhKey).html(adherence[wkLimit]+'%');
+                              }
+                              else $('#'+adhKey).html(adherence[k]+'%');
+                              
                               $('#'+nameKey).html(convertedName);
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
                               $('#'+bonusKeyL).html('+ $'+(bonusTotal[k]/1000000000000000000).toFixed(2));
