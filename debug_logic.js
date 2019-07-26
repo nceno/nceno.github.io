@@ -755,7 +755,8 @@ function selectedChallenge(){
                                         var lost = 0;
                                         
                                         //this inequality makes the NaN error.... 
-                                        if(currentWeek>k+1){
+                                        //if(currentWeek>k+1){
+                                          if(currentWeek>wkLimit+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
                                         }
                                         else lost = 0;
