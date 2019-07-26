@@ -759,8 +759,9 @@ function selectedChallenge(){
                                         var unKey = 'un'+n;
                                         var finKey = 'fin'+n;
                                         var lost = 0;
+
                                         //this inequality makes the NaN error.... 
-                                        if(currentWeek>k+1){
+                                        if(currentWeek > k+1){
                                           lost = (lockedPercentWk[k]*USDstake*1.0-wkPayout[k]*1.0)/100;
                                           console.log("NaN lost = "+lost);
                                         }
@@ -793,7 +794,8 @@ function selectedChallenge(){
       /////////////////////////////////
 
                                         //$('#'+finKey).html(winnersWk[k] +" of "+ competitors);
-                                        $('#'+finKey).html("$" +lost.toFixed(2));
+                                        //$('#'+finKey).html("$" +lost.toFixed(2));
+                                        $('#'+finKey).html("$" +lost);
 
                                         //disallow logging and claiming if quotas are met
                                         if(k>0 && successesWk[k-1] != sessions){
