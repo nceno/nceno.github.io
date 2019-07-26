@@ -678,7 +678,7 @@ function selectedChallenge(){
                       if (!error){
                         
 
-
+                        
                         var adherence = new Array();
                         adherence[k] = result[0];
 
@@ -718,11 +718,7 @@ function selectedChallenge(){
                               var lostKey = 'lostP'+n;                            
 
                               //0% success error root...
-                              if(currentWeek>wkLimit){
-                                $('#'+adhKey).html(adherence[wkLimit]+'%');
-                              }
-                              else $('#'+adhKey).html(adherence[k]+'%');
-                              
+                              $('#'+adhKey).html(adherence[k]+'%');
                               $('#'+nameKey).html(convertedName);
                               $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
                               $('#'+bonusKeyL).html('+ $'+(bonusTotal[k]/1000000000000000000).toFixed(2));
