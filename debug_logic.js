@@ -752,7 +752,12 @@ function selectedChallenge(){
                                         var finKey = 'fin'+n;
                                         var lost = 0;
                                       //populate the timeline
-                                      for (let k = 0; k < currentWeek; k++){
+
+                                      var wkPointer;
+                                      if(currentWeek>wkLimit){wkPointer=wkLimit;}
+                                      else wkPointer=currentWeek;
+
+                                      for (let k = 0; k < wkPointer; k++){
                                         //this inequality makes the NaN error.... 
                                         if(currentWeek>k+1){
                                           lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
