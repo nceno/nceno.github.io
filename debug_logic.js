@@ -762,11 +762,9 @@ function selectedChallenge(){
 
                                         //this inequality makes the NaN error.... 
                                         if(currentWeek > k+1){
-                                          lost = (lockedPercentWk[k]*USDstake-wkPayout[k])/100;
+                                          lost = (lockedPercentWk[k]*USDstake-wkPayout[stravaID])/100;
                                           console.log("NaN lost = "+lost);
-                                          console.log("lockedPercentWk[k] is... "+lockedPercentWk[k]);
-                                          console.log("USDstake is... "+USDstake);
-                                          console.log("wkPayout[k] is... "+wkPayout[k]);
+                                          console.log("wkPayout[k] is... "+wkPayout[stravaID]);
                                         }
                                         else lost = 0;
                                         nowTime = Math.floor(new Date().getTime()/1000);
