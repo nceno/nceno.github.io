@@ -183,6 +183,7 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
   $('#'+_target).html('<a style="color:#ccff00;" target= "_blank" href ="https://www.google.com/calendar/r/eventedit?text=My%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'.&dates='+start+'/'+end+'">Add to Google Calendar</a>');
 }
 
+//shares the challenge to strava automatically
 function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   var challengeStart = new Date(_start*1000).toDateString();
   var startDateLocal = new Date().toISOString(); //need to convert from UTC to local timezone.... will not affect the challenge.
@@ -677,11 +678,9 @@ function selectedChallenge(){
                     async function(error, result) {
                       if (!error){
                         
-
-
                         var adherence = new Array();
                         adherence[k] = result[0];
-                        console.log("adherence rates: "+ adherence[k]);
+
 
 
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
@@ -703,9 +702,6 @@ function selectedChallenge(){
 
                               wkBonus[ids[k]] = result[2];
                               wkPayout[ids[k]] = result[0];
-
-
-
 
                               var convertedName = web3.utils.hexToUtf8(names[k]);
                               var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
