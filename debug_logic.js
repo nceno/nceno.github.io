@@ -681,8 +681,6 @@ function selectedChallenge(){
                         var adherence = new Array();
                         adherence[k] = result[0];
 
-
-
                         await Nceno.methods.getMyGoalStats2(ids[k], goalid)
                         .call({from: web3.eth.defaultAccount},
                           async function(error, result) {  
