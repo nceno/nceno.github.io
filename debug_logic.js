@@ -1271,26 +1271,27 @@ function joinTarget(){
       else
       console.error(error);
     }
-  ).on('confirmation', function(confNumber, receipt){ 
-    console.log(receipt.status);
-    if(receipt.status === true){
-      //console.log(receipt.status);
-      correctNonce++;
-      $("#joinSoonLoader").hide();
-      $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
-      $("#joinSoonModalBtn").hide();
-      reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
-      stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
+  ).once('confirmation', function(confNumber, receipt){
+      console.log(receipt.status);
+      if(receipt.status === true){
+        //console.log(receipt.status);
+        correctNonce++;
+        $("#joinSoonLoader").hide();
+        $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
+        $("#joinSoonModalBtn").hide();
+        reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
+        stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
+      }
+      else{
+        $("#soonEcho").html('');
+        $("#joinSoonLoader").hide();
+        $("#soonJoinTitle").hide();
+        $("#joinSoonModalBtn").hide();
+        $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
+        console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
+      } 
     }
-    else{
-      $("#soonEcho").html('');
-      $("#joinSoonLoader").hide();
-      $("#soonJoinTitle").hide();
-      $("#joinSoonModalBtn").hide();
-      $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
-      console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
-    } 
-  }).once('error', function(error){console.log(error);});
+  ).once('error', function(error){console.log(error);});
 }
 
 var browsedGoal;
@@ -1317,7 +1318,7 @@ $("#claimBtn").click(function() {
 
     console.log(receipt.status);
     if(receipt.status === true){
-
+      correctNonce++;
       //----------event listener
       var usdCut;
       Nceno.events.Claim({
