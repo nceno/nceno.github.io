@@ -1272,13 +1272,13 @@ function joinTarget(){
       console.error(error);
     }
   ).once('confirmation', function(confNumber, receipt){
-      console.log(receipt.status);
-      if(receipt.status === true){
+    console.log(receipt.status);
+    if(receipt.status === true){
         //console.log(receipt.status);
         correctNonce++;
-        $("#joinSoonLoader").hide();
-        $("#joinSoonSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
-        $("#joinSoonModalBtn").hide();
+        $('#joinSoonLoader').hide();
+        $('#joinSoonSuccess').html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
+        $('#joinSoonModalBtn').hide();
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
         stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
       }
@@ -1315,7 +1315,6 @@ $("#claimBtn").click(function() {
       console.error(error);
     }
   ).once('confirmation', function(confNumber, receipt, result){
-
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
