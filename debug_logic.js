@@ -1274,7 +1274,6 @@ function joinTarget(){
   ).once('confirmation', function(confNumber, receipt){
     console.log(receipt.status);
     if(receipt.status === true){
-        //console.log(receipt.status);
         correctNonce++;
         $('#joinSoonLoader').hide();
         $('#joinSoonSuccess').html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');

@@ -4,15 +4,18 @@ import "./ERC20Interface.sol";
 import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
 
+//test data
 //stravaID: 39706111
-//other stravaID: 0123456
 //username: 0x6d6574616d61736b5f6a6e
 //flag: 0x7573
+
 //web3.utils.toHex('');
 //1000100000000000000*targetStake/ethPrice
-//goalID: 0x70fd580000000000000000000000000000
 
-//"0x95c300","39706111","098887","123","78"
+//makeProfile: "123456","0x616d61736b5f6a6e","0x7573","1"
+///////change goalID, maybe timestamp
+//host: "0x71fd580000000000000000000000000000","20","10","2","2","1565222400","123456","22176","0x00"
+//value: 50000000000000000
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 
