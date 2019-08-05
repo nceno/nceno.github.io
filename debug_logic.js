@@ -1271,7 +1271,7 @@ function joinTarget(){
       else
       console.error(error);
     }
-  ).once('receipt', function(receipt){
+  ).once('confirmation', function(receipt){
     console.log(status);
     if(status === true){
         //console.log(receipt.status);
@@ -1288,7 +1288,7 @@ function joinTarget(){
         $("#soonJoinTitle").hide();
         $("#joinSoonModalBtn").hide();
         $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
-        console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
+        console.log("UI: Challenge already started, user already is a participant, or else message value is less than intended stake.");
       } 
     }
   ).once('error', function(error){console.log(error);});
