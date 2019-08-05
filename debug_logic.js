@@ -1252,7 +1252,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU10').text().slice(0,2);
     targetMin = $('#minU10').text().slice(0,3);
     targetStart = $('#startU10').text();
-    targetStartStamp =$('#startU10');
+    targetStartStamp =$('#startU10').val();
     populateTargetModal();
   });
 
