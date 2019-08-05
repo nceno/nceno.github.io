@@ -1279,7 +1279,7 @@ function joinTarget(){
         correctNonce++;
         $('#joinSoonLoader').hide();
         $("#soonEcho").html('');
-        $('#joinSoonSuccess').html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
+        $('#joinSoonSuccess').html('<p>You’re in the challenge: '+targetGoalID+' ! Don’t forget to invite your friends and mark the starting time in your calendar!</p>');
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
         $('#joinSoonReminder').show();
