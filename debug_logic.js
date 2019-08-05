@@ -1267,6 +1267,7 @@ function populateTargetModal(){
 
 function joinTarget(){
   console.log("goalID is: "+targetGoalID+", stravaID is: "+stravaID+", ethprice is: "+ethPrice);
+  console.log("targetStartStamp is: "+targetStartStamp);
   Nceno.methods.join(
     targetGoalID,
     stravaID,
@@ -1292,7 +1293,7 @@ function joinTarget(){
         $('#joinSoonSuccess').html('<p>Success! You’re in the challenge: '+targetGoalID.slice(0, 8)+' . Don’t forget to invite your friends and mark the starting time in your calendar!</p>');
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
-        console.log("targetStartStamp is: "+targetStartStamp);
+
         //targetStart is a text date... need the timestamp.
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStartStamp);
         stravaShare(targetStartStamp, targetMin, targetStake, targetSes, targetWks, targetGoalID);
