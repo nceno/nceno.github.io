@@ -381,6 +381,7 @@ function joinSearch(){
       correctNonce++;
       $("#joinLoader").hide();
       $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
+      //need the join serach button to set proper global variables and then these functions can reference them
       reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start, _end);
       stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
     }
@@ -1281,7 +1282,6 @@ function joinTarget(){
         $('#joinSoonSuccess').html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
-
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
         stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
       }
