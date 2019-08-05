@@ -1140,6 +1140,9 @@ async function browse(){
       var startKey = 'startU'+n;
       var btnKey = 'btnU'+n;
       var idKey = 'idNumberU'+n;
+      var tKey = 'tstampU'+n;
+      $('#'+tKey).hide();
+      $('#'+tKey).html(tstamp);
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
       $('#'+sesKey).html(result[3]+' x/wk');
@@ -1161,7 +1164,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU1').text().slice(0,2);
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
-    targetStartStamp =$('#startU1').val();
+    targetStartStamp =$('#tstampU1').val();
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
