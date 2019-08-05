@@ -1143,7 +1143,7 @@ async function browse(){
       var idKey = 'idNumberU'+n;
       var tKey = 'tstampU'+n;
       $('#'+tKey).hide();
-      $('#'+tKey).html(tstamp);
+      $('#'+tKey).html(result[5]);
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
       $('#'+sesKey).html(result[3]+' x/wk');
