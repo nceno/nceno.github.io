@@ -1282,6 +1282,7 @@ function joinTarget(){
         $('#joinSoonSuccess').html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
+        $('#joinSoonReminder').show();
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
         stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
       }
