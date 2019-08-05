@@ -1271,9 +1271,9 @@ function joinTarget(){
       else
       console.error(error);
     }
-  ).once('confirmation', function(receipt){
-    console.log(status);
-    if(status === true){
+  ).once('confirmation', function(confNumber, receipt){
+    console.log(receipt.status);
+    if(receipt.status === true){
         //console.log(receipt.status);
         correctNonce++;
         $('#joinSoonLoader').hide();
