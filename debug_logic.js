@@ -1289,10 +1289,10 @@ function joinTarget(){
         correctNonce++;
         $('#joinSoonLoader').hide();
         $("#soonEcho").html('');
-        $('#joinSoonSuccess').html('<p>You’re in the challenge: '+targetGoalID+' ! Don’t forget to invite your friends and mark the starting time in your calendar!</p>');
+        $('#joinSoonSuccess').html('<p>Success! You’re in the challenge: '+targetGoalID.slice(0, 8)+' . Don’t forget to invite your friends and mark the starting time in your calendar!</p>');
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
-        $('#joinSoonReminder').show();
+        console.log("targetStartStamp is: "+targetStartStamp);
         //targetStart is a text date... need the timestamp.
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStartStamp);
         stravaShare(targetStartStamp, targetMin, targetStake, targetSes, targetWks, targetGoalID);
