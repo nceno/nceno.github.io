@@ -112,7 +112,7 @@ $("#request").hide();
 $("#joinLoader").hide();
 //$("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
-$("#joinSoonSuccess").hide();
+//$("#joinSoonSuccess").hide();
 $("#makeAcctBtn").hide();
 $("#openWallet").hide();
 $("#portisLoader").hide();
@@ -499,8 +499,9 @@ function resetJoinSoon(){
   $("#joinSoonSuccess").html('');
   $("#joinSoonFail").html('');
   $("#soonJoinTitle").show();
-  $("#joinReminder").html('');
+  $("#joinSoonReminder").html('');
   $("#joinSoonLoader").hide();
+  $('#promoFieldSoon').show();
 }
 $('#popupSoonJoin').on('hidden.bs.modal', function (e) {
   resetJoinSoon();
@@ -1276,8 +1277,11 @@ function joinTarget(){
     if(receipt.status === true){
         correctNonce++;
         $('#joinSoonLoader').hide();
+        $("#soonEcho").html('');
         $('#joinSoonSuccess').html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
         $('#joinSoonModalBtn').hide();
+        $('#promoFieldSoon').hide();
+
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
         stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
       }
@@ -1286,6 +1290,7 @@ function joinTarget(){
         $("#joinSoonLoader").hide();
         $("#soonJoinTitle").hide();
         $("#joinSoonModalBtn").hide();
+        $('#promoFieldSoon').hide();
         $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
         console.log("UI: Challenge already started, user already is a participant, or else message value is less than intended stake.");
       } 
