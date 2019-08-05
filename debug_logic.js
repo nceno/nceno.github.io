@@ -172,7 +172,7 @@ $('#week12').hide();
 
 //timestamps are in this format: yyyymmddT160000Z
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
-function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _start, _end){
+function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _start){
   //need to convert these times
 
   var s = new Date(_start*1000).toISOString();
@@ -303,7 +303,7 @@ $("#hostBtn").click(function() {
       $("#createLoader").hide();
       $("#createSuccess").show();
       $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
-      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start, start+$("#sliderWks").roundSlider("getValue")*604800);
+      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
     }
     else{
@@ -382,7 +382,7 @@ function joinSearch(){
       $("#joinLoader").hide();
       $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
       //need the join serach button to set proper global variables and then these functions can reference them
-      reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start, _end);
+      reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start);
       stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
     }
     else{
@@ -1161,6 +1161,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU1').text().slice(0,2);
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
+    targetStartStamp =$('#startU1');
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
@@ -1170,6 +1171,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU2').text().slice(0,2);
     targetMin = $('#minU2').text().slice(0,3);
     targetStart = $('#startU2').text();
+    targetStartStamp =$('#startU2');
     populateTargetModal();
   });
   $('#soonJoin3').click(function(){
@@ -1180,6 +1182,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU3').text().slice(0,2);
     targetMin = $('#minU3').text().slice(0,3);
     targetStart = $('#startU3').text();
+    targetStartStamp =$('#startU3');
     populateTargetModal();
   });
   $('#soonJoin4').click(function(){
@@ -1189,6 +1192,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU4').text().slice(0,2);
     targetMin = $('#minU4').text().slice(0,3);
     targetStart = $('#startU4').text();
+    targetStartStamp =$('#startU4');
     populateTargetModal();
   });
   $('#soonJoin5').click(function(){
@@ -1198,6 +1202,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU5').text().slice(0,2);
     targetMin = $('#minU5').text().slice(0,3);
     targetStart = $('#startU5').text();
+    targetStartStamp =$('#startU5');
     populateTargetModal();
   });
   $('#soonJoin6').click(function(){
@@ -1207,6 +1212,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU6').text().slice(0,2);
     targetMin = $('#minU6').text().slice(0,3);
     targetStart = $('#startU6').text();
+    targetStartStamp =$('#startU6');
     populateTargetModal();
   });
   $('#soonJoin7').click(function(){
@@ -1216,6 +1222,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU7').text().slice(0,2);
     targetMin = $('#minU7').text().slice(0,3);
     targetStart = $('#startU7').text();
+    targetStartStamp =$('#startU7');
     populateTargetModal();
   });
   $('#soonJoin8').click(function(){
@@ -1225,6 +1232,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU8').text().slice(0,2);
     targetMin = $('#minU8').text().slice(0,3);
     targetStart = $('#startU8').text();
+    targetStartStamp =$('#startU8');
     populateTargetModal();
   });
   $('#soonJoin9').click(function(){
@@ -1234,6 +1242,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU9').text().slice(0,2);
     targetMin = $('#minU9').text().slice(0,3);
     targetStart = $('#startU9').text();
+    targetStartStamp =$('#startU9');
     populateTargetModal();
   });
   $('#soonJoin10').click(function(){
@@ -1243,6 +1252,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU10').text().slice(0,2);
     targetMin = $('#minU10').text().slice(0,3);
     targetStart = $('#startU10').text();
+    targetStartStamp =$('#startU10');
     populateTargetModal();
   });
 
@@ -1283,8 +1293,9 @@ function joinTarget(){
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
         $('#joinSoonReminder').show();
-        reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStart, targetStart+604800*targetWks);
-        stravaShare(targetStart, targetMin, targetStake, targetSes, targetWks, targetGoalID);
+        //targetStart is a text date... need the timestamp.
+        reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStartStamp);
+        stravaShare(targetStartStamp, targetMin, targetStake, targetSes, targetWks, targetGoalID);
       }
       else{
         $("#soonEcho").html('');
