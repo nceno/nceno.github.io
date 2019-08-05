@@ -493,24 +493,6 @@ contract Nceno is RelayRecipient{
     
     return(my.adherenceRate, my.totalAtStake, successCount);
   }
-
-  function successPerGoal(uint _stravaID, bytes32 _goalID) external view returns(uint, uint, uint, uint){
-    goalObject memory theGoal = goalAt[_goalID];
-    //uint wk = (now - theGoal.startTime)/604800;
-    //if(wk>theGoal.wks){
-      myStatsObject memory my;
-      uint successCount;
-      for(uint j =0; j<theGoal.wks; j++){
-        successCount += goalAt[_goalID].successes[_stravaID][j];
-        my.wkPayouts[j] = theGoal.lockedPercent[j]*goalAt[_goalID].successes[_stravaID][j]*theGoal.stakeUSD/theGoal.sesPerWk; //in pennies
-        my.lostStake+=(theGoal.lockedPercent[j]*theGoal.stakeUSD-my.wkPayouts[j]); //in pennies
-        my.wkBonuses[j] = goalAt[_goalID].claims[_stravaID][j]*theGoal.potWk[j]/(theGoal.winnersWk[j]*2);
-        my.bonusTotal+= my.wkBonuses[j];
-        
-      }       
-      return(successCount, theGoal.sesPerWk, my.lostStake, my.bonusTotal);
-    //}
-  }
     
   function getMyGoalStats2(uint _stravaID, bytes32 _goalID) external view returns(uint[12], uint, uint[12], uint, uint){
     goalObject memory theGoal = goalAt[_goalID];
