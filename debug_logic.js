@@ -1142,9 +1142,10 @@ async function browse(){
       var btnKey = 'btnU'+n;
       var idKey = 'idNumberU'+n;
       var tKey = 'tstampU'+n;
+      var stupid = tstamp.getTime()/1000;
       $('#'+tKey).hide();
-      $('#'+tKey).html(tstamp.getTime()/1000);
-      console.log(tstamp.getTime()/1000);
+      $('#'+tKey).html(stupid);
+      console.log(stupid);
 
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
@@ -1168,7 +1169,7 @@ $('#soonJoin1').click(function(){
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
 
-    targetStartStamp = $('#tstampU1').val();
+    var targetStartStamp = $('#tstampU1').val();
     
     console.log("targetStartStamp is: "+targetStartStamp);
     populateTargetModal();
