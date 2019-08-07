@@ -1167,7 +1167,7 @@ $('#soonJoin1').click(function(){
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
 
-    targetStartStamp = new Date($('#tstampU1').text());
+    targetStartStamp = new Date($('#tstampU1').val());
     console.log("targetStartStamp is: "+targetStartStamp.getTime()/1000);
     populateTargetModal();
   });
