@@ -1146,7 +1146,7 @@ async function browse(){
       var tKey = 'tstampU'+n;
       var stupid = parseInt(tstamp.getTime()/1000);
       $('#'+tKey).hide();
-      $('#'+tKey).html(stupid+'');
+      $('#'+tKey).val(stupid);
       console.log(stupid);
 
       $('#'+buyinKey).html('$'+result[2]);
