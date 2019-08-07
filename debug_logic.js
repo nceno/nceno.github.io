@@ -1107,7 +1107,6 @@ var targetWks;
 var targetSes;
 var targetMin;
 var targetStart;
-
 var targetStartStamp;
 
 async function browse(){
@@ -1146,7 +1145,7 @@ async function browse(){
       var tKey = 'tstampU'+n;
       var stupid = parseInt(tstamp.getTime()/1000);
       $('#'+tKey).hide();
-      $('#'+tKey).val(stupid);
+      $('#'+tKey).html(stupid);
       console.log(stupid);
 
       $('#'+buyinKey).html('$'+result[2]);
@@ -1171,10 +1170,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU1').text().slice(0,2);
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
-
     targetStartStamp = $('#tstampU1').val();
-    console.log("targetStartStamp is: "+targetStartStamp);
-
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
@@ -1184,7 +1180,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU2').text().slice(0,2);
     targetMin = $('#minU2').text().slice(0,3);
     targetStart = $('#startU2').text();
-    targetStartStamp =$('#startU2');
+    targetStartStamp = $('#tstampU2').val();
     populateTargetModal();
   });
   $('#soonJoin3').click(function(){
@@ -1195,7 +1191,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU3').text().slice(0,2);
     targetMin = $('#minU3').text().slice(0,3);
     targetStart = $('#startU3').text();
-    targetStartStamp =$('#startU3');
+    targetStartStamp = $('#tstampU3').val();
     populateTargetModal();
   });
   $('#soonJoin4').click(function(){
@@ -1205,7 +1201,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU4').text().slice(0,2);
     targetMin = $('#minU4').text().slice(0,3);
     targetStart = $('#startU4').text();
-    targetStartStamp =$('#startU4');
+    targetStartStamp = $('#tstampU4').val();
     populateTargetModal();
   });
   $('#soonJoin5').click(function(){
@@ -1215,7 +1211,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU5').text().slice(0,2);
     targetMin = $('#minU5').text().slice(0,3);
     targetStart = $('#startU5').text();
-    targetStartStamp =$('#startU5');
+    targetStartStamp = $('#tstampU5').val();
     populateTargetModal();
   });
   $('#soonJoin6').click(function(){
@@ -1225,7 +1221,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU6').text().slice(0,2);
     targetMin = $('#minU6').text().slice(0,3);
     targetStart = $('#startU6').text();
-    targetStartStamp =$('#startU6');
+    targetStartStamp = $('#tstampU6').val();
     populateTargetModal();
   });
   $('#soonJoin7').click(function(){
@@ -1235,7 +1231,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU7').text().slice(0,2);
     targetMin = $('#minU7').text().slice(0,3);
     targetStart = $('#startU7').text();
-    targetStartStamp =$('#startU7');
+    targetStartStamp = $('#tstampU7').val();
     populateTargetModal();
   });
   $('#soonJoin8').click(function(){
@@ -1245,7 +1241,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU8').text().slice(0,2);
     targetMin = $('#minU8').text().slice(0,3);
     targetStart = $('#startU8').text();
-    targetStartStamp =$('#startU8');
+    targetStartStamp = $('#tstampU8').val();
     populateTargetModal();
   });
   $('#soonJoin9').click(function(){
@@ -1255,7 +1251,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU9').text().slice(0,2);
     targetMin = $('#minU9').text().slice(0,3);
     targetStart = $('#startU9').text();
-    targetStartStamp =$('#startU9');
+    targetStartStamp = $('#tstampU9').val();
     populateTargetModal();
   });
   $('#soonJoin10').click(function(){
@@ -1265,7 +1261,7 @@ $('#soonJoin1').click(function(){
     targetSes = $('#sesU10').text().slice(0,2);
     targetMin = $('#minU10').text().slice(0,3);
     targetStart = $('#startU10').text();
-    targetStartStamp = $('#startU10');
+    targetStartStamp = $('#tstampU10').val();
     populateTargetModal();
   });
 
