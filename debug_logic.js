@@ -1108,6 +1108,8 @@ var targetSes;
 var targetMin;
 var targetStart;
 
+var targetStartStamp;
+
 async function browse(){
   updateNonce();
   //clear out the goalIDs from old elements
@@ -1161,7 +1163,7 @@ async function browse(){
   }
 }
 //must be outside, so accessible globally.
-var targetStartStamp;
+
 $('#soonJoin1').click(function(){
     targetGoalID = $('#idNumberU1').text();
     targetStake = $('#buyinU1').text().slice(1);
