@@ -1169,7 +1169,7 @@ $('#soonJoin1').click(function(){
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
 
-    var targetStartStamp = $('#tstampU1').val();
+    var targetStartStamp = $('#tstampU1').text();
     
     console.log("targetStartStamp is: "+targetStartStamp);
     populateTargetModal();
