@@ -1144,10 +1144,11 @@ async function browse(){
       var idKey = 'idNumberU'+n;
       var tKey = 'tstampU'+n;
       var stupid = parseInt(tstamp.getTime()/1000);
-      $('#'+tKey).hide();
-      $('#'+tKey).html(stupid);
       console.log(stupid);
 
+      $('#'+tKey).hide();
+      $('#'+tKey).html(stupid+'');
+      
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
       $('#'+sesKey).html(result[3]+' x/wk');
