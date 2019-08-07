@@ -1144,8 +1144,8 @@ async function browse(){
       var tKey = 'tstampU'+n;
       var stupid = tstamp.getTime()/1000;
       $('#'+tKey).hide();
-      $('#'+tKey).html(stupid);
-      console.log(stupid+'');
+      $('#'+tKey).html(stupid+'');
+      console.log(stupid);
 
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
