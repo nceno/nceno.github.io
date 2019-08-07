@@ -1130,7 +1130,7 @@ async function browse(){
     if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
       //list it in the table
       var tstamp = new Date(result[5]*1000);
-      console.log('tstamp is: '+tstamp.getTime());
+      //console.log('tstamp is: '+tstamp.getTime()/1000);
       //var buyin = Math.round(result[2]/100000000000000000000);
       var n = i+1;
       var buyinKey = 'buyinU'+n;
@@ -1143,7 +1143,7 @@ async function browse(){
       var idKey = 'idNumberU'+n;
       var tKey = 'tstampU'+n;
       $('#'+tKey).hide();
-      $('#'+tKey).html(tstamp.getTime());
+      $('#'+tKey).html(tstamp.getTime()/1000);
 
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
@@ -1167,9 +1167,9 @@ $('#soonJoin1').click(function(){
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
 
-    targetStartStamp = new Date($('#tstampU1').val());
-    stupid = targetStartStamp.getTime();
-    console.log("targetStartStamp is: "+stupid);
+    targetStartStamp = $('#tstampU1').text();
+    
+    console.log("targetStartStamp is: "+targetStartStamp);
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
