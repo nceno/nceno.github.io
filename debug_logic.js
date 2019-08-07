@@ -1168,7 +1168,8 @@ $('#soonJoin1').click(function(){
     targetStart = $('#startU1').text();
 
     targetStartStamp = new Date($('#tstampU1').val());
-    console.log("targetStartStamp is: "+targetStartStamp.getTime()/1000);
+    stupid = targetStartStamp.getTime();
+    console.log("targetStartStamp is: "+stupid);
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
