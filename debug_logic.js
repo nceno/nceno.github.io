@@ -1144,7 +1144,6 @@ async function browse(){
       var tKey = 'tstampU'+n;
       $('#'+tKey).hide();
       $('#'+tKey).html(result[5]);
-      console.log("tKey is: "+tKey);
 
       $('#'+buyinKey).html('$'+result[2]);
       $('#'+wksKey).html(result[4]+'  wks');
@@ -1168,7 +1167,7 @@ $('#soonJoin1').click(function(){
     targetMin = $('#minU1').text().slice(0,3);
     targetStart = $('#startU1').text();
 
-    targetStartStamp = parseInt($('#tstampU1').text()*1);
+    targetStartStamp = $('#tstampU1').getTime()/1000;
     populateTargetModal();
   });
   $('#soonJoin2').click(function(){
