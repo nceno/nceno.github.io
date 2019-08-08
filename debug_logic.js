@@ -1534,7 +1534,7 @@ function updateGasPrice(){
       gasPriceChoice = safeLow;
       console.log("Ethereum network is experienceing high traffic currently... Transaction confirmation will take longer than usual.");
     }
-    else gasPriceChoice = standard+1;
+    else gasPriceChoice = parseInt(standard)+1;
     console.log(safeLow+" < "+standard+" < gas < "+fast+" < "+fastest);
 
     console.log("gasPrice set at: "+gasPriceChoice);
