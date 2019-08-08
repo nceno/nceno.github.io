@@ -54,9 +54,9 @@ function showPortis() {
   portis.onLogin((walletAddress, email) => {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
-      console.log("default: " + web3.eth.defaultAccount);
+      //console.log("this ETH address: " + web3.eth.defaultAccount);
       portisEmail = email;
-      console.log("portis email is: "+ portisEmail);
+      //console.log("this portis email is: "+ portisEmail);
       localize();
       getToken();
       $("#portisBtn").hide();
@@ -323,18 +323,21 @@ function getMobileOS() {
   // Windows Phone must come first because its UA also contains "Android"
   if (/windows phone/i.test(userAgent)) {
     OS = 3;
-    console.log("OS is: Windows Phone");
+    //console.log("OS is: Windows Phone");
   }
   else if (/android/i.test(userAgent)) {
     OS = 2;
-    console.log("OS is: Android");
+    //console.log("OS is: Android");
   }
   // iOS detection from: http://stackoverflow.com/a/9039885/177710
   else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
     OS = 1;
-    console.log("OS is: iOS");
+    //console.log("OS is: iOS");
   }
-  else console.log("OS is: unknown");
+  else {
+    OS = 0;
+    //console.log("OS is: unknown");
+  }
 }
 
 //function that displays in a modal, a summary of the goal you are setting.
@@ -1513,7 +1516,7 @@ function localize(){
     //pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
     //pad = parseInt(timezone.slice(0, 1)+1)
     //console.log(pad);
-    console.log("Flag URL: " + flag);
+    //console.log("Flag URL: " + flag);
     getMobileOS();
   });
 }
