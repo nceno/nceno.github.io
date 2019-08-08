@@ -1580,7 +1580,7 @@ function getToken(){
   xhr.withCredentials = true;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
-      //console.log(this.responseText);
+      console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
       //tokenExpire = data.expires_in;
