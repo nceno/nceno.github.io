@@ -1530,8 +1530,13 @@ function updateGasPrice(){
     fast = data.fast;
     fastest = data.fastest;
     //admin can control the gas price
-    gasPriceChoice = standard+1;
-    console.log(standard+" < gasPrice < "+fast);    
+    if(standard>9){
+      gasPriceChoice = safeLow
+      console.log("Ethereum network is experienceing high traffic currently... Transaction confirmation will take longer than usual.")
+    }
+    else gasPriceChoice = standard+1;
+    console.log(safeLow+" < "+standard+" < gasPrice < "+fast+" < "+fastest);
+
   });
 }
 
