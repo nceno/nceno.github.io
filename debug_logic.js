@@ -1585,7 +1585,7 @@ function getToken(){
       access_token = data.access_token;
       //tokenExpire = data.expires_in;
       stravaID = data.athlete.id;
-      console.log("strava id is:"+stravaID);
+      //console.log("strava id is:"+stravaID);
       
       //if(data.athlete.username == undefined){
         stravaUsername = portisEmail.substring(0, portisEmail.lastIndexOf("@"));
