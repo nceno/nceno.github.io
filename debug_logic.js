@@ -542,7 +542,7 @@ function makeWktl(_claimStatus){
   if(currentWeek<=wkLimit){
     $('#'+currentwklogKey).show();
   }
- if(currentWeek<=wkLimit+1 && _claimStatus < 1){
+ if(currentWeek<=wkLimit+1 && _claimStatus === false){
     $('#'+pastwkclaimKey).show();
   }
  
@@ -558,13 +558,14 @@ function makeWktl(_claimStatus){
 }
 
 var goalid;
+var hasClaimed = false;
 function selectedChallenge(){
   // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
 
-    var hasClaimed = false;
+    
     //-----hiding the claim button
     Nceno.methods.seeClaims(
       stravaID,
