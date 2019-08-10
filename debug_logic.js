@@ -542,7 +542,8 @@ function makeWktl(_claimStatus){
   if(currentWeek<=wkLimit){
     $('#'+currentwklogKey).show();
   }
- if(currentWeek<=wkLimit+1 && _claimStatus === false){
+  //replace claimstatus === false with $('#bonus').val() == 0 && players > 1
+  if(currentWeek<=wkLimit+1 && _claimStatus === false){
     $('#'+pastwkclaimKey).show();
   }
  
@@ -558,13 +559,14 @@ function makeWktl(_claimStatus){
 }
 
 var goalid;
-var hasClaimed = false;
+
 function selectedChallenge(){
   // Initialize Selectric and bind to 'change' event
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
 
+/*    var hasClaimed = false;
     
     //-----hiding the claim button
     Nceno.methods.seeClaims(
@@ -584,7 +586,7 @@ function selectedChallenge(){
         console.error(error);
       }
     );
-    //----/hiding the claim button
+    //----/hiding the claim button*/
 
     var sessions = 0;
     var wks = 0;
