@@ -1363,7 +1363,7 @@ $("#claimBtn").click(function() {
           //----begin other messages
 
           
-          if(usdCut>0){
+          if(usdCut>0 || usdCut != undefined){
             $("#claimLoader").hide();
             $("#claimTitle").hide();
             $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $'+usdCut+' from the people who skipped workouts.</p>');
