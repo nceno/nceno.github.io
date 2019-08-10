@@ -573,6 +573,7 @@ function selectedChallenge(){
     .call({from: web3.eth.defaultAccount},
       function(error, result) {
         if (!error){
+          console.log("number of claims is: "+result);
           if(result === 1){
             hasClaimed = true;
           }
