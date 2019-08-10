@@ -16,6 +16,7 @@ import "./RelayRecipient.sol";
 ///////change goalID, maybe timestamp
 //host: "0x71fd580000000000000000000000000000","20","10","2","2","1565222400","123456","22176","0x00"
 //value: 50000000000000000
+//log: 
 //inherit gas station relay contract
 contract Nceno is RelayRecipient{
 
