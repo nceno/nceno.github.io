@@ -523,7 +523,8 @@ function makePage(){
 
 var wkLimit = 0;
 var currentWeek = 0;
-function makeWktl(_claimStatus){
+//function makeWktl(_claimStatus){
+  function makeWktl(){
   //hide all weeks and buttons, in case previously selected goal was longer.
   for (let i = 0; i < 12; i++){
     var wkindex = i+1;
@@ -543,7 +544,7 @@ function makeWktl(_claimStatus){
     $('#'+currentwklogKey).show();
   }
   //replace claimstatus === false with $('#bonus').val() == 0 && players > 1
-  if(currentWeek<=wkLimit+1 && _claimStatus === false){
+  if(currentWeek<=wkLimit+1){
     $('#'+pastwkclaimKey).show();
   }
  
@@ -664,7 +665,8 @@ function selectedChallenge(){
           else {chartWeek = wkLimit;}
           //currentWeek = (Date.now()/1000 - result[4])/604800;
           console.log("blockchain says we're in week: "+currentWeek);
-          makeWktl(hasClaimed);
+          //makeWktl(hasClaimed);
+          makeWktl();
        
           await Nceno.methods.getParticipants(goalid)
           .call({from: web3.eth.defaultAccount},
