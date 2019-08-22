@@ -18,7 +18,16 @@ import "./RelayRecipient.sol";
 ///////change goalID, maybe timestamp
 //host: "0x71fd580000000000000000000000000000","20","10","2","2","1565222400","123456","22176","0x00"
 //value: 50000000000000000
-//log: 
+//log:
+
+//Ropsten chainlink addresses:
+/*  
+  LINK Token address: 0x20fE562d797A42Dcb3399062AE9546cd06f63280
+  Oracle address: 0xc99B3D447826532722E41bc36e644ba3479E4365
+  Bool JobID: 7702e2f2f6c24538b00d43c55d59b53a
+  Bytes32 JobID: a904aa9d273a4e87870912e563da3b7a
+  Uint256 JobID: 44403ffe2c424f738eb6a8206134e298
+*/
 
 
 //inherit gas station relay contract
