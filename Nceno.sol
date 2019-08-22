@@ -3,6 +3,8 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 import "./ERC20Interface.sol";
 import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
+//import "./ChainlinkClient.sol";
+
 
 //test data
 //stravaID: 39706111
@@ -17,7 +19,10 @@ import "./RelayRecipient.sol";
 //host: "0x71fd580000000000000000000000000000","20","10","2","2","1565222400","123456","22176","0x00"
 //value: 50000000000000000
 //log: 
+
+
 //inherit gas station relay contract
+//inherit chainlink contracts... but may need to alter RelayRecipient.sol as: RelayRecipient is ChainlinkClient
 contract Nceno is RelayRecipient{
 
   event LiquidateInstance(uint indexed _unclaimed);
@@ -55,7 +60,7 @@ contract Nceno is RelayRecipient{
     return(goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]);
   }*/
 
-  function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
+/*  function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
     return(admin,
       hrThresh,
       hubAddress,
@@ -71,7 +76,7 @@ contract Nceno is RelayRecipient{
 
   function downloadCompetitor(uint _index) onlyAdmin internal returns(competitorObject){
     return(profileOf[stravaIDs[_index]]);
-  }
+  }*/
 
   //adr 1 on metamask ropsten
   address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
@@ -87,8 +92,18 @@ contract Nceno is RelayRecipient{
   address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
 
   //gas station init
+  //Link init.... add this argument: address _link
   function Nceno() public {
     init_relay_hub(RelayHub(hubAddress));
+
+    /*    // Set the address for the LINK token for the network.
+    if(_link == address(0)) {
+      // Useful for deploying to public networks.
+      setPublicChainlinkToken();
+    } else {
+      // Useful if you're deploying to a local network.
+      setChainlinkToken(_link);
+    }*/
   }
 
   function liquidateGoalInstance(uint _index) onlyAdmin external{
