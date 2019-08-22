@@ -1539,9 +1539,10 @@ function updateGasPrice(){
     fast = data.fast;
     fastest = data.fastest;
     //default to slowest gas if network is busy, to avoid subsidizing super high txn cost.
-    if(parseInt(standard)>9){
+    if(parseInt(standard)>8){
       gasPriceChoice = parseInt(safeLow)+1;
       console.log("Ethereum network is experienceing high traffic currently... Transaction confirmation will take longer than usual.");
+      $('trafficAlert').alert();
     }
     else gasPriceChoice = parseInt(standard)+1;
     console.log(safeLow+" < "+standard+" < gas < "+fast+" < "+fastest);
