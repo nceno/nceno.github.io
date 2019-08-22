@@ -291,6 +291,7 @@ $("#hostBtn").click(function() {
         $("#hostBtn").hide();
         $("#cancelBtn").hide();
         $("#createLoader").show();
+        $('#promoField').hide();
         console.log(result);
       }
       else
@@ -301,6 +302,7 @@ $("#hostBtn").click(function() {
     if(receipt.status === true){
       correctNonce++;
       $("#createLoader").hide();
+      $('#promoField').hide();
       $("#createSuccess").show();
       $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
@@ -308,6 +310,7 @@ $("#hostBtn").click(function() {
     }
     else{
       $("#createLoader").hide();
+      $('#promoField').hide();
       $("#hostBtn").hide();
       $('#createFail').html('<p>Transaction failed. User account does not exist, or else message value is less than intended stake.</p>');
       console.log("User does not exist, or else message value is less than intended stake.");
@@ -373,6 +376,7 @@ function joinSearch(){
       if (!error){
         $("#joinSearch").hide();
         $("#joinLoader").show();
+        $('#promoFieldSearch').hide();
         console.log(result);
       }
       else
@@ -383,6 +387,7 @@ function joinSearch(){
     if(receipt.status === true){
       correctNonce++;
       $("#joinLoader").hide();
+      $('#promoFieldSearch').hide();
       $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
       //need the join serach button to set proper global variables and then these functions can reference them
       reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start);
@@ -391,6 +396,7 @@ function joinSearch(){
     else{
       
       $("#aboutToJoin").hide();
+      $('#promoFieldSearch').hide();
       $("#srEcho").html('');
       $("#joinLoader").hide();
       $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
@@ -456,6 +462,7 @@ function resetCreate(){
   $("#createFail").html('');
   randGoalID();
   $("#chalID").html('');
+  $('#promoField').show();
 }
 $('#popupCreate').on('hidden.bs.modal', function (e) {
   resetCreate();
@@ -492,6 +499,7 @@ function resetJoinSr(){
   $("#srEcho").html('');
   $("#srJoinReminder").html('');
   $("#joinLoader").hide();
+  $('#promoFieldSearch').show();
 }
 $('#popupSrJoin').on('hidden.bs.modal', function (e) {
   resetJoinSr();
@@ -1300,6 +1308,7 @@ function joinTarget(){
       if (!error){
         $("#joinSoonModalBtn").hide();
         $("#joinSoonLoader").show();
+        $('#promoFieldSoon').hide();
         console.log(result);
       }
       else
