@@ -551,9 +551,14 @@ var currentWeek = 0;
   if(currentWeek<=wkLimit){
     $('#'+currentwklogKey).show();
   }
-  //replace claimstatus === false with $('#bonus').val() == 0 && players > 1
+  //hides or shows claim button
   if(currentWeek<=wkLimit+1){
     $('#'+pastwkclaimKey).show();
+
+    //needs precise values ...
+    /*if($('#bonus').val() > 0 && players > 1){
+      $('#'+pastwkclaimKey).hide();
+    }*/
   }
  
   var mostRecentWk = 0;
@@ -574,28 +579,6 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
-
-/*    var hasClaimed = false;
-    
-    //-----hiding the claim button
-    Nceno.methods.seeClaims(
-      stravaID,
-      goalid
-    )
-    .call({from: web3.eth.defaultAccount},
-      function(error, result) {
-        if (!error){
-          console.log("number of claims is: "+result);
-          if(result === 1){
-            hasClaimed = true;
-          }
-          //else
-        }
-        else
-        console.error(error);
-      }
-    );
-    //----/hiding the claim button*/
 
     var sessions = 0;
     var wks = 0;
