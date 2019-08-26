@@ -412,7 +412,7 @@ function joinSearch(){
 function makeList(){
 
   $("#upcomingGoals").children('option:not(:first)').remove();
-  $("#goalCategories").selectric({maxHeight: 500, nativeOnMobile: true, responsive: true, preventWindowScroll: true});
+  $("#goalCategories").selectric({maxHeight: 500, responsive: true, preventWindowScroll: true});
   //if(populated === false){
     var goals1 = new Array();
     var goals2 = new Array();
