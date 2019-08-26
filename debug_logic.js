@@ -411,9 +411,11 @@ function joinSearch(){
 //var populated = false;
 function makeList(){
 
-  $("#upcomingGoals").children().detatch();
-  $("#activeGoals").children().detatch();
-  $("#completedGoals").children().detatch();
+  for(let n = 0; n < 15; n++){
+    $('#upcoming'+n).remove();
+    $('#active'+n).remove();
+    $('#completed'+n).remove();
+  }
 
   $("#goalCategories").selectric({maxHeight: 500, responsive: true, preventWindowScroll: true});
   //if(populated === false){
@@ -428,7 +430,7 @@ function makeList(){
           goals1[i] = result;
           console.log(goals1[i] + " is an upcoming goal");
           
-          $("#upcomingGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
+          $("#upcomingGoals").after('<option id="upcoming'+i+'">'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });
@@ -438,7 +440,7 @@ function makeList(){
           goals2[i] = result;
           console.log(goals2[i]  + " is an active goal");
           
-          $("#activeGoals").after('<option>'+ goals2[i].slice(0, 8) +'</option>');
+          $("#activeGoals").after('<option id="active'+i+'">'+ goals2[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });
@@ -448,7 +450,7 @@ function makeList(){
           goals3[i] = result;
           console.log(goals3[i]  + " is a completed goal");
           
-          $("#completedGoals").after('<option>'+ goals3[i].slice(0, 8) +'</option>');
+          $("#completedGoals").after('<option id="completed'+i+'">'+ goals3[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
       });  
