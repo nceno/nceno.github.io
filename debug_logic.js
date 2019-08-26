@@ -416,9 +416,9 @@ function makeList(){
     var goals2 = new Array();
     var goals3 = new Array();
 
-    $("#upcomingGoals").empty();
-    $("#activeGoals").empty();
-    $("#completedGoals").empty();
+    $("#upcomingGoals").children().empty();
+    $("#activeGoals").children().empty();
+    $("#completedGoals").children().empty();
 
     for (let i = 0; i < 15; i++){
       //upcoming
