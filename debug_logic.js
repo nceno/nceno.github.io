@@ -282,7 +282,7 @@ $("#hostBtn").click(function() {
     $("#sliderWks").roundSlider("getValue"),
     start,
     stravaID,
-    Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
+    //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
     web3.utils.toHex($('#promoField').val())
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
@@ -367,7 +367,7 @@ function joinSearch(){
   Nceno.methods.join(
     goalid,
     stravaID,
-    Math.floor(ethPrice*100),
+    //Math.floor(ethPrice*100),
     web3.utils.toHex($('#promoFieldSearch').val())
   )
   //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
@@ -1283,7 +1283,7 @@ function joinTarget(){
   Nceno.methods.join(
     targetGoalID,
     stravaID,
-    ethPrice*100, //ethprice in pennies, gets rid of decimals
+    //ethPrice*100, //ethprice in pennies, gets rid of decimals
     web3.utils.toHex($('#promoFieldSoon').val())
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
@@ -1546,6 +1546,8 @@ function updateGasPrice(){
 
 
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
+//only displays button when price is returned by API.
+//probably obsolete since updating contract to price internally...
 function updateEthPrice(btn) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
