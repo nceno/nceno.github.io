@@ -411,9 +411,9 @@ function joinSearch(){
 //var populated = false;
 function makeList(){
 
-  $("#upcomingGoals").children('option:not(:first)').remove();
-  $("#activeGoals").children('option:not(:first)').remove();
-  $("#completedGoals").children('option:not(:first)').remove();
+  $("#upcomingGoals").children().detatch();
+  $("#activeGoals").children().detatch();
+  $("#completedGoals").children().detatch();
 
   $("#goalCategories").selectric({maxHeight: 500, responsive: true, preventWindowScroll: true});
   //if(populated === false){
