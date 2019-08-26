@@ -412,6 +412,9 @@ function joinSearch(){
 function makeList(){
 
   $("#upcomingGoals").children('option:not(:first)').remove();
+  $("#activeGoals").children('option:not(:first)').remove();
+  $("#completedGoals").children('option:not(:first)').remove();
+
   $("#goalCategories").selectric({maxHeight: 500, responsive: true, preventWindowScroll: true});
   //if(populated === false){
     var goals1 = new Array();
