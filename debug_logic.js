@@ -410,10 +410,9 @@ function joinSearch(){
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 //var populated = false;
 function makeList(){
-  $("#goalCategories").selectric('destroy');
-  $("#goalCategories").selectric('init');
 
-  $("#goalCategories").selectric({maxHeight: 500, disableOnMobile: true, nativeOnMobile: true, responsive: true, preventWindowScroll: true});
+
+  $("#goalCategories").selectric({maxHeight: 500, nativeOnMobile: true, responsive: true, preventWindowScroll: true});
   //if(populated === false){
     var goals1 = new Array();
     var goals2 = new Array();
@@ -425,7 +424,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals1[i] = result;
           console.log(goals1[i] + " is an upcoming goal");
-          //$("#upcomingGoals").empty();
+          
           $("#upcomingGoals").after('<option>'+ goals1[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
@@ -435,7 +434,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals2[i] = result;
           console.log(goals2[i]  + " is an active goal");
-          //$("#activeGoals").empty();
+          
           $("#activeGoals").after('<option>'+ goals2[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
@@ -445,7 +444,7 @@ function makeList(){
         if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
           goals3[i] = result;
           console.log(goals3[i]  + " is a completed goal");
-          //$("#completedGoals").empty();
+          
           $("#completedGoals").after('<option>'+ goals3[i].slice(0, 8) +'</option>');
           $('#goalCategories').selectric('refresh');
         }
