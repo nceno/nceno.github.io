@@ -411,7 +411,7 @@ function joinSearch(){
 var populated = false;
 function makeList(){
   $("#goalCategories").selectric();
-  if(populated === false){
+  //if(populated === false){
     var goals1 = new Array();
     var goals2 = new Array();
     var goals3 = new Array();
@@ -448,8 +448,8 @@ function makeList(){
         }
       });  
     }
-    populated=true;
-  }
+    //populated=true;
+  //}
   
 }
 
@@ -529,10 +529,12 @@ function makePage(){
   getToken();
 }
 
+
+
 var wkLimit = 0;
 var currentWeek = 0;
 //function makeWktl(_claimStatus){
-  function makeWktl(){
+function makeWktl(){
   //hide all weeks and buttons, in case previously selected goal was longer.
   for (let i = 0; i < 12; i++){
     var wkindex = i+1;
