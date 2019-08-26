@@ -500,7 +500,6 @@ function makePage(){
 
 var wkLimit = 0;
 var currentWeek = 0;
-//function makeWktl(_claimStatus){
 function makeWktl(){
   //hide all weeks and buttons, in case previously selected goal was longer.
   for (let i = 0; i < 12; i++){
@@ -523,11 +522,6 @@ function makeWktl(){
   //hides or shows claim button
   if(currentWeek<=wkLimit+1){
     $('#'+pastwkclaimKey).show();
-
-    //needs precise values ...
-    /*if($('#bonus').val() > 0 && players > 1){
-      $('#'+pastwkclaimKey).hide();
-    }*/
   }
  
   var mostRecentWk = 0;
@@ -762,6 +756,8 @@ function selectedChallenge(){
 
                                         //disallow logging and claiming if quotas are met
                                         if(k>0 && successesWk[k-1] != sessions){
+                                        //final bug
+                                        //if(k>0 && successesWk[k-1] != sessions || claims = 1 || compcount === 1){
                                           $('#w'+k+'claim').hide();
                                         }
 
@@ -1510,13 +1506,14 @@ function updateGasPrice(){
 
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
 //only displays button when price is returned by API.
-//probably obsolete since updating contract to price internally...
+//still need this because it tells how much wei to send.
+//try to get data from kyber instead of API though.
 function updateEthPrice(btn) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
-      ethPrice = resp.USD;
+      ethPrice = resp.USD*1.025;  //...in lieu of calling kyber
       console.log(this.responseText);
       console.log(ethPrice);
       $('#'+btn).show();

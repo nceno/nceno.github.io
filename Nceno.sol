@@ -104,7 +104,7 @@ contract Nceno is RelayRecipient{
     bool liquidated;
 
     mapping(uint=>uint[12]) successes;
-    mapping(uint=>uint[12]) claims;
+    mapping(uint=>uint[12]) public claims;
     //mapping(uint=>uint) ethPricePenniesAtJoin;  //not used..
     mapping(uint=>bool) activitySpent;
     mapping(uint=>bool) isCompetitor;
