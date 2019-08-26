@@ -121,7 +121,7 @@ $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
 $("#claimBtn").show();
 
-for(let h=1, h<13, h++){
+for(let h=1; h<13; h++){
   $('#btnU'+h).hide();
   
   $('#w'+h+'log').hide();
@@ -1082,7 +1082,7 @@ var targetStartStamp;
 async function browse(){
   updateNonce();
   //clear out the goalIDs from old elements
-  for(let p=1, p<11, p++){
+  for(let p=1; p<11; p++){
     $('#idNumberU'+p).val('');
   }
 
