@@ -43,27 +43,6 @@ contract Nceno is RelayRecipient{
   event Log(bytes32 indexed _goalID, uint indexed _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint indexed _payout);
   event Claim(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _cut);
 
-  //---------for testing only!!!!!!!!!
-  function getTestETH() public{
-    get_sender().transfer(500000000000000000);
-  }
-
-  function recoverETH(uint _eth) public{
-    admin.transfer(_eth*1000000000000000000);
-  }
-  //---------   /for testing only!!!!!!!!!
-
-  //--------  cody's code
-  bytes32 promoCode= 0x776f726b6f757434617061796f7574;
-  uint promoCodeCount;
-  function setPromoCode(bytes32 _code) public onlyAdmin{
-    promoCode = _code;
-  }
-  function getPromoCodeCount() public returns(uint){
-    return(promoCodeCount);
-  }
-  //----- /cody's code
-
 /*  //to help with hiding the claim button in the UI... not needed since we have if(bonus===0 && players>1)... then...
   function seeClaims(uint _stravaID, bytes32 _goalID) external view returns(uint){
     return(goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]);
@@ -87,16 +66,7 @@ contract Nceno is RelayRecipient{
     return(profileOf[stravaIDs[_index]]);
   }*/
 
-  //adr 1 on metamask ropsten
-  address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
-  function setAdmin(address _newAdmin) onlyAdmin external{
-    admin = _newAdmin;
-  }
 
-  uint hrThresh = 100;
-  function setHRthresh(uint _newThresh) onlyAdmin external{
-    hrThresh = _newThresh;
-  }
 
   address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
 
@@ -115,38 +85,6 @@ contract Nceno is RelayRecipient{
     }*/
   }
 
-  function liquidateGoalInstance(uint _index) onlyAdmin external{
-    //can only see a week after a goal is finished
-    require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
-    //transfer the money
-    DAI_ERC20.transfer(admin, goalInstance[_index].unclaimedStake);
-    //close the goal
-    goalInstance[_index].liquidated = true;
-
-    emit LiquidateInstance(goalInstance[_index].unclaimedStake);
-
-  }
-
-  function liquidateGoalAt(bytes32 _goalID) onlyAdmin external {
-    //can only see a week after a goal is finished
-    require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
-    //transfer the money
-    DAI_ERC20.transfer(admin, goalAt[_goalID].unclaimedStake);
-    //close the goal
-    goalAt[_goalID].liquidated = true;
-    
-    emit LiquidatedAt(goalAt[_goalID].unclaimedStake);
-  }
-
-  //useful for liquidating
-  function getGoalCount() external view returns(uint){
-    return(goalCount);
-  }
-
-  function getUserCount() external view returns(uint){
-    return(stravaIDs.length);
-  }
-  
   struct goalObject{
     bytes32 goalID;
     uint startTime;
@@ -176,29 +114,6 @@ contract Nceno is RelayRecipient{
   uint public goalCount;
   bytes32[] public goalIDs;
 
-  //payout lockedPercent based on wks parameter
-  uint[12][6] lockedPercent = partitionChoices[0];
-  uint[12][6][2] partitionChoices =[ 
-    //choice 1
-    [[43, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [13, 30, 21, 36, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [7, 12, 24, 13, 26, 18, 0, 0, 0, 0, 0, 0], 
-    [3, 10, 9, 21, 12, 10, 24, 11, 0, 0, 0, 0], 
-    [2, 7, 7, 9, 18, 11, 4, 17, 16, 9, 0, 0], 
-    [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]],
-    //choice 2
-    [[45, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [22, 23, 11, 44, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [14, 17, 14, 6, 16, 33, 0, 0, 0, 0, 0, 0], 
-    [11, 11, 14, 10, 4, 7, 17, 26, 0, 0, 0, 0], 
-    [9, 8, 10, 11, 7, 4, 4, 9, 17, 21, 0, 0], 
-    [7, 7, 8, 9, 8, 6, 4, 3, 5, 10, 15, 18]]
-  ];
-
-  //seed with new lockedPercent
-  function setPartitionChoices(uint[12][6][2] _newChoices) onlyAdmin external {
-    partitionChoices = _newChoices;
-  }
 
   struct competitorObject{
     uint stravaID;
@@ -217,7 +132,7 @@ contract Nceno is RelayRecipient{
   mapping(uint=>bool) public userExists;
 
 
-  function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS)  external{
+  function makeProfile(uint _stravaID, bytes32 _userName, bytes32 _flag, uint _OS)  external notHalted{
     require(userExists[_stravaID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
 
@@ -237,7 +152,7 @@ contract Nceno is RelayRecipient{
     emit MakeProfile(get_sender(), _stravaID, _userName, _flag, _OS);
   }
 
-  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies, bytes32 _code)  external payable {
+  function host(bytes32 _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, uint _ethPricePennies, bytes32 _code)  external payable notHalted{
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == get_sender() && msg.value >= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //get_sender()
     goalObject memory createdGoal;
@@ -289,7 +204,7 @@ contract Nceno is RelayRecipient{
   }
   //event Hosted();
 
-  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies, bytes32 _code)  external payable {
+  function join(bytes32 _goalID, uint _stravaID, uint _ethPricePennies, bytes32 _code)  external payable notHalted {
     require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
@@ -315,7 +230,7 @@ contract Nceno is RelayRecipient{
     emit Join(_goalID, _stravaID, _ethPricePennies);
   }
 
-  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external {
+  function log(bytes32 _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external notPaused{
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
       "wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //get_sender()
@@ -351,7 +266,7 @@ contract Nceno is RelayRecipient{
   }
 
 
-  function claim(bytes32 _goalID, uint _stravaID)  external {
+  function claim(bytes32 _goalID, uint _stravaID)  external notPaused{
     //must have 100% adherence for the previous week, and can only claim once.
     require(profileOf[_stravaID].walletAdr == get_sender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
       goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
@@ -396,33 +311,6 @@ contract Nceno is RelayRecipient{
     goalAt[_goalID].unclaimedStake-= cut; //convert to usd
 
     emit Claim(_goalID, _stravaID, cut);
-  }
-
-
-  modifier onlyAdmin(){
-    require(get_sender() == admin,"Sender not authorized."); //get_sender()
-    _;
-  }
-    
-  bool halted =false;
-  modifier notHalted(){
-    require(halted == false,"App is halted."); //get_sender()
-    _;
-  }
-
-  bool paused = false;
-  modifier notPaused(){
-    require(paused == false,"App is paused."); //get_sender()
-    _;
-  }
-
-  function setHalt(bool _status) onlyAdmin external {
-    halted = _status;
-    paused = _status;
-  }
-
-  function setPause(bool _status) onlyAdmin external {
-    paused = _status;
   }
 
 
@@ -626,11 +514,147 @@ contract Nceno is RelayRecipient{
       Swap(get_sender(), token, destAmount);
   }
   
-  function cashout(uint _dollars) public onlyAdmin{
-      DAI_ERC20.transfer(admin, _dollars*1000000000000000000);
-  }
+  
 
   //--------------------------
   //--- /kyber stuff 
+  //--------------------------
+
+
+  //--------------------------
+  //--- admin functions
+  //--------------------------
+
+  //admin-defined cash out
+  function cashout(uint _dollars) public onlyAdmin notHalted notPaused{
+      DAI_ERC20.transfer(admin, _dollars*1000000000000000000);
+  }
+
+  modifier onlyAdmin(){
+    require(get_sender() == admin,"Sender not authorized."); //get_sender()
+    _;
+  }
+  
+  //stuff to halt the app
+  bool halted =false;
+  modifier notHalted(){
+    require(halted == false,"App is halted."); //get_sender()
+    _;
+  }
+
+  bool paused = false;
+  modifier notPaused(){
+    require(paused == false,"App is paused."); //get_sender()
+    _;
+  }
+
+  function getAppStatus() external view returns(bool, bool){
+    return(halted, paused);
+  }
+
+  //halt is stronger than pause
+  function setHalt(bool _status) onlyAdmin external {
+    halted = _status;
+    paused = _status;
+  }
+
+  function setPause(bool _status) onlyAdmin external {
+    halted = _status;
+    paused = _status;
+  }
+
+  //cashout a goal slot (useful for iterating)
+  function liquidateGoalInstance(uint _index) onlyAdmin external{
+  //can only call one week after a goal is finished
+  require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
+  //transfer the money
+  DAI_ERC20.transfer(admin, goalInstance[_index].unclaimedStake);
+  //close the goal
+  goalInstance[_index].liquidated = true;
+
+  emit LiquidateInstance(goalInstance[_index].unclaimedStake);
+
+  }
+
+  //cashout a specific goal
+  function liquidateGoalAt(bytes32 _goalID) onlyAdmin external {
+    //can only call one week after a goal is finished
+    require(goalAt[_goalID].liquidated == false && now > goalAt[_goalID].startTime + (goalAt[_goalID].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
+    //transfer the money
+    DAI_ERC20.transfer(admin, goalAt[_goalID].unclaimedStake);
+    //close the goal
+    goalAt[_goalID].liquidated = true;
+    
+    emit LiquidatedAt(goalAt[_goalID].unclaimedStake);
+  }
+
+  //useful for liquidating
+  function getGoalCount() external view returns(uint){
+    return(goalCount);
+  }
+
+  function getUserCount() external view returns(uint){
+    return(stravaIDs.length);
+  }
+
+  //payout lockedPercent based on wks parameter
+  uint[12][6] lockedPercent = partitionChoices[0];
+  uint[12][6][2] partitionChoices =[ 
+    //choice 1
+    [[43, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+    [13, 30, 21, 36, 0, 0, 0, 0, 0, 0, 0, 0], 
+    [7, 12, 24, 13, 26, 18, 0, 0, 0, 0, 0, 0], 
+    [3, 10, 9, 21, 12, 10, 24, 11, 0, 0, 0, 0], 
+    [2, 7, 7, 9, 18, 11, 4, 17, 16, 9, 0, 0], 
+    [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]],
+    //choice 2
+    [[45, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+    [22, 23, 11, 44, 0, 0, 0, 0, 0, 0, 0, 0], 
+    [14, 17, 14, 6, 16, 33, 0, 0, 0, 0, 0, 0], 
+    [11, 11, 14, 10, 4, 7, 17, 26, 0, 0, 0, 0], 
+    [9, 8, 10, 11, 7, 4, 4, 9, 17, 21, 0, 0], 
+    [7, 7, 8, 9, 8, 6, 4, 3, 5, 10, 15, 18]]
+  ];
+
+  //seed with new lockedPercent
+  function setPartitionChoices(uint[12][6][2] _newChoices) onlyAdmin external {
+    partitionChoices = _newChoices;
+  }
+
+  //adr 1 on metamask ropsten
+  address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
+  function setAdmin(address _newAdmin) onlyAdmin external{
+    admin = _newAdmin;
+  }
+
+  //set the valid heart rate threshold
+  uint hrThresh = 99;
+  function setHRthresh(uint _newThresh) onlyAdmin external{
+    hrThresh = _newThresh;
+  }
+
+  //---------for testing only!!!!!!!!!
+  function getTestETH() public{
+    get_sender().transfer(500000000000000000);
+  }
+
+  function recoverETH(uint _eth) public{
+    admin.transfer(_eth*1000000000000000000);
+  }
+  //---------   /for testing only!!!!!!!!!
+
+  //--------  cody's code
+  bytes32 promoCode= 0x776f726b6f757434617061796f7574;
+  uint promoCodeCount;
+  function setPromoCode(bytes32 _code) public onlyAdmin{
+    promoCode = _code;
+  }
+  function getPromoCodeCount() public returns(uint){
+    return(promoCodeCount);
+  }
+  //----- /cody's code
+
+  //--------------------------
+  //--- /admin functions
   //--------------------------
 }
