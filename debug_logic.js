@@ -1545,6 +1545,7 @@ function updateGasPrice(){
 }
 
 
+
 //gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
 //only displays button when price is returned by API.
 //probably obsolete since updating contract to price internally...
