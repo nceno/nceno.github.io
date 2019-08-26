@@ -121,54 +121,14 @@ $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
 $("#claimBtn").show();
 
-$('#btnU1').hide();
-$('#btnU2').hide();
-$('#btnU3').hide();
-$('#btnU4').hide();
-$('#btnU5').hide();
-$('#btnU6').hide();
-$('#btnU7').hide();
-$('#btnU8').hide();
-$('#btnU9').hide();
-$('#btnU10').hide();
-
-$('#w1log').hide();
-$('#w1claim').hide();
-$('#w2log').hide();
-$('#w2claim').hide();
-$('#w3log').hide();
-$('#w3claim').hide();
-$('#w4log').hide();
-$('#w4claim').hide();
-$('#w5log').hide();
-$('#w5claim').hide();
-$('#w6log').hide();
-$('#w6claim').hide();
-$('#w7log').hide();
-$('#w7claim').hide();
-$('#w8log').hide();
-$('#w8claim').hide();
-$('#w9log').hide();
-$('#w9claim').hide();
-$('#w10log').hide();
-$('#w10claim').hide();
-$('#w11log').hide();
-$('#w11claim').hide();
-$('#w12log').hide();
-$('#w12claim').hide();
-
-$('#week1').hide();
-$('#week2').hide();
-$('#week3').hide();
-$('#week4').hide();
-$('#week5').hide();
-$('#week6').hide();
-$('#week7').hide();
-$('#week8').hide();
-$('#week9').hide();
-$('#week10').hide();
-$('#week11').hide();
-$('#week12').hide();
+for(let h=1, h<13, h++){
+  $('#btnU'+h).hide();
+  
+  $('#w'+h+'log').hide();
+  $('#w'+h+'claim').hide();
+  
+  $('#week'+h).hide();
+}
 
 //timestamps are in this format: yyyymmddT160000Z
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
@@ -411,12 +371,14 @@ function joinSearch(){
 //var populated = false;
 function makeList(){
 
+  //empty the dropdown list
   for(let n = 0; n < 15; n++){
     $('#upcoming'+n).remove();
     $('#active'+n).remove();
     $('#completed'+n).remove();
   }
 
+  //repopulate it
   $("#goalCategories").selectric({maxHeight: 500, responsive: true, preventWindowScroll: true});
   //if(populated === false){
     var goals1 = new Array();
@@ -535,8 +497,6 @@ function makePage(){
   //quickStats();
   getToken();
 }
-
-
 
 var wkLimit = 0;
 var currentWeek = 0;
@@ -1122,16 +1082,9 @@ var targetStartStamp;
 async function browse(){
   updateNonce();
   //clear out the goalIDs from old elements
-  $('#idNumberU1').val('');
-  $('#idNumberU2').val('');
-  $('#idNumberU3').val('');
-  $('#idNumberU4').val('');
-  $('#idNumberU5').val('');
-  $('#idNumberU6').val('');
-  $('#idNumberU7').val('');
-  $('#idNumberU8').val('');
-  $('#idNumberU9').val('');
-  $('#idNumberU10').val('');
+  for(let p=1, p<11, p++){
+    $('#idNumberU'+p).val('');
+  }
 
   
   for (let i = 0; i < 10; i++){
