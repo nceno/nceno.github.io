@@ -411,7 +411,7 @@ function joinSearch(){
 //var populated = false;
 function makeList(){
 
-
+  $("#upcomingGoals").children('option:not(:first)').remove();
   $("#goalCategories").selectric({maxHeight: 500, nativeOnMobile: true, responsive: true, preventWindowScroll: true});
   //if(populated === false){
     var goals1 = new Array();
