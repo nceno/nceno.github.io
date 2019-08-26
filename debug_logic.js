@@ -1510,7 +1510,7 @@ function updateEthPrice(btn) {
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
-      ethPrice = resp.USD*1.0025;  //...in lieu of calling kyber
+      ethPrice = resp.USD*1.0;  //...in lieu of calling kyber, adjust this factor
       console.log(this.responseText);
       console.log(ethPrice);
       $('#'+btn).show();
