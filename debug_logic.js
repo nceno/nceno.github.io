@@ -634,6 +634,7 @@ function selectedChallenge(){
                 ids = result[0];
                 names = result[1];
                 flags = result[2];
+                var competitorCount = result[3];
 
 
       //////////////// warning: do you mean to call a for loop on the nested function as well?
@@ -692,6 +693,9 @@ function selectedChallenge(){
                                   function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
+
+                                      var claimStatusWk = new Array();
+                                      claimStatusWk = result[4];
                                       
                                       //hide the current locked stake percent from the user
                                       if(currentWeek>1){
@@ -701,13 +705,6 @@ function selectedChallenge(){
 
                                       successesWk = result[1];
                                       winnersWk = result[2];
-
-                                        
-                                      //populate the timeline
-
-                                      /*var wkPointer;
-                                      if(currentWeek>wkLimit){wkPointer=wkLimit;}
-                                      else wkPointer=currentWeek;*/
 
                                       for (let k = 0; k < currentWeek; k++){
                                         var n = k+1;
@@ -743,7 +740,7 @@ function selectedChallenge(){
                                         else $('#'+lockKey).html("$"+(lockedPercentWk[k]*USDstake/100).toFixed(2));
                                         
       /////////////////////////////////
-      //this will error when user's stravaID is lower in the list than where the loop is at
+      //this might error when user's stravaID is lower in the list than where the loop is at
       //because bonusKey is updated before this function.
       //need to test...
       /////////////////////////////////
@@ -755,9 +752,9 @@ function selectedChallenge(){
                                         $('#'+finKey).html("$" +lost.toFixed(2));
 
                                         //disallow logging and claiming if quotas are met
-                                        if(k>0 && successesWk[k-1] != sessions){
-                                        //final bug
-                                        //if(k>0 && successesWk[k-1] != sessions || claims = 1 || compcount === 1){
+                                        //if(k>0 && successesWk[k-1] != sessions){
+                                        //final bug...
+                                        if(k>0 && successesWk[k-1] != sessions || claimStatusWk[currentWeek-2] = 1 || competitorCount === 1){
                                           $('#w'+k+'claim').hide();
                                         }
 

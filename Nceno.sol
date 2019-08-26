@@ -92,7 +92,7 @@ contract Nceno is RelayRecipient{
     uint wks;
     uint stakeUSD; //stake in usd
     uint sesPerWk;
-    uint ethPricePennies; //this is the usd price of eth, but multiplied by 100.
+    //uint ethPricePennies; //this is the usd price of eth, but multiplied by 100. not used
 
     uint competitorCount;
     uint[10] competitorIDs;
@@ -104,8 +104,7 @@ contract Nceno is RelayRecipient{
     bool liquidated;
 
     mapping(uint=>uint[12]) successes;
-    mapping(uint=>uint[12]) public claims;
-    //mapping(uint=>uint) ethPricePenniesAtJoin;  //not used..
+    mapping(uint=>uint[12]) claims;
     mapping(uint=>bool) activitySpent;
     mapping(uint=>bool) isCompetitor;
   }
@@ -173,7 +172,7 @@ contract Nceno is RelayRecipient{
     createdGoal.wks = _wks;
     createdGoal.stakeUSD = _stakeUSD;
     createdGoal.sesPerWk = _sesPerWk;
-    createdGoal.ethPricePennies = _ethPricePennies;
+    //createdGoal.ethPricePennies = _ethPricePennies; //not used
 
     //adjust the unclaimedStake
     createdGoal.unclaimedStake+= _stakeUSD;
@@ -330,8 +329,8 @@ contract Nceno is RelayRecipient{
     return(goalAt[_goalID].activeMins, goalAt[_goalID].stakeUSD, goalAt[_goalID].sesPerWk, goalAt[_goalID].wks, goalAt[_goalID].startTime, goalAt[_goalID].competitorCount);
   }
 
-  function getGoalArrays(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12], uint[12], uint[10]){
-    return(goalAt[_goalID].lockedPercent, goalAt[_goalID].successes[_stravaID], goalAt[_goalID].winnersWk, goalAt[_goalID].competitorIDs);
+  function getGoalArrays(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12], uint[12], uint[10], uint[12]){
+    return(goalAt[_goalID].lockedPercent, goalAt[_goalID].successes[_stravaID], goalAt[_goalID].winnersWk, goalAt[_goalID].competitorIDs, goalAt[_goalID].claims[_stravaID]);
   }
 
   function getSuccessesClaims(bytes32 _goalID, uint _stravaID) external view returns(uint[12], uint[12]){
@@ -360,7 +359,7 @@ contract Nceno is RelayRecipient{
     }
   }
 
-  function getParticipants( bytes32 _goalID) external view returns(uint[10], bytes32[10], bytes32[10]){
+  function getParticipants( bytes32 _goalID) external view returns(uint[10], bytes32[10], bytes32[10], uint){
     uint[10] memory ids;
     bytes32[10] memory names;
     bytes32[10] memory flags;
@@ -374,7 +373,7 @@ contract Nceno is RelayRecipient{
         flags[i] = profileOf[theGoal.competitorIDs[i]].flag;
       }
     }
-    return(ids, names, flags);
+    return(ids, names, flags, compcount);
   }
 
   //get personal stats

@@ -38,6 +38,10 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "",
         "type": "bytes32[10]"
+      },
+      {
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -828,6 +832,10 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "",
         "type": "uint256[10]"
+      },
+      {
+        "name": "",
+        "type": "uint256[12]"
       }
     ],
     "payable": false,
@@ -1288,4 +1296,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xd306ffaf495922bdb845c9f09b0afd072c027050');
+], '0x3364e6a0509d51e4ad34075788032cf710388393');
