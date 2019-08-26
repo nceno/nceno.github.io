@@ -410,17 +410,14 @@ function joinSearch(){
 //an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
 //var populated = false;
 function makeList(){
-  $("#goalCategories").selectric().destroy();
-  $("#goalCategories").selectric().init();
+  $("#goalCategories").data('selectric').destroy();
+  //$("#goalCategories").data('selectric').init();
+
   $("#goalCategories").selectric({maxHeight: 500, disableOnMobile: true, nativeOnMobile: true, responsive: true, preventWindowScroll: true});
   //if(populated === false){
     var goals1 = new Array();
     var goals2 = new Array();
     var goals3 = new Array();
-
-    $("#upcomingGoals").children().empty();
-    $("#activeGoals").children().empty();
-    $("#completedGoals").children().empty();
 
     for (let i = 0; i < 15; i++){
       //upcoming
