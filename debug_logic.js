@@ -754,7 +754,7 @@ function selectedChallenge(){
                                         //disallow logging and claiming if quotas are met
                                         //if(k>0 && successesWk[k-1] != sessions){
                                         //final bug...
-                                        if(k>0 && successesWk[k-1] != sessions || claimStatusWk[currentWeek-2] = 1 || competitorCount === 1){
+                                        if(k>0 && successesWk[k-1] != sessions || claimStatusWk[currentWeek-2] > 0 || competitorCount === 1){
                                           $('#w'+k+'claim').hide();
                                         }
 
