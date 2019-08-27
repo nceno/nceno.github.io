@@ -322,6 +322,31 @@ contract Nceno is RelayRecipient{
     emit Claim(_goalID, _stravaID, cut);
   }
 
+  //----------------------
+  //---ChainLink functions------
+  //----------------------
+  function getActivities(address _oracle, bytes32 _jobId, string _accessToken) public {
+    Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfill.selector);
+    req.add("access_token", _accessToken);
+    req.addUint("before", now);
+    req.addUint("after", now - 1 days);
+    req.add("copyPath", "0.elapsed_time");
+    sendChainlinkRequestTo(_oracle, req, oraclePayment);
+  }
+
+  uint256 public elapsedTime;
+
+  function fulfill(bytes32 _requestId, uint256 _data)
+    public
+    recordChainlinkFulfillment(_requestId)
+  {
+    elapsedTime = _data;
+  }
+
+  //----------------------
+  //---  /ChainLink functions------
+  //----------------------
+
 
   //getters for UI
   //get goal
