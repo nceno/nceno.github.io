@@ -1,6 +1,6 @@
 pragma solidity 0.4.24;
 
-import "solidity-cborutils/contracts/CBOR.sol";
+import "./CBOR.sol";
 
 /**
  * @title Library for common Chainlink functions

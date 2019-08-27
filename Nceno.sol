@@ -3,7 +3,7 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 import "./ERC20Interface.sol";
 import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
-//import "./ChainlinkClient.sol";
+import "./ChainlinkClient.sol";
 
 
 //test data
@@ -32,7 +32,8 @@ import "./RelayRecipient.sol";
 
 //inherit gas station relay contract
 //inherit chainlink contracts... but may need to alter RelayRecipient.sol as: RelayRecipient is ChainlinkClient
-contract Nceno is RelayRecipient{
+//contract Nceno is RelayRecipient{
+  contract Nceno is ChainlinkClient{
 
   event LiquidateInstance(uint indexed _unclaimed);
   event LiquidatedAt(uint indexed _unclaimed);
@@ -43,46 +44,21 @@ contract Nceno is RelayRecipient{
   event Log(bytes32 indexed _goalID, uint indexed _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint indexed _payout);
   event Claim(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _cut);
 
-/*  //to help with hiding the claim button in the UI... not needed since we have if(bonus===0 && players>1)... then...
-  function seeClaims(uint _stravaID, bytes32 _goalID) external view returns(uint){
-    return(goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]);
-  }*/
-
-/*  function downloadVars() onlyAdmin public returns(address, uint, address, address, address, uint){
-    return(admin,
-      hrThresh,
-      hubAddress,
-      USDC_ERC20,
-      DAI_ERC20,
-      goalCount
-    );
-  }
-
-  function downloadGoal(uint _index) onlyAdmin internal returns(goalObject){
-    return(goalInstance[_index]);
-  }
-
-  function downloadCompetitor(uint _index) onlyAdmin internal returns(competitorObject){
-    return(profileOf[stravaIDs[_index]]);
-  }*/
-
-
-
   address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
 
   //gas station init
   //Link init.... add this argument: address _link
-  function Nceno() public {
+  function Nceno(address _link) public {
     init_relay_hub(RelayHub(hubAddress));
 
-    /*    // Set the address for the LINK token for the network.
+    // Set the address for the LINK token for the network.
     if(_link == address(0)) {
       // Useful for deploying to public networks.
       setPublicChainlinkToken();
     } else {
       // Useful if you're deploying to a local network.
       setChainlinkToken(_link);
-    }*/
+    }
   }
 
   struct goalObject{
@@ -161,10 +137,6 @@ contract Nceno is RelayRecipient{
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //get_sender()
     goalObject memory createdGoal;
     
-    //for oraclized exchange rate
-    /*uint minConversionRate;
-      (minConversionRate,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20_Address, 1);*/
-
     //populate parameters
     createdGoal.goalID = _goalID;
     createdGoal.startTime = _startTime;
@@ -329,18 +301,29 @@ contract Nceno is RelayRecipient{
     Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfill.selector);
     req.add("access_token", _accessToken);
     req.addUint("before", now);
-    req.addUint("after", now - 1 days);
+    req.addUint("after", now - 7 days); //
+    
+    req.add("copyPath", "0.id");
     req.add("copyPath", "0.elapsed_time");
+    req.add("copyPath", "0.average_heartrate");
+
+    req.add("copyPath", "1.id");
+    req.add("copyPath", "1.elapsed_time");
+    req.add("copyPath", "1.average_heartrate");
+
+    req.add("copyPath", "2.id");
+    req.add("copyPath", "2.elapsed_time");
+    req.add("copyPath", "2.average_heartrate");
     sendChainlinkRequestTo(_oracle, req, oraclePayment);
   }
 
-  uint256 public elapsedTime;
+  uint id;
+  uint elapsed_time;
+  uint average_heartrate;
 
-  function fulfill(bytes32 _requestId, uint256 _data)
-    public
-    recordChainlinkFulfillment(_requestId)
-  {
-    elapsedTime = _data;
+  //gets called when the oracle responds
+  function fulfill(bytes32 _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
+    elapsed_time = _data;
   }
 
   //----------------------
@@ -546,12 +529,7 @@ contract Nceno is RelayRecipient{
       uint destAmount = proxy.swapEtherToToken.value(msg.value)(token, minConversionRate);
       require(token.transfer(destAddress, destAmount));
       Swap(get_sender(), token, destAmount);
-  }
-
-      /*uint minConversionRate;
-      (minConversionRate,) = proxy.getExpectedRate(ETH_ERC20, token, msg.value);*/
-  
-  
+  } 
 
   //--------------------------
   //--- /kyber stuff 

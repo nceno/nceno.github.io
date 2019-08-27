@@ -1,6 +1,6 @@
 pragma solidity ^0.4.19;
 
-import "@ensdomains/buffer/contracts/Buffer.sol";
+import "./Buffer.sol";
 
 library CBOR {
     using Buffer for Buffer.buffer;

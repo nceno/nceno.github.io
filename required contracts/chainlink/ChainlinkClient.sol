@@ -2,18 +2,19 @@ pragma solidity 0.4.24;
 
 import "./Chainlink.sol";
 import "./ENSResolver.sol";
-import "./interfaces/ENSInterface.sol";
-import "./interfaces/LinkTokenInterface.sol";
-import "./interfaces/ChainlinkRequestInterface.sol";
-import "./interfaces/PointerInterface.sol";
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "./ENSInterface.sol";
+import "./LinkTokenInterface.sol";
+import "./ChainlinkRequestInterface.sol";
+import "./PointerInterface.sol";
+import "./SafeMath.sol";
+import "./RelayRecipient.sol";
 
 /**
  * @title The ChainlinkClient contract
  * @notice Contract writers can inherit this contract in order to create requests for the
  * Chainlink network
  */
-contract ChainlinkClient {
+contract ChainlinkClient is RelayRecipient {
   using Chainlink for Chainlink.Request;
   using SafeMath for uint256;
 
