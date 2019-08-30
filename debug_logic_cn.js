@@ -1533,6 +1533,7 @@ var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 //var tokenExpire = 0;
 
 function getToken(){
+  console.log("code is: "+code);
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
