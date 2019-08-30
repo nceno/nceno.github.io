@@ -65,37 +65,37 @@
             <ul class="navbar-nav align-items-center mr-auto">
               <li class="nav-item">
                 <a class="nav-link" href="index.html" role="button">
-                  Home
+                  首頁
                 </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  About
+                  關於
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="team.html">
-                    <span>Team</span>
+                    <span>團隊</span>
                     
                   </a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="elevator.html">
-                    <span>What is Nceno?</span>
+                    <span>什麼是 Nceno?</span>
                     
                   </a>                 
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="comingsoon.html">
-                    <span>Whitepaper</span>
+                    <span>白皮書</span>
                     
                   </a>
                 </div>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Try the app
+                  試用App
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="instructions.html">
-                    <span>Instructions</span>
+                    <span>教學</span>
                     
                   </a>
                   <div class="dropdown-divider"></div>
@@ -139,7 +139,7 @@
               <div class="col">
                 <div class="row align-items-center">
                   <div class="col-md-8">
-                    <h2 class="mb-0"style="color:#ffffff;">Welcome to <b style="color:#ccff00;">Nceno</b></h2>
+                    <h2 class="mb-0"style="color:#ffffff;">歡迎來到 <b style="color:#ccff00;">Nceno</b></h2>
                     <span class="text-muted">Workout for a Payout</span>
                   </div>
                 </div>
@@ -157,10 +157,10 @@
         <div class="row justify-content-center">
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
-              <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateNonce()">Host</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">Manage</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse()">Browse</a>
+              <a class="nav-item nav-link active" data-toggle="tab" href="#signin">登入</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateNonce()">建立挑戰</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">我的挑戰</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse()">瀏覽挑戰</a>
             </div>
           </div>
         </div>
@@ -184,12 +184,12 @@
                       <div class="accordion open" data-accordion>
                         <div class="accordion-control" data-control>
 
-                          <h5 style="color:#ffffff">Sign In</h5>
+                          <h5 style="color:#ffffff">登入</h5>
                         </div>
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
                             <form>
-                              <a id="stravaBtn" href="https://www.strava.com/oauth/authorize?approval_prompt=auto&client_id=33084&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fapp.html%23&response_type=code&scope=read%2Cprofile%3Aread_all%2Cactivity%3Aread%2Cactivity%3Aread_all%2Cactivity%3Awrite&approval_prompt=auto" class="btn btn-rounded btn-primary btn-block">Step 1: Log in with Strava</a>
+                              <a id="stravaBtn" href="https://www.strava.com/oauth/authorize?approval_prompt=auto&client_id=33084&redirect_uri=https%3A%2F%2Fwww.nceno.app%2Fapp.html%23&response_type=code&scope=read%2Cprofile%3Aread_all%2Cactivity%3Aread%2Cactivity%3Aread_all%2Cactivity%3Awrite&approval_prompt=auto" class="btn btn-rounded btn-primary btn-block">步驟 1: 登入 Strava</a>
 
                               <div class="row justify-content-center">
                                 <div class="text-center col-sm-5 ">
@@ -199,7 +199,7 @@
                               </div>
                               
 
-                              <a style="color:black;" id="portisBtn" class="btn btn-primary btn-rounded btn-block px-2" onclick="showPortis()">Step 2: Connect Blockchain</a>
+                              <a style="color:black;" id="portisBtn" class="btn btn-primary btn-rounded btn-block px-2" onclick="showPortis()">步驟 2: 連接區塊鏈</a>
 
                               <div class="row justify-content-center">
                                 <div class="text-center col-sm-5 ">
@@ -212,11 +212,11 @@
                               </div>
                               
                               <!-- <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn" onclick="getTestETH()">Once: Create Nceno profile</a> -->
-                              <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn">Once: Create Nceno profile</a>
+                              <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn">建立 Nceno 個人檔案</a>
                               
 
                               <div id="acctLoader" class="col text-center ">
-                                <p>Please wait a minute. We're making space for you on the blockchain...</p> 
+                                <p>請稍等，我們正在區塊鏈上建立你的檔案...</p> 
                                 <span id="acctFail"></span>
                                 <img  src="app/assets/images/loader.svg">
                               </div>
@@ -225,7 +225,7 @@
 
                               <div class="row">
                                 <div class="col text-center mb-2 ">
-                                  <label class="form-check-label"><a href="instructions.html" target='_blank' >Click here to read the instructions</a></label>
+                                  <label class="form-check-label"><a href="instructions.html" target='_blank' >點擊閱讀教學</a></label>
                                 </div>
                               </div>
 
@@ -270,7 +270,7 @@
               <div class="col-md-10 col-lg-8">
                 <div class="row">
                   <div class="col">
-                    <h5 class="mb-2 fs-20 font-weight-normal">Host a new challenge</h5>
+                    <h5 class="mb-2 fs-20 font-weight-normal">建立一個新挑戰</h5>
                       <div class="container">
                         <div class="row justify-content-center">
                           <div id="sliderMins" class="mr-3"></div>
@@ -282,10 +282,10 @@
                         </div>
                       </div>
                       <!--new date picker -->
-                        <label for="exampleFormControlSelect5">Starting Date:</label> 
+                        <label for="exampleFormControlSelect5">開始日期:</label> 
                         <div class="input-group">                                                  
                           <button style="color:#ccff00;" id="dateChoice" type="button" class="btn btn-outline-white btn-rounded docs-datepicker-trigger" data-toggle="datepicker" enabled>
-                            <p>Select Date</p>
+                            <p>選擇日期</p>
                           </button>
 
                           <input id="promoField" type="text" class="form-control ml-3 col-8" placeholder="Have a promo code? " aria-label="Search challenges">
@@ -302,10 +302,10 @@
                       <p>&nbsp;</p>
                       <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="checker">
-                        <label class="form-check-label" for="checker">I've read the <a target="_blank" href="instructions.html">instructions</a> and agree to the <a target="_blank" href="legal.html" >terms</a>.</label>
+                        <label class="form-check-label" for="checker">我已經閱讀 <a target="_blank" href="instructions.html">教學</a> 並且同意 <a target="_blank" href="legal.html" >使用條款</a>.</label>
                       </div>
                       
-                      <button onclick="echoGoal()" class="btn btn-primary btn-rounded" id="createBtn" data-toggle="modal" data-target="#popupCreate">Create this challenge</button>
+                      <button onclick="echoGoal()" class="btn btn-primary btn-rounded" id="createBtn" data-toggle="modal" data-target="#popupCreate">建立挑戰</button>
                   </div>
                   
                 </div>
@@ -319,12 +319,12 @@
             <div class="row justify-content-center">
               <div class="col text-center">
 
-                <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats.</h5>
+                <h5 class="mb-2 fs-20 font-weight-normal">登錄今日的健身活動、獲取bonus或是查看統計數據</h5>
                 
               <form>
                 <div class="row justify-content-center">
                   <div class="form-group col-md-4 col-lg-offset-4">
-                    <label for="chIDtools">Select one of your challenges:</label>
+                    <label for="chIDtools">選擇一個挑戰:</label>
                     <select class="form-control" id="goalCategories">
                       <optgroup id="upcomingGoals" label="Upcoming:"> </optgroup>
                       <option id= "placeholder"></option>
@@ -342,7 +342,7 @@
               <!--echo -->
                 <div id="dashboard" class="row justify-content-center">
                 <div class="col-md-12 col-lg-12">
-                  <h5 class=" fs-20 font-weight-normal">The challenge you selected: </h5>
+                  <h5 class=" fs-20 font-weight-normal">你選擇的挑戰: </h5>
                     <div class="row">
                       <div class="col">
                         <div class="table-responsive-md">
@@ -350,11 +350,11 @@
                             <thead class="thead-dark">
                               <tr>
                                 <th scope="col">Buy-in</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">Sessions</th>
-                                <th scope="col">Minutes</th>
-                                <th scope="col">People</th>
-                                <th scope="col">Starting Date</th>
+                                <th scope="col">挑戰期間</th>
+                                <th scope="col">頻率</th>
+                                <th scope="col">時間長度</th>
+                                <th scope="col">人數</th>
+                                <th scope="col">開始日期</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -382,7 +382,7 @@
                                 <div class="accordion-group "  data-accordion-group>
                                   <div class="accordion" data-accordion>
                                     <div class="accordion-control" data-control>
-                                      <h2 class="text-white">Log and claim:</h2>
+                                      <h2 class="text-white">登錄活動或獲取bonus:</h2>
                                     </div>
                                     <div class="accordion-content" data-content>
                                       <div class="accordion-content-wrapper">
@@ -398,75 +398,75 @@
                                                     <div class="step " id= "week1">
                                                       <div >
                                                         <span id="dl1"></span>
-                                                        <h4 id= "progW1" class="step-title"><b id="compl1" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW1" class="step-title"><b id="compl1" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock1" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus1" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un1" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin1" style="color:#ffffff;"></b> lost
+                                                          <b id="lock1" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus1" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un1" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin1" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w1log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w1claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal" >Claim</a>
+                                                        <a id="w1log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w1claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal" >獲取bonus</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week2">
                                                       <div >
                                                         <span id="dl2"></span>
-                                                        <h4 id= "progW2" class="step-title"><b id="compl2" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW2" class="step-title"><b id="compl2" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock2" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus2" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un2" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin2" style="color:#ffffff;"></b> lost
+                                                          <b id="lock2" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus2" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un2" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin2" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w2log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w2claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w2log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w2claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week3">
                                                       <div >
                                                         <span id="dl3"></span>
-                                                        <h4 id= "progW3" class="step-title"><b id="compl3" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW3" class="step-title"><b id="compl3" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock3" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus3" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un3" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin3" style="color:#ffffff;"></b> lost
+                                                          <b id="lock3" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus3" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un3" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin3" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w3log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w3claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w3log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w3claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week4">
                                                       <div >
                                                         <span id="dl4"></span>
-                                                        <h4 id= "progW4" class="step-title"><b id="compl4" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW4" class="step-title"><b id="compl4" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock4" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus4" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un4" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin4" style="color:#ffffff;"></b> lost
+                                                          <b id="lock4" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus4" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un4" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin4" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w4log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w4claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w4log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w4claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div> 
 
                                                     <div class="step " id= "week5">
                                                       <div >
                                                         <span id="dl5"></span>
-                                                        <h4 id= "progW5" class="step-title"><b id="compl5" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW5" class="step-title"><b id="compl5" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock5" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus5" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un5" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin5" style="color:#ffffff;"></b> lost
+                                                          <b id="lock5" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus5" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un5" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin5" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w5log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w5claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w5log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w5claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
@@ -474,105 +474,105 @@
                                                     <div class="step " id= "week6">
                                                       <div >
                                                         <span id="dl6"></span>
-                                                        <h4 id= "progW6" class="step-title"><b id="compl6" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW6" class="step-title"><b id="compl6" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock6" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus6" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un6" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin6" style="color:#ffffff;"></b> lost
+                                                          <b id="lock6" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus6" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un6" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin6" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w6log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w6claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w6log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w6claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week7">
                                                       <div >
                                                         <span id="dl7"></span>
-                                                        <h4 id= "progW7" class="step-title"><b id="compl7" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW7" class="step-title"><b id="compl7" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock7" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus7" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un7" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin7" style="color:#ffffff;"></b> lost
+                                                          <b id="lock7" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus7" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un7" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin7" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w7log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w7claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w7log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w7claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week8">
                                                       <div >
                                                         <span id="dl8"></span>
-                                                        <h4 id= "progW8" class="step-title"><b id="compl8" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW8" class="step-title"><b id="compl8" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock8" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus8" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un8" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin8" style="color:#ffffff;"></b> lost
+                                                          <b id="lock8" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus8" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un8" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin8" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w8log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w8claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w8log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w8claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week9">
                                                       <div >
                                                         <span id="dl9"></span>
-                                                        <h4 id= "progW9" class="step-title"><b id="compl9" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW9" class="step-title"><b id="compl9" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock9" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus9" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un9" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin9" style="color:#ffffff;"></b> lost
+                                                          <b id="lock9" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus9" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un9" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin9" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w9log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w9claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w9log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w9claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week10">
                                                       <div >
                                                         <span id="dl10"></span>
-                                                        <h4 id= "progW10" class="step-title"><b id="compl10" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW10" class="step-title"><b id="compl10" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock10" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus10" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un10" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin10" style="color:#ffffff;"></b> lost
+                                                          <b id="lock10" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus10" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un10" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin10" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w10log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w10claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w10log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w10claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week11">
                                                       <div >
                                                         <span id="dl11"></span>
-                                                        <h4 id= "progW11" class="step-title"><b id="compl11" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW11" class="step-title"><b id="compl11" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock11" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus11" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un11" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin11" style="color:#ffffff;"></b> lost
+                                                          <b id="lock11" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus11" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un11" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin11" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w11log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w11claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w11log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w11claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
                                                     <div class="step " id= "week12">
                                                       <div >
                                                         <span id="dl12"></span>
-                                                        <h4 id= "progW12" class="step-title"><b id="compl12" style="color:#ccff00;"></b> workouts completed</h4>
+                                                        <h4 id= "progW12" class="step-title"><b id="compl12" style="color:#ccff00;"></b> 已完成的健身次數</h4>
                                                         <p>
-                                                          <b id="lock12" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus12" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un12" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin12" style="color:#ffffff;"></b> lost
+                                                          <b id="lock12" style="color:#ffffff;"></b> 鎖定中<br>
+                                                          <b id="bonus12" style="color:#ffffff;"></b> 獎勵<br>
+                                                          <b id="un12" style="color:#ffffff;"></b> 已解鎖<br>
+                                                          <b id="fin12" style="color:#ffffff;"></b> 已損失
                                                         </p>
-                                                        <a id="w12log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w12claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        <a id="w12log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">登錄健身</a>
+                                                        <a id="w12claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">獲取獎勵</a>
                                                       </div>            
                                                     </div>
 
@@ -587,7 +587,7 @@
                                   </div>
                                   <div class="accordion" data-accordion>
                                     <div class="accordion-control" data-control>
-                                      <h2 class="text-white">Charts & Stats</h2>
+                                      <h2 class="text-white">圖表和統計</h2>
                                     </div>
 
                                     <div class="accordion-content" data-content>
@@ -597,7 +597,7 @@
                                           <div>
                                             <div class="row justify-content-center">
                                               <div class="col-md-7 text-center">
-                                                <h4 style="color:#ffffff">Note: Charts appear best when mobile device is in landscape (horizontal) mode.</h4>
+                                                <h4 style="color:#ffffff">註：圖表在手機橫向時有最好的顯示效果</h4>
                                               </div>
                                             </div>
                                           </div>
@@ -612,7 +612,7 @@
 
                                   <div class="accordion" data-accordion>
                                     <div class="accordion-control" data-control>
-                                      <h2 class="text-white">Leaderboard</h2>
+                                      <h2 class="text-white">排行榜</h2>
                                     </div>
                                     <div class="accordion-content" data-content>
                                       <div class="accordion-content-wrapper">
@@ -625,12 +625,12 @@
                                                   <table class="table table-lined" >
                                                     <thead id="leaderboard" class="thead-dark">
                                                       <tr>
-                                                        <th scope="col">Success</th>
-                                                        <th scope="col">Person</th>
-                                                        <th scope="col">Country</th>
-                                                        <th scope="col">Bonus</th>
-                                                        <th scope="col">Returned</th>
-                                                        <th scope="col">Lost</th>   
+                                                        <th scope="col">成功率</th>
+                                                        <th scope="col">姓名</th>
+                                                        <th scope="col">國家</th>
+                                                        <th scope="col">獎勵</th>
+                                                        <th scope="col">已贖回</th>
+                                                        <th scope="col">已損失</th>   
                                                       </tr>
                                                     </thead>
                                                     
@@ -757,11 +757,11 @@
           <div class="tab-pane" id="browse" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
-                <h5 class="mb-2 fs-20 font-weight-normal">Browse upcoming challenges or search for a friend's to join.</h5>
+                <h5 class="mb-2 fs-20 font-weight-normal">瀏覽即將開始的挑戰或是尋找朋友建立的挑戰</h5>
                   <div class="input-group rounded">
                     <input id="searchField" type="text" class="form-control px-2" placeholder="Search by challenge ID ..." aria-label="Search challenges">
                     <div class="input-group-append">
-                      <button onclick="search()" class="btn btn-primary" type="button">Search</button>
+                      <button onclick="search()" class="btn btn-primary" type="button">搜尋</button>
                     </div>
                   </div>
               </div>
@@ -773,7 +773,7 @@
               <!--echo -->
                 <div id="request" class="row justify-content-center">
                 <div class="col-md-12 col-lg-12">
-                  <h5 class="mb-2 fs-20 font-weight-normal">The challenge you requested: </h5>
+                  <h5 class="mb-2 fs-20 font-weight-normal">搜尋結果: </h5>
                   <div class="row">
                     <div class="col">
                       <div class="table-responsive-md">
@@ -781,11 +781,11 @@
                             <thead class="thead-dark">
                               <tr>
                                 <th scope="col">Buy-in</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">Sessions</th>
-                                <th scope="col">Minutes</th>
-                                <th scope="col">Spots<br>Remaining</th>
-                                <th scope="col">Starting Date</th>
+                                <th scope="col">挑戰期間</th>
+                                <th scope="col">頻率</th>
+                                <th scope="col">時間長度</th>
+                                <th scope="col">剩餘名額</th>
+                                <th scope="col">開始日期</th>
                               </tr>
                             </thead>
                             <tbody >
@@ -797,7 +797,7 @@
                                 <td style="color:#ccff00" id= "srComp"></td>
                                 <td style="color:#ccff00" id= "srStart"></td>
                                 <!-- <td><button type="button" id="srJoin" onclick="updateEthPrice('joinSearch')" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">Join</button></td> -->
-                                <td><button type="button" id="srJoin" onclick="search()" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">Join</button></td>
+                                <td><button type="button" id="srJoin" onclick="search()" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">加入</button></td>
                               </tr>
                             </tbody>
                           </table>
@@ -808,7 +808,7 @@
               </div>
             <!-- / echo-->
 
-                <h5 class="mb-2 fs-20 font-weight-normal">Here's the challenges that are starting soon: </h5>
+                <h5 class="mb-2 fs-20 font-weight-normal">即將開始的挑戰: </h5>
                 <div class="row">
                   <div class="col">
                     <div class="table-responsive-md">
@@ -816,11 +816,11 @@
                         <thead  class="thead-dark">
                           <tr>
                             <th scope="col">Buy-in</th>
-                            <th scope="col">Duration</th>
-                            <th scope="col">Sessions</th>
-                            <th scope="col">Minutes</th>
-                            <th scope="col">Spots<br>Remaining</th>
-                            <th scope="col">Starting Date</th>
+                            <th scope="col">挑戰期間</th>
+                            <th scope="col">頻率</th>
+                            <th scope="col">時間長度</th>
+                            <th scope="col">剩餘名額</th>
+                            <th scope="col">開始日期</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -834,7 +834,7 @@
                               <td id = "minU1"></td>
                               <td id = "pplU1"></td>
                               <td id = "startU1"></td>
-                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU1"></span>
                               <span id="tstampU1"></span>
                             </tr>
@@ -846,7 +846,7 @@
                               <td id = "minU2"></td>
                               <td id = "pplU2"></td>
                               <td id = "startU2"></td>
-                              <td id = "btnU2"><button type="button"  id="soonJoin2" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU2"><button type="button"  id="soonJoin2" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU2"></span>
                               <span id="tstampU2"></span>
                             </tr>
@@ -858,7 +858,7 @@
                               <td id = "minU3"></td>
                               <td id = "pplU3"></td>
                               <td id = "startU3"></td>
-                              <td id = "btnU3"><button type="button"  id="soonJoin3" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU3"><button type="button"  id="soonJoin3" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU3"></span>
                               <span id="tstampU3"></span>
                             </tr>
@@ -870,7 +870,7 @@
                               <td id = "minU4"></td>
                               <td id = "pplU4"></td>
                               <td id = "startU4"></td>
-                              <td id = "btnU4"><button type="button"  id="soonJoin4" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU4"><button type="button"  id="soonJoin4" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU4"></span>
                               <span id="tstampU4"></span>
                             </tr>
@@ -882,7 +882,7 @@
                               <td id = "minU5"></td>
                               <td id = "pplU5"></td>
                               <td id = "startU5"></td>
-                              <td id = "btnU5"><button type="button"  id="soonJoin5" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU5"><button type="button"  id="soonJoin5" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU5"></span>
                               <span id="tstampU5"></span>
                             </tr>
@@ -894,7 +894,7 @@
                               <td id = "minU6"></td>
                               <td id = "pplU6"></td>
                               <td id = "startU6"></td>
-                              <td id = "btnU6"><button type="button"  id="soonJoin6" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU6"><button type="button"  id="soonJoin6" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU6"></span>
                               <span id="tstampU6"></span>
                             </tr>
@@ -906,7 +906,7 @@
                               <td id = "minU7"></td>
                               <td id = "pplU7"></td>
                               <td id = "startU7"></td>
-                              <td id = "btnU7"><button type="button"  id="soonJoin7" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU7"><button type="button"  id="soonJoin7" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU7"></span>
                               <span id="tstampU7"></span>
                             </tr>
@@ -918,7 +918,7 @@
                               <td id = "minU8"></td>
                               <td id = "pplU8"></td>
                               <td id = "startU8"></td>
-                              <td id = "btnU8"><button type="button"  id="soonJoin8" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU8"><button type="button"  id="soonJoin8" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU8"></span>
                               <span id="tstampU8"></span>
                             </tr>
@@ -930,7 +930,7 @@
                               <td id = "minU9"></td>
                               <td id = "pplU9"></td>
                               <td id = "startU9"></td>
-                              <td id = "btnU9"><button type="button"  id="soonJoin9" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU9"><button type="button"  id="soonJoin9" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU9"></span>
                               <span id="tstampU9"></span>
                             </tr>
@@ -942,7 +942,7 @@
                               <td id = "minU10"></td>
                               <td id = "pplU10"></td>
                               <td id = "startU10"></td>
-                              <td id = "btnU10"><button type="button"  id="soonJoin10" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Join</button></td>
+                              <td id = "btnU10"><button type="button"  id="soonJoin10" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">加入</button></td>
                               <span id="idNumberU10"></span>
                               <span id="tstampU10"></span>
                             </tr>
@@ -973,16 +973,16 @@
             <div class="col-md-5 text-center text-md-left">
               <ul class="nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="#" data-toggle="modal" data-target="#contactModal">Contact</a>
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#contactModal">聯繫我們</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="careers.html">Careers</a>
+                  <a class="nav-link" href="careers.html">職缺</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="team.html">Team</a>
+                  <a class="nav-link" href="team.html">團隊</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="legal.html" >Legal</a>
+                  <a class="nav-link" href="legal.html" >法律條款</a>
                 </li>
               </ul>
             </div>
@@ -1015,8 +1015,8 @@
               </button>
             </div>
             <div class="modal-body text-center">
-              <h3><b>Contact Us</b></h3>
-              <p>We'd love to hear from you. Email us at support@nceno.app</p>
+              <h3><b>聯繫我們</b></h3>
+              <p>我們很高興能收到你的來信，請 email 至 support@nceno.app</p>
             </div>
           </div>
         </div>
@@ -1033,7 +1033,7 @@
               </button>
             </div>
             <div class="modal-body text-center  text-white">
-              <h3>Confirm your challenge</h3>
+              <h3>確認你的挑戰</h3>
               <p id="goalEcho"></p>
               <span id="createFail"><span>
             </div>
@@ -1042,18 +1042,18 @@
                 <div class="row gutter-1">
                   
                   <div class="col-4">
-                    <button id="cancelBtn" type="button" class="btn  btn-rounded" data-dismiss="modal">Cancel</button>
+                    <button id="cancelBtn" type="button" class="btn  btn-rounded" data-dismiss="modal">取消</button>
                   </div>
                   <div class="col-8">
-                    <button id="hostBtn" type="button" class="btn btn-block btn-rounded btn-primary">Host this challenge</button>
+                    <button id="hostBtn" type="button" class="btn btn-block btn-rounded btn-primary">建立這個挑戰</button>
                   </div>
                 </div>
                 <div id="createLoader" class="col text-center mb-2">
-                  <p>Please wait  a minute. We're writing your challenge to the blockchain...</p>
+                  <p>請稍等，我們正將你的挑戰記錄到區塊鏈上...</p>
                   <img  src="app/assets/images/loader.svg"> 
                 </div>
                 <div id="createSuccess" class="col text-center mb-2">
-                  <p>Success!</p>
+                  <p>成功!</p>
                   <p style="color:white;" id="chalID"></p>
                 </div>
 
@@ -1082,7 +1082,7 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="soonJoinTitle">You're about to join this challenge:</h3>
+              <h3 id="soonJoinTitle">你正要加入此挑戰</h3>
               <!--/title -->
 
               <!--echo, success, fail -->
@@ -1101,14 +1101,14 @@
                   <div class="col text-center">
                     <!--buttons -->
                     <input id="promoFieldSoon" type="text" class="form-control col-8-offset-4 mb-2 " placeholder="Have a promo code? " aria-label="Search challenges">
-                    <button id="joinSoonModalBtn" type="button" onclick="joinTarget()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
+                    <button id="joinSoonModalBtn" type="button" onclick="joinTarget()" class="btn btn-block btn-rounded btn-primary">加入挑戰</button>
                     <!--/buttons -->
                   </div>
                 </div>
                 <div class="row">
                   <div id="joinSoonLoader" class="col text-center mb-2">
                     <!--loaders -->
-                    <p>Please wait a minute. We're adding you to the challenge...</p>
+                    <p>請稍等，我們正將你加入挑戰...</p>
                     <img  src="app/assets/images/loader.svg"> 
                     <!--/loaders -->
                   </div>
@@ -1134,7 +1134,7 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="aboutToJoin">You're about to join this challenge:</h3>
+              <h3 id="aboutToJoin">你正要加入此挑戰</h3>
               <!--/title -->
 
               <!--echo, success, fail -->
@@ -1150,14 +1150,14 @@
                   <div class="col text-center">
                     <!--buttons -->
                     <input id="promoFieldSearch" type="text" class="mb-2 col-8-offset-4 form-control" placeholder="Have a promo code? " aria-label="Search challenges">
-                    <button id="joinSearch" type="button" onclick="joinSearch()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
+                    <button id="joinSearch" type="button" onclick="joinSearch()" class="btn btn-block btn-rounded btn-primary">加入挑戰</button>
                     <!--/buttons -->
                   </div>
                 </div>
                 <div class="row">
                   <div id="joinLoader" class="col text-center mb-2">
                     <!--loaders -->
-                    <p>Please wait a minute. We're adding you to the challenge...</p>
+                    <p>請稍等，我們正將你加入挑戰...</p>
                     <img  src="app/assets/images/loader.svg"> 
                     <!--/loaders -->
                   </div>  
@@ -1183,7 +1183,7 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="getYouPaid">Let's get you a payout for that workout!</h3>
+              <h3 id="getYouPaid">來獲取你努力健身的獎勵吧!</h3>
               <!--/title -->
               
               <!--echo, success, fail -->
@@ -1197,14 +1197,14 @@
                 <div class="row">
                   <div class="col text-center">
                     <!--buttons -->
-                    <button id="payMeBtn" type="button" onclick="getActivities()" class="btn btn-block btn-rounded btn-primary">Pay me</button>
+                    <button id="payMeBtn" type="button" onclick="getActivities()" class="btn btn-block btn-rounded btn-primary">給我錢</button>
                     <!--/buttons -->
                   </div>
                 </div>
                 <div class="row">
                   <span class="col text-center mb-2" id="logLoader">
                     <!--loaders -->
-                    <p>Please wait while we write your workout to the blockchain. This could take a minute...</p>
+                    <p>請稍等，我們正將你的健身記錄寫到區塊鏈上，這可能需要數分鐘...</p>
                     <img  src="app/assets/images/loader.svg">
                     <!--/loaders -->
                   </span>
@@ -1230,7 +1230,7 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="claimTitle">Some people didn't make it last week. Their loss could be your gain!</h3>
+              <h3 id="claimTitle">上星期有些人沒有完成他們的挑戰，他們的損失可能就是你的獎勵！</h3>
               <!--/title -->
 
               <!--echo, success, fail -->
@@ -1244,14 +1244,14 @@
                 <div class="row">
                   <div class="col text-center">
                     <!--buttons -->
-                    <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">Pay me</button>
+                    <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">給我錢</button>
                     <!--/buttons -->
                   </div>
                 </div>
                 <div class="row">
                   <span class="col md-8 text-center mb-2" id="claimLoader">
                     <!--loaders -->
-                    <p>Calculating your payout... Please wait.</p>
+                    <p>正在計算你的獎勵，請稍等...</p>
                     <img  src="app/assets/images/loader.svg">
                     <!--/loaders -->
                   </span>
