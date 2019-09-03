@@ -100,6 +100,10 @@ import "./ChainlinkClient.sol";
     mapping(bytes32=>goalObject) myGoal;
     uint myGoalCount;
     mapping(uint=>goalObject) mygoalInstance;
+
+    uint CL_id;
+    uint CL_elapsed_time;
+    uint CL_average_heartrate;
   }
 
   mapping(uint=>competitorObject) public profileOf;
@@ -279,7 +283,7 @@ import "./ChainlinkClient.sol";
     //and indexed as previous week...
     //the big 1000.... is supposed to fix the chart scale problem since payout is in cents, and this *was* in 1000000...
     //if it doesnt fix it, try more or less 0's
-    cut = pot/(2*1000000000000000000*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); 
+    cut = pot/(2*1000000000000000000*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); //2* should be replaced by a loss rate
     
     //protect against bonus double spending
     goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] = 1;
@@ -298,7 +302,7 @@ import "./ChainlinkClient.sol";
   //---ChainLink functions------
   //----------------------
   function getActivities(address _oracle, bytes32 _jobId, string _accessToken) public {
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfill.selector);
+    Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfillID.selector); //fulfillID must match one of the below's
     req.add("access_token", _accessToken);
     req.addUint("before", now);
     req.addUint("after", now - 7 days); //
@@ -314,16 +318,21 @@ import "./ChainlinkClient.sol";
     req.add("copyPath", "2.id");
     req.add("copyPath", "2.elapsed_time");
     req.add("copyPath", "2.average_heartrate");
-    sendChainlinkRequestTo(_oracle, req, oraclePayment);
+    sendChainlinkRequestTo(_oracle, req, oraclePayment); //oraclePayment = 1*LINK
   }
 
-  uint id;
-  uint elapsed_time;
-  uint average_heartrate;
 
-  //gets called when the oracle responds
-  function fulfill(bytes32 _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
-    elapsed_time = _data;
+  //fulfillment functions called with response data
+  function fulfillID(uint _stravaID, bytes32 _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
+    profileOf[_stravaID].CL_id = _data;
+  }
+
+  function fulfillTime(uint _stravaID, bytes32 _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
+    profileOf[_stravaID].CL_elapsed_time = _data;
+  }
+
+  function fulfillHR(uint _stravaID, bytes32 _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
+    profileOf[_stravaID].CL_average_heartrate = _data;
   }
 
   //----------------------
