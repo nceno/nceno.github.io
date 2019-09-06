@@ -213,7 +213,7 @@ $("#makeAcctBtn").click(function() {
     else{
       $("#acctLoader").hide();
       $("#makeAcctBtn").hide();
-      $('#acctFail').html('<p>Transaction failed. That profile already exists!</p>');
+      $('#acctFail').html('<p>Failed to create profile. The profile already exists!</p>');
       console.log("profile already exists!");
     } 
   }).once('error', function(error){console.log(error);});
@@ -359,7 +359,7 @@ function joinSearch(){
       $('#promoFieldSearch').hide();
       $("#srEcho").html('');
       $("#joinLoader").hide();
-      $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
+      $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming challenges! (ID: '+goalid.slice(0, 7)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
   }).once('error', function(error){console.log(error);}); 
@@ -1693,7 +1693,7 @@ function getActivities(){
           else{
             $('#logLoader').hide();
             $('#getYouPaid').hide();
-            $('#logFail').html('<p>"wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.</p>');
+            $('#logFail').html('<p>"wallet mismatch, user is not competitor, goal has not started , or goal has finished.</p>');
             console.log("wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.");
           } 
         })

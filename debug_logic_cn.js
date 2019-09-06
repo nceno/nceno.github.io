@@ -63,7 +63,7 @@ function showPortis() {
       updateGasPrice();
 
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
-      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Blockchain connection: </a></h5><a style="color:#ccff00;">successful!</a>');
+      $("#portisSuccess").html('<h5><a style="color:#ffffff;">區塊鏈連接: </a></h5><a style="color:#ccff00;">successful!</a>');
       $("#openWallet").show();
       
     });
@@ -140,7 +140,7 @@ function reminder(_target, _stake, _minutes, _frequency, _duration, _goalid, _st
   var start = s.replace(/:/g, "").replace(/-/g, "").replace(".000", "");
   var e = new Date(1000*(_start+_duration*604800)).toISOString();
   var end = e.replace(/:/g, "").replace(/-/g, "").replace(".000", "");
-  $('#'+_target).html('<a style="color:#ccff00;" target= "_blank" href ="https://www.google.com/calendar/r/eventedit?text=My%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'.&dates='+start+'/'+end+'">Add to Google Calendar</a>');
+  $('#'+_target).html('<a style="color:#ccff00;" target= "_blank" href ="https://www.google.com/calendar/r/eventedit?text=My%20Nceno%20goal&location=www.nceno.app/app.html&details=You%20committed%20$' + _stake + '%20to%20working%20out%20for%20' + _minutes + 'min,%20'+ _frequency+ 'x%20per%20week,%20for%20'+ _duration + '%20weeks.%20The%20challenge%20ID%20is%20'+_goalid+'.&dates='+start+'/'+end+'">加到 Google 日曆</a>');
 }
 
 //shares the challenge to strava automatically
@@ -148,8 +148,8 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   var challengeStart = new Date(_start*1000).toDateString();
   var startDateLocal = new Date().toISOString(); //need to convert from UTC to local timezone.... will not affect the challenge.
 
-  var nameString = '$'+_stake+'... Anyone wanna join me?';
-  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid+'". It starts on '+ challengeStart+'.';
+  var nameString = '$'+_stake+'... 有人想要加入我嗎?';
+  var descriptionString = '我正一個挑戰 $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid+'". It starts on '+ challengeStart+'.';
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
@@ -213,7 +213,7 @@ $("#makeAcctBtn").click(function() {
     else{
       $("#acctLoader").hide();
       $("#makeAcctBtn").hide();
-      $('#acctFail').html('<p>Transaction failed. That profile already exists!</p>');
+      $('#acctFail').html('<p>帳號建立失敗，這個帳號已被註冊過。</p>');
       console.log("profile already exists!");
     } 
   }).once('error', function(error){console.log(error);});
@@ -264,7 +264,7 @@ $("#hostBtn").click(function() {
       $("#createLoader").hide();
       $('#promoField').hide();
       $("#createSuccess").show();
-      $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
+      $("#chalID").html("邀請你的朋友加入挑戰! 挑戰編號: "+ goalID+".");
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
     }
@@ -272,7 +272,7 @@ $("#hostBtn").click(function() {
       $("#createLoader").hide();
       $('#promoField').hide();
       $("#hostBtn").hide();
-      $('#createFail').html('<p>Transaction failed. User account does not exist, or else message value is less than intended stake.</p>');
+      $('#createFail').html('<p>交易失敗。此帳戶不存在或是交易金額低於應有的金額。</p>');
       console.log("User does not exist, or else message value is less than intended stake.");
     }
     })
@@ -348,7 +348,7 @@ function joinSearch(){
       correctNonce++;
       $("#joinLoader").hide();
       $('#promoFieldSearch').hide();
-      $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
+      $("#joinSuccess").html('<p>你已經成功加入此挑戰!</p>');
       //need the join serach button to set proper global variables and then these functions can reference them
       reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start);
       stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
@@ -359,7 +359,7 @@ function joinSearch(){
       $('#promoFieldSearch').hide();
       $("#srEcho").html('');
       $("#joinLoader").hide();
-      $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+goalid.slice(0, 7)+')</p>');
+      $("#joinFail").html('<p>無法加入。挑戰可能已經開始，或是你已經加入了此挑戰。請查看你即將開始的挑戰清單。(ID: '+goalid.slice(0, 7)+')</p>');
       console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
     } 
   }).once('error', function(error){console.log(error);}); 
@@ -726,9 +726,9 @@ function selectedChallenge(){
 
                                         if(k+1 == currentWeek){
                                           if(daysRem!=1){
-                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> days left this week</h3>");
+                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> 天剩餘</h3>");
                                           }
-                                          else{$('#'+dlKey).html('<h2>Last day this week!</h2>');}
+                                          else{$('#'+dlKey).html('<h2>這週挑戰的最後一天!</h2>');}
                                         }
 
                                         $('#'+complKey).html(successesWk[k] +" of "+ sessions);
@@ -800,7 +800,7 @@ function selectedChallenge(){
                                           data: {
                                             datasets: [{
                                                 //bar
-                                                label: 'Workouts you completed',
+                                                label: '你完成的運動次數',
                                                 yAxisID: 'A',
                                                 //data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3],
                                                 data: successesWk,
@@ -810,7 +810,7 @@ function selectedChallenge(){
                                                 fill: true
                                             }, {
                                                 //line
-                                                label: '% Competitors finished the week',
+                                                label: '所有挑戰者此週的成功比率',
                                                 yAxisID: 'B',
                                                 //data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43],
                                                 data: finishers,
@@ -838,7 +838,7 @@ function selectedChallenge(){
                                                 display: true,
                                                 scaleLabel: {
                                                   display: true,
-                                                  labelString: 'Week'
+                                                  labelString: '週'
                                                 }
                                               }],
 
@@ -853,7 +853,7 @@ function selectedChallenge(){
                                                   },
                                                   scaleLabel: {
                                                     display: true,
-                                                    labelString: 'Workouts'
+                                                    labelString: '運動次數'
                                                   }
                                                   },
                                                 {
@@ -866,7 +866,7 @@ function selectedChallenge(){
                                                   },
                                                   scaleLabel: {
                                                     display: true,
-                                                    labelString: '% competitors'
+                                                    labelString: '挑戰者比率'
                                                   }
                                                 }
                                               ],
@@ -878,7 +878,7 @@ function selectedChallenge(){
                                             },
                                             title: {
                                               display: true,
-                                              text: 'Your Progress'
+                                              text: '你的表現'
                                             }
                                           }
                                         }
@@ -892,7 +892,7 @@ function selectedChallenge(){
                                           data: {
                                             datasets: [{
                                                 //bar data
-                                                label: '% stake locked up',
+                                                label: '投入的賭注',
                                                 yAxisID: 'A',
                                                 //data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
                                                 data: visibleLockedPercentWk,
@@ -903,7 +903,7 @@ function selectedChallenge(){
 
                                             {
                                                 //line data
-                                                label: 'Your cumulative % stake earned back',
+                                                label: '截至目前你所收回的賭注',
                                                 yAxisID: 'B',
                                                 //data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
                                                 data: roi,
@@ -931,7 +931,7 @@ function selectedChallenge(){
                                                 display: true,
                                                 scaleLabel: {
                                                   display: true,
-                                                  labelString: 'Week'
+                                                  labelString: '週'
                                                 }
                                               }],
 
@@ -946,7 +946,7 @@ function selectedChallenge(){
                                                   },
                                                   scaleLabel: {
                                                     display: true,
-                                                    labelString: '% stake'
+                                                    labelString: '賭注比率'
                                                   }
                                                   },
                                                 {
@@ -959,7 +959,7 @@ function selectedChallenge(){
                                                   },
                                                   scaleLabel: {
                                                     display: true,
-                                                    labelString: '% returned'
+                                                    labelString: '收回賭注的比率'
                                                   }
                                                 }
                                               ],
@@ -971,7 +971,7 @@ function selectedChallenge(){
                                             },
                                             title: {
                                               display: true,
-                                              text: 'Challenge Snapshot'
+                                              text: '統計圖表'
                                             }
                                           }
                                         }
@@ -1106,9 +1106,9 @@ async function browse(){
       $('#'+tKey).html(stupid+'');
       
       $('#'+buyinKey).html('$'+result[2]);
-      $('#'+wksKey).html(result[4]+'  wks');
-      $('#'+sesKey).html(result[3]+' x/wk');
-      $('#'+minKey).html(result[1]+'  min');
+      $('#'+wksKey).html(result[4]+'週');
+      $('#'+sesKey).html(result[3]+'次/週');
+      $('#'+minKey).html(result[1]+'分鐘');
       $('#'+pplKey).html(10-result[6]);
       $('#'+startKey).html(tstamp.toDateString());
       $('#'+btnKey).show();
@@ -1258,7 +1258,7 @@ function joinTarget(){
         correctNonce++;
         $('#joinSoonLoader').hide();
         $("#soonEcho").html('');
-        $('#joinSoonSuccess').html('<p>Success! You’re in the challenge: '+targetGoalID.slice(0, 8)+' . Don’t forget to invite your friends and mark the starting time in your calendar!</p>');
+        $('#joinSoonSuccess').html('<p>成功！你已經加入此挑戰: '+targetGoalID.slice(0, 8)+' 。別忘記邀請你的朋友，並記下開始的日期!</p>');
         $('#joinSoonModalBtn').hide();
         $('#promoFieldSoon').hide();
         $("#joinSoonReminder").show();
@@ -1272,7 +1272,7 @@ function joinTarget(){
         $("#soonJoinTitle").hide();
         $("#joinSoonModalBtn").hide();
         $('#promoFieldSoon').hide();
-        $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
+        $("#joinSoonFail").html('<p>無法加入。挑戰可能已經開始，或是你已經加入了此挑戰。請查看你即將開始的挑戰清單。(ID: '+targetGoalID.slice(0, 8)+')</p>');
         console.log("UI: Challenge already started, user already is a participant, or else message value is less than intended stake.");
       } 
     }
@@ -1318,11 +1318,11 @@ $("#claimBtn").click(function() {
           if(usdCut>0 || usdCut != undefined){
             $("#claimLoader").hide();
             $("#claimTitle").hide();
-            $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $'+usdCut+' from the people who skipped workouts.</p>');
+            $("#claimSuccess").html('<p>太棒了!上週你完全沒有錯過任何挑戰。你成功從偷懶的挑戰著贏得$'+usdCut+'！</p>');
           }
           else{
             $("#acctLoader").hide();
-            $('#claimFail').html('<p>Your cut is $0.00 because everyone completed all of their workouts... Is this challenge too easy?</p>');
+            $('#claimFail').html('<p>你沒有賺到錢，因為其餘挑戰者都沒有錯過任何挑戰...這個挑戰太簡單了嗎?</p>');
           }
           //----end other messages
       })
@@ -1335,7 +1335,7 @@ $("#claimBtn").click(function() {
     }
     else{
       $("#acctLoader").hide();
-      $('#claimFail').html('<p>Transaction failed. Did you already claim this week?</p>');
+      $('#claimFail').html('<p>交易失敗。你這週是否已經獲取過獎勵了?</p>');
       console.log("wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
     }   
   })
@@ -1435,23 +1435,23 @@ window.onload = function() {
   //delays extraction of the fitbit creds until the user has authed.
   if (window.location.href != 'https://www.nceno.app/app_cn.html'){
     $("#stravaBtn").hide();
-    $("#stravaOk").html("Proceed to step 2...")
+    $("#stravaOk").html("到步驟二...")
     $("#stravaOk").show();
   }
 };
 
 //chart tool tips
 function tooltipVal1(args) {
-    return args.value + " mins";
+    return args.value + "分鐘";
 }
 function tooltipVal2(args) {
-    return args.value + "x per week";
+    return args.value + "次/週";
 }
 function tooltipVal3(args) {
-    return "for "+args.value + " weeks";
+    return "for "+args.value + "週";
 }
 function tooltipVal4(args) {
-    return "$"+args.value + " at stake";
+    return "$"+args.value + "賭注金額";
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
@@ -1533,7 +1533,6 @@ var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 //var tokenExpire = 0;
 
 function getToken(){
-  console.log("code is: "+code);
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
@@ -1553,7 +1552,7 @@ function getToken(){
       
 
       $("#stravaOk").hide();
-      $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
+      $("#stravaSuccess").html('<h5><a style="color:white;">歡迎 </a></h5>'+stravaUsername);
       userCreated = Date.parse(data.athlete.created_at);
       uniqueUserString = stravaID.toString() + userCreated.toString();
       userID1 = uniqueUserString;
@@ -1630,7 +1629,7 @@ function getActivities(){
       //if there is at least one valid workout, log it in the contract, triggering payout.
       if(cleaned.length>0){
         
-        console.log("Good news, your workout is being logged for a payout!");
+        console.log("棒呆了!你成功用運動贏得了獎勵金！");
         console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
         
 
@@ -1666,19 +1665,19 @@ function getActivities(){
             }, (error, event) => { 
                 console.log(event);
                 usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
-                console.log("payout was: $"+usdPayout.toFixed(2));
+                console.log("獎勵金額: $"+usdPayout.toFixed(2));
                 //----begin other messages
 
-                $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
+                $('#logEcho').html('<p>運動表現：平均心率 '+Math.round(cleaned[0][1])+ 'bpm, 運動時間 '+Math.round(cleaned[0][2])+'分鐘。</p>');
                 
                 if(usdPayout>0){
-                  $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout.toFixed(2)+' of your stake! Check your wallet.</p>');
+                  $('#logSuccess').html('<p style="color:white;">棒呆了!你成功收回了 $'+usdPayout.toFixed(2)+'的賭注！查看你的錢包</p>');
                   $('#logSuccess').show();
                 }
                 else{
                   $('#logLoader').hide();
                   $('#getYouPaid').hide();
-                  $('#logFail').html('<p>Good job, but no payout for this one... You already logged a workout today.</p>');
+                  $('#logFail').html('<p>G很好！但是你今天已經登錄過這個運動。</p>');
                 }
                 //----end other messages
             })
@@ -1693,7 +1692,7 @@ function getActivities(){
           else{
             $('#logLoader').hide();
             $('#getYouPaid').hide();
-            $('#logFail').html('<p>"wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.</p>');
+            $('#logFail').html('<p>"錢包與帳戶不符、你尚未加入此挑戰、挑戰尚未開始或是挑戰已結束。</p>');
             console.log("wallet-user mismatch, user is not competitor, goal has not started yet, or goal has already finished.");
           } 
         })
@@ -1705,7 +1704,7 @@ function getActivities(){
         $('#getYouPaid').hide();
         $('#logLoader').hide();
         //$('#logFail').show();
-        $('#logFail').html('<p>You don’t have any valid workouts today. </p>');
+        $('#logFail').html('<p>你今天沒有符合的運動紀錄。</p>');
 
       } 
     }
