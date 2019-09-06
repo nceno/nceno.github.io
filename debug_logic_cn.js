@@ -1448,7 +1448,7 @@ function tooltipVal2(args) {
     return args.value + "次/週";
 }
 function tooltipVal3(args) {
-    return "for "+args.value + "週";
+    return args.value + "週";
 }
 function tooltipVal4(args) {
     return "$"+args.value + "賭注金額";
