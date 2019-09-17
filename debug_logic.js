@@ -1725,35 +1725,21 @@ function getRawHR(){
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       console.log(this.responseText);
-      var data = JSON.parse(xhr.responseText); 
+      var resp = JSON.parse(xhr.responseText);
+      var hr = resp.heartrate.data;
+      var tm = resp.time.data;
+      var dataString='';
+      for(let u =0; u< hr.length; u++){
+        data[u]=[time[u],hr[u]];
+        dataString=dataString+'{'+data[u]+'},';
+      }
+      console.log(dataString);
     }
     else{
       console.log("none"); 
     } 
   });
-  xhr.open("GET", 'https://www.strava.com/api/v3/activities/2712826552/streams?keys=heartrate,time,moving&series_type=time&key_by_type=true');
+  xhr.open("GET", 'https://www.strava.com/api/v3/activities/2712826552/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
-
-var hr = [81, 81, 81, 80, 80, 80, 80, 81, 82, 84, 85, 88, 93, 97, 102, 105,
-107, 109, 110, 111, 111, 110, 110, 110, 109, 108, 108, 108, 109, 109,
-109, 110, 111, 111, 111, 112, 112, 112, 112, 112, 112, 113, 114, 116,
-116, 118, 119, 120, 120, 119, 119, 118, 118, 117, 117, 118, 118, 118,
-119, 121, 122, 123, 125, 127, 127, 129, 130, 131, 131, 131, 131, 131,
-130, 129, 124, 123, 122, 120, 119, 117, 116, 116, 117, 117, 117, 116,
-116, 115, 115, 114, 114, 114, 115, 115, 115, 115, 115, 114, 113];
-var time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
-37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
-71, 72, 73, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258,
-259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272];
-var data = new Array();
-var dataString='';
-for(let u =0; u< hr.length; u++){
-  data[u]=[time[u],hr[u]];
-  dataString=dataString+'{'+data[u]+'},';
-}
-console.log(data.join());
-console.log(dataString);
