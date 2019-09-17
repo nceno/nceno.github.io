@@ -1730,9 +1730,10 @@ function getRawHR(){
       var hr = resp.heartrate.data;
       var tm = resp.time.data;
       var dataString='';
+      var plot = new Array();
       for(let u=0; u<hr.length; u++){
-        data[u]=[time[u],hr[u]];
-        dataString=dataString+'{'+data[u]+'},';
+        plot[u]=[time[u],hr[u]];
+        dataString=dataString+'{'+plot[u]+'},';
       }
       console.log(dataString);
     }
