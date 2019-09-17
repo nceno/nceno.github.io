@@ -1757,7 +1757,10 @@ var time = [0, 27, 42, 53, 63, 72, 88, 90, 94, 99, 105, 107, 119, 132,
    1944, 1951, 1954, 1966, 1973, 1978, 1981, 1986, 1996, 2020, 2021, 
    2023, 2026, 2030, 2044, 2049, 2061, 2069, 2084, 2089, 2395, 2411];
 var data = new Array();
+var dataString='';
 for(let u =0; u< hr.length; u++){
   data[u]=[time[u],hr[u]];
+  dataString=dataString+'{'+data[u]+'},';
 }
 console.log(data.join());
+console.log(dataString);
