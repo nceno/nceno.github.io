@@ -1715,3 +1715,21 @@ function getActivities(){
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
+
+function getRawHR(){
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      var data = JSON.parse(xhr.responseText); 
+    }
+    else{
+      console.log("none"); 
+    } 
+  }
+  xhr.open("GET", 'https://www.strava.com/api/v3/activities/2715300973/streams?keys=heartrate&key_by_type=true');
+  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.send(stuff);
+}
