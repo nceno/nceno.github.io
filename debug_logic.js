@@ -1759,5 +1759,5 @@ var time = [0, 27, 42, 53, 63, 72, 88, 90, 94, 99, 105, 107, 119, 132,
 var data = new Array();
 for(let u =0; u< hr.length; u++){
   data[u]=[time[u],hr[u]];
-  console.log(data[u]);
+  console.log(data[u]+'');
 }
