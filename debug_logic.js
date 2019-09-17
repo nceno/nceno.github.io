@@ -1758,6 +1758,6 @@ var time = [0, 27, 42, 53, 63, 72, 88, 90, 94, 99, 105, 107, 119, 132,
    2023, 2026, 2030, 2044, 2049, 2061, 2069, 2084, 2089, 2395, 2411];
 var data = new Array();
 for(let u =0; u< hr.length; u++){
-  data[u]=[hr[u],time[u]];
+  data[u]=[time[u],hr[u]];
+  console.log(data[u]);
 }
-console.log(data);
