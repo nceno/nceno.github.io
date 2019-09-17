@@ -1732,7 +1732,7 @@ function getRawHR(){
       var dataString='';
       var plot = new Array();
       for(let u=0; u<hr.length; u++){
-        plot[u]=[time[u],hr[u]];
+        plot[u]=[tm[u],hr[u]];
         dataString=dataString+'{'+plot[u]+'},';
       }
       console.log(dataString);
