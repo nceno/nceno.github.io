@@ -1727,8 +1727,8 @@ function getRawHR(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var resp = JSON.parse(xhr.responseText);
-      var hr = resp[0].heartrate.data;
-      var tm = resp[1].time.data;
+      var hr = resp.heartrate.data;
+      var tm = resp.time.data;
       var dataString='';
       for(let u=0; u<hr.length; u++){
         data[u]=[time[u],hr[u]];
