@@ -1741,7 +1741,7 @@ function getRawHR(){
       console.log("none"); 
     } 
   });
-  xhr.open("GET", 'https://www.strava.com/api/v3/activities/2712826552/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+  xhr.open("GET", 'https://www.strava.com/api/v3/activities/2718217586/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
