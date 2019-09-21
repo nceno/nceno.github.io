@@ -649,7 +649,6 @@ contract Nceno is RelayRecipient{
   
   address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F; //metamask 1
   //0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a; //portis mainnet
-  
   function setAdmin(address _newAdmin) onlyAdmin external{
     admin = _newAdmin;
   }
