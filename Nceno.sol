@@ -3,7 +3,7 @@ pragma experimental ABIEncoderV2; //to return a struct in a function
 import "./ERC20Interface.sol";
 import "./KyberNetworkProxy.sol";
 import "./RelayRecipient.sol";
-import "./ChainlinkClient.sol";
+//import "./ChainlinkClient.sol";
 
 
 //test data
@@ -32,8 +32,8 @@ import "./ChainlinkClient.sol";
 
 //inherit gas station relay contract
 //inherit chainlink contracts... but may need to alter RelayRecipient.sol as: RelayRecipient is ChainlinkClient
-//contract Nceno is RelayRecipient{
-  contract Nceno is ChainlinkClient{
+contract Nceno is RelayRecipient{
+  //contract Nceno is ChainlinkClient{
 
   event LiquidateInstance(uint indexed _unclaimed);
   event LiquidatedAt(uint indexed _unclaimed);
@@ -44,21 +44,22 @@ import "./ChainlinkClient.sol";
   event Log(bytes32 indexed _goalID, uint indexed _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, uint indexed _payout);
   event Claim(bytes32 indexed _goalID, uint indexed _stravaID, uint indexed _cut);
 
-  address hubAddress = 0x1349584869A1C7b8dc8AE0e93D8c15F5BB3B4B87; //ropsten
+  address hubAddress = 0xD216153c06E857cD7f72665E0aF1d7D82172F494; //ropsten, mainnet
 
   //gas station init
   //Link init.... add this argument: address _link
-  function Nceno(address _link) public {
+  //function Nceno(address _link) public {
+  function Nceno() public {
     init_relay_hub(RelayHub(hubAddress));
 
     // Set the address for the LINK token for the network.
-    if(_link == address(0)) {
+    /*if(_link == address(0)) {
       // Useful for deploying to public networks.
       setPublicChainlinkToken();
     } else {
       // Useful if you're deploying to a local network.
       setChainlinkToken(_link);
-    }
+    }*/
   }
 
   struct goalObject{
@@ -101,9 +102,9 @@ import "./ChainlinkClient.sol";
     uint myGoalCount;
     mapping(uint=>goalObject) mygoalInstance;
 
-    uint CL_id;
+/*    uint CL_id;
     uint CL_elapsed_time;
-    uint CL_average_heartrate;
+    uint CL_average_heartrate;*/
   }
 
   mapping(uint=>competitorObject) public profileOf;
@@ -115,7 +116,7 @@ import "./ChainlinkClient.sol";
     require(userExists[_stravaID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
 
-    //poulate identifiers
+    //populate identifiers
     createdCompetitor.stravaID = _stravaID;
     createdCompetitor.userName = _userName;
     createdCompetitor.walletAdr = get_sender();
@@ -301,7 +302,7 @@ import "./ChainlinkClient.sol";
   //----------------------
   //---ChainLink functions------
   //----------------------
-  function getActivities(address _oracle, bytes32 _jobId, string _accessToken) public {
+/*  function getActivities(address _oracle, bytes32 _jobId, string _accessToken) public {
     Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfillID.selector); //fulfillID must match one of the below's
     req.add("access_token", _accessToken);
     req.addUint("before", now);
@@ -333,7 +334,7 @@ import "./ChainlinkClient.sol";
 
   function fulfillHR(uint _stravaID, bytes32 _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
     profileOf[_stravaID].CL_average_heartrate = _data;
-  }
+  }*/
 
   //----------------------
   //---  /ChainLink functions------
@@ -518,16 +519,16 @@ import "./ChainlinkClient.sol";
   //must have default payable since this contract expected to receive change
   function() public payable {}
 
-  address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
-  address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
+  //address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
+  //address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
   address DAI_ERC20_Address_Main = 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359; //mainnet 
   address ETH_ERC20_Address = 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee;
-  address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten
+  address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten, mainnet
 
   
   ERC20 constant internal ETH_ERC20 = ERC20(ETH_ERC20_Address); //kyber ether proxy
-  ERC20 constant internal USDC_ERC20 = ERC20(USDC_ERC20_Address);
-  ERC20 constant internal DAI_ERC20 = ERC20(DAI_ERC20_Address);
+  //ERC20 constant internal USDC_ERC20 = ERC20(USDC_ERC20_Address);
+  ERC20 constant internal DAI_ERC20 = ERC20(DAI_ERC20_Address_Main);
   
   event Swap(address indexed sender, ERC20 destToken, uint amount);
   KyberNetworkProxy public proxy = KyberNetworkProxy(KyberNetworkProxy_Address);
@@ -645,8 +646,10 @@ import "./ChainlinkClient.sol";
     partitionChoices = _newChoices;
   }
 
-  //adr 1 on metamask ropsten
-  address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F;
+  
+  address admin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F; //metamask 1
+  //0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a; //portis mainnet
+  
   function setAdmin(address _newAdmin) onlyAdmin external{
     admin = _newAdmin;
   }
