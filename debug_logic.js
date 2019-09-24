@@ -245,7 +245,7 @@ $("#hostBtn").click(function() {
     //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
     web3.utils.toHex($('#promoField').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000*1.2, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei*1.2},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
