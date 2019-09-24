@@ -1072,7 +1072,7 @@ var targetMin;
 var targetStart;
 var targetStartStamp;
 
-async function browse(_first, _last){
+async function browse(_upperBound){
   updateNonce();
   //clear out the goalIDs from old elements
   for(let p=1; p<11; p++){
@@ -1080,7 +1080,7 @@ async function browse(_first, _last){
   }
 
   
-  for (let i = _first; i < _last; i++){
+  for (let i = 10 -_upperBound; i < _upperBound; i++){
     var result = await Nceno.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
 
 
