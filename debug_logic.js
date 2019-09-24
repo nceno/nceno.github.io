@@ -113,7 +113,7 @@ $("#joinLoader").hide();
 //$("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 //$("#joinSoonSuccess").hide();
-$("#makeAcctBtn").show();
+$("#makeAcctBtn").hide();
 $("#openWallet").hide();
 $("#portisLoader").hide();
 $("#hostBtn").hide();
