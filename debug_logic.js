@@ -192,7 +192,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
@@ -241,9 +241,9 @@ $("#hostBtn").click(function() {
     $("#sliderSes").roundSlider("getValue"),
     $("#sliderWks").roundSlider("getValue"),
     start,
-    stravaID,
+    stravaID
     //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
-    web3.utils.toHex($('#promoField').val())
+    //web3.utils.toHex($('#promoField').val())
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
     function(error, result) {
@@ -326,9 +326,9 @@ function joinSearch(){
   goalid = web3.utils.padRight($('#searchField').val(),34);
   Nceno.methods.join(
     goalid,
-    stravaID,
+    stravaID
     //Math.floor(ethPrice*100),
-    web3.utils.toHex($('#promoFieldSearch').val())
+    //web3.utils.toHex($('#promoFieldSearch').val())
   )
   //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakeweiSearched - 0},
@@ -1237,9 +1237,9 @@ function joinTarget(){
   console.log("targetStartStamp is: "+targetStartStamp);
   Nceno.methods.join(
     targetGoalID,
-    stravaID,
+    stravaID
     //ethPrice*100, //ethprice in pennies, gets rid of decimals
-    web3.utils.toHex($('#promoFieldSoon').val())
+    //web3.utils.toHex($('#promoFieldSoon').val())
   )
   .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
     function(error, result) {

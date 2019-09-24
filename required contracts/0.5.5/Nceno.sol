@@ -19,7 +19,7 @@ import "./KyberNetworkProxy.sol";
 
 //makeProfile: "123456","0x6a61736f6e","0x7573","1"
 ///////change goalID, maybe timestamp
-//host: "0x7bcd580000000000000000000000000000","25","30","3","6","1567728000","123456","0x00"
+//host: "0xaaaaaa0000000000000000000000000000","120","10","7","12","1569801600","123456"
 //value: 50000000000000000
 //log:
 
@@ -134,7 +134,7 @@ contract Nceno is RelayRecipient{
     emit MakeProfile(getSender(), _stravaID, _userName, _flag, _OS);
   }
 
-  function host(bytes memory _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID, bytes memory _code)  public payable notHalted{
+  function host(bytes memory _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID)  public payable notHalted{
     //price eth internally using Kyber
     uint _ETHUSDprice;
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
@@ -189,7 +189,7 @@ contract Nceno is RelayRecipient{
   }
   //event Hosted();
 
-  function join(bytes calldata _goalID, uint _stravaID, bytes calldata _code)  external payable notHalted {
+  function join(bytes calldata _goalID, uint _stravaID)  external payable notHalted {
     //price eth internally using Kyber
     uint _ETHUSDprice;
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
@@ -531,8 +531,8 @@ contract Nceno is RelayRecipient{
   //function() external payable {}
 
   //address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
-  //address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
-  address DAI_ERC20_Address_Main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
+  address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
+  //address DAI_ERC20_Address_Main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
   address ETH_ERC20_Address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
   address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten, mainnet
 
