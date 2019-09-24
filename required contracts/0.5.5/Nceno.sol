@@ -538,7 +538,7 @@ contract Nceno is RelayRecipient{
 
   
   ERC20 internal ETH_ERC20 = ERC20(ETH_ERC20_Address); //kyber ether proxy
-  //ERC20 constant internal USDC_ERC20 = ERC20(USDC_ERC20_Address);
+  //ERC20 internal USDC_ERC20 = ERC20(USDC_ERC20_address);
   ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
   
   event Swap(address indexed sender, ERC20 destToken, uint amount);
