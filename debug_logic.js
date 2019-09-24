@@ -113,7 +113,7 @@ $("#joinLoader").hide();
 //$("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 //$("#joinSoonSuccess").hide();
-$("#makeAcctBtn").hide();
+$("#makeAcctBtn").show();
 $("#openWallet").hide();
 $("#portisLoader").hide();
 $("#hostBtn").hide();
@@ -1559,7 +1559,7 @@ function getToken(){
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
       
-      Nceno.instance.userExists(stravaID
+      Nceno.methods.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
         function(error, result) {
