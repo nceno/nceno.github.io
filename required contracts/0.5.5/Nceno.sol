@@ -530,16 +530,16 @@ contract Nceno is RelayRecipient{
   //must have default payable since this contract expected to receive change
   //function() external payable {}
 
-  //address USDC_ERC20_Address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
-  address DAI_ERC20_Address = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
-  //address DAI_ERC20_Address_Main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
+  //address USDC_ERC20_address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
+  address DAI_ERC20_address_ropsten = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
+  //address DAI_ERC20_address_main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
   address ETH_ERC20_Address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
   address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten, mainnet
 
   
   ERC20 internal ETH_ERC20 = ERC20(ETH_ERC20_Address); //kyber ether proxy
   //ERC20 constant internal USDC_ERC20 = ERC20(USDC_ERC20_Address);
-  ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_Address_Main);
+  ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
   
   event Swap(address indexed sender, ERC20 destToken, uint amount);
   KyberNetworkProxy public proxy = KyberNetworkProxy(KyberNetworkProxy_Address);
