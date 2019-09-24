@@ -1559,7 +1559,7 @@ function getToken(){
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
       
-      Nceno.methods.userExists(stravaID
+      Nceno.instance.userExists(stravaID
       )
       .call({from: web3.eth.defaultAccount},
         function(error, result) {
