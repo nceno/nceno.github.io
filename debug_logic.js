@@ -24,7 +24,7 @@
 var first = new Date();
 first.setDate(first.getDate() + 1);
 //$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
-$('[data-toggle="datepicker"]').datepicker({'autoHide': true});
+$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $("#time").click(function(){
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   console.log(time);
