@@ -1,5 +1,5 @@
 //get test ether that is stored in the contract
-function getTestETH(){
+/*function getTestETH(){
   Nceno.methods.getTestETH()
   .send({from: web3.eth.defaultAccount, gas: 1500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
@@ -18,7 +18,7 @@ function getTestETH(){
       console.log("error...");
     } 
   }).once('error', function(error){console.log(error);});
-}
+}*/
 
 //datepicker initializer
 var first = new Date();
@@ -192,7 +192,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS)
-  .send({from: web3.eth.defaultAccount, gas: 1500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
@@ -245,7 +245,7 @@ $("#hostBtn").click(function() {
     //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
     web3.utils.toHex($('#promoField').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 4500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000*1.2, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
