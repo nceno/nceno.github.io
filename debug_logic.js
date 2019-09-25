@@ -1726,7 +1726,7 @@ function getRawHR(){
   xhr.withCredentials = true;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
-      console.log(this.responseText);
+      //console.log(this.responseText);
       var resp = JSON.parse(xhr.responseText);
       var hr = resp.heartrate.data;
       var tm = resp.time.data;
