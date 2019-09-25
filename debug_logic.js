@@ -1756,10 +1756,10 @@ function getRawHR(){
       var avghr = pl/hr.length;
       var adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
 
-      console.log("total gap is: "+gap);
-      console.log("real active time is: "+activeTime);
+      console.log("total gap is: "+gap/60+" min");
+      console.log("real active time is: "+activeTime/60+" min");
       console.log("adjusted HR is: "+adjHR+" BPM");
-      
+
       if(gap > 0.05*tm[tm.length-1]){
         console.log("invalid workout... you paused for over 5% of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
       }
