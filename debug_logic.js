@@ -1747,6 +1747,7 @@ function getRawHR(){
           gap+=diff;
         }
       }
+      console.log("total gap is: "+gap);
       if(gap > 0.1*tm[tm.length-1]){
         console.log("invalid workout... you paused for over 10% of your workout. ("+gap+" seconds)");
       }
