@@ -1761,7 +1761,7 @@ function getRawHR(){
       console.log("adjusted HR is: "+adjHR+" BPM");
 
       if(gap > 0.05*tm[tm.length-1]){
-        console.log("invalid workout... you paused for over 5% of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
+        console.log("you paused for a significant portion of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
       }
       //---- /gap detection -----
 
