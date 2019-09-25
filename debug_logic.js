@@ -1750,11 +1750,11 @@ function getRawHR(){
       var activeTime = (1.0*tm[tm.length-1]-gap);
 
       var pl = 0;
-      for(let r=0; r<hr.length+1; r++){
+      for(let r=0; r<hr.length; r++){
         pl +=hr[r];
       }
       var avghr = pl/hr.length;
-      var adjHR = avghr+(80*gap)/(1.0*tm[tm.length-1]);
+      var adjHR = avghr+(80*gap)/(tm[tm.length-1]);
 
       console.log("total gap is: "+gap);
       console.log("real active time is: "+activeTime);
