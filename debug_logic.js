@@ -1754,7 +1754,7 @@ function getRawHR(){
         pl +=hr[r];
       }
       var avghr = pl/hr.length;
-      var adjHR = avghr+(80*gap)/tm[tm.length-1];
+      var adjHR = avghr+(80*gap)/(1.0*tm[tm.length-1]);
 
       console.log("total gap is: "+gap);
       console.log("real active time is: "+activeTime);
