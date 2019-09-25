@@ -1738,9 +1738,23 @@ function getRawHR(){
       }
       var hrdata=dataString.slice(0, -1);
       console.log(hrdata);
+
+      //----- gap detection -----
+      var gap = 0;
+      for(let s=0; s<tm.length+1; s++){
+        var diff = tm[s+1]-tm[s];
+        if(diff>=10){
+          gap+=diff;
+        }
+      }
+      if(gap > 0.1*tm[tm.length-1]){
+        console.log("invalid workout... you paused for over 10% of your workout. ("+gap+" seconds)");
+      }
+      //---- /gap detection -----
+
     }
     else{
-      console.log("none"); 
+      //console.log("none"); 
     } 
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
