@@ -1726,7 +1726,7 @@ function getRawHR(){
   xhr.withCredentials = true;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
-      //console.log(this.responseText);
+      console.log(this.responseText);
       var resp = JSON.parse(xhr.responseText);
       var hr = resp.heartrate.data;
       var tm = resp.time.data;
@@ -1748,6 +1748,8 @@ function getRawHR(){
         }
       }
       console.log("total gap is: "+gap);
+      console.log("real active time is: "+tm[tm.length-1]-gap);
+      //console.log("adjusted HR is: "+)
       if(gap > 0.05*tm[tm.length-1]){
         console.log("invalid workout... you paused for over 5% of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
       }
