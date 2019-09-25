@@ -1747,9 +1747,18 @@ function getRawHR(){
           gap+=diff;
         }
       }
+      var activeTime = (1.0*tm[tm.length-1]-gap);
+
+      var pl = 0;
+      for(let r=0; r<hr.length+1; r++){
+        pl +=hr[r];
+      }
+      var avghr = pl/hr.length;
+      var adjHR = avghr+(80*gap)/tm[tm.length-1];
+
       console.log("total gap is: "+gap);
-      console.log("real active time is: "+(1.0*tm[tm.length-1]-gap));
-      //console.log("adjusted HR is: "+)
+      console.log("real active time is: "+activeTime);
+      console.log("adjusted HR is: "+adjHR+" BPM");
       if(gap > 0.05*tm[tm.length-1]){
         console.log("invalid workout... you paused for over 5% of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
       }
