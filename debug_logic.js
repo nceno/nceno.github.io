@@ -1719,7 +1719,7 @@ function getActivities(){
 //wahoo1: 2712826552
 //strava: 2715300973
 //strava with pause: 2716096931
-function getRawHR(){
+function getRawHR(_actID){
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
@@ -1735,13 +1735,14 @@ function getRawHR(){
         plot[u]=[tm[u],hr[u]];
         dataString=dataString+'{'+plot[u]+'},';
       }
-      console.log(dataString);
+      var hrdata=dataString.slice(0, -1);
+      console.log(hrdata);
     }
     else{
       console.log("none"); 
     } 
   });
-  xhr.open("GET", 'https://www.strava.com/api/v3/activities/2718217586/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+  xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
