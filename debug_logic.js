@@ -1737,7 +1737,7 @@ function getRawHR(){
         dataString=dataString+'{'+plot[u]+'},';
       }
       var hrdata=dataString.slice(0, -1);
-      console.log(hrdata);
+      //console.log(hrdata);
 
       //----- gap detection -----
       var gap = 0;
