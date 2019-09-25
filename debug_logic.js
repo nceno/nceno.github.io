@@ -1748,8 +1748,8 @@ function getRawHR(){
         }
       }
       console.log("total gap is: "+gap);
-      if(gap > 0.1*tm[tm.length-1]){
-        console.log("invalid workout... you paused for over 10% of your workout. ("+gap+" seconds)");
+      if(gap > 0.05*tm[tm.length-1]){
+        console.log("invalid workout... you paused for over 5% of your workout. ("+gap+" seconds)");
       }
       //---- /gap detection -----
 
