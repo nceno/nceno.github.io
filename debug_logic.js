@@ -1748,7 +1748,7 @@ function getRawHR(){
         }
       }
       console.log("total gap is: "+gap);
-      console.log("real active time is: "+tm[tm.length-1]-gap);
+      console.log("real active time is: "+(1.0*tm[tm.length-1]-gap));
       //console.log("adjusted HR is: "+)
       if(gap > 0.05*tm[tm.length-1]){
         console.log("invalid workout... you paused for over 5% of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
