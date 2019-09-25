@@ -1719,7 +1719,7 @@ function getActivities(){
 //wahoo1: 2712826552
 //strava: 2715300973
 //strava with pause: 2716096931
-var actID = 2715300973;
+var actID = 2719149178;
 function getRawHR(){
   var stuff = null;
   var xhr = new XMLHttpRequest();
