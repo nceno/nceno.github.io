@@ -222,6 +222,13 @@ contract Nceno is RelayRecipient{
     emit Join(_goalID, _stravaID, _ethPricePennies);
   }
 
+   //password log "require"  remark: if using strong pw mechanism, may not need threshhold mechanism. (can reduce gas..)
+	/*  function log(bytes calldata _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, bytes calldata _pw)  external notPaused{
+    		require(profileOf[_stravaID].walletAdr == getSender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
+      		(goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks) && (keccak256(_pw) == keccak256(blockhash( block.number() - now % 99 )))
+     		"wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //getSender()
+   		}	
+	*/
   function log(bytes calldata _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external notPaused{
     require(profileOf[_stravaID].walletAdr == getSender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
