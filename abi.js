@@ -1259,4 +1259,4 @@ var Nceno = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x0Aa6875bDD1e5795a3E3DB10FfEF02Ca3B808847');
+], '0x58aabc167fcac5a18f03552ad0eb60e17a940f4e');

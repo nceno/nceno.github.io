@@ -222,13 +222,6 @@ contract Nceno is RelayRecipient{
     emit Join(_goalID, _stravaID, _ethPricePennies);
   }
 
-   //password log "require"  remark: if using strong pw mechanism, may not need threshhold mechanism. (can reduce gas..)
-	/*  function log(bytes calldata _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins, bytes calldata _pw)  external notPaused{
-    		require(profileOf[_stravaID].walletAdr == getSender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
-      		(goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks) && (keccak256(_pw) == keccak256(blockhash( block.number() - now % 99 )))
-     		"wallet-user mismatch, user is not competitor, goal has not started, or week has already passed"); //getSender()
-   		}	
-	*/
   function log(bytes calldata _goalID, uint _stravaID, uint _activityID, uint _avgHR, uint _reportedMins)  external notPaused{
     require(profileOf[_stravaID].walletAdr == getSender() && goalAt[_goalID].isCompetitor[_stravaID]==true && 
       (goalAt[_goalID].startTime < now) && (now < goalAt[_goalID].startTime + goalAt[_goalID].wks*1 weeks), 
@@ -538,15 +531,16 @@ contract Nceno is RelayRecipient{
   //function() external payable {}
 
   //address USDC_ERC20_address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
-  address DAI_ERC20_address_ropsten = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
-  //address DAI_ERC20_address_main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
+  //address DAI_ERC20_address_ropsten = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
+  address DAI_ERC20_address_main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
   address ETH_ERC20_Address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
   address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten, mainnet
 
   
   ERC20 internal ETH_ERC20 = ERC20(ETH_ERC20_Address); //kyber ether proxy
   //ERC20 internal USDC_ERC20 = ERC20(USDC_ERC20_address);
-  ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
+  //ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
+  ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_main);
   
   event Swap(address indexed sender, ERC20 destToken, uint amount);
   KyberNetworkProxy public proxy = KyberNetworkProxy(KyberNetworkProxy_Address);
@@ -666,7 +660,7 @@ contract Nceno is RelayRecipient{
   }
 
   
-  address ncenoAdmin = 0x7a3857cE0e3F8dA8e8e1c7Dbf7642cD7243de22F; //metamask 1
+  address ncenoAdmin = 0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a; //portis mainnet
   //0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a; //portis mainnet
 
   function setNcenoAdmin(address _newAdmin) onlyNcenoAdmin external{
