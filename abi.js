@@ -1,5 +1,5 @@
 //initialize portis
-const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten', { gasRelay: true, scope: ['email'] });
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'mainnet', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
 
 var Nceno = new web3.eth.Contract([
@@ -1259,4 +1259,4 @@ var Nceno = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x12c56f7d38d01b88f402e2ec0d974e7d84f53535');
+], '0x0Aa6875bDD1e5795a3E3DB10FfEF02Ca3B808847');
