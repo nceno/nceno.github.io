@@ -230,7 +230,7 @@ var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
   //updateEthPrice();
   var sliderStake = $("#sliderStake").roundSlider("getValue").toString();
-  var msgValueHost = 1001000000000000000*$("#sliderStake").roundSlider("getValue")/ethPrice; //removed math.floor()
+  var msgValueHost = 1010000000000000000*$("#sliderStake").roundSlider("getValue")/ethPrice; //removed math.floor()
   var usdStakeInWei = msgValueHost.toString();
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
 
