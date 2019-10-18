@@ -193,10 +193,6 @@ var Nceno = new web3.eth.Contract([
         "type": "address"
       },
       {
-        "name": "email",
-        "type": "bytes"
-      },
-      {
         "name": "born",
         "type": "uint256"
       },
@@ -207,6 +203,10 @@ var Nceno = new web3.eth.Contract([
       {
         "name": "OS",
         "type": "uint256"
+      },
+      {
+        "name": "email",
+        "type": "bytes"
       },
       {
         "name": "myGoalCount",
@@ -1323,4 +1323,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xd90e460c858632f1c08e37e21527b6de75f10b29');
+], '0x8e4c4c38c4f55e7fe664400d4c440afa4a490129');
