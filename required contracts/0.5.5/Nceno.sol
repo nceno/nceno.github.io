@@ -41,7 +41,7 @@ contract Nceno is RelayRecipient{
 
   event LiquidateInstance(uint indexed _unclaimed);
   event LiquidatedAt(uint indexed _unclaimed);
-  event MakeProfile(address indexed _wallet, uint indexed _stravaID, bytes _userName, bytes _flag, uint _OS);
+  event MakeProfile(address indexed _wallet, uint indexed _stravaID, bytes _userName, bytes _flag, uint _OS, bytes _email);
   event Host(bytes indexed _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint indexed _startTime, uint indexed _stravaID, uint _ethPricePennies);
   event Join(bytes indexed _goalID, uint indexed _stravaID, uint indexed _ethPricePennies);
   
@@ -91,7 +91,7 @@ contract Nceno is RelayRecipient{
     mapping(uint=>bool) activitySpent;
     mapping(uint=>bool) isCompetitor;
   }
-  mapping(bytes=>goalObject) internal goalAt;
+  mapping(bytes=>goalObject) public goalAt;
   mapping(uint=>goalObject) public goalInstance;
   uint public goalCount;
   bytes[] public goalIDs;
