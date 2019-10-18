@@ -192,7 +192,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS,
-    portisEmail)
+    web3.utils.padRight(web3.utils.toHex(portisEmail),34))
   .send({from: web3.eth.defaultAccount, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
