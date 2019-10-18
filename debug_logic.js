@@ -1420,7 +1420,7 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 20,
+    min: 1,
     max: 300,
     step: 5,
     value: 55,
