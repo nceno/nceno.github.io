@@ -100,6 +100,7 @@ contract Nceno is RelayRecipient{
     uint stravaID;
     bytes userName;
     address walletAdr;
+    bytes email;
     uint born;
     bytes flag;
     uint OS;
@@ -114,7 +115,7 @@ contract Nceno is RelayRecipient{
   mapping(uint=>bool) public userExists;
 
 
-  function makeProfile(uint _stravaID, bytes calldata _userName, bytes calldata _flag, uint _OS)  external notHalted{
+  function makeProfile(uint _stravaID, bytes calldata _userName, bytes calldata _flag, uint _OS, bytes calldata _email)  external notHalted{
     require(userExists[_stravaID] == false, "This profile already exists.");
     competitorObject memory createdCompetitor;
 
@@ -125,13 +126,14 @@ contract Nceno is RelayRecipient{
     createdCompetitor.born = now;
     createdCompetitor.flag = _flag;
     createdCompetitor.OS = _OS;
+    createdCompetitor.email = _email;
 
 
     //add to registry
     profileOf[_stravaID] = createdCompetitor;
     userExists[_stravaID] = true;
     stravaIDs.push(_stravaID);
-    emit MakeProfile(getSender(), _stravaID, _userName, _flag, _OS);
+    emit MakeProfile(getSender(), _stravaID, _userName, _flag, _OS, _email);
   }
 
   function host(bytes memory _goalID, uint _activeMins,  uint _stakeUSD, uint _sesPerWk, uint _wks, uint _startTime, uint _stravaID)  public payable notHalted{
