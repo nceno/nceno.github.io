@@ -142,7 +142,7 @@ contract Nceno is RelayRecipient{
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
     uint _ethPricePennies = _ETHUSDprice/10**16;
 
-    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && msg.value >= 100*1000000000000000000*_stakeUSD/_ethPricePennies,
+    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && msg.value >= 95*100*1000000000000000000*_stakeUSD/(100*_ethPricePennies),
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //getSender()
     goalObject memory createdGoal;
     
@@ -197,7 +197,7 @@ contract Nceno is RelayRecipient{
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
     uint _ethPricePennies = _ETHUSDprice/10**16;
 
-    require(now < goalAt[_goalID].startTime && msg.value >= goalAt[_goalID].stakeUSD*_ethPricePennies && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
+    require(now < goalAt[_goalID].startTime && msg.value >= 95*100*1000000000000000000*goalAt[_goalID].stakeUSD/(100*_ethPricePennies) && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
     goalAt[_goalID].competitorCount++;
