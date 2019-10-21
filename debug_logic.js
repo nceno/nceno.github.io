@@ -222,9 +222,9 @@ $("#makeAcctBtn").click(function() {
 
 
 //randomizes the goalID
-/*function randGoalID(){
+function randGoalID(){
   goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
-}*/
+}
 
 //creating a goal from the slider values and live ethereum price
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
