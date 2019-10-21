@@ -117,16 +117,25 @@ contract Nceno is RelayRecipient{
 
   function makeProfile(uint _stravaID, bytes calldata _userName, bytes calldata _flag, uint _OS, bytes calldata _email)  external notHalted{
     require(userExists[_stravaID] == false, "This profile already exists.");
-    competitorObject memory createdCompetitor;
+    competitorObject memory createdCompetitor = competitorObject({
+        stravaID : _stravaID,
+        userName : _userName,
+        walletAdr : getSender(),
+        born : now,
+        flag : _flag,
+        OS : _OS,
+        email : _email,
+        myGoalCount : 0
+    });
 
     //populate identifiers
-    createdCompetitor.stravaID = _stravaID;
+    /*createdCompetitor.stravaID = _stravaID;
     createdCompetitor.userName = _userName;
     createdCompetitor.walletAdr = getSender();
     createdCompetitor.born = now;
     createdCompetitor.flag = _flag;
     createdCompetitor.OS = _OS;
-    createdCompetitor.email = _email;
+    createdCompetitor.email = _email;*/
 
 
     //add to registry
@@ -144,9 +153,29 @@ contract Nceno is RelayRecipient{
 
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && msg.value >= 95*100*1000000000000000000*_stakeUSD/(100*_ethPricePennies),
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //getSender()
-    goalObject memory createdGoal;
+    goalObject memory createdGoal = goalObject({
+        //populate parameters
+        goalID : _goalID,
+        startTime : _startTime,
+        activeMins : _activeMins,
+        wks : _wks,
+        stakeUSD : _stakeUSD,
+        sesPerWk : _sesPerWk,
+        
+        competitorCount : 1,
+        competitorIDs : [_stravaID, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        
+        
+        lockedPercent : partitionChoices[_wks/2 -1],
+        potWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        winnersWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        unclaimedStake : _stakeUSD,
+        liquidated : false
+        
+        
+    });
     
-    //populate parameters
+    /*//populate parameters
     createdGoal.goalID = _goalID;
     createdGoal.startTime = _startTime;
     createdGoal.activeMins = _activeMins;
@@ -163,7 +192,7 @@ contract Nceno is RelayRecipient{
 
     //set host as first competitor
     createdGoal.competitorIDs[0] = _stravaID;
-    createdGoal.competitorCount++;
+    createdGoal.competitorCount++;*/
     goalAt[_goalID].isCompetitor[_stravaID] = true;
 
     //push goal to registry
