@@ -1506,7 +1506,7 @@ function updateGasPrice(){
 //only displays button when price is returned by API.
 //still need this because it tells how much wei to send.
 //try to get data from kyber instead of API though.
-function updateEthPrice(btn) {
+/*function updateEthPrice(btn) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
@@ -1520,8 +1520,29 @@ function updateEthPrice(btn) {
   });
   xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
   xhr.send();
-}
+}*/
 
+
+//gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
+//only displays button when price is returned by API.
+//still need this because it tells how much wei to send.
+//try to get data from kyber instead of API though.
+var daiID = '0xaD6D458402F60fD3Bd25163575031ACDce07538D';
+function updateEthPrice(btn) {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      var resp = JSON.parse(xhr.responseText);
+      //ethPrice = resp.USD*1.0;  //...in lieu of calling kyber, adjust this factor
+      console.log(this.responseText);
+      //console.log(ethPrice);
+      $('#'+btn).show();
+
+    }
+  });
+  xhr.open("GET", "https://api.kyber.network/buy_rate?id=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&qty=1.0&id="+daiID+"&qty=1.0");
+  xhr.send();
+}
 
 //gets the access token to make GET request. Valid for 6 hours.
 var access_token;
