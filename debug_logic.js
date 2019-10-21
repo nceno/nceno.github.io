@@ -1534,7 +1534,7 @@ function updateEthPrice(btn) {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
       ethPrice = resp.data[0].dst_qty[0]/resp.data[0].src_qty[0];
-      console.log(this.responseText);
+      //console.log(this.responseText);
       console.log(ethPrice);
       $('#'+btn).show();
 
