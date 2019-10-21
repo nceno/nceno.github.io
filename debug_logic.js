@@ -1533,7 +1533,7 @@ function updateEthPrice(btn) {
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
-      ethPrice = resp.dst_qty/resp.src_qty;
+      ethPrice = resp.data[0].dst_qty[0]/resp.data[0].src_qty[0];
       console.log(this.responseText);
       console.log(ethPrice);
       $('#'+btn).show();
