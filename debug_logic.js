@@ -1527,7 +1527,7 @@ function updateGasPrice(){
 //only displays button when price is returned by API.
 //still need this because it tells how much wei to send.
 //try to get data from kyber instead of API though.
-var daiID = '0xaD6D458402F60fD3Bd25163575031ACDce07538D';
+var daiID = '0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359';
 function updateEthPrice(btn) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", function () {
