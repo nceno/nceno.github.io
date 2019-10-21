@@ -1533,7 +1533,7 @@ function updateEthPrice(btn) {
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
-      ethPrice = resp.dst_qty[0]/resp.src_qty[0];  //...in lieu of calling kyber, adjust this factor
+      ethPrice = resp.dst_qty/resp.src_qty;
       console.log(this.responseText);
       console.log(ethPrice);
       $('#'+btn).show();
