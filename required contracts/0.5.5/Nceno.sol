@@ -91,8 +91,8 @@ contract Nceno is RelayRecipient{
     mapping(uint=>bool) activitySpent;
     mapping(uint=>bool) isCompetitor;
   }
-  mapping(bytes=>goalObject) public goalAt;
-  mapping(uint=>goalObject) public goalInstance;
+  mapping(bytes => goalObject) goalAt;
+  mapping(uint => goalObject) goalInstance;
   uint public goalCount;
   bytes[] public goalIDs;
 
@@ -107,9 +107,7 @@ contract Nceno is RelayRecipient{
     mapping(bytes=>goalObject) myGoal;
     uint myGoalCount;
     mapping(uint=>goalObject) mygoalInstance;
-
   }
-
   mapping(uint=>competitorObject) public profileOf;
   uint[] stravaIDs;
   mapping(uint=>bool) public userExists;
@@ -154,25 +152,23 @@ contract Nceno is RelayRecipient{
     require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && msg.value >= 100*1000000000000000000*_stakeUSD/(_ethPricePennies),
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //getSender()
     goalObject memory createdGoal = goalObject({
-        //populate parameters
-        goalID : _goalID,
-        startTime : _startTime,
-        activeMins : _activeMins,
-        wks : _wks,
-        stakeUSD : _stakeUSD,
-        sesPerWk : _sesPerWk,
+      //populate parameters
+      goalID : _goalID,
+      startTime : _startTime,
+      activeMins : _activeMins,
+      wks : _wks,
+      stakeUSD : _stakeUSD,
+      sesPerWk : _sesPerWk,
         
-        competitorCount : 1,
-        competitorIDs : [_stravaID, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        
-        
-        lockedPercent : partitionChoices[_wks/2 -1],
-        potWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        winnersWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        unclaimedStake : _stakeUSD,
-        liquidated : false
+      competitorCount : 1,
+      competitorIDs : [_stravaID, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         
         
+      lockedPercent : partitionChoices[_wks/2 -1],
+      potWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      winnersWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      unclaimedStake : _stakeUSD,
+      liquidated : false      
     });
     
     /*//populate parameters

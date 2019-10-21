@@ -222,9 +222,9 @@ $("#makeAcctBtn").click(function() {
 
 
 //randomizes the goalID
-function randGoalID(){
+/*function randGoalID(){
   goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
-}
+}*/
 
 //creating a goal from the slider values and live ethereum price
 var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
@@ -236,7 +236,7 @@ $("#hostBtn").click(function() {
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
 
   Nceno.methods.host(
-    goalID,
+    web3.utils.padRight(goalID,34),
     $("#sliderMins").roundSlider("getValue"),
     sliderStake, //plain whole dollar amount
     $("#sliderSes").roundSlider("getValue"),
