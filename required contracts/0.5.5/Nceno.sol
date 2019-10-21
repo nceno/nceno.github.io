@@ -126,16 +126,6 @@ contract Nceno is RelayRecipient{
         myGoalCount : 0
     });
 
-    //populate identifiers
-    /*createdCompetitor.stravaID = _stravaID;
-    createdCompetitor.userName = _userName;
-    createdCompetitor.walletAdr = getSender();
-    createdCompetitor.born = now;
-    createdCompetitor.flag = _flag;
-    createdCompetitor.OS = _OS;
-    createdCompetitor.email = _email;*/
-
-
     //add to registry
     profileOf[_stravaID] = createdCompetitor;
     userExists[_stravaID] = true;
@@ -171,24 +161,7 @@ contract Nceno is RelayRecipient{
       liquidated : false      
     });
     
-    /*//populate parameters
-    createdGoal.goalID = _goalID;
-    createdGoal.startTime = _startTime;
-    createdGoal.activeMins = _activeMins;
-    createdGoal.wks = _wks;
-    createdGoal.stakeUSD = _stakeUSD;
-    createdGoal.sesPerWk = _sesPerWk;
-    //createdGoal.ethPricePennies = _ethPricePennies; //not used
-
-    //adjust the unclaimedStake
-    createdGoal.unclaimedStake+= _stakeUSD;
-
-    //set weekly lockup percentages
-    createdGoal.lockedPercent = partitionChoices[_wks/2 -1];
-
-    //set host as first competitor
-    createdGoal.competitorIDs[0] = _stravaID;
-    createdGoal.competitorCount++;*/
+    
     goalAt[_goalID].isCompetitor[_stravaID] = true;
 
     //push goal to registry
@@ -692,7 +665,6 @@ contract Nceno is RelayRecipient{
 
   
   address ncenoAdmin = 0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a; //portis mainnet
-  //0x0b51bde2ee3ca800e9f368f2b3807a0d212b711a; //portis mainnet
 
   function setNcenoAdmin(address _newAdmin) onlyNcenoAdmin external{
     ncenoAdmin = _newAdmin;
