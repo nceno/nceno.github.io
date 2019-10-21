@@ -151,7 +151,7 @@ contract Nceno is RelayRecipient{
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
     uint _ethPricePennies = _ETHUSDprice/10**16;
 
-    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && msg.value >= 95*100*1000000000000000000*_stakeUSD/(100*_ethPricePennies),
+    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && msg.value >= 100*1000000000000000000*_stakeUSD/(_ethPricePennies),
      "User does not exist, wallet-user pair does not match, or msg value not enough."); //getSender()
     goalObject memory createdGoal = goalObject({
         //populate parameters

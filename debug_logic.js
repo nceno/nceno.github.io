@@ -1540,7 +1540,7 @@ function updateEthPrice(btn) {
 
     }
   });
-  xhr.open("GET", "https://api.kyber.network/buy_rate?id=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&qty=1.0&id="+daiID+"&qty=1.0");
+  xhr.open("GET", "https://api.kyber.network/buy_rate?id="+daiID+"&qty=100.0");
   xhr.send();
 }
 
