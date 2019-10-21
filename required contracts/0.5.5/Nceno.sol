@@ -226,7 +226,7 @@ contract Nceno is RelayRecipient{
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
     uint _ethPricePennies = _ETHUSDprice/10**16;
 
-    require(now < goalAt[_goalID].startTime && msg.value >= 95*100*1000000000000000000*goalAt[_goalID].stakeUSD/(100*_ethPricePennies) && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
+    require(now < goalAt[_goalID].startTime && msg.value >= 100*1000000000000000000*goalAt[_goalID].stakeUSD/(_ethPricePennies) && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
     goalAt[_goalID].competitorCount++;
@@ -548,6 +548,11 @@ contract Nceno is RelayRecipient{
 
     function postRelayedCall(bytes calldata context, bool success, uint actualCharge, bytes32 preRetVal) /*relayHubOnly*/ external {
     }
+    
+    function _withdrawDeposits(uint256 amount, address payable payee) external onlyNcenoAdmin{
+
+    }
+
 
 
   //-----------------------------------------------
@@ -562,16 +567,16 @@ contract Nceno is RelayRecipient{
   //function() external payable {}
 
   //address USDC_ERC20_address = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;//mainnet
-  //address DAI_ERC20_address_ropsten = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
-  address DAI_ERC20_address_main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
+  address DAI_ERC20_address_ropsten = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
+  //address DAI_ERC20_address_main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
   address ETH_ERC20_Address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
   address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten, mainnet
 
   
   ERC20 internal ETH_ERC20 = ERC20(ETH_ERC20_Address); //kyber ether proxy
   //ERC20 internal USDC_ERC20 = ERC20(USDC_ERC20_address);
-  //ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
-  ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_main);
+  ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
+  //ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_main);
   
   event Swap(address indexed sender, ERC20 destToken, uint amount);
   KyberNetworkProxy public proxy = KyberNetworkProxy(KyberNetworkProxy_Address);

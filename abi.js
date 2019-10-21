@@ -232,6 +232,24 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "payee",
+        "type": "address"
+      }
+    ],
+    "name": "_withdrawDeposits",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -1323,4 +1341,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xbdf3cd788459d86214aee00f98bf411ec4aaef4e');
+], '0xb1887041ceebf8bf9708b5919e0495ac042436cb');
