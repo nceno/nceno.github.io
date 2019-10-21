@@ -1043,7 +1043,7 @@ function search(){
 
         var tstamp = new Date(result[4]*1000);
         //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
-        stakeweiSearched = 1000100000000000000*result[1]/ethPrice;
+        stakeweiSearched = 1000000000000000000*result[1]/ethPrice;
         $("#srStake").html("$"+result[1]);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
@@ -1242,7 +1242,7 @@ function joinTarget(){
     //ethPrice*100, //ethprice in pennies, gets rid of decimals
     //web3.utils.toHex($('#promoFieldSoon').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1000100000000000000*targetStake/ethPrice},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1000000000000000000*targetStake/ethPrice},
     function(error, result) {
       if (!error){
         $("#joinSoonModalBtn").hide();
