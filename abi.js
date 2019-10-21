@@ -1,5 +1,5 @@
 //initialize portis
-const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten', { gasRelay: true, scope: ['email'] });
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'mainnet', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
 
 var Nceno = new web3.eth.Contract([
@@ -99,57 +99,6 @@ var Nceno = new web3.eth.Contract([
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "name": "goalAt",
-    "outputs": [
-      {
-        "name": "goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "startTime",
-        "type": "uint256"
-      },
-      {
-        "name": "activeMins",
-        "type": "uint256"
-      },
-      {
-        "name": "wks",
-        "type": "uint256"
-      },
-      {
-        "name": "stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "name": "sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "name": "competitorCount",
-        "type": "uint256"
-      },
-      {
-        "name": "unclaimedStake",
-        "type": "uint256"
-      },
-      {
-        "name": "liquidated",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -807,57 +756,6 @@ var Nceno = new web3.eth.Contract([
     "constant": true,
     "inputs": [
       {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "goalInstance",
-    "outputs": [
-      {
-        "name": "goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "startTime",
-        "type": "uint256"
-      },
-      {
-        "name": "activeMins",
-        "type": "uint256"
-      },
-      {
-        "name": "wks",
-        "type": "uint256"
-      },
-      {
-        "name": "stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "name": "sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "name": "competitorCount",
-        "type": "uint256"
-      },
-      {
-        "name": "unclaimedStake",
-        "type": "uint256"
-      },
-      {
-        "name": "liquidated",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
         "name": "_goalID",
         "type": "bytes"
       },
@@ -1341,4 +1239,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0xb1887041ceebf8bf9708b5919e0495ac042436cb');
+], '0x0c029d15b8bb0fc6129b2d5b11689fc784938b7e');
