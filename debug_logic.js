@@ -193,7 +193,7 @@ $("#makeAcctBtn").click(function() {
     web3.utils.padRight(web3.utils.toHex(flag),34),
     OS,
     web3.utils.padRight(web3.utils.toHex(portisEmail),34))
-  .send({from: web3.eth.defaultAccount, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
@@ -246,7 +246,7 @@ $("#hostBtn").click(function() {
     //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
     //web3.utils.toHex($('#promoField').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 8000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
