@@ -24,7 +24,7 @@ var valueMultiplier = 1.04;
 
 //datepicker initializer
 var first = new Date();
-first.setDate(first.getDate() + 1);
+first.setDate(first.getDate() - 20);
 //$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $("#time").click(function(){
@@ -1383,7 +1383,7 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
-  
+
   $("#sliderSes").roundSlider({
     editableTooltip: false,
     radius: 75,
