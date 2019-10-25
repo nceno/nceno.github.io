@@ -1383,6 +1383,7 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
+  
   $("#sliderSes").roundSlider({
     editableTooltip: false,
     radius: 75,
