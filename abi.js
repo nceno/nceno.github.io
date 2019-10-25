@@ -1,5 +1,5 @@
 //initialize portis
-const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'mainnet', { gasRelay: true, scope: ['email'] });
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'ropsten', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
 
 var Nceno = new web3.eth.Contract([
@@ -1239,4 +1239,4 @@ var Nceno = new web3.eth.Contract([
     "name": "Swap",
     "type": "event"
   }
-], '0x0c029d15b8bb0fc6129b2d5b11689fc784938b7e');
+], '0x457b3d8c4a4727954158e45f524eb2df1ad855a8');
