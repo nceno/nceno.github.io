@@ -22,6 +22,7 @@
 
 var valueMultiplier = 1.04;
 
+
 //datepicker initializer
 var first = new Date();
 first.setDate(first.getDate() - 20);
