@@ -22,10 +22,9 @@
 
 var valueMultiplier = 1.04;
 
-
 //datepicker initializer
 var first = new Date();
-first.setDate(first.getDate() - 20);
+first.setDate(first.getDate() + 1);
 //$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $("#time").click(function(){
@@ -53,7 +52,7 @@ function showPortis() {
     
   });
 
-  var teeee=0;
+  
   portis.onLogin((walletAddress, email) => {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
@@ -1373,7 +1372,7 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 1,
+    min: 20,
     max: 120,
     step: 5,
     value: 45,
@@ -1384,7 +1383,6 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
-
   $("#sliderSes").roundSlider({
     editableTooltip: false,
     radius: 75,

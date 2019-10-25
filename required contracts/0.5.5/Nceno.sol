@@ -160,7 +160,7 @@ contract Nceno is RelayRecipient{
       unclaimedStake : _stakeUSD,
       liquidated : false      
     });
-    
+     
     
     goalAt[_goalID].isCompetitor[_stravaID] = true;
 
@@ -195,7 +195,7 @@ contract Nceno is RelayRecipient{
     (_ETHUSDprice,) = proxy.getExpectedRate(ETH_ERC20, DAI_ERC20, msg.value);
     uint _ethPricePennies = _ETHUSDprice/10**16;
 
-    require(now < goalAt[_goalID].startTime && msg.value >= 100*1000000000000000000*goalAt[_goalID].stakeUSD/(_ethPricePennies) && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
+    require(userExists[_stravaID]== true && profileOf[_stravaID].walletAdr == getSender() && now < goalAt[_goalID].startTime && msg.value >= 100*1000000000000000000*goalAt[_goalID].stakeUSD/(_ethPricePennies) && goalAt[_goalID].isCompetitor[_stravaID] == false, "Challenge already started, user already is a participant, or else message value is less than intended stake.");
     //add self as competitor
     goalAt[_goalID].competitorIDs[goalAt[_goalID].competitorCount] = _stravaID;
     goalAt[_goalID].competitorCount++;
