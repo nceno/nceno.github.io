@@ -20,7 +20,7 @@
   }).once('error', function(error){console.log(error);});
 }*/
 
-var valueMultiplier = 1.10;
+var valueMultiplier = 1.04;
 
 //datepicker initializer
 var first = new Date();
