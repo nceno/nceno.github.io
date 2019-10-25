@@ -20,6 +20,8 @@
   }).once('error', function(error){console.log(error);});
 }*/
 
+var valueMultiplier = 1.10;
+
 //datepicker initializer
 var first = new Date();
 first.setDate(first.getDate() + 1);
@@ -246,7 +248,7 @@ $("#hostBtn").click(function() {
     //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
     //web3.utils.toHex($('#promoField').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*usdStakeInWei},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -332,7 +334,7 @@ function joinSearch(){
     //web3.utils.toHex($('#promoFieldSearch').val())
   )
   //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: stakeweiSearched - 0},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*stakeweiSearched - 0},
     function(error, result) {
       if (!error){
         $("#joinSearch").hide();
@@ -1043,7 +1045,7 @@ function search(){
 
         var tstamp = new Date(result[4]*1000);
         //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
-        stakeweiSearched = 1001000000000000000*result[1]/ethPrice;
+        stakeweiSearched = 1000000000000000000*result[1]/ethPrice;
         $("#srStake").html("$"+result[1]);
         $("#srWks").html(result[3]+" wks");
         $("#srSes").html(result[2]+" x/wk");
@@ -1242,7 +1244,7 @@ function joinTarget(){
     //ethPrice*100, //ethprice in pennies, gets rid of decimals
     //web3.utils.toHex($('#promoFieldSoon').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: 1001000000000000000*targetStake/ethPrice},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*1000000000000000000*targetStake/ethPrice},
     function(error, result) {
       if (!error){
         $("#joinSoonModalBtn").hide();
