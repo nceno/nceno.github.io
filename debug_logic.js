@@ -53,7 +53,7 @@ function showPortis() {
     
   });
 
-  
+  var teeee=0;
   portis.onLogin((walletAddress, email) => {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
