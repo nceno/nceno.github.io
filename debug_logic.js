@@ -1556,10 +1556,6 @@ var e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3 = 'e4668610b5d6bee15fcd68d0cb88a1f65
 var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 //var tokenExpire = 0;
 
-function displayAthlete(){
-  console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
-  $("#athleteInfo").html('<p>"Nceno User ID: "+stravaID+"   <br>Nceno Email: "+portisEmail+"   <br>Wallet address: "+web3.eth.defaultAccount</p>');
-}
 
 function getToken(){
   console.log("code is: "+code);
@@ -1587,6 +1583,9 @@ function getToken(){
       uniqueUserString = stravaID.toString() + userCreated.toString();
       userID1 = uniqueUserString;
       //console.log(uniqueUserString);
+
+      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+      $("#athleteInfo").html('<p>"Nceno User ID: "+stravaID+"   <br>Nceno Email: "+portisEmail+"   <br>Wallet address: "+web3.eth.defaultAccount</p>');
       
       Nceno.methods.userExists(stravaID
       )
