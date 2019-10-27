@@ -1558,6 +1558,7 @@ var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
 
 function displayAthlete(){
   console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+  $("#athleteInfo").html('<p>"Nceno User ID: "+stravaID+"   <br>Nceno Email: "+portisEmail+"   <br>Wallet address: "+web3.eth.defaultAccount</p>');
 }
 
 function getToken(){
