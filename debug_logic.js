@@ -1585,7 +1585,7 @@ function getToken(){
       //console.log(uniqueUserString);
 
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
-      $("#athleteInfo").html('<p>"Nceno User ID: "+stravaID+"   <br>Nceno Email: "+portisEmail+"   <br>Wallet address: "+web3.eth.defaultAccount</p>');
+      $("#athleteInfo").html('<p>"Nceno User ID: "'+stravaID+'"   <br>Nceno Email: "'+portisEmail+'"   <br>Wallet address: "'+web3.eth.defaultAccount+'</p>');
       
       Nceno.methods.userExists(stravaID
       )
