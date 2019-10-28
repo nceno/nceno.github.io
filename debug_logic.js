@@ -1788,7 +1788,7 @@ function getRawHR(){
       console.log("real active time is: "+activeTime/60+" min");
       console.log("adjusted HR is: "+adjHR+" BPM");
 
-      if(gap > 0.1*tm[tm.length-1]){
+      if(gap > 0.17*tm[tm.length-1]){
         console.log("you paused for a significant portion of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
       }
       //---- /gap detection -----
