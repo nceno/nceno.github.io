@@ -545,7 +545,7 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
-    $("#selID").html('<p>'+goalid+'</p>');
+    $("#selID").html('<p>'+goalid.slice(0,8)+'</p>');
 
     var sessions = 0;
     var wks = 0;
