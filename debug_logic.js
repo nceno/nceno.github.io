@@ -151,7 +151,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   var startDateLocal = new Date().toISOString(); //need to convert from UTC to local timezone.... will not affect the challenge.
 
   var nameString = '$'+_stake+'... Anyone wanna join me?';
-  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid+'". It starts on '+ challengeStart+'.';
+  var descriptionString = 'I’m hosting a challenge worth $'+_stake+ ' to workout for '+_minutes+'mins, '+_frequency+'x per week, for '+_weeks+' weeks. If you wanna join me, go to www.nceno.app/app and search for challenge ID "'+_goalid.slice(0, 8)+'". It starts on '+ challengeStart+'.';
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
@@ -545,6 +545,7 @@ function selectedChallenge(){
   $('#goalCategories').selectric().on('change', function() {
     goalid = web3.utils.padRight($('#goalCategories').val(),34);
     console.log("selected goal is: "+goalid);
+    $("#selID").html('<p>'+goalid+'</p>');
 
     var sessions = 0;
     var wks = 0;
