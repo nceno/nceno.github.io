@@ -1700,7 +1700,7 @@ function getActivities(){
 
                 $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
                 
-                if(usdPayout>0){
+                if(usdPayout!=0){
                   $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout.toFixed(2)+' of your stake! Check your wallet.</p>');
                   $('#logSuccess').show();
                 }
