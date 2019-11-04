@@ -1686,6 +1686,7 @@ function getActivities(){
         ).once('confirmation', function(confNumber, receipt, result){
           console.log(receipt.status);
           if(receipt.status === true){
+            console.log("payout is: "+receipt.events.Log.returnValues['_payout']);
             
             //----------event listener
             var usdPayout;
