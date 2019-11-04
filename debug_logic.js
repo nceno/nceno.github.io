@@ -1687,6 +1687,7 @@ function getActivities(){
           console.log(receipt.status);
           console.log(receipt);
           if(receipt.status === true){
+            $('#logLoader').hide();
             console.log("payout is: "+receipt.events.Log.returnValues['_payout']);
             
             //----------event listener
@@ -1703,6 +1704,7 @@ function getActivities(){
                 $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
                 
                 if(usdPayout>0){
+                  $('#logSuccess').html('<p style="color:white;">Great job, you just earned back some of your stake! Check your wallet in a bit.</p>');
                   $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout.toFixed(2)+' of your stake! Check your wallet.</p>');
                   $('#logSuccess').show();
                 }
