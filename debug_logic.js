@@ -1312,7 +1312,7 @@ $("#claimBtn").click(function() {
       Nceno.events.Claim({
         filter: {_goalID: goalid, _stravaID: stravaID},
         fromBlock: 0, toBlock: 'latest'
-      }, (error, event) => { 
+      }, function(error, event){ 
           console.log(event);
           usdCut = parseInt(event.returnValues._cut)/1000000000000000000;
           console.log("cut was: $"+usdCut.toFixed(2));
@@ -1692,7 +1692,7 @@ function getActivities(){
             Nceno.events.Log({
               filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
-            }, (error, event) => { 
+            }, function(error, event){ 
                 console.log(event);
                 usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
                 console.log("payout was: $"+usdPayout.toFixed(2));
@@ -1700,7 +1700,7 @@ function getActivities(){
 
                 $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
                 
-                if(usdPayout!=0){
+                if(usdPayout>0){
                   $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout.toFixed(2)+' of your stake! Check your wallet.</p>');
                   $('#logSuccess').show();
                 }
