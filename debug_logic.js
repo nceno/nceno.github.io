@@ -1679,7 +1679,6 @@ function getActivities(){
               $("#srCancelBtn").hide();
               $("#joinLoader").show();*/
               console.log(result);
-              console.log("payout is: "+result.events.Log.returnValues['_payout']);
             }
             else
             console.error(error);
