@@ -1691,20 +1691,20 @@ function getActivities(){
             console.log("payout is: "+receipt.events.Log.returnValues['_payout']);
             
             //----------event listener
-            var usdPayout;
-            Nceno.events.Log({
+            var usdPayout = receipt.events.Log.returnValues['_payout']/1000000000000000000;
+            /*            Nceno.events.Log({
               filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
-            }, function(error, event){ 
-                console.log(event);
-                usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
-                console.log("payout was: $"+usdPayout.toFixed(2));
+            }, function(error, event){ */
+                //console.log(event);
+                //usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
+                //console.log("payout was: $"+usdPayout.toFixed(2));
                 //----begin other messages
 
                 $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
                 
                 if(usdPayout>0){
-                  $('#logSuccess').html('<p style="color:white;">Great job, you just earned back some of your stake! Check your wallet in a bit.</p>');
+                  //$('#logSuccess').html('<p style="color:white;">Great job, you just earned back some of your stake! Check your wallet in a bit.</p>');
                   $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout.toFixed(2)+' of your stake! Check your wallet.</p>');
                   $('#logSuccess').show();
                 }
@@ -1714,8 +1714,8 @@ function getActivities(){
                   $('#logFail').html('<p>Good job, but no payout for this one... You already logged a workout today.</p>');
                 }
                 //----end other messages
-            })
-            .on('error', console.error);
+            //})
+            //.on('error', console.error);
             //--------/end event listener
 
             $('#logLoader').hide();
