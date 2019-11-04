@@ -224,6 +224,38 @@ $("#makeAcctBtn").click(function() {
   }).once('error', function(error){console.log(error);});
 });
 
+function createUser(){
+  localize();
+  Nceno.methods.userExists(
+    stravaID
+  )
+  .call({from: web3.eth.defaultAccount},
+    function(error, result){
+      if (!error){
+        if(result!=true){
+          Nceno.methods.makeProfile(
+          stravaID,
+          web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
+          web3.utils.padRight(web3.utils.toHex(flag),34),
+          OS,
+          web3.utils.padRight(web3.utils.toHex(portisEmail),34))
+          .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+          function(error, result) {
+            if (!error){
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
+          );
+        }
+      }
+      else
+      console.error(error);
+    }
+  );
+}
+
 
 //randomizes the goalID
 function randGoalID(){
@@ -272,6 +304,7 @@ $("#hostBtn").click(function() {
       $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
+      createUser();
     }
     else{
       $("#createLoader").hide();
@@ -357,6 +390,7 @@ function joinSearch(){
       //need the join serach button to set proper global variables and then these functions can reference them
       reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start);
       stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
+      createUser();
     }
     else{
       
@@ -1271,6 +1305,7 @@ function joinTarget(){
         //targetStart is a text date... need the timestamp.
         reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStartStamp);
         stravaShare(targetStartStamp, targetMin, targetStake, targetSes, targetWks, targetGoalID);
+        createUser();
       }
       else{
         $("#soonEcho").html('');
