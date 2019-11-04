@@ -1692,6 +1692,8 @@ function getActivities(){
             
             //----------event listener
             var usdPayout = receipt.events.Log.returnValues['_payout']/1000000000000000000;
+            var loggedHR = receipt.events.Log.returnValues['_avgHR']
+            var loggedMins = receipt.events.Log.returnValues['_reportedMins']
             /*            Nceno.events.Log({
               filter: {_goalID: goalid, _stravaID: stravaID},
               fromBlock: 0, toBlock: 'latest'
@@ -1701,7 +1703,7 @@ function getActivities(){
                 //console.log("payout was: $"+usdPayout.toFixed(2));
                 //----begin other messages
 
-                $('#logEcho').html('<p>Your workout: Avg heart rate was '+Math.round(cleaned[0][1])+ 'bpm, Session length was '+Math.round(cleaned[0][2])+'mins.</p>');
+                $('#logEcho').html('<p>Your workout: Avg heart rate was '+loggedHR+ 'bpm, Session length was '+loggedMins+'mins.</p>');
                 
                 if(usdPayout>0){
                   //$('#logSuccess').html('<p style="color:white;">Great job, you just earned back some of your stake! Check your wallet in a bit.</p>');
