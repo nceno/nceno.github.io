@@ -659,7 +659,6 @@ function selectedChallenge(){
           else {chartWeek = wkLimit;}
           //currentWeek = (Date.now()/1000 - result[4])/604800;
           console.log("blockchain says we're in week: "+currentWeek);
-          //makeWktl(hasClaimed);
           makeWktl();
        
           await Nceno.methods.getParticipants(goalid)
@@ -1746,6 +1745,7 @@ function getActivities(){
                   //$('#logSuccess').html('<p style="color:white;">Great job, you just earned back some of your stake! Check your wallet in a bit.</p>');
                   $('#logSuccess').html('<p style="color:white;">Great job, you just earned back $'+usdPayout.toFixed(2)+' of your stake! Check your wallet.</p>');
                   $('#logSuccess').show();
+                  makeWktl();
                 }
                 else{
                   $('#logLoader').hide();
