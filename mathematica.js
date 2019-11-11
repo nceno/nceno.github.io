@@ -1,9 +1,9 @@
 var failRate = 0.15;
 var weeks = 4;
 var ses = 3;
-var ppl = 10;
-var lim = 2;
-var cost = 7;
+var ppl = 9;
+var lim = 3;
+var cost = 10;
 var perc = 
 	[[100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
      [31, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
@@ -20,21 +20,18 @@ var perc =
 
 //rows are workouts, columns are players counts[exercises][players]
 var fails = 
-[[0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 
- [0, 0, 0, 0, 0, 1, 0, 0, 1, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-
- [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], 
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
- [1, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 1, 0, 1, 0, 1, 0, 0, 0], 
- [1, 0, 0, 0, 0, 0, 1, 0, 0, 0]];
+[[0, 1, 0, 0, 0, 0, 1, 0, 0],
+[0, 0, 0, 1, 0, 0, 1, 0, 0],
+[0, 0, 0, 1, 0, 0, 0, 0, 0],
+[1, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 0, 0, 0, 0, 0, 0, 0],
+[1, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0],
+[1, 1, 0, 0, 0, 0, 0, 0, 0],
+[1, 0, 0, 0, 0, 0, 0, 0, 0]];
 
 
 var strikes = new Array(ppl).fill(0); //fails per person
@@ -43,30 +40,43 @@ var pot =new Array(weeks).fill(0); //lost stake per week
 var payouts = new Array(weeks).fill(0); //individual payouts per person per week
 var revenue = 0; //nceno's revenue per goal
 
-for(var p=0; p<ppl; p++){
-	for(var w= 0; w < weeks; w++){
-		console.log('strikes['+p+'] is: '+strikes[p]);
-		if(strikes[p]<lim){
-			var prevStrikes = strikes[p];
+for(var p=1; p<ppl+1; p++){
+	for(var w= 1; w < weeks+1; w++){
+		if(strikes[p-1]<lim){
+			var prevStrikes = strikes[p-1];
 			var failSum = 0;
-			for(var x= (w-0)*ses; x < w*ses+1; x++){
-				failSum+=fails[x][p];
-				console.log('fails['+x+']['+p+'] is: '+fails[x][p]);
+			for(var x= (w-1)*ses+1; x < w*ses+1; x++){
+				failSum+=fails[x-1][p-1];
 			}
-			if(failSum == 0){winners[w]++;}
+			if(failSum == 0){
+				winners[w-1]++;
+			}
 			else{
-				strikes[p] += failSum;
-				for(var f=prevStrikes; f<strikes[p]+1; f++){
-					pot[w]+= 0.01*perc[lim][f]*cost*lim;
+				strikes[p-1] += failSum;
+
+				//beginning of problem
+				for(var f=prevStrikes+1; f<strikes[p-1]+1; f++){
+					console.log('f= '+f);
+					pot[w-1]+= 0.01*perc[lim-1][f-1]*(cost*lim);
 				}
 			}
 		}
 	}
 }
-console.log('pot is: '+pot);
+
 
 for(var w=0; w<weeks; w++){
 	payouts[w] = 0.5*pot[w]/winners[w];
 	revenue += 0.5*pot[w];
 }
+
+for(var k= 0; k<weeks; k++){
+	pot[k] = pot[k].toFixed(2);
+	payouts[k] = payouts[k].toFixed(2);
+}
+console.log('strikes is: '+strikes);
+console.log('winners is: '+winners);
+console.log('pot is: '+pot);
+console.log('payouts is: '+payouts);
+console.log('revenue is: '+revenue.toFixed(2));
 

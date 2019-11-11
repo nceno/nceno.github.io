@@ -1344,40 +1344,32 @@ $("#claimBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
-      //----------event listener
-      var usdCutwei = receipt.events.Claim.returnValues['_cut'];;
+
+      var usdCutwei = receipt.events.Claim.returnValues['_cut'];
       console.log("payout is: "+receipt.events.Claim.returnValues['_cut']);
-
-
-
-          var usdCut = parseInt(usdcutwei)/1000000000000000000;
-          console.log("cut was: $"+usdCut.toFixed(2));
-          //----begin other messages
-
-          
-          if(usdCut>0 || usdCut != undefined){
-            $("#claimLoader").hide();
-            $("#claimTitle").hide();
-            $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $'+usdCut+' from the people who skipped workouts.</p>');
-          }
-          else{
-            $("#acctLoader").hide();
-            $('#claimFail').html('<p>Your cut is $0.00 because everyone completed all of their workouts... Is this challenge too easy?</p>');
-          }
-          //----end other messages
-
+      var usdCut = parseInt(usdCutwei)/1000000000000000000;
+      console.log("cut was: $"+usdCut.toFixed(2));
+      if(usdCut>0 || usdCut != undefined){
+        $("#claimLoader").hide();
+        $("#claimTitle").hide();
+        $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $'+usdCut+' from the people who skipped workouts.</p>');
+      }
+      else{
+        $("#claimLoader").hide();
+        $('#claimFail').html('<p>Your cut is $0.00 because everyone completed all of their workouts... Is this challenge too easy?</p>');
+      }
       correctNonce++;
       console.log("your cut is: "+result);
 
       
     }
     else{
-      $("#acctLoader").hide();
+      $("#claimLoader").hide();
       $('#claimFail').html('<p>Transaction failed. Did you already claim this week?</p>');
       console.log("wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
     }   
   })
-    .once('error', function(error){console.log(error);});;
+  .once('error', function(error){console.log(error);});;
 });
 
 //not sure if using window.onload correctly... but,
