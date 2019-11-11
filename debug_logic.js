@@ -790,6 +790,7 @@ function selectedChallenge(){
                                         //$('#'+finKey).html(winnersWk[k] +" of "+ competitors);
                                         $('#'+finKey).html("$" +lost.toFixed(2));
 
+
                                         //disallow logging and claiming if quotas are met
                                         //if(k>0 && successesWk[k-1] != sessions){
                                         //final bug...
@@ -1344,13 +1345,12 @@ $("#claimBtn").click(function() {
     if(receipt.status === true){
       correctNonce++;
       //----------event listener
-      var usdCut;
-      Nceno.events.Claim({
-        filter: {_goalID: goalid, _stravaID: stravaID},
-        fromBlock: 0, toBlock: 'latest'
-      }, function(error, event){ 
-          console.log(event);
-          usdCut = parseInt(event.returnValues._cut)/1000000000000000000;
+      var usdCutwei = receipt.events.Claim.returnValues['_cut'];;
+      console.log("payout is: "+receipt.events.Claim.returnValues['_cut']);
+
+
+
+          var usdCut = parseInt(usdcutwei)/1000000000000000000;
           console.log("cut was: $"+usdCut.toFixed(2));
           //----begin other messages
 
@@ -1365,9 +1365,7 @@ $("#claimBtn").click(function() {
             $('#claimFail').html('<p>Your cut is $0.00 because everyone completed all of their workouts... Is this challenge too easy?</p>');
           }
           //----end other messages
-      })
-      .on('error', console.error);
-      //--------/end event listener
+
       correctNonce++;
       console.log("your cut is: "+result);
 
