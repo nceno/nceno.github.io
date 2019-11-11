@@ -1342,10 +1342,11 @@ $("#claimBtn").click(function() {
     }
   ).once('confirmation', function(confNumber, receipt, result){
     console.log(receipt.status);
+    console.log(receipt);
     if(receipt.status === true){
       correctNonce++;
 
-      var usdCutwei = receipt.events.Claim.returnValues['_cut'];
+      var usdCutwei = parseInt(1.0*receipt.events.Claim.returnValues['_cut']);
       console.log("payout is: "+receipt.events.Claim.returnValues['_cut']);
       var usdCut = parseInt(usdCutwei)/1000000000000000000;
       console.log("cut was: $"+usdCut.toFixed(2));
@@ -1360,7 +1361,7 @@ $("#claimBtn").click(function() {
       }
       correctNonce++;
       console.log("your cut is: "+result);
-
+      makeWktl();
       
     }
     else{
