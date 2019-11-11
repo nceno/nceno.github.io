@@ -66,7 +66,7 @@ contract IRelayRecipient {
      * Revert in this functions causes a revert of the client's relayed call but not in the entire transaction
      * (that is, the relay will still get compensated)
      */
-    function preRelayedCall(bytes calldata context) external returns (bytes memory);
+    function preRelayedCall(bytes calldata context) external returns (bytes32);
 
     /** this method is called after the actual relayed function call.
      * It may be used to record the transaction (e.g. charge the caller by some contract logic) for this call.
