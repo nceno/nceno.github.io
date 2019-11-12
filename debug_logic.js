@@ -1672,6 +1672,7 @@ function getActivities(){
 
       let i=0;
       let k=0;
+      console.log("data.length= "+data.length);
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true && data[i].average_heartrate>99 && data[i].elapsed_time/60>=goalMovingTime){
           cleaned[k] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
