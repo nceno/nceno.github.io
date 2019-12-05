@@ -1833,9 +1833,8 @@ function getRawHR(){
     }
     else{
       //console.log("none"); 
-    } 
-
-    //new comment
+    }
+    //tori 
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
