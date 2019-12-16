@@ -1596,7 +1596,6 @@ var stravaID;
 var stravaUsername;
 var userCreated;
 var uniqueUserString;
-var e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3 = 'e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3';
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
 var code = window.location.href.split('=')[2].split('&')[0];
 //var tokenExpire = 0;
@@ -1648,7 +1647,7 @@ function getToken(){
 
     }
   });
-  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3+'&code='+code+'&grant_type=authorization_code');
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret=e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
