@@ -1649,7 +1649,7 @@ function getToken(){
     }
   });
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret='+e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3+'&code='+code+'&grant_type=authorization_code');
-  xhr.setRequestHeader("cache-control", "no-cache");
+  //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
 
