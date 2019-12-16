@@ -1499,7 +1499,7 @@ function tooltipVal3(args) {
 }
 function tooltipVal4(args) {
     /* @hidden return "$"+args.value + " at stake";*/
-    return "$"+args.value + " name your price";
+    return "$"+args.value + " price";
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
