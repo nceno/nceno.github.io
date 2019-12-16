@@ -1470,7 +1470,7 @@ window.onload = function() {
     min: 10,
     max: 200,
     step: 5,
-    value: 55,
+    value: 30,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal4",
     circleShape: "pie",
