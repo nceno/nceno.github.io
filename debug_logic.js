@@ -1498,7 +1498,8 @@ function tooltipVal3(args) {
     return "for "+args.value + " weeks";
 }
 function tooltipVal4(args) {
-    return "$"+args.value + " at stake";
+    /* @hidden return "$"+args.value + " at stake";*/
+    return "$"+args.value + " name your price";
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
