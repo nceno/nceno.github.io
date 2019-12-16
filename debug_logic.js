@@ -342,7 +342,7 @@ function getMobileOS() {
 }
 
 //function that displays in a modal, a summary of the goal you are setting.
-var ethPrice;
+/* @hidden var ethPrice;
 function echoGoal(){
   //get live eth price
   updateEthPrice('hostBtn');
@@ -355,6 +355,21 @@ function echoGoal(){
     "You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
     $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
     $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +"."
+  );
+}*/
+var ethPrice;
+function echoGoal(){
+  //get live eth price
+  updateEthPrice('hostBtn');
+  var time = new Date($("#dateChoice").val()).getTime() / 1000;
+  //echo modal
+  $("#host").tab('show');
+  $('#popupCreate').modal('show');
+
+  $("#goalEcho").html(
+    "You're paying $" + $("#sliderStake").roundSlider("getValue") + " to Nceno to put your goal of working out for " + 
+    $("#sliderMins").roundSlider("getValue") +" mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
+    $("#sliderWks").roundSlider("getValue")+  " weeks, starting from "+ $("#dateChoice").datepicker('getDate', true) +". You will receive the link to your blockchained goal immediately after payment."
   );
 }
 
