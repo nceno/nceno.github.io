@@ -1597,7 +1597,8 @@ var stravaUsername;
 var userCreated;
 var uniqueUserString;
 var e4668610b5d6bee15fcd68d0cb88a1f65ae1ad3 = 'e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3';
-var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];
+/*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
+var code = window.location.href.split('=')[2].split('&')[0];
 //var tokenExpire = 0;
 
 
