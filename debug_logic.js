@@ -65,7 +65,7 @@ function showPortis() {
       updateGasPrice();
 
       //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
-      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Blockchain connection: </a></h5><a style="color:#ccff00;">successful!</a>');
+      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');
       $("#openWallet").show();
       
     });
