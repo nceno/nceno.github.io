@@ -1605,7 +1605,7 @@ function getToken(){
   console.log("code is: "+code);
   var stuff = null;
   var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  xhr.withCredentials = false;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       console.log(this.responseText);
@@ -1649,7 +1649,6 @@ function getToken(){
   });
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret=e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
-  xhr.withCredentials = false;
   xhr.send(stuff);
 }
 
