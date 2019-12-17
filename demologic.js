@@ -282,7 +282,7 @@ $("#hostBtn").click(function() {
     //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
     //web3.utils.toHex($('#promoField').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -1534,12 +1534,10 @@ function updateGasPrice(){
     fast = data.fast;
     fastest = data.fastest;
     //default to slowest gas if network is busy, to avoid subsidizing super high txn cost.
-    if(parseInt(standard)>8){
-      gasPriceChoice = parseInt(safeLow)+1;
-      console.log("Ethereum network is experienceing high traffic currently... Transaction confirmation will take longer than usual.");
-      $('trafficAlert').alert();
-    }
-    else gasPriceChoice = parseInt(standard)+1;
+    
+      gasPriceChoice = fastest;
+
+
     console.log(safeLow+" < "+standard+" < gas < "+fast+" < "+fastest);
 
     console.log("gasPrice set at: "+gasPriceChoice);
