@@ -302,7 +302,7 @@ $("#hostBtn").click(function() {
       $("#createLoader").hide();
       $('#promoField').hide();
       $("#createSuccess").show();
-      $("#chalID").html('Payment complete. Your goal has been created and now lives forever on the Blockchain! View it now: <a style="color:#ccff00;" target="_blank" href="https://etherscan.io/tx/'+eshash+'">click here</a>.');
+      $("#chalID").html('Payment complete. Your goal has been created and now lives forever on the Blockchain! <br>View it now: <a style="color:#ccff00;" target="_blank" href="https://etherscan.io/tx/'+eshash+'">click here</a>.');
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
       createUser();
