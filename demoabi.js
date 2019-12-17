@@ -4,59 +4,26 @@ const web3 = new Web3(portis.provider);
 
 var Nceno = new web3.eth.Contract([
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
       {
-        "name": "amount",
-        "type": "uint256"
+        "name": "origSender",
+        "type": "address"
       },
       {
-        "name": "payee",
+        "name": "msgData",
+        "type": "bytes"
+      }
+    ],
+    "name": "getSenderFromData",
+    "outputs": [
+      {
+        "name": "",
         "type": "address"
       }
     ],
-    "name": "_withdrawDeposits",
-    "outputs": [],
     "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_activeMins",
-        "type": "uint256"
-      },
-      {
-        "name": "_stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "name": "_sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "name": "_wks",
-        "type": "uint256"
-      },
-      {
-        "name": "_startTime",
-        "type": "uint256"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      }
-    ],
-    "name": "host",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -90,29 +57,148 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
       {
-        "name": "context",
-        "type": "bytes"
-      },
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "profileOf",
+    "outputs": [
       {
-        "name": "success",
-        "type": "bool"
-      },
-      {
-        "name": "actualCharge",
+        "name": "stravaID",
         "type": "uint256"
       },
       {
-        "name": "preRetVal",
-        "type": "bytes32"
+        "name": "userName",
+        "type": "string"
+      },
+      {
+        "name": "walletAdr",
+        "type": "address"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "born",
+        "type": "uint256"
+      },
+      {
+        "name": "flag",
+        "type": "string"
+      },
+      {
+        "name": "OS",
+        "type": "uint256"
+      },
+      {
+        "name": "myGoalCount",
+        "type": "uint256"
       }
     ],
-    "name": "postRelayedCall",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "payee",
+        "type": "address"
+      }
+    ],
+    "name": "_withdrawDeposits",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "setNcenoAdmin",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getSender",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userExists",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getHubAddr",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "goalIDs",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -133,110 +219,6 @@ var Nceno = new web3.eth.Contract([
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newAdmin",
-        "type": "address"
-      }
-    ],
-    "name": "setNcenoAdmin",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "_wallet",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_userName",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "_flag",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "_OS",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_email",
-        "type": "string"
-      }
-    ],
-    "name": "MakeProfile",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "indexed": false,
-        "name": "_activeMins",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_stakeUSD",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_sesPerWk",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_wks",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "_startTime",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "_ethPricePennies",
-        "type": "uint256"
-      }
-    ],
-    "name": "Host",
-    "type": "event"
   },
   {
     "constant": true,
@@ -296,15 +278,41 @@ var Nceno = new web3.eth.Contract([
   {
     "constant": true,
     "inputs": [],
-    "name": "getHubAddr",
+    "name": "getRecipientBalance",
     "outputs": [
       {
         "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "context",
+        "type": "bytes"
+      },
+      {
+        "name": "success",
+        "type": "bool"
+      },
+      {
+        "name": "actualCharge",
+        "type": "uint256"
+      },
+      {
+        "name": "preRetVal",
+        "type": "bytes32"
+      }
+    ],
+    "name": "postRelayedCall",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -322,54 +330,41 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getRecipientBalance",
-    "outputs": [
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_activeMins",
+        "type": "uint256"
+      },
+      {
+        "name": "_stakeUSD",
+        "type": "uint256"
+      },
+      {
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "name": "_stravaID",
         "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getSender",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "origSender",
-        "type": "address"
-      },
-      {
-        "name": "msgData",
-        "type": "bytes"
-      }
-    ],
-    "name": "getSenderFromData",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
+    "name": "host",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -387,88 +382,88 @@ var Nceno = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "goalIDs",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes"
-      }
-    ],
+    "inputs": [],
     "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    "constant": true,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "profileOf",
-    "outputs": [
-      {
-        "name": "stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "userName",
-        "type": "string"
-      },
-      {
-        "name": "walletAdr",
+        "indexed": false,
+        "name": "_wallet",
         "type": "address"
       },
       {
-        "name": "email",
+        "indexed": false,
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_userName",
         "type": "string"
       },
       {
-        "name": "born",
-        "type": "uint256"
-      },
-      {
-        "name": "flag",
+        "indexed": false,
+        "name": "_flag",
         "type": "string"
       },
       {
-        "name": "OS",
+        "indexed": false,
+        "name": "_OS",
         "type": "uint256"
       },
       {
-        "name": "myGoalCount",
-        "type": "uint256"
+        "indexed": false,
+        "name": "_email",
+        "type": "string"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "name": "MakeProfile",
+    "type": "event"
   },
   {
-    "constant": true,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "",
+        "indexed": false,
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "name": "_activeMins",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stakeUSD",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_sesPerWk",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_wks",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "_startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stravaID",
         "type": "uint256"
       }
     ],
-    "name": "userExists",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "name": "Host",
+    "type": "event"
   }
-], '0xee90631e15dd666930f0ce991a494ebd331d58c4');
+], '0xaec13da8d7764fee77dc57f2014640093e50ea0b');
