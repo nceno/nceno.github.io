@@ -302,7 +302,7 @@ $("#hostBtn").click(function() {
       $("#createLoader").hide();
       $('#promoField').hide();
       $("#createSuccess").show();
-      $("#chalID").html('Your goal has been created and now lives forever on the Blockchain! View it now: <a target="_blank" href="https://etherscan.io/tx'+eshash+'">click here</a>.');
+      $("#chalID").html('Your goal has been created and now lives forever on the Blockchain! View it now: <a style="color:#ccff00;" target="_blank" href="https://etherscan.io/tx/'+eshash+'">click here</a>.');
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
       createUser();
@@ -1676,7 +1676,7 @@ function getActivities(){
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  xhr.withCredentials = false;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       console.log(this.responseText);
