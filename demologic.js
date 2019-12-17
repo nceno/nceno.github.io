@@ -296,12 +296,13 @@ $("#hostBtn").click(function() {
     }
   ).once('confirmation', function(confNumber, receipt){
     console.log(receipt.status);
+    var eshash=receipt.transactionHash;
     if(receipt.status === true){
       correctNonce++;
       $("#createLoader").hide();
       $('#promoField').hide();
       $("#createSuccess").show();
-      $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
+      $("#chalID").html('Your goal has been created and now lives forever on the Blockchain! View it now: <a target="_blank" href="https://etherscan.io/tx'+eshash+'">click here</a>.');
       reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
       stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
       createUser();
