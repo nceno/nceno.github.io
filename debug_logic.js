@@ -1480,7 +1480,7 @@ window.onload = function() {
   });
 
   //delays extraction of the fitbit creds until the user has authed.
-  if (window.location.href != 'https://www.nceno.app/app.html' && window.location.href != 'https://www.nceno.app/app'){
+  if (window.location.href != 'https://www.nceno.app/app_true.html' && window.location.href != 'https://www.nceno.app/app_true'){
     $("#stravaBtn").hide();
     $("#stravaOk").html("Proceed to step 2...")
     $("#stravaOk").show();
