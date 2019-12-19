@@ -157,7 +157,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  xhr.withCredentials = false;
   xhr.addEventListener("readystatechange", function(){
     if (this.readyState === 4) {
         console.log(this.responseText);
@@ -1677,7 +1677,7 @@ function getActivities(){
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  xhr.withCredentials = false;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       console.log(this.responseText);
@@ -1804,7 +1804,7 @@ var actID = 2719149178;
 function getRawHR(){
   var stuff = null;
   var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  xhr.withCredentials = false;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       //console.log(this.responseText);
