@@ -342,7 +342,7 @@ function getMobileOS() {
 }
 
 //function that displays in a modal, a summary of the goal you are setting.
-/* @hidden var ethPrice;
+ var ethPrice;
 function echoGoal(){
   //get live eth price
   updateEthPrice('hostBtn');
@@ -356,7 +356,7 @@ function echoGoal(){
     $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
     $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
-}*/
+}
 var ethPrice;
 function echoGoal(){
   //get live eth price
@@ -1498,8 +1498,7 @@ function tooltipVal3(args) {
     return "for "+args.value + " weeks";
 }
 function tooltipVal4(args) {
-    /* @hidden return "$"+args.value + " at stake";*/
-    return "$"+args.value + " price";
+    return "$"+args.value + " at stake";
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
