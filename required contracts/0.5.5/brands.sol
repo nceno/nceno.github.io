@@ -29,7 +29,6 @@ contract Nceno is RelayRecipient{
     uint wks;
     uint stakeUSD; //stake in usd
     uint sesPerWk;
-    //uint ethPricePennies; //this is the usd price of eth, but multiplied by 100. not used
 
     uint competitorCount;
     uint[10] competitorIDs;
@@ -73,7 +72,6 @@ contract Nceno is RelayRecipient{
         myGoalCount : 0
     });
 
-
     //add to registry
     profileOf[_stravaID] = createdCompetitor;
     userExists[_stravaID] = true;
@@ -95,8 +93,7 @@ contract Nceno is RelayRecipient{
         
       competitorCount : 1,
       competitorIDs : [_stravaID, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        
-        
+          
       lockedPercent : partitionChoices[_wks/2 -1],
       potWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       winnersWk : [uint256(0), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -104,7 +101,6 @@ contract Nceno is RelayRecipient{
       liquidated : false      
     });
      
-    
     goalAt[_goalID].isCompetitor[_stravaID] = true;
 
     //push goal to registry
@@ -118,12 +114,10 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].myGoalCount++;
 
     //kyber step... must use correct decimals. DAI has 18, USDC has 6
-    //executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, _stakeUSD*(10**18) );
     execSwap(DAI_ERC20, address(this));
 
     emit Host(_goalID, _activeMins, _stakeUSD, _sesPerWk, _wks, _startTime, _stravaID, _ethPricePennies);
   }
-  //event Hosted();
 
   function join(bytes calldata _goalID, uint _stravaID)  external payable notHalted {
     //price eth internally using Kyber
@@ -145,15 +139,7 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = goalAt[_goalID];
     profileOf[_stravaID].myGoalCount++;
 
-    //referal code
-    /*
-    if(keccak256(_code) == keccak256(promoCode) && goalAt[_goalID].stakeUSD>50 && goalAt[_goalID].sesPerWk>2 && goalAt[_goalID].wks>3){
-      promoCodeCount++;
-    }
-    */
-
     //kyber step
-    //executeSwap(ETH_ERC20, msg.value, DAI_ERC20, this, goalAt[_goalID].stakeUSD );
     execSwap(DAI_ERC20, address(this));
     emit Join(_goalID, _stravaID, _ethPricePennies);
   }
@@ -235,8 +221,6 @@ contract Nceno is RelayRecipient{
     bytes[10] memory names;
     bytes[10] memory flags;
 
-    //goalObject memory theGoal = goalAt[_goalID];
-    //uint compcount = goalAt[_goalID].competitorCount;
     for(uint i =0; i<goalAt[_goalID].competitorCount; i++){
       if(goalAt[_goalID].competitorIDs[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
         ids[i] = goalAt[_goalID].competitorIDs[i];
@@ -258,7 +242,6 @@ contract Nceno is RelayRecipient{
   }
  
   function getMyGoalStats1(uint _stravaID, bytes calldata _goalID) external view returns(uint, uint, uint){
-    //goalObject memory theGoal = goalAt[_goalID];
     uint wk = 1+(now - goalAt[_goalID].startTime)/604800;
     
       myStatsObject memory my;
@@ -288,8 +271,6 @@ contract Nceno is RelayRecipient{
   }
  
   function getMyGoalStats2(uint _stravaID, bytes calldata _goalID) external view returns(uint[12] memory, uint , uint[12] memory, uint, uint){
-    //goalObject memory theGoal = goalAt[_goalID];
-    //uint wk = (now - theGoal.startTime)/604800;
 
     //catches completed goals
     uint wkLimit;
@@ -320,7 +301,6 @@ contract Nceno is RelayRecipient{
      
     return(my.wkPayouts, my.lostStake, my.wkBonuses, my.bonusTotal, totalPay); //result[0], result[1], result[4] wkPayouts,lostStake,totalPay should be /100 in JS
   }
-
 
   function getProfile(uint _stravaID) external view returns(address, uint, bytes memory, uint, uint){
     return(profileOf[_stravaID].walletAdr, profileOf[_stravaID].born , profileOf[_stravaID].flag , profileOf[_stravaID].OS , profileOf[_stravaID].myGoalCount);
@@ -430,16 +410,8 @@ contract Nceno is RelayRecipient{
   }
 
   //payout lockedPercent based on wks parameter
-  //uint[12][6] lockedPercent = partitionChoices;
-  //uint[12][6][2] partitionChoices =[
+
     uint[12][6] partitionChoices = 
-    //choice 1
-    /*[[43, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [13, 30, 21, 36, 0, 0, 0, 0, 0, 0, 0, 0], 
-    [7, 12, 24, 13, 26, 18, 0, 0, 0, 0, 0, 0], 
-    [3, 10, 9, 21, 12, 10, 24, 11, 0, 0, 0, 0], 
-    [2, 7, 7, 9, 18, 11, 4, 17, 16, 9, 0, 0], 
-    [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7]],*/
     //choice 2
     [[45, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
     [22, 23, 11, 44, 0, 0, 0, 0, 0, 0, 0, 0], 
@@ -454,31 +426,11 @@ contract Nceno is RelayRecipient{
     partitionChoices = _newChoices;
   }
 
-  
   address ncenoAdmin = 0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a; //portis mainnet
 
   function setNcenoAdmin(address _newAdmin) onlyNcenoAdmin external{
     ncenoAdmin = _newAdmin;
   }
-
-  //set the valid heart rate threshold
-  uint hrThresh = 99;
-  function setHRthresh(uint _newThresh) onlyNcenoAdmin external{
-    hrThresh = _newThresh;
-  }
-
-  //---------for testing only!!!!!!!!!
-/*  function getTestETH() public{
-    getSender().transfer(500000000000000000);
-  }
-
-  function recoverETH(uint _eth) public{
-    admin.transfer(_eth*1000000000000000000);
-  }*/
-  //---------   /for testing only!!!!!!!!!
-
-  
-
   //--------------------------
   //--- /admin functions
   //--------------------------
