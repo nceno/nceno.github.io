@@ -125,14 +125,14 @@ $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
 $("#claimBtn").show();
 
-for(let h=1; h<13; h++){
+/*for(let h=1; h<13; h++){
   $('#btnU'+h).hide();
   
   $('#w'+h+'log').hide();
   $('#w'+h+'claim').hide();
   
   $('#week'+h).hide();
-}
+}*/
 
 //timestamps are in this format: yyyymmddT160000Z
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
