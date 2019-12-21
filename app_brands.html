@@ -83,44 +83,25 @@
             <ul class="navbar-nav align-items-center mr-auto">
               <li class="nav-item">
                 <a class="nav-link" href="index.html" role="button">
-                  Home
+                  Nceno
                 </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  About
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                  <a class="dropdown-item" href="instructions.html">
-                    <span>Instructions</span>
-                  </a>
-                  <a class="dropdown-item" href="team.html">
-                    <span>Team</span>
-                    
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="elevator.html">
-                    <span>What is Nceno?</span>
-                    
-                  </a>                 
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="comingsoon.html">
-                    <span>Whitepaper</span>
-                    
-                  </a>
-                </div>
               </li>
 
               <li class="nav-item">
+                <a class="nav-link" href="index.html" role="button">
+                  Redpoint Brewing Co.
+                </a>
+              </li>
+              
+              <li class="nav-item">
                 <a class="nav-link" href="app.html" role="button">
-                  App
+                  Need help?
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="corporatewellness.html" role="button">
-                  Corporate wellness
+                  Contact
                 </a>
               </li>
               <li class="nav-item dropdown">
@@ -146,18 +127,6 @@
     </header>
   <!-- header -->
 
-    <!-- alert -->
-      <!-- <section>   
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="trafficAlert">
-          The Ethereum network is experienceing high traffic currently... Transactions will take longer than usual.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <section>   -->
-    <!--/ alert -->
-
-
     <!-- welcome -->
     <section class="p-0 bg-dark">
       <div class="image image-overlay image-cover" style="background-image:url(app/assets/images/appcover.jpg)"
@@ -168,13 +137,13 @@
           <div class="col col-md-10 col-lg-8">
             <div class="row align-items-center">
               <div class="col-4 col-lg-3">
-                <img class="mr-3 avatar avatar-xl rounded" src="app/assets/images/black_logo.jpg" alt="Generic placeholder image">
+                <img class="mr-3 avatar avatar-xl rounded" src="app/assets/images/redpoint.png" alt="Generic placeholder image">
               </div>
               <div class="col">
                 <div class="row align-items-center">
-                  <div class="col-md-8">
-                    <h2 class="mb-0"style="color:#ffffff;">Welcome to <b style="color:#ccff00;">Nceno</b></h2>
-                    <span class="text-muted">Workout for a Payout</span>
+                  <div class="col-md-12">
+                    <h2 class="mb-0"style="color:#ffffff;">December Challenge</h2>
+                    <span class="text-muted">Powered by <a href="index.html" target="_blank" style="color:#ccff00;">Nceno</a></span>
                   </div>
                 </div>
               </div>
@@ -191,10 +160,11 @@
         <div class="row justify-content-center">
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
-              <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateNonce()">Host</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">Manage</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse(10)">Browse</a>
+              <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Start</a>
+              <!-- <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateNonce()">Host</a> -->
+              <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">Workout</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse(10)">Spend</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#POS" onclick="browse(10)">POS</a>
             </div>
           </div>
         </div>
@@ -261,7 +231,7 @@
 
                               <div class="row">
                                 <div class="col text-center mb-2 ">
-                                  <label class="form-check-label"><a href="instructions.html" target='_blank' style="color:#666666;" >Click here to read the instructions</a></label>
+                                  <label class="form-check-label"><a href="instructions.html" target='_blank' style="color:#666666;" >Click here for setup instructions</a></label>
                                 </div>
                               </div>
 
@@ -272,19 +242,20 @@
 
                       <div class="accordion" data-accordion>
                         <a id="register" class="accordion-control" data-control>
-                          <h5 style="color:#ffffff">Tools</h5>
+                          <h5 style="color:#ffffff">The challenge</h5>
                         </a>
                         <div class="accordion-content" data-content>
                           <div class = "row justify-content-center">
                             <div class="accordion-content-wrapper">
                               <div class="row">
-                                <div class="col text-center mb-2">
-                                  <a href='https://widget.kyber.network/v0.6.3/?type=swap&mode=popup&callback=https%3A%2F%2Fwww.nceno.app%2Fapp.html&paramForwarding=true&network=mainnet&pinnedTokens=ETH_USDC_DAI&defaultPair=DAI_ETH&theme=theme-sunset'class='btn btn-outline-white btn-rounded kyber-widget-button theme-sunset theme-supported btn-block py-1' name='KyberWidget - Powered by KyberNetwork' target='_blank' style="color:white;">Convert</a>
-                                  <br>
-                                  <a style="color:white;" id="openWallet" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Show wallet</a>
+                                <div class="col text-center mb-4">
+                                  <h6>Dec 1 - Dec 31<br> 30 km @4 RPT/km</h6>
+                          
+                                  <h6><b>Grand prize:</b> <br>The first person to log 30km gets a limited run Redpoint t-shirt</h6>
+                                  <p>Redpoint and Nceno have teamed up to let you turn your miles into beer! Log your workouts with Nceno to get Redpoint tokens (RPT) redeemable for food or drink of your choice at any of our locations. There are only a limited number of tokens available to claim, so get out there and workout for a payout before they're all gone! </p>
                                   
-                                                                  
-                                  <!-- <a style="color:white;" id="requestETH" class="btn btn-outline-white btn-rounded btn-block py-1" onclick="getTestETH()">Request testnet ETH</a>  -->
+                                  <a style="color:white;" id="joinChallenge" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Join this challenge</a>
+                                  
                                 </div>
                               </div>
 
@@ -295,14 +266,14 @@
 
                       <div class="accordion" data-accordion>
                         <a id="register" class="accordion-control" data-control>
-                          <h5 style="color:#ffffff">My user ID</h5>
+                          <h5 style="color:#ffffff">My wallet</h5>
                         </a>
                         <div class="accordion-content" data-content>
                           <div class = "row justify-content-center">
                             <div class="accordion-content-wrapper">
                               <div class="row">
                                 <div class="col text-center mb-2">
-                                  <span id="athleteInfo"> </span>
+                                  <a style="color:white;" id="openWallet" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Show wallet</a>
                                 </div>
                               </div>
 
@@ -375,24 +346,7 @@
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col text-center">
-
-                <h5 class="mb-2 fs-20 font-weight-normal">Log a workout, claim lost stake, or see your stats.</h5>
-                
-              <form>
-                <div class="row justify-content-center">
-                  <div class="form-group col-md-4 col-lg-offset-4">
-                    <label for="chIDtools">Select one of your challenges:</label>
-                    <select class="form-control" id="goalCategories">
-                      <optgroup id="upcomingGoals" label="Upcoming:"> </optgroup>
-                      <option id= "placeholder"></option>
-                      <optgroup id="activeGoals" label="Active:"> </optgroup>
-                      <optgroup id="completedGoals" label="Completed:"> </optgroup>
-                        <!--upcoming -->
-                    </select>
-                  </div>
-                </div>
-              </form>
-
+                <h5 class="mb-2 fs-20 font-weight-normal">Log a workout for tokens or see your stats.</h5>
               </div>
             </div>
 
@@ -400,37 +354,9 @@
                 <div id="dashboard" class="row justify-content-center">
                 <div class="col-md-12 col-lg-12">
                   <h5 class=" fs-20 font-weight-normal">The challenge you selected: <span id="selID" style="color:#ccff00;"></span></h5>
-                    <div class="row">
-                      <div class="col">
-                        <div class="table-responsive-md">
-                          <table class="table table-lined" id="echoParams">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">Buy-in</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">Sessions</th>
-                                <th scope="col">Minutes</th>
-                                <th scope="col">People</th>
-                                <th scope="col">Starting Date</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td style="color:#ccff00" id="echStake"></td>
-                                <td style="color:#ccff00" id="echWks"></td>
-                                <td style="color:#ccff00" id="echSes"></td>
-                                <td style="color:#ccff00" id= "echMins"></td>
-                                <td style="color:#ccff00" id= "echComp"></td>
-                                <td style="color:#ccff00" id= "echStart"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
+
 
                     <!-- accordion -->
-
                         <div class="component-example bg-dark text-nceno">
                           <div class="container">
                             <div class="row justify-content-center">
@@ -463,175 +389,13 @@
                                                           <b id="fin1" style="color:#ffffff;"></b> lost
                                                         </p>
                                                         <a id="w1log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w1claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal" >Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week2">
-                                                      <div >
-                                                        <span id="dl2"></span>
-                                                        <h4 id= "progW2" class="step-title"><b id="compl2" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock2" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus2" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un2" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin2" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w2log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w2claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week3">
-                                                      <div >
-                                                        <span id="dl3"></span>
-                                                        <h4 id= "progW3" class="step-title"><b id="compl3" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock3" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus3" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un3" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin3" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w3log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w3claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week4">
-                                                      <div >
-                                                        <span id="dl4"></span>
-                                                        <h4 id= "progW4" class="step-title"><b id="compl4" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock4" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus4" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un4" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin4" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w4log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w4claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div> 
-
-                                                    <div class="step " id= "week5">
-                                                      <div >
-                                                        <span id="dl5"></span>
-                                                        <h4 id= "progW5" class="step-title"><b id="compl5" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock5" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus5" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un5" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin5" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w5log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w5claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
+                                                        
                                                       </div>            
                                                     </div>
 
                                                     
-                                                    <div class="step " id= "week6">
-                                                      <div >
-                                                        <span id="dl6"></span>
-                                                        <h4 id= "progW6" class="step-title"><b id="compl6" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock6" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus6" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un6" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin6" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w6log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w6claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
 
-                                                    <div class="step " id= "week7">
-                                                      <div >
-                                                        <span id="dl7"></span>
-                                                        <h4 id= "progW7" class="step-title"><b id="compl7" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock7" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus7" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un7" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin7" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w7log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w7claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week8">
-                                                      <div >
-                                                        <span id="dl8"></span>
-                                                        <h4 id= "progW8" class="step-title"><b id="compl8" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock8" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus8" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un8" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin8" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w8log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w8claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week9">
-                                                      <div >
-                                                        <span id="dl9"></span>
-                                                        <h4 id= "progW9" class="step-title"><b id="compl9" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock9" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus9" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un9" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin9" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w9log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w9claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week10">
-                                                      <div >
-                                                        <span id="dl10"></span>
-                                                        <h4 id= "progW10" class="step-title"><b id="compl10" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock10" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus10" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un10" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin10" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w10log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w10claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week11">
-                                                      <div >
-                                                        <span id="dl11"></span>
-                                                        <h4 id= "progW11" class="step-title"><b id="compl11" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock11" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus11" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un11" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin11" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w11log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w11claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
-
-                                                    <div class="step " id= "week12">
-                                                      <div >
-                                                        <span id="dl12"></span>
-                                                        <h4 id= "progW12" class="step-title"><b id="compl12" style="color:#ccff00;"></b> workouts completed</h4>
-                                                        <p>
-                                                          <b id="lock12" style="color:#ffffff;"></b> locked up<br>
-                                                          <b id="bonus12" style="color:#ffffff;"></b> bonus<br>
-                                                          <b id="un12" style="color:#ffffff;"></b> unlocked<br>
-                                                          <b id="fin12" style="color:#ffffff;"></b> lost
-                                                        </p>
-                                                        <a id="w12log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log</a>
-                                                        <a id="w12claim" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#claimModal">Claim</a>
-                                                      </div>            
-                                                    </div>
+                                                    
 
                                                   </div>
                                                 <!-- / weeks -->       
@@ -1099,16 +863,7 @@
             <div class="col-md-5 text-center text-md-left">
               <ul class="nav">
                 <li class="nav-item">
-                  <a class="nav-link" target="_blank" href="https://t.me/nceno" >Support</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="careers.html">Careers</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="team.html">Team</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="legal.html" >Legal</a>
+                  <a class="nav-link" href="legal.html" >Terms of use</a>
                 </li>
 
               </ul>
