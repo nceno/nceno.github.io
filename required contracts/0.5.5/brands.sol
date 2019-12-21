@@ -72,7 +72,7 @@ contract Nceno is RelayRecipient{
         email : _email,
         myGoalCount : 0
     });
-    
+
 
     //add to registry
     profileOf[_stravaID] = createdCompetitor;
@@ -192,95 +192,6 @@ contract Nceno is RelayRecipient{
     //else revert("reported minutes not enough, timestamp already used, or weekly submission quota already met.");
     emit Log(_goalID, _stravaID, _activityID, _avgHR, _reportedMins, payout);
   }
-
-
-  function claim(bytes calldata _goalID, uint _stravaID)  external notPaused{
-    //must have 100% adherence for the previous week, and can only claim once.
-    require(profileOf[_stravaID].walletAdr == getSender() && goalAt[_goalID].isCompetitor[_stravaID]==true &&  
-      goalAt[_goalID].successes[_stravaID][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk && 
-      goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] == 0,
-      "wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week."
-    ); //getSender()
-
-    //uint winners;
-    uint cut;
-    uint pot;
-    uint logs;
-    uint payout = 1000000000000000000*goalAt[_goalID].lockedPercent[(now-goalAt[_goalID].startTime)/604800-1]*goalAt[_goalID].stakeUSD/(100*goalAt[_goalID].sesPerWk);
-    //loop over everyone's weekly logs and increase the week's pot from when someone skipped a workout
-    for(uint i =0; i<10; i++){
-    if(goalAt[_goalID].competitorIDs[i] != 0x0000000000000000000000000000000000000000000000000000000000000000){
-        //pot equals total weekly sessions minus total logs, all times payout
-        logs+= goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1];
-        //keep track of the number of winners, those with 100% adherence, in the previous week. 
-        /*if(goalAt[_goalID].successes[goalAt[_goalID].competitorIDs[i]][(now-goalAt[_goalID].startTime)/604800-1]==goalAt[_goalID].sesPerWk){
-          winners++; //TODO: could decrease gas by just referencing winnersWk[]...done
-        }*/
-
-      }
-    }
-    pot = payout*(goalAt[_goalID].competitorCount*goalAt[_goalID].sesPerWk - logs);
-    goalAt[_goalID].potWk[(now-goalAt[_goalID].startTime)/604800-1] = pot; //write to the global goal stats
-
-    //TODO: ensure this is in correct decimals, not Wei. 
-    //and indexed as previous week...
-    //the big 1000.... is supposed to fix the chart scale problem since payout is in cents, and this *was* in 1000000...
-    //if it doesnt fix it, try more or less 0's
-    cut = pot/(2*goalAt[_goalID].winnersWk[(now-goalAt[_goalID].startTime)/604800-1]); //2* should be replaced by a loss rate
-    
-    //protect against bonus double spending
-    goalAt[_goalID].claims[_stravaID][(now-goalAt[_goalID].startTime)/604800-1] = 1;
-
-    //getSender().transfer(cut); //ether payout
-    
-    DAI_ERC20.transfer(getSender(), cut); //stablecoin payout
-
-    //adjust the unclaimedStake
-    goalAt[_goalID].unclaimedStake-= cut; //convert to usd
-
-    emit Claim(_goalID, _stravaID, cut);
-  }
-
-  //----------------------
-  //---ChainLink functions------
-  //----------------------
-/*  function getActivities(address _oracle, bytes _jobId, string _accessToken) public {
-    Chainlink.Request memory req = buildChainlinkRequest(_jobId, this, this.fulfillID.selector); //fulfillID must match one of the below's
-    req.add("access_token", _accessToken);
-    req.addUint("before", now);
-    req.addUint("after", now - 7 days); //
-    
-    req.add("copyPath", "0.id");
-    req.add("copyPath", "0.elapsed_time");
-    req.add("copyPath", "0.average_heartrate");
-
-    req.add("copyPath", "1.id");
-    req.add("copyPath", "1.elapsed_time");
-    req.add("copyPath", "1.average_heartrate");
-
-    req.add("copyPath", "2.id");
-    req.add("copyPath", "2.elapsed_time");
-    req.add("copyPath", "2.average_heartrate");
-    sendChainlinkRequestTo(_oracle, req, oraclePayment); //oraclePayment = 1*LINK
-  }
-
-
-  //fulfillment functions called with response data
-  function fulfillID(uint _stravaID, bytes _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
-    profileOf[_stravaID].CL_id = _data;
-  }
-
-  function fulfillTime(uint _stravaID, bytes _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
-    profileOf[_stravaID].CL_elapsed_time = _data;
-  }
-
-  function fulfillHR(uint _stravaID, bytes _requestId, uint256 _data) public recordChainlinkFulfillment(_requestId){
-    profileOf[_stravaID].CL_average_heartrate = _data;
-  }*/
-
-  //----------------------
-  //---  /ChainLink functions------
-  //----------------------
 
 
   //getters for UI
@@ -411,24 +322,6 @@ contract Nceno is RelayRecipient{
   }
 
 
-  //get upcoming goal: only returns a user's goal if it hasn't yet started
-  function getUpcomingGoal(uint _stravaID, uint _index) external view returns(bytes memory){
-    require(now < profileOf[_stravaID].mygoalInstance[_index].startTime );
-    return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
-  }
-
-  //get active goal: only returns a user's goal if it has already started
-  function getActiveGoal(uint _stravaID, uint _index) external view returns(bytes memory){
-    require((0 < now - profileOf[_stravaID].mygoalInstance[_index].startTime) && (now-profileOf[_stravaID].mygoalInstance[_index].startTime < profileOf[_stravaID].mygoalInstance[_index].wks*604800));
-    return(profileOf[_stravaID].mygoalInstance[_index].goalID);    
-  }
-
-  //get completed goal: only returns a user's goal if it has completed
-  function getCompletedGoal(uint _stravaID, uint _index) external view returns(bytes memory){
-    require(now > profileOf[_stravaID].mygoalInstance[_index].startTime + profileOf[_stravaID].mygoalInstance[_index].wks*604800);
-    return(profileOf[_stravaID].mygoalInstance[_index].goalID);
-  }
-
   function getProfile(uint _stravaID) external view returns(address, uint, bytes memory, uint, uint){
     return(profileOf[_stravaID].walletAdr, profileOf[_stravaID].born , profileOf[_stravaID].flag , profileOf[_stravaID].OS , profileOf[_stravaID].myGoalCount);
   }
@@ -458,8 +351,6 @@ contract Nceno is RelayRecipient{
 
     }
 
-
-
   //-----------------------------------------------
   //---  /gas station relay stuff
   //-----------------------------------------------
@@ -474,25 +365,12 @@ contract Nceno is RelayRecipient{
   address DAI_ERC20_address_ropsten = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;//ropsten
   address DAI_ERC20_address_main = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359; //mainnet 
   address ETH_ERC20_Address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
-  address KyberNetworkProxy_Address = 0x818E6FECD516Ecc3849DAf6845e3EC868087B755; //ropsten, mainnet
-
   
   ERC20 internal ETH_ERC20 = ERC20(ETH_ERC20_Address); //kyber ether proxy
 
   //ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_ropsten);
   ERC20 internal DAI_ERC20 = ERC20(DAI_ERC20_address_main);
   
-  event Swap(address indexed sender, ERC20 destToken, uint amount);
-  KyberNetworkProxy public proxy = KyberNetworkProxy(KyberNetworkProxy_Address);
-
-  function execSwap(ERC20 token, address destAddress) public payable {
-      uint minConversionRate;
-      (minConversionRate,) = proxy.getExpectedRate(ETH_ERC20, token, msg.value);
-      uint destAmount = proxy.swapEtherToToken.value(msg.value)(token, minConversionRate);
-      require(token.transfer(destAddress, destAmount));
-      emit Swap(getSender(), token, destAmount);
-  } 
-
   //--------------------------
   //--- /kyber stuff 
   //--------------------------
@@ -501,11 +379,6 @@ contract Nceno is RelayRecipient{
   //--------------------------
   //--- admin functions
   //--------------------------
-
-  //admin-defined cash out
-  function cashout(uint _dollars) public onlyNcenoAdmin notHalted notPaused{
-      DAI_ERC20.transfer(ncenoAdmin, _dollars*1000000000000000000);
-  }
 
   modifier onlyNcenoAdmin(){
     require(getSender() == ncenoAdmin,"Sender not authorized."); //getSender()
@@ -530,27 +403,9 @@ contract Nceno is RelayRecipient{
   }
 
   //halt is stronger than pause
-  function setHalt(bool _status) onlyNcenoAdmin external {
-    halted = _status;
-    paused = _status;
-  }
-
-  function setPause(bool _status) onlyNcenoAdmin external {
-    halted = _status;
-    paused = _status;
-  }
-
-  //cashout a goal slot (useful for iterating)
-  function liquidateGoalInstance(uint _index) onlyNcenoAdmin external{
-  //can only call one week after a goal is finished
-  require(goalInstance[_index].liquidated == false && now > goalInstance[_index].startTime + (goalInstance[_index].wks+1)*604800, "Goal already liquidated, or Goal has not finished yet.");
-  //transfer the money
-  DAI_ERC20.transfer(ncenoAdmin, goalInstance[_index].unclaimedStake);
-  //close the goal
-  goalInstance[_index].liquidated = true;
-
-  emit LiquidateInstance(goalInstance[_index].unclaimedStake);
-
+  function setHalt(bool _haltstatus, bool _pausestatus) onlyNcenoAdmin external {
+    halted = _haltstatus;
+    paused = _pausestatus;
   }
 
   //cashout a specific goal
