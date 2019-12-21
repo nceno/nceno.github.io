@@ -72,6 +72,7 @@ contract Nceno is RelayRecipient{
         email : _email,
         myGoalCount : 0
     });
+    
 
     //add to registry
     profileOf[_stravaID] = createdCompetitor;
