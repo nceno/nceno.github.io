@@ -1,5 +1,5 @@
 //initialize portis
-const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'kovan', { gasRelay: true, scope: ['email'] });
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
 
 var Nceno = new web3.eth.Contract([
