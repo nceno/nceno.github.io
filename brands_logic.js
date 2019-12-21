@@ -105,7 +105,7 @@ $("#acctLoader").hide();
 $("#acctSuccess").hide();
 $("#createLoader").hide();
 $("#createSuccess").hide();
-$("#dashboard").hide();
+//$("#dashboard").hide();
 $("#logLoader").hide();
 $("#logSuccess").hide();
 $("#claimLoader").hide();
@@ -1647,7 +1647,7 @@ function getToken(){
 
     }
   });
-  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret=e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3&code='+code+'&grant_type=authorization_code');
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
