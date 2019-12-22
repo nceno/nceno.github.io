@@ -496,14 +496,143 @@
         <!-- / browse -->
 
         <!--pos -->
-          <div class="tab-pane" id="pos" role="tabpanel" aria-labelledby="pos">
+        <!-- browse -->
+          <div class="tab-pane" id="pos" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
-              <div class="col text-center">
-                <h5 class="mb-2 fs-20 font-weight-normal"><span style="color:#f442b3;" id="tokenBalance">casey.r442</span> just paid <span style="color:#ccff00;" id="tokenBalance">1200 RPT</span> for <span style="color:#ccff00;" id="tokenBalance">redpoint burger</span>. <br>Confirmation number <span style="color:#ccff00;" id="tokenBalance">0x443af2</span></h5>
+              <div class="col-md-10 col-lg-8">
+                <h5 class="mb-2 fs-20 font-weight-normal">View or search for recent orders </h5>
+                  <div class="input-group rounded">
+                    <input id="searchField" type="text" class="form-control px-2" placeholder="Search by order number ..." aria-label="Search challenges">
+                    <div class="input-group-append">
+                      <button onclick="search()" class="btn btn-primary" type="button">Search</button>
+                    </div>
+                  </div>
               </div>
             </div>
-                    
+
+            <div class="row justify-content-center">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <h5 class="mb-2 fs-20 font-weight-normal">New order #0x4cb123 from <span style="color:#ccff00;" id="tokenBalance">rogerliu</span>: <br><span style="color:#ccff00;" id="tokenBalance">Apple Pie, 450 RPT </span> </h5>
+                </div>
+              </div>
+              <div class="col-md-10 col-lg-10">
+
+              <!--echo -->
+                <div id="request" class="row justify-content-center">
+                <div class="col-md-12 col-lg-12">
+                  <h5 class="mb-2 fs-20 font-weight-normal">The order you requested: </h5>
+                  <div class="row">
+                    <div class="col">
+                      <div class="table-responsive-md">
+                        <table class="table table-lined" id="echoParams">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">order #</th>
+                                <th scope="col">name</th>
+                                <th scope="col">item</th>
+                                <th scope="col">cost</th>
+                                <th scope="col">date</th>
+                              </tr>
+                            </thead>
+                            <tbody >
+                              <tr>
+                                <td style="color:#ccff00" id="srOrder"></td>
+                                <td style="color:#ccff00" id="srName"></td>
+                                <td style="color:#ccff00" id="srItem"></td>
+                                <td style="color:#ccff00" id= "srCost"></td>
+                                <td style="color:#ccff00" id= "srDate"></td>
+                                
+                                <!-- <td><button type="button" id="srJoin" onclick="updateEthPrice('joinSearch')" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">Join</button></td> -->
+                                <td><button type="button" id="srJoin" onclick="search()" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">Refund</button></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- / echo-->
+
+                <!-- <h5 class="mb-2 fs-20 font-weight-normal">Here's the challenges that are starting soon: </h5> -->
+                <div class="row">
+                  <div class="col">
+                    <div class="table-responsive-md">
+                      <table class="table table-lined" id="soonGoals">
+                        <thead  class="thead-dark">
+                          <tr>
+                            <th scope="col">order #</th>
+                            <th scope="col">name</th>
+                            <th scope="col">item</th>
+                            <th scope="col">price (RPT)</th>
+                            <th scope="col">date</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        
+                          <tbody id="startingSoon">
+                            
+                            <tr id="U1">
+                              <td id = "orderU1">0x1ad0ff</td>
+                              <td id = "nameU1">casey.huang6</td>
+                              <td id = "itemU1">Redpoint Burger</td>
+                              <td id = "costU1">1200</td>
+                              <td id = "dateU1">Dec 21, 9:45pm</td>
+                              
+                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
+                              <span id="idNumberU1"></span>
+                              <span id="tstampU1"></span>
+                            </tr>
+
+                            <tr id="U2">
+                              <td id = "orderU1">0xacf993</td>
+                              <td id = "nameU1">jeffzhao2</td>
+                              <td id = "itemU1">Coca cola</td>
+                              <td id = "costU1">95</td>
+                              <td id = "dateU1">Dec 21, 9:47pm</td>
+                              
+                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
+                              <span id="idNumberU1"></span>
+                              <span id="tstampU1"></span>
+                            </tr>
+
+                            <tr id="U3">
+                              <td id = "orderU1">0xccff00</td>
+                              <td id = "nameU1">joe</td>
+                              <td id = "itemU1">Shot of Jack</td>
+                              <td id = "costU1">950</td>
+                              <td id = "dateU1">Dec 22, 5:34pm</td>
+                              
+                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
+                              <span id="idNumberU1"></span>
+                              <span id="tstampU1"></span>
+                            </tr>
+
+                            <tr id="U4">
+                              <td id = "orderU1">0x3d11a5</td>
+                              <td id = "nameU1">codyg3354</td>
+                              <td id = "itemU1">Long Dong Lager</td>
+                              <td id = "costU1">750</td>
+                              <td id = "dateU1">Dec 22, 6:03pm</td>
+                              
+                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
+                              <span id="idNumberU1"></span>
+                              <span id="tstampU1"></span>
+                            </tr>
+
+                            <!--upcoming challenges go here -->
+
+                          </tbody>
+                        
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        <!-- / browse -->
         <!-- / pos -->           
         </div>
       </div>
