@@ -179,6 +179,10 @@ contract Nceno is RelayRecipient{
     emit Log(_goalID, _stravaID, _activityID, _avgHR, _reportedMins, payout);
   }
 
+  function buy(string _buyer, string _item, uint _price, bytes _confNum) public{
+    //transfer _price tokens from getSender() to _brandOwner
+    //emit buy() event
+  }
 
   //getters for UI
   //get goal
