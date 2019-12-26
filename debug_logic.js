@@ -24,7 +24,7 @@ var valueMultiplier = 1.04;
 
 //datepicker initializer
 var first = new Date();
-first.setDate(first.getDate() + 1);
+first.setDate(first.getDate() + 0 - 8);
 //$('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $('[data-toggle="datepicker"]').datepicker({'autoHide': true, 'startDate': first});
 $("#time").click(function(){
@@ -1467,7 +1467,7 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 10,
+    min: 5,
     max: 200,
     step: 5,
     value: 30,
