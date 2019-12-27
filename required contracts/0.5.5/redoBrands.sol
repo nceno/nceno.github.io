@@ -143,14 +143,24 @@ contract NcenoBrands is RelayRecipient{
   function join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode){
     require(goalAt[_goalID].isPlayer[_stravaID] == false && keccak256(_inviteCode) == keccak256(goalAt[_goalID].inviteCode));
 
+    if(userExists[_stravaID] == false){
+      player memory createdPlayer = player({
+        stravaID : _stravaID,
+        userName : _userName,
+        walletAdr : getSender()
+      });
+      //add to registry
+      profileOf[_stravaID] = createdPlayer;
+      userExists[_stravaID] = true;
+      emit MakeUser();
+    }
+
     goalAt[_goalID].playerSet[0]=_stravaID;
     goalAt[_goalID].playerKms[_stravaID] = 0;
     goalAt[_goalID].playerMins[_stravaID] = 0;
     goalAt[_goalID].isPlayer[_stravaID]=true;
     goalAt[_goalID].compCount++;
-
     emit Join();
-    emit MakeUser();
   }
 
   function log(bytes _secret){
