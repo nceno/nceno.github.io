@@ -165,16 +165,19 @@ contract Nceno is RelayRecipient{
   }
 
   function buy(string _buyer, string _item, uint _price, bytes _orderNum) public{
-    //transfer _price tokens from getSender() to _brandOwner
+    
+    //todo: transfer _price tokens from getSender() to _brandOwner
+    
 
-    emit Buy(_orderNum, _buyer, _item, _price, now, false); 
+    emit Buy(); 
   }
 
-  //mark as delivered
-/*  function refund(bytes _orderNum, bytes _goalID){
+
+  function refund(bytes _orderNum, bytes _goalID){
     require(goalAt[_goalID].owner == getSender())
-    goalAt[_goalID].orders[_orderNum].status = true;
-  }*/
+    
+    //todo: transfer tokens back to buyer
+  }
 
   //getters for UI
   //get goal
