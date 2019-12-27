@@ -57,6 +57,8 @@ contract NcenoBrands is RelayRecipient{
     mapping(bytes=>order) orderSet;
     mapping(uint=>uint) playerKms;
     mapping(uint=>uint) playerMins;
+    mapping(uint=>uint) playerPayout;
+    mapping(uint=>uint) lastLog;
 
     mapping(uint=>bool) activitySpent;
     mapping(uint=>bool) isPlayer;
@@ -102,7 +104,7 @@ contract NcenoBrands is RelayRecipient{
     emit MakeToken();
   }
 
-  function hostKm(byted _goalID, uint _start, uint _days, uint _kms, uint _pot, uint _rewardRate, string _inviteCode){
+  function hostKm(byted _goalID, uint _start, uint _days, uint _kms, uint _pot, uint _rewardRate, string _inviteCode)public payable{
     goal memory createdGoal = goal({
       inviteCode: _inviteCode,
       goalID: _goalID,
@@ -121,7 +123,7 @@ contract NcenoBrands is RelayRecipient{
     emit MakeGoal();
   }
 
-  function hostBpm(byted _goalID, uint _start, uint _days, uint _mins, uint _pot, uint _rewardRate, string _inviteCode){
+  function hostBpm(byted _goalID, uint _start, uint _days, uint _mins, uint _pot, uint _rewardRate, string _inviteCode) public payable{
     goal memory createdGoal = goal({
       inviteCode: _inviteCode,
       goalID: _goalID,
@@ -140,8 +142,10 @@ contract NcenoBrands is RelayRecipient{
     emit MakeGoal();
   }
 
-  function join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode){
-    require(goalAt[_goalID].isPlayer[_stravaID] == false && keccak256(_inviteCode) == keccak256(goalAt[_goalID].inviteCode));
+  function join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode) public notHalted{
+    require(now < goalAt[_goalID].start+goalAt[_goalID].days 
+      && goalAt[_goalID].isPlayer[_stravaID] == false 
+      && keccak256(_inviteCode) == keccak256(goalAt[_goalID].inviteCode));
 
     if(userExists[_stravaID] == false){
       player memory createdPlayer = player({
@@ -149,7 +153,6 @@ contract NcenoBrands is RelayRecipient{
         userName : _userName,
         walletAdr : getSender()
       });
-      //add to registry
       profileOf[_stravaID] = createdPlayer;
       userExists[_stravaID] = true;
       emit MakeUser();
@@ -163,12 +166,26 @@ contract NcenoBrands is RelayRecipient{
     emit Join();
   }
 
-  function log(bytes _secret){
-    require(keccak256(_secret) == keccak256());
+  function log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes _secret) public notHalted{
+    require(now-goalAt[_goalID].lastLog[_stravaID] >13 hours 
+      && now > goalAt[_goalID].start 
+      && now < goalAt[_goalID].start+goalAt[_goalID].days 
+      && keccak256(_secret) == keccak256(?));
+    goalAt[_goalID].playerKms[]+= _kms;
+    goalAt[_goalID].playerMins[]+= _mins;
+    uint memory payout = _kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
+
+    //todo: token payout transfer
+
+    goalAt[_goalID].activitySpent[_actID] = true;
+    goalAt[_goalID].lastLog[_stravaID] = now;
+    goalAt[_goalID].playerPayout += payout;
+    emit Log();
 
   }
   
   function buy(){
+
 
     emit MakeOrder();
   }
