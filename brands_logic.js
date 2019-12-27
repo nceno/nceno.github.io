@@ -1416,10 +1416,10 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 20,
-    max: 120,
+    min: 10,
+    max: 100,
     step: 5,
-    value: 45,
+    value: 30,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal1",
     circleShape: "pie",
@@ -1433,10 +1433,10 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 2,
-    max: 7,
-    step: 1,
-    value: 3,
+    min: 100,
+    max: 2000,
+    step: 10,
+    value: 700,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal2",
     circleShape: "pie",
@@ -1450,10 +1450,10 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 2,
-    max: 12,
-    step: 2,
-    value: 6,
+    min: 7,
+    max: 60,
+    step: 1,
+    value: 30,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal3",
     circleShape: "pie",
@@ -1467,10 +1467,10 @@ window.onload = function() {
     width: 14,
     handleSize: "30,15",
     handleShape: "circle",
-    min: 10,
-    max: 200,
-    step: 5,
-    value: 30,
+    min: 1,
+    max: 10,
+    step: 1,
+    value: 4,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal4",
     circleShape: "pie",
@@ -1489,16 +1489,16 @@ window.onload = function() {
 
 //chart tool tips
 function tooltipVal1(args) {
-    return args.value + " mins";
+    return args.value + " km";
 }
 function tooltipVal2(args) {
-    return args.value + "x per week";
+    return args.value + " RPT pot";
 }
 function tooltipVal3(args) {
-    return "for "+args.value + " weeks";
+    return "for "+args.value + " days";
 }
 function tooltipVal4(args) {
-    return "$"+args.value + " at stake";
+    return args.value + " RPT/km";
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
