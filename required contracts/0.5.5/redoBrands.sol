@@ -20,6 +20,7 @@ contract NcenoBrands is RelayRecipient{
   event Join();
   event Log();
   event MakeToken();
+  event Refund();
   
 
   //gas station init
@@ -51,10 +52,9 @@ contract NcenoBrands is RelayRecipient{
     uint tokenPot;
     uint kmTokenRate;
     uint bpmTokenRate;
-    string company;
+    address owner;
     uint compCount=0;
     mapping(uint=>uint) playerSet;
-    mapping(bytes=>order) orderSet;
     mapping(uint=>uint) playerKms;
     mapping(uint=>uint) playerMins;
     mapping(uint=>uint) playerPayout;
@@ -81,8 +81,8 @@ contract NcenoBrands is RelayRecipient{
     uint stravaBuyer;
     uint price;
     uint date;
-    bool filled;
-    string company;
+    bool refunded;
+    bytes company;
   }
   mapping(bytes=>order) orderAt;
   //---- /objects
@@ -113,7 +113,7 @@ contract NcenoBrands is RelayRecipient{
       kms: _kms,
       tokenPot: _pot,
       kmTokenRate: _rewardRate,
-      company: companyOf[getSender()]
+      owner: getSender()
     });
     companyOf[getSender()].goalSet[_goalID] = createdGoal;
     goalAt[_goalID] = createdGoal;
@@ -132,7 +132,7 @@ contract NcenoBrands is RelayRecipient{
       activeMins: _mins,
       tokenPot: _pot,
       bpmTokenRate: _rewardRate,
-      company: companyOf[getSender()]
+      owner: getSender()
     });
     companyOf[getSender()].goalSet[_goalID] = createdGoal;
     goalAt[_goalID] = createdGoal;
@@ -142,10 +142,11 @@ contract NcenoBrands is RelayRecipient{
     emit MakeGoal();
   }
 
-  function join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode) public notHalted{
+  function join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode) public {
     require(now < goalAt[_goalID].start+goalAt[_goalID].days 
       && goalAt[_goalID].isPlayer[_stravaID] == false 
-      && keccak256(_inviteCode) == keccak256(goalAt[_goalID].inviteCode));
+      && keccak256(_inviteCode) == keccak256(goalAt[_goalID].inviteCode)
+      && goalAt[_goalID].halted == false);
 
     if(userExists[_stravaID] == false){
       player memory createdPlayer = player({
@@ -166,11 +167,12 @@ contract NcenoBrands is RelayRecipient{
     emit Join();
   }
 
-  function log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes _secret) public notHalted{
+  function log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes _secret) public{
     require(now-goalAt[_goalID].lastLog[_stravaID] >13 hours 
       && now > goalAt[_goalID].start 
       && now < goalAt[_goalID].start+goalAt[_goalID].days 
-      && keccak256(_secret) == keccak256(?));
+      && keccak256(_secret) == keccak256(?)
+      && goalAt[_goalID].halted == false);
     goalAt[_goalID].playerKms[]+= _kms;
     goalAt[_goalID].playerMins[]+= _mins;
     uint memory payout = _kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
@@ -184,18 +186,37 @@ contract NcenoBrands is RelayRecipient{
 
   }
   
-  function buy(){
+  function buy(bytes _companyID, bytes _orderNum, uint _buyer, string _item, uint _price){
+    require(goalAt[_goalID].halted == false);
 
+    //todo: transfer tokens to owner
 
+    order memory createdOrder =({
+      orderNum: _orderNum,
+      item: _item,
+      stravaBuyer: _buyer,
+      price: _price,
+      date: now,
+      refunded: false,
+      company: _companyID
+    });
+    companyAt[_companyID].orderSet[_orderNum]=createdOrder;
+    profileOf[_stravaID].orderSet[_orderNum]=createdOrder;
+    orderAt[_orderNum]=createdOrder;
+    
     emit MakeOrder();
   }
 
-  function halt(bytes _goalID, bool _status){
-    goalAt[_goalID].halted = _status;
+  function refund(bytes _orderNum){
+    require(goalAt[_goalID].owner == getSender())
+    
+    //todo: transfer tokens back to buyer
+    emit Refund();
   }
 
-  function discrBonus(){
-
+  function halt(bytes _goalID, bool _status)public{
+    require(goalAt[_goalID].owner = getSender());
+    goalAt[_goalID].halted = _status;
   }
   //---- /main functions
 
@@ -220,12 +241,6 @@ contract NcenoBrands is RelayRecipient{
 
   }
   //----- /getters
-
-  //modifiers
-  modifier notHalted(){
-    require(halted == false,"App is halted.");
-    _;
-  }
 }
 
 // factory stuff

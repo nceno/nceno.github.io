@@ -86,8 +86,7 @@ contract Nceno is RelayRecipient{
     profileOf[_stravaID].mygoalInstance[profileOf[_stravaID].myGoalCount] = createdGoal;
     profileOf[_stravaID].myGoalCount++;
 
-    //kyber step... must use correct decimals. DAI has 18, USDC has 6
-    execSwap(DAI_ERC20, address(this));
+
 
     emit Host(_goalID, _activeMins, _stakeUSD, _sesPerWk, _wks, _startTime, _stravaID, _ethPricePennies);
   }
@@ -146,7 +145,6 @@ contract Nceno is RelayRecipient{
       payout = 1000000000000000000*goalAt[_goalID].stakeUSD*goalAt[_goalID].lockedPercent[wk]/(100*goalAt[_goalID].sesPerWk);
       //getSender().transfer(payout); //ether payout
       
-      DAI_ERC20.transfer(getSender(), payout); //stablecoin payout
 
       //increase winnersWk if this is the final workout of the week
       if(goalAt[_goalID].successes[_stravaID][wk] == goalAt[_goalID].sesPerWk-1){
