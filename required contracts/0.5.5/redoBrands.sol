@@ -38,7 +38,7 @@ contract NcenoBrands is RelayRecipient{
     uint orderCount=0;
     mapping(uint=>order) indexedOrder;
     string tokenSymbol;
-    address tokenAddress;
+    address BrandToken_Address = 0xaa6D458402F60fD3Bd25163575031ACDce07538D;
   }
   mapping(bytes=>company) public companyAt;
   mapping(address=>company) public companyOf;
@@ -108,6 +108,16 @@ contract NcenoBrands is RelayRecipient{
   //---- /objects
 
   //main functions
+  function makeToken(uint _supply, address _owner, string _symbol, string _companyName) public returns(address){
+    BrandToken createdToken = new BrandToken({
+      supply: _supply,
+      owner: _owner,
+      symbol: _symbol
+    });
+    emit MakeToken(_symbol, address(createdToken), _supply, _owner, _companyName);
+    return address(createdToken);
+  }
+
   function makeCompany(string _name, bytes _companyID, string _symbol, uint _supply) public{
     company memory createdCompany = company({
       name : _name,
@@ -119,10 +129,12 @@ contract NcenoBrands is RelayRecipient{
     companyAt[_companyID] = createdCompany;
     companyCount++;
 
-    //todo: make token
+    //todo: make token (make token separately first before company)
+    ERC20 internal BrandToken = ERC20(BrandToken_Address);
+
+    //todo:set token address
 
     emit makeCompany(_companyID, _name, getSender(), _symbol);
-    emit MakeToken(_symbol, _address, _supply, getSender(), _company);
   }
 
   function hostKm(byted _goalID, uint _start, uint _days, uint _kms, uint _pot, uint _rewardRate, bytes _inviteCodeHash)public payable{
@@ -209,6 +221,7 @@ contract NcenoBrands is RelayRecipient{
     }
 
     //todo: token payout transfer
+    BrandToken.transfer(getSender(), payout);
 
     goalAt[_goalID].potRemaining-=payout;
 
@@ -289,18 +302,17 @@ contract NcenoBrands is RelayRecipient{
   //gas station relay stuff
 
   function acceptRelayedCall(address relay, address from, bytes calldata encodedFunction, uint256 transactionFee, uint256 gasPrice, uint256 gasLimit, uint256 nonce, bytes calldata approvalData, uint256 maxPossibleCharge) external view returns (uint256, bytes memory) {
-        return (0, "");
+      return (0, "");
     }
 
     function preRelayedCall(bytes calldata context) /*relayHubOnly*/ external returns (bytes32) {
-        return bytes32(uint(123456));
+      return bytes32(uint(123456));
     }
 
     function postRelayedCall(bytes calldata context, bool success, uint actualCharge, bytes32 preRetVal) /*relayHubOnly*/ external {
     }
     
     function _withdrawDeposits(uint256 amount, address payable payee) external onlyNcenoAdmin{
-
     }
   //---  /gas station relay stuff
 
@@ -312,28 +324,59 @@ contract NcenoBrands is RelayRecipient{
   modifier onlyNcenoAdmin(){
     require(getSender() == ncenoAdmin,"Sender not authorized.");
     _;
-  }
+  } 
 }
 
 // token factory stuff
-contract MyContract is ERC20Mintable, ERC20Burnable {
-  using SafeMath for uint256;
-  address[] public tokens;
-  constructor(address[] memory _tokens) public {
-      tokens = _tokens;
+contract BrandToken {
+  constructor(uint _supply, address _owner, string _symbol, string _name) public {
+    balances[_owner]= _supply;
   }
-  function testBurn(address account, uint amount) public {
-      _burn(account, amount);
+
+  mapping(address => uint256) balances;
+  mapping(address => mapping (address => uint256)) allowed;
+  uint public constant totalSupply = _supply;
+  string public constant name = _name;
+  uint8 public constant decimals = 0;
+  string public constant symbol = _symbol;
+  
+  event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+  event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+  function totalSupply() constant returns (uint256 theTotalSupply) {
+    theTotalSupply = _totalSupply;
+    return theTotalSupply;
   }
-  function getTokens() public view returns(address[] memory) {
-      return tokens;
+  
+  function balanceOf(address _owner) constant returns (uint256 balance) {
+    return balances[_owner];
+  }
+  
+  function approve(address _spender, uint256 _amount) returns (bool success) {
+    allowed[msg.sender][_spender] = _amount;
+    Approval(msg.sender, _spender, _amount);
+    return true;
+  }
+  
+  function transfer(address _to, uint256 _amount) returns (bool success) {
+    if (balances[msg.sender] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {
+      balances[msg.sender] -= _amount;
+      balances[_to] += _amount;
+      Transfer(msg.sender, _to, _amount);
+      return true;
+    } else {return false;}
+  }
+   
+  function transferFrom(address _from, address _to, uint256 _amount) returns (bool success) {
+    if (balances[_from] >= _amount && allowed[_from][msg.sender] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {
+      balances[_from] -= _amount;
+      balances[_to] += _amount;
+      Transfer(_from, _to, _amount);
+      return true;
+    } else {return false;}
+  }
+  
+  function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+    return allowed[_owner][_spender];
   }
 }
-contract MyFactory {
-  function newMyContract() public returns(address)
-  {
-    MyContract myContract = new MyContract(new address[](0));
-    return address(myContract);
-  }
-}
-//----- /token factory stuff
