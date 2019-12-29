@@ -212,20 +212,6 @@
                                 <img  src="app/assets/images/loader.svg">
                               </div>
                               
-                              <!-- <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn" onclick="getTestETH()">Once: Create Nceno profile</a> -->
-                              <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn">Once: Create Nceno profile</a>
-                              
-
-                              <div id="acctLoader" class="col text-center ">
-                                <p>Please wait a minute. We're making space for you on the blockchain...</p> 
-                                <span id="acctFail"></span>
-                                <img  src="app/assets/images/loader.svg">
-                              </div>
-
-                              <!-- <a id="rawBtn" style="color:black;" onclick="getRawHR()" class="btn btn-rounded btn-primary btn-block">get raw HR</a> -->
-
-                             <!--  <a style="color:black;" id="testStravaApi" class="btn btn-primary btn-block px-2" onclick="getActivities()">call Strava API</a> -->
-
                               <div class="row">
                                 <div class="col text-center mb-2 ">
                                   <label class="form-check-label"><a href="instructions.html" target='_blank' style="color:#666666;" >Click here for setup instructions</a></label>
@@ -252,6 +238,11 @@
                                   <p>Redpoint and Nceno have teamed up to let you turn your miles into beer! Log your workouts with Nceno to get Redpoint tokens (RPT) redeemable for food or drink of your choice at any of our locations. There are only a limited number of tokens available to claim, so get out there and workout for a payout before they're all gone! </p>
                                   
                                   <a style="color:white;" id="joinChallenge" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Join this challenge</a>
+                                  <div id="joinChallengeLoader" class="col text-center ">
+                                    <p>Adding you to the challenge...</p> 
+                                    <span id="joinChallengeFail"></span>
+                                    <img  src="app/assets/images/loader.svg">
+                                  </div>
                                   
                                 </div>
                               </div>
@@ -946,6 +937,7 @@
 
       <script src="utils.js"></script>
       
+      <script>const brandGoalID = burger;</script>
       <script src="brands_abi.js"></script>
       <script src="kyberProxy.js"></script>
       <!--<script src="chartdata.js"></script>   -->

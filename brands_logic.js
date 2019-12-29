@@ -224,6 +224,42 @@ $("#makeAcctBtn").click(function() {
   }).once('error', function(error){console.log(error);});
 });
 
+//brands join
+$("#joinChallenge").click(function() {
+  NcenoBrands.methods.join(
+    brandGoalID,
+    stravaID,
+    chosenUserName,
+    inviteCodeInput)
+  .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+    function(error, result) {
+      if (!error){
+
+        $("#joinChallenge").hide();
+        $("#joinChallengeLoader").show();
+        console.log(result);
+      }
+      else
+      console.error(error);
+    }
+  ).once('confirmation', function(confNumber, receipt){ 
+    console.log(receipt.status);
+    if(receipt.status === true){
+      updateNonce();
+      $("#joinChallengeLoader").hide();
+      $("joinChallenge").hide();
+    }
+    else{
+      $("#joinChallengeLoader").hide();
+      $("#joinChallenge").hide();
+      $('#joinChallengeFail').html('<p>Sorry, invite code invalid or challenge has stopped.</p>');
+      console.log("profile already exists!");
+    } 
+  }).once('error', function(error){console.log(error);});
+});
+
+
+
 function createUser(){
   localize();
   Nceno.methods.userExists(

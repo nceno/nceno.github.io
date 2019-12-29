@@ -5,11 +5,8 @@ import "./IRelayHub.sol";
 import "./RelayRecipient.sol";
 import "./ERC20Interface.sol";
 
-//inherit gas station relay contract
-//inherit chainlink contracts... but may need to alter RelayRecipient.sol as: RelayRecipient is ChainlinkClient
+
 contract NcenoBrands is RelayRecipient{
-  //contract Nceno is ChainlinkClient{
-  //contract Nceno{
 
   event MakeUser(address _wallet, uint _stravaID, string _userName);
   event MakeGoal(bytes _goalID, address _owner, bytes _inviteCodeHash);
@@ -20,7 +17,6 @@ contract NcenoBrands is RelayRecipient{
   event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
   event Refund(bytes _orderNum, uint _buyer, uint _date, uint _amount);
   
-
   //gas station init
   constructor() public {
     setRelayHub(IRelayHub(0xD216153c06E857cD7f72665E0aF1d7D82172F494));
@@ -120,7 +116,6 @@ contract NcenoBrands is RelayRecipient{
       tokenSymbol: _symbol,
       BrandToken_Address: 0x0000000000000000000000000000000000000000,
       orderCount:0
-      
     });
     companyExists[_companyID] = true;
     companyAt[_companyID] = createdCompany;
