@@ -234,10 +234,10 @@
                                 <div class="col text-center mb-4">
                                   <h6>Dec 1 - Dec 31<br> 30 km @4 RPT/km</h6>
                           
-                                  <h6><b>Grand prize:</b> <br>The first person to log 30km gets a limited run Redpoint t-shirt</h6>
-                                  <p>Redpoint and Nceno have teamed up to let you turn your miles into beer! Log your workouts with Nceno to get Redpoint tokens (RPT) redeemable for food or drink of your choice at any of our locations. There are only a limited number of tokens available to claim, so get out there and workout for a payout before they're all gone! </p>
-                                  
+                                  <h6><b>Grand prize:</b> <br>First to log 30km gets a Redpoint t-shirt</h6>
                                   <a style="color:white;" id="joinChallenge" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Join this challenge</a>
+                                  <p>Redpoint and Nceno have teamed up to let you turn your miles into beer! Log your workouts with Nceno to get Redpoint tokens (RPT) redeemable for food or drink of your choice at any of our locations. There are only a limited number of tokens available to claim, so get out there and workout for a payout before they're all gone! </p>
+
                                   <div id="joinChallengeLoader" class="col text-center ">
                                     <p>Adding you to the challenge...</p> 
                                     <span id="joinChallengeFail"></span>
@@ -265,8 +265,8 @@
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col text-center">
-                <h5 class=" mt-4 fs-20 font-weight-normal"><font style="color:#ccff00;">Joe</font>, you're <font style="color:#ccff00;">87%</font> finished!<br> There are still <font style="color:#ccff00;">17</font> days left. <br> You have earned <font style="color:#ccff00;">27 RPT</font> tokens,<br> but there are still <font style="color:#ccff00;">129 RPT</font> up for grabs.</h5>
-                  <a id="w1log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log a workout</a>
+                <h5 class=" mt-4 fs-20 font-weight-normal"><span style="color:#ccff00;">Joe</span>, you're <span style="color:#ccff00;">87%</span> finished!<br> There are still <span style="color:#ccff00;">17</span> days left. <br> You have earned <span style="color:#ccff00;">27 RPT</span> tokens,<br> but there are still <span style="color:#ccff00;">129 RPT</span> up for grabs.</h5>
+                  <a id="log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log a workout</a>
                   
 
               </div>
@@ -280,7 +280,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="col text-center">
-                          <h3>Leaderboard: <font style="color:#ccff00;">6</font> players </h3>
+                          <h3>Leaderboard: <span style="color:#ccff00;">6</span> players </h3>
                         </div>
                         <div class="col-12">
                           
@@ -352,7 +352,8 @@
           <div class="tab-pane" id="browse" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
               <div class="col text-center">
-                <h5 class="mb-2 fs-20 font-weight-normal">You have <span style="color:#ccff00;" id="tokenBalance">42 RPT</span> tokens. <br>Use them to buy any of these items:</h5>
+                <h5 class="mb-2 fs-20 font-weight-normal">You have <span style="color:#ccff00;" id="tokenBalance">42 RPT</span> tokens. <br>Use them to buy any of these items,<br> or pool them together and appoint one friend to buy.</h5>
+                <a id="pool" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#poolModal" onclick="$('#poolBtn').show()">Pool my tokens</a>
               </div>
             </div>
             <!-- lessons -->
@@ -436,6 +437,7 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
                 <h5 class="mb-2 fs-20 font-weight-normal">View or search for recent orders </h5>
+                
                   <div class="input-group rounded">
                     <input id="searchField" type="text" class="form-control px-2" placeholder="Search by order number ..." aria-label="Search challenges">
                     <div class="input-group-append">
@@ -448,7 +450,7 @@
             <div class="row justify-content-center">
               <div class="row justify-content-center">
                 <div class="col text-center">
-                  <h5 class="mb-2 fs-20 font-weight-normal">New order #0x4cb123 from <span style="color:#ccff00;" id="tokenBalance">rogerliu</span>: <br><span style="color:#ccff00;" id="tokenBalance">Apple Pie, 450 RPT </span> </h5>
+                  <h5 class="mb-2 fs-20 font-weight-normal">New order <span id="orderNum" style="color:#fff;">#0x4cb123</span> from <span style="color:#ccff00;" id="buyer">rogerliu</span>: <br><span style="color:#ccff00;" id="item">Apple Pie</span>, <span style="color:#ccff00;" id="price">450</span> <font style="color:#ccff00;">RPT</font>  </h5>
                 </div>
               </div>
               <div class="col-md-10 col-lg-10">
@@ -852,11 +854,11 @@
                     <!--/buttons -->
                   </div>
                 </div>
-                <div class="row">
+                <div class="row justify-content-center">
 
                     <span class="col text-center mb-2" id="logLoader">
                       <!--loaders -->
-                      <p>Please wait while we write your workout to the blockchain. This could take a minute...</p>
+                      <p>Verifying your workout... </p>
                       <div class="livicon-evo" data-options=" name: pulse.svg; style: lines; size: 60px; strokeStyle: round; strokeWidth: original; tryToSharpen: true; rotate: none; flipHorizontal: false; flipVertical: false; strokeColor: #ccff00; strokeColorAction: #b3421b; strokeColorAlt: #F9B32F; strokeColorAltAction: #ab69c6; fillColor: #ccff00; fillColorAction: #ff926b; solidColor: #ccff00; solidColorAction: #ccff00; solidColorBgAction: #ffffff; solidColorBg: #ffffff; colorsOnHover: none; colorsHoverTime: 0.3; colorsWhenMorph: none; brightness: 0.1; saturation: 0.07; morphState: start; morphImage: none; allowMorphImageTransform: false; strokeWidthFactorOnHover: none; strokeWidthOnHoverTime: 0.3; keepStrokeWidthOnResize: false; animated: true; eventType: hover; eventOn: parent; autoPlay: true; delay: 0; duration: default; repeat: loop; repeatDelay: default; drawOnViewport: false; viewportShift: oneHalf; drawDelay: 0; drawTime: 1; drawStagger: 0.1; drawStartPoint: middle; drawColor: same; drawColorTime: 1; drawReversed: false; drawEase: Power1.easeOut; eraseDelay: 0; eraseTime: 1; eraseStagger: 0.1; eraseStartPoint: middle; eraseReversed: true; eraseEase: Power1.easeOut; touchEvents: false "></div>
                       <!--/loaders -->
                     </span>

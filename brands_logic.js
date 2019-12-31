@@ -1525,16 +1525,16 @@ window.onload = function() {
 
 //chart tool tips
 function tooltipVal1(args) {
-    return args.value + " km";
+    return args.value + " km goal";
 }
 function tooltipVal2(args) {
-    return args.value + " RPT pot";
+    return args.value + " token pot";
 }
 function tooltipVal3(args) {
-    return "for "+args.value + " days";
+    return args.value + " days";
 }
 function tooltipVal4(args) {
-    return args.value + " RPT/km";
+    return args.value + " tokens/km";
 }
 
 //global variables that will sync logged minutes to UTC time from the local time.
@@ -1699,21 +1699,12 @@ var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 function getActivities(){
   $('#payMeBtn').hide();
   $('#logLoader').show();
-  var goalMovingTime;
-  Nceno.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
-      function(error, result) {
-      if (!error){
-        goalMovingTime = result[0];
-      }
-      else
-      console.error(error);
-  });
+  var goalMovingTime = 19;
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", function () {
+  xhr.addEventListener("readystatechange", function(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
@@ -1725,14 +1716,20 @@ function getActivities(){
       let k=0;
       console.log("data[0]= "+data[0]);
       while(i<data.length){
-        if(data[i].manual == false && data[i].has_heartrate == true && data[i].average_heartrate>99 && data[i].elapsed_time/60>=goalMovingTime){
-          cleaned[k] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time/60];
+        if(data[i].manual == false && data[i].moving_time/60>=goalMovingTime){
+          cleaned[k] = [data[i].id, data[i].moving_time/60];
           //cleaned.push([data[i].id, data[i].average_heartrate, data[i].moving_time/60]);
           //console.log("added: ["+cleaned[i]+"]");
           k++;
         }
         i++;
       }
+
+      //sorting algo
+/*      var arrayMaxIndex = function(array) {
+        return array.indexOf(Math.max.apply(null, array));
+      };
+      console.log(arrayMaxIndex([1,2,7,2])); //outputs 2*/
 
       console.log("cleaned length is: "+cleaned.length);
       console.log(cleaned);
@@ -1763,6 +1760,7 @@ function getActivities(){
             else
             console.error(error);
           }
+          //start here left off pick up here
         ).once('confirmation', function(confNumber, receipt, result){
           console.log(receipt.status);
           console.log(receipt);
