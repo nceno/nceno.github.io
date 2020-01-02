@@ -1687,7 +1687,7 @@ function getToken(){
 
     }
   });
-  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+Cookies.get('code')+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
