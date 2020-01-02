@@ -1,9 +1,3 @@
-const testvar;
-$("#testbtn").on('click', function() {
-  testvar = $("#testinput").val();
-  console.log(testvar);
-});
-
 //get test ether that is stored in the contract
 /*function getTestETH(){
   Nceno.methods.getTestETH()
@@ -1641,6 +1635,7 @@ var userCreated;
 var uniqueUserString;
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
 var code = window.location.href.split('=')[2].split('&')[0];
+Cookies.set('code', code);
 //var tokenExpire = 0;
 
 
@@ -1654,8 +1649,10 @@ function getToken(){
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
       access_token = data.access_token;
+      Cookies.set('access_token', access_token);
       //tokenExpire = data.expires_in;
       stravaID = data.athlete.id;
+      Cookies.set('stravaID', stravaID);
       //console.log("strava id is:"+stravaID);
       
       //if(data.athlete.username == undefined){
