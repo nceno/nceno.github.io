@@ -86,6 +86,31 @@
                   Home
                 </a>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  About
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                  <a class="dropdown-item" href="instructions.html">
+                    <span>Instructions</span>
+                  </a>
+                  <a class="dropdown-item" href="team.html">
+                    <span>Team</span>
+                    
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="elevator.html">
+                    <span>What is Nceno?</span>
+                    
+                  </a>                 
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="comingsoon.html">
+                    <span>Whitepaper</span>
+                    
+                  </a>
+                </div>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="app.html" role="button">
@@ -93,7 +118,28 @@
                 </a>
               </li>
 
-           </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="corporatewellness.html" role="button">
+                  Corporate wellness
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Language
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="app.html">
+                    <span>English</span>
+                    
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="app_cn.html">
+                    <span>繁體中文</span>
+                    
+                  </a>
+                </div>
+              </li>
+            </ul>
           </div>
         </nav>
       </div>
@@ -128,7 +174,7 @@
                 <div class="row align-items-center">
                   <div class="col-md-8">
                     <h2 class="mb-0"style="color:#ffffff;">Welcome to <b style="color:#ccff00;">Nceno</b></h2>
-                    <span class="text-muted">Workouts on the Blockchain</span>
+                    <span class="text-muted">Workout for a Payout</span>
                   </div>
                 </div>
               </div>
@@ -146,9 +192,9 @@
           <div class="col col-md-10 col-lg-8">
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Sign in</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateNonce()">Create</a>
-              <!-- @hidden <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">Manage</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse(10)">Browse</a> -->
+              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="updateNonce()">Host</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#manage" onclick="makePage()">Manage</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="browse(10)">Browse</a>
             </div>
           </div>
         </div>
@@ -177,7 +223,7 @@
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
                             <form>
-                              <a id="stravaBtn" href="https://www.strava.com/oauth/authorize?client_id=33084&response_type=code&redirect_uri=http://www.nceno.app/app&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all,activity:write" class="btn btn-rounded btn-primary btn-block">Step 1: Log in with Strava</a>
+                              <a id="stravaBtn" href="https://www.strava.com/oauth/authorize?client_id=33084&response_type=code&redirect_uri=http://www.nceno.app/app_true&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all,activity:write" class="btn btn-rounded btn-primary btn-block">Step 1: Log in with Strava</a>
 
                               <div class="row justify-content-center">
                                 <div class="text-center col-sm-5 ">
@@ -187,7 +233,7 @@
                               </div>
                               
 
-                              <a style="color:black;" id="portisBtn" class="btn btn-primary btn-rounded btn-block px-2" onclick="showPortis()">Step 2: Connect</a>
+                              <a style="color:black;" id="portisBtn" class="btn btn-primary btn-rounded btn-block px-2" onclick="showPortis()">Step 2: Connect Blockchain</a>
 
                               <div class="row justify-content-center">
                                 <div class="text-center col-sm-5 ">
@@ -200,11 +246,11 @@
                               </div>
                               
                               <!-- <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn" onclick="getTestETH()">Once: Create Nceno profile</a> -->
-                              <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn">one-time: Create Nceno profile</a>
+                              <a style="color:black;" class="btn btn-primary btn-rounded btn-block px-2 " id="makeAcctBtn">Once: Create Nceno profile</a>
                               
 
                               <div id="acctLoader" class="col text-center ">
-                                <p>Please wait a minute. We're making your profile...</p> 
+                                <p>Please wait a minute. We're making space for you on the blockchain...</p> 
                                 <span id="acctFail"></span>
                                 <img  src="app/assets/images/loader.svg">
                               </div>
@@ -213,18 +259,18 @@
 
                              <!--  <a style="color:black;" id="testStravaApi" class="btn btn-primary btn-block px-2" onclick="getActivities()">call Strava API</a> -->
 
-                              <!-- @hidden <div class="row">
+                              <div class="row">
                                 <div class="col text-center mb-2 ">
                                   <label class="form-check-label"><a href="instructions.html" target='_blank' style="color:#666666;" >Click here to read the instructions</a></label>
                                 </div>
-                              </div> -->
+                              </div>
 
                             </form>
                           </div>
                         </div>
                       </div>
 
-                      <!-- @hidden <div class="accordion" data-accordion>
+                      <div class="accordion" data-accordion>
                         <a id="register" class="accordion-control" data-control>
                           <h5 style="color:#ffffff">Tools</h5>
                         </a>
@@ -236,13 +282,16 @@
                                   <a href='https://widget.kyber.network/v0.6.3/?type=swap&mode=popup&callback=https%3A%2F%2Fwww.nceno.app%2Fapp.html&paramForwarding=true&network=mainnet&pinnedTokens=ETH_USDC_DAI&defaultPair=DAI_ETH&theme=theme-sunset'class='btn btn-outline-white btn-rounded kyber-widget-button theme-sunset theme-supported btn-block py-1' name='KyberWidget - Powered by KyberNetwork' target='_blank' style="color:white;">Convert</a>
                                   <br>
                                   <a style="color:white;" id="openWallet" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Show wallet</a>
-                               </div>
+                                  
+                                                                  
+                                  <!-- <a style="color:white;" id="requestETH" class="btn btn-outline-white btn-rounded btn-block py-1" onclick="getTestETH()">Request testnet ETH</a>  -->
+                                </div>
                               </div>
 
                             </div>
                           </div>
                         </div>
-                      </div> 
+                      </div>
 
                       <div class="accordion" data-accordion>
                         <a id="register" class="accordion-control" data-control>
@@ -260,7 +309,7 @@
                             </div>
                           </div>
                         </div>
-                      </div> -->
+                      </div>
 
 
  
@@ -278,8 +327,7 @@
               <div class="col-md-10 col-lg-8">
                 <div class="row">
                   <div class="col">
-                    <!-- @hidden <h5 class="mb-2 fs-20 font-weight-normal">Host a new challenge</h5> -->
-                    <h5 class="mb-2 fs-20 font-weight-normal">Record a new goal</h5>
+                    <h5 class="mb-2 fs-20 font-weight-normal">Host a new challenge</h5>
                       <div class="container">
                         <div class="row justify-content-center">
                           <div id="sliderMins" class="mr-3"></div>
@@ -311,12 +359,10 @@
                       <p>&nbsp;</p>
                       <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="checker">
-                        <!-- @hidden <label class="form-check-label" for="checker">I've read the <a target="_blank" href="instructions.html">instructions</a> and agree to the <a target="_blank" href="legal.html" >terms</a>.</label> -->
-                        <label class="form-check-label" for="checker">I agree to try my best to complete this goal.</label>
+                        <label class="form-check-label" for="checker">I've read the <a target="_blank" href="instructions.html">instructions</a> and agree to the <a target="_blank" href="legal.html" >terms</a>.</label>
                       </div>
                       
-                      <!-- @hidden <button onclick="echoGoal()" class="btn btn-primary btn-rounded" id="createBtn" data-toggle="modal" data-target="#popupCreate">Create this challenge</button> -->
-                      <button onclick="echoGoal()" class="btn btn-primary btn-rounded" id="createBtn" data-toggle="modal" data-target="#popupCreate">Create this goal</button>
+                      <button onclick="echoGoal()" class="btn btn-primary btn-rounded" id="createBtn" data-toggle="modal" data-target="#popupCreate">Create this challenge</button>
                   </div>
                   
                 </div>
@@ -1114,8 +1160,7 @@
               </button>
             </div>
             <div class="modal-body text-center  text-white">
-              <h3>Confirm your goal</h3>
-              <h5>Note: this is a demo. To set a live goal, LINE PAY is required</h5>
+              <h3>Confirm your challenge</h3>
               <p id="goalEcho"></p>
               <span id="createFail"><span>
             </div>
@@ -1127,12 +1172,11 @@
                     <button id="cancelBtn" type="button" class="btn  btn-rounded" data-dismiss="modal">Cancel</button>
                   </div>
                   <div class="col-8">
-                    <!-- @hidden <button id="hostBtn" type="button" class="btn btn-block btn-rounded btn-primary">Host this challenge</button> -->
-                    <button id="hostBtn" type="button" class="btn btn-block btn-rounded btn-primary" onclick="window.open('https://www.nceno.app/linepopup.html','popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');">Pay with LINE</button>
+                    <button id="hostBtn" type="button" class="btn btn-block btn-rounded btn-primary">Host this challenge</button>
                   </div>
                 </div>
                 <div id="createLoader" class="col text-center mb-2">
-                  <p>Please wait  a minute. We're completing your purchase and writing your goal to the blockchain...</p>
+                  <p>Please wait  a minute. We're writing your challenge to the blockchain...</p>
                   <img  src="app/assets/images/loader.svg"> 
                 </div>
                 <div id="createSuccess" class="col text-center mb-2">
@@ -1352,6 +1396,8 @@
     <!-- / modals -->   
 
     <!-- scripts -->
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
       <script src="app/assets/js/vendor.js"></script>
       <script src="app/assets/js/app.js"></script>
 
@@ -1367,17 +1413,17 @@
 
       <script src="utils.js"></script>
       
-      <!-- @hidden <script src="abi.js"></script> -->
-      <script src="demoabi.js"></script>
+      <script src="abi.js"></script>
       <script src="kyberProxy.js"></script>
       <!--<script src="chartdata.js"></script>   -->
       <!-- <script src="circle-progress.min.js"></script> -->
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.js"></script>
 
-      <!-- @hidden <script src="debug_logic.js"></script> -->
-      <script src="demologic.js"></script>
+      <script src="debug_logic.js"></script>
       <!-- <script src="obf.js"></script> -->
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
       <script async src='https://widget.kyber.network/v0.6.3/widget.js'></script>
 
