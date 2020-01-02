@@ -1,4 +1,4 @@
-var testvar;
+const testvar;
 $("#testbtn").on('click', function() {
   testvar = $("#testinput").val();
   console.log(testvar);
