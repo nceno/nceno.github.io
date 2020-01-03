@@ -1533,7 +1533,7 @@ function tooltipVal2(args) {
     return args.value + " token pot";
 }
 function tooltipVal3(args) {
-    return args.value + " days";
+    return args.value + " day limit";
 }
 function tooltipVal4(args) {
     return args.value + " tokens/km";
