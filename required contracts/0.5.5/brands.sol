@@ -129,10 +129,9 @@ contract NcenoBrands is RelayRecipient{
     emit MakeCompany(_companyID, _name, getSender(), _symbol);
   }
 
-  function hostKm(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _pot, uint _rewardRate, bytes memory _inviteCodeHash)public payable{
+  function hostKm(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _pot, uint _rewardRate)public payable{
     goal memory createdGoal = goal({
       halted: false,
-      inviteCodeHash: _inviteCodeHash,
       goalID: _goalID,
       start: _start,
       dur: _days,
@@ -154,10 +153,9 @@ contract NcenoBrands is RelayRecipient{
     emit MakeGoal(_goalID, getSender(), _inviteCodeHash);
   }
 
-  function hostBpm(bytes memory _goalID, uint _start, uint _days, uint _mins, uint _pot, uint _rewardRate, bytes memory _inviteCodeHash) public payable{
+  function hostBpm(bytes memory _goalID, uint _start, uint _days, uint _mins, uint _pot, uint _rewardRate) public payable{
     goal memory createdGoal = goal({
       halted: false,
-      inviteCodeHash: _inviteCodeHash,
       goalID: _goalID,
       start: _start,
       dur: _days,
