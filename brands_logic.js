@@ -97,7 +97,7 @@ function checkUserbase(){
 }
 
 //sanity check for debugging
-console.log(Nceno);
+console.log(NcenoBrands);
 
 //hides all the loaders
 $("#createBtn").hide();
