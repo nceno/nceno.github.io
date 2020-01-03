@@ -1570,8 +1570,8 @@ function updateGasPrice(){
     standard = data.standard;
     fast = data.fast;
     fastest = data.fastest;
-    //default to fast gas 
-    gasPriceChoice = fastest+1;
+    //default to fast gas  
+    gasPriceChoice = parseInt(fastest)+1.0; 
     console.log(safeLow+" < "+standard+" < gas < "+fast+" < "+fastest);
     console.log("gasPrice set at: "+gasPriceChoice);
 
