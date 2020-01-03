@@ -1515,10 +1515,10 @@ window.onload = function() {
   });
 
   //delays extraction of the fitbit creds until the user has authed.
-  if (window.location.href != 'https://www.Nceno.app/app_brands.html' 
-    && window.location.href != 'https://www.Nceno.app/app_brands'
-    && window.location.href != 'https://Nceno.app/app_brands'
-    && window.location.href != 'https://Nceno.app/app_brands.html'){
+  if (window.location.href != 'https://www.nceno.app/app_brands.html' 
+    && window.location.href != 'https://www.nceno.app/app_brands'
+    && window.location.href != 'https://nceno.app/app_brands'
+    && window.location.href != 'https://nceno.app/app_brands.html'){
     $("#stravaBtn").hide();
     $("#stravaOk").html("Proceed to step 2...")
     $("#stravaOk").show();
