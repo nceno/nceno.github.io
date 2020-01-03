@@ -113,7 +113,7 @@ $("stravaSuccess").hide();
 $("stravaOk").hide();
 $("portisSuccess").hide();
 $("#request").hide();
-$("#joinLoader").hide();
+$("#joinChallengeLoader").hide();
 //$("#joinSuccess").hide();
 $("#joinSoonLoader").hide();
 //$("#joinSoonSuccess").hide();
