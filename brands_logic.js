@@ -1570,15 +1570,9 @@ function updateGasPrice(){
     standard = data.standard;
     fast = data.fast;
     fastest = data.fastest;
-    //default to slowest gas if network is busy, to avoid subsidizing super high txn cost.
-    if(parseInt(standard)>8){
-      gasPriceChoice = parseInt(safeLow)+1;
-      console.log("Ethereum network is experienceing high traffic currently... Transaction confirmation will take longer than usual.");
-      $('trafficAlert').alert();
-    }
-    else gasPriceChoice = parseInt(standard)+1;
+    //default to fast gas 
+    gasPriceChoice = fastest+1;
     console.log(safeLow+" < "+standard+" < gas < "+fast+" < "+fastest);
-
     console.log("gasPrice set at: "+gasPriceChoice);
 
   });
@@ -1688,6 +1682,7 @@ function getToken(){
 
     }
   });
+  //allofnceno ONEOFUS!
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
