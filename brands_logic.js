@@ -1515,7 +1515,10 @@ window.onload = function() {
   });
 
   //delays extraction of the fitbit creds until the user has authed.
-  if (window.location.href != 'https://www.nceno.app/app_brands.html' && window.location.href != 'https://www.nceno.app/app_brands'){
+  if (window.location.href != 'https://www.nceno.app/app_brands.html' 
+    && window.location.href != 'https://www.nceno.app/app_brands'
+    && window.location.href != 'https://nceno.app/app_brands'
+    && window.location.href != 'https://nceno.app/app_brands.html'){
     $("#stravaBtn").hide();
     $("#stravaOk").html("Proceed to step 2...")
     $("#stravaOk").show();
@@ -1884,8 +1887,7 @@ function getRawHR(){
     }
     else{
       //console.log("none"); 
-    }
-    //tori 
+    } 
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
