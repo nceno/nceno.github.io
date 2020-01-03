@@ -1429,8 +1429,6 @@ $("#claimBtn").click(function() {
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
 
 window.onload = function() {
-  $("#testfield").html(testvar);
-  console.log(testvar);
 /*  portis.onLogin((walletAddress, email) => {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
