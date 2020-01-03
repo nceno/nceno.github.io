@@ -1665,21 +1665,6 @@ function getToken(){
 
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
       $("#athleteInfo").html('<p>Nceno User ID: "'+stravaID+'"   <br>Nceno Email: "'+portisEmail+'"   <br>Wallet address: "'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42)+'"</p>');
-      
-      Nceno.methods.userExists(stravaID
-      )
-      .call({from: web3.eth.defaultAccount},
-        function(error, result) {
-          if (!error){
-            if(!result){
-              $("#makeAcctBtn").show();          
-            }
-          }
-          else
-          console.error(error);
-        }
-      );
-
     }
   });
   //allofnceno ONEOFUS!
