@@ -293,6 +293,7 @@ contract NcenoBrands is RelayRecipient{
   function searchOrders(bytes memory _orderNum) public returns(string memory, uint, uint, uint, bool, bytes memory){
     return(orderAt[_orderNum].item, orderAt[_orderNum].stravaBuyer, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].company);
   }
+  
 
   function getNcenoStats() public returns(uint, uint, uint, uint, uint, uint, uint){
     return(companyCount, goalCount, kmCount, minsCount, userCount, orderCount, payoutToDate);
