@@ -1330,10 +1330,9 @@ function joinTarget(){
   NcenoBrands.methods.join(
     targetGoalID,
     stravaID
-    //ethPrice*100, //ethprice in pennies, gets rid of decimals
     //web3.utils.toHex($('#promoFieldSoon').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*1000000000000000000*targetStake/ethPrice},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
         $("#joinSoonModalBtn").hide();

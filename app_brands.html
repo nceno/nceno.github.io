@@ -295,7 +295,7 @@
                                   <h6>Dec 1 - Dec 31<br> 30 km @4 RPT/km</h6>
                           
                                   <h6><b>Grand prize:</b> <br>First to log 30km gets a Redpoint t-shirt</h6>
-                                  <a style="color:white;" id="joinChallenge" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" onclick="showPortis();">Join this challenge</a>
+                                  <a style="color:white;" id="joinChallenge" class="btn btn-outline-white btn-rounded btn-block mt-1 py-1" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join this challenge</a>
                                   <p>Turn your miles into beer! Log your workouts with Nceno to get Redpoint tokens (RPT) redeemable for food or drink at any Redpoint location. Limited tokens available to claim, so get out there and workout for a payout before they're all gone! </p>
 
                                   <div id="joinChallengeLoader" class="col text-center ">
@@ -797,13 +797,13 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="soonJoinTitle">You're about to join this challenge:</h3>
+              <h3 id="soonJoinTitle">You're about to join the Beerpoint challenge: </h3> <br>
+              <h6>Dec 1 - Dec 31<br> 30 km @4 BPT/km</h6>
               <!--/title -->
 
               <!--echo, success, fail -->
-              <span id="soonEcho"></span>
+              <!-- <span id="soonEcho"></span> -->
               <span id="joinSoonSuccess"></span>
-              
               <span id="joinSoonFail"></span>
               <!--/echo, success, fail -->
             </div>
@@ -815,7 +815,7 @@
                 <div class="row">
                   <div class="col text-center">
                     <!--buttons -->
-                    <!-- <input id="promoFieldSoon" type="text" class="form-control col-8-offset-4 mb-2 " placeholder="Have a promo code? " aria-label="Search challenges"> -->
+                    <input id="promoFieldSoon" type="text" class="form-control col-8-offset-4 mb-2 " placeholder="Enter your invite code. " aria-label="invite code..."> 
                     <button id="joinSoonModalBtn" type="button" onclick="joinTarget()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
                     <!--/buttons -->
                   </div>
@@ -984,6 +984,7 @@
     <!-- / modals -->   
 
     <!-- scripts -->
+      <script src="beerpoint_meta.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
       <script src="app/assets/js/vendor.js"></script>
