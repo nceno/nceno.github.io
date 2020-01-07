@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Rubik:300,400,700");
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -377,7 +378,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 1em;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "chinese", sans-serif;
   font-weight: 300;
   line-height: 1.25;
   color: inherit; }
@@ -8755,6 +8756,12 @@ a.text-rss:hover, a.text-rss:focus {
   width: 20% !important; }
 
 @font-face {
+  font-family: 'chinese';
+  src: url("../fonts/chinese.otf");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon.eot?q2xewv");
   src: url("../fonts/icomoon.eot?q2xewv#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?q2xewv") format("truetype"), url("../fonts/icomoon.woff?q2xewv") format("woff"), url("../fonts/icomoon.svg?q2xewv#icomoon") format("svg");
@@ -14993,7 +15000,7 @@ img {
     content: "\ec73";
     text-align: center;
     line-height: 3.625rem;
-    font-family: "icomoon";
+    font-family: "chinese";
     font-size: 20px;
     background-color: #e5e5e5; }
   .phone:hover {
@@ -16225,7 +16232,7 @@ footer {
     max-width: 100%;
     margin: 0;
     font-size: 1rem;
-    font-family: "chinese", sans-serif;
+    font-family: "Rubik", sans-serif;
     font-weight: 400;
     vertical-align: middle; }
   .accordion-control h5 {
@@ -16423,7 +16430,7 @@ footer {
       content: "\ec7d"; }
     .accordion-group-portal .accordion-control h5 {
       font-size: 1.25rem;
-      font-family: "chinese", sans-serif; }
+      font-family: 'icomoon', sans-serif; }
   .accordion-group-portal .accordion-content > div {
     padding-bottom: 2rem; }
 
@@ -16892,7 +16899,7 @@ footer {
     display: block;
     content: "\f105";
     font-size: 1.375rem;
-    font-family: "icomoon";
+    font-family: "chinese";
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     transition: all 0.2s;
