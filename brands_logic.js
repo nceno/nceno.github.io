@@ -1,27 +1,3 @@
-//get test ether that is stored in the contract
-/*function getTestETH(){
-  NcenoBrands.methods.getTestETH()
-  .send({from: web3.eth.defaultAccount, gas: 1500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){ 
-    console.log(receipt.status);
-    if(receipt.status === true){
-      updateNonce();
-    }
-    else{
-      console.log("error...");
-    } 
-  }).once('error', function(error){console.log(error);});
-}*/
-
-var valueMultiplier = 1.04;
-
 //datepicker initializer
 var first = new Date();
 first.setDate(first.getDate() + 1);
@@ -70,30 +46,6 @@ function showPortis() {
       
     });
   });
-}
-
-//helper function that will hide the create account button if the user already made an account.
-//i.e. if a fitbit ID already has a competitor object associated to it, this function hides the create button.
-var registered = false;
-function checkUserbase(){
-  localize();
-
-  NcenoBrands.methods.userExists(
-    stravaID
-  )
-  .call({from: web3.eth.defaultAccount},
-    function(error, result) {
-      if (!error){
-        if(result){
-          $("#makeAcctBtn").hide();
-          registered = true;
-        }
-        //else
-      }
-      else
-      console.error(error);
-    }
-  );
 }
 
 //sanity check for debugging
@@ -183,47 +135,6 @@ if($("#checker").is(':checked')) {
 //var fitbitUser 
 var userID
 
-//a clue to load the join or log/claim txn with the right ID or week....... needs work.        
-function loadRowID(){
-  var id = $("button").closest("div").prop("id");
-}
-
-//creating a competitor account from the input form and flag
-$("#makeAcctBtn").click(function() {
-  localize();
-  NcenoBrands.methods.makeProfile(
-    stravaID,
-    web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
-    web3.utils.padRight(web3.utils.toHex(flag),34),
-    OS,
-    web3.utils.padRight(web3.utils.toHex(portisEmail),34))
-  .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-
-        $("#makeAcctBtn").hide();
-        $("#acctLoader").show();
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){ 
-    console.log(receipt.status);
-    if(receipt.status === true){
-      updateNonce();
-      $("#acctLoader").hide();
-      $("#makeAcctBtn").hide();
-    }
-    else{
-      $("#acctLoader").hide();
-      $("#makeAcctBtn").hide();
-      $('#acctFail').html('<p>Failed to create profile. The profile already exists!</p>');
-      console.log("profile already exists!");
-    } 
-  }).once('error', function(error){console.log(error);});
-});
-
 //brands join
 $("#joinChallenge").click(function() {
   NcenoBrands.methods.join(
@@ -257,40 +168,6 @@ $("#joinChallenge").click(function() {
     } 
   }).once('error', function(error){console.log(error);});
 });
-
-
-
-function createUser(){
-  localize();
-  NcenoBrands.methods.userExists(
-    stravaID
-  )
-  .call({from: web3.eth.defaultAccount},
-    function(error, result){
-      if (!error){
-        if(result!=true){
-          NcenoBrands.methods.makeProfile(
-          stravaID,
-          web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
-          web3.utils.padRight(web3.utils.toHex(flag),34),
-          OS,
-          web3.utils.padRight(web3.utils.toHex(portisEmail),34))
-          .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-          function(error, result) {
-            if (!error){
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-          );
-        }
-      }
-      else
-      console.error(error);
-    }
-  );
-}
 
 
 //randomizes the goalID
@@ -353,32 +230,8 @@ $("#hostBtn").click(function() {
     .once('error', function(error){console.log(error);});;
 });
 
-//gets the user's operating system
-var OS = 0;
-function getMobileOS() {
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  // Windows Phone must come first because its UA also contains "Android"
-  if (/windows phone/i.test(userAgent)) {
-    OS = 3;
-    //console.log("OS is: Windows Phone");
-  }
-  else if (/android/i.test(userAgent)) {
-    OS = 2;
-    //console.log("OS is: Android");
-  }
-  // iOS detection from: http://stackoverflow.com/a/9039885/177710
-  else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    OS = 1;
-    //console.log("OS is: iOS");
-  }
-  else {
-    OS = 0;
-    //console.log("OS is: unknown");
-  }
-}
-
 //function that displays in a modal, a summary of the goal you are setting.
- var ethPrice;
+var ethPrice;
 function echoGoal(){
   //get live eth price
   updateEthPrice('hostBtn');
@@ -392,124 +245,6 @@ function echoGoal(){
     $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
     $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
-}
-var ethPrice;
-function echoGoal(){
-  //get live eth price
-  updateEthPrice('hostBtn');
-  var time = new Date($("#dateChoice").val()).getTime() / 1000;
-  //echo modal
-  $("#host").tab('show');
-  $('#popupCreate').modal('show');
-
-  $("#goalEcho").html(
-    "You're paying $" + $("#sliderStake").roundSlider("getValue") + " to Nceno to put your goal of working out for " + 
-    $("#sliderMins").roundSlider("getValue") +" mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
-    $("#sliderWks").roundSlider("getValue")+  " weeks, starting from "+ $("#dateChoice").datepicker('getDate', true) +". You will receive the link to your blockchained goal immediately after payment."
-  );
-}
-
-
-//joins the searched goal
-function joinSearch(){
-  goalid = web3.utils.padRight($('#searchField').val(),34);
-  NcenoBrands.methods.join(
-    goalid,
-    stravaID
-    //Math.floor(ethPrice*100),
-    //web3.utils.toHex($('#promoFieldSearch').val())
-  )
-  //subsidized joining fee with "value: stakewei - 1200400*gasPrice"
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*stakeweiSearched - 0},
-    function(error, result) {
-      if (!error){
-        $("#joinSearch").hide();
-        $("#joinLoader").show();
-        $('#promoFieldSearch').hide();
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){ 
-    console.log(receipt.status);
-    if(receipt.status === true){
-      correctNonce++;
-      $("#joinLoader").hide();
-      $('#promoFieldSearch').hide();
-      $("#joinSuccess").html('<p>You’re in the challenge! Don’t forget to mark the starting time in your calendar!</p>');
-      //need the join serach button to set proper global variables and then these functions can reference them
-      reminder('srJoinReminder', _stake, _minutes, _frequency, _duration, _goalid, _start);
-      stravaShare(_start, _minutes, _stake, _frequency, _duration, _goalid);
-      createUser();
-    }
-    else{
-      
-      $("#aboutToJoin").hide();
-      $('#promoFieldSearch').hide();
-      $("#srEcho").html('');
-      $("#joinLoader").hide();
-      $("#joinFail").html('<p>Cannot join. Either the challenge already started, or else you are already in this challenge. Go check your upcoming challenges! (ID: '+goalid.slice(0, 7)+')</p>');
-      console.log("Challenge already started, user already is a participant, or else message value is less than intended stake.");
-    } 
-  }).once('error', function(error){console.log(error);}); 
-}
-
-
-
-//an abortion of a function that should populate the dropdown with upcoming, active, and completed goals. Needs work.
-//var populated = false;
-function makeList(){
-
-  //empty the dropdown list
-  for(let n = 0; n < 15; n++){
-    $('#upcoming'+n).remove();
-    $('#active'+n).remove();
-    $('#completed'+n).remove();
-  }
-
-  //repopulate it
-  $("#goalCategories").selectric({maxHeight: 500, responsive: true, preventWindowScroll: true});
-  //if(populated === false){
-    var goals1 = new Array();
-    var goals2 = new Array();
-    var goals3 = new Array();
-
-    for (let i = 0; i < 15; i++){
-      //upcoming
-      NcenoBrands.methods.getUpcomingGoal(stravaID, i).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals1[i] = result;
-          console.log(goals1[i] + " is an upcoming goal");
-          
-          $("#upcomingGoals").after('<option id="upcoming'+i+'">'+ goals1[i].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
-        }
-      });
-      //active
-      NcenoBrands.methods.getActiveGoal(stravaID, i).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals2[i] = result;
-          console.log(goals2[i]  + " is an active goal");
-          
-          $("#activeGoals").after('<option id="active'+i+'">'+ goals2[i].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
-        }
-      });
-      //completed
-      NcenoBrands.methods.getCompletedGoal(stravaID, i).call({from: web3.eth.defaultAccount}, function(error, result){
-        if(result != 0x0000000000000000000000000000000000000000000000000000000000000000 && result != undefined){
-          goals3[i] = result;
-          console.log(goals3[i]  + " is a completed goal");
-          
-          $("#completedGoals").after('<option id="completed'+i+'">'+ goals3[i].slice(0, 8) +'</option>');
-          $('#goalCategories').selectric('refresh');
-        }
-      });  
-    }
-    //populated=true;
-  //}
-  
 }
 
 function resetCreate(){
@@ -590,41 +325,6 @@ function makePage(){
 
 var wkLimit = 0;
 var currentWeek = 0;
-function makeWktl(){
-  //hide all weeks and buttons, in case previously selected goal was longer.
-  for (let i = 0; i < 12; i++){
-    var wkindex = i+1;
-    var currentwkHide = 'week'+wkindex;
-    var currentwklogHide  = 'w'+wkindex+'log';
-    var pastwkclaimHide  = 'w'+wkindex+'claim';
-    $('#'+currentwkHide).hide();
-    $('#'+currentwklogHide).hide();
-    $('#'+pastwkclaimHide).hide();
-  }
-
-  var pastWeek = currentWeek-1;
-  var currentwklogKey  = 'w'+currentWeek+'log';
-  var pastwkclaimKey  = 'w'+pastWeek+'claim'; 
-
-  if(currentWeek<=wkLimit){
-    $('#'+currentwklogKey).show();
-  }
-  //hides or shows claim button
-  if(currentWeek<=wkLimit+1){
-    $('#'+pastwkclaimKey).show();
-  }
- 
-  var mostRecentWk = 0;
-  if(currentWeek>wkLimit){mostRecentWk = wkLimit;}
-  else mostRecentWk = currentWeek;
-
-  for (let i = 0; i < mostRecentWk; i++){ //i < wkLimit;
-    var wkindex = i+1;
-    var currentwkKey = 'week'+wkindex;
-    $('#'+currentwkKey).show();
-  }
-}
-
 var goalid;
 
 function selectedChallenge(){
@@ -880,195 +580,6 @@ function selectedChallenge(){
                                         finishers[i] = winnersWk[i]*100/competitors;
                                       }
 
-                                      $('#canvas1Div').html('<canvas id="canvas1" ></canvas>');
-                                      $('#canvas2Div').html('<canvas id="canvas2" ></canvas>');  
-
-                                      //draw charts**************************************************************************************************
-                                      ctx1 = document.getElementById('canvas1').getContext('2d');
-                                      window.myLine1 = new Chart(ctx1, 
-                                        //config1
-                                        {
-                                          type: 'bar',
-                                          data: {
-                                            datasets: [{
-                                                //bar
-                                                label: 'Workouts you completed',
-                                                yAxisID: 'A',
-                                                //data: [3, 3, 2, 3, 1, 0, 3, 1, 3, 3, 2, 3],
-                                                data: successesWk,
-                                                backgroundColor: 'rgba(204, 255, 0, 0.5)',
-
-                                                borderColor: '#ccff00',
-                                                fill: true
-                                            }, {
-                                                //line
-                                                label: '% Competitors finished the week',
-                                                yAxisID: 'B',
-                                                //data: [90, 95, 60, 40, 55, 70, 30, 45, 40, 30, 20, 43],
-                                                data: finishers,
-                                                type: 'line',
-                                                backgroundColor: 'rgba(244, 66, 179, 0.5)',
-                                                borderColor: '#f442b3',
-                                                fill: true
-                                            }],
-                                            //labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
-                                            labels: xaxis
-                                          },
-                                          
-
-
-                                          options: {
-                                            responsive: true,
-                                            legend: {
-                                              position: 'bottom',
-                                            },
-                                            hover: {
-                                              mode: 'index'
-                                            },
-                                            scales: {
-                                              xAxes: [{
-                                                display: true,
-                                                scaleLabel: {
-                                                  display: true,
-                                                  labelString: 'Week'
-                                                }
-                                              }],
-
-                                              yAxes: [
-                                                {
-                                                  //bar axis
-                                                  id: 'A',
-                                                  type: 'linear',
-                                                  position: 'left',
-                                                  ticks: {
-                                                    beginAtZero: true
-                                                  },
-                                                  scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'Workouts'
-                                                  }
-                                                  },
-                                                {
-                                                  //line axis
-                                                  id: 'B',
-                                                  type: 'linear',
-                                                  position: 'right',
-                                                  ticks: {
-                                                    beginAtZero: true
-                                                  },
-                                                  scaleLabel: {
-                                                    display: true,
-                                                    labelString: '% competitors'
-                                                  }
-                                                }
-                                              ],
-
-                                              gridlines: [{
-                                              display: true,
-                                              color: '#848484'
-                                              }]
-                                            },
-                                            title: {
-                                              display: true,
-                                              text: 'Your Progress'
-                                            }
-                                          }
-                                        }
-                                      );
-
-                                      ctx2 = document.getElementById('canvas2').getContext('2d');
-                                      window.myLine2 = new Chart(ctx2, 
-                                        //config2
-                                        {
-                                          type: 'bar',
-                                          data: {
-                                            datasets: [{
-                                                //bar data
-                                                label: '% stake locked up',
-                                                yAxisID: 'A',
-                                                //data: [2, 5, 7, 5, 9, 15, 10, 3, 8, 18, 11, 7],
-                                                data: visibleLockedPercentWk,
-                                                backgroundColor: 'rgba(204, 255, 0, 0.5)',
-                                                borderColor: '#ccff00',
-                                                fill: true
-                                            }, 
-
-                                            {
-                                                //line data
-                                                label: 'Your cumulative % stake earned back',
-                                                yAxisID: 'B',
-                                                //data: [2, 7, 12, 26, 26, 30, 45, 45, 78, 85, 85, 90],
-                                                data: roi,
-                                                backgroundColor: 'rgba(244, 66, 179, 0.5)',
-                                                borderColor: '#f442b3',
-                                                fill: true,
-                                                type: 'line'
-                                            }],
-                                            //labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12']
-                                            labels: xaxis
-                                          },
-                                          
-
-
-                                          options: {
-                                            responsive: true,
-                                            legend: {
-                                              position: 'bottom',
-                                            },
-                                            hover: {
-                                              mode: 'index'
-                                            },
-                                            scales: {
-                                              xAxes: [{
-                                                display: true,
-                                                scaleLabel: {
-                                                  display: true,
-                                                  labelString: 'Week'
-                                                }
-                                              }],
-
-                                              yAxes: [
-                                                {
-                                                  //bar axis
-                                                  id: 'A',
-                                                  type: 'linear',
-                                                  position: 'left',
-                                                  ticks: {
-                                                    beginAtZero: true
-                                                  },
-                                                  scaleLabel: {
-                                                    display: true,
-                                                    labelString: '% stake'
-                                                  }
-                                                  },
-                                                {
-                                                  //line axis
-                                                  id: 'B',
-                                                  type: 'linear',
-                                                  position: 'right',
-                                                  ticks: {
-                                                    beginAtZero: true
-                                                  },
-                                                  scaleLabel: {
-                                                    display: true,
-                                                    labelString: '% returned'
-                                                  }
-                                                }
-                                              ],
-
-                                              gridlines: [{
-                                              display: true,
-                                              color: '#848484'
-                                              }]
-                                            },
-                                            title: {
-                                              display: true,
-                                              text: 'Challenge Snapshot'
-                                            }
-                                          }
-                                        }
-                                      );
-                                      
                                       //***************************************************************************
 
                                     }
@@ -1164,7 +675,7 @@ var targetMin;
 var targetStart;
 var targetStartStamp;
 
-async function browse(_upperBound){
+async function browse(){
   updateNonce();
   //clear out the goalIDs from old elements
   for(let p=1; p<11; p++){
@@ -1172,7 +683,7 @@ async function browse(_upperBound){
   }
 
   
-  for (let i = 10 -_upperBound; i < _upperBound; i++){
+  for (let i = 0; i < 10; i++){
     var result = await NcenoBrands.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
 
 
@@ -1372,76 +883,8 @@ function joinTarget(){
 }
 
 var browsedGoal;
-
-//button to claim lost stake from previous week. needs work.
-$("#claimBtn").click(function() {
-  var goalid = web3.utils.padRight($("#goalCategories").val(),34);
-  //function:
-  NcenoBrands.methods.claim(
-    goalid,
-    stravaID
-  )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        $("#claimBtn").hide();
-        $("#claimLoader").show();
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt, result){
-    console.log(receipt.status);
-    console.log(receipt);
-    if(receipt.status === true){
-      correctNonce++;
-
-      var usdCutwei = parseInt(1.0*receipt.events.Claim.returnValues['_cut']);
-      console.log("payout is: "+receipt.events.Claim.returnValues['_cut']);
-      var usdCut = parseInt(usdCutwei)/1000000000000000000;
-      console.log("cut was: $"+usdCut.toFixed(2));
-      if(usdCut>0 || usdCut != undefined){
-        $("#claimLoader").hide();
-        $("#claimTitle").hide();
-        $("#claimSuccess").html('<p>Nice job, you were 100% successful last week! You just won $'+usdCut+' from the people who skipped workouts.</p>');
-      }
-      else{
-        $("#claimLoader").hide();
-        $('#claimFail').html('<p>Your cut is $0.00 because everyone completed all of their workouts... Is this challenge too easy?</p>');
-      }
-      correctNonce++;
-      console.log("your cut is: "+result);
-      makeWktl();
-      
-    }
-    else{
-      $("#claimLoader").hide();
-      $('#claimFail').html('<p>Transaction failed. Did you already claim this week?</p>');
-      console.log("wallet-user mismatch, user not a competitor, user not 100% adherent for the week, or user already claimed bonus for the week.");
-    }   
-  })
-  .once('error', function(error){console.log(error);});;
-});
-
-//not sure if using window.onload correctly... but,
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
-
 window.onload = function() {
-/*  portis.onLogin((walletAddress, email) => {
-    web3.eth.getAccounts().then(e => { 
-      web3.eth.defaultAccount = e[0];
-      console.log("default: " + web3.eth.defaultAccount);
-      portisEmail = email;
-      console.log("portis email is: "+ portisEmail);
-      localize();
-      getToken();
-      $("#portisBtn").hide();
-      //$("#portisSuccess").html("Wallet address: "+web3.eth.defaultAccount.slice(0, 22)+" "+web3.eth.defaultAccount.slice(23, 42));
-    });
-  });*/
-
-
 
   //sliders
   $("#sliderMins").roundSlider({
@@ -1513,50 +956,32 @@ window.onload = function() {
     lineCap: "round"
   });
 
+  //@NCENO setup
   //delays extraction of the fitbit creds until the user has authed.
   if (window.location.href != 'https://www.nceno.app/app_brands.html' 
     && window.location.href != 'https://www.nceno.app/app_brands'
     && window.location.href != 'https://nceno.app/app_brands'
     && window.location.href != 'https://nceno.app/app_brands.html'){
     $("#stravaBtn").hide();
-    $("#stravaOk").html("Proceed to step 2...")
+    $("#stravaOk").html("Proceed to step 2")
     $("#stravaOk").show();
   }
 };
 
 //chart tool tips
 function tooltipVal1(args) {
-    return args.value + " km max";
+    return args.value + " km target";
 }
 function tooltipVal2(args) {
     return args.value + " token pot";
 }
 function tooltipVal3(args) {
-    return args.value + " day limit";
+    return args.value + " duration";
 }
 function tooltipVal4(args) {
     return args.value + " tokens/km";
 }
 
-//global variables that will sync logged minutes to UTC time from the local time.
-//var pad;
-//var sign;
-var flag;
-function localize(){
-  $.getJSON("https://api.ipdata.co/?api-key=25948172f6d73640c781a87df67ef61f03bf5948cbc333f56fd0baf6", function(data) {
-    var countryName = data.country_name;
-    //var timezone = data.time_zone.offset;
-    flag = data.country_code;
-    //console.log("Country Name: " + countryName);
-    //console.log("Time Zone: " + timezone);
-    //sign = parseInt(timezone.slice(0, 1)+1);
-    //pad = parseInt(timezone.slice(1, 3)*60*60 + timezone.slice(3, 5)*60)
-    //pad = parseInt(timezone.slice(0, 1)+1)
-    //console.log(pad);
-    //console.log("Flag URL: " + flag);
-    getMobileOS();
-  });
-}
 
 var safeLow;
 var standard;
@@ -1575,50 +1000,6 @@ function updateGasPrice(){
     console.log("gasPrice set at: "+gasPriceChoice);
 
   });
-}
-
-
-
-//gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
-//only displays button when price is returned by API.
-//still need this because it tells how much wei to send.
-//try to get data from kyber instead of API though.
-/*function updateEthPrice(btn) {
-  var xhr = new XMLHttpRequest();
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      var resp = JSON.parse(xhr.responseText);
-      ethPrice = resp.USD*1.0;  //...in lieu of calling kyber, adjust this factor
-      console.log(this.responseText);
-      console.log(ethPrice);
-      $('#'+btn).show();
-
-    }
-  });
-  xhr.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
-  xhr.send();
-}*/
-
-
-//gets the current price of ETH in USD. Should be called as close as possible to goal deployment.
-//only displays button when price is returned by API.
-//still need this because it tells how much wei to send.
-//try to get data from kyber instead of API though.
-var daiID = '0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359';
-function updateEthPrice(btn) {
-  var xhr = new XMLHttpRequest();
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      var resp = JSON.parse(xhr.responseText);
-      ethPrice = resp.data[0].dst_qty[0]/resp.data[0].src_qty[0];
-      //console.log(this.responseText);
-      console.log(ethPrice);
-      $('#'+btn).show();
-
-    }
-  });
-  xhr.open("GET", "https://api.kyber.network/buy_rate?id="+daiID+"&qty=100.0");
-  xhr.send();
 }
 
 //gets the access token to make GET request. Valid for 6 hours.
@@ -1710,7 +1091,7 @@ function getActivities(){
       }
 
       //sorting algo
-/*      var arrayMaxIndex = function(array) {
+      /* var arrayMaxIndex = function(array) {
         return array.indexOf(Math.max.apply(null, array));
       };
       console.log(arrayMaxIndex([1,2,7,2])); //outputs 2*/
@@ -1756,14 +1137,8 @@ function getActivities(){
             var usdPayout = receipt.events.Log.returnValues['_payout']/1000000000000000000;
             var loggedHR = receipt.events.Log.returnValues['_avgHR']
             var loggedMins = receipt.events.Log.returnValues['_reportedMins']
-            /*            NcenoBrands.events.Log({
-              filter: {_goalID: goalid, _stravaID: stravaID},
-              fromBlock: 0, toBlock: 'latest'
-            }, function(error, event){ */
-                //console.log(event);
-                //usdPayout = parseInt(event.returnValues._payout)/1000000000000000000;
-                //console.log("payout was: $"+usdPayout.toFixed(2));
-                //----begin other messages
+            //-----/
+
 
                 $('#logEcho').html('<p>Your workout: Avg heart rate was '+loggedHR+ 'bpm, Session length was '+loggedMins+'mins.</p>');
                 
@@ -1813,100 +1188,3 @@ function getActivities(){
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
-
-//wahoo1: 2712826552
-//strava: 2715300973
-//strava with pause: 2716096931
-var actID = 2719149178;
-function getRawHR(){
-  var stuff = null;
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      //console.log(this.responseText);
-      var resp = JSON.parse(xhr.responseText);
-      var hr = resp.heartrate.data;
-      var tm = resp.time.data;
-      var dataString='';
-      var plot = new Array();
-      for(let u=0; u<hr.length; u++){
-        plot[u]=[tm[u],hr[u]];
-        dataString=dataString+'{'+plot[u]+'},';
-      }
-      var hrdata=dataString.slice(0, -1);
-      console.log(hrdata);
-
-      //----- gap detection -----
-      var gap = 0;
-      for(let s=0; s<tm.length+1; s++){
-        var diff = tm[s+1]-tm[s];
-        if(diff>=10){
-          gap+=diff;
-        }
-      }
-      var activeTime = (1.0*tm[tm.length-1]-gap);
-
-      var pl = 0;
-      for(let r=0; r<hr.length; r++){
-        pl +=hr[r];
-      }
-      var avghr = pl/hr.length;
-      var adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
-
-      console.log("total gap is: "+gap/60+" min");
-      console.log("real active time is: "+activeTime/60+" min");
-      console.log("adjusted HR is: "+adjHR+" BPM");
-
-      if(gap > 0.17*tm[tm.length-1]){
-        console.log("you paused for a significant portion of your workout. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
-      }
-      //---- /gap detection -----
-
-    }
-    else{
-      //console.log("none"); 
-    } 
-  });
-  xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
-  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-  xhr.send(stuff);
-}
-
-//------ cookies
-function setCookie(cname,cvalue,exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires=" + d.toGMTString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function checkCookie() {
-  var user=getCookie("username");
-  if (user != "") {
-    alert("Welcome again " + user);
-  } else {
-     user = prompt("Please enter your name:","");
-     if (user != "" && user != null) {
-       setCookie("username", user, 30);
-     }
-  }
-}
-
-//----- /cookies

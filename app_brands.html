@@ -413,8 +413,8 @@
           <div class="tab-pane" id="browse" role="tabpanel" aria-labelledby="browse">
             <div class="row justify-content-center">
               <div class="col text-center">
-                <h5 class="mb-2 fs-20 font-weight-normal">You have <span style="color:#ccff00;" id="tokenBalance">42 ACT</span> tokens. <br>Use them to buy any of these items,<br> or pool them together and appoint one friend to buy.</h5>
-                <a id="pool" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#poolModal" onclick="$('#poolBtn').show()">Pool my tokens</a>
+                <h5 class="mb-2 fs-20 font-weight-normal">You have <span style="color:#ccff00;" id="tokenBalance">42 ACT</span> tokens. <br>Use them to buy any of these items.</h5>
+                <!-- <a id="pool" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#poolModal" onclick="$('#poolBtn').show()">Pool my tokens</a> -->
               </div>
             </div>
             <!-- lessons -->
@@ -635,7 +635,7 @@
         <!-- / browse -->
         <!-- / pos --> 
 
-                <!-- host -->
+          <!-- host -->
           <div class="tab-pane" id="host" role="tabpanel" aria-labelledby="host">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-8">
@@ -658,15 +658,9 @@
                           <button style="color:#ccff00;" id="dateChoice" type="button" class="btn btn-outline-white btn-rounded docs-datepicker-trigger" data-toggle="datepicker" enabled>
                             <p>Select Date</p>
                           </button>
-
-                          <!-- <input id="promoField" type="text" class="form-control ml-3 col-8" placeholder="Have a promo code? " aria-label="Search challenges"> -->
                         </div>
 
-                        <!--promo code -->
-                        <!-- <div class="input-group rounded">
-                          <input id="promoField" type="text" class="form-control px-2" placeholder="Have a promo code? " aria-label="Search challenges">
-                        </div> -->
-                        <!--/  promo code -->
+
 
                       <!-- / new date picker -->                                                                                            
                       
@@ -721,23 +715,7 @@
     <!-- / footer -->
 
     <!-- modals -->
-      <!--contact modal-->
-      <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header justify-content-end">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" class="icon-x"></span>
-              </button>
-            </div>
-            <div class="modal-body text-center">
-              <h3><b>Contact Us</b></h3>
-              <p>We'd love to hear from you. Email us at support@nceno.app</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / contact modal-->
+
       <!--create modal-->
       <div class="modal fade" id="popupCreate" tabindex="-1" role="dialog" aria-labelledby="popupCreate" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -784,7 +762,7 @@
       </div>
       <!-- / create modal-->
 
-      <!--Soon join modal-->
+      <!-- join modal-->
       <div class="modal fade" id="popupSoonJoin" tabindex="-1" role="dialog" aria-labelledby="popupSoonJoin" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -798,8 +776,8 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="soonJoinTitle">You're about to join the Beerpoint challenge: </h3> <br>
-              <h6>Dec 1 - Dec 31<br> 30 km @4 BPT/km</h6>
+              <h3 id="soonJoinTitle"><span id="joinUsername" style="color:#ccff00;">Joe</span>, You're about to join the Beerpoint challenge: </h3> <br>
+              <h6>Feb 1 - Feb 31<br> 30 km @4 BPT/km</h6>
               <!--/title -->
 
               <!--echo, success, fail -->
@@ -815,9 +793,27 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col text-center">
+                    <span id="nameChangeSuccess"></span>
+                    <span id="nameChangeFail"></span>
+
                     <!--buttons -->
-                    <input id="promoFieldSoon" type="text" class="form-control col-8-offset-4 mb-2 " placeholder="Enter your invite code. " aria-label="invite code..."> 
-                    <button id="joinSoonModalBtn" type="button" onclick="joinTarget()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
+                    <div class="input-group rounded">
+                      <input id="searchField" type="text" class="form-control px-2" placeholder="Optional: change username?" aria-label="change">
+                      <div class="input-group-append">
+                        <button onclick="change()" class="btn btn-primary" type="button">Change</button>
+                      </div>
+                    </div>
+                    <br>
+
+                    
+                    <div class="input-group rounded">
+                      <input id="searchField" type="text" class="form-control px-2" placeholder="Enter your invite code" aria-label="invite code">
+                      <div class="input-group-append">
+                        <button onclick="join()" class="btn btn-primary px-4" type="button">Join </button>
+                      </div>
+                    </div>
+
+
                     <!--/buttons -->
                   </div>
                 </div>
@@ -834,56 +830,9 @@
           </div>
         </div>
       </div>
-      <!-- / Soon join modal-->
+      <!-- / join modal-->
 
-      <!--search join modal-->
-      <div class="modal fade" id="popupSrJoin" tabindex="-1" role="dialog" aria-labelledby="popupSrJoin" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
-            <div class="modal-header justify-content-end">
-              <!--reset content onclick -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetJoinSr()">
-                <span aria-hidden="true" class="icon-x"></span>
-              </button>
-              <!--/reset content onclick -->
-            </div>
-            <div class="modal-body text-center text-white">
-              <!--title -->
-              <h3 id="aboutToJoin">You're about to join this challenge:</h3>
-              <!--/title -->
-
-              <!--echo, success, fail -->
-              <span id="srEcho"></span>
-              <span id="joinSuccess"></span>
-              <span id="srJoinReminder"></span>
-              <span id="joinFail"></span>
-              <!--/echo, success, fail -->
-            </div>
-            <div class="modal-footer gutter-1">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col text-center">
-                    <!--buttons -->
-                    <!-- <input id="promoFieldSearch" type="text" class="mb-2 col-8-offset-4 form-control" placeholder="Have a promo code? " aria-label="Search challenges"> -->
-                    <button id="joinSearch" type="button" onclick="joinSearch()" class="btn btn-block btn-rounded btn-primary">Join this challenge</button>
-                    <!--/buttons -->
-                  </div>
-                </div>
-                <div class="row">
-                  <div id="joinLoader" class="col text-center mb-2">
-                    <!--loaders -->
-                    <p>Please wait a minute. We're adding you to the challenge...</p>
-                    <img  src="app/assets/images/loader.svg"> 
-                    <!--/loaders -->
-                  </div>  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / search join modal-->
+      
 
       <!--log modal-->
       <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModal" aria-hidden="true">
@@ -934,52 +883,7 @@
       </div>
       <!-- / log modal-->
 
-      <!--claim modal-->
-      <div class="modal fade" id="claimModal" tabindex="-1" role="dialog" aria-labelledby="claimModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
-            <div class="modal-header justify-content-end">
-              <!--reset content onclick -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetClaim()">
-                <span aria-hidden="true" class="icon-x"></span>
-              </button>
-              <!--/reset content onclick -->
-            </div>
-            <div class="modal-body text-center text-white">
-              <!--title -->
-              <h3 id="claimTitle">Some ACT didn't make it last week. Their loss could be your gain!</h3>
-              <!--/title -->
-
-              <!--echo, success, fail -->
-              <span id="claimSuccess"></span>
-              <span id="claimFail"></span>
-
-              <!--/echo, success, fail -->
-            </div>
-            <div class="modal-footer gutter-1">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col text-center">
-                    <!--buttons -->
-                    <button id="claimBtn" type="button" class="btn btn-block btn-rounded btn-primary">Claim bonus</button>
-                    <!--/buttons -->
-                  </div>
-                </div>
-                <div class="row">
-                  <span class="col md-8 text-center mb-2" id="claimLoader">
-                    <!--loaders -->
-                    <p>Calculating your bonus... Please wait.</p>
-                    <img  src="app/assets/images/loader.svg">
-                    <!--/loaders -->
-                  </span>
-                </div>
-              </div> 
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / claim modal-->        
+       
 
         
     <!-- / modals -->   

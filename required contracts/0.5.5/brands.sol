@@ -9,13 +9,13 @@ import "./ERC20Interface.sol";
 contract NcenoBrands is RelayRecipient{
 
   event MakeUser(address _wallet, uint _stravaID, string _userName);
-  event MakeGoal(bytes _goalID, address _owner, bytes _inviteCodeHash);
+  event MakeGoal(bytes _goalID, address _owner);
   event MakeCompany(bytes _companyID, string _name, address owner, string _token);
   event MakeOrder(bytes _companyID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
   event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID);
   event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
-  event Refund(bytes _orderNum, uint _buyer, uint _date, uint _amount);
+ /* event Refund(bytes _orderNum, uint _buyer, uint _date, uint _amount);*/
   
   //gas station init
   constructor() public {
@@ -42,7 +42,6 @@ contract NcenoBrands is RelayRecipient{
 
   struct goal{
     bool halted;
-    bytes inviteCodeHash;
     mapping(string=>bool) codeOk;
     bytes goalID;
     uint start;
@@ -94,6 +93,7 @@ contract NcenoBrands is RelayRecipient{
   mapping(bytes=>order) orderAt;
   uint orderCount=0;
 
+  //called by nceno admin
   function addInviteCodes(bytes memory _goalID, string[10] memory _codes) public onlyNcenoAdmin{
     for(uint i =0; i<10; i++){
       goalAt[_goalID].codeOk[_codes[i]]==true;
@@ -102,12 +102,19 @@ contract NcenoBrands is RelayRecipient{
   //---- /objects
 
   //main functions
-  function makeToken(uint _supply, address _owner, string memory _symbol, string memory _companyName) public returns(address){
-    BrandToken createdToken = new BrandToken(_supply, _owner, _symbol, _companyName);
+  function changeUsername(uint _stravaID, string memory _newName)public{
+    require(profileOf[_stravaID].wallet==getSender());
+    profileOf[_stravaID].userName = _newName;
+  }
+
+  //called by nceno admin
+  function makeToken(uint _supply, address _owner, string memory _symbol, string memory _companyName, address _relayHub) public returns(address){
+    BrandToken createdToken = new BrandToken(_supply, _owner, _symbol, _companyName, _relayHub);
     emit MakeToken(_symbol, address(createdToken), _supply, _owner, _companyName);
     return address(createdToken);
   }
 
+  //called by nceno admin
   function makeCompany(string memory _name, bytes memory _companyID, string memory _symbol, uint _supply) public{
     company memory createdCompany = company({
       name : _name,
@@ -150,7 +157,7 @@ contract NcenoBrands is RelayRecipient{
 
     //todo: transfer tokens here
 
-    emit MakeGoal(_goalID, getSender(), _inviteCodeHash);
+    emit MakeGoal(_goalID, getSender());
   }
 
   function hostBpm(bytes memory _goalID, uint _start, uint _days, uint _mins, uint _pot, uint _rewardRate) public payable{
@@ -174,7 +181,7 @@ contract NcenoBrands is RelayRecipient{
 
     //todo: transfer tokens here
 
-    emit MakeGoal(_goalID, getSender(), _inviteCodeHash);
+    emit MakeGoal(_goalID, getSender());
   }
 
   function join(bytes memory _goalID, uint _stravaID, string memory _userName, string memory _inviteCode) public {
@@ -235,7 +242,7 @@ contract NcenoBrands is RelayRecipient{
     emit Log(_goalID, _stravaID, _kms, _mins, _actID);
   }
   
-  function buy(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price) public{
+  function makeOrder(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price) public{
     require(goalAt[_goalID].halted == false);
 
     //todo: transfer tokens to owner
@@ -259,13 +266,13 @@ contract NcenoBrands is RelayRecipient{
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
   }
 
-  function refund(bytes memory _goalID, bytes memory _orderNum)public {
+/*  function refund(bytes memory _goalID, bytes memory _orderNum)public {
     require(goalAt[_goalID].owner == getSender());
     
     //todo: transfer tokens back to buyer
 
     emit Refund(_orderNum, orderAt[_orderNum].stravaBuyer, now, orderAt[_orderNum].price);
-  }
+  }*/
 
   function halt(bytes memory _goalID, bool _status)public{
     require(goalAt[_goalID].owner == getSender());
@@ -273,8 +280,8 @@ contract NcenoBrands is RelayRecipient{
   }
   //---- /main functions
 
-  //getters
-  function goalParams(bytes memory _goalID) public returns(uint, uint, uint, uint, uint, uint){
+  //gettersv
+  function getGoalParams(bytes memory _goalID) public returns(uint, uint, uint, uint, uint, uint){
     return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining);
   }
 
@@ -329,21 +336,23 @@ contract NcenoBrands is RelayRecipient{
 }
 
 // token factory stuff
-contract BrandToken {
-  constructor(uint _supply, address _owner, string memory _symbol, string memory _name) public {
+contract BrandToken is RelayRecipient{
+  constructor(uint _supply, address _owner, string memory _symbol, string memory _name, address _relayHub) public {
     balances[_owner]= _supply;
     thetotalSupply = _supply;
     name = _name;
     decimals = 0;
     symbol = _symbol;
+    setRelayHub(IRelayHub(_relayHub));
+    //0xD216153c06E857cD7f72665E0aF1d7D82172F494
   }
 
   mapping(address => uint256) balances;
   mapping(address => mapping (address => uint256)) allowed;
   uint public  thetotalSupply;
-  string public  name;
-  uint8 public  decimals;
-  string public  symbol;
+  string public name;
+  uint8 public decimals;
+  string public symbol;
   
   event Approval(address indexed _owner, address indexed _spender, uint256 _value);
   event Transfer(address indexed _from, address indexed _to, uint256 _value);
@@ -357,22 +366,22 @@ contract BrandToken {
   }
   
   function approve(address _spender, uint256 _amount) public returns (bool success) {
-    allowed[msg.sender][_spender] = _amount;
-    emit Approval(msg.sender, _spender, _amount);
+    allowed[getSender()][_spender] = _amount;
+    emit Approval(getSender(), _spender, _amount);
     return true;
   }
   
   function transfer(address _to, uint256 _amount) public returns (bool success) {
-    if (balances[msg.sender] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {
-      balances[msg.sender] -= _amount;
+    if (balances[getSender()] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {
+      balances[getSender()] -= _amount;
       balances[_to] += _amount;
-      emit Transfer(msg.sender, _to, _amount);
+      emit Transfer(getSender(), _to, _amount);
       return true;
     } else {return false;}
   }
    
   function transferFrom(address _from, address _to, uint256 _amount) public returns (bool success) {
-    if (balances[_from] >= _amount && allowed[_from][msg.sender] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {
+    if (balances[_from] >= _amount && allowed[_from][getSender()] >= _amount && _amount > 0 && balances[_to] + _amount > balances[_to]) {
       balances[_from] -= _amount;
       balances[_to] += _amount;
       emit Transfer(_from, _to, _amount);
@@ -383,4 +392,31 @@ contract BrandToken {
   function allowance(address _owner, address _spender) public returns (uint256 remaining) {
     return allowed[_owner][_spender];
   }
+
+   //gas station relay stuff
+
+  function acceptRelayedCall(address relay, address from, bytes calldata encodedFunction, uint256 transactionFee, uint256 gasPrice, uint256 gasLimit, uint256 nonce, bytes calldata approvalData, uint256 maxPossibleCharge) external view returns (uint256, bytes memory) {
+      return (0, "");
+    }
+
+    function preRelayedCall(bytes calldata context) /*relayHubOnly*/ external returns (bytes32) {
+      return bytes32(uint(123456));
+    }
+
+    function postRelayedCall(bytes calldata context, bool success, uint actualCharge, bytes32 preRetVal) /*relayHubOnly*/ external {
+    }
+    
+    function _withdrawDeposits(uint256 amount, address payable payee) external onlyNcenoAdmin{
+    }
+  //---  /gas station relay stuff
+
+  address ncenoAdmin = 0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a; //portis mainnet
+  function setNcenoAdmin(address _newAdmin) onlyNcenoAdmin external{
+    ncenoAdmin = _newAdmin;
+  }
+
+  modifier onlyNcenoAdmin(){
+    require(getSender() == ncenoAdmin,"Sender not authorized.");
+    _;
+  } 
 }
