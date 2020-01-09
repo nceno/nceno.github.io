@@ -15,7 +15,6 @@ contract NcenoBrands is RelayRecipient{
   event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID);
   event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
- /* event Refund(bytes _orderNum, uint _buyer, uint _date, uint _amount);*/
   
   //gas station init
   constructor() public {
@@ -128,10 +127,10 @@ contract NcenoBrands is RelayRecipient{
     companyAt[_companyID] = createdCompany;
     companyCount++;
 
-    //todo: make token (make token separately first before company)
+    //to do: make token (make token separately first before company)
     //ERC20 internal BrandToken = ERC20(BrandToken_Address);
 
-    //todo:set token address
+    //to do:set token address
 
     emit MakeCompany(_companyID, _name, getSender(), _symbol);
   }
