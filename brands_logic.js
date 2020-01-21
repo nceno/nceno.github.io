@@ -138,10 +138,10 @@ var userID
 //brands join
 $("#joinChallenge").click(function() {
   NcenoBrands.methods.join(
-    brandGoalID,
-    stravaID,
-    chosenUserName,
-    inviteCodeInput)
+    goalID, 
+    stravaID, 
+    _userName, 
+    _inviteCode)
   .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
@@ -176,7 +176,7 @@ function randGoalID(){
 }
 
 //creating a goal from the slider values and live ethereum price
-var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
+//var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
   //updateEthPrice();
   var sliderStake = $("#sliderStake").roundSlider("getValue").toString();
@@ -955,6 +955,23 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
+  $("#sliderHRbonus").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 0,
+    max: 4,
+    step: 0.5,
+    value: 2,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal5",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
 
   //@NCENO setup
   //delays extraction of the fitbit creds until the user has authed.
@@ -976,10 +993,13 @@ function tooltipVal2(args) {
     return args.value + " token pot";
 }
 function tooltipVal3(args) {
-    return args.value + " duration";
+    return args.value + " days";
 }
 function tooltipVal4(args) {
     return args.value + " tokens/km";
+}
+function tooltipVal5(args) {
+    return args.value + " BPM bonus";
 }
 
 
