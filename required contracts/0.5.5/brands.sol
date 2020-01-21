@@ -1,3 +1,12 @@
+//makeCompany: "Suntek Global","0xccff00959f043d6e2926793d85a8cde6adccff00","0x619201959f043d6e2926793d85a8cde6ad755ef8", "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
+//deposit: "0xf34c124a29229a5cf5b63be4bb9a6778d1847012","30"
+//host: "0xccff00","1579588026","30","50","0", "100","1","2","0x619201959f043d6e2926793d85a8cde6ad755ef8"
+//addinvite codes: "0xccff00",["red", "orange", "yellow", "green", "blue", "indigo", "violet", "white", "black", "gray"]
+//join: "0xccff00","1234567","joenance","red"
+//log: "0xccff00","1234567","3","2","666","0x121212"
+//make order: "0xccff00","0xccff00959f043d6e2926793d85a8cde6adccff00","0x666aaa","1234567","butt plug","12"
+
+
 pragma solidity >=0.5.5;
 pragma experimental ABIEncoderV2;
 import "./GsnUtils.sol";
@@ -10,7 +19,7 @@ contract NcenoBrands is RelayRecipient{
 
   event MakeUser(address _wallet, uint _stravaID, string _userName);
   event MakeGoal(bytes _goalID, address _owner);
-  event MakeCompany(bytes _companyID, string _name, address owner, string _token);
+  event MakeCompany(bytes _companyID, string _name, address owner);
   event MakeOrder(bytes _companyID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
   event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID);
@@ -30,8 +39,7 @@ contract NcenoBrands is RelayRecipient{
     mapping(bytes=>order) orderSet;
     uint orderCount;
     mapping(uint=>order) indexedOrder;
-    string tokenSymbol;
-    address BrandToken_Address;
+    address token;
   }
   mapping(bytes=>company) public companyAt;
   mapping(address=>company) public companyOf;
@@ -53,6 +61,7 @@ contract NcenoBrands is RelayRecipient{
     uint bpmTokenRate;
     address owner;
     uint compCount;
+    address token;
     mapping(uint=>uint) playerSet;
     mapping(uint=>uint) indexedPlayerID;
     mapping(uint=>uint) playerKms;
@@ -95,14 +104,14 @@ contract NcenoBrands is RelayRecipient{
   //called by nceno admin
   function addInviteCodes(bytes memory _goalID, string[10] memory _codes) public onlyNcenoAdmin{
     for(uint i =0; i<10; i++){
-      goalAt[_goalID].codeOk[_codes[i]]==true;
+      goalAt[_goalID].codeOk[_codes[i]]=true;
     }
   }
   //---- /objects
 
   //main functions
   function changeUsername(uint _stravaID, string memory _newName)public{
-    require(profileOf[_stravaID].wallet==getSender());
+    require(profileOf[_stravaID].wallet==getSender(),"error");
     profileOf[_stravaID].userName = _newName;
   }
 
@@ -112,83 +121,58 @@ contract NcenoBrands is RelayRecipient{
     emit MakeToken(_symbol, address(createdToken), _supply, _owner, _companyName);
     return address(createdToken);
   }
-
+  
   //called by nceno admin
-  function makeCompany(string memory _name, bytes memory _companyID, string memory _symbol, uint _supply) public{
+  function makeCompany(string memory _name, bytes memory _companyID, address _BrandToken_Address, address _owner) public{
     company memory createdCompany = company({
       name : _name,
       companyID : _companyID,
-      owner: getSender(),
-      tokenSymbol: _symbol,
-      BrandToken_Address: 0x0000000000000000000000000000000000000000,
+      //add an _owner parameter?
+      owner: _owner,
+      token: _BrandToken_Address,
       orderCount:0
     });
     companyExists[_companyID] = true;
     companyAt[_companyID] = createdCompany;
     companyCount++;
 
-    //to do: make token (make token separately first before company)
-    //ERC20 internal BrandToken = ERC20(BrandToken_Address);
-
-    //to do:set token address
-
-    emit MakeCompany(_companyID, _name, getSender(), _symbol);
+    //(make token separately first before company)
+    emit MakeCompany(_companyID, _name, _owner);
   }
 
-  function hostKm(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _pot, uint _rewardRate)public payable{
-    goal memory createdGoal = goal({
-      halted: false,
-      goalID: _goalID,
-      start: _start,
-      dur: _days,
-      activeMins: 0,
-      kms: _kms,
-      tokenPot: _pot,
-      potRemaining: _pot,
-      kmTokenRate: _rewardRate,
-      bpmTokenRate:0,
-      owner: getSender(),
-      compCount:0
-    });
-    companyOf[getSender()].goalSet[_goalID] = createdGoal;
-    goalAt[_goalID] = createdGoal;
-    goalCount++;
-
-    //todo: transfer tokens here
-
-    emit MakeGoal(_goalID, getSender());
-  }
-
-  function hostBpm(bytes memory _goalID, uint _start, uint _days, uint _mins, uint _pot, uint _rewardRate) public payable{
+  function host(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _mins, uint _pot, uint _KmReward, uint _BpmReward, address _token)public payable{
     goal memory createdGoal = goal({
       halted: false,
       goalID: _goalID,
       start: _start,
       dur: _days,
       activeMins: _mins,
-      kms: 0,
+      kms: _kms,
       tokenPot: _pot,
       potRemaining: _pot,
-      kmTokenRate:0,
-      bpmTokenRate: _rewardRate,
+      kmTokenRate: _KmReward,
+      bpmTokenRate:_BpmReward,
       owner: getSender(),
-      compCount:0
+      compCount:0,
+      token: _token
     });
+
+    //replace getSender() with _owner parameter?
     companyOf[getSender()].goalSet[_goalID] = createdGoal;
     goalAt[_goalID] = createdGoal;
     goalCount++;
 
-    //todo: transfer tokens here
+    //(transfer the tokens as a deposit in the UI separately in the callback)
 
     emit MakeGoal(_goalID, getSender());
   }
 
   function join(bytes memory _goalID, uint _stravaID, string memory _userName, string memory _inviteCode) public {
-    require(now < goalAt[_goalID].start+goalAt[_goalID].dur 
+    require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
-      //&& keccak256(_inviteCode) == goalAt[_goalID].inviteCodeHash
       && goalAt[_goalID].halted == false
-      && goalAt[_goalID].codeOk[_inviteCode]==true);
+      && goalAt[_goalID].codeOk[_inviteCode]==true,"error");
+      
 
     if(userExists[_stravaID] == false){
       player memory createdPlayer = player({
@@ -210,16 +194,16 @@ contract NcenoBrands is RelayRecipient{
     goalAt[_goalID].compCount++;
 
     goalAt[_goalID].codeOk[_inviteCode]==false;
-    emit Join(_goalID,_stravaID, _userName,  _inviteCode);
+    emit Join(_goalID,_stravaID, _userName, _inviteCode);
   }
 
   function log(bytes memory _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes memory _secret) public{
     require(now-goalAt[_goalID].lastLog[_stravaID] >13 hours 
       && now > goalAt[_goalID].start 
-      && now < goalAt[_goalID].start+goalAt[_goalID].dur 
-      && keccak256(_secret) == keccak256('masterhash')
+      && now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days 
+      /*&& keccak256(_secret) == keccak256('masterhash')*/
       && goalAt[_goalID].halted == false
-      && goalAt[_goalID].potRemaining>0);
+      && goalAt[_goalID].potRemaining>0,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
     uint payout = _kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
@@ -227,8 +211,11 @@ contract NcenoBrands is RelayRecipient{
       payout = goalAt[_goalID].potRemaining;
     }
 
-    //todo: token payout transfer
-    //BrandToken.transfer(getSender(), payout);
+    //---- token payout
+    ERC20 companyToken = ERC20(goalAt[_goalID].token);
+    companyToken.transfer(getSender(), payout);
+    //----/ token payout
+
 
     goalAt[_goalID].potRemaining-=payout;
 
@@ -242,9 +229,9 @@ contract NcenoBrands is RelayRecipient{
   }
   
   function makeOrder(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price) public{
-    require(goalAt[_goalID].halted == false);
+    require(goalAt[_goalID].halted == false,"error");
 
-    //todo: transfer tokens to owner
+    //(transfer tokens to owner first)
 
     order memory createdOrder = order ({
       orderNum: _orderNum,
@@ -265,43 +252,42 @@ contract NcenoBrands is RelayRecipient{
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
   }
 
-/*  function refund(bytes memory _goalID, bytes memory _orderNum)public {
-    require(goalAt[_goalID].owner == getSender());
-    
-    //todo: transfer tokens back to buyer
-
-    emit Refund(_orderNum, orderAt[_orderNum].stravaBuyer, now, orderAt[_orderNum].price);
-  }*/
-
-  function halt(bytes memory _goalID, bool _status)public{
-    require(goalAt[_goalID].owner == getSender());
+  function halt(bytes memory _goalID, bool _status) public{
+    require(goalAt[_goalID].owner == getSender(),"error");
     goalAt[_goalID].halted = _status;
   }
+
+  function emptyContract(address _token, bytes memory _company) public{
+    require(getSender() == companyAt[_company].owner && companyAt[_company].token == _token, "sender not authorized.");
+    ERC20 companyToken = ERC20(_token);
+    companyToken.transfer(getSender(), address(this).balance);
+  }
+
+
   //---- /main functions
 
-  //gettersv
-  function getGoalParams(bytes memory _goalID) public returns(uint, uint, uint, uint, uint, uint){
-    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining);
+  //getters
+  function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint, uint){
+    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].activeMins, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining);
   }
 
-  function getIndexedPlayerID(bytes memory _goalID, uint _index) public returns(uint){
-    return(goalAt[_goalID].indexedPlayerID[_index]);
+  function getIndexedPlayerID(bytes memory _goalID, uint _index) public view returns(uint, string memory){
+    return(goalAt[_goalID].indexedPlayerID[_index], profileOf[goalAt[_goalID].indexedPlayerID[_index]].userName );
   }
 
-  function getPlayer(bytes memory _goalID, uint _stravaID) public returns(uint, uint, uint, uint){
+  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint){
     return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID]);
   }
 
-  function getIndexedOrder(bytes memory _companyID, uint _index) public returns(string memory, uint, uint, uint, bool){
+  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, uint, uint, uint, bool){
     return(companyAt[_companyID].indexedOrder[_index].item, companyAt[_companyID].indexedOrder[_index].stravaBuyer, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded);    
   }
 
-  function searchOrders(bytes memory _orderNum) public returns(string memory, uint, uint, uint, bool, bytes memory){
+  function searchOrders(bytes memory _orderNum) public view returns(string memory, uint, uint, uint, bool, bytes memory){
     return(orderAt[_orderNum].item, orderAt[_orderNum].stravaBuyer, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].company);
   }
-  
 
-  function getNcenoStats() public returns(uint, uint, uint, uint, uint, uint, uint){
+  function getNcenoStats() public view returns(uint, uint, uint, uint, uint, uint, uint){
     return(companyCount, goalCount, kmCount, minsCount, userCount, orderCount, payoutToDate);
   }
   //----- /getters

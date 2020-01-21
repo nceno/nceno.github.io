@@ -1,4 +1,4 @@
-const challengeID;
+const goalID;
 const companyID;
 const tokenAddress;
 const adminAddress;
