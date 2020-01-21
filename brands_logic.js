@@ -35,7 +35,7 @@ function showPortis() {
       //console.log("this ETH address: " + web3.eth.defaultAccount);
       portisEmail = email;
       //console.log("this portis email is: "+ portisEmail);
-      localize();
+      //localize();
       getToken();
       $("#portisBtn").hide();
       updateGasPrice();
