@@ -950,11 +950,12 @@ window.onload = function() {
     value: 4,
     sliderType: "min-range",
     tooltipFormat: "tooltipVal4",
-    circleShape: "quarter",
+    circleShape: "pie",
     startAngle: 315,
     handleSize: "+20",
     lineCap: "round"
   });
+  
   $("#sliderHRbonus").roundSlider({
     editableTooltip: false,
     radius: 75,
