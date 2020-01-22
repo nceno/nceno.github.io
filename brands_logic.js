@@ -182,7 +182,7 @@ $("#hostBtn").click(function() {
   var KmReward = $("#sliderReward").roundSlider('getValue',1).toString();
   var BpmReward = $("#sliderReward").roundSlider('getValue',2)-$("#sliderReward").roundSlider('getValue',1).toString();
   var target = $("#sliderTarget").roundSlider("getValue");
-  var kmTarget = target/($("#sliderReward").roundSlider('getValue',1)*(1+0.1*$("#sliderReward").roundSlider('getValue',2)));
+  var kmTarget = Math.round(target/($("#sliderReward").roundSlider('getValue',1)*(1+0.1*$("#sliderReward").roundSlider('getValue',2))));
   var minsTarget = 10*kmTarget;
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
   var daysDur = $("#sliderDays").roundSlider("getValue").toString();
