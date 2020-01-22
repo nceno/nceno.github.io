@@ -1,9 +1,9 @@
 const goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 const companyID = 'alechemist';
-const tokenAddress = 0x1f54487e715774717332ec82a4988282f14e33e2;
-const adminWallet = 0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a;
+const tokenAddress = '0x1f54487e715774717332ec82a4988282f14e33e2';
+const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a';
 
-const adminUserID_1 = 49092681;
+const adminUserID_1 = '49092681';
 
 const item1Name = 'Valencia Ale';
 const item1Price = 620;
