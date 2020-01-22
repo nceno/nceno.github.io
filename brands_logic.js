@@ -178,7 +178,7 @@ function randGoalID(){
 //creating a goal from the slider values and live ethereum price
 //var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
-  //updateEthPrice();
+
   var sliderStake = $("#sliderStake").roundSlider("getValue").toString();
   var msgValueHost = 1000000000000000000*$("#sliderStake").roundSlider("getValue")/ethPrice; //removed math.floor()
   var usdStakeInWei = msgValueHost.toString();
@@ -233,8 +233,7 @@ $("#hostBtn").click(function() {
 //function that displays in a modal, a summary of the goal you are setting.
 var ethPrice;
 function echoGoal(){
-  //get live eth price
-  updateEthPrice('hostBtn');
+
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
   //echo modal
   $("#host").tab('show');
@@ -633,7 +632,7 @@ function selectedChallenge(){
 //also populates the join modal.
 var stakeweiSearched;
 function search(){
-  updateEthPrice('joinSearch');
+
   $("#request").show();
   var goalid = web3.utils.padRight($('#searchField').val(),34)
 
@@ -827,7 +826,7 @@ $('#soonJoin1').click(function(){
   });
 
 function populateTargetModal(){
-  updateEthPrice();
+
   $("#soonEcho").html(
     "You're commiting $" + targetStake + " to working out for " + 
     targetMin +"minutes, "+ targetSes+" times per week, for "+ 
