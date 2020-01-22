@@ -72,7 +72,7 @@ $("#joinSoonLoader").hide();
 $("#makeAcctBtn").hide();
 $("#openWallet").hide();
 $("#portisLoader").hide();
-$("#hostBtn").hide();
+
 $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
 $("#claimBtn").show();
