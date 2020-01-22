@@ -171,31 +171,35 @@ $("#joinChallenge").click(function() {
 
 
 //randomizes the goalID
-function randGoalID(){
+/*function randGoalID(){
   goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
-}
+}*/
 
 //creating a goal from the slider values and live ethereum price
 //var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
 
-  var sliderStake = $("#sliderStake").roundSlider("getValue").toString();
-  var msgValueHost = 1000000000000000000*$("#sliderStake").roundSlider("getValue")/ethPrice; //removed math.floor()
-  var usdStakeInWei = msgValueHost.toString();
+  var KmReward = $("#sliderReward").roundSlider("getValue(1)").toString();
+  var BpmReward = ($("#sliderReward").roundSlider("getValue(2)")-$("#sliderReward").roundSlider("getValue(1)")).toString();
+  var target = $("#sliderTarget").roundSlider("getValue");
+  var kmTarget = target/($("#sliderReward").roundSlider("getValue(1)")*(1+0.1*$("#sliderReward").roundSlider("getValue(2)")));
+  var minsTarget = 10*kmTarget;
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
+  var daysDur = $("#sliderDays").roundSlider("getValue");
+  var pot = $("#sliderPot").roundSlider("getValue");
 
   NcenoBrands.methods.host(
-    web3.utils.padRight(goalID,34),
-    $("#sliderMins").roundSlider("getValue"),
-    sliderStake, //plain whole dollar amount
-    $("#sliderSes").roundSlider("getValue"),
-    $("#sliderWks").roundSlider("getValue"),
-    start,
-    stravaID
-    //Math.round(ethPrice*100), //eth price in pennies. Gets rid of decimals
-    //web3.utils.toHex($('#promoField').val())
+    goalID,
+    start,  
+    daysDur,
+    kmTarget, 
+    minsTarget,  
+    pot, 
+    KmReward, 
+    BpmReward, 
+    tokenAddress
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000, value: valueMultiplier*usdStakeInWei},
+  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -214,10 +218,7 @@ $("#hostBtn").click(function() {
       $("#createLoader").hide();
       $('#promoField').hide();
       $("#createSuccess").show();
-      $("#chalID").html("Invite your friends to this challenge! The challenge ID is: "+ goalID+".");
-      reminder('createReminder',sliderStake, $("#sliderMins").roundSlider("getValue"), $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID, start);
-      stravaShare(start, $("#sliderMins").roundSlider("getValue"), sliderStake, $("#sliderSes").roundSlider("getValue"), $("#sliderWks").roundSlider("getValue"), goalID);
-      createUser();
+      
     }
     else{
       $("#createLoader").hide();
@@ -231,7 +232,6 @@ $("#hostBtn").click(function() {
 });
 
 //function that displays in a modal, a summary of the goal you are setting.
-var ethPrice;
 function echoGoal(){
 
   var time = new Date($("#dateChoice").val()).getTime() / 1000;
@@ -240,9 +240,9 @@ function echoGoal(){
   $('#popupCreate').modal('show');
 
   $("#goalEcho").html(
-    "You're commiting $" + $("#sliderStake").roundSlider("getValue") + " to working out for " + 
-    $("#sliderMins").roundSlider("getValue") +"mins " + $("#sliderSes").roundSlider("getValue")+" times per week for "+ 
-    $("#sliderWks").roundSlider("getValue")+  " weeks, starting automatically on "+ $("#dateChoice").datepicker('getDate', true) +"."
+    "You're offering " + $("#sliderPot").roundSlider("getValue") + " tokens to your employees to work out for " + 
+    $("#sliderDays").roundSlider("getValue")+  " days, at a reward rate of "+$("#sliderReward").roundSlider("getValue(1)")+" tokens/km with no heart rate data, and "+
+    $("#sliderReward").roundSlider("getValue(2)")+" tokens/10min for exercises with heart rate, starting automatically from "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
 }
 
@@ -886,7 +886,7 @@ var browsedGoal;
 window.onload = function() {
 
   //sliders
-  $("#sliderMins").roundSlider({
+  $("#sliderTarget").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -903,7 +903,7 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
-  $("#sliderSes").roundSlider({
+  $("#sliderPot").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -920,7 +920,7 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
-  $("#sliderWks").roundSlider({
+  $("#sliderDays").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -937,7 +937,7 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
-  $("#sliderStake").roundSlider({
+  $("#sliderReward").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
