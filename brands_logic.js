@@ -205,7 +205,6 @@ $("#hostBtn").click(function() {
         $("#hostBtn").hide();
         $("#cancelBtn").hide();
         $("#createLoader").show();
-        $('#promoField').hide();
         console.log(result);
       }
       else
@@ -223,9 +222,7 @@ $("#hostBtn").click(function() {
       .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
         function(error, result) {
           if (!error){
-            $("#createLoader").hide();
-            $('#promoField').hide();
-            $("#createSuccess").show();
+            $("#createLoader").show();
             console.log(result);
           }
           else
@@ -235,12 +232,14 @@ $("#hostBtn").click(function() {
         console.log(receipt.status);
         if(receipt.status === true){
           correctNonce++;
+          $("#createLoader").hide();
+          $("#createSuccess").show();
+          $("#hostBtn").hide();
         }
       })      
     }
     else{
       $("#createLoader").hide();
-      $('#promoField').hide();
       $("#hostBtn").hide();
       $('#createFail').html('<p>Transaction failed. User account does not exist, or else message value is less than intended stake.</p>');
       console.log("User does not exist, or else message value is less than intended stake.");
