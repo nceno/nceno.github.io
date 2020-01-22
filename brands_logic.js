@@ -215,10 +215,28 @@ $("#hostBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       correctNonce++;
-      $("#createLoader").hide();
-      $('#promoField').hide();
-      $("#createSuccess").show();
-      
+      //deposit tokens here...
+      AleToken.methods.transfer(
+        contractAddress,
+        pot
+      )
+      .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+        function(error, result) {
+          if (!error){
+            $("#createLoader").hide();
+            $('#promoField').hide();
+            $("#createSuccess").show();
+            console.log(result);
+          }
+          else
+          console.error(error);
+        }
+      ).once('confirmation', function(confNumber, receipt){
+        console.log(receipt.status);
+        if(receipt.status === true){
+          correctNonce++;
+        }
+      })      
     }
     else{
       $("#createLoader").hide();
@@ -227,7 +245,8 @@ $("#hostBtn").click(function() {
       $('#createFail').html('<p>Transaction failed. User account does not exist, or else message value is less than intended stake.</p>');
       console.log("User does not exist, or else message value is less than intended stake.");
     }
-    })
+    }
+    )
     .once('error', function(error){console.log(error);});;
 });
 
