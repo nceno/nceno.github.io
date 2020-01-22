@@ -179,21 +179,21 @@ $("#joinChallenge").click(function() {
 //var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
 
-  var KmReward = $("#sliderReward").roundSlider("getValue")[1].toString();
-  var BpmReward = ($("#sliderReward").roundSlider("getValue(2)")-$("#sliderReward").roundSlider("getValue")[1]).toString();
+  var KmReward = $("#sliderReward").roundSlider('getValue',1).toString();
+  var BpmReward = ($("#sliderReward").roundSlider('getValue',2)-$("#sliderReward").roundSlider('getValue',1).toString();
   var target = $("#sliderTarget").roundSlider("getValue");
-  var kmTarget = target/($("#sliderReward").roundSlider("getValue")[1]*(1+0.1*$("#sliderReward").roundSlider("getValue(2)")));
+  var kmTarget = target/($("#sliderReward").roundSlider('getValue',1)*(1+0.1*$("#sliderReward").roundSlider('getValue',2)));
   var minsTarget = 10*kmTarget;
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
-  var daysDur = $("#sliderDays").roundSlider("getValue");
-  var pot = $("#sliderPot").roundSlider("getValue");
+  var daysDur = $("#sliderDays").roundSlider("getValue").toString();
+  var pot = $("#sliderPot").roundSlider("getValue").toString();
 
   NcenoBrands.methods.host(
     goalID,
     start,  
     daysDur,
-    kmTarget, 
-    minsTarget,  
+    kmTarget.toString(), 
+    minsTarget.toString(),  
     pot, 
     KmReward, 
     BpmReward, 
