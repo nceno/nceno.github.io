@@ -1006,7 +1006,7 @@ window.onload = function() {
 
 //chart tool tips
 function tooltipVal1(args) {
-    return args.value + " km target";
+    return args.value + " token cap";
 }
 function tooltipVal2(args) {
     return args.value + " token pot";
