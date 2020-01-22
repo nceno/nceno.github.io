@@ -179,10 +179,10 @@ $("#joinChallenge").click(function() {
 //var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
 $("#hostBtn").click(function() {
 
-  var KmReward = $("#sliderReward").roundSlider("getValue(1)").toString();
-  var BpmReward = ($("#sliderReward").roundSlider("getValue(2)")-$("#sliderReward").roundSlider("getValue(1)")).toString();
+  var KmReward = $("#sliderReward").roundSlider("getValue")[1].toString();
+  var BpmReward = ($("#sliderReward").roundSlider("getValue(2)")-$("#sliderReward").roundSlider("getValue")[1]).toString();
   var target = $("#sliderTarget").roundSlider("getValue");
-  var kmTarget = target/($("#sliderReward").roundSlider("getValue(1)")*(1+0.1*$("#sliderReward").roundSlider("getValue(2)")));
+  var kmTarget = target/($("#sliderReward").roundSlider("getValue")[1]*(1+0.1*$("#sliderReward").roundSlider("getValue(2)")));
   var minsTarget = 10*kmTarget;
   var start = new Date($("#dateChoice").datepicker('getDate')).getTime() / 1000;
   var daysDur = $("#sliderDays").roundSlider("getValue");
@@ -241,7 +241,7 @@ function echoGoal(){
 
   $("#goalEcho").html(
     "You're offering a maximum of " + $("#sliderPot").roundSlider("getValue") + " tokens to your employees to work out for " + 
-    $("#sliderDays").roundSlider("getValue")+  " days, at a reward rate of "+$("#sliderReward").roundSlider("getValue(1)")+" tokens/km with no heart rate data, and "+
+    $("#sliderDays").roundSlider("getValue")+  " days, at a reward rate of "+$("#sliderReward").roundSlider("getValue")[1]+" tokens/km with no heart rate data, and "+
     $("#sliderReward").roundSlider("getValue(2)")+" tokens/10min for exercises with heart rate, starting automatically from "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
 }
