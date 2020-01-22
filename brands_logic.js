@@ -949,7 +949,7 @@ window.onload = function() {
     step: 1,
     value: "2,4",
     sliderType: "range",
-    tooltipFormat: "tooltipVal4,tooltipVal5 ",
+/*    tooltipFormat: "tooltipVal4",*/
     circleShape: "pie",
     startAngle: 315,
     handleSize: "+20",
@@ -996,12 +996,9 @@ function tooltipVal2(args) {
 function tooltipVal3(args) {
     return args.value + " days";
 }
-function tooltipVal4(args) {
-    return args.value + " tokens/km";
-}
-function tooltipVal5(args) {
-    return args.value + " with HR";
-}
+/*function tooltipVal4(args) {
+    return args.value + " reward";
+}*/
 
 
 var safeLow;
