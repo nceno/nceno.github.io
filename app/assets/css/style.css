@@ -40,74 +40,74 @@
   --font-family-sans-serif: "Rubik", sans-serif;
   --font-family-monospace: "Roboto Mono", monospace; }
 
-#sliderMins .rs-range-color  {
+#sliderTarget .rs-range-color  {
     background-color: #f442b3;
 }
-#sliderMins .rs-path-color  {
+#sliderTarget .rs-path-color  {
     background-color: #151515;
 }
-#sliderMins .rs-handle  {
+#sliderTarget .rs-handle  {
     background-color: #ccff00;
 }
-#sliderMins .rs-border  {
+#sliderTarget .rs-border  {
     border-color: #151515;
 }
 
-#sliderMins .rs-bg-color {
+#sliderTarget .rs-bg-color {
     background-color: #151515;
 }
 
 
-#sliderSes .rs-range-color  {
+#sliderPot .rs-range-color  {
     background-color: #f442b3;
 }
-#sliderSes .rs-path-color  {
+#sliderPot .rs-path-color  {
     background-color: #151515;
 }
-#sliderSes .rs-handle  {
+#sliderPot .rs-handle  {
     background-color: #ccff00;
 }
-#sliderSes .rs-border  {
+#sliderPot .rs-border  {
     border-color: #151515;
 }
 
-#sliderSes .rs-bg-color {
+#sliderPot .rs-bg-color {
     background-color: #151515;
 }
 
 
-#sliderWks .rs-range-color  {
+#sliderDays .rs-range-color  {
     background-color: #f442b3;
 }
-#sliderWks .rs-path-color  {
+#sliderDays .rs-path-color  {
     background-color: #151515;
 }
-#sliderWks .rs-handle  {
+#sliderDays .rs-handle  {
     background-color: #ccff00;
 }
-#sliderWks .rs-border  {
+#sliderDays .rs-border  {
     border-color: #151515;
 }
 
-#sliderWks .rs-bg-color {
+#sliderDays .rs-bg-color {
     background-color: #151515;
 }
 
 
-#sliderStake .rs-range-color  {
+#sliderReward .rs-range-color  {
     background-color: #f442b3;
 }
-#sliderStake .rs-path-color  {
+#sliderReward .rs-path-color  {
     background-color: #151515;
 }
-#sliderStake .rs-handle  {
+#sliderReward .rs-handle  {
     background-color: #ccff00;
 }
-#sliderStake .rs-border  {
+#sliderReward .rs-border  {
     border-color: #151515;
 }
 
-#sliderStake .rs-bg-color {
+#sliderReward .rs-bg-color {
     background-color: #151515;
 }
 
