@@ -947,8 +947,8 @@ window.onload = function() {
     min: 1,
     max: 10,
     step: 1,
-    value: 4,
-    sliderType: "min-range",
+    value: "2,4",
+    sliderType: "range",
     tooltipFormat: "tooltipVal4",
     circleShape: "pie",
     startAngle: 315,
@@ -956,7 +956,7 @@ window.onload = function() {
     lineCap: "round"
   });
   
-  $("#sliderHRbonus").roundSlider({
+/*  $("#sliderHRbonus").roundSlider({
     editableTooltip: false,
     radius: 75,
     width: 14,
@@ -972,7 +972,7 @@ window.onload = function() {
     startAngle: 315,
     handleSize: "+20",
     lineCap: "round"
-  });
+  });*/
 
   //@NCENO setup
   //delays extraction of the fitbit creds until the user has authed.
@@ -997,11 +997,11 @@ function tooltipVal3(args) {
     return args.value + " days";
 }
 function tooltipVal4(args) {
-    return args.value + " tokens/km";
+    return args.value + " reward/km";
 }
-function tooltipVal5(args) {
+/*function tooltipVal5(args) {
     return args.value + " BPM bonus";
-}
+}*/
 
 
 var safeLow;

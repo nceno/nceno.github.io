@@ -140,7 +140,7 @@ contract NcenoBrands is RelayRecipient{
     emit MakeCompany(_companyID, _name, _owner);
   }
 
-  function host(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _mins, uint _pot, uint _KmReward, uint _BpmReward, address _token)public payable{
+  function host(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _mins, uint _pot, uint _KmReward, uint _BpmReward, address _token) public payable{
     goal memory createdGoal = goal({
       halted: false,
       goalID: _goalID,
