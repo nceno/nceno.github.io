@@ -244,7 +244,7 @@ function echoGoal(){
     $("#sliderDays").roundSlider("getValue")+  " days, at a reward rate of "+$("#sliderReward").roundSlider("getValue")+" tokens/km with no heart rate data, and "+
     $("#sliderReward").roundSlider("getValue(2)")+" tokens/10min for exercises with heart rate, starting automatically from "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
-  console.log($("#sliderReward").roundSlider.getValue(1));
+  console.log($("#sliderReward").roundSlider('getValue(1)');
 }
 
 function resetCreate(){
