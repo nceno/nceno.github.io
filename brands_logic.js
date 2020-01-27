@@ -140,13 +140,15 @@ $("#joinChallenge").click(function() {
   NcenoBrands.methods.join(
     goalID, 
     stravaID, 
-    _userName, 
-    _inviteCode)
+    $("#nameChangeField").val(), 
+    $("#codeField").val())
   .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
         $("#joinChallenge").hide();
+        $("#codeField").hide();
+        $("#nameChangeField").hide();
         $("#joinChallengeLoader").show();
         console.log(result);
       }
@@ -158,13 +160,14 @@ $("#joinChallenge").click(function() {
     if(receipt.status === true){
       updateNonce();
       $("#joinChallengeLoader").hide();
-      $("joinChallenge").hide();
+      //$("joinChallenge").hide();
     }
     else{
-      $("#joinChallengeLoader").hide();
       $("#joinChallenge").hide();
+      $("#codeField").hide();
+      $("#nameChangeField").hide();
       $('#joinChallengeFail').html('<p>Sorry, invite code invalid or challenge has stopped.</p>');
-      console.log("profile already exists!");
+      console.log("join error.");
     } 
   }).once('error', function(error){console.log(error);});
 });

@@ -298,12 +298,6 @@
                                   <h6><b>Grand prize:</b> <br>First to log 30km gets a lunch date with the boss!</h6>
                                   <a style="color:white;" id="joinBtn" class="btn btn-outline-white btn-rounded mt-1 mb-1 py-1" data-toggle="modal" data-target="#popupSoonJoin" data-whatever="@mdo">Join this challenge</a>
                                   <p>Turn your Km's into beer! Log your workouts with Nceno to get Alechemist tokens (ACT) redeemable for food or drink at any Alechemist location. Limited tokens available to claim, so get out there and workout for a payout before they're all gone! </p>
-
-                                  <div id="joinChallengeLoader" class="col text-center ">
-                                    <p>Adding you to the challenge...</p> 
-                                    <span id="joinChallengeFail"></span>
-                                    <img  src="app/assets/images/loader.svg">
-                                  </div>
                                   
                                 </div>
                               </div>
@@ -799,16 +793,16 @@
 
                     <!--buttons -->
                     <div class="input-group rounded">
-                      <input id="searchField" type="text" class="form-control px-2" placeholder="Optional: change username?" aria-label="change">
-                      <div class="input-group-append">
+                      <input id="nameChangeField" type="text" class="form-control px-2" placeholder="Optional: change username?" aria-label="change">
+                      <!-- <div class="input-group-append">
                         <button onclick="change()" class="btn btn-primary" type="button">Change</button>
-                      </div>
+                      </div> -->
                     </div>
                     <br>
 
                     
                     <div class="input-group rounded">
-                      <input id="searchField" type="text" class="form-control px-2" placeholder="Enter your invite code" aria-label="invite code">
+                      <input id="codeField" type="text" class="form-control px-2" placeholder="Enter your invite code" aria-label="invite code">
                       <div class="input-group-append">
                         <button id="joinChallenge" class="btn btn-primary px-4" type="button">Join </button>
                       </div>
