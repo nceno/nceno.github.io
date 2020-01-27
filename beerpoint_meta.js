@@ -6,17 +6,27 @@ const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a';
 
 const adminUserID_1 = '49092681';
 
-const item1Name = 'Valencia Ale';
-const item1Price = 620;
+const item1={
+	name: 'Valencia Ale';
+	price : 620;
+}
 
-const item2Name= 'Hefty Red';
-const item2Price = 700;
+const item2={
+	name: 'Hefty Red';
+	price: 700;
+}
 
-const item3Name = 'Beer Glass';
-const item3Price = 2200;
+const item3={
+	name: 'Beer Glass';
+	price: 2200;
+}
 
-const item4Name = 'Tana Ale';
-const item4Price = 450;
+const item4={
+	name: 'Tana Ale';
+	price = 450;
+}
 
-const item5Name = 'Koshi Light';
-const item5Price = 95;
+const item5={
+	name: 'Koshi Light';
+	price = 95;
+}
