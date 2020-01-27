@@ -422,7 +422,7 @@
                           <div class="tile-image " style="background-image: url(app/assets/images/val1.png)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a  class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item1);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow" >620 ACT</span>
@@ -435,7 +435,7 @@
                           <div class="tile-image" style="background-image: url(app/assets/images/red1.png)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a  class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item2);" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">700 ACT</span>
@@ -447,7 +447,7 @@
                           <div class="tile-image" style="background-image: url(app/assets/images/glass.png)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a   class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item3);"  class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">2200 ACT</span>
@@ -459,7 +459,7 @@
                           <div class="tile-image" style="background-image: url(app/assets/images/tana1.png)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a  class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item4);" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">450 ACT</span>
@@ -471,7 +471,7 @@
                           <div class="tile-image" style="background-image: url(app/assets/images/koshi1.png)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a  class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item5);" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">95 ACT</span>
@@ -877,6 +877,57 @@
         </div>
       </div>
       <!-- / log modal-->
+
+      <!--buy modal-->
+      <div class="modal fade" id="popupBuy" tabindex="-1" role="dialog" aria-labelledby="popupBuy" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="image image-overlay" style="background-image:url(app/assets/images/metal.jpg)"></div>
+            <div class="modal-header justify-content-end">
+              <!--reset content onclick -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetBuy()">
+                <span aria-hidden="true" class="icon-x"></span>
+              </button>
+              <!--/reset content onclick -->
+            </div>
+            <div class="modal-body text-center text-white">
+              <!--title -->
+              <h3 id="getYouPaid">Buy using your tokens</h3>
+              <!--/title -->
+              
+              <!--echo, success, fail -->
+              <span id="logEcho"></span>
+              <span id="logSuccess"></span>
+              <span id="logFail"></span>
+              <!--/echo, success, fail -->
+            </div>
+            <div class="modal-footer gutter-1">
+              <div class="container-fluid">
+                <div class="row gutter-1">
+                  
+                  <div class="col-4">
+                    <button id="cancelBuy" type="button" class="btn  btn-rounded" data-dismiss="modal">Cancel</button>
+                  </div>
+                  <div class="col-8">
+                    <button id="confirmBuy" type="button" class="btn btn-block btn-rounded btn-primary">Confirm</button>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+
+                    <span class="col text-center mb-2" id="logLoader">
+                      <!--loaders -->
+                      <p>Verifying your workout... </p>
+                      <div class="livicon-evo" data-options=" name: pulse.svg; style: lines; size: 60px; strokeStyle: round; strokeWidth: original; tryToSharpen: true; rotate: none; flipHorizontal: false; flipVertical: false; strokeColor: #ccff00; strokeColorAction: #b3421b; strokeColorAlt: #F9B32F; strokeColorAltAction: #ab69c6; fillColor: #ccff00; fillColorAction: #ff926b; solidColor: #ccff00; solidColorAction: #ccff00; solidColorBgAction: #ffffff; solidColorBg: #ffffff; colorsOnHover: none; colorsHoverTime: 0.3; colorsWhenMorph: none; brightness: 0.1; saturation: 0.07; morphState: start; morphImage: none; allowMorphImageTransform: false; strokeWidthFactorOnHover: none; strokeWidthOnHoverTime: 0.3; keepStrokeWidthOnResize: false; animated: true; eventType: hover; eventOn: parent; autoPlay: true; delay: 0; duration: default; repeat: loop; repeatDelay: default; drawOnViewport: false; viewportShift: oneHalf; drawDelay: 0; drawTime: 1; drawStagger: 0.1; drawStartPoint: middle; drawColor: same; drawColorTime: 1; drawReversed: false; drawEase: Power1.easeOut; eraseDelay: 0; eraseTime: 1; eraseStagger: 0.1; eraseStartPoint: middle; eraseReversed: true; eraseEase: Power1.easeOut; touchEvents: false "></div>
+                      <!--/loaders -->
+                    </span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / buy modal-->
   
     <!-- / modals -->   
 

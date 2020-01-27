@@ -317,6 +317,9 @@ $("#hostBtn").click(function() {
     .once('error', function(error){console.log(error);});;
 });
 
+
+
+
 //gets the user's operating system
 var OS = 0;
 function getMobileOS() {
