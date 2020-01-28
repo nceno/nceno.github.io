@@ -4,7 +4,7 @@ const web3 = new Web3(portis.provider);
 
 var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
-function showPortis() {
+function showPortisGlobal() {
   $('#portisLoader').show();
   setTimeout("$('#portisLoader').hide();", 5000);
 
@@ -16,7 +16,7 @@ function showPortis() {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       portisEmail = email;
-      getToken();
+      getTokenGlobal();
       $("#portisBtn").hide();
       $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');   
     });
@@ -47,7 +47,7 @@ var code = window.location.href.split('=')[2].split('&')[0];
 var inSixHours = 0.24;
 
 
-function getToken(){
+function getTokenGlobal(){
   console.log("code is: "+code);
   var stuff = null;
   var xhr = new XMLHttpRequest();
