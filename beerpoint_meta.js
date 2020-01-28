@@ -23,10 +23,10 @@ const item3={
 
 const item4={
 	name: 'Tana Ale',
-	price = 450
+	price: 450
 }
 
 const item5={
 	name: 'Koshi Light',
-	price = 95
+	price: 95
 }
