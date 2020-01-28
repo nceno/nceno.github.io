@@ -1,3 +1,4 @@
+$("#portisLoaderGlobal").hide();
 //initialize portis
 const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
@@ -5,8 +6,8 @@ const web3 = new Web3(portis.provider);
 var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortisGlobal() {
-  $('#portisLoader').show();
-  setTimeout("$('#portisLoader').hide();", 5000);
+  $('#portisLoaderBlobal').show();
+  setTimeout("$('#portisLoaderGlobal').hide();", 5000);
 
   // will only open the portis menu
   portis.showPortis(() => {
@@ -25,10 +26,10 @@ function showPortisGlobal() {
 
 window.onload = function() {
 	//delays extraction of the strava creds until the user has authed.
-	if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
-		&& window.location.href != 'https://www.nceno.app/brands/brands_demo'
-		&& window.location.href != 'https://nceno.app/brands/brands_demo'
-		&& window.location.href != 'https://nceno.app/brands/brands_demo.html'){
+	if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
+		&& window.location.href != 'https://www.nceno.app/brandchallenges'
+		&& window.location.href != 'https://nceno.app/brandchallenges'
+		&& window.location.href != 'https://nceno.app/brandchallenges.html'){
 		$("#stravaBtn").hide();
 		$("#stravaOk").html("Proceed to step 2")
 		$("#stravaOk").show();
