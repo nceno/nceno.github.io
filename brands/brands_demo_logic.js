@@ -9,7 +9,6 @@ $("#time").click(function(){
 })
 
 function showCookies(){
-  console.log("all cookies: "+Cookies.get());
   console.log("access_token: "+Cookies.get('access_token'));
   console.log("stravaID: "+Cookies.get('stravaID'));
   console.log("stravaUsername: "+Cookies.get('stravaUsername'));
