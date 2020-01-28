@@ -8,6 +8,13 @@ $("#time").click(function(){
   console.log(time);
 })
 
+function showCookies(){
+  console.log("all cookies: "+Cookies.get());
+  console.log("access_token: "+Cookies.get('access_token'));
+  console.log("stravaID: "+Cookies.get('stravaID'));
+  console.log("stravaUsername: "+Cookies.get('stravaUsername'));
+}
+
 var correctNonce = 0;
 function updateNonce(){
   web3.eth.getTransactionCount(web3.eth.defaultAccount).then(nonce => {
@@ -1045,27 +1052,9 @@ window.onload = function() {
     handleSize: "+20",
     lineCap: "round"
   });
-  
-/*  $("#sliderHRbonus").roundSlider({
-    editableTooltip: false,
-    radius: 75,
-    width: 14,
-    handleSize: "30,15",
-    handleShape: "circle",
-    min: 0,
-    max: 10,
-    step: 1,
-    value: 2,
-    sliderType: "min-range",
-    tooltipFormat: "tooltipVal5",
-    circleShape: "pie",
-    startAngle: 315,
-    handleSize: "+20",
-    lineCap: "round"
-  });*/
 
   //@NCENO setup
-  //delays extraction of the fitbit creds until the user has authed.
+  //delays extraction of the strava creds until the user has authed.
   if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
     && window.location.href != 'https://www.nceno.app/brands/brands_demo'
     && window.location.href != 'https://nceno.app/brands/brands_demo'
@@ -1111,18 +1100,17 @@ function updateGasPrice(){
 }
 
 //gets the access token to make GET request. Valid for 6 hours.
-var access_token;
-var stravaID;
-var stravaUsername;
+var access_token = Cookies.get('access_token');
+var stravaID = Cookies.get('stravaID');
+var stravaUsername =Cookies.get('stravaUsername');
 var userCreated;
 var uniqueUserString;
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
 var code = window.location.href.split('=')[2].split('&')[0];
-Cookies.set('code', code);
-//var tokenExpire = 0;
 
 
-function getToken(){
+//----moved to login.js
+/*function getToken(){
   console.log("code is: "+code);
   var stuff = null;
   var xhr = new XMLHttpRequest();
@@ -1159,7 +1147,8 @@ function getToken(){
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
-}
+}*/
+//--- end/ moved to login.js
 
 //gets activity minutes from strava
 //var stravaMins;
