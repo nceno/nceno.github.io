@@ -6,7 +6,7 @@ const web3 = new Web3(portis.provider);
 var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortisGlobal() {
-  $('#portisLoaderBlobal').show();
+  $('#portisLoaderGlobal').show();
   setTimeout("$('#portisLoaderGlobal').hide();", 5000);
 
   // will only open the portis menu
@@ -18,7 +18,7 @@ function showPortisGlobal() {
       web3.eth.defaultAccount = e[0];
       portisEmail = email;
       getTokenGlobal();
-      $("#portisBtn").hide();
+      $("#portisBtnGlobal").hide();
       $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');   
     });
   });
@@ -30,7 +30,7 @@ window.onload = function() {
 		&& window.location.href != 'https://www.nceno.app/brandchallenges'
 		&& window.location.href != 'https://nceno.app/brandchallenges'
 		&& window.location.href != 'https://nceno.app/brandchallenges.html'){
-		$("#stravaBtn").hide();
+		$("#stravaBtnGlobal").hide();
 		$("#stravaOk").html("Proceed to step 2")
 		$("#stravaOk").show();
 	}
