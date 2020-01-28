@@ -9,7 +9,7 @@ function showPortisGlobal() {
   $('#portisLoaderGlobal').show();
   setTimeout("$('#portisLoaderGlobal').hide();", 5000);
 
-  // will only open the portis menu
+  // will open the portis menu
   portis.showPortis(() => {
   });
 
