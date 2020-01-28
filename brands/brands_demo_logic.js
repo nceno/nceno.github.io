@@ -1066,10 +1066,10 @@ window.onload = function() {
 
   //@NCENO setup
   //delays extraction of the fitbit creds until the user has authed.
-  if (window.location.href != 'https://www.nceno.app/app_brands.html' 
-    && window.location.href != 'https://www.nceno.app/app_brands'
-    && window.location.href != 'https://nceno.app/app_brands'
-    && window.location.href != 'https://nceno.app/app_brands.html'){
+  if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
+    && window.location.href != 'https://www.nceno.app/brands/brands_demo'
+    && window.location.href != 'https://nceno.app/brands/brands_demo'
+    && window.location.href != 'https://nceno.app/brands/brands_demo.html'){
     $("#stravaBtn").hide();
     $("#stravaOk").html("Proceed to step 2")
     $("#stravaOk").show();
