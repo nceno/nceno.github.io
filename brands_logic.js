@@ -207,7 +207,7 @@ function buy(){
           stravaID, 
           targetName, 
           targetPrice
-        .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+        ).send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
           function(error, result) {
             if (!error){
 
@@ -239,9 +239,7 @@ function buy(){
     else{
       console.log('error. not enough funds?');
     }
-  })
-
-
+  });
 }
 
 //randomizes the goalID
