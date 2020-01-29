@@ -63,14 +63,10 @@ function getTokenGlobal(){
       });
 
       stravaID = data.athlete.id;
-      Cookies.set('stravaID', stravaID, {
-    	expires: inSixHours
-      });
+      Cookies.set('stravaID', stravaID);
 
       stravaUsername = portisEmail.substring(0, portisEmail.lastIndexOf("@"));
-      Cookies.set('stravaUsername', stravaUsername, {
-    	expires: inSixHours
-      });
+      Cookies.set('stravaUsername', stravaUsername);
 
       $("#stravaOk").hide();
       $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
