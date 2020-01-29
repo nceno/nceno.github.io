@@ -26,14 +26,31 @@ function showPortisGlobal() {
 
 window.onload = function() {
 	//delays extraction of the strava creds until the user has authed.
-	if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
+	/*if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
 		&& window.location.href != 'https://www.nceno.app/brandchallenges'
 		&& window.location.href != 'https://nceno.app/brandchallenges'
 		&& window.location.href != 'https://nceno.app/brandchallenges.html'){
 		$("#stravaBtnGlobal").hide();
-		$("#stravaOk").html("Proceed to step 2")
+		$("#stravaOk").html("Proceed to step 2");
 		$("#stravaOk").show();
+	}*/
+
+	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){
+		$("#stravaBtnGlobal").show();
+		$("#stravaOk").html('');
+		$("#stravaOk").hide();
+
+		$("#portisBtnGlobal").show();
+		$("#portisSuccess").html('');
 	}
+	else if(Cookies.get('stravaUsername') == 'undefined'){
+		$("#stravaBtnGlobal").hide();
+		$("#stravaOk").html("Proceed to step 2");
+		$("#stravaOk").show();
+		$("#portisBtnGlobal").show();
+		$("#portisSuccess").html('');
+	}
+
 }
 
 //gets the access token to make GET request. Valid for 6 hours.
