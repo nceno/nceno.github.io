@@ -60,7 +60,7 @@ window.onload = function() {
 	else if( Cookies.get('stravaUsername') == 'undefined'){
     console.log("doing case 2: missing portis only...");
 		$("#stravaBtnGlobal").hide();
-    $("#brandsPrompt").html('You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a>');
+    $("#brandsPrompt").html('<p>You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a></p>');
 		//$("#portisBtnGlobal").show();
 		//$("#userPrompt").html("Activate points wallet continue...");
 		showPortisGlobal();
