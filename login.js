@@ -1,4 +1,4 @@
-$("#portisLoaderGlobal").hide();
+$("#loaderGlobal").hide();
 //initialize portis
 const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
@@ -43,6 +43,9 @@ window.onload = function() {
 		$("#stravaOk").html('');
 		$("#portisSuccess").html('');
 		//todo: proceed to case 1 flow
+			//click strava, auth, redirect
+			//hide strava, show proceed prompt
+			//
 	}
 	//case 2- missing strava only
 	else if((Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined') && Cookies.get('stravaUsername') != 'undefined'){
