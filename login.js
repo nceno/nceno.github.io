@@ -82,7 +82,7 @@ window.onload = function() {
 		$("#stravaBtnGlobal").hide();
 		$("#openWalletGlobal").show();
 		//$("#portisBtnGlobal").hide();
-		$("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
+		$("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
 	}
 }
 
