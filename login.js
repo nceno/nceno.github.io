@@ -18,6 +18,10 @@ function showPortisGlobal() {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       portisEmail = email;
+
+      stravaUsername = portisEmail.substring(0, portisEmail.lastIndexOf("@"));
+      Cookies.set('stravaUsername', stravaUsername);
+
       getTokenGlobal();
       $("#portisBtnGlobal").hide();
       $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');   
@@ -25,59 +29,76 @@ function showPortisGlobal() {
   });
 }
 
+var code;
 window.onload = function() {
-	//delays extraction of the strava creds until the user has authed.
-	if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
-		&& window.location.href != 'https://www.nceno.app/brandchallenges'
-		&& window.location.href != 'https://nceno.app/brandchallenges'
-		&& window.location.href != 'https://nceno.app/brandchallenges.html'){
-		code = window.location.href.split('=')[2].split('&')[0];
-	}
-
-	//case 1- no creds
-	if((Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined') && Cookies.get('stravaUsername') == 'undefined'){
+	//case 1- if you're missing everything,
+	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
+		//&& Cookies.get('stravaUsername') == 'undefined'){
 		$("#stravaBtnGlobal").show();
-		$("#portisBtnGlobal").show();
-		$("#stravaOk").html('');
-		$("#portisSuccess").html('');
+		//$("#portisBtnGlobal").show();
+		$("#userPrompt").html('');
+
+		//and you've been redirected from strava auth page,
+		if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
+			&& window.location.href != 'https://www.nceno.app/brandchallenges'
+			&& window.location.href != 'https://nceno.app/brandchallenges'
+			&& window.location.href != 'https://nceno.app/brandchallenges.html'){
+			//capture the code,
+			code = window.location.href.split('=')[2].split('&')[0];
+			console.log(code);
+			//redeem it for the token,
+			getTokenGlobal();
+			//then log into portis. (included in gettoken)
+		}
+		
 		//todo: proceed to case 1 flow
 			//click strava, auth, redirect
-			//hide strava
-			//click portis login (gets token)
+			//get token
+			//hide strava, prompt "activate points wallet to continue..."
+			//click portis
 			//hide portis, show loader
 			//hide loader, prompt welcome
 	}
-	//case 2- missing strava only
-	else if((Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined') && Cookies.get('stravaUsername') != 'undefined'){
-		$("#portisBtnGlobal").hide();
+	//case 2- if you're missing strava only,
+	/*else if((Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined') && Cookies.get('stravaUsername') != 'undefined'){
+		//$("#portisBtnGlobal").hide();
 		$("#stravaBtnGlobal").show();
-		$("#portisSuccess").html("Log in to continue...");
+		//$("#userPrompt").html("Log in to continue...");
+		
+
 		//todo: proceed to case 2 flow
 			//click strava, auth, redirect
 			//hide strava
 			//get token
 			//prompt welcome
-	}
+	}*/
 	//case 3- missing portis only
-	else if((Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined') && Cookies.get('stravaUsername') == 'undefined'){
+	else if( Cookies.get('stravaUsername') == 'undefined'){
 		$("#stravaBtnGlobal").hide();
-		$("#portisBtnGlobal").show();
-		$("#stravaOk").html("Turn on your wallet to continue...");
+		//$("#portisBtnGlobal").show();
+		//$("#userPrompt").html("Activate points wallet continue...");
+		showPortis();
+
 		//todo: proceed to case 3 flow
 			//click portis
 			//hide portis, show loader
 			//hide loader, prompt welcome
-
+	}
+	//case 4- nothing missing
+		//-----disable this block when testing.------
+	else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
+		$("#stravaBtnGlobal").hide();
+		//$("#portisBtnGlobal").hide();
+		$("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
 	}
 }
+
 
 //gets the access token to make GET request. Valid for 6 hours.
 var access_token;
 var stravaID;
 var stravaUsername;
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
-var code;
-//= window.location.href.split('=')[2].split('&')[0];
 
 var inSixHours = 0.24;
 
@@ -92,23 +113,25 @@ function getTokenGlobal(){
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
 
+      //set the token in cookies
       access_token = data.access_token;
       Cookies.set('access_token', access_token, {
     	expires: inSixHours
       });
 
+      //set the stravaID in cookies
       stravaID = data.athlete.id;
       Cookies.set('stravaID', stravaID);
 
-      stravaUsername = portisEmail.substring(0, portisEmail.lastIndexOf("@"));
-      Cookies.set('stravaUsername', stravaUsername);
-
-      $("#stravaOk").hide();
-      $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
+      $("#stravaBtnGlobal").hide();
+      if(Cookies.get('stravaUsername') == 'undefined'){
+      	//$("#userPrompt").html("Activate points wallet continue...");
+      	showPortis();
+      }else $("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
 
 
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
-      $("#athleteInfo").html('<p>Nceno User ID: "'+stravaID+'"   <br>Nceno Email: "'+portisEmail+'"   <br>Wallet address: "'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42)+'"</p>');
+      
     }
   });
   //allofnceno ONEOFUS!
@@ -130,9 +153,14 @@ function showPortis() {
       web3.eth.defaultAccount = e[0];
       portisEmail = email;
       getTokenGlobal();
-      $("#portisBtn").hide();
+      //$("#portisBtn").hide();
       updateGasPrice();
-      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');
+
+      //if this fills in the blanks for auth creds,
+      if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined'){
+      	//say so.
+      	$("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
+      }
       $("#openWalletGlobal").show();
       
     });
