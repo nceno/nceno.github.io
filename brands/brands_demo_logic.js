@@ -980,7 +980,7 @@ function joinTarget(){
 
 var browsedGoal;
 //this initializes a bunch of stuff as soon as the user navigates to the app page.
-window.onload = function() {
+/*window.onload = function() {
 
   //sliders
   $("#sliderTarget").roundSlider({
@@ -1045,12 +1045,12 @@ window.onload = function() {
     step: 1,
     value: "2,4",
     sliderType: "range",
-/*    tooltipFormat: "tooltipVal4",*/
+    tooltipFormat: "tooltipVal4",
     circleShape: "pie",
     startAngle: 315,
     handleSize: "+20",
     lineCap: "round"
-  });
+  });*/
 
   //@NCENO setup
   //delays extraction of the strava creds until the user has authed.

@@ -80,6 +80,77 @@ window.onload = function() {
 		$("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
 	}
+
+  //we can only use window.onload once... so move the slider initialization here
+  //sliders
+  $("#sliderTarget").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 10,
+    max: 100,
+    step: 5,
+    value: 30,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal1",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+  $("#sliderPot").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 100,
+    max: 2000,
+    step: 10,
+    value: 700,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal2",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+  $("#sliderDays").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 7,
+    max: 60,
+    step: 1,
+    value: 30,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal3",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+  $("#sliderReward").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 1,
+    max: 10,
+    step: 1,
+    value: "2,4",
+    sliderType: "range",
+/*    tooltipFormat: "tooltipVal4",*/
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
 }
 
 var inSixHours = 0.24;
