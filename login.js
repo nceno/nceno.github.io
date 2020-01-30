@@ -34,7 +34,12 @@ window.onload = function() {
 		if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
 			&& window.location.href != 'https://www.nceno.app/brandchallenges'
 			&& window.location.href != 'https://nceno.app/brandchallenges'
-			&& window.location.href != 'https://nceno.app/brandchallenges.html'){
+			&& window.location.href != 'https://nceno.app/brandchallenges.html'
+
+			&& window.location.href != 'https://www.nceno.app/brandchallenges.html#' 
+			&& window.location.href != 'https://www.nceno.app/brandchallenges#'
+			&& window.location.href != 'https://nceno.app/brandchallenges#'
+			&& window.location.href != 'https://nceno.app/brandchallenges.html#'){
 			//capture the code,
 			code = window.location.href.split('=')[2].split('&')[0];
 			console.log(code);
