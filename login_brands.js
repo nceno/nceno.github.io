@@ -58,13 +58,14 @@ window.onload = function() {
 	//case 2- missing portis only
 	else if( Cookies.get('stravaUsername') == 'undefined'){
 		$("#stravaBtnGlobal").hide();
+    $("#brandsPrompt").html('You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a>');
 		//$("#portisBtnGlobal").show();
 		//$("#userPrompt").html("Activate points wallet continue...");
 		showPortisGlobal();
 
 		
 	}
-	//case 4- nothing missing
+	//case 3- nothing missing
 		//-----disable this block when testing.------
 	else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
 		$("#stravaBtnGlobal").hide();
