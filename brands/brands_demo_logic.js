@@ -1062,7 +1062,7 @@ var browsedGoal;
     $("#stravaOk").html("Proceed to step 2")
     $("#stravaOk").show();
   }*/
-};
+//};
 
 //chart tool tips
 function tooltipVal1(args) {

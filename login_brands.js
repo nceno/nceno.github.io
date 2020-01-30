@@ -5,8 +5,6 @@ const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { g
 const web3 = new Web3(portis.provider);
 
 
-console.log("this shit loaded.");
-
 
 //set auth creds if they exist
 var access_token;
@@ -25,8 +23,6 @@ if(Cookies.get('stravaUsername') != 'undefined'){
 
 var code;
 window.onload = function() {
-  $("#brandsPrompt").html('<p>this shit loaded</p>');
-  console.log("this shit loaded.");
 
 	//case 1- if you're missing everything,
 	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
