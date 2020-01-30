@@ -161,3 +161,10 @@ function showPortisGlobal() {
     });
   });
 }
+
+function showWallet(){
+	$('#loaderGlobal').show();
+	setTimeout("$('#loaderGlobal').hide();", 5000);
+    portis.showPortis(() => {  
+    });
+}
