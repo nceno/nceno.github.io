@@ -88,6 +88,7 @@ window.onload = function() {
 		//-----disable this block when testing.------
 	else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
 		$("#stravaBtnGlobal").hide();
+		$("#openWalletGlobal").show();
 		//$("#portisBtnGlobal").hide();
 		$("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
 	}
