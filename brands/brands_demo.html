@@ -249,38 +249,15 @@
                         </div>
                         <div class="accordion-content" data-content>
                           <div class="accordion-content-wrapper">
-                            
-                              <a id="stravaBtn" href="https://www.strava.com/oauth/authorize?client_id=41825&response_type=code&redirect_uri=https%3A%2F%2Fnceno.app%2Fbrands%2Fbrands_demo.html&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all,activity:write" class="btn btn-rounded btn-primary btn-block">Sign in</a>
+                            <!--using joe nceno -->
+                            <a id="stravaBtnGlobal" href="https://www.strava.com/oauth/authorize?client_id=33084&response_type=code&redirect_uri=http://www.nceno.app/brands/brands_demo.html&approval_prompt=force&scope=read,profile:read_all,activity:read,activity:read_all,activity:write" class="btn btn-outline-white btn-rounded mt-1 py-1 px-9">Log in</a>
+									          <br>
+									          <span id="userPrompt"></span>
+									          <br>
+									          <a href="#" id="openWalletGlobal" class="btn btn-outline-white btn-rounded mt-1 py-1 px-8" onclick="showWallet();">My points wallet</a>
+									          <img id="loaderGlobal" src="app/assets/images/loader.svg">
+									          <!-- <a id="testCookies" href="#" class="btn btn-outline-white btn-rounded mt-1 py-1 px-6" onclick="showCookies()">test cookies</a> -->
 
-                              <div class="row justify-content-center">
-                                <div class="text-center col-sm-5 ">
-                                  <span id="stravaOk"></span>
-                                  <span id="stravaSuccess"></span>
-                                </div>
-                              </div>
-                              
-
-                              <!-- <a style="color:black;" id="portisBtn" class="btn btn-primary btn-rounded btn-block px-2" onclick="showPortis()">Connect to points wallet</a> -->
-                              <!-- <a id="testCookies" class="btn btn-outline-white btn-rounded mt-1 px-5" onclick="showCookies()">show cookies</a> -->
-
-                              <div class="row justify-content-center">
-                                <div class="text-center col-sm-5 ">
-                                  <span id="portisSuccess"></span>
-                                </div>
-                              </div>
-
-                              <div id="portisLoader" class="col text-center "> 
-                                <img  src="../app/assets/images/loader.svg">
-                              </div>
-                              
-                              <div class="row">
-                                <div class="col text-center mb-2 ">
-                                  <label class="form-check-label"><a href="instructions.html" target='_blank' style="color:#666666;" >Click here for setup instructions</a></label>
-
-                                </div>
-                              </div>
-
-                            
                           </div>
                         </div>
                       </div>
@@ -965,7 +942,7 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.js"></script>
 
-
+      <script src="login_alechemist.js"></script>
       <script src="brands_demo_logic.js"></script>
       <!-- <script src="obf.js"></script> -->
 
