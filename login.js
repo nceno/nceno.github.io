@@ -134,8 +134,8 @@ function getTokenGlobal(){
 var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortisGlobal() {
-  $('#portisLoader').show();
-  setTimeout("$('#portisLoader').hide();", 5000);
+  $('#loaderGlobal').show();
+  setTimeout("$('#loaderGlobal').hide();", 5000);
   // will only open the portis menu
   portis.showPortis(() => {  
   });
