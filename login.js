@@ -48,38 +48,17 @@ window.onload = function() {
 			//then log into portis. (included in gettoken)
 		}
 		
-		//todo: proceed to case 1 flow
-			//click strava, auth, redirect
-			//get token
-			//hide strava, prompt "activate points wallet to continue..."
-			//click portis
-			//hide portis, show loader
-			//hide loader, prompt welcome
-	}
-	//case 2- if you're missing strava only,
-	/*else if((Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined') && Cookies.get('stravaUsername') != 'undefined'){
-		//$("#portisBtnGlobal").hide();
-		$("#stravaBtnGlobal").show();
-		//$("#userPrompt").html("Log in to continue...");
 		
-
-		//todo: proceed to case 2 flow
-			//click strava, auth, redirect
-			//hide strava
-			//get token
-			//prompt welcome
-	}*/
-	//case 3- missing portis only
+	}
+	
+	//case 2- missing portis only
 	else if( Cookies.get('stravaUsername') == 'undefined'){
 		$("#stravaBtnGlobal").hide();
 		//$("#portisBtnGlobal").show();
 		//$("#userPrompt").html("Activate points wallet continue...");
 		showPortisGlobal();
 
-		//todo: proceed to case 3 flow
-			//click portis
-			//hide portis, show loader
-			//hide loader, prompt welcome
+		
 	}
 	//case 4- nothing missing
 		//-----disable this block when testing.------
@@ -145,8 +124,6 @@ function showPortisGlobal() {
       portisEmail = email;
       stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
       Cookies.set('stravaUsername', stravaUsername);
-
-      //getTokenGlobal();
 
       //$("#portisBtn").hide();
       updateGasPrice();
