@@ -4,33 +4,25 @@ $("#openWalletGlobal").hide();
 const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
 
-var portisEmail;
-//signs user into portis and stores their wallet address as the default wallet address in web3
-function showPortisGlobal() {
-  $('#portisLoaderGlobal').show();
-  setTimeout("$('#portisLoaderGlobal').hide();", 5000);
 
-  // will open the portis menu
-  portis.showPortis(() => {
-  });
+//set auth creds if they exist
+var access_token;
+if(Cookies.get('access_token') != 'undefined'){
+	access_token = Cookies.get('access_token');
+}	
 
-  portis.onLogin((walletAddress, email) => {
-    web3.eth.getAccounts().then(e => { 
-      web3.eth.defaultAccount = e[0];
-      portisEmail = email;
-
-      stravaUsername = portisEmail.substring(0, portisEmail.lastIndexOf("@"));
-      Cookies.set('stravaUsername', stravaUsername);
-
-      getTokenGlobal();
-      $("#portisBtnGlobal").hide();
-      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');   
-    });
-  });
+var stravaID; 
+if(Cookies.get('stravaID') != 'undefined'){
+	stravaID = Cookies.get('stravaID');
+}
+var stravaUsername; 
+if(Cookies.get('stravaUsername') != 'undefined'){
+	stravaUsername = Cookies.get('stravaUsername');
 }
 
 var code;
 window.onload = function() {
+
 	//case 1- if you're missing everything,
 	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
 		//&& Cookies.get('stravaUsername') == 'undefined'){
@@ -94,16 +86,9 @@ window.onload = function() {
 	}
 }
 
-
-//gets the access token to make GET request. Valid for 6 hours.
-var access_token;
-var stravaID;
-var stravaUsername;
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
 
 var inSixHours = 0.24;
-
-
 function getTokenGlobal(){
   console.log("code is: "+code);
   var stuff = null;
@@ -153,6 +138,9 @@ function showPortis() {
     web3.eth.getAccounts().then(e => { 
       web3.eth.defaultAccount = e[0];
       portisEmail = email;
+      stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
+      Cookies.set('stravaUsername', stravaUsername);
+
       getTokenGlobal();
       //$("#portisBtn").hide();
       updateGasPrice();

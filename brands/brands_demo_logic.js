@@ -22,7 +22,7 @@ function updateNonce(){
   console.log("nonce is: "+correctNonce);
 }
 
-var portisEmail;
+/*var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortis() {
 
@@ -52,7 +52,7 @@ function showPortis() {
       
     });
   });
-}
+}*/
 
 //sanity check for debugging
 console.log(NcenoBrands);
