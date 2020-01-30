@@ -118,7 +118,7 @@ function getTokenGlobal(){
       if(Cookies.get('stravaUsername') == 'undefined'){
       	//$("#userPrompt").html("Activate points wallet continue...");
       	showPortis();
-      }else $("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
+      }else $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
 
 
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
@@ -154,7 +154,7 @@ function showPortis() {
       //if this fills in the blanks for auth creds,
       if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined'){
       	//say so.
-      	$("#userPrompt").html('<h5><a style="color:white;">Connection successful. Welcome, </a></h5>'+stravaUsername+'!');
+      	$("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
       $("#openWalletGlobal").show();
       
