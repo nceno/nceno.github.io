@@ -1200,7 +1200,7 @@ window.onload = function() {
     console.log("doing case 3: missing nothing...");
 
     $("#stravaBtnGlobal").hide();
-    $("#openWalletGlobal22").show();
+    $("#openWalletGlobal2").show();
     //$("#portisBtnGlobal").hide();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
