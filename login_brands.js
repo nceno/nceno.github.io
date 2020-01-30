@@ -23,6 +23,7 @@ if(Cookies.get('stravaUsername') != 'undefined'){
 var code;
 window.onload = function() {
   $("#brandsPrompt").html('<p>this shit loaded</p>');
+  console.log("this shit loaded.");
 
 	//case 1- if you're missing everything,
 	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
