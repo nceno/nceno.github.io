@@ -26,6 +26,7 @@ window.onload = function() {
 	//case 1- if you're missing everything,
 	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
 		//&& Cookies.get('stravaUsername') == 'undefined'){
+    console.log("doing case 1: missing everything...");
 		$("#stravaBtnGlobal").show();
 		//$("#portisBtnGlobal").show();
 		$("#userPrompt").html('');
@@ -57,6 +58,7 @@ window.onload = function() {
 	
 	//case 2- missing portis only
 	else if( Cookies.get('stravaUsername') == 'undefined'){
+    console.log("doing case 2: missing portis only...");
 		$("#stravaBtnGlobal").hide();
     $("#brandsPrompt").html('You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a>');
 		//$("#portisBtnGlobal").show();
@@ -68,7 +70,8 @@ window.onload = function() {
 	//case 3- nothing missing
 		//-----disable this block when testing.------
 	else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
-		$("#stravaBtnGlobal").hide();
+		console.log("doing case 3: missing nothing...");
+    $("#stravaBtnGlobal").hide();
 		$("#openWalletGlobal").show();
 		//$("#portisBtnGlobal").hide();
 		$("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
