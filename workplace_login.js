@@ -29,24 +29,27 @@ window.onload = function() {
 		$("#stravaBtnGlobal").show();
 		//$("#portisBtnGlobal").show();
 		$("#userPrompt").html('');
+    $("#workplacePrompt").html('You need to log in! <a href="www.nceno.app/workplace.html">click here</a>');
 
 		//and you've been redirected from strava auth page,
 			//@config  the path (and file name) will change if this is a corp well challenge
-		if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
-			&& window.location.href != 'https://www.nceno.app/brands/brands_demo'
-			&& window.location.href != 'https://nceno.app/brands/brands_demo'
-			&& window.location.href != 'https://nceno.app/brands/brands_demo.html'
+		if (window.location.href != 'https://www.nceno.app/workplace.html' 
+			&& window.location.href != 'https://www.nceno.app/workplace'
+			&& window.location.href != 'https://nceno.app/workplace'
+			&& window.location.href != 'https://nceno.app/workplace.html'
 
-			&& window.location.href != 'https://www.nceno.app/brands/brands_demo.html#' 
-			&& window.location.href != 'https://www.nceno.app/brands/brands_demo#'
-			&& window.location.href != 'https://nceno.app/brands/brands_demo#'
-			&& window.location.href != 'https://nceno.app/brands/brands_demo.html#'){
+			&& window.location.href != 'https://www.nceno.app/workplace.html#' 
+			&& window.location.href != 'https://www.nceno.app/workplace#'
+			&& window.location.href != 'https://nceno.app/workplace#'
+			&& window.location.href != 'https://nceno.app/workplace.html#'){
 			//capture the code,
 			code = window.location.href.split('=')[2].split('&')[0];
 			console.log(code);
 			//redeem it for the token,
 			getTokenGlobal();
 			//then log into portis. (included in gettoken)
+
+
 		}
 		
 		
@@ -105,8 +108,8 @@ function getTokenGlobal(){
       
     }
   });
-  //using joe nceno
-  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret=e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3&code='+code+'&grant_type=authorization_code');
+  //allofnceno ONEOFUS!
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
