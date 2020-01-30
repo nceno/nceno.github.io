@@ -42,7 +42,7 @@ function showPortis() {
       portisEmail = email;
       //console.log("this portis email is: "+ portisEmail);
       //localize();
-      getToken();
+      getTokenGlobal();
       $("#portisBtn").hide();
       updateGasPrice();
 
