@@ -1,5 +1,5 @@
 $("#loaderGlobal").hide();
-$("#openWalletGlobal").hide();
+$("#openWalletGlobal2").hide();
 //initialize portis
 const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
@@ -72,7 +72,7 @@ window.onload = function() {
 	else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
 		console.log("doing case 3: missing nothing...");
     $("#stravaBtnGlobal").hide();
-		$("#openWalletGlobal").show();
+		$("#openWalletGlobal22").show();
 		//$("#portisBtnGlobal").hide();
 		$("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
@@ -146,7 +146,7 @@ function showPortisGlobal() {
       	$("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
-      $("#openWalletGlobal").show();
+      $("#openWalletGlobal2").show();
       
     });
   });
