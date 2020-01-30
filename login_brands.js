@@ -25,8 +25,8 @@ window.onload = function() {
 
 	//case 1- if you're missing everything,
 	if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
-		//&& Cookies.get('stravaUsername') == 'undefined'){
     console.log("doing case 1: missing everything...");
+
 		$("#stravaBtnGlobal").show();
 		//$("#portisBtnGlobal").show();
 		$("#userPrompt").html('');
@@ -49,16 +49,13 @@ window.onload = function() {
 			//redeem it for the token,
 			getTokenGlobal();
 			//then log into portis. (included in gettoken)
-
-
 		}
-		
-		
 	}
 	
 	//case 2- missing portis only
 	else if( Cookies.get('stravaUsername') == 'undefined'){
     console.log("doing case 2: missing portis only...");
+
 		$("#stravaBtnGlobal").hide();
     $("#brandsPrompt").html('<p>You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a></p>');
 		//$("#portisBtnGlobal").show();
@@ -71,6 +68,7 @@ window.onload = function() {
 		//-----disable this block when testing.------
 	else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
 		console.log("doing case 3: missing nothing...");
+
     $("#stravaBtnGlobal").hide();
 		$("#openWalletGlobal22").show();
 		//$("#portisBtnGlobal").hide();
@@ -78,8 +76,6 @@ window.onload = function() {
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
 	}
 }
-
-/*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
 
 var inSixHours = 0.24;
 function getTokenGlobal(){
@@ -110,10 +106,7 @@ function getTokenGlobal(){
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
-
-
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
-      
     }
   });
   //allofnceno ONEOFUS!
