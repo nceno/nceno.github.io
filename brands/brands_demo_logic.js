@@ -22,38 +22,6 @@ function updateNonce(){
   console.log("nonce is: "+correctNonce);
 }
 
-/*var portisEmail;
-//signs user into portis and stores their wallet address as the default wallet address in web3
-function showPortis() {
-
-  $('#portisLoader').show();
-  setTimeout("$('#portisLoader').hide();", 5000);
-
-  // will only open the portis menu
-  portis.showPortis(() => {
-    
-  });
-
-  
-  portis.onLogin((walletAddress, email) => {
-    web3.eth.getAccounts().then(e => { 
-      web3.eth.defaultAccount = e[0];
-      //console.log("this ETH address: " + web3.eth.defaultAccount);
-      portisEmail = email;
-      //console.log("this portis email is: "+ portisEmail);
-      //localize();
-      getTokenGlobal();
-      $("#portisBtn").hide();
-      updateGasPrice();
-
-      //$("#portisSuccess").html('<a style="color:white;">Wallet address: </a>'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42));
-      $("#portisSuccess").html('<h5><a style="color:#ffffff;">Connection: </a></h5><a style="color:#ccff00;">successful!</a>');
-      $("#openWallet").show();
-      
-    });
-  });
-}*/
-
 //sanity check for debugging
 console.log(NcenoBrands);
 
@@ -979,90 +947,7 @@ function joinTarget(){
 }
 
 var browsedGoal;
-//this initializes a bunch of stuff as soon as the user navigates to the app page.
-/*window.onload = function() {
 
-  //sliders
-  $("#sliderTarget").roundSlider({
-    editableTooltip: false,
-    radius: 75,
-    width: 14,
-    handleSize: "30,15",
-    handleShape: "circle",
-    min: 10,
-    max: 100,
-    step: 5,
-    value: 30,
-    sliderType: "min-range",
-    tooltipFormat: "tooltipVal1",
-    circleShape: "pie",
-    startAngle: 315,
-    handleSize: "+20",
-    lineCap: "round"
-  });
-  $("#sliderPot").roundSlider({
-    editableTooltip: false,
-    radius: 75,
-    width: 14,
-    handleSize: "30,15",
-    handleShape: "circle",
-    min: 100,
-    max: 2000,
-    step: 10,
-    value: 700,
-    sliderType: "min-range",
-    tooltipFormat: "tooltipVal2",
-    circleShape: "pie",
-    startAngle: 315,
-    handleSize: "+20",
-    lineCap: "round"
-  });
-  $("#sliderDays").roundSlider({
-    editableTooltip: false,
-    radius: 75,
-    width: 14,
-    handleSize: "30,15",
-    handleShape: "circle",
-    min: 7,
-    max: 60,
-    step: 1,
-    value: 30,
-    sliderType: "min-range",
-    tooltipFormat: "tooltipVal3",
-    circleShape: "pie",
-    startAngle: 315,
-    handleSize: "+20",
-    lineCap: "round"
-  });
-  $("#sliderReward").roundSlider({
-    editableTooltip: false,
-    radius: 75,
-    width: 14,
-    handleSize: "30,15",
-    handleShape: "circle",
-    min: 1,
-    max: 10,
-    step: 1,
-    value: "2,4",
-    sliderType: "range",
-    tooltipFormat: "tooltipVal4",
-    circleShape: "pie",
-    startAngle: 315,
-    handleSize: "+20",
-    lineCap: "round"
-  });*/
-
-  //@NCENO setup
-  //delays extraction of the strava creds until the user has authed.
-  /*if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
-    && window.location.href != 'https://www.nceno.app/brands/brands_demo'
-    && window.location.href != 'https://nceno.app/brands/brands_demo'
-    && window.location.href != 'https://nceno.app/brands/brands_demo.html'){
-    $("#stravaBtn").hide();
-    $("#stravaOk").html("Proceed to step 2")
-    $("#stravaOk").show();
-  }*/
-//};
 
 //chart tool tips
 function tooltipVal1(args) {
@@ -1074,9 +959,7 @@ function tooltipVal2(args) {
 function tooltipVal3(args) {
     return args.value + " days";
 }
-/*function tooltipVal4(args) {
-    return args.value + " reward";
-}*/
+
 
 
 var safeLow;
@@ -1098,56 +981,7 @@ function updateGasPrice(){
   });
 }
 
-//gets the access token to make GET request. Valid for 6 hours.
-/*var access_token = Cookies.get('access_token');
-var stravaID = Cookies.get('stravaID');
-var stravaUsername =Cookies.get('stravaUsername');
-var userCreated;
-var uniqueUserString;
-/*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
-//var code = window.location.href.split('=')[2].split('&')[0];
 
-
-//----moved to login.js
-/*function getToken(){
-  console.log("code is: "+code);
-  var stuff = null;
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      console.log(this.responseText);
-      var data = JSON.parse(xhr.responseText);
-      access_token = data.access_token;
-      Cookies.set('access_token', access_token);
-      //tokenExpire = data.expires_in;
-      stravaID = data.athlete.id;
-      Cookies.set('stravaID', stravaID);
-      //console.log("strava id is:"+stravaID);
-      
-      //if(data.athlete.username == undefined){
-        stravaUsername = portisEmail.substring(0, portisEmail.lastIndexOf("@"));
-      //}
-      //else {stravaUsername = data.athlete.username;}
-      
-
-      $("#stravaOk").hide();
-      $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
-      userCreated = Date.parse(data.athlete.created_at);
-      uniqueUserString = stravaID.toString() + userCreated.toString();
-      userID1 = uniqueUserString;
-      //console.log(uniqueUserString);
-
-      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
-      $("#athleteInfo").html('<p>Nceno User ID: "'+stravaID+'"   <br>Nceno Email: "'+portisEmail+'"   <br>Wallet address: "'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42)+'"</p>');
-    }
-  });
-  //allofnceno ONEOFUS!
-  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
-  //xhr.setRequestHeader("cache-control", "no-cache");
-  xhr.send(stuff);
-}*/
-//--- end/ moved to login.js
 
 //gets activity minutes from strava
 //var stravaMins;
@@ -1284,3 +1118,238 @@ function getActivities(){
   xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr.send(stuff);
 }
+
+
+///////////////////////////////
+//-----begin log-in logic
+///////////////////////////////
+
+$("#loaderGlobal").hide();
+$("#openWalletGlobal2").hide();
+//initialize portis
+const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
+const web3 = new Web3(portis.provider);
+
+
+
+//set auth creds if they exist
+var access_token;
+if(Cookies.get('access_token') != 'undefined'){
+  access_token = Cookies.get('access_token');
+} 
+
+var stravaID; 
+if(Cookies.get('stravaID') != 'undefined'){
+  stravaID = Cookies.get('stravaID');
+}
+var stravaUsername; 
+if(Cookies.get('stravaUsername') != 'undefined'){
+  stravaUsername = Cookies.get('stravaUsername');
+}
+
+var code;
+window.onload = function() {
+
+  //case 1- if you're missing everything,
+  if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
+    console.log("doing case 1: missing everything...");
+
+    $("#stravaBtnGlobal").show();
+    //$("#portisBtnGlobal").show();
+    $("#userPrompt").html('');
+    $("#brandsPrompt").html('<p>You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a></p>');
+
+    //and you've been redirected from strava auth page,
+      //@config  the path (and file name) will change if this is a corp well challenge
+    if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
+      && window.location.href != 'https://www.nceno.app/brandchallenges'
+      && window.location.href != 'https://nceno.app/brandchallenges'
+      && window.location.href != 'https://nceno.app/brandchallenges.html'
+
+      && window.location.href != 'https://www.nceno.app/brandchallenges.html#' 
+      && window.location.href != 'https://www.nceno.app/brandchallenges#'
+      && window.location.href != 'https://nceno.app/brandchallenges#'
+      && window.location.href != 'https://nceno.app/brandchallenges.html#'){
+      //capture the code,
+      code = window.location.href.split('=')[2].split('&')[0];
+      console.log(code);
+      //redeem it for the token,
+      getTokenGlobal();
+      //then log into portis. (included in gettoken)
+    }
+  }
+  
+  //case 2- missing portis only
+  else if( Cookies.get('stravaUsername') == 'undefined'){
+    console.log("doing case 2: missing portis only...");
+
+    $("#stravaBtnGlobal").hide();
+    $("#brandsPrompt").html('<p>You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a></p>');
+    //$("#portisBtnGlobal").show();
+    //$("#userPrompt").html("Activate points wallet continue...");
+    showPortisGlobal();
+
+    
+  }
+  //case 3- nothing missing
+    //-----disable this block when testing.------
+  else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
+    console.log("doing case 3: missing nothing...");
+
+    $("#stravaBtnGlobal").hide();
+    $("#openWalletGlobal22").show();
+    //$("#portisBtnGlobal").hide();
+    $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
+    $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
+  }
+
+  //we can only use window.onload once... so move the slider initialization here
+  //sliders
+  $("#sliderTarget").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 10,
+    max: 100,
+    step: 5,
+    value: 30,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal1",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+  $("#sliderPot").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 100,
+    max: 2000,
+    step: 10,
+    value: 700,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal2",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+  $("#sliderDays").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 7,
+    max: 60,
+    step: 1,
+    value: 30,
+    sliderType: "min-range",
+    tooltipFormat: "tooltipVal3",
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+  $("#sliderReward").roundSlider({
+    editableTooltip: false,
+    radius: 75,
+    width: 14,
+    handleSize: "30,15",
+    handleShape: "circle",
+    min: 1,
+    max: 10,
+    step: 1,
+    value: "2,4",
+    sliderType: "range",
+/*    tooltipFormat: "tooltipVal4",*/
+    circleShape: "pie",
+    startAngle: 315,
+    handleSize: "+20",
+    lineCap: "round"
+  });
+}
+
+var inSixHours = 0.24;
+function getTokenGlobal(){
+  console.log("code is: "+code);
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      var data = JSON.parse(xhr.responseText);
+
+      //set the token in cookies
+      access_token = data.access_token;
+      Cookies.set('access_token', access_token, {
+      expires: inSixHours
+      });
+
+      //set the stravaID in cookies
+      stravaID = data.athlete.id;
+      Cookies.set('stravaID', stravaID);
+
+      $("#stravaBtnGlobal").hide();
+      if(Cookies.get('stravaUsername') == 'undefined'){
+        //$("#userPrompt").html("Activate points wallet continue...");
+        showPortisGlobal();
+      }else{
+        $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
+        $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
+      }
+      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+    }
+  });
+  //allofnceno ONEOFUS!
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
+  //xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send(stuff);
+}
+
+var portisEmail;
+//signs user into portis and stores their wallet address as the default wallet address in web3
+function showPortisGlobal() {
+  $('#loaderGlobal').show();
+  setTimeout("$('#loaderGlobal').hide();", 5000);
+  // will only open the portis menu
+  portis.showPortis(() => {  
+  });
+  portis.onLogin((walletAddress, email) => {
+    web3.eth.getAccounts().then(e => { 
+      web3.eth.defaultAccount = e[0];
+      portisEmail = email;
+      stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
+      Cookies.set('stravaUsername', stravaUsername);
+
+      //$("#portisBtn").hide();
+      updateGasPrice();
+
+      //if this fills in the blanks for auth creds,
+      if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined'){
+        //say so.
+        $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
+        $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
+      }
+      $("#openWalletGlobal2").show();
+      
+    });
+  });
+}
+
+function showWallet(){
+  $('#loaderGlobal').show();
+  setTimeout("$('#loaderGlobal').hide();", 5000);
+    portis.showPortis(() => {  
+    });
+}
+
+///////////////////////////////
+//-----/end log-in logic
+///////////////////////////////
