@@ -66,8 +66,6 @@ window.onload = function() {
 var access_token;
 var stravaID;
 var stravaUsername;
-var userCreated;
-var uniqueUserString;
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
 var code;
 //= window.location.href.split('=')[2].split('&')[0];
@@ -84,6 +82,7 @@ function getTokenGlobal(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
+
       access_token = data.access_token;
       Cookies.set('access_token', access_token, {
     	expires: inSixHours
@@ -97,10 +96,7 @@ function getTokenGlobal(){
 
       $("#stravaOk").hide();
       $("#stravaSuccess").html('<h5><a style="color:white;">Welcome, </a></h5>'+stravaUsername);
-      userCreated = Date.parse(data.athlete.created_at);
-      uniqueUserString = stravaID.toString() + userCreated.toString();
-      userID1 = uniqueUserString;
-      //console.log(uniqueUserString);
+
 
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
       $("#athleteInfo").html('<p>Nceno User ID: "'+stravaID+'"   <br>Nceno Email: "'+portisEmail+'"   <br>Wallet address: "'+web3.eth.defaultAccount.slice(0, 22)+' '+web3.eth.defaultAccount.slice(23, 42)+'"</p>');
