@@ -74,7 +74,7 @@ window.onload = function() {
 		$("#stravaBtnGlobal").hide();
 		//$("#portisBtnGlobal").show();
 		//$("#userPrompt").html("Activate points wallet continue...");
-		showPortis();
+		showPortisGlobal();
 
 		//todo: proceed to case 3 flow
 			//click portis
@@ -117,7 +117,7 @@ function getTokenGlobal(){
       $("#stravaBtnGlobal").hide();
       if(Cookies.get('stravaUsername') == 'undefined'){
       	//$("#userPrompt").html("Activate points wallet continue...");
-      	showPortis();
+      	showPortisGlobal();
       }else $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
 
 
@@ -133,7 +133,7 @@ function getTokenGlobal(){
 
 var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
-function showPortis() {
+function showPortisGlobal() {
   $('#portisLoader').show();
   setTimeout("$('#portisLoader').hide();", 5000);
   // will only open the portis menu
@@ -147,7 +147,7 @@ function showPortis() {
       Cookies.set('stravaUsername', stravaUsername);
 
       //getTokenGlobal();
-      
+
       //$("#portisBtn").hide();
       updateGasPrice();
 
