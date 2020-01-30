@@ -1054,14 +1054,14 @@ window.onload = function() {
 
   //@NCENO setup
   //delays extraction of the strava creds until the user has authed.
-  if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
+  /*if (window.location.href != 'https://www.nceno.app/brands/brands_demo.html' 
     && window.location.href != 'https://www.nceno.app/brands/brands_demo'
     && window.location.href != 'https://nceno.app/brands/brands_demo'
     && window.location.href != 'https://nceno.app/brands/brands_demo.html'){
     $("#stravaBtn").hide();
     $("#stravaOk").html("Proceed to step 2")
     $("#stravaOk").show();
-  }
+  }*/
 };
 
 //chart tool tips
@@ -1099,13 +1099,13 @@ function updateGasPrice(){
 }
 
 //gets the access token to make GET request. Valid for 6 hours.
-var access_token = Cookies.get('access_token');
+/*var access_token = Cookies.get('access_token');
 var stravaID = Cookies.get('stravaID');
 var stravaUsername =Cookies.get('stravaUsername');
 var userCreated;
 var uniqueUserString;
 /*var code = window.location.href.split('#')[1].split('=')[2].split('&')[0];*/
-var code = window.location.href.split('=')[2].split('&')[0];
+//var code = window.location.href.split('=')[2].split('&')[0];
 
 
 //----moved to login.js
