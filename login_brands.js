@@ -29,6 +29,7 @@ window.onload = function() {
 		$("#stravaBtnGlobal").show();
 		//$("#portisBtnGlobal").show();
 		$("#userPrompt").html('');
+    $("#brandPrompt").html('You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a>');
 
 		//and you've been redirected from strava auth page,
 			//@config  the path (and file name) will change if this is a corp well challenge
@@ -47,6 +48,8 @@ window.onload = function() {
 			//redeem it for the token,
 			getTokenGlobal();
 			//then log into portis. (included in gettoken)
+
+
 		}
 		
 		
