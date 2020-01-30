@@ -31,9 +31,6 @@ window.onload = function() {
 		&& window.location.href != 'https://www.nceno.app/brandchallenges'
 		&& window.location.href != 'https://nceno.app/brandchallenges'
 		&& window.location.href != 'https://nceno.app/brandchallenges.html'){
-		/*$("#stravaBtnGlobal").hide();
-		$("#stravaOk").html("Proceed to step 2");
-		$("#stravaOk").show();*/
 		code = window.location.href.split('=')[2].split('&')[0];
 	}
 
@@ -45,8 +42,10 @@ window.onload = function() {
 		$("#portisSuccess").html('');
 		//todo: proceed to case 1 flow
 			//click strava, auth, redirect
-			//hide strava, show proceed prompt
-			//
+			//hide strava
+			//click portis login (gets token)
+			//hide portis, show loader
+			//hide loader, prompt welcome
 	}
 	//case 2- missing strava only
 	else if((Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined') && Cookies.get('stravaUsername') != 'undefined'){
@@ -54,7 +53,10 @@ window.onload = function() {
 		$("#stravaBtnGlobal").show();
 		$("#portisSuccess").html("Log in to continue...");
 		//todo: proceed to case 2 flow
-
+			//click strava, auth, redirect
+			//hide strava
+			//get token
+			//prompt welcome
 	}
 	//case 3- missing portis only
 	else if((Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined') && Cookies.get('stravaUsername') == 'undefined'){
@@ -62,6 +64,9 @@ window.onload = function() {
 		$("#portisBtnGlobal").show();
 		$("#stravaOk").html("Turn on your wallet to continue...");
 		//todo: proceed to case 3 flow
+			//click portis
+			//hide portis, show loader
+			//hide loader, prompt welcome
 
 	}
 }
