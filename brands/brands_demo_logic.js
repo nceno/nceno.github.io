@@ -1211,7 +1211,7 @@ window.onload = function() {
     $("#openWalletGlobal2").show();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
     $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
-    //updateNonce();
+    updateNonce();
   }
 
   //we can only use window.onload once... so move the slider initialization here
