@@ -1275,7 +1275,7 @@ window.onload = function() {
     step: 1,
     value: "2,4",
     sliderType: "range",
-/*    tooltipFormat: "tooltipVal4",*/
+    tooltipFormat: "tooltipVal4",
     circleShape: "pie",
     startAngle: 315,
     handleSize: "+20",
