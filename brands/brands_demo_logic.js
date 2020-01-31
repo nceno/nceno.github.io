@@ -1215,8 +1215,8 @@ window.onload = function() {
     $("#stravaBtnGlobal").hide();
     $("#openWalletGlobal2").show();
     //$("#portisBtnGlobal").hide();
-    $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'Cookies.get('stravaUsername')'</h5>');
-    $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'Cookies.get('stravaUsername')'</h5>');
+    $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
+    $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
   }
 
   //we can only use window.onload once... so move the slider initialization here
@@ -1317,8 +1317,8 @@ function getTokenGlobal(){
         //$("#userPrompt").html("Activate points wallet continue...");
         showPortisGlobal();
       }else{
-        $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'Cookies.get('stravaUsername')'</h5>');
-        $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'Cookies.get('stravaUsername')'</h5>');
+        $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
+        $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
       }
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
@@ -1351,8 +1351,8 @@ function showPortisGlobal() {
       //if this fills in the blanks for auth creds,
       if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined){
         //say so.
-        $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'Cookies.get('stravaUsername')'</h5>');
-        $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'Cookies.get('stravaUsername')'</h5>');
+        $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
+        $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
       }
       $("#openWalletGlobal2").show();
       
