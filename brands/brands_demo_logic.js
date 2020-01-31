@@ -1151,9 +1151,14 @@ if(Cookies.get('stravaUsername') != undefined){
   stravaUsername = Cookies.get('stravaUsername');
 }
 
+var userWallet;
+if(Cookies.get('userWallet') != undefined){
+  userWallet = Cookies.get('userWallet');
+}
+
 var code;
 window.onload = function() {
-  //updateNonce();
+  updateNonce();
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined){ 
     console.log("doing case 1: missing everything...");
