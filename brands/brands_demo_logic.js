@@ -1309,7 +1309,6 @@ function getTokenGlobal(){
 
       $("#stravaBtnGlobal").hide();
       if(Cookies.get('stravaUsername') == undefined){
-        //$("#userPrompt").html("Activate points wallet continue...");
         showPortisGlobal();
       }else{
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
