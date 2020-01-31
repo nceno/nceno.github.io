@@ -137,7 +137,7 @@ function showPortisGlobal() {
       Cookies.set('stravaUsername', stravaUsername);
 
       //$("#portisBtn").hide();
-      updateGasPrice();
+      //updateGasPrice();
 
       //if this fills in the blanks for auth creds,
       if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined){
