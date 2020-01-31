@@ -15,6 +15,7 @@ function showCookies(){
   console.log("access_token: "+Cookies.get('access_token'));
   console.log("stravaID: "+Cookies.get('stravaID'));
   console.log("stravaUsername: "+Cookies.get('stravaUsername'));
+  console.log("wallet: "+web3.eth.defaultAccount);
 }
 
 var correctNonce = 0;
