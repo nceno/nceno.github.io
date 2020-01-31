@@ -1157,7 +1157,7 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function() {
-  $("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
+  //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
@@ -1195,9 +1195,9 @@ window.onload = function() {
   }
   
   //case 2- missing portis only
-  else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){
+  else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == undefined){
     console.log("doing case 2: missing portis only...");
-    $("#brandsPrompt").html("doing case 2: missing portis...");
+    $("#brandsPrompt").html('<p>doing case 2: missing portis...</p>');
 
     $("#stravaBtnGlobal").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
