@@ -1157,7 +1157,7 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function() {
-  $("#brandsPrompt").html('<p>'Cookies.get('access_token')+Cookies.get('stravaID')+Cookies.get('stravaUsername')+Cookies.get('userWallet')'</p>');
+  $("#brandsPrompt").html('<p>'+Cookies.get('access_token')+Cookies.get('stravaID')+Cookies.get('stravaUsername')+Cookies.get('userWallet')+'</p>');
   updateNonce();
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
