@@ -1158,9 +1158,9 @@ if(Cookies.get('userWallet') != undefined){
 var code;
 window.onload = function() {
   $("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
-  updateNonce();
+  
   //case 1- if you're missing everything,
-  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
+  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == null ){ 
     console.log("doing case 1: missing everything...");
     $("#brandsPrompt").html("doing case 1: missing everything...");
 
@@ -1211,7 +1211,7 @@ window.onload = function() {
     //-----disable this block when testing.------
   else if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('stravaUsername') != undefined){
     console.log("doing case 3: missing nothing...");
-
+    updateNonce();
     $("#stravaBtnGlobal").hide();
     $("#openWalletGlobal2").show();
     //$("#portisBtnGlobal").hide();
