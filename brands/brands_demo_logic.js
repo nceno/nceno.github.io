@@ -1150,7 +1150,6 @@ var stravaUsername;
 if(Cookies.get('stravaUsername') != undefined){
   stravaUsername = Cookies.get('stravaUsername');
 }
-
 var userWallet;
 if(Cookies.get('userWallet') != undefined){
   userWallet = Cookies.get('userWallet');
@@ -1163,6 +1162,7 @@ window.onload = function() {
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
     console.log("doing case 1: missing everything...");
+    $("#brandsPrompt").html("doing case 1: missing everything...");
 
     $("#stravaBtnGlobal").show();
     //$("#portisBtnGlobal").show();
@@ -1197,6 +1197,7 @@ window.onload = function() {
   //case 2- missing portis only
   else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){
     console.log("doing case 2: missing portis only...");
+    $("#brandsPrompt").html("doing case 2: missing portis...");
 
     $("#stravaBtnGlobal").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
