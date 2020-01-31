@@ -1,5 +1,5 @@
 $("#loaderGlobal").hide();
-$("#openWalletGlobal2").hide();
+$("#openWalletGlobal").hide();
 //initialize portis
 const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 const web3 = new Web3(portis.provider);
@@ -76,7 +76,7 @@ window.onload = function() {
     console.log("doing case 3: missing nothing...");
 
     $("#stravaBtnGlobal").hide();
-    $("#openWalletGlobal2").show();
+    $("#openWalletGlobal").show();
     //$("#portisBtnGlobal").hide();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
@@ -112,7 +112,7 @@ function getTokenGlobal(){
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
-      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+      console.log("got token.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
     }
   });
   //allofnceno ONEOFUS!
@@ -145,7 +145,8 @@ function showPortisGlobal() {
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
-      $("#openWalletGlobal2").show();
+      $("#openWalletGlobal").show();
+      console.log("signed in to portis.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
       
     });
   });
