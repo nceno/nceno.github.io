@@ -1281,7 +1281,7 @@ window.onload = function() {
     step: 1,
     value: "2,4",
     sliderType: "range",
-    tooltipFormat: "tooltipVal4",
+    //tooltipFormat: "tooltipVal4",
     circleShape: "pie",
     startAngle: 315,
     handleSize: "+20",
@@ -1341,6 +1341,7 @@ function showPortisGlobal() {
       portisEmail = email;
       stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
       Cookies.set('stravaUsername', stravaUsername);
+      Cookies.set('userWallet', Cookies.get('userWallet'));
 
       //$("#portisBtn").hide();
       updateGasPrice();
