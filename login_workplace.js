@@ -34,24 +34,24 @@ window.onload = function() {
     $("#stravaBtnGlobal").show();
     //$("#portisBtnGlobal").show();
     $("#userPrompt").html('');
-    $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
+    $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/workplace.html">click here</a></p>');
 
     //and you've been redirected from strava auth page,
       //@config  the path (and file name) will change if this is a corp well challenge
-    if (window.location.href != 'https://www.nceno.app/brandchallenges.html' 
-      && window.location.href != 'https://www.nceno.app/brandchallenges'
-      && window.location.href != 'https://nceno.app/brandchallenges'
-      && window.location.href != 'https://nceno.app/brandchallenges.html'
+    if (window.location.href != 'https://www.nceno.app/workplace.html' 
+      && window.location.href != 'https://www.nceno.app/workplace'
+      && window.location.href != 'https://nceno.app/workplace'
+      && window.location.href != 'https://nceno.app/workplace.html'
 
-      && window.location.href != 'https://www.nceno.app/brandchallenges.html#' 
-      && window.location.href != 'https://www.nceno.app/brandchallenges#'
-      && window.location.href != 'https://nceno.app/brandchallenges#'
-      && window.location.href != 'https://nceno.app/brandchallenges.html#'
+      && window.location.href != 'https://www.nceno.app/workplace.html#' 
+      && window.location.href != 'https://www.nceno.app/workplace#'
+      && window.location.href != 'https://nceno.app/workplace#'
+      && window.location.href != 'https://nceno.app/workplace.html#'
 
-      && window.location.href != 'https://www.nceno.app/brands/brands_demo.html#' 
-      && window.location.href != 'https://www.nceno.app/brands/brands_demo#'
-      && window.location.href != 'https://nceno.app/brands/brands_demo#'
-      && window.location.href != 'https://nceno.app/brands/brands_demo.html#'){
+      && window.location.href != 'https://www.nceno.app/brands/cw_demo.html#' 
+      && window.location.href != 'https://www.nceno.app/brands/cw_demo#'
+      && window.location.href != 'https://nceno.app/brands/cw_demo#'
+      && window.location.href != 'https://nceno.app/brands/cw_demo.html#'){
       //capture the code,
       code = window.location.href.split('=')[2].split('&')[0];
       //console.log(code);
@@ -66,7 +66,7 @@ window.onload = function() {
     console.log("doing case 2: missing portis only...");
 
     $("#stravaBtnGlobal").hide();
-    $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
+    $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/workplace.html">click here</a></p>');
     //$("#portisBtnGlobal").show();
     //$("#userPrompt").html("Activate points wallet continue...");
     showPortisGlobal();
@@ -118,8 +118,8 @@ function getTokenGlobal(){
       console.log("got token.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
   });
-  //allofnceno ONEOFUS!
-  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=41825&client_secret=790acb08d1be8c0e1930a5fdcaee01d6139e04c8&code='+code+'&grant_type=authorization_code');
+  //joe nceno 
+  xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret=e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
 }
