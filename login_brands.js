@@ -51,7 +51,7 @@ window.onload = function() {
       && window.location.href != 'https://nceno.app/brands/brands_demo.html#'){
       //capture the code,
       code = window.location.href.split('=')[2].split('&')[0];
-      console.log(code);
+      //console.log(code);
       //redeem it for the token,
       getTokenGlobal();
       //then log into portis. (included in gettoken)
@@ -105,7 +105,7 @@ function getTokenGlobal(){
       Cookies.set('stravaID', stravaID);
 
       $("#stravaBtnGlobal").hide();
-      if(Cookies.get('stravaUsername') == undefined){
+      if(Cookies.get('stravaUsername') == undefined || web3.eth.defaultAccount == null){
         //$("#userPrompt").html("Activate points wallet continue...");
         showPortisGlobal();
       }else{
