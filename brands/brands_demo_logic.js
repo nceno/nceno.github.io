@@ -1154,7 +1154,7 @@ var code;
 window.onload = function() {
 
   //case 1- if you're missing everything,
-  if(Cookies.get('access_token') == 'undefined' || Cookies.get('stravaID') == 'undefined'){ 
+  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined){ 
     console.log("doing case 1: missing everything...");
 
     $("#stravaBtnGlobal").show();
@@ -1183,7 +1183,7 @@ window.onload = function() {
   }
   
   //case 2- missing portis only
-  else if( Cookies.get('stravaUsername') == 'undefined'){
+  else if( Cookies.get('stravaUsername') == undefined){
     console.log("doing case 2: missing portis only...");
 
     $("#stravaBtnGlobal").hide();
@@ -1196,7 +1196,7 @@ window.onload = function() {
   }
   //case 3- nothing missing
     //-----disable this block when testing.------
-  else if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined' && Cookies.get('stravaUsername') != 'undefined'){
+  else if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('stravaUsername') != undefined){
     console.log("doing case 3: missing nothing...");
 
     $("#stravaBtnGlobal").hide();
