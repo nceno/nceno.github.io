@@ -1192,7 +1192,7 @@ window.onload = function() {
     console.log("doing case 2: missing portis only...");
 
     $("#stravaBtnGlobal").hide();
-    $("#brandsPrompt").html('<p>You need to log in! <a href="www.nceno.app/brandchallenges.html">click here</a></p>');
+    $("#brandsPrompt").html('<p style:"color:#ffffff;">You need to log in! <a style:"color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
     //$("#portisBtnGlobal").show();
     //$("#userPrompt").html("Activate points wallet continue...");
     showPortisGlobal();
