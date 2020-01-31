@@ -1210,7 +1210,7 @@ window.onload = function() {
     $("#stravaBtnGlobal").hide();
     $("#openWalletGlobal2").show();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
-    $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
+    $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. <br>Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
     updateNonce();
   }
 
