@@ -20,7 +20,7 @@ function showCookies(){
 
 var correctNonce = 0;
 function updateNonce(){
-  web3.eth.getTransactionCount(web3.eth.defaultAccount).then(nonce => {
+  web3.eth.getTransactionCount(Cookies.get('userWallet')).then(nonce => {
     correctNonce = nonce;
   });
   console.log("nonce is: "+correctNonce);
@@ -120,7 +120,7 @@ $("#joinChallenge").click(function() {
     stravaID, 
     $("#nameChangeField").val(), 
     $("#codeField").val())
-  .send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
 
@@ -164,7 +164,7 @@ function buy(){
     adminWallet,
     targetPrice
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
         $("#createLoader").show();
@@ -185,7 +185,7 @@ function buy(){
           stravaID, 
           targetName, 
           targetPrice
-        ).send({from: web3.eth.defaultAccount, gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+        ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
           function(error, result) {
             if (!error){
 
@@ -249,7 +249,7 @@ $("#hostBtn").click(function() {
     BpmReward, 
     tokenAddress
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
         $("#hostBtn").hide();
@@ -269,7 +269,7 @@ $("#hostBtn").click(function() {
         contractAddress,
         pot
       )
-      .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+      .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
         function(error, result) {
           if (!error){
             $("#createLoader").show();
@@ -447,7 +447,7 @@ function selectedChallenge(){
     }
 
     NcenoBrands.methods.getGoalParams(goalid)
-    .call({from: web3.eth.defaultAccount},
+    .call({from: Cookies.get('userWallet')},
         async function(error, result) {
         if (!error){
           //echo challenge
@@ -481,7 +481,7 @@ function selectedChallenge(){
           makeWktl();
        
           await NcenoBrands.methods.getParticipants(goalid)
-          .call({from: web3.eth.defaultAccount},
+          .call({from: Cookies.get('userWallet')},
             async function(error, result) {
               if (!error){
                 
@@ -499,7 +499,7 @@ function selectedChallenge(){
                 for (let k = 0; k < compcount; k++){
 
                   await NcenoBrands.methods.getMyGoalStats1(ids[k], goalid)
-                  .call({from: web3.eth.defaultAccount},
+                  .call({from: Cookies.get('userWallet')},
                     async function(error, result) {
                       if (!error){
                         
@@ -507,7 +507,7 @@ function selectedChallenge(){
                         adherence[k] = result[0];
 
                         await NcenoBrands.methods.getMyGoalStats2(ids[k], goalid)
-                        .call({from: web3.eth.defaultAccount},
+                        .call({from: Cookies.get('userWallet')},
                           async function(error, result) {  
                             if (!error){
                               var bonusTotal = new Array();
@@ -547,7 +547,7 @@ function selectedChallenge(){
 
                                 //get the timeline variables and set them
                                 await NcenoBrands.methods.getGoalArrays(goalid, stravaID)
-                                .call({from: web3.eth.defaultAccount},
+                                .call({from: Cookies.get('userWallet')},
                                   function(error, result) {
                                     if (!error){
                                       lockedPercentWk = result[0];
@@ -706,7 +706,7 @@ function search(){
   var goalid = web3.utils.padRight($('#searchField').val(),34)
 
   NcenoBrands.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
+  .call({from: Cookies.get('userWallet')},
       function(error, result) {
       if (!error){
         //echo challenge
@@ -752,7 +752,7 @@ async function browse(){
 
   
   for (let i = 0; i < 10; i++){
-    var result = await NcenoBrands.methods.getFutureGoal(i).call({from: web3.eth.defaultAccount});
+    var result = await NcenoBrands.methods.getFutureGoal(i).call({from: Cookies.get('userWallet')});
 
 
     if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
@@ -911,7 +911,7 @@ function joinTarget(){
     stravaID
     //web3.utils.toHex($('#promoFieldSoon').val())
   )
-  .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
         $("#joinSoonModalBtn").hide();
@@ -1048,7 +1048,7 @@ function getActivities(){
           Math.round(cleaned[0][1]),
           Math.round(cleaned[0][2])
         )
-        .send({from: web3.eth.defaultAccount, nonce: correctNonce, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+        .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 300000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
           function(error, result) {
             if (!error){
               /*$("#joinSearch").hide();
@@ -1313,7 +1313,7 @@ function getTokenGlobal(){
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
-      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
   });
   //allofnceno ONEOFUS!

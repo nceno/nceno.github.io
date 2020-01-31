@@ -62,7 +62,7 @@ window.onload = function() {
   }
   
   //case 2- missing portis only
-  else if( Cookies.get('stravaUsername') == undefined || web3.eth.defaultAccount == null){
+  else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){
     console.log("doing case 2: missing portis only...");
 
     $("#stravaBtnGlobal").hide();
@@ -115,7 +115,7 @@ function getTokenGlobal(){
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
-      console.log("got token.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+      console.log("got token.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
   });
   //allofnceno ONEOFUS!
@@ -138,7 +138,7 @@ function showPortisGlobal() {
       portisEmail = email;
       stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
       Cookies.set('stravaUsername', stravaUsername);
-      Cookies.set('userWallet', web3.eth.defaultAccount);
+      Cookies.set('userWallet', Cookies.get('userWallet'));
 
       //$("#portisBtn").hide();
       //updateGasPrice();
@@ -150,7 +150,7 @@ function showPortisGlobal() {
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       }
       $("#openWalletGlobal").show();
-      console.log("signed in to portis.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+web3.eth.defaultAccount);
+      console.log("signed in to portis.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
       
     });
   });
