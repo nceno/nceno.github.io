@@ -1137,16 +1137,16 @@ $("#openWalletGlobal2").hide();
 
 //set auth creds if they exist
 var access_token;
-if(Cookies.get('access_token') != 'undefined'){
+if(Cookies.get('access_token') != undefined){
   access_token = Cookies.get('access_token');
 } 
 
 var stravaID; 
-if(Cookies.get('stravaID') != 'undefined'){
+if(Cookies.get('stravaID') != undefined){
   stravaID = Cookies.get('stravaID');
 }
 var stravaUsername; 
-if(Cookies.get('stravaUsername') != 'undefined'){
+if(Cookies.get('stravaUsername') != undefined){
   stravaUsername = Cookies.get('stravaUsername');
 }
 
@@ -1305,7 +1305,7 @@ function getTokenGlobal(){
       Cookies.set('stravaID', stravaID);
 
       $("#stravaBtnGlobal").hide();
-      if(Cookies.get('stravaUsername') == 'undefined'){
+      if(Cookies.get('stravaUsername') == undefined){
         //$("#userPrompt").html("Activate points wallet continue...");
         showPortisGlobal();
       }else{
@@ -1340,7 +1340,7 @@ function showPortisGlobal() {
       updateGasPrice();
 
       //if this fills in the blanks for auth creds,
-      if(Cookies.get('access_token') != 'undefined' && Cookies.get('stravaID') != 'undefined'){
+      if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined){
         //say so.
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
