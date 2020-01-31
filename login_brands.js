@@ -25,7 +25,7 @@ var code;
 window.onload = function() {
 
   //case 1- if you're missing everything,
-  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined){ 
+  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined || web3.eth.defaultAccount == null){ 
     console.log("doing case 1: missing everything...");
 
     $("#stravaBtnGlobal").show();
