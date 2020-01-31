@@ -11,7 +11,6 @@ var access_token;
 if(Cookies.get('access_token') != undefined){
   access_token = Cookies.get('access_token');
 } 
-
 var stravaID; 
 if(Cookies.get('stravaID') != undefined){
   stravaID = Cookies.get('stravaID');
@@ -20,12 +19,16 @@ var stravaUsername;
 if(Cookies.get('stravaUsername') != undefined){
   stravaUsername = Cookies.get('stravaUsername');
 }
+var userWallet;
+if(Cookies.get('userWallet') != undefined){
+  userWallet = Cookies.get('userWallet');
+}
 
 var code;
 window.onload = function() {
 
   //case 1- if you're missing everything,
-  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined || web3.eth.defaultAccount == null){ 
+  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined || Cookies.get('userWallet') == null){ 
     console.log("doing case 1: missing everything...");
 
     $("#stravaBtnGlobal").show();
@@ -105,7 +108,7 @@ function getTokenGlobal(){
       Cookies.set('stravaID', stravaID);
 
       $("#stravaBtnGlobal").hide();
-      if(Cookies.get('stravaUsername') == undefined || web3.eth.defaultAccount == null){
+      if(Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){
         //$("#userPrompt").html("Activate points wallet continue...");
         showPortisGlobal();
       }else{
@@ -135,6 +138,7 @@ function showPortisGlobal() {
       portisEmail = email;
       stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
       Cookies.set('stravaUsername', stravaUsername);
+      Cookies.set('userWallet', web3.eth.defaultAccount);
 
       //$("#portisBtn").hide();
       //updateGasPrice();
@@ -163,5 +167,5 @@ function showCookies(){
   console.log("access_token: "+Cookies.get('access_token'));
   console.log("stravaID: "+Cookies.get('stravaID'));
   console.log("stravaUsername: "+Cookies.get('stravaUsername'));
-  console.log("wallet: "+web3.eth.defaultAccount);
+  console.log("userWallet: "+Cookies.get('userWallet'));
 }
