@@ -59,7 +59,7 @@ window.onload = function() {
   }
   
   //case 2- missing portis only
-  else if( Cookies.get('stravaUsername') == undefined){
+  else if( Cookies.get('stravaUsername') == undefined || web3.eth.defaultAccount == null){
     console.log("doing case 2: missing portis only...");
 
     $("#stravaBtnGlobal").hide();
