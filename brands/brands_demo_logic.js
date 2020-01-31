@@ -1160,7 +1160,7 @@ window.onload = function() {
     $("#stravaBtnGlobal").show();
     //$("#portisBtnGlobal").show();
     $("#userPrompt").html('');
-    $("#brandsPrompt").html('<p style:"color:#ffffff;">You need to log in! <a style:"color:#ccff00;" href="www.nceno.app/brandchallenges.html">click here</a></p>');
+    $("#brandsPrompt").html('<p style:"color:#ffffff;">You need to log in! <a style:"color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
 
     //and you've been redirected from strava auth page,
       //@config  the path (and file name) will change if this is a corp well challenge
