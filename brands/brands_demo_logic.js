@@ -1163,9 +1163,7 @@ window.onload = function() {
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
     console.log("doing case 1: missing everything...");
     $("#brandsPrompt").html("doing case 1: missing everything...");
-
     $("#stravaBtnGlobal").show();
-    //$("#portisBtnGlobal").show();
     $("#userPrompt").html('');
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
 
@@ -1198,11 +1196,8 @@ window.onload = function() {
   else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == undefined){
     console.log("doing case 2: missing portis only...");
     $("#brandsPrompt").html('<p>doing case 2: missing portis...</p>');
-
     $("#stravaBtnGlobal").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/brandchallenges.html">click here</a></p>');
-    //$("#portisBtnGlobal").show();
-    //$("#userPrompt").html("Activate points wallet continue...");
     showPortisGlobal();
 
     
@@ -1214,7 +1209,6 @@ window.onload = function() {
     
     $("#stravaBtnGlobal").hide();
     $("#openWalletGlobal2").show();
-    //$("#portisBtnGlobal").hide();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
     updateNonce();
