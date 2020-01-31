@@ -1211,12 +1211,13 @@ window.onload = function() {
     //-----disable this block when testing.------
   else if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('stravaUsername') != undefined){
     console.log("doing case 3: missing nothing...");
-    updateNonce();
+    
     $("#stravaBtnGlobal").hide();
     $("#openWalletGlobal2").show();
     //$("#portisBtnGlobal").hide();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
     $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
+    updateNonce();
   }
 
   //we can only use window.onload once... so move the slider initialization here
