@@ -157,3 +157,9 @@ function showWallet(){
     portis.showPortis(() => {  
     });
 }
+
+function showCookies(){
+  console.log("access_token: "+Cookies.get('access_token'));
+  console.log("stravaID: "+Cookies.get('stravaID'));
+  console.log("stravaUsername: "+Cookies.get('stravaUsername'));
+}
