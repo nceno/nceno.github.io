@@ -1152,7 +1152,7 @@ if(Cookies.get('stravaUsername') != undefined){
 
 var code;
 window.onload = function() {
-  updateNonce();
+  //updateNonce();
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined){ 
     console.log("doing case 1: missing everything...");
