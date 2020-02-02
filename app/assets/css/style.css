@@ -20370,8 +20370,9 @@ pre[class*="language-"] {
       -moz-transition-delay: 0s;
       transition-delay: 0s;
       position: absolute;
-      right: 0;
-      top: calc(100% + .5rem);
+      bottom: 200%;
+      right: -2em;
+      top: calc(-590% + 0.5rem);
       font-size: 12px;
       font-weight: 400;
       line-height: 1rem; }
