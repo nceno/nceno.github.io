@@ -11,7 +11,7 @@ var r=0;
 function addPlayer(){
   if(r==0){
     $("#entry0").prepend(
-      '<h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;">+ ' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+      '<h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
     );
     r++;
     console.log("done.");
@@ -19,7 +19,7 @@ function addPlayer(){
   }
   else if (r>0){
     $('#entry'+ (r-1)).after(
-      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;">+ ' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
+      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
     );
     r++;
     console.log("done.");
