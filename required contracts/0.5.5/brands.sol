@@ -82,6 +82,7 @@ contract NcenoBrands is RelayRecipient{
     address wallet;
     uint stravaID;
     string userName;
+    string avatar;
     mapping(bytes=>order) orderSet;
     mapping(bytes=>goal) goalSet;
   }
@@ -167,7 +168,7 @@ contract NcenoBrands is RelayRecipient{
     emit MakeGoal(_goalID, getSender());
   }
 
-  function join(bytes memory _goalID, uint _stravaID, string memory _userName, string memory _inviteCode) public {
+  function join(bytes memory _goalID, uint _stravaID, string memory _userName, string memory _avatar, string memory _inviteCode) public {
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
@@ -178,6 +179,7 @@ contract NcenoBrands is RelayRecipient{
       player memory createdPlayer = player({
         stravaID : _stravaID,
         userName : _userName,
+        avatar : _avatar,
         wallet : getSender()
       });
       profileOf[_stravaID] = createdPlayer;
@@ -185,6 +187,9 @@ contract NcenoBrands is RelayRecipient{
       userCount++;
       emit MakeUser(getSender(), _stravaID, _userName);
     }
+
+    profileOf[_stravaID].avatar = _avatar;
+    profileOf[_stravaID].userName = _userName;
 
     goalAt[_goalID].playerSet[0]=_stravaID;
     goalAt[_goalID].indexedPlayerID[goalAt[_goalID].compCount]=_stravaID;
