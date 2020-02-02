@@ -1,6 +1,34 @@
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
+var USERNAME = ["chris", "Kyle", "Barney", "Liz"];
+var REWARDS = ["1","2","3","4"];
+var TOKENSYMBOL = "BMW";
+var DISTANCE = ["10","20","30","40"];
+var PROGRESS =["31","82","43","94"];
+var r=0;
+
+function addPlayer(){
+  if(r==0){
+    $("#entry0").prepend(
+      '<h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;">+ ' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+    );
+    r++;
+    console.log("done.");
+    console.log("r = "+r);
+  }
+  else if (r>0){
+    $('#entry'+ (r-1)).after(
+      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;">+ ' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
+    );
+    r++;
+    console.log("done.");
+    console.log("r = "+r);
+  }
+  console.log("button pressed. r= "+r);
+  $("#leaderboardCount").html(r);
+}
+
 //datepicker initializer
 var first = new Date();
 first.setDate(first.getDate() + 1);
