@@ -24,6 +24,7 @@ contract NcenoBrands is RelayRecipient{
   event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID);
   event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
+  event UpdateOrder(bytes _orderNumber, bool _refunded, bool _settled);
   
   //gas station init
   constructor() public {
@@ -259,9 +260,13 @@ contract NcenoBrands is RelayRecipient{
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
   }
 
-  function settleOrder(){
-    
+  function updateOrder(bytes memory _orderNumber, bool _refunded, bool _settled) public{
+    orderAt[_orderNum].refunded = _refunded;
+    orderAt[_orderNum].settled = _settled;
+    emit UpdateOrder(_orderNumber, _refunded, _settled);
   }
+
+
 
   function halt(bytes memory _goalID, bool _status) public{
     require(goalAt[_goalID].owner == getSender(),"error");
@@ -277,26 +282,36 @@ contract NcenoBrands is RelayRecipient{
 
   //---- /main functions
 
-  //getters
-  function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint, uint){
-    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].activeMins, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining);
+  //used for workout quickstats screen and getting comp count for function below
+  function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint){
+    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining);
+    //goalID --> start0, dur1, mins2, kms3, compcount4, remainingTokens5
   }
 
+  //used to generate the leaderboard
   function getIndexedPlayerID(bytes memory _goalID, uint _index) public view returns(uint, string memory){
     return(goalAt[_goalID].indexedPlayerID[_index], profileOf[goalAt[_goalID].indexedPlayerID[_index]].userName );
-  }
+    //goalID, index --> stravaID0, username1
+  } 
 
+  //useful for workout quickstats screen
   function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint){
     return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID]);
+    //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3
   }
 
-  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, uint, uint, uint, bool){
-    return(companyAt[_companyID].indexedOrder[_index].item, companyAt[_companyID].indexedOrder[_index].stravaBuyer, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded);    
+  //used to generate order list
+  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, uint, uint, uint, bool, bool){
+    return(companyAt[_companyID].indexedOrder[_index].item, companyAt[_companyID].indexedOrder[_index].stravaBuyer, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded, companyAt[_companyID].indexedOrder[_index].settled);    
+    //companyID, index --> item0, buyerID1, price2, date3, refunded4, settled5
   }
 
-  function searchOrders(bytes memory _orderNum) public view returns(string memory, uint, uint, uint, bool, bytes memory){
-    return(orderAt[_orderNum].item, orderAt[_orderNum].stravaBuyer, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].company);
+  //used for order search
+  function searchOrders(bytes memory _orderNum) public view returns(string memory, uint, uint, uint, bool, bool){
+    return(orderAt[_orderNum].item, orderAt[_orderNum].stravaBuyer, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].settled );
+    //orderNo --> item0, buyerID1, price2, date3, refunded4, settled5
   }
+
 
   function getNcenoStats() public view returns(uint, uint, uint, uint, uint, uint, uint){
     return(companyCount, goalCount, kmCount, minsCount, userCount, orderCount, payoutToDate);

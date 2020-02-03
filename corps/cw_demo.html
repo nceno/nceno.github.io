@@ -224,9 +224,9 @@
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Start</a>
               
               <a class="nav-item nav-link" data-toggle="tab" href="#manage" >Workout</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#browse" >Spend</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#pos" >Orders</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#host" >Host</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#browse" onclick="makeSpendPage();" >Spend</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#pos" onclick="makeOrdersPage();" >Orders</a>
+              <a class="nav-item nav-link" data-toggle="tab" href="#host" onclick="makeHostPage();" >Host</a>
             </div>
           </div>
         </div>
@@ -302,7 +302,7 @@
           <div class="tab-pane" id="manage" role="tabpanel" aria-labelledby="manage">
             <div class="row justify-content-center">
               <div class="col text-center">
-                <h5 class=" mt-4 fs-20 font-weight-normal" ><span style="color:#ccff00;">Joe</span>, you're <span style="color:#ccff00;">87%</span> finished!<br> There are still <span style="color:#ccff00;">17</span> days left. <br> You have earned <span style="color:#ccff00;">27 SUN</span> tokens,<br> but there are still <span style="color:#ccff00;">129 SUN</span> up for grabs.</h5>
+                <h5 class=" mt-4 fs-20 font-weight-normal" ><span id="workoutUser" style="color:#ccff00;">Joe</span>, you're <span id="progressPerc" style="color:#ccff00;">87%</span> finished!<br> There are still <span id="daysLeft" style="color:#ccff00;">17</span> days left. <br> You have earned <span id="rewardSlot" style="color:#ccff00;">27 SUN</span> tokens,<br> but there are still <span id="potRem" style="color:#ccff00;">129 SUN</span> up for grabs.</h5>
                   <a id="log" class="btn btn-rounded btn-sm btn-outline-white" data-toggle="modal" data-target="#logModal" onclick="$('#payMeBtn').show()">Log a workout</a>
                   <a id="addPlayerBtn" class="btn btn-rounded btn-sm btn-outline-white" onclick="addPlayer();">Add player</a>
               </div>
@@ -472,7 +472,7 @@
 
                             </tr>
 
-                            <!--upcoming challenges go here -->
+                            <!--new orders go here -->
 
                           </tbody>
                         

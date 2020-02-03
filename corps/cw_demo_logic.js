@@ -1,19 +1,114 @@
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
+
+function makeWorkoutPage(){
+  var start;
+  var dur;
+  var mins;
+  var kms;
+  var compcount;
+  var remainingTokens;
+
+  //---get goal params
+  NcenoBrands.methods.getGoalParams(_goalID)
+  .call({from: Cookies.get('userWallet')},
+    function(error, result) {
+      if (!error){
+        start = result[0];
+        dur = result[1];
+        mins =result[2];
+        kms = result[3];
+        compcount = result[4];
+        remainingTokens = result[5];
+
+        //---get your own stats
+        NcenoBrands.methods.getPlayer(_goalID, _MystravaID)
+        .call({from: Cookies.get('userWallet')},
+          function(error, result) {
+            if (!error){
+              myKms = result[0]; 
+              myMins = result[1]; 
+              myReward = result[2];
+              myLastLogTime = result[3];
+
+              //---get other players
+              for(var i=0; i<compcount; i++){
+                NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+                .call({from: Cookies.get('userWallet')},
+                  function(error, result) {
+                    if (!error){
+                      playerID = result[0]; 
+                      playerName = result[1];
+
+                      //---call that player
+                      NcenoBrands.methods.getPlayer(_goalID, result[0])
+                      .call({from: Cookies.get('userWallet')},
+                        function(error, result) {
+                          if (!error){
+                            theirKms = result[0]; 
+                            theirMins = result[1]; 
+                            theirReward = result[2];
+                            theirLastLogTime = result[3];
+                          }
+                          else{
+                            console.error(error);
+                          }
+                        }
+                      );
+
+                      //---/ call that player
+                    }
+                    else{
+                      console.error(error);
+                    }
+                  }
+                );
+              }//end for
+              //---/ get other players
+            }
+            else{
+              console.error(error);
+            }
+          }
+        );
+        //---/ get your own stats
+      }
+      else{
+        console.error(error);
+      }
+    }
+  );
+  //---/ get goal params  
+}
+
+function makeSpendPage(){
+
+}
+
+function makeOrdersPage(){
+
+}
+
+function makeHostPage(){
+
+}
+
+
 /////----- helper function to make the leaderboard
 
 var USERNAME = ["chris", "Kyle", "Barney", "Liz"];
 var REWARDS = ["1","2","3","4"];
-var TOKENSYMBOL = "BMW";
+var TOKENSYMBOL = "SUN";
 var DISTANCE = ["10","20","30","40"];
+var MINS = ["15","25","35","45"];
 var PROGRESS =["31","82","43","94"];
 var r=0;
 
 function addPlayer(){
   if(r==0){
     $("#entry0").prepend(
-      '<h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+      '<h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km + '+MINS[r]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
     );
     r++;
     console.log("done.");
@@ -21,7 +116,7 @@ function addPlayer(){
   }
   else if (r>0){
     $('#entry'+ (r-1)).after(
-      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
+      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km + '+MINS[r]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
     );
     r++;
     console.log("done.");
@@ -86,14 +181,7 @@ $("#joinSearch").hide();
 $('#joinSoonModalBtn').hide();
 $("#claimBtn").show();
 
-/*for(let h=1; h<13; h++){
-  $('#btnU'+h).hide();
-  
-  $('#w'+h+'log').hide();
-  $('#w'+h+'claim').hide();
-  
-  $('#week'+h).hide();
-}*/
+
 
 //timestamps are in this format: yyyymmddT160000Z
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
@@ -140,9 +228,6 @@ if($("#checker").is(':checked')) {
   }
 });
 
-//global variables for when a user auths with strava
-//var fitbitUser 
-var userID
 
 //brands join
 $("#joinChallenge").click(function() {
@@ -373,45 +458,7 @@ $('#logModal').on('hidden.bs.modal', function (e) {
   resetLog();
 })
 
-function resetClaim(){
-  $("#claimBtn").show();
-  $("#claimSuccess").html('');
-  $("#claimFail").html('');
-  $("#claimTitle").show();
-  $("#claimLoader").hide();
-}
-$('#claimModal').on('hidden.bs.modal', function (e) {
-  resetClaim();
-})
 
-function resetJoinSr(){
-  $("#joinSearch").show();
-  $("#joinSuccess").html('');
-  $("#joinFail").html('');
-  $("#aboutToJoin").show();
-  $("#srEcho").html('');
-  $("#srJoinReminder").html('');
-  $("#joinLoader").hide();
-  $('#promoFieldSearch').show();
-}
-$('#popupSrJoin').on('hidden.bs.modal', function (e) {
-  resetJoinSr();
-})
-
-function resetJoinSoon(){
-  $("#joinSoonModalBtn").show();
-  $("#soonEcho").html('');
-  $("#joinSoonSuccess").html('');
-  $("#joinSoonFail").html('');
-  $("#soonJoinTitle").show();
-  $("#joinSoonReminder").html('');
-  $("#joinSoonReminder").hide();
-  $("#joinSoonLoader").hide();
-  $('#promoFieldSoon').show();
-}
-$('#popupSoonJoin').on('hidden.bs.modal', function (e) {
-  resetJoinSoon();
-})
 
 //helper function that populates the manage page with all the goodies. needs work.
 function makePage(){
@@ -422,310 +469,9 @@ function makePage(){
   getToken();
 }
 
-var wkLimit = 0;
-var currentWeek = 0;
 var goalid;
 
-function selectedChallenge(){
-  // Initialize Selectric and bind to 'change' event
-  $('#goalCategories').selectric().on('change', function() {
-    goalid = web3.utils.padRight($('#goalCategories').val(),34);
-    console.log("selected goal is: "+goalid);
-    $("#selID").html(goalid.slice(0,8));
 
-    var sessions = 0;
-    var wks = 0;
-    var USDstake = 0;
-    var competitors = 0;
-
-    //try making these dictionaries instead
-    var wkPayout = {};
-    var wkBonus = {};
-    
-    
-    var lockedPercentWk = new Array();
-    var successesWk = new Array();
-    var winnersWk = new Array();
-    var startingTime = 0;
-
-    //empty previous charts
-    var ctx1 = null;
-    var ctx2 = null;
-
-    $('#canvas1Div').html('');
-    $('#canvas2Div').html('');
-
-
-    //overwrite artifacts from perviously selected goal if current has lower compcount.
-    for (let k = 0; k < 10; k++){
-      var n = k+1;
-      var adhKey = 'adhP'+n;
-      var nameKey = 'nameP'+n;
-      var flagKey = 'flagP'+n;
-      var bonusKey = 'bonusP'+n;
-      var payKey = 'payP'+n;
-      var lostKey = 'lostP'+n;
-      var dlKey1 = 'dl'+n;
-                        
-      $('#'+adhKey).html('');
-      $('#'+nameKey).html('');
-      $('#'+flagKey).html('');
-      $('#'+bonusKey).html('');
-      $('#'+payKey).html('');
-      $('#'+lostKey).html('');
-      $('#'+dlKey1).html('');
-
-    }
-
-    NcenoBrands.methods.getGoalParams(goalid)
-    .call({from: Cookies.get('userWallet')},
-        async function(error, result) {
-        if (!error){
-          //echo challenge
-          var compcount = result[5];
-          var tstamp = new Date(result[4]*1000);
-          startingTime = result[4]*1.0;
-          wkLimit = result[3];
-          $("#echStake").html("$"+result[1]);
-          $("#echWks").html(result[3]+" wks");
-          $("#echSes").html(result[2]+" x/wk");
-          $("#echMins").html(result[0]+ " mins");
-          $("#echComp").html(result[5]);
-          $("#echStart").html(tstamp.toDateString());
-          $("#dashboard").show();
-
-
-          //set the timeline variables
-          sessions = result[2];
-          USDstake = result[1];
-          competitors = result[5];
-          wks = result[3];
-
-          //set current challenge week globally
-          currentWeek = Math.floor((Date.now()/1000 - startingTime)/604800)+1;
-          if(Date.now()/1000 < (startingTime+wkLimit*604800)){
-            chartWeek = currentWeek;
-          }
-          else {chartWeek = wkLimit;}
-          //currentWeek = (Date.now()/1000 - result[4])/604800;
-          console.log("blockchain says we're in week: "+currentWeek);
-          makeWktl();
-       
-          await NcenoBrands.methods.getParticipants(goalid)
-          .call({from: Cookies.get('userWallet')},
-            async function(error, result) {
-              if (!error){
-                
-                var ids = new Array();
-                var names = new Array();
-                var flags = new Array();
-                
-                ids = result[0];
-                names = result[1];
-                flags = result[2];
-                var competitorCount = result[3];
-
-
-      //////////////// warning: do you mean to call a for loop on the nested function as well?
-                for (let k = 0; k < compcount; k++){
-
-                  await NcenoBrands.methods.getMyGoalStats1(ids[k], goalid)
-                  .call({from: Cookies.get('userWallet')},
-                    async function(error, result) {
-                      if (!error){
-                        
-                        var adherence = new Array();
-                        adherence[k] = result[0];
-
-                        await NcenoBrands.methods.getMyGoalStats2(ids[k], goalid)
-                        .call({from: Cookies.get('userWallet')},
-                          async function(error, result) {  
-                            if (!error){
-                              var bonusTotal = new Array();
-                              var totalPay = new Array();
-                              var lostStake = new Array();
-
-                              bonusTotal[k] = (result[3]*1).toFixed(2);
-                              totalPay[k] = (result[4]/100).toFixed(2);
-
-                              if(currentWeek>1){
-                                lostStake[k] = (result[1]/100).toFixed(2);
-                              }
-                              else lostStake[k] = (0).toFixed(2);
-
-
-                              wkBonus[ids[k]] = result[2];
-                              wkPayout[ids[k]] = result[0];
-
-                              var convertedName = web3.utils.hexToUtf8(names[k]);
-                              var convertedFlag = web3.utils.hexToUtf8(flags[k]).toLowerCase();
-
-                              var n = k+1;
-                              var adhKey = 'adhP'+n;
-                              var nameKey = 'nameP'+n;
-                              var flagKey = 'flagP'+n;
-                              var bonusKeyL = 'bonusP'+n;
-                              var payKey = 'payP'+n;
-                              var lostKey = 'lostP'+n;                            
-
-                              //0% success error root...
-                              $('#'+adhKey).html(adherence[k]+'%');
-                              $('#'+nameKey).html(convertedName);
-                              $('#'+flagKey).html('<img src="https://ipdata.co/flags/'+convertedFlag+'.png">');
-                              $('#'+bonusKeyL).html('+$'+(bonusTotal[k]/1000000000000000000).toFixed(2));
-                              $('#'+payKey).html('$'+totalPay[k]);
-                              $('#'+lostKey).html('-$'+lostStake[k]);
-
-                                //get the timeline variables and set them
-                                await NcenoBrands.methods.getGoalArrays(goalid, stravaID)
-                                .call({from: Cookies.get('userWallet')},
-                                  function(error, result) {
-                                    if (!error){
-                                      lockedPercentWk = result[0];
-
-                                      var claimStatusWk = new Array();
-                                      claimStatusWk = result[4];
-                                      
-                                      //hide the current locked stake percent from the user
-                                      if(currentWeek>1){
-                                        visibleLockedPercentWk = lockedPercentWk.slice(0, currentWeek-1);
-                                      }
-                                      else(visibleLockedPercentWk=[0])
-
-                                      successesWk = result[1];
-                                      winnersWk = result[2];
-
-                                      for (let k = 0; k < currentWeek; k++){
-                                        var n = k+1;
-                                        var dlKey = 'dl'+n;
-                                        var complKey = 'compl'+n;
-                                        var lockKey = 'lock'+n;
-                                        var bonusKey = 'bonus'+n;
-                                        var unKey = 'un'+n;
-                                        var finKey = 'fin'+n;
-                                        var lost = 0;
-
-                                        //this inequality makes the NaN error.... 
-                                        if(currentWeek > k+1){
-                                          lost = (lockedPercentWk[k]*USDstake-wkPayout[stravaID][k])/100;
-                                        }
-                                        else lost = 0;
-                                        nowTime = Math.floor(new Date().getTime()/1000);
-                                        daysRem = Math.ceil((startingTime + wks*604800 - nowTime - (wks-currentWeek)*604800)/86400);
-
-                                        if(k+1 == currentWeek){
-                                          if(daysRem!=1){
-                                            $('#'+dlKey).html('<h3><b style="color:#ccff00;">'+daysRem+"</b> days left this week</h3>");
-                                          }
-                                          else{$('#'+dlKey).html('<h2>Last day this week!</h2>');}
-                                        }
-
-                                        $('#'+complKey).html(successesWk[k] +" of "+ sessions);
-
-                                        //hide locked stake from user
-                                        if(k+1 == currentWeek){
-                                          $('#'+lockKey).html("$???");
-                                        }
-                                        else $('#'+lockKey).html("$"+(lockedPercentWk[k]*USDstake/100).toFixed(2));
-                                        
-      /////////////////////////////////
-      //this might error when user's stravaID is lower in the list than where the loop is at
-      //because bonusKey is updated before this function.
-      //need to test...
-      /////////////////////////////////
-                                        $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/100).toFixed(2));
-                                        $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
-      /////////////////////////////////
-
-                                        //$('#'+finKey).html(winnersWk[k] +" of "+ competitors);
-                                        $('#'+finKey).html("$" +lost.toFixed(2));
-
-
-                                        //disallow logging and claiming if quotas are met
-                                        //if(k>0 && successesWk[k-1] != sessions){
-                                        //final bug...
-                                        if(k>0 && successesWk[k-1] != sessions || claimStatusWk[currentWeek-2] > 0 || competitorCount === 1){
-                                          $('#w'+k+'claim').hide();
-                                        }
-
-                                        if(successesWk[k] === sessions){
-                                          var m = k+1;
-                                          $('#w'+m+'log').hide();
-                                        }
-                                      }
-
-                                      //make chart data 
-                                      //x axis
-                                      var xaxis = new Array();
-                                        for(let i = 0; i<chartWeek; i++){
-                                        var weekIndex = i+1;
-                                        xaxis[i] = "Week "+weekIndex;
-                                      }
-
-                                      //Cumulative % stake returned
-                                      var roi = new Array();
-                                      for(let i = 0; i<wks; i++){
-                                        var sum = 0;
-                                        for(let k = 0; k<i+1; k++){
-                                          //fixed the smart contract, but this will persist until we redeploy it. then will need to fix this.
-                                          sum += Math.round(0.1*(wkPayout[stravaID][k]+wkBonus[stravaID][k])/(1000000000000000000*USDstake));
-                                        }
-                                        roi[i] = sum;
-                                      }
-
-                                      //% Competitors finished the week
-                                      var finishers = new Array();
-                                      for(let i = 0; i<wks; i++){
-                                        finishers[i] = winnersWk[i]*100/competitors;
-                                      }
-
-                                      //***************************************************************************
-
-                                    }
-                                    else{
-                                      console.log("step 5/5 getGoalArrays failed.");  
-                                      console.error(error);
-                                    }
-                                });
-                              //}//end if
-
-                              //we place this outside of the function so that the order of our specific ID doesn;t matter. Its key will be defined in the list always.
-                              for (let k = 0; k < currentWeek; k++){
-                                var n = k+1;
-                                var bonusKey = 'bonus'+n;
-                                var unKey = 'un'+n;
-                                $('#'+bonusKey).html("$" +(wkBonus[stravaID][k]/1000000000000000000).toFixed(2));
-                                $('#'+unKey).html("$" +(wkPayout[stravaID][k]/100).toFixed(2));
-                              }
-                              
-                            }
-                            else{
-                              console.log("step 4/5 getGoalStats2 failed.");  
-                              console.error(error);
-                            }
-                        });
-                      }
-                      else{
-                        console.log("step 3/5 getGoalStats1 failed.");  
-                        console.error(error);
-                      }
-                  });
-                }
-              }
-              else{
-                console.log("step 2/5 got participants failed.");  
-                console.error(error);
-              }
-          });
-          
-        } 
-        else{
-          console.log("step 1/5 getGoalParams failed.");  
-          console.error(error);
-        }
-    });
-  });
-}
 
 
 //searches for a specific goal and displays it with an option to join.
@@ -764,166 +510,9 @@ function search(){
   }); 
 }
 
-//populates the challenges starting soon table
-
-var targetGoalID;
-var targetStake;
-var targetWks;
-var targetSes;
-var targetMin;
-var targetStart;
-var targetStartStamp;
-
-async function browse(){
-  updateNonce();
-  //clear out the goalIDs from old elements
-  for(let p=1; p<11; p++){
-    $('#idNumberU'+p).val('');
-  }
-
-  
-  for (let i = 0; i < 10; i++){
-    var result = await NcenoBrands.methods.getFutureGoal(i).call({from: Cookies.get('userWallet')});
 
 
-    if(result[0] != 0x0000000000000000000000000000000000000000000000000000000000000000 && result[0] != undefined){
-      //list it in the table
-      var tstamp = new Date(result[5]*1000);
-      //console.log('tstamp is: '+tstamp.getTime()/1000);
-      //var buyin = Math.round(result[2]/100000000000000000000);
-      var n = i+1;
-      var buyinKey = 'buyinU'+n;
-      var wksKey = 'wksU'+n;
-      var sesKey = 'sesU'+n;
-      var minKey = 'minU'+n;
-      var pplKey = 'pplU'+n;
-      var startKey = 'startU'+n;
-      var btnKey = 'btnU'+n;
-      var idKey = 'idNumberU'+n;
-      var tKey = 'tstampU'+n;
-      var stupid = parseInt(tstamp.getTime()/1000);
-      console.log(stupid);
 
-      $('#'+tKey).hide();
-      $('#'+tKey).html(stupid+'');
-      
-      $('#'+buyinKey).html('$'+result[2]);
-      $('#'+wksKey).html(result[4]+'  wks');
-      $('#'+sesKey).html(result[3]+' x/wk');
-      $('#'+minKey).html(result[1]+'  min');
-      $('#'+pplKey).html(10-result[6]);
-      $('#'+startKey).html(tstamp.toDateString());
-      $('#'+btnKey).show();
-      $('#'+idKey).hide();
-      $('#'+idKey).html(result[0]+'');
-      console.log("upcoming goal: "+result[0]);      
-    }   
-  }
-}
-
-//must be outside, so accessible globally.
-
-$('#soonJoin1').click(function(){
-    targetGoalID = $('#idNumberU1').text();
-    targetStake = $('#buyinU1').text().slice(1);
-    targetWks = $('#wksU1').text().slice(0,3);
-    targetSes = $('#sesU1').text().slice(0,2);
-    targetMin = $('#minU1').text().slice(0,3);
-    targetStart = $('#startU1').text();
-    targetStartStamp = parseInt($('#tstampU1').text());
-    populateTargetModal();
-  });
-  $('#soonJoin2').click(function(){
-    targetGoalID = $('#idNumberU2').text();
-    targetStake = $('#buyinU2').text().slice(1);
-    targetWks = $('#wksU2').text().slice(0,3);;
-    targetSes = $('#sesU2').text().slice(0,2);
-    targetMin = $('#minU2').text().slice(0,3);
-    targetStart = $('#startU2').text();
-    targetStartStamp = parseInt($('#tstampU2').text());
-    populateTargetModal();
-  });
-  $('#soonJoin3').click(function(){
-    targetGoalID = $('#idNumberU3').text();
-    console.log("target goal ID is: "+targetGoalID);
-    targetStake = $('#buyinU3').text().slice(1);
-    targetWks = $('#wksU3').text().slice(0,3);;
-    targetSes = $('#sesU3').text().slice(0,2);
-    targetMin = $('#minU3').text().slice(0,3);
-    targetStart = $('#startU3').text();
-    targetStartStamp = parseInt($('#tstampU3').text());
-    populateTargetModal();
-  });
-  $('#soonJoin4').click(function(){
-    targetGoalID = $('#idNumberU4').text();
-    targetStake = $('#buyinU4').text().slice(1);
-    targetWks = $('#wksU4').text().slice(0,3);;
-    targetSes = $('#sesU4').text().slice(0,2);
-    targetMin = $('#minU4').text().slice(0,3);
-    targetStart = $('#startU4').text();
-    targetStartStamp = parseInt($('#tstampU4').text());
-    populateTargetModal();
-  });
-  $('#soonJoin5').click(function(){
-    targetGoalID = $('#idNumberU5').text();
-    targetStake = $('#buyinU5').text().slice(1);
-    targetWks = $('#wksU5').text().slice(0,3);;
-    targetSes = $('#sesU5').text().slice(0,2);
-    targetMin = $('#minU5').text().slice(0,3);
-    targetStart = $('#startU5').text();
-    targetStartStamp = parseInt($('#tstampU5').text());
-    populateTargetModal();
-  });
-  $('#soonJoin6').click(function(){
-    targetGoalID = $('#idNumberU6').text();
-    targetStake = $('#buyinU6').text().slice(1);
-    targetWks = $('#wksU6').text().slice(0,3);;
-    targetSes = $('#sesU6').text().slice(0,2);
-    targetMin = $('#minU6').text().slice(0,3);
-    targetStart = $('#startU6').text();
-    targetStartStamp = parseInt($('#tstampU6').text());
-    populateTargetModal();
-  });
-  $('#soonJoin7').click(function(){
-    targetGoalID = $('#idNumberU7').text();
-    targetStake = $('#buyinU7').text().slice(1);
-    targetWks = $('#wksU7').text().slice(0,3);;
-    targetSes = $('#sesU7').text().slice(0,2);
-    targetMin = $('#minU7').text().slice(0,3);
-    targetStart = $('#startU7').text();
-    targetStartStamp = parseInt($('#tstampU7').text());
-    populateTargetModal();
-  });
-  $('#soonJoin8').click(function(){
-    targetGoalID = $('#idNumberU8').text();
-    targetStake = $('#buyinU8').text().slice(1);
-    targetWks = $('#wksU8').text().slice(0,3);;
-    targetSes = $('#sesU8').text().slice(0,2);
-    targetMin = $('#minU8').text().slice(0,3);
-    targetStart = $('#startU8').text();
-    targetStartStamp = parseInt($('#tstampU8').text());
-    populateTargetModal();
-  });
-  $('#soonJoin9').click(function(){
-    targetGoalID = $('#idNumberU9').text();
-    targetStake = $('#buyinU9').text().slice(1);
-    targetWks = $('#wksU9').text().slice(0,3);;
-    targetSes = $('#sesU9').text().slice(0,2);
-    targetMin = $('#minU9').text().slice(0,3);
-    targetStart = $('#startU9').text();
-    targetStartStamp = parseInt($('#tstampU9').text());
-    populateTargetModal();
-  });
-  $('#soonJoin10').click(function(){
-    targetGoalID = $('#idNumberU10').text();
-    targetStake = $('#buyinU10').text().slice(1);
-    targetWks = $('#wksU10').text().slice(0,3);;
-    targetSes = $('#sesU10').text().slice(0,2);
-    targetMin = $('#minU10').text().slice(0,3);
-    targetStart = $('#startU10').text();
-    targetStartStamp = parseInt($('#tstampU10').text());
-    populateTargetModal();
-  });
 
 function populateTargetModal(){
 
