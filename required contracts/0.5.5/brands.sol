@@ -97,6 +97,7 @@ contract NcenoBrands is RelayRecipient{
     uint price;
     uint date;
     bool refunded;
+    bool settled;
     bytes company;
   }
   mapping(bytes=>order) orderAt;
@@ -245,6 +246,7 @@ contract NcenoBrands is RelayRecipient{
       price: _price,
       date: now,
       refunded: false,
+      settled: false,
       company: _companyID
     });
     companyAt[_companyID].orderSet[_orderNum]=createdOrder;
@@ -255,6 +257,10 @@ contract NcenoBrands is RelayRecipient{
     companyAt[_companyID].orderCount++;
     
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
+  }
+
+  function settleOrder(){
+    
   }
 
   function halt(bytes memory _goalID, bool _status) public{

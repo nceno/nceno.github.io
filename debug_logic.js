@@ -1,24 +1,3 @@
-//get test ether that is stored in the contract
-/*function getTestETH(){
-  Nceno.methods.getTestETH()
-  .send({from: web3.eth.defaultAccount, gas: 1500000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){ 
-    console.log(receipt.status);
-    if(receipt.status === true){
-      updateNonce();
-    }
-    else{
-      console.log("error...");
-    } 
-  }).once('error', function(error){console.log(error);});
-}*/
 
 var valueMultiplier = 1.04;
 

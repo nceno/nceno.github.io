@@ -1,6 +1,8 @@
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
+/////----- helper function to make the leaderboard
+
 var USERNAME = ["chris", "Kyle", "Barney", "Liz"];
 var REWARDS = ["1","2","3","4"];
 var TOKENSYMBOL = "BMW";
@@ -28,6 +30,7 @@ function addPlayer(){
   console.log("button pressed. r= "+r);
   $("#leaderboardCount").html(r);
 }
+////----/ end helper leaderboard function
 
 //datepicker initializer
 var first = new Date();
