@@ -54,6 +54,14 @@ function makeWorkoutPage(){
                           '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
                         );
                         //populate my quick stats .........
+                        $("#progressPerc").html(theirProgress+'%');
+                        $("#user").html(playerName);
+                
+                        var days = Math.round((Date.now()/1000-start)/86400);
+                        $("#daysLeft").html(days);
+                        $("#rewardSlot").html(theirReward+' SUN');
+                        $("#potRem").html(remainingTokens+' SUN');
+                        $("#leaderboardCount").html(compcount);
 
                       }
                       else{
