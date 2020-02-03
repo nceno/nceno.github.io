@@ -283,9 +283,10 @@ contract NcenoBrands is RelayRecipient{
   //---- /main functions
 
   //used for workout quickstats screen and getting comp count for function below
-  function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint){
-    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining);
-    //goalID --> start0, dur1, mins2, kms3, compcount4, remainingTokens5
+  function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint, uint){
+    uint tokenGoal = ???
+    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining, tokenGoal);
+    //goalID --> start0, dur1, mins2, kms3, compcount4, remainingTokens5, tokenGoal6
   }
 
   //used to generate the leaderboard

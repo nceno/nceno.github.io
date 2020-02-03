@@ -2,7 +2,7 @@
 //const web3 = new Web3(portis.provider);
 
 
-/*function makeWorkoutPage(){
+function makeWorkoutPage(){
   var start;
   var dur;
   var mins;
@@ -21,58 +21,58 @@
         kms = result[3];
         compcount = result[4];
         remainingTokens = result[5];
+        tokenGoal = result[6];
 
-        //---get your own stats
-        NcenoBrands.methods.getPlayer(_goalID, _MystravaID)
-        .call({from: Cookies.get('userWallet')},
-          function(error, result) {
-            if (!error){
-              myKms = result[0]; 
-              myMins = result[1]; 
-              myReward = result[2];
-              myLastLogTime = result[3];
+        //---get other players
+        for(var i=0; i<compcount; i++){
+          NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          .call({from: Cookies.get('userWallet')},
+            function(error, result) {
+              if (!error){
+                playerID = result[0]; 
+                playerName = result[1];
 
-              //---get other players
-              for(var i=0; i<compcount; i++){
-                NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+                //---call that player
+                NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   function(error, result) {
                     if (!error){
-                      playerID = result[0]; 
-                      playerName = result[1];
+                      theirKms = result[0]; 
+                      theirMins = result[1]; 
+                      theirReward = result[2];
+                      theirProgress = Math.round(100*theirReward/tokenGoal);
+                      theirLastLogTime = result[3];
 
-                      //---call that player
-                      NcenoBrands.methods.getPlayer(_goalID, result[0])
-                      .call({from: Cookies.get('userWallet')},
-                        function(error, result) {
-                          if (!error){
-                            theirKms = result[0]; 
-                            theirMins = result[1]; 
-                            theirReward = result[2];
-                            theirLastLogTime = result[3];
-                          }
-                          else{
-                            console.error(error);
-                          }
-                        }
+                      //look out for my own stats, post at top
+                      if(playerID == MystravaID){
+                        //post at top of leaderboard
+                        //populate my quick stats
+                      }
+                      //.prepend first entry if it's not me
+                      if(i==0 && playerID != MystravaID){
+                        $("#entry0").prepend(
+                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+                        );
+                      }
+                      //.after following entries
+                      $('#entry'+ (i-1)).after(
+                        '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
                       );
-
-                      //---/ call that player
                     }
                     else{
                       console.error(error);
                     }
                   }
                 );
-              }//end for
-              //---/ get other players
+                //---/ call that player
+              }
+              else{
+                console.error(error);
+              }
             }
-            else{
-              console.error(error);
-            }
-          }
-        );
-        //---/ get your own stats
+          );
+        }//end for
+        //---/ get other players
       }
       else{
         console.error(error);
@@ -92,7 +92,7 @@ function makeOrdersPage(){
 
 function makeHostPage(){
 
-}*/
+}
 
 
 /////----- helper function to make the leaderboard
@@ -108,7 +108,7 @@ var r=0;
 function addPlayer(){
   if(r==0){
     $("#entry0").prepend(
-      '<h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km + '+MINS[r]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+      '<h4 class="progress-title">'  +USERNAME[i]+ '<font style="color:#ccff00;"> +' +REWARDS[i]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[i]+ 'km + '+MINS[i]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[i]+ '%;" aria-valuenow="' +PROGRESS[i]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
     );
     r++;
     console.log("done.");
@@ -116,7 +116,7 @@ function addPlayer(){
   }
   else if (r>0){
     $('#entry'+ (r-1)).after(
-      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[r]+ '<font style="color:#ccff00;"> +' +REWARDS[r]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[r]+ 'km + '+MINS[r]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[r]+ '%;" aria-valuenow="' +PROGRESS[r]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
+      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[i]+ '<font style="color:#ccff00;"> +' +REWARDS[i]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[i]+ 'km + '+MINS[i]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[i]+ '%;" aria-valuenow="' +PROGRESS[i]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
     );
     r++;
     console.log("done.");
