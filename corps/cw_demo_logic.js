@@ -2,7 +2,7 @@
 //const web3 = new Web3(portis.provider);
 
 
-function makeWorkoutPage(){
+/*function makeWorkoutPage(){
   var start;
   var dur;
   var mins;
@@ -92,7 +92,7 @@ function makeOrdersPage(){
 
 function makeHostPage(){
 
-}
+}*/
 
 
 /////----- helper function to make the leaderboard
