@@ -54,7 +54,7 @@ function makeWorkoutPage(){
                       var theirMins = result[1]; 
                       var theirReward = result[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
-                      var theirAvatar = result[4];
+                      var avatar;
                       //theirLastLogTime = result[3];
                       switch(result[4]){
                         case 0:
