@@ -31,7 +31,7 @@ function makeWorkoutPage(){
         var start = result[0];
         var dur = result[1];
         var tokenCap = result[2];
-        var compcount = result[4];
+        var compcount = result[3];
         var remainingTokens = result[5];
         var bpmReward = result[6]; //per 10mins
         var kmReward = result[7]; //per km
