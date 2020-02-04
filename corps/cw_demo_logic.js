@@ -98,11 +98,13 @@ function makeWorkoutPage(){
 
                       //.prepend first entry if it's not me
                       if(i==0){
+                        console.log("first post...");
                         $("#entry0").prepend(
                           '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
                       }else if(playerID == Cookies.get('stravaID', stravaID) && i>0){
                         //post to top if it's me
+                        console.log("hey, it's me...");
                         $("#entry0").before(
                           '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
@@ -118,6 +120,7 @@ function makeWorkoutPage(){
                       }
                       else{
                         //.after following entries
+                        console.log("posting after...");
                         $('#entry'+ (i-1)).after(
                           '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
                         );
