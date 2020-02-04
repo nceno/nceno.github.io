@@ -3,26 +3,36 @@
 
 
 function makeWorkoutPage(){
-  var start;
+/*  var start;
   var dur;
-  var mins;
-  var kms;
+  var tokenCap;
   var compcount;
   var remainingTokens;
+  var bpmReward;
+  var kmReward;
+
+  var playerID;
+  var playerName;
+
+  var theirkms;
+  var theirMins;
+  var theirReward;
+  var theirProgress;
+  var theirLastLogTime;
+  var theirAvatar;*/
 
   //---get goal params
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     function(error, result) {
       if (!error){
-        start = result[0];
-        dur = result[1];
-        mins =result[2];
-        kms = result[3];
-        compcount = result[4];
-        remainingTokens = result[5];
-        bpmReward = result[6]; //per 10mins
-        kmReward = result[7]; //per km
+        var start = result[0];
+        var dur = result[1];
+        var tokenCap = result[2];
+        var compcount = result[4];
+        var remainingTokens = result[5];
+        var bpmReward = result[6]; //per 10mins
+        var kmReward = result[7]; //per km
 
         //---get other players
         for(var i=0; i<compcount; i++){
@@ -30,19 +40,19 @@ function makeWorkoutPage(){
           .call({from: Cookies.get('userWallet')},
             function(error, result) {
               if (!error){
-                playerID = result[0]; 
-                playerName = result[1];
+                var playerID = result[0]; 
+                var playerName = result[1];
 
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   function(error, result) {
                     if (!error){
-                      theirKms = result[0]; 
-                      theirMins = result[1]; 
-                      theirReward = result[2];
-                      theirProgress = Math.round(100*theirReward/tokenGoal);
-                      theirLastLogTime = result[3];
+                      var theirKms = result[0]; 
+                      var theirMins = result[1]; 
+                      var theirReward = result[2];
+                      var theirProgress = Math.round(100*theirReward/tokenCap);
+                      //theirLastLogTime = result[3];
                       switch(result[4]){
                         case 0:
                           theirAvatar = 'runner0';
@@ -78,7 +88,7 @@ function makeWorkoutPage(){
                         $("#entry0").prepend(
                           '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+theirAvatar+'.png"> </span></div></div></div>'
                         );
-                      }else if(playerID == MystravaID && i>0){
+                      }else if(playerID == Cookies.get('stravaID', stravaID) && i>0){
                         //post to top if it's me
                         $("#entry0").before(
                           '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+theirAvatar+'.png"> </span></div></div></div>'
