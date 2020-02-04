@@ -22,6 +22,7 @@ function makeWorkoutPage(){
   var theirAvatar;*/
 
   //---get goal params
+  
   var _goalID = "0xccff00";
 
   NcenoBrands.methods.getGoalParams(_goalID)
@@ -36,8 +37,15 @@ function makeWorkoutPage(){
         var bpmReward = result[5]; //per 10mins
         var kmReward = result[6]; //per km
 
+        //reset the leaderboard
+        $('#entry0').empty();
+        for(var j=1; j<compcount+1; j++){
+          $('#entry'+j).remove();
+        }
+
         //---get other players
         for(var i=0; i<compcount; i++){
+
           NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
             function(error, result) {
@@ -55,7 +63,6 @@ function makeWorkoutPage(){
                       var theirReward = result[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
                       var avatar = result[4];
-                      console.log(avatar);
 
                       //theirLastLogTime = result[3];
                       switch(avatar){
