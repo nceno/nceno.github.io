@@ -83,7 +83,7 @@ contract NcenoBrands is RelayRecipient{
     address wallet;
     uint stravaID;
     string userName;
-    string avatar;
+    uint avatar;
     mapping(bytes=>order) orderSet;
     mapping(bytes=>goal) goalSet;
   }
@@ -170,7 +170,7 @@ contract NcenoBrands is RelayRecipient{
     emit MakeGoal(_goalID, getSender());
   }
 
-  function join(bytes memory _goalID, uint _stravaID, string memory _userName, string memory _avatar, string memory _inviteCode) public {
+  function join(bytes memory _goalID, uint _stravaID, string memory _userName, uint _avatar, string memory _inviteCode) public {
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
@@ -284,9 +284,8 @@ contract NcenoBrands is RelayRecipient{
 
   //used for workout quickstats screen and getting comp count for function below
   function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint, uint){
-    uint tokenGoal = ???
-    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining, tokenGoal);
-    //goalID --> start0, dur1, mins2, kms3, compcount4, remainingTokens5, tokenGoal6
+    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining, goalAt[_goalID].bpmTokenRate, goalAt[_goalID].kmTokenRate);
+    //goalID --> start0, dur1, mins2, kms3, compcount4, remainingTokens5, bpmReward6, kmReward7
   }
 
   //used to generate the leaderboard
@@ -296,9 +295,9 @@ contract NcenoBrands is RelayRecipient{
   } 
 
   //useful for workout quickstats screen
-  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint){
-    return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID]);
-    //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3
+  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, uint){
+    return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID],goalAt[_goalID].lastLog[_avatar] );
+    //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3, avatar4
   }
 
   //used to generate order list

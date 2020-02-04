@@ -21,7 +21,8 @@ function makeWorkoutPage(){
         kms = result[3];
         compcount = result[4];
         remainingTokens = result[5];
-        tokenGoal = result[6];
+        bpmReward = result[6]; //per 10mins
+        kmReward = result[7]; //per km
 
         //---get other players
         for(var i=0; i<compcount; i++){
@@ -42,21 +43,49 @@ function makeWorkoutPage(){
                       theirReward = result[2];
                       theirProgress = Math.round(100*theirReward/tokenGoal);
                       theirLastLogTime = result[3];
+                      switch(result[4]){
+                        case 0:
+                          theirAvatar = 'runner0';
+                          break;
+
+                        case 1:
+                          theirAvatar = 'runner1';
+                          break;
+                          
+                        case 2:
+                          theirAvatar = 'runner2';
+                          break;
+                          
+                        case 3:
+                          theirAvatar = 'runner3';
+                          break;
+                        
+                        case 4:
+                          theirAvatar = 'runner4';
+                          break;
+                        
+                        case 5:
+                          theirAvatar = 'runner5';
+                          break;
+                        
+                        case 6:
+                          theirAvatar = 'runner6';
+                          break;
+                      }
 
                       //.prepend first entry if it's not me
                       if(i==0){
                         $("#entry0").prepend(
-                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+theirAvatar+'.png"> </span></div></div></div>'
                         );
                       }else if(playerID == MystravaID && i>0){
                         //post to top if it's me
                         $("#entry0").before(
-                          '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
+                          '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+theirAvatar+'.png"> </span></div></div></div>'
                         );
                         //populate my quick stats .........
                         $("#progressPerc").html(theirProgress+'%');
-                        $("#user").html(playerName);
-                
+                        $("#user").html(playerName);                
                         var days = Math.round((Date.now()/1000-start)/86400);
                         $("#daysLeft").html(days);
                         $("#rewardSlot").html(theirReward+' SUN');
@@ -163,6 +192,8 @@ function updateNonce(){
   });
   console.log("nonce is: "+correctNonce);
 }
+
+//transaction is mined successfully --> correctNonce++;
 
 //sanity check for debugging
 console.log(NcenoBrands);
@@ -931,9 +962,9 @@ function getTokenGlobal(){
 
       //set the token in cookies
       access_token = data.access_token;
-      Cookies.set('access_token', access_token, {
-      expires: inSixHours
-      });
+      Cookies.set('access_token', access_token
+        //,{expires: inSixHours}
+      );
 
       //set the stravaID in cookies
       stravaID = data.athlete.id;
