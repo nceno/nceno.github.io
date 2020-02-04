@@ -52,12 +52,13 @@ function makeWorkoutPage(){
               if (!error){
                 var playerID = result[0]; 
                 var playerName = result[1];
-
+                console.log("i= "+i);
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   function(error, result) {
                     if (!error){
+                      console.log(result);
                       var theirKms = result[0]; 
                       var theirMins = result[1]; 
                       var theirReward = result[2];
