@@ -59,31 +59,31 @@ function makeWorkoutPage(){
 
                       //theirLastLogTime = result[3];
                       switch(avatar){
-                        case 0:
+                        case "0":
                           avatar = "runner0";
                           break;
 
-                        case 1:
+                        case "1":
                           avatar = "runner1";
                           break;
                           
-                        case 2:
+                        case "2":
                           avatar = "runner2";
                           break;
                           
-                        case 3:
+                        case "3":
                           avatar = "runner3";
                           break;
                         
-                        case 4:
+                        case "4":
                           avatar = "runner4";
                           break;
                         
-                        case 5:
+                        case "5":
                           avatar = "runner5";
                           break;
                         
-                        case 6:
+                        case "6":
                           avatar = "runner6";
                           break;
                       }
