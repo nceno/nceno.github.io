@@ -58,43 +58,43 @@ function makeWorkoutPage(){
                       //theirLastLogTime = result[3];
                       switch(result[4]){
                         case 0:
-                          theirAvatar = 'runner0';
+                          avatar = 'runner0';
                           break;
 
                         case 1:
-                          theirAvatar = 'runner1';
+                          avatar = 'runner1';
                           break;
                           
                         case 2:
-                          theirAvatar = 'runner2';
+                          avatar = 'runner2';
                           break;
                           
                         case 3:
-                          theirAvatar = 'runner3';
+                          avatar = 'runner3';
                           break;
                         
                         case 4:
-                          theirAvatar = 'runner4';
+                          avatar = 'runner4';
                           break;
                         
                         case 5:
-                          theirAvatar = 'runner5';
+                          avatar = 'runner5';
                           break;
                         
                         case 6:
-                          theirAvatar = 'runner6';
+                          avatar = 'runner6';
                           break;
                       }
 
                       //.prepend first entry if it's not me
                       if(i==0){
                         $("#entry0").prepend(
-                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+theirAvatar+'.png"> </span></div></div></div>'
+                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
                       }else if(playerID == Cookies.get('stravaID', stravaID) && i>0){
                         //post to top if it's me
                         $("#entry0").before(
-                          '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+theirAvatar+'.png"> </span></div></div></div>'
+                          '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
                         //populate my quick stats .........
                         $("#progressPerc").html(theirProgress+'%');
