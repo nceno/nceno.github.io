@@ -22,6 +22,7 @@ function makeWorkoutPage(){
   var theirAvatar;*/
 
   //---get goal params
+  var _goalID = "0xccff00";
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     function(error, result) {
