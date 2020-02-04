@@ -1,10 +1,10 @@
 //makeCompany: "Suntek Global","0xccff00959f043d6e2926793d85a8cde6adccff00","0x619201959f043d6e2926793d85a8cde6ad755ef8", "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//deposit: "0xf34c124a29229a5cf5b63be4bb9a6778d1847012","30"
-//host: "0xccff00","1579588026","30","50","0", "100","1","2","0x619201959f043d6e2926793d85a8cde6ad755ef8"
+//deposit: "0xf34c124a29229a5cf5b63be4bb9a6778d1847012","10"
+//host: "0xccff00","1579588026","30","3","10","1","2","0x619201959f043d6e2926793d85a8cde6ad755ef8"
 //addinvite codes: "0xccff00",["red", "orange", "yellow", "green", "blue", "indigo", "violet", "white", "black", "gray"]
-//join: "0xccff00","1234567","joenance","red"
-//log: "0xccff00","1234567","3","2","666","0x121212"
-//make order: "0xccff00","0xccff00959f043d6e2926793d85a8cde6adccff00","0x666aaa","1234567","butt plug","12"
+//join: "0xccff00","39706111","joenance","0","red"
+//log: "0xccff00","39706111","1","0","666","0x121212"
+//make order: "0xccff00","0xccff00959f043d6e2926793d85a8cde6adccff00","0x666aaa","39706111","beer","12"
 
 
 pragma solidity >=0.5.5;
@@ -54,8 +54,7 @@ contract NcenoBrands is RelayRecipient{
     bytes goalID;
     uint start;
     uint dur;
-    uint activeMins;
-    uint kms;
+    uint tokenCap;
     uint tokenPot;
     uint potRemaining;
     uint kmTokenRate;
@@ -143,14 +142,13 @@ contract NcenoBrands is RelayRecipient{
     emit MakeCompany(_companyID, _name, _owner);
   }
 
-  function host(bytes memory _goalID, uint _start, uint _days, uint _kms, uint _mins, uint _pot, uint _KmReward, uint _BpmReward, address _token) public payable{
+  function host(bytes memory _goalID, uint _start, uint _days, uint _cap, uint _pot, uint _KmReward, uint _BpmReward, address _token) public payable{
     goal memory createdGoal = goal({
       halted: false,
       goalID: _goalID,
       start: _start,
       dur: _days,
-      activeMins: _mins,
-      kms: _kms,
+      tokenCap: _cap,
       tokenPot: _pot,
       potRemaining: _pot,
       kmTokenRate: _KmReward,
@@ -210,12 +208,16 @@ contract NcenoBrands is RelayRecipient{
       && now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days 
       /*&& keccak256(_secret) == keccak256('masterhash')*/
       && goalAt[_goalID].halted == false
-      && goalAt[_goalID].potRemaining>0,"error");
+      && goalAt[_goalID].potRemaining>0
+      && goalAt[_goalID].playerPayout[_stravaID]<goalAt[_goalID].tokenCap,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
     uint payout = _kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
     if(goalAt[_goalID].potRemaining<payout){
       payout = goalAt[_goalID].potRemaining;
+    }
+    if(payout+goalAt[_goalID].playerPayout[_stravaID] > goalAt[_goalID].tokenCap){
+      payout = goalAt[_goalID].tokenCap - goalAt[_goalID].playerPayout[_stravaID];
     }
 
     //---- token payout
@@ -260,10 +262,10 @@ contract NcenoBrands is RelayRecipient{
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
   }
 
-  function updateOrder(bytes memory _orderNumber, bool _refunded, bool _settled) public{
+  function updateOrder(bytes memory _orderNum, bool _refunded, bool _settled) public{
     orderAt[_orderNum].refunded = _refunded;
     orderAt[_orderNum].settled = _settled;
-    emit UpdateOrder(_orderNumber, _refunded, _settled);
+    emit UpdateOrder(_orderNum, _refunded, _settled);
   }
 
 
@@ -284,8 +286,8 @@ contract NcenoBrands is RelayRecipient{
 
   //used for workout quickstats screen and getting comp count for function below
   function getGoalParams(bytes memory _goalID) public view returns(uint, uint, uint, uint, uint, uint, uint){
-    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].activeMins, goalAt[_goalID].kms, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining, goalAt[_goalID].bpmTokenRate, goalAt[_goalID].kmTokenRate);
-    //goalID --> start0, dur1, mins2, kms3, compcount4, remainingTokens5, bpmReward6, kmReward7
+    return(goalAt[_goalID].start, goalAt[_goalID].dur, goalAt[_goalID].tokenCap, goalAt[_goalID].compCount, goalAt[_goalID].potRemaining, goalAt[_goalID].bpmTokenRate, goalAt[_goalID].kmTokenRate);
+    //goalID --> start0, dur1, tokenCap2, compcount3, remainingTokens4, bpmReward5, kmReward6
   }
 
   //used to generate the leaderboard
@@ -296,7 +298,7 @@ contract NcenoBrands is RelayRecipient{
 
   //useful for workout quickstats screen
   function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, uint){
-    return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID],goalAt[_goalID].lastLog[_avatar] );
+    return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID],profileOf[_stravaID].avatar );
     //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3, avatar4
   }
 
