@@ -32,9 +32,9 @@ function makeWorkoutPage(){
         var dur = result[1];
         var tokenCap = result[2];
         var compcount = result[3];
-        var remainingTokens = result[5];
-        var bpmReward = result[6]; //per 10mins
-        var kmReward = result[7]; //per km
+        var remainingTokens = result[4];
+        var bpmReward = result[5]; //per 10mins
+        var kmReward = result[6]; //per km
 
         //---get other players
         for(var i=0; i<compcount; i++){
