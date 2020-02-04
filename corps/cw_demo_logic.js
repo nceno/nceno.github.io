@@ -23,6 +23,7 @@ function makeWorkoutPage(){
 
   //---get goal params
   var _goalID = "0xccff00";
+
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     function(error, result) {
@@ -53,6 +54,7 @@ function makeWorkoutPage(){
                       var theirMins = result[1]; 
                       var theirReward = result[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
+                      var theirAvatar = result[4];
                       //theirLastLogTime = result[3];
                       switch(result[4]){
                         case 0:
