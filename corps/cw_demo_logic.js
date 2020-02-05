@@ -971,7 +971,7 @@ var portisEmail;
 //signs user into portis and stores their wallet address as the default wallet address in web3
 function showPortisGlobal() {
   $('#loaderGlobal').show();
-  setTimeout("$('#loaderGlobal').hide();", 5000);
+  setTimeout("$('#loaderGlobal').hide();", 7500);
   // will only open the portis menu
   portis.showPortis(() => {  
   });
