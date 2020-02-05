@@ -27,7 +27,7 @@ function makeWorkoutPage(){
 
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
-    function(error, result) {
+    async function(error, result) {
       if (!error){
         var start = result[0];
         var dur = result[1];
@@ -46,15 +46,15 @@ function makeWorkoutPage(){
         //---get other players
         for(var i=0; i<compcount; i++){
 
-          NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
-            function(error, result) {
+            async function(error, result) {
               if (!error){
                 console.log(result);
                 var playerID = result[0]; 
                 var playerName = result[1];
                 //---call that player
-                NcenoBrands.methods.getPlayer(_goalID, playerID)
+                await NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   function(error, result) {
                     if (!error){
@@ -118,7 +118,7 @@ function makeWorkoutPage(){
                         $("#leaderboardCount").html(compcount);
 
                       }
-                      else{
+                      else {
                         //.after following entries
                         console.log("after..."+playerName+"... i= "+i);
                         $('#entry'+ (i-1)).after(
