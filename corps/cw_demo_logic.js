@@ -793,7 +793,7 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function(){
-  makeWorkoutPage();
+
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
@@ -843,6 +843,7 @@ window.onload = function(){
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
     $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. <br>Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
     updateNonce();
+    makeWorkoutPage();
   }
 
   //we can only use window.onload once... so move the slider initialization here
