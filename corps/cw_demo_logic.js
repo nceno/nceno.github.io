@@ -808,16 +808,7 @@ window.onload = function() {
 
     //and you've been redirected from strava auth page,
       //@config  the path (and file name) will change if this is a corp well challenge
-    if (window.location.href != 'https://www.nceno.app/workplace.html' 
-      && window.location.href != 'https://www.nceno.app/workplace'
-      && window.location.href != 'https://nceno.app/workplace'
-      && window.location.href != 'https://nceno.app/workplace.html'
-
-      && window.location.href != 'https://www.nceno.app/workplace.html#' 
-      && window.location.href != 'https://www.nceno.app/workplace#'
-      && window.location.href != 'https://nceno.app/workplace#'
-      && window.location.href != 'https://nceno.app/workplace.html#'
-
+    if (
       && window.location.href != 'https://www.nceno.app/corps/cw_demo.html#' 
       && window.location.href != 'https://www.nceno.app/corps/cw_demo#'
       && window.location.href != 'https://nceno.app/corps/cw_demo#'
