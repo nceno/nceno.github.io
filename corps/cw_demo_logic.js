@@ -793,6 +793,20 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function(){
+  //----this hides the join button if you're a player.
+  NcenoBrands.methods.isPlayer(Cookies.set('stravaID', stravaID))
+  .call({from: Cookies.get('userWallet')},
+    function(error, result) {
+      if (!error){
+        console.log(result);
+        var playerStatus = result[0];
+        if(playerStatus==true){
+          $("#joinBtn").hide();
+        }
+      }
+    }
+  );
+  //---/ hide join button
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   //case 1- if you're missing everything,
@@ -842,6 +856,7 @@ window.onload = function(){
     $("#openWalletGlobal2").show();
     $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
     $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. <br>Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
+    
     updateNonce();
     makeWorkoutPage();
   }
