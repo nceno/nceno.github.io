@@ -95,7 +95,7 @@ async function makeWorkoutPage(){
                         $("#user").html(playerName);                
                         var days = Math.round(start+dur-(Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
-                        $("#rewardSlot").html(theirReward+' SUN');
+                        $("#rewardSlot").html(theirReward+' of '+tokenCap+' SUN');
                         $("#potRem").html(remainingTokens+' SUN');
                         $("#leaderboardCount").html(compcount);
 
