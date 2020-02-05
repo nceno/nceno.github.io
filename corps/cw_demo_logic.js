@@ -793,7 +793,7 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function(){
-
+  makeWorkoutPage();
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
