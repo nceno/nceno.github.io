@@ -77,6 +77,9 @@ async function makeWorkoutPage(){
                           avatar = "runner6";
                           break;
                       }
+                      1579588026
+                      2592000000
+                      1580919387
 
                       //.prepend first entry if it's not me
                       if(i==0){
@@ -97,7 +100,7 @@ async function makeWorkoutPage(){
                         console.log("start: "+start);
                         console.log("dur: "+dur);
                         console.log("dateNow: "+Date.now()/1000);                
-                        var days = Math.round((start+dur*8640000-Date.now()/1000)/86400);
+                        var days = Math.round((start+dur*86400000-Date.now()/1000)/86400000);
                         $("#daysLeft").html(days+" days");
                         $("#rewardSlot").html(theirReward+' SUN');
                         $("#potRem").html(remainingTokens+' SUN');
