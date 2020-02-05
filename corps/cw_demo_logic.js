@@ -795,9 +795,18 @@ if(Cookies.get('userWallet') != undefined){
 }
 
 var code;
-window.onload = function() {
+window.onload = function(){
+
+  Cookies.remove('userWallet');
+  Cookies.remove('stravaID');
+  Cookies.remove('access_token');
+  Cookies.remove('stravaUsername');
+
+
+
+
+
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
-  
   //case 1- if you're missing everything,
   if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
     console.log("doing case 1: missing everything...");
@@ -834,8 +843,6 @@ window.onload = function() {
     $("#stravaBtnGlobal").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/workplace.html">click here</a></p>');
     showPortisGlobal();
-
-    
   }
   //case 3- nothing missing
     //-----disable this block when testing.------
