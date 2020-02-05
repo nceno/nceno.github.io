@@ -92,8 +92,12 @@ async function makeWorkoutPage(){
                         );
                         //populate my quick stats .........
                         $("#progressPerc").html(theirProgress+'%');
-                        $("#user").html(playerName);                
-                        var days = Math.round((start+dur*86400-Date.now()/1)/86400);
+                        $("#user").html(playerName);
+
+                        console.log("start: "+start);
+                        console.log("dur: "+dur);
+                        console.log("dateNow: "+Date.now());                
+                        var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
                         $("#rewardSlot").html(theirReward+' SUN');
                         $("#potRem").html(remainingTokens+' SUN');
