@@ -948,7 +948,7 @@ function getTokenGlobal(){
       console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
   });
-  //joe nceno 
+  //using joe nceno 
   xhr.open("POST", 'https://www.strava.com/oauth/token?client_id=33084&client_secret=e4668610b5d6bee15fcd68d0cb88a1f656ae1ad3&code='+code+'&grant_type=authorization_code');
   //xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(stuff);
