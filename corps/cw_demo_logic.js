@@ -96,7 +96,7 @@ async function makeWorkoutPage(){
 
                         console.log("start: "+start);
                         console.log("dur: "+dur);
-                        console.log("dateNow: "+Date.now());                
+                        console.log("dateNow: "+Date.now()/1000);                
                         var days = Math.round((start+dur*8640000-Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
                         $("#rewardSlot").html(theirReward+' SUN');
