@@ -2,12 +2,12 @@
 //const web3 = new Web3(portis.provider);
 
 
-function makeWorkoutPage(){
+async function makeWorkoutPage(){
   //---get goal params
   
   //var _goalID = "0xccff00";
 
-  NcenoBrands.methods.getGoalParams(_goalID)
+  await NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     async function(error, result) {
       if (!error){
@@ -796,16 +796,6 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function(){
-
-  //debug.. mobile isn;t getting a wallet id
-  /*Cookies.remove('userWallet');
-  Cookies.remove('stravaID');
-  Cookies.remove('access_token');
-  Cookies.remove('stravaUsername');*/
-
-
-
-
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   //case 1- if you're missing everything,
