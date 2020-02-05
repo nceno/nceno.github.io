@@ -917,7 +917,7 @@ window.onload = function(){
   });
 }
 
-var inSixHours = 0.24;
+//var inSixHours = 0.24;
 function getTokenGlobal(){
   console.log("code is: "+code);
   var stuff = null;
