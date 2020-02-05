@@ -11,13 +11,13 @@ async function makeWorkoutPage(){
   .call({from: Cookies.get('userWallet')},
     async function(error, result) {
       if (!error){
-        var start = result[0];
-        var dur = result[1];
-        var tokenCap = result[2];
-        var compcount = result[3];
-        var remainingTokens = result[4];
-        var bpmReward = result[5]; //per 10mins
-        var kmReward = result[6]; //per km
+        var start = parseInt(result[0]);
+        var dur = parseInt(result[1]);
+        var tokenCap = parseInt(result[2]);
+        var compcount = parseInt(result[3]);
+        var remainingTokens = parseInt(result[4]);
+        var bpmReward = parseInt(result[5]); //per 10mins
+        var kmReward = parseInt(result[6]); //per km
 
         //reset the leaderboard
         $('#entry0').empty();
@@ -97,7 +97,7 @@ async function makeWorkoutPage(){
                         console.log("start: "+start);
                         console.log("dur*C: "+dur*86400000);
                         console.log("dateNow/1k: "+Date.now()/1000);                
-                        var days = Math.round((start+dur*86400000-Math.round(parseInt(Date.now())/1000)/86400000);
+                        var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
                         $("#rewardSlot").html(theirReward+' SUN');
                         $("#potRem").html(remainingTokens+' SUN');
