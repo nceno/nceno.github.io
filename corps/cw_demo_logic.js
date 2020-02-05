@@ -794,7 +794,7 @@ if(Cookies.get('userWallet') != undefined){
 var code;
 window.onload = function(){
   //----this hides the join button if you're a player.
-  NcenoBrands.methods.isPlayer(Cookies.set('stravaID', stravaID))
+  NcenoBrands.methods.playerStatus(_goalID, Cookies.get('stravaID'))
   .call({from: Cookies.get('userWallet')},
     function(error, result) {
       if (!error){

@@ -318,6 +318,10 @@ contract NcenoBrands is RelayRecipient{
   function getNcenoStats() public view returns(uint, uint, uint, uint, uint, uint, uint){
     return(companyCount, goalCount, kmCount, minsCount, userCount, orderCount, payoutToDate);
   }
+
+  function playerStatus(bytes memory _goalID, uint _stravaID) public view returns(bool){
+    return (goalAt[_goalID].isPlayer[_stravaID]);
+  }
   //----- /getters
 
   //gas station relay stuff
@@ -335,6 +339,8 @@ contract NcenoBrands is RelayRecipient{
     
     function _withdrawDeposits(uint256 amount, address payable payee) external onlyNcenoAdmin{
     }
+
+
   //---  /gas station relay stuff
 
   address ncenoAdmin = 0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a; //portis mainnet
