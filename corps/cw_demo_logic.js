@@ -798,10 +798,10 @@ var code;
 window.onload = function(){
 
   //debug.. mobile isn;t getting a wallet id
-  /*Cookies.remove('userWallet');
+  Cookies.remove('userWallet');
   Cookies.remove('stravaID');
   Cookies.remove('access_token');
-  Cookies.remove('stravaUsername');*/
+  Cookies.remove('stravaUsername');
 
 
 
