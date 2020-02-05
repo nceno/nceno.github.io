@@ -77,9 +77,6 @@ async function makeWorkoutPage(){
                           avatar = "runner6";
                           break;
                       }
-                      1579588026
-                      2592000000
-                      1580919387
 
                       //.prepend first entry if it's not me
                       if(i==0){
