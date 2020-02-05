@@ -3,24 +3,6 @@
 
 
 function makeWorkoutPage(){
-/*  var start;
-  var dur;
-  var tokenCap;
-  var compcount;
-  var remainingTokens;
-  var bpmReward;
-  var kmReward;
-
-  var playerID;
-  var playerName;
-
-  var theirkms;
-  var theirMins;
-  var theirReward;
-  var theirProgress;
-  var theirLastLogTime;
-  var theirAvatar;*/
-
   //---get goal params
   
   var _goalID = "0xccff00";
@@ -162,38 +144,6 @@ function makeHostPage(){
 }
 
 
-/////----- helper function to make the leaderboard
-
-var USERNAME = ["chris", "Kyle", "Barney", "Liz"];
-var REWARDS = ["1","2","3","4"];
-var TOKENSYMBOL = "SUN";
-var DISTANCE = ["10","20","30","40"];
-var MINS = ["15","25","35","45"];
-var PROGRESS =["31","82","43","94"];
-var r=0;
-
-function addPlayer(){
-  if(r==0){
-    $("#entry0").prepend(
-      '<h4 class="progress-title">'  +USERNAME[i]+ '<font style="color:#ccff00;"> +' +REWARDS[i]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[i]+ 'km + '+MINS[i]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[i]+ '%;" aria-valuenow="' +PROGRESS[i]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div>'
-    );
-    r++;
-    console.log("done.");
-    console.log("r = "+r);
-  }
-  else if (r>0){
-    $('#entry'+ (r-1)).after(
-      '<div id="entry'+r+'" class="col-12 mt-2"><h4 class="progress-title">'  +USERNAME[i]+ '<font style="color:#ccff00;"> +' +REWARDS[i]+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +DISTANCE[i]+ 'km + '+MINS[i]+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +PROGRESS[i]+ '%;" aria-valuenow="' +PROGRESS[i]+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/runner.png"> </span></div></div></div></div>'
-    );
-    r++;
-    console.log("done.");
-    console.log("r = "+r);
-  }
-  console.log("button pressed. r= "+r);
-  $("#leaderboardCount").html(r);
-}
-////----/ end helper leaderboard function
-
 //datepicker initializer
 var first = new Date();
 first.setDate(first.getDate() + 1);
@@ -222,7 +172,7 @@ function updateNonce(){
 //transaction is mined successfully --> correctNonce++;
 
 //sanity check for debugging
-console.log(NcenoBrands);
+//console.log(NcenoBrands);
 
 //hides all the loaders
 $("#createBtn").hide();
@@ -868,10 +818,15 @@ window.onload = function() {
       && window.location.href != 'https://nceno.app/workplace#'
       && window.location.href != 'https://nceno.app/workplace.html#'
 
-      && window.location.href != 'https://www.nceno.app/brands/cw_demo.html#' 
-      && window.location.href != 'https://www.nceno.app/brands/cw_demo#'
-      && window.location.href != 'https://nceno.app/brands/cw_demo#'
-      && window.location.href != 'https://nceno.app/brands/cw_demo.html#'){
+      && window.location.href != 'https://www.nceno.app/corps/cw_demo.html#' 
+      && window.location.href != 'https://www.nceno.app/corps/cw_demo#'
+      && window.location.href != 'https://nceno.app/corps/cw_demo#'
+      && window.location.href != 'https://nceno.app/corps/cw_demo.html#'
+
+      && window.location.href != 'https://www.nceno.app/corps/cw_demo.html' 
+      && window.location.href != 'https://www.nceno.app/corps/cw_demo'
+      && window.location.href != 'https://nceno.app/corps/cw_demo'
+      && window.location.href != 'https://nceno.app/corps/cw_demo.html'){
       //capture the code,
       code = window.location.href.split('=')[2].split('&')[0];
       console.log(code);
