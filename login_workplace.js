@@ -138,7 +138,7 @@ function showPortisGlobal() {
       portisEmail = email;
       stravaUsername= portisEmail.substring(0, portisEmail.lastIndexOf("@"));
       Cookies.set('stravaUsername', stravaUsername);
-      Cookies.set('userWallet', Cookies.get('userWallet'));
+      Cookies.set('userWallet', e[0]);
 
       //$("#portisBtn").hide();
       //updateGasPrice();
