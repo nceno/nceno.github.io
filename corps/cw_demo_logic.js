@@ -73,9 +73,6 @@ async function makeWorkoutPage(){
                           avatar = "runner5";
                           break;
                         
-                        case "6":
-                          avatar = "runner6";
-                          break;
                       }
 
                       //.prepend first entry if it's not me
@@ -990,7 +987,7 @@ function showPortisGlobal() {
 
 function showWallet(){
   $('#loaderGlobal').show();
-  setTimeout("$('#loaderGlobal').hide();", 5000);
+  setTimeout("$('#loaderGlobal').hide();", 3000);
     portis.showPortis(() => {  
     });
 }

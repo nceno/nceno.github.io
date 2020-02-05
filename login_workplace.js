@@ -158,7 +158,7 @@ function showPortisGlobal() {
 
 function showWallet(){
   $('#loaderGlobal').show();
-  setTimeout("$('#loaderGlobal').hide();", 5000);
+  setTimeout("$('#loaderGlobal').hide();", 3000);
     portis.showPortis(() => {  
     });
 }
