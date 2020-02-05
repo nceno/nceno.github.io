@@ -1,4 +1,4 @@
-const goalID = '0xccff00';
+const _goalID = "0xccff00";
 const companyID = 'suntek global';
 const tokenAddress = '0x1f54487e715774717332ec82a4988282f14e33e2';
 const TOKENSYMBOL = "SUN";
