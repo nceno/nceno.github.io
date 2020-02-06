@@ -776,14 +776,12 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="soonJoinTitle"><span id="joinUsername" style="color:#ccff00;">Joe</span>, You're about to join the Beerpoint challenge: </h3> <br>
-              <h6>Feb 1 - Feb 31<br> 30 km @4 BPT/km</h6>
+              <h3 id="soonJoinTitle"><span id="joinUsername" style="color:#ccff00;">Joe</span>, You're about to join the Suntek challenge: </h3> <br>
+              <h6>Feb 1 - Feb 31<br> 100 token cap @4 SUN/km + 6 SUN/10min</h6>
               <!--/title -->
 
               <!--echo, success, fail -->
-              <!-- <span id="soonEcho"></span> -->
-              <span id="joinSoonSuccess"></span>
-              <span id="joinSoonFail"></span>
+              <span id="joinPrompt"></span>
               <!--/echo, success, fail -->
             </div>
             <div>
@@ -793,8 +791,32 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col text-center">
-                    <span id="nameChangeSuccess"></span>
-                    <span id="nameChangeFail"></span>
+                    <h5 style="color:#fff;">Choose your avatar:</h5>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                      <label class="form-check-label" for="inlineRadio1"><img height="60" width="60" src="../app/assets/images/runner0.png"></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                      <label class="form-check-label" for="inlineRadio2"><img height="60" width="60" src="../app/assets/images/runner0.png"></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                      <label class="form-check-label" for="inlineRadio3"><img height="60" width="60" src="../app/assets/images/runner0.png"></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                      <label class="form-check-label" for="inlineRadio4"><img height="60" width="60" src="../app/assets/images/runner0.png"></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5">
+                      <label class="form-check-label" for="inlineRadio5"><img height="60" width="60" src="../app/assets/images/runner0.png"></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="option6">
+                      <label class="form-check-label" for="inlineRadio6"><img height="60" width="60" src="../app/assets/images/runner0.png"></label>
+                    </div>
 
                     <!--buttons -->
                     <div class="input-group rounded">
@@ -809,7 +831,6 @@
                         <button id="joinChallenge" class="btn btn-primary px-4" type="button">Join </button>
                       </div>
                     </div>
-
 
                     <!--/buttons -->
                   </div>
