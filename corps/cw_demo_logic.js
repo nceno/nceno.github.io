@@ -858,7 +858,7 @@ window.onload = function(){
     $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. <br>Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
     
     updateNonce();
-    makeWorkoutPage();
+    //makeWorkoutPage();
   }
 
   //we can only use window.onload once... so move the slider initialization here
