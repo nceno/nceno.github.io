@@ -779,14 +779,8 @@
               <h3 id="soonJoinTitle"><span id="joinUsername" style="color:#ccff00;">Joe</span>, You're about to join the Suntek challenge: </h3> <br>
               <h6>Feb 1 - Feb 31<br> 100 token cap @4 SUN/km + 6 SUN/10min</h6>
               <!--/title -->
+            </div>
 
-              <!--echo, success, fail -->
-              <span id="joinPrompt"></span>
-              <!--/echo, success, fail -->
-            </div>
-            <div>
-              <span id="joinSoonReminder" class="col text-center mb-2"></span>
-            </div>
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
                 <div class="row">
@@ -820,7 +814,7 @@
 
                     <!--buttons -->
                     <div class="input-group rounded">
-                      <input id="nameChangeField" type="text" class="form-control px-2" placeholder="Optional: change username?" aria-label="change">
+                      <input id="nameChangeField" type="text" class="form-control px-2" placeholder="Choose a username" aria-label="change">
                     </div>
                     <br>
 
@@ -831,11 +825,19 @@
                         <button id="joinChallenge" class="btn btn-primary px-4" type="button">Join </button>
                       </div>
                     </div>
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="joinChecker">
+                      <label style="color:#ccff00;" class="form-check-label" for="joinChecker">I've read the <a style="color:#ccff00;" target="_blank" href="instructions.html">instructions</a> and agree to the <a style="color:#ccff00;" target="_blank" href="legal.html" >terms</a>.</label>
+                    </div>
 
                     <!--/buttons -->
                   </div>
                 </div>
                 <div class="row">
+                  <div>
+                    <span id="joinPrompt"></span>
+                    <span id="joinSoonReminder" class="col text-center mb-2"></span>
+                  </div>
                   <div id="joinSoonLoader" class="col text-center mb-2">
                     <!--loaders -->
                     <p>Please wait a minute. We're adding you to the challenge...</p>

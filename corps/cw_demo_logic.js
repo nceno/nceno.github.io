@@ -44,7 +44,7 @@ function makeWorkoutPage(){
                       var theirMins = result[1]; 
                       var theirReward = result[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
-                      var avatar = result[4];
+                      await var avatar = result[4];
 
                       //theirLastLogTime = result[3];
                       switch(avatar){
@@ -75,7 +75,7 @@ function makeWorkoutPage(){
                       }
 
                       //.prepend first entry if it's not me
-                      await if(i==0){
+                       if(i==0){
                         console.log("first post.."+playerName+"...i= "+i);
                         $("#entry0").prepend(
                           '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
@@ -242,6 +242,17 @@ if($("#checker").is(':checked')) {
   $("#createBtn").hide(); 
   }
 });
+
+$("#joinChallenge").hide();
+$("#joinChecker").on('click', function(){
+  if($("#joinChecker").is(':checked')) {
+    $("#joinChallenge").show(); 
+  } 
+  else {
+    $("#joinChallenge").hide(); 
+  }
+});
+
 
 
 //brands join
