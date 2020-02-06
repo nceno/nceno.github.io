@@ -2,12 +2,17 @@
 //const web3 = new Web3(portis.provider);
 
 
-async function makeWorkoutPage(){
+function makeWorkoutPage(){
   //---get goal params
   
   //var _goalID = "0xccff00";
+  //reset the leaderboard
+  $('#entry0').empty();
+  for(var j=1; j<10; j++){
+    $('#entry'+j).remove();
+  }
 
-  await NcenoBrands.methods.getGoalParams(_goalID)
+  NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     async function(error, result) {
       if (!error){
@@ -18,12 +23,6 @@ async function makeWorkoutPage(){
         var remainingTokens = parseInt(result[4]);
         var bpmReward = parseInt(result[5]); //per 10mins
         var kmReward = parseInt(result[6]); //per km
-
-        //reset the leaderboard
-        $('#entry0').empty();
-        for(var j=1; j<compcount+1; j++){
-          $('#entry'+j).remove();
-        }
 
         //---get other players
         for(var i=0; i<compcount; i++){
