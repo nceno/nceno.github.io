@@ -40,6 +40,7 @@ function makeWorkoutPage(){
                   async function(error, result) {
                     if (!error){
                       //console.log(result);
+                      
                       var theirKms = result[0]; 
                       var theirMins = result[1]; 
                       var theirReward = result[2];
