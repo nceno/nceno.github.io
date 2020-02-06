@@ -91,8 +91,8 @@ function makeWorkoutPage(){
                         $("#user").html(playerName);                
                         var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
-                        $("#rewardSlot").html(theirReward+' SUN');
-                        $("#potRem").html(remainingTokens+' SUN');
+                        $("#rewardSlot").html(theirReward+' '+TOKENSYMBOL);
+                        $("#potRem").html(remainingTokens+' '+TOKENSYMBOL);
                         $("#leaderboardCount").html(compcount);
 
                       }
