@@ -7,112 +7,6 @@ var NcenoBrands = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_status",
-        "type": "bool"
-      }
-    ],
-    "name": "halt",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "origSender",
-        "type": "address"
-      },
-      {
-        "name": "msgData",
-        "type": "bytes"
-      }
-    ],
-    "name": "getSenderFromData",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_companyID",
-        "type": "bytes"
-      },
-      {
-        "name": "_orderNum",
-        "type": "bytes"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_item",
-        "type": "string"
-      },
-      {
-        "name": "_price",
-        "type": "uint256"
-      }
-    ],
-    "name": "makeOrder",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "profileOf",
-    "outputs": [
-      {
-        "name": "wallet",
-        "type": "address"
-      },
-      {
-        "name": "stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "userName",
-        "type": "string"
-      },
-      {
-        "name": "avatar",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
         "name": "amount",
         "type": "uint256"
       },
@@ -128,41 +22,6 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "companyOf",
-    "outputs": [
-      {
-        "name": "companyID",
-        "type": "bytes"
-      },
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "name": "orderCount",
-        "type": "uint256"
-      },
-      {
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -170,73 +29,14 @@ var NcenoBrands = new web3.eth.Contract([
         "type": "bytes"
       },
       {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_userName",
-        "type": "string"
-      },
-      {
-        "name": "_avatar",
-        "type": "uint256"
-      },
-      {
-        "name": "_inviteCode",
-        "type": "string"
+        "name": "_codes",
+        "type": "string[10]"
       }
     ],
-    "name": "join",
+    "name": "addInviteCodes",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newAdmin",
-        "type": "address"
-      }
-    ],
-    "name": "setNcenoAdmin",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getSender",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "userExists",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -258,287 +58,39 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getHubAddr",
-    "outputs": [
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
+        "name": "_token",
         "type": "address"
+      },
+      {
+        "name": "_company",
+        "type": "bytes"
       }
     ],
+    "name": "emptyContract",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "name": "context",
+        "name": "_goalID",
         "type": "bytes"
-      }
-    ],
-    "name": "preRelayedCall",
-    "outputs": [
+      },
       {
-        "name": "",
-        "type": "bytes32"
+        "name": "_status",
+        "type": "bool"
       }
     ],
+    "name": "halt",
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "relay",
-        "type": "address"
-      },
-      {
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "name": "encodedFunction",
-        "type": "bytes"
-      },
-      {
-        "name": "transactionFee",
-        "type": "uint256"
-      },
-      {
-        "name": "gasPrice",
-        "type": "uint256"
-      },
-      {
-        "name": "gasLimit",
-        "type": "uint256"
-      },
-      {
-        "name": "nonce",
-        "type": "uint256"
-      },
-      {
-        "name": "approvalData",
-        "type": "bytes"
-      },
-      {
-        "name": "maxPossibleCharge",
-        "type": "uint256"
-      }
-    ],
-    "name": "acceptRelayedCall",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getNcenoStats",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "name": "companyExists",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      }
-    ],
-    "name": "getGoalParams",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_companyID",
-        "type": "bytes"
-      },
-      {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getIndexedOrder",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bool"
-      },
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      }
-    ],
-    "name": "getPlayer",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getRecipientBalance",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -587,64 +139,27 @@ var NcenoBrands = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_token",
-        "type": "address"
-      },
-      {
-        "name": "_company",
-        "type": "bytes"
-      }
-    ],
-    "name": "emptyContract",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
         "name": "_goalID",
         "type": "bytes"
       },
       {
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getIndexedPlayerID",
-    "outputs": [
-      {
-        "name": "",
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
-        "name": "",
+        "name": "_userName",
+        "type": "string"
+      },
+      {
+        "name": "_avatar",
+        "type": "uint256"
+      },
+      {
+        "name": "_inviteCode",
         "type": "string"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_orderNum",
-        "type": "bytes"
-      },
-      {
-        "name": "_refunded",
-        "type": "bool"
-      },
-      {
-        "name": "_settled",
-        "type": "bool"
-      }
-    ],
-    "name": "updateOrder",
+    "name": "join",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -685,80 +200,6 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "name": "companyAt",
-    "outputs": [
-      {
-        "name": "companyID",
-        "type": "bytes"
-      },
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "name": "orderCount",
-        "type": "uint256"
-      },
-      {
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_orderNum",
-        "type": "bytes"
-      }
-    ],
-    "name": "searchOrders",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bool"
-      },
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -788,23 +229,31 @@ var NcenoBrands = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "context",
+        "name": "_goalID",
         "type": "bytes"
       },
       {
-        "name": "success",
-        "type": "bool"
+        "name": "_companyID",
+        "type": "bytes"
       },
       {
-        "name": "actualCharge",
+        "name": "_orderNum",
+        "type": "bytes"
+      },
+      {
+        "name": "_stravaID",
         "type": "uint256"
       },
       {
-        "name": "preRetVal",
-        "type": "bytes32"
+        "name": "_item",
+        "type": "string"
+      },
+      {
+        "name": "_price",
+        "type": "uint256"
       }
     ],
-    "name": "postRelayedCall",
+    "name": "makeOrder",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -846,32 +295,81 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getMessageData",
-    "outputs": [
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
+        "name": "context",
         "type": "bytes"
+      },
+      {
+        "name": "success",
+        "type": "bool"
+      },
+      {
+        "name": "actualCharge",
+        "type": "uint256"
+      },
+      {
+        "name": "preRetVal",
+        "type": "bytes32"
       }
     ],
+    "name": "postRelayedCall",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "name": "_goalID",
+        "name": "context",
+        "type": "bytes"
+      }
+    ],
+    "name": "preRelayedCall",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "setNcenoAdmin",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_orderNum",
         "type": "bytes"
       },
       {
-        "name": "_codes",
-        "type": "string[10]"
+        "name": "_refunded",
+        "type": "bool"
+      },
+      {
+        "name": "_settled",
+        "type": "bool"
       }
     ],
-    "name": "addInviteCodes",
+    "name": "updateOrder",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1093,5 +591,530 @@ var NcenoBrands = new web3.eth.Contract([
     ],
     "name": "UpdateOrder",
     "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "relay",
+        "type": "address"
+      },
+      {
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "name": "encodedFunction",
+        "type": "bytes"
+      },
+      {
+        "name": "transactionFee",
+        "type": "uint256"
+      },
+      {
+        "name": "gasPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "gasLimit",
+        "type": "uint256"
+      },
+      {
+        "name": "nonce",
+        "type": "uint256"
+      },
+      {
+        "name": "approvalData",
+        "type": "bytes"
+      },
+      {
+        "name": "maxPossibleCharge",
+        "type": "uint256"
+      }
+    ],
+    "name": "acceptRelayedCall",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "companyAt",
+    "outputs": [
+      {
+        "name": "companyID",
+        "type": "bytes"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "orderCount",
+        "type": "uint256"
+      },
+      {
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "companyExists",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "companyOf",
+    "outputs": [
+      {
+        "name": "companyID",
+        "type": "bytes"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "orderCount",
+        "type": "uint256"
+      },
+      {
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      }
+    ],
+    "name": "getGoalParams",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getHubAddr",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_companyID",
+        "type": "bytes"
+      },
+      {
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getIndexedOrder",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getIndexedPlayerID",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getMessageData",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getNcenoStats",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      }
+    ],
+    "name": "getPlayer",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getRecipientBalance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getSender",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "origSender",
+        "type": "address"
+      },
+      {
+        "name": "msgData",
+        "type": "bytes"
+      }
+    ],
+    "name": "getSenderFromData",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      }
+    ],
+    "name": "playerStatus",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "profileOf",
+    "outputs": [
+      {
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "name": "stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "userName",
+        "type": "string"
+      },
+      {
+        "name": "avatar",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_orderNum",
+        "type": "bytes"
+      }
+    ],
+    "name": "searchOrders",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userExists",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
-], '0x036081591cebc2ee648abbf2be9e001f6fcf5562');
+], '0x49c6de5de57589b506b26a0ff9de6eaf90a404a2');

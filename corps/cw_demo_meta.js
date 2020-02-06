@@ -1,8 +1,8 @@
 const _goalID = "0xccff00";
-const companyID = 'suntek global';
-const tokenAddress = '0x1f54487e715774717332ec82a4988282f14e33e2';
-const TOKENSYMBOL = "SUN";
-const contractAddress = '0x036081591cebc2ee648abbf2be9e001f6fcf5562';
+const companyID = '0x123456';
+const tokenAddress = '0x3157425bc971fa0cc9865a63ea10a94fea82ed6f';
+const TOKENSYMBOL = "ABC";
+const contractAddress = '0x49c6de5de57589b506b26a0ff9de6eaf90a404a2';
 const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a';
 
 const adminUserID_1 = '49092681';
