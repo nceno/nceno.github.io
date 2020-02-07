@@ -374,7 +374,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/parking.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item2);" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item2);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">700 SUN</span>
@@ -386,7 +386,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/vacation.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item3);"  class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item3);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">2200 SUN</span>
@@ -398,7 +398,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/casual.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item4);" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item4);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">450 SUN</span>
@@ -410,7 +410,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/101.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item5);" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a onclick="setTarget(item5);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">9500 SUN</span>
@@ -918,13 +918,13 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="getYouPaid">Buy using your tokens</h3>
+              <h3 id="getYouPaid">Confirm your purchase</h3>
               <!--/title -->
               
               <!--echo, success, fail -->
-              <span id="logEcho"></span>
-              <span id="logSuccess"></span>
-              <span id="logFail"></span>
+              <span id="buyEcho"><h5><font style="color:#ccff00;">Joe</font>, you just purchased <font style="color:#ccff00;">"Lunch delivery"</font> for <font style="color:#ccff00;">620</font> SUN.</h5><br>  <font style="color:#fff;">Show this order code to your challenge admin to receive your purchase.</font> <h3><b style="color:#ccff00;" >0xcc2f51</b></h3></span>
+              <span id="buyPrompt"></span>
+              
               <!--/echo, success, fail -->
             </div>
             <div class="modal-footer gutter-1">
@@ -940,14 +940,14 @@
                 </div>
                 <div class="row justify-content-center">
 
-                    <span class="col text-center mb-2" id="logLoader">
-                      <!--loaders -->
-                      <p>Verifying your workout... </p>
-                      <div id="portisLoader" class="col text-center "> 
+                    <!--loaders -->
+                    <span class="col text-center mb-2" id="buyLoader">
+                      <p>Processing your purchase... </p>
+                      <div  class="col text-center "> 
                         <img  src="../app/assets/images/loader.svg">
                       </div>
-                      <!--/loaders -->
                     </span>
+                    <!--/loaders -->
 
                 </div>
               </div>
