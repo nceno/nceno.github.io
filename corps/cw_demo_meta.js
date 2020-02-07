@@ -1,5 +1,6 @@
 const _goalID = "0xccff00";
 const companyID = '0x123456';
+const companyName = "Suntek"
 const tokenAddress = '0x3157425bc971fa0cc9865a63ea10a94fea82ed6f';
 const TOKENSYMBOL = "SUN";
 const contractAddress = '0x49c6de5de57589b506b26a0ff9de6eaf90a404a2';
