@@ -821,6 +821,7 @@ window.onload = function(){
     //$("#debug").html('<p>doing case 1: missing everything...</p><br><p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
     $("#stravaBtnGlobal").show();
     $("#userPrompt").html('');
+    $("#signOut").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/workplace.html">click here</a></p>');
 
     //and you've been redirected from strava auth page,
@@ -849,6 +850,7 @@ window.onload = function(){
     console.log("doing case 2: missing portis only...");
     //$("#debug").html('<p>doing case 2: missing portis...</p><br><p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
     $("#stravaBtnGlobal").hide();
+    $("#signOut").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/workplace.html">click here</a></p>');
     showPortisGlobal();
   }
