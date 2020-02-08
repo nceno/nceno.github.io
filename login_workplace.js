@@ -24,6 +24,14 @@ if(Cookies.get('userWallet') != undefined){
   userWallet = Cookies.get('userWallet');
 }
 
+function signOut(){
+  Cookies.remove('access_token');
+  Cookies.remove('stravaID');
+  Cookies.remove('stravaUsername');
+  Cookies.remove('userWallet');
+  location.reload();
+}
+
 var code;
 window.onload = function() {
 

@@ -1,7 +1,13 @@
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
-
+function signOut(){
+  Cookies.remove('access_token');
+  Cookies.remove('stravaID');
+  Cookies.remove('stravaUsername');
+  Cookies.remove('userWallet');
+  location.reload();
+}
 
 function makeWorkoutPage(){
   //---get goal params
