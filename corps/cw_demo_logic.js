@@ -278,7 +278,7 @@ $("#joinModBtn").click(function() {
         $("#joinModBtn").hide();
         $("#codeField").hide();
         $("#nameField").hide();
-        $("#joinChallengeLoader").show();
+        $("#joinLoader").show();
         console.log(result);
       }
       else
@@ -288,14 +288,15 @@ $("#joinModBtn").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
       updateNonce();
-      $("#joinChallengeLoader").hide();
+      $("#joinLoader").hide();
       //$("joinChallenge").hide();
     }
     else{
       $("#joinChallenge").hide();
+      $("#joinLoader").hide();
       $("#codeField").hide();
-      $("#nameChangeField").hide();
-      $('#joinChallengeFail').html('<p>Sorry, invite code invalid or challenge has stopped.</p>');
+      $("#nameField").hide();
+      $('#joinPrompt').html('<p>Sorry, invite code invalid or challenge has stopped.</p>');
       console.log("join error.");
     } 
   }).once('error', function(error){console.log(error);});
