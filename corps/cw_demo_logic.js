@@ -245,13 +245,13 @@ if($("#checker").is(':checked')) {
   }
 });
 
-$("#joinChallenge").hide();
+$("#joinModBtn").hide();
 $("#joinChecker").on('click', function(){
   if($("#joinChecker").is(':checked')) {
-    $("#joinChallenge").show(); 
+    $("#joinModBtn").show(); 
   } 
   else {
-    $("#joinChallenge").hide(); 
+    $("#joinModBtn").hide(); 
   }
 });
 
@@ -269,7 +269,7 @@ $("#joinModBtn").click(function() {
     function(error, result) {
       if (!error){
 
-        $("#joinChallenge").hide();
+        $("#joinModBtn").hide();
         $("#codeField").hide();
         $("#nameField").hide();
         $("#joinChallengeLoader").show();
