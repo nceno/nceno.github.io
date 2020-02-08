@@ -812,20 +812,7 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function(){
-  //----this hides the join button if you're a player.
-  NcenoBrands.methods.playerStatus(_goalID, Cookies.get('stravaID'))
-  .call({from: Cookies.get('userWallet')},
-    function(error, result) {
-      if (!error){
-        console.log("player joined already: "+result);
-        //var playerStatus = result[0];
-        if(result[0]==true){
-          $("#joinBtn").hide();
-        }
-      }
-    }
-  );
-  //---/ hide join button
+
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   //case 1- if you're missing everything,
@@ -878,6 +865,19 @@ window.onload = function(){
     
     updateNonce();
     //makeWorkoutPage();
+      //----this hides the join button if you're a player.
+      NcenoBrands.methods.playerStatus(_goalID, Cookies.get('stravaID'))
+      .call({from: Cookies.get('userWallet')},
+        function(error, result) {
+          if (!error){
+            console.log("player joined already: "+result);
+            if(result[0]==true){
+              $("#joinBtn").hide();
+            }
+          }
+        }
+      );
+      //---/ hide join button
   }
 
   //we can only use window.onload once... so move the slider initialization here
