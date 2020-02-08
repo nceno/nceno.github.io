@@ -2,6 +2,7 @@
 //const web3 = new Web3(portis.provider);
 
 
+
 function makeWorkoutPage(){
   //---get goal params
   
@@ -81,7 +82,7 @@ function makeWorkoutPage(){
                         $("#entry0").prepend(
                           '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
-                      }else if(playerID == Cookies.get('stravaID', stravaID) && i>0){
+                      }else if(playerID == Cookies.get('stravaID') && i>0){
                         //post to top if it's me
                         console.log("it's me..."+playerName+"...i= "+i);
                         $("#entry0").before(
@@ -136,7 +137,7 @@ function makeOrdersPage(){
 
 }
 
-function makeHostPage(){
+function makeAdminPage(){
 
 }
 
@@ -257,11 +258,12 @@ $("#joinChecker").on('click', function(){
 
 
 //brands join
-$("#joinChallenge").click(function() {
+$("#joinModBtn").click(function() {
   NcenoBrands.methods.join(
-    goalID, 
-    stravaID, 
-    $("#nameChangeField").val(), 
+    _goalID, 
+    Cookies.get('stravaID'), 
+    $("#nameField").val(),
+    $('input[name="avatarRadio"]:checked').val(), 
     $("#codeField").val())
   .send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
@@ -269,7 +271,7 @@ $("#joinChallenge").click(function() {
 
         $("#joinChallenge").hide();
         $("#codeField").hide();
-        $("#nameChangeField").hide();
+        $("#nameField").hide();
         $("#joinChallengeLoader").show();
         console.log(result);
       }

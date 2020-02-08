@@ -1,10 +1,10 @@
 const _goalID = "0xccff00";
-const companyID = '0x123456';
-const companyName = "Suntek"
-const tokenAddress = '0x3157425bc971fa0cc9865a63ea10a94fea82ed6f';
-const TOKENSYMBOL = "SUN";
+const companyID = '0x123456'; //host
+const companyName = "Suntek"; //host
+const tokenAddress = '0x3157425bc971fa0cc9865a63ea10a94fea82ed6f'; //host
+const TOKENSYMBOL = "SUN"; //host
 const contractAddress = '0x49c6de5de57589b506b26a0ff9de6eaf90a404a2';
-const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a';
+const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a'; //host
 
 const adminUserID_1 = '49092681';
 
