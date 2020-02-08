@@ -811,9 +811,9 @@ window.onload = function(){
   .call({from: Cookies.get('userWallet')},
     function(error, result) {
       if (!error){
-        console.log(result);
-        var playerStatus = result[0];
-        if(playerStatus==true){
+        console.log("player joined already: "+result);
+        //var playerStatus = result[0];
+        if(result[0]==true){
           $("#joinBtn").hide();
         }
       }
