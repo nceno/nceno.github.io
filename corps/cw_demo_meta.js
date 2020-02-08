@@ -9,26 +9,26 @@ const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a'; //host
 const adminUserID_1 = '49092681';
 
 const item1={
-	name: 'Valencia Ale',
+	name: 'Lunch delivery',
 	price : 620
 }
 
 const item2={
-	name: 'Hefty Red',
+	name: 'Parking space',
 	price: 700
 }
 
 const item3={
-	name: 'Beer Glass',
+	name: 'Half-day',
 	price: 2200
 }
 
 const item4={
-	name: 'Tana Ale',
+	name: 'Casual dress',
 	price: 450
 }
 
 const item5={
-	name: 'Koshi Light',
-	price: 95
+	name: 'Dinner for 2',
+	price: 9500
 }
