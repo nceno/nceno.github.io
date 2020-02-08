@@ -426,69 +426,68 @@
                   </div>
 
                   <div class="row">
-                  <div class="col">
-                    <h3>My past orders</h3>
-                    <div class="table-responsive-md">
-                      <table class="table table-lined" id="soonGoals">
-                        <thead  class="thead-dark">
-                          <tr>
-                            <th scope="col">order #</th>
-                            
-                            <th scope="col">item</th>
-                            <th scope="col">price (SUN)</th>
-                            <th scope="col">date</th>
-                            
-                          </tr>
-                        </thead>
-                        
-                          <tbody id="orderList">
-                            
-                            <tr id="U1">
-                              <td id = "orderU1">0x1ad0ff</td>
+                    <div class="col">
+                      <h3>My past orders</h3>
+                      <div class="table-responsive-md">
+                        <table class="table table-lined" id="soonGoals">
+                          <thead  class="thead-dark">
+                            <tr>
+                              <th scope="col">order #</th>
                               
-                              <td id = "itemU1">Valencia Ale</td>
-                              <td id = "costU1">720</td>
-                              <td id = "dateU1">Dec 21, 9:45pm</td>
+                              <th scope="col">item</th>
+                              <th scope="col">price (SUN)</th>
+                              <th scope="col">date</th>
                               
                             </tr>
-
-                            <tr id="U2">
-                              <td id = "orderU1">0xacf993</td>
+                          </thead>
+                          
+                            <tbody id="orderList">
                               
-                              <td id = "itemU1">Hefty Red</td>
-                              <td id = "costU1">95</td>
-                              <td id = "dateU1">Dec 21, 9:47pm</td>
-                              
+                              <tr id="U1">
+                                <td id = "orderU1">0x1ad0ff</td>
+                                
+                                <td id = "itemU1">Valencia Ale</td>
+                                <td id = "costU1">720</td>
+                                <td id = "dateU1">Dec 21, 9:45pm</td>
+                                
+                              </tr>
 
-                            </tr>
+                              <tr id="U2">
+                                <td id = "orderU1">0xacf993</td>
+                                
+                                <td id = "itemU1">Hefty Red</td>
+                                <td id = "costU1">95</td>
+                                <td id = "dateU1">Dec 21, 9:47pm</td>
+                                
 
-                            <tr id="U3">
-                              <td id = "orderU1">0xccff00</td>
-                              
-                              <td id = "itemU1">Pale Jade</td>
-                              <td id = "costU1">950</td>
-                              <td id = "dateU1">Dec 22, 5:34pm</td>
+                              </tr>
 
-                            </tr>
+                              <tr id="U3">
+                                <td id = "orderU1">0xccff00</td>
+                                
+                                <td id = "itemU1">Pale Jade</td>
+                                <td id = "costU1">950</td>
+                                <td id = "dateU1">Dec 22, 5:34pm</td>
 
-                            <tr id="U4">
-                              <td id = "orderU1">0x3d11a5</td>
-                              
-                              <td id = "itemU1">Koshi Light</td>
-                              <td id = "costU1">750</td>
-                              <td id = "dateU1">Dec 22, 6:03pm</td>
+                              </tr>
 
-                            </tr>
+                              <tr id="U4">
+                                <td id = "orderU1">0x3d11a5</td>
+                                
+                                <td id = "itemU1">Koshi Light</td>
+                                <td id = "costU1">750</td>
+                                <td id = "dateU1">Dec 22, 6:03pm</td>
 
-                            <!--new orders go here -->
+                              </tr>
 
-                          </tbody>
-                        
-                      </table>
+                              <!--new orders go here -->
+
+                            </tbody>
+                          
+                        </table>
+                      </div>
                     </div>
                   </div>
-                </div>
-
                 </div>
               </section>
             <!-- / lessons -->                    
@@ -575,7 +574,7 @@
                           <tbody id="orderList">
                             
                             <tr id="U1">
-                              <td id = "orderU1" ondblclick="console.log('doubleclicked!');">0x1ad0ff</td>
+                              <td id = "orderU1" ondblclick="console.log('I double clicked!');">0x1ad0ff</td>
                               <td id = "nameU1">casey.huang6</td>
                               <td id = "itemU1">Valencia Ale</td>
                               <td id = "costU1">720</td>
@@ -874,7 +873,50 @@
               
               <!--echo, success, fail -->
               <span id="logEcho"></span>
-              <span id="logPrompt"></span>
+              <span id="logPrompt">
+                <div class="row">
+                  <div class="col">
+                    <h5>Choose a workout to log</h5>
+                    <div class="table-responsive-md">
+                      <table class="table table-lined" id="soonGoals">
+                        <thead  class="thead-dark">
+                          <tr>
+                            <th scope="col">date</th> 
+                            <th scope="col">HR mins</th>
+                            <th scope="col">avg HR</th>
+                            <th scope="col">dist</th>
+                            <th scope="col">avg speed</th>
+                            <th scope="col">time</th>
+                            <th scope="col">value</th>         
+                          </tr>
+                        </thead>
+                          <tbody id="orderList">
+                            <tr id="wo1">
+                              <td id = "orderU1">9:45am</td>       
+                              <td id = "itemU1">62 min</td>
+                              <td id = "costU1">@121 bpm</td>
+                              <td id = "dateU1">0.5 km</td>
+                              <td id = "itemU1">@2.3 kph</td>
+                              <td id = "costU1">84 min</td>
+                              <td id = "dateU1">18 SUN</td>              
+                            </tr>
+
+                            <tr id="wo2">
+                              <td id = "orderU1">6:12am</td>       
+                              <td id = "itemU1">12 min</td>
+                              <td id = "costU1">@0 bpm</td>
+                              <td id = "dateU1">1.8 km</td>
+                              <td id = "itemU1">@8.1 kph</td>
+                              <td id = "costU1">12 min</td>
+                              <td id = "dateU1">4 SUN</td>               
+                            </tr>
+                            <!--new orders go here -->
+                          </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </span>
               <!--/echo, success, fail -->
             </div>
             <div class="modal-footer gutter-1">
