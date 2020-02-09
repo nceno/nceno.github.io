@@ -1,24 +1,10 @@
 const hrThresh = 99;
 function getActivities(){
-  $('#payMeBtn').hide();
-  $('#logLoader').show();
-  
-  //gets the original goal parameters
-  var goalMovingTime;
-  Nceno.methods.getGoalParams(goalid)
-  .call({from: web3.eth.defaultAccount},
-      function(error, result) {
-      if (!error){
-        goalMovingTime = result[0];
-      }
-      else
-      console.error(error);
-  });
 
   //check the day's activities
   var stuff = null;
   var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  xhr.withCredentials = false;
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
 
@@ -157,7 +143,7 @@ function getActivities(){
   });
 
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
-  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 }
 
@@ -165,7 +151,7 @@ var actID = 2719149178;
 function getRawHR(){
   var stuff2 = null;
   var xhr2 = new XMLHttpRequest();
-  xhr2.withCredentials = true;
+  xhr2.withCredentials = false;
   xhr2.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       //console.log(this.responseText);
@@ -218,34 +204,3 @@ function getRawHR(){
   xhr2.send(stuff2);
 }
 
-function createUser(){
-  localize();
-  Nceno.methods.userExists(
-    stravaID
-  )
-  .call({from: web3.eth.defaultAccount},
-    function(error, result){
-      if (!error){
-        if(result!=true){
-          Nceno.methods.makeProfile(
-          stravaID,
-          web3.utils.padRight(web3.utils.toHex(stravaUsername),34),
-          web3.utils.padRight(web3.utils.toHex(flag),34),
-          OS,
-          web3.utils.padRight(web3.utils.toHex(portisEmail),34))
-          .send({from: web3.eth.defaultAccount, gas: 400000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-          function(error, result) {
-            if (!error){
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-          );
-        }
-      }
-      else
-      console.error(error);
-    }
-  );
-}

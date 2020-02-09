@@ -983,7 +983,7 @@ function getTokenGlobal(){
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</h5>');
         $("#brandsPrompt").html('<p><font style="color:white;">Connection successful. Welcome, </font>'+Cookies.get('stravaUsername')+'</p>');
       }
-      console.log("Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
+      console.log("Nceno User ID: "+Cookies.get('stravaID')+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
   });
   //using joe nceno 
