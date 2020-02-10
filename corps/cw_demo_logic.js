@@ -649,7 +649,7 @@ async function gapAdjust(_actID){
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", function () {
+  xhr.addEventListener("readystatechange", async function () {
     if (this.readyState === 4) {
       var resp = await JSON.parse(xhr.responseText);
       var hr = resp.heartrate.data;
@@ -703,7 +703,7 @@ async function gapAdjust(_actID){
   xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 
-  return [activeTime, adjHR];
+  return await [activeTime, adjHR];
 }
 
 
