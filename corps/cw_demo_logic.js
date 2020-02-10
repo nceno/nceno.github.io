@@ -663,8 +663,8 @@ function getActivities(){
       var data = JSON.parse(xhr.responseText);
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
-      var HR = new Array(new Array());  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
-      var GPS = new Array(new Array()); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
+      var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+      var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
       let i=0;
       let j=0;
       let k=0;
@@ -686,8 +686,10 @@ function getActivities(){
         i++;
       }
 
-      console.log("the "+k+" GPS workouts are: "+GPS);
-      console.log("the "+j+" HR workouts are: "+HR);
+      console.log("the "+k+" GPS workouts are: ");
+      console.table(GPS);
+      console.log("the "+j+" HR workouts are: ");
+      console.table(HR);
       /*if(cleaned.length>0){
         console.log("Good news, your workout is being logged for a payout!");
         console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
