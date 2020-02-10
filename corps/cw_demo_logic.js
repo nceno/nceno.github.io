@@ -844,7 +844,7 @@ function getActivities(){
           console.log(_A);
           dispHR = _A.average_heartrate; //needs to be adjusted
           dispMins = _A.elapsed_time; //may need adjusted
-          dispTime = Date.parse(_A.start_date_local).toDateString();
+          dispTime = new Date(_A.start_date_local).toDateString();
           dispSpeed = _A.average_speed;
           dispDist = _A.distance;
           dispValue = Math.round(bestVal);
