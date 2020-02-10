@@ -21,7 +21,7 @@ function makeWorkoutPage(){
 
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
-    async function(error, result) {
+    function(error, result) {
       if (!error){
         var start = parseInt(result[0]);
         var dur = parseInt(result[1]);
@@ -39,15 +39,15 @@ function makeWorkoutPage(){
         //---get other players
         for(var i=0; i<compcount; i++){
 
-          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
-            async function(error, result) {
+            function(error, result) {
               if (!error){
                 //console.log(result);
                 var playerID = result[0]; 
                 var playerName = result[1];
                 //---call that player
-                await NcenoBrands.methods.getPlayer(_goalID, playerID)
+                NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   async function(error, result) {
                     if (!error){
@@ -116,7 +116,7 @@ function makeWorkoutPage(){
                         //.after following entries
                         console.log("after..."+playerName+"... i= "+i);
                         //$('#entry'+ (i-1)).after(
-                        await $('#startList').after(
+                        $('#startList').after(
                           '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div></div>'
                         );
                       }
