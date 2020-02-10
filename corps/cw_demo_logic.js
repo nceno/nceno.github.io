@@ -112,7 +112,7 @@ function makeWorkoutPage(){
 
                       }
                       //only after if there isn't already an element of the same name
-                      else if($('#entry'+i).length==0){
+                      else if(! $('#entry'+i).length){
                         //.after following entries
                         console.log("after..."+playerName+"... i= "+i);
                         //$('#entry'+ (i-1)).after(
