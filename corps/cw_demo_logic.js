@@ -15,7 +15,7 @@ function makeWorkoutPage(){
   //var _goalID = "0xccff00";
   //reset the leaderboard
   $('#entry0').empty();
-  for(var j=1; j<10; j++){
+  for(var j=0; j<10; j++){
     $('#entry'+j).remove();
   }
 
