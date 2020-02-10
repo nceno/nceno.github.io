@@ -646,6 +646,10 @@ function updateGasPrice(){
 //gets activity minutes from strava
 //var stravaMins;
 //var avgHR;
+var speedLimit = 4.5;
+var speedLow = 1.4;
+var BPMthresh = 99;
+var sesLow = 1200;
 var HRreward = 3;
 var KMreward = 1;
 var placeholderDate = new Date();
@@ -669,15 +673,17 @@ function getActivities(){
       let j=0;
       let k=0;
       
-
-
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
-          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, true]);
+          var HRvalid= false;
+          if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
+          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, HRvalid]);
           j++;
         }
         if(data[i].manual == false && data[i].distance > 0){
-          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, 0, true]);
+          var GPSvalid= false;
+          if(data[i].distance>1000 && data[i].average_speed<speedLimit && data[i].average_speed>speedLow) {GPSvalid =true;}
+          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, KMreward*data[i].distance/1000, GPSvalid]);
           k++;
         }
         else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
@@ -690,13 +696,7 @@ function getActivities(){
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
-      /*if(cleaned.length>0){
-        console.log("Good news, your workout is being logged for a payout!");
-        console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
-      }
-      else{
-        console.log("No valid workouts today...");
-      }*/ 
+       
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
