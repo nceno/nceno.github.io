@@ -852,7 +852,7 @@ function getActivities(){
       if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
       if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
       $("#dispTime").html(dispTime); 
-      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*0.278).toFixed(1));
+      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
       if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
       $("#dispValue").html(dispValue); 
   
