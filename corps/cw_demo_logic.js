@@ -14,7 +14,7 @@ function makeWorkoutPage(){
   
   //var _goalID = "0xccff00";
   //reset the leaderboard
-  $('#entry0').empty();
+  //$('#entry0').empty();
   for(var j=0; j<10; j++){
     $('#entry'+j).remove();
   }
@@ -93,7 +93,7 @@ function makeWorkoutPage(){
                         //post to top if it's me
                         console.log("it's me..."+playerName+"...i= "+i);
                         //$("#entry0").before(
-                        $("#entry0").prepend(
+                        $("#me").prepend(
                           '<div id="entry'+i+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
                         //populate my quick stats .........
