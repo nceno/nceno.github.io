@@ -700,7 +700,7 @@ async function gapAdjust(_actID){
     } 
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
-  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 
   return [activeTime, adjHR];
@@ -763,7 +763,7 @@ function getActivities(){
       console.table(HR);
 
       //do gap adjustment on HR[] here
-      
+
 
       
       //find the max
