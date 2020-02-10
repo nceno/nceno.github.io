@@ -36,7 +36,7 @@ function makeWorkoutPage(){
         }
 
         //---get other players
-        for(var i=0; i<compcount-1; i++){
+        for(var i=0; i<compcount; i++){
 
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
@@ -93,7 +93,7 @@ function makeWorkoutPage(){
                           '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
                         );
                       }else if(playerID == Cookies.get('stravaID') && i>0){*/
-                        if(playerID == Cookies.get('stravaID')){
+                      if(playerID == Cookies.get('stravaID')){
                         //post to top if it's me
                         console.log("it's me..."+playerName+"...i= "+i);
                         //$("#entry0").before(
@@ -110,7 +110,7 @@ function makeWorkoutPage(){
                         $("#leaderboardCount").html(compcount);
 
                       }
-                      else {
+                      else if($('#entry'+i).length==0){
                         //.after following entries
                         console.log("after..."+playerName+"... i= "+i);
                         //$('#entry'+ (i-1)).after(
