@@ -31,6 +31,7 @@ function makeWorkoutPage(){
         var bpmReward = parseInt(result[5]); //per 10mins
         var kmReward = parseInt(result[6]); //per km
 
+        $('#me').empty();
         for(var j=0; j<10; j++){
           $('#entry'+j).remove();
         }
