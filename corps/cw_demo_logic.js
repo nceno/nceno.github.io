@@ -774,11 +774,11 @@ function getActivities(){
         }
       });
       console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
-      $("#dispHR").html(dispHR); 
-      $("#dispMins").html(dispMins);
+      if(dispHR!= null && dispHR!= 0) $("#dispHR").html(dispHR); 
+      if(dispMins!= null && dispMins!= 0) $("#dispMins").html(dispMins);
       $("#dispTime").html(dispTime); 
-      $("#dispSpeed").html(dispSpeed);
-      $("#dispDist").html(dispDist); 
+      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html(dispSpeed);
+      if(dispDist!= null && dispDist!= 0) $("#dispDist").html(dispDist); 
       $("#dispValue").html(dispValue); 
   
     }
@@ -787,6 +787,12 @@ function getActivities(){
   xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 }
+$("#dispHR").html("-"); 
+$("#dispMins").html("-");
+$("#dispTime").html("-"); 
+$("#dispSpeed").html("-");
+$("#dispDist").html("-"); 
+$("#dispValue").html("-");
 
 
 
