@@ -700,6 +700,7 @@ function getActivities(){
 
       
       //loop through HR[m]
+      console.log("for each:::");
       HR.forEach(function(_x){
         console.table(_x);
       });
