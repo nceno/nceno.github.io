@@ -111,6 +111,7 @@ function makeWorkoutPage(){
                         $("#leaderboardCount").html(compcount);
 
                       }
+                      //only after if there isn't already an element of the same name
                       else if($('#entry'+i).length==0){
                         //.after following entries
                         console.log("after..."+playerName+"... i= "+i);
