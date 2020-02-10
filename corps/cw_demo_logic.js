@@ -15,9 +15,9 @@ function makeWorkoutPage(){
   //var _goalID = "0xccff00";
   //reset the leaderboard
   //$('#entry0').empty();
-  for(var j=0; j<10; j++){
+  /*for(var j=0; j<10; j++){
     $('#entry'+j).remove();
-  }
+  }*/
 
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
@@ -31,8 +31,12 @@ function makeWorkoutPage(){
         var bpmReward = parseInt(result[5]); //per 10mins
         var kmReward = parseInt(result[6]); //per km
 
+        for(var j=0; j<10; j++){
+          $('#entry'+j).remove();
+        }
+
         //---get other players
-        for(var i=0; i<compcount; i++){
+        for(var i=0; i<compcount-1; i++){
 
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
@@ -848,8 +852,8 @@ function getActivities(){
       if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
       if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
       $("#dispTime").html(dispTime); 
-      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html(Math.round(dispSpeed*0.278));
-      if(dispDist!= null && dispDist!= 0) $("#dispDist").html(Math.round(dispDist/1000)); 
+      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*0.278).toFixed(1));
+      if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
       $("#dispValue").html(dispValue); 
   
     }
