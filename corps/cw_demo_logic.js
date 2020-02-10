@@ -692,10 +692,16 @@ function getActivities(){
         i++;
       }
 
+
       console.log("the "+k+" GPS workouts are: ");
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
+
+      var together = new Array();
+      together.push(GPS);
+      together.push(HR);
+      console.table(together);
        
     }
   });
