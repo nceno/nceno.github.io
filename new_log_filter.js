@@ -147,8 +147,7 @@ function getActivities(){
   xhr.send(stuff);
 }
 
-var actID = 2719149178;
-function getRawHR(){
+function getRawHR(_actID){
   var stuff2 = null;
   var xhr2 = new XMLHttpRequest();
   xhr2.withCredentials = false;
@@ -199,7 +198,7 @@ function getRawHR(){
       console.log("ERROR: gap detection failed."); 
     } 
   });
-  xhr2.open("GET", 'https://www.strava.com/api/v3/activities/'+actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+  xhr2.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr2.setRequestHeader("Authorization", 'Bearer ' + access_token);
   xhr2.send(stuff2);
 }
