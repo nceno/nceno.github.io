@@ -691,25 +691,35 @@ function getActivities(){
         i++;
       }
 
-
+      //show the workouts
       console.log("the "+k+" GPS workouts are: ");
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
 
       
+      //find the max
       //loop through HR[m]
-      console.log("---------------------for each-------------------");
+      console.log("---------------------best workout-------------------");
       var GPSMaxID = null;
       var hrMaxID = null;
       var hrMaxVal=0;
       var GPSMaxVal=0;
 
+      var avgHRmax = 0;
+      var elapsed_timeMax = 0;
+      var timestampMax = null;
+      var avgSpeedMax = 0;
+      var distMax = 0;
+
       if(j>0){
         HR.forEach(function(_H){
           if(_H[5]==true && _H[4]>hrMaxVal){
-            hrMaxVal=_H[4];
             hrMaxID = _H[0];
+            /*avgHRmax = _H[1];
+            elapsed_timeMax = _H[2];
+            timestampMax = _H[3];*/
+            hrMaxVal=_H[4];
           }
         });
       }
@@ -718,8 +728,11 @@ function getActivities(){
       if(k>0){
         GPS.forEach(function(_G){
           if(_G[5]==true && _G[4]>GPSMaxVal){
-            GPSMaxVal=_G[4];
             GPSMaxID = _G[0];
+            /*avgSpeedMax = _G[1];
+            distMax = _G[2];
+            timestampMax = _G[3];*/
+            GPSMaxVal=_G[4];
           }
         });
       }
@@ -727,20 +740,20 @@ function getActivities(){
       //compare the max values and return the id of the best one
       var bestID = null;
       var bestVal = 0;
+      var identifier = null;
+
       if(GPSMaxVal>=hrMaxVal){
         bestVal = GPSMaxVal;
         bestID = GPSMaxID;
+        identifier = "GPS";
       }
       else {
         bestVal = hrMaxVal;
         bestID = hrMaxID;
+        identifier = "HR";
       }
-      console.log("the best workout is: "+bestID+" which is worth "+Math.round(bestVal)+" SUN tokens");
-
-
-
-
-      
+      console.log("the best one is a(n) "+identifier+" workout: "+bestID+", which is worth "+Math.round(bestVal)+" SUN tokens");
+  
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
