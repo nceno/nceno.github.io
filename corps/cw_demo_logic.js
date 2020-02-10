@@ -839,6 +839,7 @@ function getActivities(){
       var dispSpeed;
       var dispDist;
       var dispValue;
+      var period;
 
       data.forEach(function(_A){
         if(_A.id==bestID){
@@ -846,6 +847,16 @@ function getActivities(){
           dispHR = _A.average_heartrate; //needs to be adjusted
           dispMins = _A.elapsed_time; //may need adjusted
           dispTimeHours = new Date(_A.start_date_local).getHours();
+          if(dispTimeHours%12>=0){
+            if(dispTimeHours%12==0){
+              dispTimeHours = 12;
+            }
+            else {dispTimeHours = dispTimeHours%12;}
+            period = "pm";
+          }
+          else{
+            period = "am";
+          }
           dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
           dispSpeed = _A.average_speed;
           dispDist = _A.distance;
@@ -855,7 +866,8 @@ function getActivities(){
       console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
       if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
       if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
-      $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes); 
+      $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
+      $("#period").html(period); 
       if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
       if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
       $("#dispValue").html(dispValue); 
