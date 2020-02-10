@@ -842,11 +842,11 @@ function getActivities(){
         }
       });
       console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
-      if(dispHR!= null && dispHR!= 0) $("#dispHR").html(dispHR); 
-      if(dispMins!= null && dispMins!= 0) $("#dispMins").html(dispMins);
+      if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
+      if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
       $("#dispTime").html(dispTime); 
-      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html(dispSpeed);
-      if(dispDist!= null && dispDist!= 0) $("#dispDist").html(dispDist); 
+      if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html(Math.round(dispSpeed*0.278));
+      if(dispDist!= null && dispDist!= 0) $("#dispDist").html(Math.round(dispDist/1000)); 
       $("#dispValue").html(dispValue); 
   
     }
