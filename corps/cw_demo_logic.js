@@ -755,13 +755,20 @@ function getActivities(){
       console.log("the best one is a(n) "+identifier+" workout: "+bestID+", which is worth "+Math.round(bestVal)+" SUN tokens");
 
       //get the full details of that activity
+      var dispHR;
+      var dispMins;
+      var dispTime;
+      var dispSpeed;
+      var dispDist;
+      var dispValue;
+
       data.forEach(function(_A, index){
           if(_A.id==bestID){
-            if(_A[index].average_heartrate!=undefined) dispHR = _A[index].average_heartrate; //needs to be adjusted
-            if(_A[index].elapsed_time!=undefined)dispMins = _A[index].elapsed_time; //may need adjusted
-            if(_A[index].start_date_local!=undefined)dispTime = _A[index].start_date_local;
-            if(_A[index].average_speed!=undefined)dispSpeed = _A[index].average_speed;
-            if(_A[index].distance!=undefined)dispDist = _A[index].distance;
+            dispHR = _A[index].average_heartrate; //needs to be adjusted
+            dispMins = _A[index].elapsed_time; //may need adjusted
+            dispTime = _A[index].start_date_local;
+            dispSpeed = _A[index].average_speed;
+            dispDist = _A[index].distance;
             dispValue = Math.round(bestVal);
 
           }
