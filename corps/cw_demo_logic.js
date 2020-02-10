@@ -641,6 +641,70 @@ function updateGasPrice(){
   });
 }
 
+//_actID --> activeTime0, adjHR1
+async function gapAdjust(_actID){
+  var adjHR;
+  var activeTime;
+
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      var resp = await JSON.parse(xhr.responseText);
+      var hr = resp.heartrate.data;
+      var tm = resp.time.data;
+      /* 
+      //mathematica input form to plot
+      var dataString='';
+      var plot = new Array();
+      for(let u=0; u<hr.length; u++){
+        plot[u]=[tm[u],hr[u]];
+        dataString=dataString+'{'+plot[u]+'},';
+      }
+      var hrdata=dataString.slice(0, -1);
+      console.log(hrdata);*/
+
+      //----- gap detection -----
+      var gap = 0;
+      for(let s=0; s<tm.length+1; s++){
+        var diff = tm[s+1]-tm[s];
+        if(diff>=10){
+          gap+=diff;
+        }
+      }
+
+      //activeTime will replace elapsed_time
+      activeTime = (1.0*tm[tm.length-1]-gap);
+      var pl = 0;
+      for(let r=0; r<hr.length; r++){
+        pl +=hr[r];
+      }
+      var avghr = pl/hr.length;
+
+      //adjHR will replace avgHR
+      adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
+
+      console.log("total gap is: "+gap/60+" min");
+      console.log("real active time is: "+activeTime/60+" min");
+      console.log("adjusted HR is: "+adjHR+" BPM");
+
+      //report if gap it too large
+      /*if(gap > 0.17*tm[tm.length-1]){
+        console.log("you paused for too long. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
+      }*/
+      //---- /gap detection -----
+    }
+    else{
+      console.log("ERROR: gap detection failed."); 
+    } 
+  });
+  xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.send(stuff);
+
+  return [activeTime, adjHR];
+}
 
 
 //gets best activity from strava
@@ -691,11 +755,15 @@ function getActivities(){
         i++;
       }
 
+
       //show the workouts
       console.log("the "+k+" GPS workouts are: ");
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
+
+      //do gap adjustment on HR[] here
+      
 
       
       //find the max
