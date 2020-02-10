@@ -646,8 +646,10 @@ function updateGasPrice(){
 //gets activity minutes from strava
 //var stravaMins;
 //var avgHR;
+var HRreward = 3;
+var KMreward = 1;
 var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 1); //can change "1" day to "20" days for testing.
+placeholderDate.setDate(placeholderDate.getDate() - 52); //can change "1" day to "20" days for testing.
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 //original went here...
@@ -661,20 +663,20 @@ function getActivities(){
       var data = JSON.parse(xhr.responseText);
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
-      var HR = new Array();
-      var GPS = new Array();
+      var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+      var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
       let i=0;
+      let j=0;
       let k=0;
       console.log("data[0]= "+data[0]);
 
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
-          HR[k][] = [data[i].id, data[i].moving_time/60];
-          k++;
-
+          HR[j] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, true];
+          j++;
         }
         else if(data[i].manual == false && data[i].distance > 0){
-          GPS[k][] = [data[i].id, data[i].moving_time/60];
+          GPS[k] = [data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, 0, true];
           k++;
         }
         else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
@@ -683,18 +685,19 @@ function getActivities(){
         i++;
       }
 
-      console.log(cleaned);
-      if(cleaned.length>0){
+      console.log("GPS workouts are: "+GPS);
+      console.log("HR workouts are: "+HR);
+      /*if(cleaned.length>0){
         console.log("Good news, your workout is being logged for a payout!");
         console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
       }
       else{
         console.log("No valid workouts today...");
-      } 
+      }*/ 
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
-  xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token');
   xhr.send(stuff);
 }
 
