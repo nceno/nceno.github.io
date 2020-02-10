@@ -762,18 +762,18 @@ function getActivities(){
       var dispDist;
       var dispValue;
 
-      data.forEach(function(_A, index){
-          if(_A.id==bestID){
-            console.log(_A);
-            /*dispHR = _A[index].average_heartrate; //needs to be adjusted
-            dispMins = _A[index].elapsed_time; //may need adjusted
-            dispTime = _A[index].start_date_local;
-            dispSpeed = _A[index].average_speed;
-            dispDist = _A[index].distance;
-            dispValue = Math.round(bestVal);*/
-
-          }
-        });
+      data.forEach(function(_A){
+        if(_A.id==bestID){
+          console.log(_A);
+          dispHR = _A.average_heartrate; //needs to be adjusted
+          dispMins = _A.elapsed_time; //may need adjusted
+          dispTime = _A.start_date_local;
+          dispSpeed = _A.average_speed;
+          dispDist = _A.distance;
+          dispValue = Math.round(bestVal);
+        }
+      });
+      console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
   
     }
   });
