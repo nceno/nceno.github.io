@@ -676,7 +676,7 @@ function getActivities(){
         if(data[i].manual == false && data[i].has_heartrate == true){
           var HRvalid= false;
           if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
-          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, HRvalid]);
+          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
           j++;
         }
         if(data[i].manual == false && data[i].distance > 0){
@@ -753,6 +753,19 @@ function getActivities(){
         identifier = "HR";
       }
       console.log("the best one is a(n) "+identifier+" workout: "+bestID+", which is worth "+Math.round(bestVal)+" SUN tokens");
+
+      //get the full details of that activity
+      data.forEach(function(_A, index){
+          if(_A.id==bestID){
+            dispHR = _A[index].average_heartrate; //needs to be adjusted
+            dispMins = _A[index].elapsed_time; //may need adjusted
+            dispTime = _A[index].start_date_local;
+            dispSpeed = _A[index].average_speed;
+            dispDist = _A[index].distance;
+            dispValue = Math.round(bestVal);
+
+          }
+        });
   
     }
   });
