@@ -774,6 +774,12 @@ function getActivities(){
         }
       });
       console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
+      $("#dispHR").html(dispHR); 
+      $("#dispMins").html(dispMins);
+      $("#dispTime").html(dispTime); 
+      $("#dispSpeed").html(dispSpeed);
+      $("#dispDist").html(dispDist); 
+      $("#dispValue").html(dispValue); 
   
     }
   });

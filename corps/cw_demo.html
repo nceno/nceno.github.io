@@ -869,7 +869,7 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="logTitle">Let's get you a payout for that workout!</h3>
+              <h3 id="logTitle">Here is your most valuable workout session from today:</h3>
               <!--/title -->
               
               <!--echo, success, fail -->
@@ -877,7 +877,7 @@
               <span id="logPrompt">
                 <div class="row">
                   <div class="col">
-                    <h5>Here is your most valuable workout session from today:</h5>
+                    <!-- <h5>Here is your most valuable workout session from today:</h5> -->
                     <div class="table-responsive-md">
                       <table class="table table-lined" id="bestWorkout">
                         <thead  class="thead-dark">
@@ -894,13 +894,12 @@
                           
                         </thead>
                           <tbody id="orderList">
-                            <tr id="wo1">
-                              <td id = "orderU1">9:45 <br>am</td>       
-                              <td id = "itemU1">62 <br>min</td>
-                              <td id = "costU1">121 <br>bpm</td>
-                              <td id = "dateU1">2.0 <br>km</td>
-                              <td id = "costU1">7.0 <br>kph</td>
-                                           
+                            <tr>
+                              <td ><span id="dispTime"></span><br>am</td>       
+                              <td ><span id="dispMins"></span><br>min</td>
+                              <td ><span id="dispHR"></span><br>bpm</td>
+                              <td ><span id="dispDist"></span><br>km</td>
+                              <td ><span id="dispSpeed"></span><br>kph</td>            
                             </tr>
                             <!--new orders go here -->
                           </tbody>
@@ -916,7 +915,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col text-center">
-                    <h3 style="color:#fff;">Workout value: <b style="color:#ccff00;">18 SUN</b></h3>
+                    <h3 style="color:#fff;">Workout value: <b style="color:#ccff00;"><span id="dispValue"></span> SUN</b></h3>
                     <!--buttons -->
                     <button id="payMeBtn" type="button" onclick="logActivity()" class="btn btn-block btn-rounded btn-primary">Pay me!</button>
                     <!--/buttons -->
