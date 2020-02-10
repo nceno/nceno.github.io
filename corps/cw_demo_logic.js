@@ -698,11 +698,14 @@ function getActivities(){
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
 
-      var together = new Array();
-      together.push(GPS);
-      together.push(HR);
-      console.table(together);
-       
+      
+      //loop through HR[m]
+      HR.forEach(function(_x){
+        console.table(_x);
+      });
+
+
+      //loop through GPS[m]
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
