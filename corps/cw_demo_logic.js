@@ -668,14 +668,15 @@ function getActivities(){
       let i=0;
       let j=0;
       let k=0;
-      console.log("data[0]= "+data[0]);
+      
+
 
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
           HR[j] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, true];
           j++;
         }
-        else if(data[i].manual == false && data[i].distance > 0){
+        if(data[i].manual == false && data[i].distance > 0){
           GPS[k] = [data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, 0, true];
           k++;
         }
