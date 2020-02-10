@@ -844,7 +844,7 @@ function getActivities(){
           console.log(_A);
           dispHR = _A.average_heartrate; //needs to be adjusted
           dispMins = _A.elapsed_time; //may need adjusted
-          dispTime = _A.start_date_local;
+          dispTime = Date.parse(_A.start_date_local).toDateString();
           dispSpeed = _A.average_speed;
           dispDist = _A.distance;
           dispValue = Math.round(bestVal);
@@ -853,7 +853,7 @@ function getActivities(){
       console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
       if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
       if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
-      $("#dispTime").html(Date.parse(dispTime).toDateString()); 
+      $("#dispTime").html(dispTime); 
       if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
       if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
       $("#dispValue").html(dispValue); 
