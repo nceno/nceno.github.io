@@ -643,9 +643,8 @@ function updateGasPrice(){
 
 
 
-//gets activity minutes from strava
-//var stravaMins;
-//var avgHR;
+//gets best activity from strava
+
 var speedLimit = 4.5;
 var speedLow = 1.4;
 var BPMthresh = 99;
@@ -700,13 +699,48 @@ function getActivities(){
 
       
       //loop through HR[m]
-      console.log("for each:::");
-      HR.forEach(function(_x){
-        console.table(_x);
-      });
+      console.log("---------------------for each-------------------");
+      var GPSMaxID = null;
+      var hrMaxID = null;
+      var hrMaxVal=0;
+      var GPSMaxVal=0;
 
+      if(j>0){
+        HR.forEach(function(_H){
+          if(_H[5]==true && _H[4]>hrMaxVal){
+            hrMaxVal=_H[4];
+            hrMaxID = _H[0];
+          }
+        });
+      }
 
       //loop through GPS[m]
+      if(k>0){
+        GPS.forEach(function(_G){
+          if(_G[5]==true && _G[4]>GPSMaxVal){
+            GPSMaxVal=_G[4];
+            GPSMaxID = _G[0];
+          }
+        });
+      }
+
+      //compare the max values and return the id of the best one
+      var bestID = null;
+      var bestVal = 0;
+      if(GPSMaxVal>=hrMaxVal){
+        bestVal = GPSMaxVal;
+        bestID = GPSMaxID;
+      }
+      else {
+        bestVal = hrMaxVal;
+        bestID = hrMaxID;
+      }
+      console.log("the best workout is: "+bestID+" which is worth "+Math.round(bestVal)+" SUN tokens");
+
+
+
+
+      
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
