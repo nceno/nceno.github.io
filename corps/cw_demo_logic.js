@@ -697,7 +697,7 @@ function getActivities(){
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
-  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token');
+  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 }
 
