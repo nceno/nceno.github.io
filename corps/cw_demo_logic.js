@@ -673,11 +673,11 @@ function getActivities(){
 
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
-          HR[j] = [data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, true];
+          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, 0, true]);
           j++;
         }
         if(data[i].manual == false && data[i].distance > 0){
-          GPS[k] = [data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, 0, true];
+          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, 0, true]);
           k++;
         }
         else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
@@ -686,8 +686,8 @@ function getActivities(){
         i++;
       }
 
-      console.log("GPS workouts are: "+GPS);
-      console.log("HR workouts are: "+HR);
+      console.log("the "+k+" GPS workouts are: "+GPS);
+      console.log("the "+j+" HR workouts are: "+HR);
       /*if(cleaned.length>0){
         console.log("Good news, your workout is being logged for a payout!");
         console.log(goalid+","+stravaID+","+ cleaned[0][0]+","+Math.round(cleaned[0][1])+","+Math.round(cleaned[0][2]));
