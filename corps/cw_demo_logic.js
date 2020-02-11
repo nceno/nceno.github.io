@@ -1,4 +1,4 @@
-console.log("666");
+console.log("777");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -50,7 +50,8 @@ async function makeWorkoutPage(){
           .call({from: Cookies.get('userWallet')},
             async function(error, result) {
               if (!error){
-                //console.log(result);
+                console.log("i= "+i);
+
                 var playerID = await result[0]; 
                 var playerName = result[1];
                 //---call that player
