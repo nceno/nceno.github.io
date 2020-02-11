@@ -1,4 +1,4 @@
-console.log("46566gffg");
+console.log("ttttt");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -163,6 +163,7 @@ function gapAdjust(){
         //this is the HR update step.....
         _H[1]=adjHR;
         _H[2]=activeTime;
+        _H[5]= HRreward*activeTime/600;
 
         data.forEach(function(act){
           if (act.id == _H[0]){
