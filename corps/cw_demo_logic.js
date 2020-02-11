@@ -655,12 +655,12 @@ async function gapAdjust(_actID){
   var adjHR;
   var activeTime;
 
-  var stuff = null;
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = false;
-  await xhr.addEventListener("readystatechange", async function () {
+  var stuff2 = null;
+  var xhr2 = new XMLHttpRequest();
+  xhr2.withCredentials = false;
+  await xhr2.addEventListener("readystatechange", async function () {
     if (this.readyState === 4) {
-      var resp = await JSON.parse(xhr.responseText);
+      var resp = await JSON.parse(xhr2.responseText);
       var hr = resp.heartrate.data;
       var tm = resp.time.data;
       /* 
@@ -703,16 +703,11 @@ async function gapAdjust(_actID){
         console.log("you paused for too long. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
       }*/
       //---- /gap detection -----
-    }
-    /*else{
-      console.log("ERROR: gap detection failed."); 
-    }*/ 
+    } 
   });
-  xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
-  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
-  xhr.send(stuff);
-
-  console.log("adjustment complete: "+adjHR+", "+ activeTime);
+  xhr2.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+  xhr2.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
+  xhr2.send(stuff2);
 }
 
 
@@ -747,9 +742,78 @@ async function getActivities(){
       
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
+          
+          ////////////// gap adjustment
+            var adjHR;
+            var activeTime;
+            var stuff2 = null;
+            var xhr2 = new XMLHttpRequest();
+            xhr2.withCredentials = false;
+            await xhr2.addEventListener("readystatechange", async function () {
+              if (this.readyState === 4) {
+                var resp = await JSON.parse(xhr2.responseText);
+                var hr = resp.heartrate.data;
+                var tm = resp.time.data;
+                /* 
+                //mathematica input form to plot
+                var dataString='';
+                var plot = new Array();
+                for(let u=0; u<hr.length; u++){
+                  plot[u]=[tm[u],hr[u]];
+                  dataString=dataString+'{'+plot[u]+'},';
+                }
+                var hrdata=dataString.slice(0, -1);
+                console.log(hrdata);*/
+
+                //----- gap detection -----
+                var gap = 0;
+                for(let s=0; s<tm.length+1; s++){
+                  var diff = tm[s+1]-tm[s];
+                  if(diff>=10){
+                    gap+=diff;
+                  }
+                }
+
+                //activeTime will replace elapsed_time
+                activeTime = (1.0*tm[tm.length-1]-gap);
+                var pl = 0;
+                for(let r=0; r<hr.length; r++){
+                  pl +=hr[r];
+                }
+                var avghr = pl/hr.length;
+
+                //adjHR will replace avgHR
+                adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
+
+                console.log("total gap is: "+gap/60+" min");
+                console.log("real active time is: "+activeTime/60+" min");
+                console.log("adjusted HR is: "+adjHR+" BPM");
+
+                //report if gap it too large
+                /*if(gap > 0.17*tm[tm.length-1]){
+                  console.log("you paused for too long. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
+                }*/
+                //---- /gap detection -----
+              } 
+            });
+            xhr2.open("GET", 'https://www.strava.com/api/v3/activities/'+data[i].id+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+            xhr2.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
+            xhr2.send(stuff2);
+          ////////////// end gap adjustment
+
+
+
           var HRvalid= false;
-          if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
-          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
+          //if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
+          if(adjHR>BPMthresh && activeTime>sesLow) {HRvalid =true;}
+          HR.push([data[i].id, 
+          //data[i].average_heartrate,
+          adjHR, 
+          //data[i].elapsed_time,
+          activeTime 
+          data[i].start_date, 
+          HRreward*data[i].elapsed_time/600, 
+          HRvalid]); //need to adjust time, hr, value, validity
           j++;
         }
         if(data[i].manual == false && data[i].distance > 0){
@@ -772,9 +836,9 @@ async function getActivities(){
       console.table(HR);
 //--------------------------------------------------------------------------------------------------------------------------------------------
       //do gap adjustment on HR[] here
-      await HR.forEach(async function(_H){
-        await gapAdjust(_H[0]);
-      });
+      /*HR.forEach(function(_H){
+        gapAdjust(_H[0]);
+      });*/
 
       
       //find the max
