@@ -1,4 +1,4 @@
-console.log("yynn");
+console.log("htrhw");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -43,7 +43,7 @@ function makeWorkoutPage(){
         }
 
         //---get other players
-        for(var i= 0; i<compcount; i++){
+        for(var i= 0; i<compcount+5; i++){
           console.log("----------------------- next iteration----------");
           console.log("i= "+i);
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
