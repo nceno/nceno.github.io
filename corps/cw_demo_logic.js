@@ -1,4 +1,4 @@
-console.log("99ds");
+console.log("ttds");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -28,6 +28,10 @@ var toLog = new Array(3);
 
 var data = new Object();
 
+let i=0;
+let j=0;
+let k=0;
+
 
 //---- Get the activities, clean them, and separate them into HR and GPS
 var stuff = null;
@@ -41,9 +45,7 @@ xhr.addEventListener("readystatechange", async function(){
     //clean the data and make a list of valid workouts.
     /*var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
     var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5*/
-    let i=0;
-    let j=0;
-    let k=0;
+    
     
     while(i<data.length){
       if(data[i].manual == false && data[i].has_heartrate == true){
