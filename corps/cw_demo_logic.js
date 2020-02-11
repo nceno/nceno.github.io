@@ -1,4 +1,4 @@
-console.log("yeah buddy");
+console.log("46566gffg");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -164,6 +164,13 @@ function gapAdjust(){
         _H[1]=adjHR;
         _H[2]=activeTime;
 
+        data.forEach(function(act){
+          if (act.id == _H[0]){
+            act.elapsed_time = activeTime;
+            act.average_heartrate = adjHR;
+          }
+        });
+
         //---- /gap detection -----
       } 
     });
@@ -211,8 +218,7 @@ function showBest(){
   data.forEach(function(_A){
     if(_A.id==bestID){
       //console.log(_A);
-      dispHR = _A.average_heartrate; //needs to be adjusted
-      dispMins = _A.elapsed_time; //may need adjusted
+
       dispTimeHours = new Date(_A.start_date).getHours()//-_A.utc_offset/3600;  may need to use start_date_local
       if(dispTimeHours%12>=0){
         if(dispTimeHours%12==0){
@@ -224,11 +230,16 @@ function showBest(){
       else{
         period = "am";
       }
+
+      dispHR = _A.average_heartrate; //needs to be adjusted
+      dispMins = _A.elapsed_time; //needs adjusted
+      dispValue = Math.round(bestVal); //needs adjusted
+
       _A.utc_offset/3600
       dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
       dispSpeed = _A.average_speed;
       dispDist = _A.distance;
-      dispValue = Math.round(bestVal);
+      
     }
   });
   //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
