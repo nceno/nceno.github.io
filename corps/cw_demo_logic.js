@@ -651,14 +651,14 @@ function updateGasPrice(){
 }
 
 //_actID --> activeTime0, adjHR1
-function gapAdjust(_actID){
+function async gapAdjust(_actID){
   var adjHR;
   var activeTime;
 
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", async function () {
+  await xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
       var hr = resp.heartrate.data;
