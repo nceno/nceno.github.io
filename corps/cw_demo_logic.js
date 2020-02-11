@@ -658,7 +658,7 @@ function gapAdjust(_actID){
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", function () {
+  xhr.addEventListener("readystatechange", async function () {
     if (this.readyState === 4) {
       var resp = JSON.parse(xhr.responseText);
       var hr = resp.heartrate.data;
@@ -696,7 +696,7 @@ function gapAdjust(_actID){
       console.log("the state is: "+this.readyState);
       console.log("total gap is: "+gap/60+" min");
       console.log("real active time is: "+activeTime/60+" min");
-      console.log("adjusted HR is: "+adjHR+" BPM");
+      await console.log("adjusted HR is: "+adjHR+" BPM");
 
       //report if gap it too large
       /*if(gap > 0.17*tm[tm.length-1]){
