@@ -1,4 +1,4 @@
-console.log("ywtrjw4");
+console.log("here");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -319,7 +319,17 @@ function signOut(){
   location.reload();
 }
 
+
 function makeWorkoutPage(){
+  
+
+  //prepare the workouts to be filtered and logged
+  makeActivities().then( function(){
+    gapAdjust();
+  });
+
+
+
   //---get goal params
 
   NcenoBrands.methods.getGoalParams(_goalID)
