@@ -1,4 +1,4 @@
-//heehaw
+//blllle
 
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
@@ -18,7 +18,7 @@ function signOut(){
   location.reload();
 }
 
-function makeWorkoutPage(){
+async function makeWorkoutPage(){
   //---get goal params
   
   //var _goalID = "0xccff00";
@@ -28,9 +28,9 @@ function makeWorkoutPage(){
     $('#entry'+j).remove();
   }*/
 
-  NcenoBrands.methods.getGoalParams(_goalID)
+  await NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
-    function(error, result) {
+    async function(error, result) {
       if (!error){
         var start = parseInt(result[0]);
         var dur = parseInt(result[1]);
@@ -48,7 +48,7 @@ function makeWorkoutPage(){
         //---get other players
         for(var i=0; i<compcount; i++){
 
-          NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
             async function(error, result) {
               if (!error){
