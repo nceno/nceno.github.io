@@ -1,3 +1,5 @@
+//hi there
+
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -649,7 +651,15 @@ function updateGasPrice(){
 
   });
 }
-//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+///////////////////////////////////////
+//////////////------ gapAdjust()
+///////////////////////////////////////
+
+
 //_actID --> activeTime0, adjHR1
 async function gapAdjust(_actID){
   var adjHR;
@@ -663,17 +673,7 @@ async function gapAdjust(_actID){
       var resp = await JSON.parse(xhr2.responseText);
       var hr = resp.heartrate.data;
       var tm = resp.time.data;
-      /* 
-      //mathematica input form to plot
-      var dataString='';
-      var plot = new Array();
-      for(let u=0; u<hr.length; u++){
-        plot[u]=[tm[u],hr[u]];
-        dataString=dataString+'{'+plot[u]+'},';
-      }
-      var hrdata=dataString.slice(0, -1);
-      console.log(hrdata);*/
-
+      
       //----- gap detection -----
       var gap = 0;
       for(let s=0; s<tm.length+1; s++){
@@ -698,10 +698,6 @@ async function gapAdjust(_actID){
       console.log("real active time is: "+activeTime/60+" min");
       console.log("adjusted HR is: "+adjHR+" BPM");
 
-      //report if gap it too large
-      /*if(gap > 0.17*tm[tm.length-1]){
-        console.log("you paused for too long. ("+gap+" seconds = "+(100*gap/tm[tm.length-1])+"%)");
-      }*/
       //---- /gap detection -----
     } 
   });
@@ -709,10 +705,20 @@ async function gapAdjust(_actID){
   xhr2.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr2.send(stuff2);
 }
+///////////////////////////////////////
+//////////////------ gapAdjust()
+///////////////////////////////////////
 
 
-//gets best activity from strava
 
+
+
+
+
+
+///////////////////////////////////////
+//////////////------ getActivities()
+///////////////////////////////////////
 var speedLimit = 4.5; //in m/s
 var speedLow = 1.4; //in m/s
 var BPMthresh = 99; 
@@ -723,7 +729,9 @@ var placeholderDate = new Date();
 placeholderDate.setDate(placeholderDate.getDate() - 56); //can change "1" day to "20" days for testing.
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
-//original went here...
+
+
+//---- start the function
 async function getActivities(){
   var stuff = null;
   var xhr = new XMLHttpRequest();
@@ -742,10 +750,6 @@ async function getActivities(){
       
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
-
-
-
-
           var HRvalid= false;
           if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
           HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
@@ -763,22 +767,12 @@ async function getActivities(){
         i++;
       }
 
-
       //show the workouts
       console.log("the "+k+" GPS workouts are: ");
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
-//--------------------------------------------------------------------------------------------------------------------------------------------
-      //do gap adjustment on HR[] here
-      /*HR.forEach(function(_H){
-        gapAdjust(_H[0]);
-      });*/
-
-      
       //find the max
-      //loop through HR[m]
-      console.log("---------------------best workout-------------------");
       var GPSMaxID = null;
       var hrMaxID = null;
       var hrMaxVal=0;
@@ -794,9 +788,6 @@ async function getActivities(){
         HR.forEach(function(_H){
           if(_H[5]==true && _H[4]>hrMaxVal){
             hrMaxID = _H[0];
-            /*avgHRmax = _H[1];
-            elapsed_timeMax = _H[2];
-            timestampMax = _H[3];*/
             hrMaxVal=_H[4];
           }
         });
@@ -807,9 +798,6 @@ async function getActivities(){
         GPS.forEach(function(_G){
           if(_G[5]==true && _G[4]>GPSMaxVal){
             GPSMaxID = _G[0];
-            /*avgSpeedMax = _G[1];
-            distMax = _G[2];
-            timestampMax = _G[3];*/
             GPSMaxVal=_G[4];
           }
         });
@@ -873,7 +861,6 @@ async function getActivities(){
       if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
       if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
       $("#dispValue").html(dispValue); 
-  
     }
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
@@ -886,6 +873,15 @@ $("#dispTime").html("-");
 $("#dispSpeed").html("-");
 $("#dispDist").html("-"); 
 $("#dispValue").html("-");
+///////////////////////////////////////
+//////////////------ getActivities()
+///////////////////////////////////////
+
+
+
+
+
+
 
 
 
