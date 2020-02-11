@@ -1,4 +1,4 @@
-//yyyy
+//77u7uu7
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -46,10 +46,10 @@ async function makeWorkoutPage(){
             async function(error, result) {
               if (!error){
                 //console.log(result);
-                var playerID = result[0]; 
+                var playerID = await result[0]; 
                 var playerName = result[1];
                 //---call that player
-                await NcenoBrands.methods.getPlayer(_goalID, playerID)
+                NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   async function(error, result) {
                     if (!error){
