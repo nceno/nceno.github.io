@@ -20,11 +20,6 @@ function signOut(){
 function makeWorkoutPage(){
   //---get goal params
 
-  /*$('#me').empty();
-  for(var j=0; j<10; j++){
-    $('#entry'+j).remove();
-  }*/
-
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     async function(error, resultA) {
@@ -38,20 +33,14 @@ function makeWorkoutPage(){
         var kmReward = parseInt(resultA[6]); //per km
 
         $('#me').empty();
-        /*for(var j=0; j<compcount; j++){
-          $('#entry'+j).remove();
-        }*/
 
         //---get other players
         for(var i= 0; i<compcount; i++){
-          console.log("----------------------- next iteration----------");
-          console.log("i= "+i);
+
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
             function(error, resultB) {
               if (!error){
-                console.log("i= "+i);
-
                 var playerID =  resultB[0]; 
                 var playerName = resultB[1];
                 //---call that player
@@ -96,8 +85,6 @@ function makeWorkoutPage(){
 
                       if(playerID == Cookies.get('stravaID')){
                         //post to top if it's me
-                        console.log("I am "+playerName+". player "+i);
-                        //if(! $('#me').length){
                           $("#me").prepend(
                             '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
                           );
@@ -115,8 +102,6 @@ function makeWorkoutPage(){
                       //only after if there isn't already an element of the same name
                       else if(! $('#'+playerName).length){
                         //.after following entries
-                        console.log(playerName+" is player "+i);
-                        //$('#entry'+ (i-1)).after(
                         $('#startList').after(
                           '<div id="'+playerName+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div></div>'
                         );
