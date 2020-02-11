@@ -696,7 +696,7 @@ async function gapAdjust(_actID){
       console.log("the state is: "+this.readyState);
       console.log("total gap is: "+gap/60+" min");
       console.log("real active time is: "+activeTime/60+" min");
-      await console.log("adjusted HR is: "+adjHR+" BPM");
+      console.log("adjusted HR is: "+adjHR+" BPM");
 
       //report if gap it too large
       /*if(gap > 0.17*tm[tm.length-1]){
