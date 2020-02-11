@@ -1,4 +1,4 @@
-console.log("ttds");
+console.log("reges");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -31,6 +31,12 @@ var data = new Object();
 let i=0;
 let j=0;
 let k=0;
+
+var GPSMaxID = null;
+var GPSMaxVal=0;
+var avgSpeedMax = 0;
+var distMax = 0;
+var timestampMax = null;
 
 
 //---- Get the activities, clean them, and separate them into HR and GPS
@@ -72,14 +78,7 @@ xhr.addEventListener("readystatechange", async function(){
     console.log("the "+j+" HR workouts are: ");
     console.table(HR);
 
-    //find the max
-    var GPSMaxID = null;
-    var GPSMaxVal=0;
-    var avgSpeedMax = 0;
-    var distMax = 0;
-    var timestampMax = null;
-
-    //loop through GPS[m]
+    //loop through GPS[m] to find max
     if(k>0){
       GPS.forEach(function(_G){
         if(_G[5]==true && _G[4]>GPSMaxVal){
