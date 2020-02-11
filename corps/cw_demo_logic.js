@@ -658,9 +658,9 @@ async function gapAdjust(_actID){
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  await xhr.addEventListener("readystatechange", function () {
+  await xhr.addEventListener("readystatechange", async function () {
     if (this.readyState === 4) {
-      var resp = JSON.parse(xhr.responseText);
+      var resp = await JSON.parse(xhr.responseText);
       var hr = resp.heartrate.data;
       var tm = resp.time.data;
       /* 
@@ -693,7 +693,7 @@ async function gapAdjust(_actID){
 
       //adjHR will replace avgHR
       adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
-      console.log("the state is: "+this.readyState);
+
       console.log("total gap is: "+gap/60+" min");
       console.log("real active time is: "+activeTime/60+" min");
       console.log("adjusted HR is: "+adjHR+" BPM");
