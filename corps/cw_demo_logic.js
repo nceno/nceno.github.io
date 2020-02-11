@@ -712,7 +712,7 @@ function gapAdjust(_actID){
   xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 
-  return [activeTime, adjHR];
+  console.log("adjustment complete: "+adjHR+", "+ activeTime);
 }
 
 
