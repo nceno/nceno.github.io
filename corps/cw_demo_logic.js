@@ -693,7 +693,7 @@ function gapAdjust(_actID){
 
       //adjHR will replace avgHR
       adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
-
+      console.log("the state is: "+this.readyState);
       console.log("total gap is: "+gap/60+" min");
       console.log("real active time is: "+activeTime/60+" min");
       console.log("adjusted HR is: "+adjHR+" BPM");
@@ -704,9 +704,9 @@ function gapAdjust(_actID){
       }*/
       //---- /gap detection -----
     }
-    else{
+    /*else{
       console.log("ERROR: gap detection failed."); 
-    } 
+    }*/ 
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/activities/'+_actID+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
   xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
@@ -845,7 +845,7 @@ function getActivities(){
 
       data.forEach(function(_A){
         if(_A.id==bestID){
-          console.log(_A);
+          //console.log(_A);
           dispHR = _A.average_heartrate; //needs to be adjusted
           dispMins = _A.elapsed_time; //may need adjusted
           dispTimeHours = new Date(_A.start_date).getHours()//-_A.utc_offset/3600;  may need to use start_date_local
