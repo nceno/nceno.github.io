@@ -1,4 +1,4 @@
-//77u7uu7
+//7rrrrrrr
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -59,7 +59,7 @@ async function makeWorkoutPage(){
                       var theirMins = result[1]; 
                       var theirReward = result[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
-                      var avatar = result[4];
+                      var avatar = await result[4];
 
                       
                       switch(avatar){
