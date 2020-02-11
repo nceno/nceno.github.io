@@ -749,13 +749,13 @@ function getActivities(){
         if(data[i].manual == false && data[i].has_heartrate == true){
           var HRvalid= false;
           if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
-          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date_local, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
+          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
           j++;
         }
         if(data[i].manual == false && data[i].distance > 0){
           var GPSvalid= false;
           if(data[i].distance>1000 && data[i].average_speed<speedLimit && data[i].average_speed>speedLow) {GPSvalid =true;}
-          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date_local, KMreward*data[i].distance/1000, GPSvalid]);
+          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date, KMreward*data[i].distance/1000, GPSvalid]);
           k++;
         }
         else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
