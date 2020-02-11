@@ -773,7 +773,8 @@ function getActivities(){
 
       //do gap adjustment on HR[] here
       HR.forEach(async function(_H){
-        await console.log("gap adjusted: "+gapAdjust(_H[0]));
+        console.log("gap adjusted: "+ await gapAdjust(_H[0]));
+
       });
 
       
