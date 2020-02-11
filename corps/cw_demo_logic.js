@@ -846,7 +846,7 @@ function getActivities(){
           console.log(_A);
           dispHR = _A.average_heartrate; //needs to be adjusted
           dispMins = _A.elapsed_time; //may need adjusted
-          dispTimeHours = new Date(_A.start_date_local).getHours();
+          dispTimeHours = new Date(_A.start_date_local).getHours()+_A.utc_offset/3600;
           if(dispTimeHours%12>=0){
             if(dispTimeHours%12==0){
               dispTimeHours = 12;
@@ -857,6 +857,7 @@ function getActivities(){
           else{
             period = "am";
           }
+          _A.utc_offset/3600
           dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
           dispSpeed = _A.average_speed;
           dispDist = _A.distance;
