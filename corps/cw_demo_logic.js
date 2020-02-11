@@ -27,7 +27,7 @@ function makeWorkoutPage(){
 
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
-    function(error, resultA) {
+    async function(error, resultA) {
       if (!error){
         var start = parseInt(resultA[0]);
         var dur = parseInt(resultA[1]);
@@ -46,14 +46,14 @@ function makeWorkoutPage(){
         for(var i= 0; i<compcount; i++){
           console.log("----------------------- next iteration----------");
           console.log("i= "+i);
-          NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
-            async function(error, resultB) {
+            function(error, resultB) {
               if (!error){
                 console.log("i= "+i);
 
                 var playerID =  resultB[0]; 
-                var playerName = await resultB[1];
+                var playerName = resultB[1];
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
