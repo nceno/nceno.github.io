@@ -649,7 +649,7 @@ function updateGasPrice(){
 
   });
 }
-
+//--------------------------------------------------------------------------------------------------------------------------------------------
 //_actID --> activeTime0, adjHR1
 async function gapAdjust(_actID){
   var adjHR;
@@ -770,7 +770,7 @@ function getActivities(){
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
-
+//--------------------------------------------------------------------------------------------------------------------------------------------
       //do gap adjustment on HR[] here
       HR.forEach(function(_H){
         gapAdjust(_H[0]);
