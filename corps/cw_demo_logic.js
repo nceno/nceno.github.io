@@ -1,4 +1,4 @@
-//rwdsf
+//1112
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -43,7 +43,9 @@ async function makeWorkoutPage(){
         }
 
         //---get other players
-        for(var i= 0; i<compcount; i++){
+        //for(var i= 0; i<compcount; i++){
+        var i=0;
+        while(i<compcount){
           console.log("----------------------- next iteration----------");
           console.log("i= "+i);
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
@@ -131,8 +133,12 @@ async function makeWorkoutPage(){
               else{
                 console.error(error);
               }
+
+              //i++;//////////////////////------------------------debug
             }
           );
+
+          i++; //----------debug
         }//end for
         //---/ get other players
       }
