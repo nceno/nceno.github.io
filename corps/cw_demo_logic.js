@@ -651,7 +651,7 @@ function updateGasPrice(){
 }
 
 //_actID --> activeTime0, adjHR1
-function async gapAdjust(_actID){
+async function gapAdjust(_actID){
   var adjHR;
   var activeTime;
 
