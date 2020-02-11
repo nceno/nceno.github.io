@@ -718,14 +718,14 @@ async function gapAdjust(_actID){
 
 //gets best activity from strava
 
-var speedLimit = 4.5;
-var speedLow = 1.4;
-var BPMthresh = 99;
-var sesLow = 1200;
+var speedLimit = 4.5; //in m/s
+var speedLow = 1.4; //in m/s
+var BPMthresh = 99; 
+var sesLow = 1200; //in s
 var HRreward = 3;
 var KMreward = 1;
 var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 360); //can change "1" day to "20" days for testing.
+placeholderDate.setDate(placeholderDate.getDate() - 56); //can change "1" day to "20" days for testing.
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 //original went here...
@@ -866,7 +866,7 @@ function getActivities(){
           dispValue = Math.round(bestVal);
         }
       });
-      console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
+      //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
       if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
       if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
       $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
