@@ -729,11 +729,11 @@ placeholderDate.setDate(placeholderDate.getDate() - 56); //can change "1" day to
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 //original went here...
-function getActivities(){
+async function getActivities(){
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  xhr.addEventListener("readystatechange", function(){
+  await xhr.addEventListener("readystatechange", async function(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       var data = JSON.parse(xhr.responseText);
@@ -772,8 +772,8 @@ function getActivities(){
       console.table(HR);
 //--------------------------------------------------------------------------------------------------------------------------------------------
       //do gap adjustment on HR[] here
-      HR.forEach(function(_H){
-        gapAdjust(_H[0]);
+      await HR.forEach(async function(_H){
+        await gapAdjust(_H[0]);
       });
 
       
@@ -887,6 +887,7 @@ $("#dispTime").html("-");
 $("#dispSpeed").html("-");
 $("#dispDist").html("-"); 
 $("#dispValue").html("-");
+
 
 
 
