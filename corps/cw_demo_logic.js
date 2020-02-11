@@ -1,4 +1,4 @@
-console.log("thsdfdae");
+console.log("yeah buddy");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -161,8 +161,8 @@ function gapAdjust(){
         console.log("adjusted HR is: "+adjHR+" BPM");
 
         //this is the HR update step.....
-        H[1]=adjHR;
-        H[2]=activeTime;
+        _H[1]=adjHR;
+        _H[2]=activeTime;
 
         //---- /gap detection -----
       } 
@@ -326,7 +326,7 @@ function makeWorkoutPage(){
   //prepare the workouts to be filtered and logged
   makeActivities();
 
-  setTimeout(function(){ gapAdjust(); }, 3000);
+  setTimeout(function(){ gapAdjust(); }, 1500);
 
   
 
