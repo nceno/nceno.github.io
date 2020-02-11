@@ -1,4 +1,4 @@
-//7rrrrrrrccc
+//ggghe
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -20,10 +20,10 @@ function signOut(){
 async function makeWorkoutPage(){
   //---get goal params
 
-  $('#me').empty();
+  /*$('#me').empty();
   for(var j=0; j<10; j++){
     $('#entry'+j).remove();
-  }
+  }*/
 
   await NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
@@ -36,6 +36,11 @@ async function makeWorkoutPage(){
         var remainingTokens = parseInt(result[4]);
         var bpmReward = parseInt(result[5]); //per 10mins
         var kmReward = parseInt(result[6]); //per km
+
+        $('#me').empty();
+        for(var j=0; j<compcount; j++){
+          $('#entry'+j).remove();
+        }
 
         //---get other players
         for(var i= 0; i<compcount; i++){
