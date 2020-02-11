@@ -1,4 +1,4 @@
-//yo
+//heehaw
 
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
@@ -41,22 +41,22 @@ function makeWorkoutPage(){
         var kmReward = parseInt(result[6]); //per km
 
         $('#me').empty();
-        for(var j=0; j<10; j++){
+/*        for(var j=0; j<10; j++){
           $('#entry'+j).remove();
-        }
+        }*/
 
         //---get other players
         for(var i=0; i<compcount; i++){
 
           NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
-            function(error, result) {
+            async function(error, result) {
               if (!error){
                 //console.log(result);
                 var playerID = result[0]; 
                 var playerName = result[1];
                 //---call that player
-                NcenoBrands.methods.getPlayer(_goalID, playerID)
+                await NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   async function(error, result) {
                     if (!error){
@@ -66,7 +66,7 @@ function makeWorkoutPage(){
                       var theirMins = result[1]; 
                       var theirReward = result[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
-                      var avatar =  result[4];
+                      var avatar =  await result[4];
 
                       
                       switch(avatar){
@@ -92,17 +92,17 @@ function makeWorkoutPage(){
                         
                         case "5":
                           avatar = "runner5";
-                          break;
-                        
+                          break; 
                       }
 
                       if(playerID == Cookies.get('stravaID')){
                         //post to top if it's me
                         console.log("it's me..."+playerName+"...i= "+i);
-                        
-                        $("#me").prepend(
-                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
-                        );
+                        if(! $('#me').length){
+                          $("#me").prepend(
+                            '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
+                          );
+                        }
                         //populate my quick stats .........
                         $("#progressPerc").html(theirProgress+'%');
                         $("#user").html(playerName);                
