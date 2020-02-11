@@ -1,4 +1,4 @@
-console.log("777");
+console.log("xxx");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -27,15 +27,15 @@ async function makeWorkoutPage(){
 
   await NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
-    async function(error, result) {
+    async function(error, resultA) {
       if (!error){
-        var start = parseInt(result[0]);
-        var dur = parseInt(result[1]);
-        var tokenCap = parseInt(result[2]);
-        var compcount = parseInt(result[3]);
-        var remainingTokens = parseInt(result[4]);
-        var bpmReward = parseInt(result[5]); //per 10mins
-        var kmReward = parseInt(result[6]); //per km
+        var start = parseInt(resultA[0]);
+        var dur = parseInt(resultA[1]);
+        var tokenCap = parseInt(resultA[2]);
+        var compcount = parseInt(resultA[3]);
+        var remainingTokens = parseInt(resultA[4]);
+        var bpmReward = parseInt(resultA[5]); //per 10mins
+        var kmReward = parseInt(resultA[6]); //per km
 
         $('#me').empty();
         for(var j=0; j<compcount; j++){
@@ -48,24 +48,24 @@ async function makeWorkoutPage(){
           console.log("i= "+i);
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
-            async function(error, result) {
+            async function(error, resultB) {
               if (!error){
                 console.log("i= "+i);
 
-                var playerID = await result[0]; 
-                var playerName = result[1];
+                var playerID = await resultB[0]; 
+                var playerName = resultB[1];
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
-                  async function(error, result) {
+                  async function(error, resultC) {
                     if (!error){
                       //console.log(result);
                       
-                      var theirKms = result[0]; 
-                      var theirMins = result[1]; 
-                      var theirReward = result[2];
+                      var theirKms = resultC[0]; 
+                      var theirMins = resultC[1]; 
+                      var theirReward = resultC[2];
                       var theirProgress = Math.round(100*theirReward/tokenCap);
-                      var avatar = result[4];
+                      var avatar = resultC[4];
 
                       
                       switch(avatar){
