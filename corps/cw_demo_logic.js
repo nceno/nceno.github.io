@@ -43,7 +43,7 @@ function makeWorkoutPage(){
         }
 
         //---get other players
-        for(var i= -1; i<compcount; ++i){
+        for(var i= 0; i<compcount; i++){
           console.log("----------------------- next iteration----------");
           console.log("i= "+i);
           await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
@@ -52,8 +52,8 @@ function makeWorkoutPage(){
               if (!error){
                 console.log("i= "+i);
 
-                var playerID = await resultB[0]; 
-                var playerName = resultB[1];
+                var playerID =  resultB[0]; 
+                var playerName = await resultB[1];
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
