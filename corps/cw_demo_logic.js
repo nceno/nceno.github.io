@@ -772,7 +772,9 @@ function getActivities(){
       console.table(HR);
 
       //do gap adjustment on HR[] here
-
+      HR.forEach(async function(_H){
+        await console.log("gap adjusted: "+gapAdjust(_H[0]));
+      }
 
       
       //find the max
@@ -846,7 +848,7 @@ function getActivities(){
           console.log(_A);
           dispHR = _A.average_heartrate; //needs to be adjusted
           dispMins = _A.elapsed_time; //may need adjusted
-          dispTimeHours = new Date(_A.start_date).getHours()//-_A.utc_offset/3600;
+          dispTimeHours = new Date(_A.start_date).getHours()//-_A.utc_offset/3600;  may need to use start_date_local
           if(dispTimeHours%12>=0){
             if(dispTimeHours%12==0){
               dispTimeHours = 12;
