@@ -1,4 +1,4 @@
-console.log("htrhw");
+console.log("2224445");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -27,7 +27,7 @@ function makeWorkoutPage(){
 
   NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
-    async function(error, resultA) {
+    function(error, resultA) {
       if (!error){
         var start = parseInt(resultA[0]);
         var dur = parseInt(resultA[1]);
@@ -43,10 +43,10 @@ function makeWorkoutPage(){
         }
 
         //---get other players
-        for(var i= 0; i<compcount+5; i++){
+        for(var i= 0; i<compcount; i++){
           console.log("----------------------- next iteration----------");
           console.log("i= "+i);
-          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
           .call({from: Cookies.get('userWallet')},
             async function(error, resultB) {
               if (!error){
