@@ -1,4 +1,4 @@
-console.log("here");
+console.log("thsdfdae");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -324,9 +324,11 @@ function makeWorkoutPage(){
   
 
   //prepare the workouts to be filtered and logged
-  makeActivities().then( function(){
-    gapAdjust();
-  });
+  makeActivities();
+
+  setTimeout(function(){ gapAdjust(); }, 3000);
+
+  
 
 
 
