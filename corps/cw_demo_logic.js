@@ -1,4 +1,4 @@
-console.log("cgea");
+console.log("cgdgadafha");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -17,7 +17,7 @@ function signOut(){
   location.reload();
 }
 
-async function makeWorkoutPage(){
+function makeWorkoutPage(){
   //---get goal params
 
   /*$('#me').empty();
@@ -25,7 +25,7 @@ async function makeWorkoutPage(){
     $('#entry'+j).remove();
   }*/
 
-  await NcenoBrands.methods.getGoalParams(_goalID)
+  NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     async function(error, resultA) {
       if (!error){
