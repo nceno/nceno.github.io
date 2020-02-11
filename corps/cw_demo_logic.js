@@ -1,7 +1,14 @@
-//hi there
+//yo
 
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
+
+$("#dispHR").html("-"); 
+$("#dispMins").html("-");
+$("#dispTime").html("-"); 
+$("#dispSpeed").html("-");
+$("#dispDist").html("-"); 
+$("#dispValue").html("-");
 
 function signOut(){
   Cookies.remove('access_token');
@@ -61,7 +68,7 @@ function makeWorkoutPage(){
                       var theirProgress = Math.round(100*theirReward/tokenCap);
                       var avatar =  result[4];
 
-                      //theirLastLogTime = result[3];
+                      
                       switch(avatar){
                         case "0":
                           avatar = "runner0";
@@ -89,17 +96,10 @@ function makeWorkoutPage(){
                         
                       }
 
-                      //.prepend first entry if it's not me
-                       /*if(i==0){
-                        console.log("first post.."+playerName+"...i= "+i);
-                        $("#entry0").prepend(
-                          '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div>'
-                        );
-                      }else if(playerID == Cookies.get('stravaID') && i>0){*/
                       if(playerID == Cookies.get('stravaID')){
                         //post to top if it's me
                         console.log("it's me..."+playerName+"...i= "+i);
-                        //$("#entry0").before(
+                        
                         $("#me").prepend(
                           '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
                         );
@@ -656,7 +656,7 @@ function updateGasPrice(){
 
 
 ///////////////////////////////////////
-//////////////------ gapAdjust()
+//////////////vvvvvvvvvv gapAdjust()
 ///////////////////////////////////////
 
 
@@ -706,7 +706,7 @@ async function gapAdjust(_actID){
   xhr2.send(stuff2);
 }
 ///////////////////////////////////////
-//////////////------ gapAdjust()
+//////////////^^^^^^^^^^ gapAdjust()
 ///////////////////////////////////////
 
 
@@ -717,7 +717,7 @@ async function gapAdjust(_actID){
 
 
 ///////////////////////////////////////
-//////////////------ getActivities()
+//////////////vvvvvvvvv getActivities()
 ///////////////////////////////////////
 var speedLimit = 4.5; //in m/s
 var speedLow = 1.4; //in m/s
@@ -729,6 +729,10 @@ var placeholderDate = new Date();
 placeholderDate.setDate(placeholderDate.getDate() - 56); //can change "1" day to "20" days for testing.
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
+
+var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
+var toLog = new Array(3);
 
 
 //---- start the function
@@ -742,8 +746,8 @@ async function getActivities(){
       var data = JSON.parse(xhr.responseText);
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.
-      var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
-      var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
+      /*var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+      var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5*/
       let i=0;
       let j=0;
       let k=0;
@@ -767,11 +771,12 @@ async function getActivities(){
         i++;
       }
 
-      //show the workouts
+      //echo the workouts
       console.log("the "+k+" GPS workouts are: ");
       console.table(GPS);
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
+
       //find the max
       var GPSMaxID = null;
       var hrMaxID = null;
@@ -867,14 +872,9 @@ async function getActivities(){
   xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
   xhr.send(stuff);
 }
-$("#dispHR").html("-"); 
-$("#dispMins").html("-");
-$("#dispTime").html("-"); 
-$("#dispSpeed").html("-");
-$("#dispDist").html("-"); 
-$("#dispValue").html("-");
+
 ///////////////////////////////////////
-//////////////------ getActivities()
+//////////////^^^^^^^^^^ getActivities()
 ///////////////////////////////////////
 
 
