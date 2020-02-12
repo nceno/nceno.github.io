@@ -1,6 +1,70 @@
-console.log("ttttt");
+console.log("5463dfdffdf");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
+
+var targetName;
+var targetPrice;
+function setTarget(item){
+  targetName = item.name;
+  targetPrice = item.price;
+  console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
+}
+
+function buy(){
+  //deposit tokens here...
+  AleToken.methods.transfer(
+    adminWallet,
+    targetPrice
+  )
+  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+    function(error, result) {
+      if (!error){
+        $("#createLoader").show();
+        console.log(result);
+      }
+      else
+      console.error(error);
+    }
+  ).once('confirmation', function(confNumber, receipt){
+    console.log(receipt.status);
+    if(receipt.status === true){
+      correctNonce++;
+      //---begin make order
+        NcenoBrands.methods.makeOrder(
+          goalID, 
+          companyID, 
+          web3.utils.padRight(web3.utils.randomHex(3),6),
+          stravaID, 
+          targetName, 
+          targetPrice
+        ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+          function(error, result) {
+            if (!error){
+
+              
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
+        ).once('confirmation', function(confNumber, receipt){ 
+          console.log(receipt.status);
+          if(receipt.status === true){
+            updateNonce();
+            $("#joinChallengeLoader").hide();
+          }
+          else{
+            
+            console.log("join error.");
+          } 
+        }).once('error', function(error){console.log(error);});
+      //---end makeorder
+    }
+    else{
+      console.log('error. not enough funds?');
+    }
+  });
+}
 
 ///////////////////////////////////////
 //////////////vvvvvvvvv getActivities()
@@ -609,74 +673,6 @@ $("#joinModBtn").click(function() {
 });
 
 
-var targetName;
-var targetPrice;
-function setTarget(item){
-  targetName = item.name;
-  targetPrice = item.price;
-}
-
-function buy(){
-  //deposit tokens here...
-  AleToken.methods.transfer(
-    adminWallet,
-    targetPrice
-  )
-  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        $("#createLoader").show();
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){
-    console.log(receipt.status);
-    if(receipt.status === true){
-      correctNonce++;
-      //---begin make order
-        NcenoBrands.methods.makeOrder(
-          goalID, 
-          companyID, 
-          web3.utils.padRight(web3.utils.randomHex(3),6),
-          stravaID, 
-          targetName, 
-          targetPrice
-        ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-          function(error, result) {
-            if (!error){
-
-              $("#joinChallenge").hide();
-              $("#codeField").hide();
-              $("#nameChangeField").hide();
-              $("#joinChallengeLoader").show();
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-        ).once('confirmation', function(confNumber, receipt){ 
-          console.log(receipt.status);
-          if(receipt.status === true){
-            updateNonce();
-            $("#joinChallengeLoader").hide();
-          }
-          else{
-            $("#joinChallenge").hide();
-            $("#codeField").hide();
-            $("#nameChangeField").hide();
-            $('#joinChallengeFail').html('<p>Sorry, invite code invalid or challenge has stopped.</p>');
-            console.log("join error.");
-          } 
-        }).once('error', function(error){console.log(error);});
-      //---end makeorder
-    }
-    else{
-      console.log('error. not enough funds?');
-    }
-  });
-}
 
 //randomizes the goalID
 /*function randGoalID(){
