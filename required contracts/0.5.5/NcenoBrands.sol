@@ -380,7 +380,7 @@ contract BrandToken is RelayRecipient{
     return theTotalSupply;
   }
   
-  function balanceOf(address _owner) public returns (uint256 balance) {
+  function balanceOf(address _owner) public view returns (uint256 balance) {
     return balances[_owner];
   }
   
@@ -408,7 +408,7 @@ contract BrandToken is RelayRecipient{
     } else {return false;}
   }
   
-  function allowance(address _owner, address _spender) public returns (uint256 remaining) {
+  function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
     return allowed[_owner][_spender];
   }
 

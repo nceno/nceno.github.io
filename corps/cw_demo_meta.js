@@ -29,7 +29,7 @@ const item3={
 const item4={
 	name: 'Happy hour',
 	//price: 450
-	price: 450
+	price: 4
 }
 
 const item5={

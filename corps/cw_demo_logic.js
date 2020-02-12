@@ -514,7 +514,18 @@ function makeWorkoutPage(){
 }
 
 function makeSpendPage(){
-
+  AleToken.methods.balanceOf(
+    Cookies.get('userWallet')
+  )
+  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+    function(error, result) {
+      if (!error){
+        $("#tokenBalance").html(result+" "+TOKENSYMBOL);
+      }
+      else
+      console.error(error);
+    }
+  );
 }
 
 function makeOrdersPage(){
