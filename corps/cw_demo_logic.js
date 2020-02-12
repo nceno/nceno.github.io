@@ -8,7 +8,9 @@ var orderNo;
 function setTarget(item){
   targetName = item.name;
   targetPrice = item.price;
-  console.log("item is: "+targetName+" for "+targetPrice+ " tokens")
+  console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
+  $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you are about to buy <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>');
+
 }
 
 $("#buyLoader").hide();
