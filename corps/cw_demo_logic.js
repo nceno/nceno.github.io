@@ -4,12 +4,14 @@ console.log("5463dfdffdf");
 
 var targetName;
 var targetPrice;
+var orderNo;
 function setTarget(item){
   targetName = item.name;
   targetPrice = item.price;
-  console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
+  console.log("item is: "+targetName+" for "+targetPrice+ " tokens")
 }
 
+$("#buyLoader").hide();
 function buy(){
   //deposit tokens here...
   AleToken.methods.transfer(
@@ -19,7 +21,8 @@ function buy(){
   .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
-        $("#createLoader").show();
+        $("#buyLoader").show();
+        orderNo = web3.utils.padRight(web3.utils.randomHex(3),6);
         console.log(result);
       }
       else
@@ -33,8 +36,8 @@ function buy(){
         NcenoBrands.methods.makeOrder(
           goalID, 
           companyID, 
-          web3.utils.padRight(web3.utils.randomHex(3),6),
-          stravaID, 
+          orderNo,
+          Cookies.get('stravaID'), 
           targetName, 
           targetPrice
         ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
@@ -51,11 +54,12 @@ function buy(){
           console.log(receipt.status);
           if(receipt.status === true){
             updateNonce();
-            $("#joinChallengeLoader").hide();
+            $("#buyLoader").hide();
+            $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName'+</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
           }
           else{
             
-            console.log("join error.");
+            console.log("buy error.");
           } 
         }).once('error', function(error){console.log(error);});
       //---end makeorder

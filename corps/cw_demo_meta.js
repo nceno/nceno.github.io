@@ -24,7 +24,7 @@ const item3={
 }
 
 const item4={
-	name: 'Casual dress',
+	name: 'Happy hour',
 	price: 450
 }
 
