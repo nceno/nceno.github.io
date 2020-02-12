@@ -62,6 +62,8 @@ contract NcenoBrands is RelayRecipient{
     address owner;
     uint compCount;
     address token;
+    uint cutoff;
+
     mapping(uint=>uint) playerSet;
     mapping(uint=>uint) indexedPlayerID;
     mapping(uint=>uint) playerKms;
@@ -142,7 +144,7 @@ contract NcenoBrands is RelayRecipient{
     emit MakeCompany(_companyID, _name, _owner);
   }
 
-  function host(bytes memory _goalID, uint _start, uint _days, uint _cap, uint _pot, uint _KmReward, uint _BpmReward, address _token) public payable{
+  function host(bytes memory _goalID, uint _start, uint _days, uint _cap, uint _pot, uint _KmReward, uint _BpmReward, address _token, uint _cutoff) public payable{
     goal memory createdGoal = goal({
       halted: false,
       goalID: _goalID,
@@ -155,7 +157,8 @@ contract NcenoBrands is RelayRecipient{
       bpmTokenRate:_BpmReward,
       owner: getSender(),
       compCount:0,
-      token: _token
+      token: _token,
+      cutoff: _cutoff
     });
 
     //replace getSender() with _owner parameter?
@@ -172,7 +175,8 @@ contract NcenoBrands is RelayRecipient{
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
-      && goalAt[_goalID].codeOk[_inviteCode]==true,"error");
+      && goalAt[_goalID].codeOk[_inviteCode]==true
+      && goalAt[_goalID].compCount<goalAt[_goalID].cutoff,"error");
       
 
     if(userExists[_stravaID] == false){
