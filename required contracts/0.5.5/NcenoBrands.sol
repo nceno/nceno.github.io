@@ -315,8 +315,8 @@ contract NcenoBrands is RelayRecipient{
 
   //used to generate order list
   function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, uint, uint, uint, bool, bool){
-    return(companyAt[_companyID].indexedOrder[_index].item, companyAt[_companyID].indexedOrder[_index].stravaBuyer, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded, companyAt[_companyID].indexedOrder[_index].settled);    
-    //companyID, index --> item0, buyerID1, price2, date3, refunded4, settled5
+    return(companyAt[_companyID].indexedOrder[_index].item, pofileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded, companyAt[_companyID].indexedOrder[_index].settled);    
+    //companyID, index --> item0, buyerName1, price2, date3, refunded4, settled5
   }
 
   //used to generate player order history
@@ -325,9 +325,9 @@ contract NcenoBrands is RelayRecipient{
   }
 
   //used for order search
-  function searchOrders(bytes memory _orderNum) public view returns(string memory, uint, uint, uint, bool, bool){
-    return(orderAt[_orderNum].item, orderAt[_orderNum].stravaBuyer, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].settled );
-    //orderNo --> item0, buyerID1, price2, date3, refunded4, settled5
+  function searchOrders(bytes memory _orderNum) public view returns(string memory, string, uint, uint, bool, bool){
+    return(orderAt[_orderNum].item, profileOf[orderAt[_orderNum].stravaBuyer].userName, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].settled );
+    //orderNo --> item0, buyerName1, price2, date3, refunded4, settled5
   }
 
   //assuming each challenge has its own contract, this gets the order count for a player in that challenge.

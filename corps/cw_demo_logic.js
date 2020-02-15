@@ -548,6 +548,51 @@ function makeSpendPage(){
 
 }//end makeSpendPage
 
+function orderSearch(){
+  NcenoBrands.methods.searchOrders(
+      $("#searchField").val()
+    )
+    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+      async function(error, result) {
+        if (!error){
+          await $("#searchedOrder").html('<tr id="'+$("#searchField").val()+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget("'+$("#searchField").val()+'");" data-whatever="@mdo"><td id = "order'+$("#searchField").val()+'">'+$("#searchField").val()+'</td><td id = "name'+$("#searchField").val()+'">'+result[1]+'</td><td id = "item'+$("#searchField").val()+'">'+result[0]+'</td><td id = "cost'+$("#searchField").val()+'">'+result[2]+'</td><td id = "date'+$("#searchField").val()+'">'+Date(result[3]).toDateString()+'</td></tr>');
+        }
+        //item0, buyername1, price2, date3, refunded4, settled5
+        else
+        console.error(error);
+      }
+    );
+}
+
+var refTarget;
+function setRefTarget(_orderNo){
+  refTarget = _orderNo;
+}
+
+function setOrderStatus(_orderNo, _action){
+  if(_action == "refunded"){
+    //nceno refund
+    console.log("issuing a refund!");
+    $('#status'+_orderNo).css({color: "#333"});
+    $('#status'+_orderNo).html("refunded");
+  }
+  else if(_action == "settled"){
+    //nceno settle
+    console.log("settling the sale!");
+    $('#status'+_orderNo).css({color: "#333"});
+    $('#status'+_orderNo).html("complete");
+  } 
+
+  $('#order'+_orderNo).css({color: "#333"});
+  $('#name'+_orderNo).css({color: "#333"});
+  $('#item'+_orderNo).css({color: "#333"});
+  $('#cost'+_orderNo).css({color: "#333"});
+  $('#date'+_orderNo).css({color: "#333"});
+  $('#status'+_orderNo).css({color: "#333"});
+  $('#status'+_orderNo).html("complete");
+
+}
+
 function makeOrdersPage(){
 
 }

@@ -503,17 +503,8 @@
                                 <th scope="col">date</th>
                               </tr>
                             </thead>
-                            <tbody >
-                              <tr>
-                                <td style="color:#ccff00" id="srOrder"></td>
-                                <td style="color:#ccff00" id="srName"></td>
-                                <td style="color:#ccff00" id="srItem"></td>
-                                <td style="color:#ccff00" id= "srCost"></td>
-                                <td style="color:#ccff00" id= "srDate"></td>
-                                
-                                <!-- <td><button type="button" id="srJoin" onclick="updateEthPrice('joinSearch')" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSrJoin" data-whatever="@mdo">Join</button></td> -->
-                                <td><button type="button" id="srJoin" onclick="search()" class="btn btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#refundModal" data-whatever="@mdo">Refund</button></td>
-                              </tr>
+                            <tbody id="searchedOrder">
+
                             </tbody>
                           </table>
                       </div>
@@ -535,59 +526,24 @@
                             <th scope="col">item</th>
                             <th scope="col">price (SUN)</th>
                             <th scope="col">date</th>
-                            <th scope="col"></th>
+                            <th scope="col">status</th>
                           </tr>
                         </thead>
                         
                           <tbody id="orderList">
                             
-                            <tr id="U1">
-                              <td id = "orderU1" ondblclick="console.log('I double clicked!');">0x1ad0ff</td>
-                              <td id = "nameU1">casey.huang6</td>
-                              <td id = "itemU1">Valencia Ale</td>
-                              <td id = "costU1">720</td>
-                              <td id = "dateU1">Dec 21, 9:45pm</td>
-                              <td id = "refundU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
-                              
+                            <tr id="0xccd1f">
+                              <td id = "order0xccd1f" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('0xccd1f');" data-whatever="@mdo" style="color:#ccff00">0x1ad0ff</td>
+                              <td id = "name0xccd1f">casey.huang6</td>
+                              <td id = "item0xccd1f">Valencia Ale</td>
+                              <td id = "cost0xccd1f" >720</td>
+                              <td id = "date0xccd1f">Dec 21, 9:45pm</td>
+                              <td id = "status0xccd1f" style="color:#f442b3;">new</td>
                             </tr>
 
-                            <tr id="U2">
-                              <td id = "orderU1">0xacf993</td>
-                              <td id = "nameU1">jeffzhao2</td>
-                              <td id = "itemU1">Hefty Red</td>
-                              <td id = "costU1">95</td>
-                              <td id = "dateU1">Dec 21, 9:47pm</td>
-                              
-                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
-                              <span id="idNumberU1"></span>
-                              <span id="tstampU1"></span>
-                            </tr>
+                            
 
-                            <tr id="U3">
-                              <td id = "orderU1">0xccff00</td>
-                              <td id = "nameU1">joe</td>
-                              <td id = "itemU1">Pale Jade</td>
-                              <td id = "costU1">950</td>
-                              <td id = "dateU1">Dec 22, 5:34pm</td>
-                              
-                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
-                              <span id="idNumberU1"></span>
-                              <span id="tstampU1"></span>
-                            </tr>
-
-                            <tr id="U4">
-                              <td id = "orderU1">0x3d11a5</td>
-                              <td id = "nameU1">codyg3354</td>
-                              <td id = "itemU1">Koshi Light</td>
-                              <td id = "costU1">750</td>
-                              <td id = "dateU1">Dec 22, 6:03pm</td>
-                              
-                              <td id = "btnU1"><button type="button" id="soonJoin1" class="btn btn-rounded btn-primary px-1 py-0 ml-0 mt-0" data-toggle="modal" data-target="#popupSoonJoin" onclick="updateEthPrice('joinSoonModalBtn')" data-whatever="@mdo">Refund</button></td>
-                              <span id="idNumberU1"></span>
-                              <span id="tstampU1"></span>
-                            </tr>
-
-                            <!--upcoming challenges go here -->
+                        
 
                           </tbody>
                         
@@ -679,8 +635,8 @@
 
     <!-- modals -->
 
-      <!--create modal-->
-      <div class="modal fade" id="popupCreate" tabindex="-1" role="dialog" aria-labelledby="popupCreate" aria-hidden="true">
+      <!--orderStatus modal-->
+      <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="image image-overlay" style="background-image:url(../app/assets/images/metal.jpg)"></div>
@@ -690,7 +646,7 @@
               </button>
             </div>
             <div class="modal-body text-center  text-white">
-              <h3>Confirm your challenge</h3>
+              <h3>Choose an action for this order</h3>
               <p id="goalEcho"></p>
               <span id="createFail"><span>
             </div>
@@ -698,24 +654,12 @@
               <div class="container-fluid">
                 <div class="row gutter-1">
                   
-                  <div class="col-4">
-                    <button id="cancelBtn" type="button" class="btn  btn-rounded" data-dismiss="modal">Cancel</button>
+                  <div class="col-6">
+                    <button id="settleBtn" onclick="setOrderStatus(refTarget,'settled');" type="button" class="btn btn-block btn-rounded btn-primary">Mark as settled</button>
                   </div>
-                  <div class="col-8">
-                    <button id="hostBtn" type="button" class="btn btn-block btn-rounded btn-primary">Host this challenge</button>
+                  <div class="col-6">
+                    <button id="issueRefund" onclick="setOrderStatus(refTarget,'refunded');" type="button" class="btn btn-block btn-rounded btn-primary">Issue refund</button>
                   </div>
-                </div>
-                <div id="createLoader" class="col text-center mb-2">
-                  <p>Please wait  a minute. We're writing your challenge to the blockchain...</p>
-                  <img  src="../app/assets/images/loader.svg"> 
-                </div>
-                <div id="createSuccess" class="col text-center mb-2">
-                  <p>Success!</p>
-                  <p style="color:white;" id="chalID"></p>
-                </div>
-
-                <div id="createLoader" class="col text-center mb-2">
-                  <span id="createReminder"></span>
                 </div>
 
               </div>
@@ -723,7 +667,7 @@
           </div>
         </div>
       </div>
-      <!-- / create modal-->
+      <!-- / orderStatus modal-->
 
       <!-- join modal-->
       <div class="modal fade" id="popupSoonJoin" tabindex="-1" role="dialog" aria-labelledby="popupSoonJoin" aria-hidden="true">
