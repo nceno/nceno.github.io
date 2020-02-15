@@ -86,8 +86,12 @@ contract NcenoBrands is RelayRecipient{
     string userName;
     uint avatar;
     mapping(bytes=>order) orderSet;
+    uint orderCt;
     mapping(bytes=>goal) goalSet;
   }
+  mapping(uint=>mapping(uint=>bytes)) playerOrders; //stravaID => orderIndex => orderNum
+
+
   mapping(uint=>player) public profileOf;
   mapping(uint=>bool) public userExists;
   uint userCount=0;
@@ -262,6 +266,9 @@ contract NcenoBrands is RelayRecipient{
     orderAt[_orderNum]=createdOrder;
     orderCount++;
     companyAt[_companyID].orderCount++;
+
+    orderAt[playerOrders[_stravaID][orderCt]] = createdOrder;
+    profileOf[_stravaID].orderCt++;
     
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
   }
@@ -312,10 +319,20 @@ contract NcenoBrands is RelayRecipient{
     //companyID, index --> item0, buyerID1, price2, date3, refunded4, settled5
   }
 
+  //used to generate player order history
+  function getIndexedPlayerOrder(uint _stravaID, uint _index) public view returns(bytes memory, string memory, uint, uint){
+    return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date )
+  }
+
   //used for order search
   function searchOrders(bytes memory _orderNum) public view returns(string memory, uint, uint, uint, bool, bool){
     return(orderAt[_orderNum].item, orderAt[_orderNum].stravaBuyer, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].settled );
     //orderNo --> item0, buyerID1, price2, date3, refunded4, settled5
+  }
+
+  //assuming each challenge has its own contract, this gets the order count for a player in that challenge.
+  function getPlayerOrderCt(uint _stravaID) public view returns(uint){
+    return(profileOf[_stravaID].orderCt);
   }
 
 
