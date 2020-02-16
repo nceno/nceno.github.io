@@ -1,4 +1,4 @@
-console.log("craf2f2b");
+console.log("dfsssssf2b");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -36,7 +36,7 @@ function makeSpendPage(){
             async function(error, result) {
               if (!error){
                 var theOrder = await result[0];
-                if(! $('#order'+result[0]).length) $("#orderHistory").append('<tr id="order'+result[0]+'"><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+new Date(result[3]).toDateString()+'</td></tr>');
+                if(! $('#order'+result[0]).length) $("#orderHistory").append('<tr id="order'+result[0]+'"><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+new Date(result[3]*1000).toDateString()+'</td></tr>');
               }
               else
               console.error(error);
