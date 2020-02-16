@@ -1,4 +1,4 @@
-console.log("456fgdf");
+console.log("crab");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -35,7 +35,8 @@ function makeSpendPage(){
           .call({from: Cookies.get('userWallet'), nonce: correctNonce},
             async function(error, result) {
               if (!error){
-                await if(! $('#order'+result[0]).length) $("#orderHistory").append('<tr id="order'+result[0]+'"><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+Date(result[3]).toDateString()+'</td></tr>');
+                var theOrder = await result[0];
+                if(! $('#order'+result[0]).length) $("#orderHistory").append('<tr id="order'+result[0]+'"><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+Date(result[3]).toDateString()+'</td></tr>');
               }
               else
               console.error(error);
