@@ -16,7 +16,7 @@ function setTarget(item){
 $("#buyLoader").hide();
 function buy(){
   //deposit tokens here...
-  AleToken.methods.transfer(
+  theToken.methods.transfer(
     adminWallet,
     targetPrice
   )
@@ -515,7 +515,7 @@ function makeWorkoutPage(){
 
 function makeSpendPage(){
   //show token balance
-  AleToken.methods.balanceOf(
+  theToken.methods.balanceOf(
     Cookies.get('userWallet')
   )
   .call({from: Cookies.get('userWallet'), nonce: correctNonce},
@@ -803,7 +803,7 @@ $("#hostBtn").click(function() {
     if(receipt.status === true){
       correctNonce++;
       //deposit tokens here...
-      AleToken.methods.transfer(
+      theToken.methods.transfer(
         contractAddress,
         pot
       )

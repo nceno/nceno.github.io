@@ -1,4 +1,4 @@
-var AleToken = new web3.eth.Contract([
+var theToken = new web3.eth.Contract([
 	{
 		"constant": true,
 		"inputs": [],
