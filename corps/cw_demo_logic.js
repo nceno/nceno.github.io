@@ -533,8 +533,9 @@ function makeSpendPage(){
     Cookies.get('stravaID')
   )
   .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    function(error, result) {
+    async function(error, result) {
       if (!error){
+        var playerOrderCt = await result;
         correctNonce++;
         //start making the list
         for(let i = 0; i<playerOrderCt; i++){
