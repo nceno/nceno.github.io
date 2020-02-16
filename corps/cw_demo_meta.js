@@ -11,29 +11,29 @@ const adminUserID_1 = '49092681';
 const item1={
 	name: 'Lunch delivery',
 	//price : 620
-	price : 61
+	price : 6
 }
 
 const item2={
 	name: 'Parking space',
 	//price: 700
-	price: 72
+	price: 7
 }
 
 const item3={
 	name: 'Half-day',
 	//price: 2200
-	price: 24
+	price: 2
 }
 
 const item4={
 	name: 'Happy hour',
 	//price: 450
-	price: 45
+	price: 4
 }
 
 const item5={
 	name: 'Dinner for 2',
 	//price: 9500
-	price: 94
+	price: 90
 }
