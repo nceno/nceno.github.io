@@ -1,6 +1,53 @@
-console.log("bbbbb");
+console.log("regw");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
+
+function makeSpendPage(){
+  //show token balance
+  TheToken.methods.balanceOf(
+    Cookies.get('userWallet')
+  )
+  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+    function(error, result) {
+      if (!error){
+        $("#tokenBalance").html(result+" "+TOKENSYMBOL);
+      }
+      else
+      console.error(error);
+    }
+  );
+
+  //get the order count
+  NcenoBrands.methods.getPlayerOrderCt(
+    Cookies.get('stravaID')
+  )
+  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+    async function(error, result) {
+      if (!error){
+        var playerOrderCt = await result;
+        correctNonce++;
+        //start making the list
+        for(let i = 0; i<playerOrderCt; i++){
+          NcenoBrands.methods.getIndexedPlayerOrder(
+            Cookies.get('stravaID'),
+            i
+          )
+          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+            async function(error, result) {
+              if (!error){
+                await $("#orderHistory").append('<tr><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+Date(result[3]).toDateString()+'</td></tr>');
+              }
+              else
+              console.error(error);
+            }
+          );
+        }
+      }
+      else
+      console.error(error);
+    }
+  );
+}//end makeSpendPage
 
 var targetName;
 var targetPrice;
@@ -513,56 +560,7 @@ function makeWorkoutPage(){
 
 }
 
-function makeSpendPage(){
-  //show token balance
-  TheToken.methods.balanceOf(
-    Cookies.get('userWallet')
-  )
-  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    function(error, result) {
-      if (!error){
-        $("#tokenBalance").html(result+" "+TOKENSYMBOL);
-      }
-      else
-      console.error(error);
-    }
-  );
 
-  //get the order count
-  NcenoBrands.methods.getPlayerOrderCt(
-    Cookies.get('stravaID')
-  )
-  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    async function(error, result) {
-      if (!error){
-        var playerOrderCt = await result;
-        correctNonce++;
-        //start making the list
-        for(let i = 0; i<playerOrderCt; i++){
-          NcenoBrands.methods.getIndexedPlayerOrder(
-            Cookies.get('stravaID'),
-            i
-          )
-          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-            async function(error, result) {
-              if (!error){
-                await $("#orderHistory").append('<tr><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+Date(result[3]).toDateString+'</td></tr>');
-              }
-              else
-              console.error(error);
-            }
-          );
-        }
-      }
-      else
-      console.error(error);
-    }
-  );
-
-  
-
-
-}//end makeSpendPage
 
 function orderSearch(){
   NcenoBrands.methods.searchOrders(
