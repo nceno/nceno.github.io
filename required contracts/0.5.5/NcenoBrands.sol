@@ -1,7 +1,8 @@
-//makeCompany: "Suntek Global","0xccff00959f043d6e2926793d85a8cde6adccff01","0xdeabceb054a4423435698919652dc134c79b9055", "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//deposit: "0xdfd28ad3b096932843c388d82bd8df93d52e340c","6"
-//host: "0xccff00","1579588026","30","3","10","1","2","0x619201959f043d6e2926793d85a8cde6ad755ef8"
-//addinvite codes: "0xccff00",["red", "orange", "yellow", "green", "blue", "indigo", "violet", "white", "black", "gray"]
+//makeCompany: "Suntek Global","0xccff00","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
+//deposit: "0xd306ffaf495922bdb845c9f09b0afd072c027050","600"
+//host: "0xccff00","1579588026","30","100","600","5","10","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","10"
+//addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+
 //join: "0xccff00","39706111","joenance","0","red"
 //log: "0xccff00","39706111","1","0","666","0x121212"
 //make order: "0xccff00","0xccff00959f043d6e2926793d85a8cde6adccff00","0x666aaa","39706111","beer","12"
@@ -188,6 +189,7 @@ contract NcenoBrands is RelayRecipient{
         stravaID : _stravaID,
         userName : _userName,
         avatar : _avatar,
+        orderCt: 0,
         wallet : getSender()
       });
       profileOf[_stravaID] = createdPlayer;
@@ -267,7 +269,7 @@ contract NcenoBrands is RelayRecipient{
     orderCount++;
     companyAt[_companyID].orderCount++;
 
-    orderAt[playerOrders[_stravaID][orderCt]] = createdOrder;
+    orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
     profileOf[_stravaID].orderCt++;
     
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
@@ -314,18 +316,18 @@ contract NcenoBrands is RelayRecipient{
   }
 
   //used to generate order list
-  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, uint, uint, uint, bool, bool){
-    return(companyAt[_companyID].indexedOrder[_index].item, pofileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded, companyAt[_companyID].indexedOrder[_index].settled);    
+  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, string memory, uint, uint, bool, bool){
+    return(companyAt[_companyID].indexedOrder[_index].item, profileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded, companyAt[_companyID].indexedOrder[_index].settled);    
     //companyID, index --> item0, buyerName1, price2, date3, refunded4, settled5
   }
 
   //used to generate player order history
   function getIndexedPlayerOrder(uint _stravaID, uint _index) public view returns(bytes memory, string memory, uint, uint){
-    return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date )
+    return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
   }
 
   //used for order search
-  function searchOrders(bytes memory _orderNum) public view returns(string memory, string, uint, uint, bool, bool){
+  function searchOrders(bytes memory _orderNum) public view returns(string memory, string memory, uint, uint, bool, bool){
     return(orderAt[_orderNum].item, profileOf[orderAt[_orderNum].stravaBuyer].userName, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].settled );
     //orderNo --> item0, buyerName1, price2, date3, refunded4, settled5
   }
