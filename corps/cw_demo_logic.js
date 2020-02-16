@@ -16,7 +16,7 @@ function setTarget(item){
 $("#buyLoader").hide();
 function buy(){
   //deposit tokens here...
-  theToken.methods.transfer(
+  TheToken.methods.transfer(
     adminWallet,
     targetPrice
   )
@@ -515,7 +515,7 @@ function makeWorkoutPage(){
 
 function makeSpendPage(){
   //show token balance
-  theToken.methods.balanceOf(
+  TheToken.methods.balanceOf(
     Cookies.get('userWallet')
   )
   .call({from: Cookies.get('userWallet'), nonce: correctNonce},
@@ -528,22 +528,37 @@ function makeSpendPage(){
     }
   );
 
-  //make the order history list
-  for(let i = 0; i<playerOrderCt; i++){
-    NcenoBrands.methods.getIndexedPlayerOrder(
-      Cookies.get('stravaID'),
-      i
-    )
-    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-      async function(error, result) {
-        if (!error){
-          await $("#orderHistory").append('<tr><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+Date(result[3]).toDateString+'</td></tr>');
+  //get the order count
+  NcenoBrands.methods.getPlayerOrderCt(
+    Cookies.get('stravaID')
+  )
+  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+    function(error, result) {
+      if (!error){
+        correctNonce++;
+        //start making the list
+        for(let i = 0; i<playerOrderCt; i++){
+          NcenoBrands.methods.getIndexedPlayerOrder(
+            Cookies.get('stravaID'),
+            i
+          )
+          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+            async function(error, result) {
+              if (!error){
+                await $("#orderHistory").append('<tr><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+Date(result[3]).toDateString+'</td></tr>');
+              }
+              else
+              console.error(error);
+            }
+          );
         }
-        else
-        console.error(error);
       }
-    );
-  }
+      else
+      console.error(error);
+    }
+  );
+
+  
 
 
 }//end makeSpendPage
@@ -803,7 +818,7 @@ $("#hostBtn").click(function() {
     if(receipt.status === true){
       correctNonce++;
       //deposit tokens here...
-      theToken.methods.transfer(
+      TheToken.methods.transfer(
         contractAddress,
         pot
       )

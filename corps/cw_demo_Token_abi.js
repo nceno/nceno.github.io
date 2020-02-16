@@ -1,4 +1,4 @@
-var theToken = new web3.eth.Contract([
+var TheToken = new web3.eth.Contract([
 	{
 		"constant": true,
 		"inputs": [],
