@@ -29,7 +29,7 @@ function orderSearch(){
               statusCode = "refunded";
               break;
           }
-          $("#searchedOrder").html('<tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+$("#searchField").val()+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+          $("#searchedOrder").html('<tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+$("#searchField").val()+"'"+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr>');
         }
         
         else
@@ -92,32 +92,31 @@ function makeOrdersPage(){
                 switch(await result[4]) {
                   case "0":
                     statusCode = "new";
-                    console.log("status is "+statusCode);
                     break;
                   case "1":
                     statusCode = "complete";
-                    $('#order'+_orderNo).css({color: "#333"});
-                    $('#name'+_orderNo).css({color: "#333"});
-                    $('#item'+_orderNo).css({color: "#333"});
-                    $('#cost'+_orderNo).css({color: "#333"});
-                    $('#date'+_orderNo).css({color: "#333"});
-                    $('#status'+_orderNo).css({color: "#333"});
-                    console.log("status is "+statusCode);
+                    $('#order'+result[5]).css({color: "#333"});
+                    $('#name'+result[5]).css({color: "#333"});
+                    $('#item'+result[5]).css({color: "#333"});
+                    $('#cost'+result[5]).css({color: "#333"});
+                    $('#date'+result[5]).css({color: "#333"});
+                    $('#status'+result[5]).css({color: "#333"});
+
                     
                     break;
                   case "2":
                     statusCode = "refunded";
-                    $('#order'+_orderNo).css({color: "#333"});
-                    $('#name'+_orderNo).css({color: "#333"});
-                    $('#item'+_orderNo).css({color: "#333"});
-                    $('#cost'+_orderNo).css({color: "#333"});
-                    $('#date'+_orderNo).css({color: "#333"});
-                    $('#status'+_orderNo).css({color: "#333"});
-                    console.log("status is "+statusCode);
+                    $('#order'+result[5]).css({color: "#333"});
+                    $('#name'+result[5]).css({color: "#333"});
+                    $('#item'+result[5]).css({color: "#333"});
+                    $('#cost'+result[5]).css({color: "#333"});
+                    $('#date'+result[5]).css({color: "#333"});
+                    $('#status'+result[5]).css({color: "#333"});
+
                     break;
                 }
                 //item0, buyerName1, price2, date3, status4, orderNo5
-                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result[5]+"'"+')" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
               
               }
               else
