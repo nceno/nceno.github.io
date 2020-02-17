@@ -36,7 +36,7 @@ var code;
 window.onload = function() {
 
   //case 1- if you're missing everything,
-  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined || Cookies.get('userWallet') == null){ 
+  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined || Cookies.get('userWallet') == null || Cookies.get('stravaUsername') == undefined){ 
     console.log("doing case 1: missing everything...");
 
     $("#stravaBtnGlobal").show();
