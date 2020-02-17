@@ -9,7 +9,7 @@ console.log("jjj");
 }*/
 
 
-if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
+if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a" && Cookies.get('stravaID')!="42846718") {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
 }
