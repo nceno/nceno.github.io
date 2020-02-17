@@ -173,6 +173,7 @@ async function makeOrdersPage(){
             async function(error, result2) {
               if (!error){
                 var that = await result;
+                console.log(result2[5]+" status is "+result2[4]);
                 //var statusCode;
                 switch(result2[4]) {
                   case 'a':
