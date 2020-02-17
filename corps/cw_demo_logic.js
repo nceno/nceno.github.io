@@ -1,4 +1,4 @@
-console.log("hhh");
+console.log("bbb");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
@@ -18,7 +18,7 @@ function orderSearch(){
 
           $("#theOrder").show();
           var statusCode;
-          switch(await result[4]) {
+          switch(result[4]) {
             case "0":
               statusCode = "new";
               break;
