@@ -614,6 +614,38 @@ function setOrderStatus(_orderNo, _action){
 
 function makeOrdersPage(){
 
+  //get the order count
+  NcenoBrands.methods.getCompanyOrderCt(
+    companyID
+  )
+  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+    async function(error, result) {
+      if (!error){
+        var playerOrderCt = await result;
+        correctNonce++;
+        //start making the list
+        for(let i = 0; i<playerOrderCt; i++){
+          NcenoBrands.methods.getIndexedOrder(
+            companyID,
+            i
+          )
+          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+            async function(error, result) {
+              if (!error){
+                var theOrder = await result[0];
+                //item0, buyerName1, price2, date3, refunded4, settled5
+                if(! $('#comporder'+result[0]).length) $("#orderList").append('');
+              }
+              else
+              console.error(error);
+            }
+          );
+        }
+      }
+      else
+      console.error(error);
+    }
+  );
 }
 
 function makeAdminPage(){

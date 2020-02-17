@@ -25,7 +25,7 @@ contract NcenoBrands is RelayRecipient{
   event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID);
   event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
-  event UpdateOrder(bytes _orderNumber, bool _refunded, bool _settled);
+  event UpdateOrder(bytes _orderNumber, uint _status);
   
   //gas station init
   constructor() public {
@@ -103,8 +103,7 @@ contract NcenoBrands is RelayRecipient{
     uint stravaBuyer;
     uint price;
     uint date;
-    bool refunded;
-    bool settled;
+    uint status;
     bytes company;
   }
   mapping(bytes=>order) orderAt;
@@ -258,8 +257,7 @@ contract NcenoBrands is RelayRecipient{
       stravaBuyer: _stravaID,
       price: _price,
       date: now,
-      refunded: false,
-      settled: false,
+      status: 0,
       company: _companyID
     });
     companyAt[_companyID].orderSet[_orderNum]=createdOrder;
@@ -275,10 +273,9 @@ contract NcenoBrands is RelayRecipient{
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
   }
 
-  function updateOrder(bytes memory _orderNum, bool _refunded, bool _settled) public{
-    orderAt[_orderNum].refunded = _refunded;
-    orderAt[_orderNum].settled = _settled;
-    emit UpdateOrder(_orderNum, _refunded, _settled);
+  function setOrderStatus(bytes memory _orderNum, uint _status) public{
+    orderAt[_orderNum].status = _status;
+    emit UpdateOrder(_orderNum, _status);
   }
 
 
@@ -315,20 +312,26 @@ contract NcenoBrands is RelayRecipient{
     //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3, avatar4
   }
 
+  //get order count for order list
+  function getCompanyOrderCt(uint _companyID) public view returns(uint){
+    return(companyAt[_companyID].orderCount);
+  }
+
   //used to generate order list
-  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, string memory, uint, uint, bool, bool){
-    return(companyAt[_companyID].indexedOrder[_index].item, profileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].refunded, companyAt[_companyID].indexedOrder[_index].settled);    
-    //companyID, index --> item0, buyerName1, price2, date3, refunded4, settled5
+  function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, string memory, uint, uint, uint, bytes memory){
+    return(companyAt[_companyID].indexedOrder[_index].item, profileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].status, companyAt[_companyID].indexedOrder[_index].orderNum);    
+    //companyID, index --> item0, buyerName1, price2, date3, status4, orderNo5
   }
 
   //used to generate player order history
   function getIndexedPlayerOrder(uint _stravaID, uint _index) public view returns(bytes memory, string memory, uint, uint){
     return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
+    //stravaID, index --> ordernum0, item1, price2, date3
   }
 
   //used for order search
-  function searchOrders(bytes memory _orderNum) public view returns(string memory, string memory, uint, uint, bool, bool){
-    return(orderAt[_orderNum].item, profileOf[orderAt[_orderNum].stravaBuyer].userName, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].refunded, orderAt[_orderNum].settled );
+  function searchOrders(bytes memory _orderNum) public view returns(string memory, string memory, uint, uint, uint){
+    return(orderAt[_orderNum].item, profileOf[orderAt[_orderNum].stravaBuyer].userName, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].status );
     //orderNo --> item0, buyerName1, price2, date3, refunded4, settled5
   }
 
