@@ -625,7 +625,7 @@ function makeOrdersPage(){
         correctNonce++;
         //start making the list
         for(let i = 0; i<playerOrderCt; i++){
-          NcenoBrands.methods.getIndexedOrder(
+          await NcenoBrands.methods.getIndexedOrder(
             companyID,
             i
           )
