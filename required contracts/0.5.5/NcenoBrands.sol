@@ -332,7 +332,7 @@ contract NcenoBrands is RelayRecipient{
   //used for order search
   function searchOrders(bytes memory _orderNum) public view returns(string memory, string memory, uint, uint, uint){
     return(orderAt[_orderNum].item, profileOf[orderAt[_orderNum].stravaBuyer].userName, orderAt[_orderNum].price, orderAt[_orderNum].date, orderAt[_orderNum].status );
-    //orderNo --> item0, buyerName1, price2, date3, refunded4, settled5
+    //orderNo --> item0, buyerName1, price2, date3, status4
   }
 
   //assuming each challenge has its own contract, this gets the order count for a player in that challenge.
