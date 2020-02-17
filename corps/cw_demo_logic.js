@@ -1,8 +1,8 @@
-console.log("fr");
+console.log("hhhddt");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
-for(let fr=1, fr<inventory; fr++){
+for(let fr=1; fr<inventory; fr++){
   $('#itemPrice'+fr).html(('item'+fr).price+TOKENSYMBOL);
   $('#itemName'+fr).html(('item'+fr).descr);
 }
