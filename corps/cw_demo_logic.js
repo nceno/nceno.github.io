@@ -965,17 +965,6 @@ $('#popupCreate').on('hidden.bs.modal', function (e) {
   resetCreate();
 })
 
-function resetLog(){
-  $("#payMeBtn").show();
-  $("#logSuccess").html('');
-  $("#logFail").html('');
-  $("#logEcho").html('');
-  $("#getYouPaid").show();
-  $("#logLoader").hide();
-}
-$('#logModal').on('hidden.bs.modal', function (e) {
-  resetLog();
-})
 
 
 
