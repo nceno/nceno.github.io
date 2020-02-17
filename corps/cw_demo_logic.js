@@ -1,4 +1,4 @@
-console.log("1234");
+console.log("jjj");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -7,6 +7,29 @@ console.log("1234");
   $('#itemPrice'+k).html(tarObj.price+TOKENSYMBOL);
   $('#itemName'+k).html(tarObj.descr);
 }*/
+function testToken(){
+  TheToken.methods.transfer(
+          adminWallet,
+          3
+        )
+        .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+          function(error, result) {
+            if (!error){
+              //loader
+            }
+            else
+            console.error(error);
+          }
+        ).once('confirmation', function(confNumber, receipt){
+          console.log(receipt.status);
+          if(receipt.status == true){
+            correctNonce++;      
+          }
+          else{
+            console.log('error. not enough funds?');
+          }
+        });
+}
 
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
   $("#adminOrders").hide();
