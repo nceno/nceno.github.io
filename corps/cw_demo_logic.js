@@ -1,4 +1,4 @@
-console.log("6566556");
+console.log("reaqg3");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -172,18 +172,18 @@ async function makeOrdersPage(){
           .call({from: Cookies.get('userWallet'), nonce: correctNonce},
             async function(error, result2) {
               if (!error){
-                
+                var that = await result;
                 //var statusCode;
                 switch(result2[4]) {
-                  case "0":
+                  case '0':
                     //var statusCode = "new";
-                    if(! $('#co'+result2[5]).length) await $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >new</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
+                    if(! $('#co'+result2[5]).length) $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >new</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
                     console.log("new order");
                     break;
 
-                  case "1":
+                  case '1':
                     //var statusCode = "complete";
-                    if(! $('#co'+result2[5]).length) await $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >complete</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
+                    if(! $('#co'+result2[5]).length) $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >complete</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
                     $('#order'+result2[5]).css({color: "#333"});
                     $('#name'+result2[5]).css({color: "#333"});
                     $('#item'+result2[5]).css({color: "#333"});
@@ -193,9 +193,9 @@ async function makeOrdersPage(){
                     console.log("complete order");
                     break;
 
-                  case "2":
+                  case '2':
                     //var statusCode = "refunded";
-                    if(! $('#co'+result2[5]).length) await $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >refunded</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
+                    if(! $('#co'+result2[5]).length) $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >refunded</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
                     $('#order'+result2[5]).css({color: "#333"});
                     $('#name'+result2[5]).css({color: "#333"});
                     $('#item'+result2[5]).css({color: "#333"});
