@@ -634,7 +634,7 @@ function makeOrdersPage(){
               if (!error){
                 var theOrder = await result[0];
                 //item0, buyerName1, price2, date3, refunded4, settled5
-                if(! $('#comporder'+result[0]).length) $("#orderList").append('');
+                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'">'+result[4]+'</td><td id = "order'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
               }
               else
               console.error(error);
