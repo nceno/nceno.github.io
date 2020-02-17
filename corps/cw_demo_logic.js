@@ -7,7 +7,7 @@ if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
 }
 $("#theOrder").hide();
 function orderSearch(){
-  console.log("button pressed.");
+
   NcenoBrands.methods.searchOrders(
       $("#searchField").val()
     )
@@ -15,10 +15,21 @@ function orderSearch(){
     .call({from: Cookies.get('userWallet'), nonce: correctNonce},
       function(error, result) {
         if (!error){
-          console.log("function working.");
-          console.log(result);
+
           $("#theOrder").show();
-          $("#searchedOrder").html('<tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+$("#searchField").val()+');" data-whatever="@mdo" >'+result[4]+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+          var statusCode;
+          switch(await result[4]) {
+            case "0":
+              statusCode = "new";
+              break;
+            case "1":
+              statusCode = "complete";                    
+              break;
+            case "2":
+              statusCode = "refunded";
+              break;
+          }
+          $("#searchedOrder").html('<tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+$("#searchField").val()+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr>');
         }
         
         else
