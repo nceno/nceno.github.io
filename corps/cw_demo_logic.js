@@ -8,7 +8,7 @@ console.log("jjj");
   $('#itemName'+k).html(tarObj.descr);
 }*/
 
-
+//hide tabs from non-admins
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a" && Cookies.get('stravaID')!="42846718") {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
@@ -682,7 +682,8 @@ function makeWorkoutPage(){
             function(error, resultB) {
               if (!error){
                 var playerID =  resultB[0]; 
-                var playerName = resultB[1];
+                //fill the whitespace
+                var playerName = resultB[1].replace(/ /g,"_");
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
@@ -742,6 +743,7 @@ function makeWorkoutPage(){
                       //only after if there isn't already an element of the same name
                       else if(! $('#'+playerName).length){
                         //.after following entries
+
                         $('#startList').after(
                           '<div id="'+playerName+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div></div>'
                         );
