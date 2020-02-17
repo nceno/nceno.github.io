@@ -1,4 +1,4 @@
-console.log("78");
+console.log("55555");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
@@ -634,10 +634,10 @@ function makeOrdersPage(){
               if (!error){
                 var statusCode;
                 switch(result[4]) {
-                  case 0:
+                  case "0":
                     statusCode = "new";
                     break;
-                  case 1:
+                  case "1":
                     statusCode = "complete";
                     $('#order'+_orderNo).css({color: "#333"});
                     $('#name'+_orderNo).css({color: "#333"});
@@ -647,7 +647,7 @@ function makeOrdersPage(){
                     $('#status'+_orderNo).css({color: "#333"});
                     
                     break;
-                  case 2:
+                  case "2":
                     statusCode = "refunded";
                     $('#order'+_orderNo).css({color: "#333"});
                     $('#name'+_orderNo).css({color: "#333"});
