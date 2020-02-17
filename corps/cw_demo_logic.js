@@ -1,10 +1,10 @@
-console.log("gggg");
+console.log("65668878");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
-for(let k=1, k<inventory; k++){
-  $('#itemPrice'+k).html(('item'+k).price+TOKENSYMBOL);
-  $('#itemName'+k).html(('item'+k).descr);
+for(let y=1, y<inventory; y++){
+  $('#itemPrice'+y).html(('item'+y).price+TOKENSYMBOL);
+  $('#itemName'+y).html(('item'+y).descr);
 }
 
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
