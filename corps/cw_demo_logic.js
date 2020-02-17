@@ -149,10 +149,10 @@ function setOrderStatus(_orderNo, _action){
   } 
 }
 
-function makeOrdersPage(){
+async function makeOrdersPage(){
   $("#theOrder").hide();
   //get the order count
-  NcenoBrands.methods.getCompanyOrderCt(
+  await NcenoBrands.methods.getCompanyOrderCt(
     companyID
   )
   .call({from: Cookies.get('userWallet'), nonce: correctNonce},
@@ -167,38 +167,38 @@ function makeOrdersPage(){
             i
           )
           .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-            async function(error, result) {
+            async function(error, result2) {
               if (!error){
                 
                 var statusCode;
-                switch(await result[4]) {
+                switch(await result2[4]) {
                   case "0":
                     statusCode = "new";
                     break;
                   case "1":
                     statusCode = "complete";
-                    $('#order'+result[5]).css({color: "#333"});
-                    $('#name'+result[5]).css({color: "#333"});
-                    $('#item'+result[5]).css({color: "#333"});
-                    $('#cost'+result[5]).css({color: "#333"});
-                    $('#date'+result[5]).css({color: "#333"});
-                    $('#status'+result[5]).css({color: "#333"});
+                    $('#order'+result2[5]).css({color: "#333"});
+                    $('#name'+result2[5]).css({color: "#333"});
+                    $('#item'+result2[5]).css({color: "#333"});
+                    $('#cost'+result2[5]).css({color: "#333"});
+                    $('#date'+result2[5]).css({color: "#333"});
+                    $('#status'+result2[5]).css({color: "#333"});
 
                     
                     break;
                   case "2":
                     statusCode = "refunded";
-                    $('#order'+result[5]).css({color: "#333"});
-                    $('#name'+result[5]).css({color: "#333"});
-                    $('#item'+result[5]).css({color: "#333"});
-                    $('#cost'+result[5]).css({color: "#333"});
-                    $('#date'+result[5]).css({color: "#333"});
-                    $('#status'+result[5]).css({color: "#333"});
+                    $('#order'+result2[5]).css({color: "#333"});
+                    $('#name'+result2[5]).css({color: "#333"});
+                    $('#item'+result2[5]).css({color: "#333"});
+                    $('#cost'+result2[5]).css({color: "#333"});
+                    $('#date'+result2[5]).css({color: "#333"});
+                    $('#status'+result2[5]).css({color: "#333"});
 
                     break;
                 }
                 //item0, buyerName1, price2, date3, status4, orderNo5
-                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result[5]+"'"+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+                if(! $('#co'+result2[5]).length) $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
               
               }
               else
