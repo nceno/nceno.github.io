@@ -1,9 +1,122 @@
-console.log("rg3rq");
+console.log("989609");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
+}
+
+function orderSearch(){
+  console.log("button pressed.");
+  NcenoBrands.methods.searchOrders(
+      $("#searchField").val()
+    )
+  //item0, buyerName1, price2, date3, status4
+    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+      function(error, result) {
+        if (!error){
+          console.log("function working.");
+          $("#searchedOrder").html('<tbody><tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+$("#searchField").val()+');" data-whatever="@mdo" >'+result[4]+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr></tbody');
+        }
+        
+        else
+        console.error(error);
+      }
+    );
+}
+
+var refTarget;
+function setRefTarget(_orderNo){
+  refTarget = _orderNo;
+}
+
+function setOrderStatus(_orderNo, _action){
+  if(_action == "refunded"){
+    //nceno refund
+    console.log("issuing a refund!");
+    $('#status'+_orderNo).css({color: "#333"});
+    $('#status'+_orderNo).html("refunded");
+  }
+  else if(_action == "settled"){
+    //nceno settle
+    console.log("settling the sale!");
+    $('#status'+_orderNo).css({color: "#333"});
+    $('#status'+_orderNo).html("complete");
+  } 
+
+  $('#order'+_orderNo).css({color: "#333"});
+  $('#name'+_orderNo).css({color: "#333"});
+  $('#item'+_orderNo).css({color: "#333"});
+  $('#cost'+_orderNo).css({color: "#333"});
+  $('#date'+_orderNo).css({color: "#333"});
+  $('#status'+_orderNo).css({color: "#333"});
+  $('#status'+_orderNo).html("complete");
+
+}
+
+function makeOrdersPage(){
+
+  //get the order count
+  NcenoBrands.methods.getCompanyOrderCt(
+    companyID
+  )
+  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+    async function(error, result) {
+      if (!error){
+        var playerOrderCt = await result;
+        correctNonce++;
+        //start making the list
+        for(let i = 0; i<playerOrderCt; i++){
+          await NcenoBrands.methods.getIndexedOrder(
+            companyID,
+            i
+          )
+          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+            async function(error, result) {
+              if (!error){
+                
+                var statusCode;
+                switch(await result[4]) {
+                  case "0":
+                    statusCode = "new";
+                    console.log("status is "+statusCode);
+                    break;
+                  case "1":
+                    statusCode = "complete";
+                    $('#order'+_orderNo).css({color: "#333"});
+                    $('#name'+_orderNo).css({color: "#333"});
+                    $('#item'+_orderNo).css({color: "#333"});
+                    $('#cost'+_orderNo).css({color: "#333"});
+                    $('#date'+_orderNo).css({color: "#333"});
+                    $('#status'+_orderNo).css({color: "#333"});
+                    console.log("status is "+statusCode);
+                    
+                    break;
+                  case "2":
+                    statusCode = "refunded";
+                    $('#order'+_orderNo).css({color: "#333"});
+                    $('#name'+_orderNo).css({color: "#333"});
+                    $('#item'+_orderNo).css({color: "#333"});
+                    $('#cost'+_orderNo).css({color: "#333"});
+                    $('#date'+_orderNo).css({color: "#333"});
+                    $('#status'+_orderNo).css({color: "#333"});
+                    console.log("status is "+statusCode);
+                    break;
+                }
+                //item0, buyerName1, price2, date3, status4, orderNo5
+                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+              
+              }
+              else
+              console.error(error);
+            }
+          );
+        }
+      }
+      else
+      console.error(error);
+    }
+  );
 }
 
 function makeSpendPage(){
@@ -567,116 +680,7 @@ function makeWorkoutPage(){
 
 
 
-function orderSearch(){
-  NcenoBrands.methods.searchOrders(
-      $("#searchField").val()
-    )
-  //item0, buyerName1, price2, date3, status4
-    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-      async function(error, result) {
-        if (!error){
-          await $("#searchedOrder").append('<tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+$("#searchField").val()+');" data-whatever="@mdo" >'+result[4]+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr>');
-        }
-        
-        else
-        console.error(error);
-      }
-    );
-}
 
-var refTarget;
-function setRefTarget(_orderNo){
-  refTarget = _orderNo;
-}
-
-function setOrderStatus(_orderNo, _action){
-  if(_action == "refunded"){
-    //nceno refund
-    console.log("issuing a refund!");
-    $('#status'+_orderNo).css({color: "#333"});
-    $('#status'+_orderNo).html("refunded");
-  }
-  else if(_action == "settled"){
-    //nceno settle
-    console.log("settling the sale!");
-    $('#status'+_orderNo).css({color: "#333"});
-    $('#status'+_orderNo).html("complete");
-  } 
-
-  $('#order'+_orderNo).css({color: "#333"});
-  $('#name'+_orderNo).css({color: "#333"});
-  $('#item'+_orderNo).css({color: "#333"});
-  $('#cost'+_orderNo).css({color: "#333"});
-  $('#date'+_orderNo).css({color: "#333"});
-  $('#status'+_orderNo).css({color: "#333"});
-  $('#status'+_orderNo).html("complete");
-
-}
-
-function makeOrdersPage(){
-
-  //get the order count
-  NcenoBrands.methods.getCompanyOrderCt(
-    companyID
-  )
-  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    async function(error, result) {
-      if (!error){
-        var playerOrderCt = await result;
-        correctNonce++;
-        //start making the list
-        for(let i = 0; i<playerOrderCt; i++){
-          await NcenoBrands.methods.getIndexedOrder(
-            companyID,
-            i
-          )
-          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-            async function(error, result) {
-              if (!error){
-                
-                var statusCode;
-                switch(await result[4]) {
-                  case "0":
-                    statusCode = "new";
-                    console.log("status is "+statusCode);
-                    break;
-                  case "1":
-                    statusCode = "complete";
-                    $('#order'+_orderNo).css({color: "#333"});
-                    $('#name'+_orderNo).css({color: "#333"});
-                    $('#item'+_orderNo).css({color: "#333"});
-                    $('#cost'+_orderNo).css({color: "#333"});
-                    $('#date'+_orderNo).css({color: "#333"});
-                    $('#status'+_orderNo).css({color: "#333"});
-                    console.log("status is "+statusCode);
-                    
-                    break;
-                  case "2":
-                    statusCode = "refunded";
-                    $('#order'+_orderNo).css({color: "#333"});
-                    $('#name'+_orderNo).css({color: "#333"});
-                    $('#item'+_orderNo).css({color: "#333"});
-                    $('#cost'+_orderNo).css({color: "#333"});
-                    $('#date'+_orderNo).css({color: "#333"});
-                    $('#status'+_orderNo).css({color: "#333"});
-                    console.log("status is "+statusCode);
-                    break;
-                }
-                //item0, buyerName1, price2, date3, status4, orderNo5
-                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+statusCode+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
-              
-              }
-              else
-              console.error(error);
-            }
-          );
-        }
-      }
-      else
-      console.error(error);
-    }
-  );
-}
 
 function makeAdminPage(){
 
