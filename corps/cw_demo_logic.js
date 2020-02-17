@@ -1,4 +1,4 @@
-console.log("121212");
+console.log("aaas");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
@@ -632,10 +632,14 @@ function makeOrdersPage(){
           .call({from: Cookies.get('userWallet'), nonce: correctNonce},
             async function(error, result) {
               if (!error){
+                //item0, buyerName1, price2, date3, status4, orderNo5
+                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+statusCode+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+result[4]+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+              
                 var statusCode;
                 switch(await result[4]) {
                   case "0":
                     statusCode = "new";
+                    console.log("status is "+statusCode);
                     break;
                   case "1":
                     statusCode = "complete";
@@ -645,6 +649,7 @@ function makeOrdersPage(){
                     $('#cost'+_orderNo).css({color: "#333"});
                     $('#date'+_orderNo).css({color: "#333"});
                     $('#status'+_orderNo).css({color: "#333"});
+                    console.log("status is "+statusCode);
                     
                     break;
                   case "2":
@@ -655,9 +660,9 @@ function makeOrdersPage(){
                     $('#cost'+_orderNo).css({color: "#333"});
                     $('#date'+_orderNo).css({color: "#333"});
                     $('#status'+_orderNo).css({color: "#333"});
+                    console.log("status is "+statusCode);
+                    break;
                 }
-                //item0, buyerName1, price2, date3, status4, orderNo5
-                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+statusCode+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+result[4]+'</td><td style="color:#ccff00;" id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
               }
               else
               console.error(error);
