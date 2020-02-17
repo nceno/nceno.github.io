@@ -1242,19 +1242,21 @@ if(Cookies.get('userWallet') != undefined){
 var code;
 window.onload = function(){
 
-  var playerOrderCt
-  NcenoBrands.methods.getPlayerOrderCt(
-    Cookies.get('stravaID')
-  )
-  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    function(error, result) {
-      if (!error){
-        playerOrderCt = result;
+  if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('userWallet') != undefined){
+    var playerOrderCt
+    NcenoBrands.methods.getPlayerOrderCt(
+      Cookies.get('stravaID')
+    )
+    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+      function(error, result) {
+        if (!error){
+          playerOrderCt = result;
+        }
+        else
+        console.error(error);
       }
-      else
-      console.error(error);
-    }
-  );
+    );
+  }
 
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');

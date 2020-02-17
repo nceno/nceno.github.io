@@ -260,14 +260,16 @@ contract NcenoBrands is RelayRecipient{
       status: 0,
       company: _companyID
     });
+
+    //bug check these....
     companyAt[_companyID].orderSet[_orderNum]=createdOrder;
     profileOf[_stravaID].orderSet[_orderNum]=createdOrder;
     companyAt[_companyID].indexedOrder[orderCount]=createdOrder;
     orderAt[_orderNum]=createdOrder;
+    orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
+
     orderCount++;
     companyAt[_companyID].orderCount++;
-
-    orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
     profileOf[_stravaID].orderCt++;
     
     emit MakeOrder(_companyID, _orderNum, _stravaID, _item, _price, now);
