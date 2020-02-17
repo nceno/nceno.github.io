@@ -277,6 +277,24 @@ var NcenoBrands = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
+        "name": "_orderNum",
+        "type": "bytes"
+      },
+      {
+        "name": "_status",
+        "type": "uint256"
+      }
+    ],
+    "name": "setOrderStatus",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_newAdmin",
         "type": "address"
       }
@@ -604,11 +622,11 @@ var NcenoBrands = new web3.eth.Contract([
       },
       {
         "name": "",
-        "type": "bool"
+        "type": "uint256"
       },
       {
         "name": "",
-        "type": "bool"
+        "type": "bytes"
       }
     ],
     "payable": false,
@@ -645,6 +663,25 @@ var NcenoBrands = new web3.eth.Contract([
         "name": "",
         "type": "uint256"
       },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_companyID",
+        "type": "bytes"
+      }
+    ],
+    "name": "getCompanyOrderCt",
+    "outputs": [
       {
         "name": "",
         "type": "uint256"
@@ -711,28 +748,6 @@ var NcenoBrands = new web3.eth.Contract([
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_orderNum",
-        "type": "bytes"
-      },
-      {
-        "name": "_refunded",
-        "type": "bool"
-      },
-      {
-        "name": "_settled",
-        "type": "bool"
-      }
-    ],
-    "name": "updateOrder",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -832,11 +847,7 @@ var NcenoBrands = new web3.eth.Contract([
       },
       {
         "name": "",
-        "type": "bool"
-      },
-      {
-        "name": "",
-        "type": "bool"
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -1167,16 +1178,11 @@ var NcenoBrands = new web3.eth.Contract([
       },
       {
         "indexed": false,
-        "name": "_refunded",
-        "type": "bool"
-      },
-      {
-        "indexed": false,
-        "name": "_settled",
-        "type": "bool"
+        "name": "_status",
+        "type": "uint256"
       }
     ],
     "name": "UpdateOrder",
     "type": "event"
   }
-], '0xd306ffaf495922bdb845c9f09b0afd072c027050');
+], '0x3c1060724b7d67ae3620040ed94766f4794bb7e0');

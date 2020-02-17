@@ -1,5 +1,5 @@
 //makeCompany: "Suntek Global","0xccff00","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//deposit: "0xd306ffaf495922bdb845c9f09b0afd072c027050","600"
+//transfer: "0xd306ffaf495922bdb845c9f09b0afd072c027050","600"
 //host: "0xccff00","1579588026","30","100","600","5","10","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","10"
 //addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 
@@ -313,7 +313,7 @@ contract NcenoBrands is RelayRecipient{
   }
 
   //get order count for order list
-  function getCompanyOrderCt(uint _companyID) public view returns(uint){
+  function getCompanyOrderCt(bytes memory _companyID) public view returns(uint){
     return(companyAt[_companyID].orderCount);
   }
 
@@ -388,6 +388,7 @@ contract BrandToken is RelayRecipient{
     name = _name;
     decimals = 0;
     symbol = _symbol;
+    _relayHub = address(0xD216153c06E857cD7f72665E0aF1d7D82172F494);
     setRelayHub(IRelayHub(_relayHub));
     //0xD216153c06E857cD7f72665E0aF1d7D82172F494
   }
