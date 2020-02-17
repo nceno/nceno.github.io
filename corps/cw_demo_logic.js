@@ -632,9 +632,31 @@ function makeOrdersPage(){
           .call({from: Cookies.get('userWallet'), nonce: correctNonce},
             async function(error, result) {
               if (!error){
-                var wait = await result[0];
+                switch(result[4]) {
+                  case 0:
+                    statusCode = "new";
+                    break;
+                  case 1:
+                    statusCode = "complete";
+                    $('#order'+_orderNo).css({color: "#333"});
+                    $('#name'+_orderNo).css({color: "#333"});
+                    $('#item'+_orderNo).css({color: "#333"});
+                    $('#cost'+_orderNo).css({color: "#333"});
+                    $('#date'+_orderNo).css({color: "#333"});
+                    $('#status'+_orderNo).css({color: "#333"});
+                    
+                    break;
+                  case 2:
+                    statusCode = "refunded";
+                    $('#order'+_orderNo).css({color: "#333"});
+                    $('#name'+_orderNo).css({color: "#333"});
+                    $('#item'+_orderNo).css({color: "#333"});
+                    $('#cost'+_orderNo).css({color: "#333"});
+                    $('#date'+_orderNo).css({color: "#333"});
+                    $('#status'+_orderNo).css({color: "#333"});
+                }
                 //item0, buyerName1, price2, date3, status4, orderNo5
-                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+result[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+result[4]+'</td><td id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+                if(! $('#co'+result[5]).length) $("#orderList").append('<tr id="co'+result[5]+'"><td id = "status'+statusCode+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+result[5]+');" data-whatever="@mdo" >'+result[4]+'</td><td id = "order'+result[5]+'">'+result[5]+'</td><td id = "name'+result[5]+'">'+result[1]+'</td><td id = "item'+result[5]+'">'+result[0]+'</td><td id = "cost'+result[5]+'" >'+result[2]+'</td><td id = "date'+result[5]+'">'+new Date(result[3]*1000).toDateString()+'</td></tr>');
               }
               else
               console.error(error);
