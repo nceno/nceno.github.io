@@ -1,4 +1,4 @@
-console.log("rh4r3");
+console.log("543457537");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
@@ -46,25 +46,76 @@ function setRefTarget(_orderNo){
 function setOrderStatus(_orderNo, _action){
   if(_action == "refunded"){
     //nceno refund
-    console.log("issuing a refund!");
-    $('#status'+_orderNo).css({color: "#333"});
-    $('#status'+_orderNo).html("refunded");
+    NcenoBrands.methods.setOrderStatus(
+      _orderNo,
+      2
+    ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+      function(error, result) {
+        if (!error){
+
+          
+          console.log(result);
+        }
+        else
+        console.error(error);
+      }
+    ).once('confirmation', function(confNumber, receipt){ 
+      console.log(receipt.status);
+      if(receipt.status == true){
+        updateNonce();
+        console.log("issuing a refund!");
+        $('#status'+_orderNo).css({color: "#333"});
+        $('#status'+_orderNo).html("refunded");
+        $('#order'+_orderNo).css({color: "#333"});
+          $('#name'+_orderNo).css({color: "#333"});
+          $('#item'+_orderNo).css({color: "#333"});
+          $('#cost'+_orderNo).css({color: "#333"});
+          $('#date'+_orderNo).css({color: "#333"});
+          $('#status'+_orderNo).css({color: "#333"});
+      }
+      else{
+        
+        console.log("error.");
+      } 
+    }).once('error', function(error){console.log(error);});
+
   }
   else if(_action == "settled"){
     //nceno settle
-    console.log("settling the sale!");
-    $('#status'+_orderNo).css({color: "#333"});
-    $('#status'+_orderNo).html("complete");
+    NcenoBrands.methods.setOrderStatus(
+      _orderNo,
+      1
+    ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+      function(error, result) {
+        if (!error){
+
+          
+          console.log(result);
+        }
+        else
+        console.error(error);
+      }
+    ).once('confirmation', function(confNumber, receipt){ 
+      console.log(receipt.status);
+      if(receipt.status == true){
+        updateNonce();
+        console.log("settling the sale!");
+        $('#status'+_orderNo).css({color: "#333"});
+        $('#status'+_orderNo).html("complete");
+
+          $('#order'+_orderNo).css({color: "#333"});
+          $('#name'+_orderNo).css({color: "#333"});
+          $('#item'+_orderNo).css({color: "#333"});
+          $('#cost'+_orderNo).css({color: "#333"});
+          $('#date'+_orderNo).css({color: "#333"});
+          $('#status'+_orderNo).css({color: "#333"});
+      }
+      else{
+        
+        console.log("error.");
+      } 
+    }).once('error', function(error){console.log(error);});
   } 
-
-  $('#order'+_orderNo).css({color: "#333"});
-  $('#name'+_orderNo).css({color: "#333"});
-  $('#item'+_orderNo).css({color: "#333"});
-  $('#cost'+_orderNo).css({color: "#333"});
-  $('#date'+_orderNo).css({color: "#333"});
-  $('#status'+_orderNo).css({color: "#333"});
-  //$('#status'+_orderNo).html("complete");
-
 }
 
 function makeOrdersPage(){
