@@ -571,12 +571,13 @@ function orderSearch(){
   NcenoBrands.methods.searchOrders(
       $("#searchField").val()
     )
+  //item0, buyerName1, price2, date3, status4
     .call({from: Cookies.get('userWallet'), nonce: correctNonce},
       async function(error, result) {
         if (!error){
-          await $("#searchedOrder").html('<tr id="'+$("#searchField").val()+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget("'+$("#searchField").val()+'");" data-whatever="@mdo"><td id = "order'+$("#searchField").val()+'">'+$("#searchField").val()+'</td><td id = "name'+$("#searchField").val()+'">'+result[1]+'</td><td id = "item'+$("#searchField").val()+'">'+result[0]+'</td><td id = "cost'+$("#searchField").val()+'">'+result[2]+'</td><td id = "date'+$("#searchField").val()+'">'+Date(result[3]).toDateString()+'</td></tr>');
+          await $("#searchedOrder").html('<tr><td data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+$("#searchField").val()+');" data-whatever="@mdo" >'+result[4]+'</td><td style="color:#ccff00;">'+$("#searchField").val()+'</td><td >'+result[1]+'</td><td>'+result[0]+'</td><td  >'+result[2]+'</td><td >'+new Date(result[3]*1000).toDateString()+'</td></tr>');
         }
-        //item0, buyername1, price2, date3, refunded4, settled5
+        
         else
         console.error(error);
       }
