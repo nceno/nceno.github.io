@@ -1,6 +1,12 @@
-console.log("ef");
+console.log("gggg");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
+
+for(let k=1, k<inventory; k++){
+  $('#itemPrice'+k).html(('item'+k).price+TOKENSYMBOL);
+  $('#itemName'+k).html(('item'+k).descr);
+}
+
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
