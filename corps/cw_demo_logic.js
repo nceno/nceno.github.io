@@ -5,7 +5,7 @@ if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
 }
-$("#theOrder").hide();
+
 function orderSearch(){
 
   NcenoBrands.methods.searchOrders(
@@ -68,7 +68,7 @@ function setOrderStatus(_orderNo, _action){
 }
 
 function makeOrdersPage(){
-
+  $("#theOrder").hide();
   //get the order count
   NcenoBrands.methods.getCompanyOrderCt(
     companyID
