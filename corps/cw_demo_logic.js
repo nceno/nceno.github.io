@@ -1,4 +1,4 @@
-console.log("bbb");
+console.log("t5hw4554w4");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
@@ -63,7 +63,7 @@ function setOrderStatus(_orderNo, _action){
   $('#cost'+_orderNo).css({color: "#333"});
   $('#date'+_orderNo).css({color: "#333"});
   $('#status'+_orderNo).css({color: "#333"});
-  $('#status'+_orderNo).html("complete");
+  //$('#status'+_orderNo).html("complete");
 
 }
 
