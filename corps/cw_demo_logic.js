@@ -1,4 +1,4 @@
-console.log("rh4");
+console.log("rh4r3");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a") {
@@ -621,23 +621,23 @@ function makeWorkoutPage(){
                           break;
 
                         case "1":
-                          avatar = "runner1";
+                          avatar = "avatar1";
                           break;
                           
                         case "2":
-                          avatar = "runner2";
+                          avatar = "avatar2";
                           break;
                           
                         case "3":
-                          avatar = "runner3";
+                          avatar = "avatar3";
                           break;
                         
                         case "4":
-                          avatar = "runner4";
+                          avatar = "avatar4";
                           break;
                         
                         case "5":
-                          avatar = "runner5";
+                          avatar = "avatar5";
                           break; 
                       }
 
