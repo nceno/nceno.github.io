@@ -1,4 +1,4 @@
-console.log("thrhr");
+console.log("7867");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -18,7 +18,7 @@ if(Cookies.get('userWallet') == undefined || Cookies.get('access_token')== undef
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
   $("#buyModalbtn").hide();
-  $("#workoutTab").hide();
+  //$("#workoutTab").hide();
   $("#purchaseHistory").hide();
   $("#myQuickStats").hide();
 }
