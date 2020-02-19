@@ -14,6 +14,13 @@ if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a" && 
   $("#adminAdmin").hide();
 }
 
+if(Cookies.get('userWallet') == undefined || Cookies.get('access_token')== undefined) {
+  $("#adminOrders").hide();
+  $("#adminAdmin").hide();
+  $("#spend").hide();
+  $("#workout").hide();
+}
+
 $("#joinUsername").html(Cookies.get('stravaUsername'));
 $("#joinLoader").hide();
 
@@ -627,7 +634,18 @@ $("#redeem").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
         correctNonce++;
-        
+
+        //listen to see if player is a first finisher
+        Nceno.events.Log({
+          filter: {paramGoalID: _goalid, paramStravaID: Cookies.get('stravaID'), finisher: true },
+          fromBlock: 0, toBlock: 'latest'
+        }, function(error, event){ 
+            //do some stuff
+            //ex. usdPayout = parseInt(event.returnValues._payout);
+            if(event.returnValues.finisher != false) console.log("you're one of the first 3 to finish! Go see the challenge admin to claim the top prize.");
+          }
+        ).on('error', console.error);
+
       }
       else{
         console.error("error");

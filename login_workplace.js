@@ -115,15 +115,14 @@ function getTokenGlobal(){
       stravaID = data.athlete.id;
       Cookies.set('stravaID', stravaID);
 
-      $("#stravaBtnGlobal").hide();
-      if(Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){
-        //$("#userPrompt").html("Activate points wallet continue...");
+      /*$("#stravaBtnGlobal").hide();
+      if(Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){*/
         showPortisGlobal();
-      }else{
+      /*}else{
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
-      }
-      console.log("got token.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
+      }*/
+      //console.log("got token.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
     }
   });
   //joe nceno 
@@ -151,12 +150,12 @@ function showPortisGlobal() {
       //$("#portisBtn").hide();
       //updateGasPrice();
 
-      //if this fills in the blanks for auth creds,
+      /*//if this fills in the blanks for auth creds,
       if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined){
-        //say so.
+        //say so.*/
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
-      }
+      //}
       $("#openWalletGlobal").show();
       console.log("signed in to portis.... Nceno User ID: "+stravaID+"   Nceno Email: "+portisEmail+"   Wallet address: "+Cookies.get('userWallet'));
       

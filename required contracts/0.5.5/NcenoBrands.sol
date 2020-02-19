@@ -23,7 +23,7 @@ contract NcenoBrands is RelayRecipient{
   event MakeCompany(bytes _companyID, string _name, address owner);
   event MakeOrder(bytes _companyID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
   event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
-  event Log(bytes _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID);
+  event Log(bytes indexed paramGoalID, uint indexed paramStravaID, uint _kms, uint _mins, uint _actID, bool indexed finisher);
   event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
   event UpdateOrder(bytes _orderNumber, uint _status);
   
@@ -64,6 +64,7 @@ contract NcenoBrands is RelayRecipient{
     uint compCount;
     address token;
     uint cutoff;
+    string[3] first3;
 
     mapping(uint=>uint) playerSet;
     mapping(uint=>uint) indexedPlayerID;
@@ -240,10 +241,17 @@ contract NcenoBrands is RelayRecipient{
     goalAt[_goalID].activitySpent[_actID] = true;
     goalAt[_goalID].lastLog[_stravaID] = now;
     goalAt[_goalID].playerPayout[_stravaID] += payout;
+
+    bool finisher = false;
+    if((goalAt[_goalID].playerPayout[_stravaID]+payout >= goalAt[_goalID].tokenCap) && first3.length<3){
+      goalAt[_goalID].first3.push(profileOf[_stravaID].userName);
+      finisher = true;
+    }
+
     kmCount+=_kms;
     minsCount+=_mins;
     payoutToDate+=payout;
-    emit Log(_goalID, _stravaID, _kms, _mins, _actID);
+    emit Log(_goalID, _stravaID, _kms, _mins, _actID, finisher);
   }
   
   function makeOrder(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price) public{
@@ -340,6 +348,10 @@ contract NcenoBrands is RelayRecipient{
   //assuming each challenge has its own contract, this gets the order count for a player in that challenge.
   function getPlayerOrderCt(uint _stravaID) public view returns(uint){
     return(profileOf[_stravaID].orderCt);
+  }
+
+  function seeFirst3(bytes memory _goalID)public view returns(string[3]){
+    return(goalAt[_goalID].first3);
   }
 
 
