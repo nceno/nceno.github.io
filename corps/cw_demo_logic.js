@@ -17,8 +17,8 @@ if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a" && 
 if(Cookies.get('userWallet') == undefined || Cookies.get('access_token')== undefined) {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
-  $("#spend").hide();
-  $("#workout").hide();
+  $("#buyModalbtn").hide();
+  $("#workoutTab").hide();
 }
 
 $("#joinUsername").html(Cookies.get('stravaUsername'));
@@ -230,51 +230,53 @@ async function makeOrdersPage(){
 }
 
 function makeSpendPage(){
-  //show token balance
-  TheToken.methods.balanceOf(
-    Cookies.get('userWallet')
-  )
-  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    function(error, result) {
-      if (!error){
-        $("#tokenBalance").html(result+" "+TOKENSYMBOL);
-      }
-      else
-      console.error(error);
-    }
-  );
-
-  //get the order count
-  NcenoBrands.methods.getPlayerOrderCt(
-    Cookies.get('stravaID')
-  )
-  .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-    async function(error, result) {
-      if (!error){
-        var playerOrderCt = await result;
-        correctNonce++;
-        //start making the list
-        for(let i = 0; i<playerOrderCt; i++){
-          NcenoBrands.methods.getIndexedPlayerOrder(
-            Cookies.get('stravaID'),
-            i
-          )
-          .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-            async function(error, result) {
-              if (!error){
-                var theOrder = await result[0];
-                if(! $('#order'+result[0]).length) $("#orderHistory").append('<tr id="order'+result[0]+'"><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+new Date(result[3]*1000).toDateString()+'</td></tr>');
-              }
-              else
-              console.error(error);
-            }
-          );
+  if(Cookies.get('userWallet') != undefined && Cookies.get('access_token')!= undefined){
+    //show token balance
+    TheToken.methods.balanceOf(
+      Cookies.get('userWallet')
+    )
+    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+      function(error, result) {
+        if (!error){
+          $("#tokenBalance").html(result+" "+TOKENSYMBOL);
         }
+        else
+        console.error(error);
       }
-      else
-      console.error(error);
-    }
-  );
+    );
+
+    //get the order count
+    NcenoBrands.methods.getPlayerOrderCt(
+      Cookies.get('stravaID')
+    )
+    .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+      async function(error, result) {
+        if (!error){
+          var playerOrderCt = await result;
+          correctNonce++;
+          //start making the list
+          for(let i = 0; i<playerOrderCt; i++){
+            NcenoBrands.methods.getIndexedPlayerOrder(
+              Cookies.get('stravaID'),
+              i
+            )
+            .call({from: Cookies.get('userWallet'), nonce: correctNonce},
+              async function(error, result) {
+                if (!error){
+                  var theOrder = await result[0];
+                  if(! $('#order'+result[0]).length) $("#orderHistory").append('<tr id="order'+result[0]+'"><td>'+result[0]+'</td><td>'+result[1]+'</td><td>'+result[2]+'</td><td>'+new Date(result[3]*1000).toDateString()+'</td></tr>');
+                }
+                else
+                console.error(error);
+              }
+            );
+          }
+        }
+        else
+        console.error(error);
+      }
+    );
+  }
 }//end makeSpendPage
 
 var targetName;

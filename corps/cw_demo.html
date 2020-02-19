@@ -223,8 +223,8 @@
             <div class="nav nav-tabs mb-1">
               <a class="nav-item nav-link active" data-toggle="tab" href="#signin">Start</a>
               
-              <a class="nav-item nav-link" data-toggle="tab" href="#workout" onclick="makeWorkoutPage();">Workout</a>
-              <a class="nav-item nav-link" data-toggle="tab" href="#spend" onclick="makeSpendPage();" >Spend</a>
+              <a id="workoutTab" class="nav-item nav-link" data-toggle="tab" href="#workout" onclick="makeWorkoutPage();">Workout</a>
+              <a id="spendTab" class="nav-item nav-link" data-toggle="tab" href="#spend" onclick="makeSpendPage();" >Spend</a>
               <a id="adminOrders" class="nav-item nav-link" data-toggle="tab" href="#orders" onclick="makeOrdersPage();" >Orders</a>
               <a id="adminAdmin" class="nav-item nav-link" data-toggle="tab" href="#admin" onclick="makeAdminPage();" >Admin</a>
             </div>
@@ -366,7 +366,7 @@
                           <div>
                             <div class="tile-header on-hover text-right">
                               <!-- <a href="#" class="btn btn-sm btn-outline-white">Buy now</a> -->
-                              <a onclick="setTarget(item1);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a id="buyModalbtn" onclick="setTarget(item1);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow" >6 SUN</span>
@@ -379,7 +379,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/parking.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item2);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a id="buyModalbtn" onclick="setTarget(item2);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">7 SUN</span>
@@ -391,7 +391,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/vacation.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item3);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a id="buyModalbtn" onclick="setTarget(item3);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">2 SUN</span>
@@ -403,7 +403,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/casual.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item4);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a id="buyModalbtn" onclick="setTarget(item4);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">4 SUN</span>
@@ -415,7 +415,7 @@
                           <div class="tile-image" style="background-image: url(../app/assets/images/101.jpg)"></div>
                           <div>
                             <div class="tile-header on-hover text-right">
-                              <a onclick="setTarget(item5);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
+                              <a id="buyModalbtn" onclick="setTarget(item5);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
                               <span class="eyebrow">9 SUN</span>
@@ -677,8 +677,8 @@
             </div>
             <div class="modal-body text-center text-white">
               <!--title -->
-              <h3 id="soonJoinTitle"><span id="joinUsername" style="color:#ccff00;"></span>, You're about to join the Suntek challenge: </h3> <br>
-              <h6>Feb 1 - Feb 31<br> 100 token cap @4 SUN/km + 6 SUN/10min</h6>
+              <h3 id="soonJoinTitle"><span id="joinUsername" style="color:#ccff00;"></span>, You're about to join <span id=companyTitle></span>'s challenge: </h3> <br>
+              <h6>Feb 1 - Feb 31<br> 100 max SUN/person rewarded at 4 SUN/km + 6 SUN/10min</h6>
               <!--/title -->
             </div>
 
