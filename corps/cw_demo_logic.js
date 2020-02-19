@@ -18,6 +18,7 @@ function joinModalLoad(){
           $("#capEcho").html(result[2]+" "+TOKENSYMBOL);
           $("#bpmRate").html(result[5]+" "+TOKENSYMBOL);
           $("#kmRate").html(result[6]+" "+TOKENSYMBOL);
+          $("#companyTitle").html(companyName);
         }
       else{
         console.error(error);
