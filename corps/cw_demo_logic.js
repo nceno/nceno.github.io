@@ -8,6 +8,24 @@ console.log("7867");
   $('#itemName'+k).html(tarObj.descr);
 }*/
 
+function joinModalLoad(){
+  NcenoBrands.methods.getGoalParams(_goalID)
+    .call({from: Cookies.get('userWallet')},
+      async function(error, result) {
+        if (!error){
+          $("#startTime").html(new Date(result[0]*1000).toDateString());
+          $("#endTime").html(new Date((result[1]+86400*result[0])*1000).toDateString());
+          $("#capEcho").html(result[2]+" "+TOKENSYMBOL);
+          $("#bpmRate").html(result[5]+" "+TOKENSYMBOL);
+          $("#kmRate").html(result[6]+" "+TOKENSYMBOL);
+        }
+      else{
+        console.error(error);
+      }
+    }
+  );
+}
+
 //hide tabs from non-admins
 if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a" && Cookies.get('stravaID')!="42846718") {
   $("#adminOrders").hide();
@@ -17,8 +35,10 @@ if(Cookies.get('userWallet') != "0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a" && 
 if(Cookies.get('userWallet') == undefined || Cookies.get('access_token')== undefined) {
   $("#adminOrders").hide();
   $("#adminAdmin").hide();
-  $("#buyModalbtn").hide();
-  //$("#workoutTab").hide();
+  for(let i=1; i< inventory; i++){
+    $('#buyModalbtn'+i).hide();
+  }
+  $("#myTokens").hide();
   $("#purchaseHistory").hide();
   $("#myQuickStats").hide();
 }
@@ -450,6 +470,7 @@ async function makeActivities(){
       }
 
     }
+    else console.log("access_token is too old.");
   });
   xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
   xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
