@@ -8,6 +8,7 @@ console.log("7867");
   $('#itemName'+k).html(tarObj.descr);
 }*/
 
+
 function joinModalLoad(){
   NcenoBrands.methods.getGoalParams(_goalID)
     .call({from: Cookies.get('userWallet')},
