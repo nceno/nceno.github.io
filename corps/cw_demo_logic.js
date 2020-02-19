@@ -19,6 +19,8 @@ if(Cookies.get('userWallet') == undefined || Cookies.get('access_token')== undef
   $("#adminAdmin").hide();
   $("#buyModalbtn").hide();
   $("#workoutTab").hide();
+  $("#purchaseHistory").hide();
+  $("#myQuickStats").hide();
 }
 
 $("#joinUsername").html(Cookies.get('stravaUsername'));
