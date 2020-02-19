@@ -1279,7 +1279,7 @@ window.onload = function(){
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
   //case 1- if you're missing everything,
-  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined ){ 
+  if(Cookies.get('access_token') == undefined || Cookies.get('stravaID') == undefined || Cookies.get('userWallet') == null || Cookies.get('stravaUsername') == undefined){ 
     console.log("doing case 1: missing everything...");
     //$("#debug").html('<p>doing case 1: missing everything...</p><br><p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
     $("#stravaBtnGlobal").show();
@@ -1289,7 +1289,7 @@ window.onload = function(){
 
     //and you've been redirected from strava auth page,
       //@config  the path (and file name) will change if this is a corp well challenge
-    if (
+    /*if (
          window.location.href != 'https://www.nceno.app/corps/cw_demo.html#' 
       && window.location.href != 'https://www.nceno.app/corps/cw_demo#'
       && window.location.href != 'https://nceno.app/corps/cw_demo#'
@@ -1306,9 +1306,9 @@ window.onload = function(){
       getTokenGlobal();
       //then log into portis. (included in gettoken)
     }
-  }
+  }*/
   
-  //case 2- missing portis only
+/*  //case 2- missing portis only
   else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == undefined){
     console.log("doing case 2: missing portis only...");
     //$("#debug").html('<p>doing case 2: missing portis...</p><br><p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
@@ -1316,7 +1316,7 @@ window.onload = function(){
     $("#signOut").hide();
     $("#brandsPrompt").html('<p style="color:white;">You need to log in! <a style="color:#ccff00;" href="https://www.nceno.app/workplace.html">click here</a></p>');
     showPortisGlobal();
-  }
+  }*/
   //case 3- nothing missing
     //-----disable this block when testing.------
   else if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('stravaUsername') != undefined){
