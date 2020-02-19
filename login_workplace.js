@@ -69,7 +69,7 @@ window.onload = function() {
     }
   }
   
-  //case 2- missing portis only
+/*  //case 2- missing portis only
   else if( Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){
     console.log("doing case 2: missing portis only...");
 
@@ -78,9 +78,7 @@ window.onload = function() {
     //$("#portisBtnGlobal").show();
     //$("#userPrompt").html("Activate points wallet continue...");
     showPortisGlobal();
-
-    
-  }
+  }*/
   //case 3- nothing missing
     //-----disable this block when testing.------
   else if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('stravaUsername') != undefined){
@@ -153,6 +151,7 @@ function showPortisGlobal() {
       /*//if this fills in the blanks for auth creds,
       if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined){
         //say so.*/
+        $("#stravaBtnGlobal").hide();
         $("#userPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
         $("#brandsPrompt").html('<h5><font style="color:white;">Connection successful. Welcome, </font>'+stravaUsername+'</h5>');
       //}
