@@ -313,23 +313,23 @@ async function makeSpendPage(){
   }
 
   if(myBalance<item1.price){
-    $("#action1").html("Not enough "+TOKENSYMBOL);
+    $("#action1").html('<font style="color:#f442b3;">Not enough </font>'+TOKENSYMBOL);
     $("#buyModalbtn1").hide();
   }
   if(myBalance<item2.price){
-    $("#action2").html("Not enough "+TOKENSYMBOL);
+    $("#action2").html('<font style="color:#f442b3;">Not enough </font>'+TOKENSYMBOL);
     $("#buyModalbtn2").hide();
   }
   if(myBalance<item3.price){
-    $("#action3").html("Not enough "+TOKENSYMBOL);
+    $("#action3").html('<font style="color:#f442b3;">Not enough </font>'+TOKENSYMBOL);
     $("#buyModalbtn3").hide();
   }
   if(myBalance<item4.price){
-    $("#action4").html("Not enough "+TOKENSYMBOL);
+    $("#action4").html('<font style="color:#f442b3;">Not enough </font>'+TOKENSYMBOL);
     $("#buyModalbtn4").hide();
   }
   if(myBalance<item5.price){
-    $("#action5").html("Not enough "+TOKENSYMBOL);
+    $("#action5").html('<font style="color:#f442b3;">Not enough </font>'+TOKENSYMBOL);
     $("#buyModalbtn5").hide();
   }
 
