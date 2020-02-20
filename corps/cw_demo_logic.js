@@ -640,7 +640,7 @@ function showBest(){
 
 $("#redeem").click(function() {
   $("#logLoader").show();
-
+  $("#redeem").hide();
 
   NcenoBrands.methods.log(
     _goalID, 
@@ -679,7 +679,8 @@ $("#redeem").click(function() {
       }
       else{
         $("#logLoader").hide();
-        console.error("error");
+        $("#redeem").hide();
+        console.error("redeem error");
       } 
     }
   ).once('error', function(error){console.log(error);});
