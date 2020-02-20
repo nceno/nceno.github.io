@@ -985,7 +985,7 @@ $("#joinModBtn").click(function() {
     if(receipt.status === true){
       updateNonce();
       $("#joinLoader").hide();
-      $("#joinPrompt").html("You're in, good luck!");
+      $("#joinPrompt").html('You'+"'"+'re in. Good luck, '+$("#nameField").val()+'!');
       //$("joinChallenge").hide();
     }
     else{
