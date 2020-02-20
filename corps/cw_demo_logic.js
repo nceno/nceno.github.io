@@ -1,4 +1,4 @@
-console.log("7867");
+console.log("8888");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -15,7 +15,7 @@ function joinModalLoad(){
       async function(error, result) {
         if (!error){
           $("#startTime").html(new Date(result[0]*1000).toDateString());
-          $("#endTime").html(new Date((result[1]+86400*result[0])*1000).toDateString());
+          $("#endTime").html(new Date((result[0]+86400*result[1])*1000).toDateString());
           $("#capEcho").html(result[2]+" "+TOKENSYMBOL);
           $("#bpmRate").html(result[5]+" "+TOKENSYMBOL);
           $("#kmRate").html(result[6]+" "+TOKENSYMBOL);
