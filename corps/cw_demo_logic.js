@@ -639,6 +639,9 @@ function showBest(){
 ///////////////////////////////////////
 
 $("#redeem").click(function() {
+  $("#logLoader").show();
+
+
   NcenoBrands.methods.log(
     _goalID, 
     Cookies.get('stravaID'), 
@@ -661,7 +664,7 @@ $("#redeem").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
         correctNonce++;
-
+        $("#jogLoader").hide();
         //listen to see if player is a first finisher
         Nceno.events.Log({
           filter: {paramGoalID: _goalid, paramStravaID: Cookies.get('stravaID'), finisher: true },
@@ -675,6 +678,7 @@ $("#redeem").click(function() {
 
       }
       else{
+        $("#logLoader").hide();
         console.error("error");
       } 
     }
@@ -954,6 +958,13 @@ $("#joinChecker").on('click', function(){
 
 //brands join
 $("#joinModBtn").click(function() {
+  $("#joinLoader").show();
+  $("#avatarChoices").hide();
+  $("#joinModBtn").hide();
+  $("#codeField").hide();
+  $("#nameField").hide();
+  $("#soonJoinTitle").hide();
+
   NcenoBrands.methods.join(
     _goalID, 
     Cookies.get('stravaID'), 
@@ -964,10 +975,6 @@ $("#joinModBtn").click(function() {
     function(error, result) {
       if (!error){
 
-        $("#joinModBtn").hide();
-        $("#codeField").hide();
-        $("#nameField").hide();
-        $("#joinLoader").show();
         console.log(result);
       }
       else
@@ -978,14 +985,17 @@ $("#joinModBtn").click(function() {
     if(receipt.status === true){
       updateNonce();
       $("#joinLoader").hide();
+      $("#joinPrompt").html("You're in, good luck!");
       //$("joinChallenge").hide();
     }
     else{
-      $("#joinChallenge").hide();
-      $("#joinLoader").hide();
+      $("#joinLoader").show();
+      $("#avatarChoices").hide();
+      $("#joinModBtn").hide();
       $("#codeField").hide();
       $("#nameField").hide();
-      $('#joinPrompt').html('<p>Sorry, invite code invalid or challenge has stopped.</p>');
+      $("#soonJoinTitle").hide();
+      $('#joinPrompt').html('<p>Sorry, invite code invalid or challenge is inactive.</p>');
       console.log("join error.");
     } 
   }).once('error', function(error){console.log(error);});
@@ -1169,7 +1179,7 @@ function populateTargetModal(){
   );
 }
 
-function joinTarget(){
+/*function joinTarget(){
   console.log("goalID is: "+targetGoalID+", stravaID is: "+stravaID+", ethprice is: "+ethPrice);
   console.log("targetStartStamp is: "+targetStartStamp);
   NcenoBrands.methods.join(
@@ -1214,7 +1224,7 @@ function joinTarget(){
       } 
     }
   ).once('error', function(error){console.log(error);});
-}
+}*/
 
 var browsedGoal;
 
