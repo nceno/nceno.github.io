@@ -261,16 +261,18 @@ async function makeOrdersPage(){
   );
 }
 
-function makeSpendPage(){
+async function makeSpendPage(){
+  var myBalance
   if(Cookies.get('userWallet') != undefined && Cookies.get('access_token')!= undefined){
     //show token balance
-    TheToken.methods.balanceOf(
+   await TheToken.methods.balanceOf(
       Cookies.get('userWallet')
     )
     .call({from: Cookies.get('userWallet'), nonce: correctNonce},
-      function(error, result) {
+      async function(error, result) {
         if (!error){
           $("#tokenBalance").html(result+" "+TOKENSYMBOL);
+          myBalance = await result;
         }
         else
         console.error(error);
@@ -309,6 +311,13 @@ function makeSpendPage(){
       }
     );
   }
+
+  if(myBalance<item1.price){$("#action1").html("Not enough "+TOKENSYMBOL)}
+  if(myBalance<item2.price){$("#action2").html("Not enough "+TOKENSYMBOL)}
+  if(myBalance<item3.price){$("#action3").html("Not enough "+TOKENSYMBOL)}
+  if(myBalance<item4.price){$("#action4").html("Not enough "+TOKENSYMBOL)}
+  if(myBalance<item5.price){$("#action5").html("Not enough "+TOKENSYMBOL)}
+
 }//end makeSpendPage
 
 var targetName;
