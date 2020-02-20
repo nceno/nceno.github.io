@@ -1374,8 +1374,8 @@ window.onload = function(){
         function(error, result) {
           if (!error){
             console.log("player joined already: "+result);
-            if(result[0]=='true'){
-              $("#openWalletGlobal2").hide();
+            if(result[0]){
+              $("#joinBtn").hide();
             }
           }
         }
