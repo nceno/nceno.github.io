@@ -794,7 +794,10 @@ function makeWorkoutPage(){
                         var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
                         $("#rewardSlot").html(theirReward+' '+TOKENSYMBOL);
-                        $("#potRem").html(remainingTokens+' '+TOKENSYMBOL);
+                        if(remainingTokens<1){
+                          $("#log").hide();
+                        }
+
                         $("#leaderboardCount").html(compcount);
 
                       }
