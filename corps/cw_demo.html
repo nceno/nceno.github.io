@@ -369,8 +369,8 @@
                               <a id="buyModalbtn1" onclick="setTarget(item1);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
-                              <span class="eyebrow" >6 SUN</span>
-                              <h3>Lunch delivery from restaurant of your choice</h3>
+                              <span class="eyebrow" id="price1" >6 SUN</span>
+                              <h3 id="title1">Lunch delivery from restaurant of your choice</h3>
                             </div>
                           </div>
                         </article>
@@ -382,8 +382,8 @@
                               <a id="buyModalbtn2" onclick="setTarget(item2);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
-                              <span class="eyebrow">7 SUN</span>
-                              <h3>Boss's parking space for 2 weeks</h3>
+                              <span class="eyebrow" id="price2">7 SUN</span>
+                              <h3 id="title2">Boss's parking space for 2 weeks</h3>
                             </div>
                           </div>
                         </article>
@@ -394,8 +394,8 @@
                               <a id="buyModalbtn3" onclick="setTarget(item3);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
-                              <span class="eyebrow">2 SUN</span>
-                              <h3>Half day of work</h3>
+                              <span class="eyebrow" id="price3">2 SUN</span>
+                              <h3 id="title3">Half day of work</h3>
                             </div>
                           </div>
                         </article>
@@ -406,8 +406,8 @@
                               <a id="buyModalbtn4" onclick="setTarget(item4);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
-                              <span class="eyebrow">4 SUN</span>
-                              <h3>Lunch time happy hour for your department</h3>
+                              <span class="eyebrow" id="price4">4 SUN</span>
+                              <h3 id="title4">Lunch time happy hour for your department</h3>
                             </div>
                           </div>
                         </article>
@@ -418,8 +418,8 @@
                               <a id="buyModalbtn5" onclick="setTarget(item5);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>
                             </div>
                             <div class="tile-footer">
-                              <span class="eyebrow">9 SUN</span>
-                              <h3>Dinner for 2 at 101 signature room</h3>
+                              <span class="eyebrow" id="price5">9 SUN</span>
+                              <h3 id="title5">Dinner for 2 at 101 signature room</h3>
                             </div>
                           </div>
                         </article>
@@ -670,7 +670,7 @@
             <div class="image image-overlay" style="background-image:url(../app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
               <!--reset content onclick -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <button onclick="resetJoin();" type="button" class="close" data-dismiss="modal" aria-label="Close" >
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
               <!--/reset content onclick -->
@@ -774,7 +774,7 @@
             <div class="image image-overlay" style="background-image:url(../app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
               <!--reset content onclick -->
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <button onclick="$('#redeem').show();" type="button" class="close" data-dismiss="modal" aria-label="Close" >
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
               <!--/reset content onclick -->
@@ -834,11 +834,12 @@
                   </div>
                 </div>
                 <div class="row justify-content-center">
+                  <span id="logSuccess"></span>
 
                     <span class="col text-center mb-2" id="logLoader">
                       <!--loaders -->
                       <p>Verifying your workout... </p>
-                      <div id="logLoader" class="col text-center "> 
+                      <div class="col text-center "> 
                         <img  src="../app/assets/images/loader.svg">
                       </div>
                       <!--/loaders -->

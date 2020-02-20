@@ -1,12 +1,20 @@
 console.log("1");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
+$('#price1').html(item1.price +" "+TOKENSYMBOL);
+$('#title1').html(item1.descr);
 
-/*for(let k=1; k<inventory; k++){
-  var tarObj = "item"+k;
-  $('#itemPrice'+k).html(tarObj.price+TOKENSYMBOL);
-  $('#itemName'+k).html(tarObj.descr);
-}*/
+$('#price2').html(item1.price +" "+TOKENSYMBOL);
+$('#title2').html(item1.descr);
+
+$('#price3').html(item1.price +" "+TOKENSYMBOL);
+$('#title3').html(item1.descr);
+
+$('#price4').html(item1.price +" "+TOKENSYMBOL);
+$('#title4').html(item1.descr);
+
+$('#price5').html(item1.price +" "+TOKENSYMBOL);
+$('#title5').html(item1.descr);
 
 
 function joinModalLoad(){
@@ -665,6 +673,7 @@ $("#redeem").click(function() {
     if(receipt.status === true){
         correctNonce++;
         $("#jogLoader").hide();
+        $("#logSuccess").html("Great job! Check your points wallet in a minute.");
         //listen to see if player is a first finisher
         Nceno.events.Log({
           filter: {paramGoalID: _goalid, paramStravaID: Cookies.get('stravaID'), finisher: true },
@@ -672,7 +681,7 @@ $("#redeem").click(function() {
         }, function(error, event){ 
             //do some stuff
             //ex. usdPayout = parseInt(event.returnValues._payout);
-            if(event.returnValues.finisher != false) console.log("you're one of the first 3 to finish! Go see the challenge admin to claim the top prize.");
+            if(event.returnValues.finisher != false) $("#logSuccess").html("You're one of the first 3 to finish the challenge! Go see the challenge admin to claim the top prize.");
           }
         ).on('error', console.error);
 
@@ -1102,19 +1111,17 @@ function echoGoal(){
   console.log($("#sliderReward").roundSlider('getValue',1));
 }
 
-function resetCreate(){
-  $("#hostBtn").show();
-  $("#cancelBtn").show();
-  $("#createSuccess").hide();
-  $("#createLoader").hide();
-  $("#createReminder").html('');
-  $("#createFail").html('');
-  //randGoalID();
-  $("#chalID").html('');
-  $('#promoField').show();
+function resetJoin(){
+  $("#avatarChoices").show();
+  $("#soonJoinTitle").show();
+  $("#nameField").show();
+  $("#codeField").show();
+  $("#joinModBtn").show();
+  $("#joinPrompt").html('');
+  $('#joinLoader').hide();
 }
-$('#popupCreate').on('hidden.bs.modal', function (e) {
-  resetCreate();
+$('#popupSoonJoin').on('hidden.bs.modal', function (e) {
+  resetJoin();
 })
 
 
