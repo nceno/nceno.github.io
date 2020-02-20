@@ -358,12 +358,28 @@ function setTarget(item){
   targetName = item.name;
   targetPrice = item.price;
   console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
-  $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you are about to buy <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>');
+  $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you are about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>');
 
 }
 
+function resetSpend(){
+  $("#confirmBuy").show();
+  $("#cancelBuy").show();
+  $("#buyLoader").hide();
+  $("#getYouPaid").html("Remember those workouts? They're about to pay off!");
+  makeSpendPage();
+}
+$('#popupBuy').on('hidden.bs.modal', function (e) {
+  resetSpend();
+});
+
+
 $("#buyLoader").hide();
 function buy(){
+  $("#confirmBuy").hide();
+  $("#cancelBuy").hide();
+  $("#buyLoader").show();
+
   //deposit tokens here...
   TheToken.methods.transfer(
     adminWallet,
@@ -372,7 +388,7 @@ function buy(){
   .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
-        $("#buyLoader").show();
+        
         orderNo = web3.utils.padRight(web3.utils.randomHex(3),6);
         console.log(result);
       }
@@ -405,19 +421,23 @@ function buy(){
           console.log(receipt.status);
           if(receipt.status == true){
             updateNonce();
+            $("#getYouPaid").html("Your receipt");
             $("#buyLoader").hide();
             $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
-            $("#cancelBuy").hide();
-            $("#confirmBuy").hide();
+            
           }
           else{
-            
+            $("#getYouPaid").html("Error completing purchase...");
             console.log("buy error.");
           } 
-        }).once('error', function(error){console.log(error);});
+        }).once('error', function(error){
+          $("#getYouPaid").html("Error completing purchase...");
+          console.log(error);
+        });
       //---end makeorder
     }
     else{
+      $("#getYouPaid").html("Error completing purchase...");
       console.log('error. not enough funds?');
     }
   });
@@ -639,10 +659,10 @@ function showBest(){
           dispTimeHours = 12;
         }
         else {dispTimeHours = dispTimeHours%12;}
-        period = "pm";
+        period = "am";
       }
       else{
-        period = "am";
+        period = "pm";
       }
 
       dispHR = _A.average_heartrate; //needs to be adjusted
@@ -685,6 +705,14 @@ function showBest(){
 ///////////////////////////////////////
 //////////////vvvvvvvv nceno.log()
 ///////////////////////////////////////
+
+function resetLog(){
+  $('#redeem').show();
+  makeWorkoutPage();
+}
+$('#logModal').on('hidden.bs.modal', function (e) {
+  resetLog();
+});
 
 $("#redeem").click(function() {
   $("#logLoader").show();
@@ -844,6 +872,7 @@ function makeWorkoutPage(){
                         var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
                         $("#daysLeft").html(days+" days");
                         $("#rewardSlot").html(theirReward+' '+TOKENSYMBOL);
+                        $("#potRem").html(remainingTokens+' '+TOKENSYMBOL);
                         if(remainingTokens<1){
                           $("#log").hide();
                         }
@@ -1179,104 +1208,6 @@ function makePage(){
 var goalid;
 
 
-
-
-//searches for a specific goal and displays it with an option to join.
-//also populates the join modal.
-var stakeweiSearched;
-function search(){
-
-  $("#request").show();
-  var goalid = web3.utils.padRight($('#searchField').val(),34)
-
-  NcenoBrands.methods.getGoalParams(goalid)
-  .call({from: Cookies.get('userWallet')},
-      function(error, result) {
-      if (!error){
-        //echo challenge
-
-        var tstamp = new Date(result[4]*1000);
-        //var buyin = Math.round(result[1]*result[5]/100000000000000000000);
-        stakeweiSearched = 1000000000000000000*result[1]/ethPrice;
-        $("#srStake").html("$"+result[1]);
-        $("#srWks").html(result[3]+" wks");
-        $("#srSes").html(result[2]+" x/wk");
-        $("#srMins").html(result[0]+ " mins");
-        $("#srComp").html(10-result[5]);
-        $("#srStart").html(tstamp.toDateString());
-        if(result[4]*1000>Date.now()){$("#srJoin").show();}
-
-        $("#srEcho").html(
-          "You're commiting $" + result[1] + " to working out for " + 
-          result[0] +"mins " + result[2]+" times per week for "+ 
-          result[3]+  " weeks, starting automatically on "+ tstamp.toDateString()
-        );
-      }
-      else
-      console.error(error);
-  }); 
-}
-
-
-
-
-
-function populateTargetModal(){
-
-  $("#soonEcho").html(
-    "You're commiting $" + targetStake + " to working out for " + 
-    targetMin +"minutes, "+ targetSes+" times per week, for "+ 
-    targetWks+  " weeks, starting automatically on "+ targetStart+". The challenge ID is "+ targetGoalID.slice(0, 8)
-  );
-}
-
-/*function joinTarget(){
-  console.log("goalID is: "+targetGoalID+", stravaID is: "+stravaID+", ethprice is: "+ethPrice);
-  console.log("targetStartStamp is: "+targetStartStamp);
-  NcenoBrands.methods.join(
-    targetGoalID,
-    stravaID
-    //web3.utils.toHex($('#promoFieldSoon').val())
-  )
-  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        $("#joinSoonModalBtn").hide();
-        $("#joinSoonLoader").show();
-        $('#promoFieldSoon').hide();
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){
-    console.log(receipt.status);
-    if(receipt.status === true){
-        correctNonce++;
-        $('#joinSoonLoader').hide();
-        $("#soonEcho").html('');
-        $('#joinSoonSuccess').html('<p>Success! You’re in the challenge: '+targetGoalID.slice(0, 8)+' . Don’t forget to invite your friends and mark the starting time in your calendar!</p>');
-        $('#joinSoonModalBtn').hide();
-        $('#promoFieldSoon').hide();
-        $("#joinSoonReminder").show();
-        //targetStart is a text date... need the timestamp.
-        reminder('joinSoonReminder', targetStake, targetMin, targetSes, targetWks, targetGoalID, targetStartStamp);
-        stravaShare(targetStartStamp, targetMin, targetStake, targetSes, targetWks, targetGoalID);
-        createUser();
-      }
-      else{
-        $("#soonEcho").html('');
-        $("#joinSoonLoader").hide();
-        $("#soonJoinTitle").hide();
-        $("#joinSoonModalBtn").hide();
-        $('#promoFieldSoon').hide();
-        $("#joinSoonFail").html('<p>Cannot join. Either this challenge already started, or else you are already in this challenge. Go check your upcoming goals! (ID: '+targetGoalID.slice(0, 8)+')</p>');
-        console.log("UI: Challenge already started, user already is a participant, or else message value is less than intended stake.");
-      } 
-    }
-  ).once('error', function(error){console.log(error);});
-}*/
-
 var browsedGoal;
 
 
@@ -1290,7 +1221,6 @@ function tooltipVal2(args) {
 function tooltipVal3(args) {
     return args.value + " days";
 }
-
 
 
 var safeLow;

@@ -11,35 +11,35 @@ const adminUserID_1 = '49092681';
 const inventory = 5;
 
 const item1={
-	name: 'Lunch delivery',
+	name: 'a Lunch delivery',
 	//price : 620
-	price : 60000,
+	price : 200,
 	descr : "Lunch delivery from restaurant of your choice"
 }
 
 const item2={
-	name: 'Parking space',
+	name: 'a Parking space',
 	//price: 700
 	price: 7,
 	descr : "Boss's parking space for 2 weeks"
 }
 
 const item3={
-	name: 'Half-day',
+	name: 'a Half-day',
 	//price: 2200
 	price: 2,
 	descr : "Half day of work"
 }
 
 const item4={
-	name: 'Happy hour',
+	name: 'a Happy hour',
 	//price: 450
 	price: 4,
 	descr : "Lunch time happy hour for your department"
 }
 
 const item5={
-	name: 'Dinner for 2',
+	name: 'a Dinner for 2',
 	//price: 9500
 	price: 90,
 	descr : "Dinner for two at 101 signature room"
