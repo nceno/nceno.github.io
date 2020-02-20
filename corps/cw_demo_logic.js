@@ -319,28 +319,28 @@ async function makeSpendPage(){
     $("#action1").html('<a id="buyModalbtn1" onclick="setTarget(item1);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
   ////////
-  if(myBalance<item1.price){
+  if(myBalance<item2.price){
     $("#action2").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
   else{
     $("#action2").html('<a id="buyModalbtn2" onclick="setTarget(item2);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
   /////////
-  if(myBalance<item1.price){
+  if(myBalance<item3.price){
     $("#action3").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
   else{
     $("#action3").html('<a id="buyModalbtn3" onclick="setTarget(item3);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
   /////////
-  if(myBalance<item1.price){
+  if(myBalance<item4.price){
     $("#action4").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
   else{
     $("#action4").html('<a id="buyModalbtn4" onclick="setTarget(item4);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
   /////////
-  if(myBalance<item1.price){
+  if(myBalance<item5.price){
     $("#action5").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
   else{
