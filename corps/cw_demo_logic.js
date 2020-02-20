@@ -1,4 +1,4 @@
-console.log("00");
+console.log("1");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
