@@ -13,7 +13,7 @@ const inventory = 5;
 const item1={
 	name: 'Lunch delivery',
 	//price : 620
-	price : 6,
+	price : 60000,
 	descr : "Lunch delivery from restaurant of your choice"
 }
 
