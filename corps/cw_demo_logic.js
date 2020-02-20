@@ -1,4 +1,4 @@
-console.log("111");
+console.log("00");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -1375,7 +1375,7 @@ window.onload = function(){
           if (!error){
             console.log("player joined already: "+result);
             if(result[0]=='true'){
-              $("#joinBtn").hide();
+              $("#openWalletGlobal2").hide();
             }
           }
         }
