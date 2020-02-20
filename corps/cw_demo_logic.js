@@ -1368,14 +1368,15 @@ window.onload = function(){
     
     updateNonce();
     //makeWorkoutPage();
+    $("#joinBtn").hide();
       //----this hides the join button if you're a player.
       NcenoBrands.methods.playerStatus(_goalID, Cookies.get('stravaID'))
       .call({from: Cookies.get('userWallet')},
         function(error, result) {
           if (!error){
             console.log("player joined already: "+result);
-            if(result){
-              $("#joinBtn").hide();
+            if(!result){
+              $("#joinBtn").show();
             }
           }
         }
