@@ -1374,7 +1374,7 @@ window.onload = function(){
         function(error, result) {
           if (!error){
             console.log("player joined already: "+result);
-            if(result[0]){
+            if(result){
               $("#joinBtn").hide();
             }
           }
