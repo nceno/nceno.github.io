@@ -708,7 +708,7 @@ function showBest(){
 
 function resetLog(){
   $('#redeem').show();
-  makeWorkoutPage();
+  //makeWorkoutPage();
 }
 $('#logModal').on('hidden.bs.modal', function (e) {
   resetLog();
@@ -862,11 +862,11 @@ function makeWorkoutPage(){
 
                       if(playerID == Cookies.get('stravaID')){
                         //post to top if it's me
-                          if(! $("#me").length){
+                          //if(! $("#me").length){
                             $("#me").prepend(
                               '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
                             );
-                          }
+                          //}
                         //}
                         //populate my quick stats .........
                         $("#progressPerc").html(theirProgress+'%');
