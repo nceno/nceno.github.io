@@ -4,17 +4,17 @@ console.log("1");
 $('#price1').html(item1.price +" "+TOKENSYMBOL);
 $('#title1').html(item1.descr);
 
-$('#price2').html(item1.price +" "+TOKENSYMBOL);
-$('#title2').html(item1.descr);
+$('#price2').html(item2.price +" "+TOKENSYMBOL);
+$('#title2').html(item2.descr);
 
-$('#price3').html(item1.price +" "+TOKENSYMBOL);
-$('#title3').html(item1.descr);
+$('#price3').html(item3.price +" "+TOKENSYMBOL);
+$('#title3').html(item3.descr);
 
-$('#price4').html(item1.price +" "+TOKENSYMBOL);
-$('#title4').html(item1.descr);
+$('#price4').html(item4.price +" "+TOKENSYMBOL);
+$('#title4').html(item4.descr);
 
-$('#price5').html(item1.price +" "+TOKENSYMBOL);
-$('#title5').html(item1.descr);
+$('#price5').html(item5.price +" "+TOKENSYMBOL);
+$('#title5').html(item5.descr);
 
 
 function joinModalLoad(){
@@ -312,11 +312,26 @@ async function makeSpendPage(){
     );
   }
 
-  if(myBalance<item1.price){$("#action1").html("Not enough "+TOKENSYMBOL)}
-  if(myBalance<item2.price){$("#action2").html("Not enough "+TOKENSYMBOL)}
-  if(myBalance<item3.price){$("#action3").html("Not enough "+TOKENSYMBOL)}
-  if(myBalance<item4.price){$("#action4").html("Not enough "+TOKENSYMBOL)}
-  if(myBalance<item5.price){$("#action5").html("Not enough "+TOKENSYMBOL)}
+  if(myBalance<item1.price){
+    $("#action1").html("Not enough "+TOKENSYMBOL);
+    $("#buyModalbtn1").hide();
+  }
+  if(myBalance<item2.price){
+    $("#action2").html("Not enough "+TOKENSYMBOL);
+    $("#buyModalbtn2").hide();
+  }
+  if(myBalance<item3.price){
+    $("#action3").html("Not enough "+TOKENSYMBOL);
+    $("#buyModalbtn3").hide();
+  }
+  if(myBalance<item4.price){
+    $("#action4").html("Not enough "+TOKENSYMBOL);
+    $("#buyModalbtn4").hide();
+  }
+  if(myBalance<item5.price){
+    $("#action5").html("Not enough "+TOKENSYMBOL);
+    $("#buyModalbtn5").hide();
+  }
 
 }//end makeSpendPage
 
