@@ -4,7 +4,6 @@ console.log("11");
 
 async function loadCodes(num){
   var dict=new Array();
-  var w = 10;
 
   //make the list
   for(let k=0; k<num; k++){
@@ -14,10 +13,10 @@ async function loadCodes(num){
   console.table(dict);
 
   //start loading them
-  for(let i=0; i<(num/w); i++){
+  for(let i=0; i<(num/10); i++){
     await NcenoBrands.methods.addInviteCodes(
       _goalID,
-      dict.slice(i*w,i*w+(w-0))
+      dict.slice(i*10,(i+1)*10)
       
     ).send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
       async function(error, result) {
