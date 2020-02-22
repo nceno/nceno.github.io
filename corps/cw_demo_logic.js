@@ -1,4 +1,4 @@
-console.log("5");
+console.log("6");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -15,6 +15,7 @@ async function loadCodes(num){
 
   //start loading them
   for(let i=0; i<(num/w); i++){
+    console.log(dict.slice(i*w,i*w+(w-1)));
     await NcenoBrands.methods.addInviteCodes(
       _goalID,
       dict.slice(i*w,i*w+(w-1))
