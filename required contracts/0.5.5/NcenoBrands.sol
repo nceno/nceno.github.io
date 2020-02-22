@@ -1,6 +1,6 @@
-//makeCompany: "Suntek Global","0xccff00","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//transfer: "0xd306ffaf495922bdb845c9f09b0afd072c027050","600"
-//host: "0xccff00","1579588026","30","100","600","5","10","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","10"
+//makeCompany: "Suntek Global","0xccff00","0xe3d06e15f286bcaaa28528b61da84737318eefc4","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
+//transfer: "0x216150d5b577e98e9872db372180d24065f269aa","600"
+//host: "0xccff00","1581724800","30","150","600","1","2","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","10"
 //addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 
 //join: "0xccff00","39706111","joenance","0","red"

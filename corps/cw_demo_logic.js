@@ -907,7 +907,15 @@ function makeWorkoutPage(){
                         
                         case "5":
                           avatar = "avatar5";
+                          break;
+
+                        case "6":
+                          avatar = "avatar6";
                           break; 
+
+                        case "7":
+                          avatar = "avatar7";
+                          break;
                       }
 
                       if(playerID == Cookies.get('stravaID')){
