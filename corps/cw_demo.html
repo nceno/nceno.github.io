@@ -27,6 +27,8 @@
 
     <link  href="../app/datepicker/dist/datepicker.css" rel="stylesheet" media="all">
 
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.css" rel="stylesheet" />
+
     <!---slider stuff -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.css" rel="stylesheet" />
     <!---slider stuff -->
@@ -822,7 +824,7 @@
                           </tr>
                           
                         </thead>
-                          <tbody id="orderList">
+                          <tbody >
                             <tr>
                               <td ><span id="dispTime"></span><br><span id="period" style="color:#fff;"></span></td>       
                               <td ><span id="dispMins"></span><br>min</td>
@@ -845,6 +847,15 @@
                 <div class="row">
                   <div class="col text-center">
                     <h3 style="color:#fff;">Workout value: <b style="color:#ccff00;"><span id="dispValue"></span> SUN</b></h3>
+
+                    <p>How much (NT$) do you normally spend when you come to <span id="compTitle2">Redpoint</span>?</p>
+                    <div class="form-check form-check-inline">
+                      <input id="avgSpend" type="range" min="10" max="100" step="5" data-rangeslider>
+                      <output></output>
+                    </div>
+                    
+
+
                     <!--buttons -->
                     <button id="redeem" type="button" class="btn btn-block btn-rounded btn-primary">Claim points</button>
                     <!--/buttons -->
@@ -938,6 +949,8 @@
       <script src="https://cdn.jsdelivr.net/npm/@portis/web3/umd/index.min.js"></script>
 
       <script src="../app/datepicker/dist/datepicker.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.js"></script>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
       <script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
