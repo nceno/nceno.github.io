@@ -1,10 +1,10 @@
-console.log("7");
+console.log("8");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
 NcenoBrands.events.MakeOrder({
-    filter: {paramGoalID: _goalID},
-    fromBlock: 0, toBlock: 'latest'
+    //filter: {paramGoalID: _goalID},
+    fromBlock: 0, toBlock: 'latest' //6016216
 }, function(error, event){ console.log(event); })
 .on('data', function(event){
     console.log("New order was placed!");
@@ -14,8 +14,8 @@ NcenoBrands.events.MakeOrder({
 .on('error', console.error);
 
 NcenoBrands.events.UpdateOrder({
-    filter: {paramGoalID: _goalID},
-    fromBlock: 0, toBlock: 'latest'
+    //filter: {paramGoalID: _goalID},
+    fromBlock: 0, toBlock: 'latest' //6016216
 }, function(error, event){ console.log(event); })
 .on('data', function(event){
     console.log("Order status was changed!");
