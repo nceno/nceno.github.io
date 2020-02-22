@@ -643,14 +643,14 @@
           <div class="modal-content">
             <div class="image image-overlay" style="background-image:url(../app/assets/images/metal.jpg)"></div>
             <div class="modal-header justify-content-end">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <button onclick="resetUpdateOrder();" type="button" class="close" data-dismiss="modal" aria-label="Close" >
                 <span aria-hidden="true" class="icon-x"></span>
               </button>
             </div>
             <div class="modal-body text-center  text-white">
               <h3>Choose an action for this order</h3>
-              <p id="goalEcho"></p>
-              <span id="createFail"><span>
+              <span id="statusEcho"></span>
+              
             </div>
             <div class="modal-footer gutter-1">
               <div class="container-fluid">
@@ -666,6 +666,14 @@
 
               </div>
             </div>
+
+            <div id="statusLoader" class="col text-center mb-2">
+              <!--loaders -->
+              <p>Updating status. Please wait...</p>
+              <img  src="../app/assets/images/loader.svg"> 
+              <!--/loaders -->
+            </div>
+
           </div>
         </div>
       </div>

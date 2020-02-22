@@ -141,6 +141,16 @@ function setRefTarget(_orderNo){
   refTarget = _orderNo;
 }
 
+function resetUpdateOrder(){
+  $("#settleBtn").show();
+  $("#refundBtn").show();
+  $("#statusLoader").hide();
+  makeOrdersPage();
+}
+$('#refundModal').on('hidden.bs.modal', function (e) {
+  resetUpdateOrder();
+});
+
 function setOrderStatus(_orderNo, _action){
   if(_action == "refunded"){
     //nceno refund
@@ -150,8 +160,9 @@ function setOrderStatus(_orderNo, _action){
     ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
       function(error, result) {
         if (!error){
-
-          
+          $("#settleBtn").hide();
+          $("#refundBtn").hide();
+          $("#statusLoader").show();
           console.log(result);
         }
         else
@@ -161,6 +172,7 @@ function setOrderStatus(_orderNo, _action){
       console.log(receipt.status);
       if(receipt.status == true){
         correctNonce++;
+
         TheToken.methods.transfer(
           adminWallet,
           $('#cost'+refTarget).val()
@@ -177,6 +189,8 @@ function setOrderStatus(_orderNo, _action){
           console.log(receipt.status);
           if(receipt.status == true){
             correctNonce++;
+            $("#statusLoader").hide();
+            $("#statusEcho").html("order status has been updated.");
 
             console.log("issuing a refund!");
             $('#status'+_orderNo).css({color: "#333"});
@@ -189,7 +203,7 @@ function setOrderStatus(_orderNo, _action){
             $('#status'+_orderNo).css({color: "#333"});      
           }
           else{
-            console.log('error. not enough funds?');
+            console.log('error. status could not be updated');
           }
         });
         
