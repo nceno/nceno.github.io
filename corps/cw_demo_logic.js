@@ -1,4 +1,4 @@
-console.log("5");
+console.log("6");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -918,8 +918,9 @@ function makeWorkoutPage(){
                             );
 
                             lastLogTime = resultC[3]*1000;
+                            var bla = new Date().getTime() - lastLogTime
                             console.log("last log time was: "+lastLogTime);
-                            console.log("diff "+new Date().getTime() -lastLogTime);
+                            console.log("diff "+bla);
                             console.log("last log day "+ new Date(lastLogTime).getDay());
                             console.log("now: "+new Date().getDay());
 
