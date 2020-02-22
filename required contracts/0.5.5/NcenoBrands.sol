@@ -38,9 +38,10 @@ contract NcenoBrands is RelayRecipient{
     string name;
     address owner;
     mapping(bytes=>goal) goalSet;
-    mapping(bytes=>order) orderSet;
+    mapping(bytes=>order) orderSet; ////////
     uint orderCount;
-    mapping(uint=>order) indexedOrder;
+    mapping(uint=>order) indexedOrder; ///////
+    mapping(uint=>bytes) indexedOrderNumber; //////
     address token;
   }
   mapping(bytes=>company) public companyAt;
@@ -286,6 +287,7 @@ contract NcenoBrands is RelayRecipient{
     companyAt[_companyID].orderSet[_orderNum]=createdOrder;
     profileOf[_stravaID].orderSet[_orderNum]=createdOrder;
     companyAt[_companyID].indexedOrder[orderCount]=createdOrder;
+    companyAt[_companyID].indexedOrderNumber[orderCount] = _orderNum;
     orderAt[_orderNum]=createdOrder;
     orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
 
@@ -300,6 +302,9 @@ contract NcenoBrands is RelayRecipient{
 
   function setOrderStatus(bytes memory _orderNum, uint _status) public{
     orderAt[_orderNum].status = _status;
+    //companyAt[_companyID].indexedOrder[_index].status    //this is what is returned when getting the status and building the list
+    //orderAt[_orderNum].status     //this is what is returned by order search.
+    //companyAt[_companyID].indexedOrder[magic index]  //need to find correct index and set this.
     emit UpdateOrder(_orderNum, _status);
   }
 
@@ -344,7 +349,7 @@ contract NcenoBrands is RelayRecipient{
 
   //used to generate order list
   function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, string memory, uint, uint, uint, bytes memory){
-    return(companyAt[_companyID].indexedOrder[_index].item, profileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, companyAt[_companyID].indexedOrder[_index].status, companyAt[_companyID].indexedOrder[_index].orderNum);    
+    return(companyAt[_companyID].indexedOrder[_index].item, profileOf[companyAt[_companyID].indexedOrder[_index].stravaBuyer].userName, companyAt[_companyID].indexedOrder[_index].price, companyAt[_companyID].indexedOrder[_index].date, orderAt[companyAt[_companyID].indexedOrderNumber[_index]].status, companyAt[_companyID].indexedOrder[_index].orderNum);    
     //companyID, index --> item0, buyerName1, price2, date3, status4, orderNo5
   }
 
