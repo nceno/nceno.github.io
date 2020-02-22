@@ -717,7 +717,7 @@ function showBest(){
       dispMins = _A.elapsed_time; //needs adjusted
       dispValue = Math.round(bestVal); //needs adjusted
 
-      _A.utc_offset/3600
+      //_A.utc_offset/3600
 
       dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
       if(dispTimeMinutes<10){dispTimeMinutes = "0"+dispTimeMinutes;}
