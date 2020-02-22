@@ -1,10 +1,10 @@
-console.log("6");
+console.log("8");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
 async function loadCodes(num){
   var dict=new Array();
-  var w = 9;
+  var w = 2;
 
   //make the list
   for(let k=0; k<num; k++){
