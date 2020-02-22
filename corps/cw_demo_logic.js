@@ -1,4 +1,4 @@
-console.log("10");
+console.log("1");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -249,7 +249,9 @@ function setOrderStatus(_orderNo, _action){
     ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
       function(error, result) {
         if (!error){
-
+          $("#settleBtn").hide();
+          $("#refundBtn").hide();
+          $("#statusLoader").show();
           
           console.log(result);
         }
@@ -259,7 +261,10 @@ function setOrderStatus(_orderNo, _action){
     ).once('confirmation', function(confNumber, receipt){ 
       console.log(receipt.status);
       if(receipt.status == true){
-        updateNonce();
+        correctNonce++;
+        $("#statusLoader").hide();
+        $("#statusEcho").html("order status has been updated.");
+
         console.log("settling the sale!");
         $('#status'+_orderNo).css({color: "#333"});
         $('#status'+_orderNo).html("complete");
@@ -290,7 +295,8 @@ async function makeOrdersPage(){
       if (!error){
         var playerOrderCt = await result;
         correctNonce++;
-        //start making the list
+        //empty the list and then start making the it
+        $("#orderList").empty();
         for(let i = 0; i<playerOrderCt; i++){
           await NcenoBrands.methods.getIndexedOrder(
             companyID,
@@ -301,6 +307,7 @@ async function makeOrdersPage(){
               if (!error){
                 var that = await result;
                 console.log(result2[5]+" status is "+result2[4]);
+
                 //var statusCode;
                 switch(result2[4]) {
                   case '0':

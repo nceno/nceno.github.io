@@ -19,10 +19,10 @@ import "./ERC20Interface.sol";
 contract NcenoBrands is RelayRecipient{
 
   event MakeUser(address _wallet, uint _stravaID, string _userName);
-  event MakeOrder(bytes indexed paramGoalID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
+  event MakeOrder(bytes32 indexed paramGoalID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
   event Join(bytes paramGoalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes indexed paramGoalID, uint indexed paramStravaID, uint _kms, uint _mins, uint _actID, bool indexed finisher);
-  event UpdateOrder(bytes indexed paramGoalID, bytes _orderNumber, uint _status);
+  event UpdateOrder(bytes32 indexed paramGoalID, bytes _orderNumber, uint _status);
   
   //gas station init
   constructor() public {
