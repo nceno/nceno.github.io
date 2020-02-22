@@ -22,40 +22,65 @@
  
 <script type="text/javascript">
  
-function saveTextAsFile()
-{
-    var textToSave = document.getElementById("inputTextToSave").value;
-    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
-    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
- 
-    var downloadLink = document.createElement("a");
-    downloadLink.download = fileNameToSaveAs;
-    downloadLink.innerHTML = "Download File";
-    downloadLink.href = textToSaveAsURL;
-    downloadLink.onclick = destroyClickedElement;
-    downloadLink.style.display = "none";
-    document.body.appendChild(downloadLink);
- 
-    downloadLink.click();
+function saveTextAsFile(){
+  var textToSave = document.getElementById("inputTextToSave").value;
+  var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+  var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+  var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+
+  var downloadLink = document.createElement("a");
+  downloadLink.download = fileNameToSaveAs;
+  downloadLink.innerHTML = "Download File";
+  downloadLink.href = textToSaveAsURL;
+  downloadLink.onclick = destroyClickedElement;
+  downloadLink.style.display = "none";
+  document.body.appendChild(downloadLink);
+
+  downloadLink.click();
 }
  
-function destroyClickedElement(event)
-{
-    document.body.removeChild(event.target);
+function destroyClickedElement(event){
+  document.body.removeChild(event.target);
 }
  
-function loadFileAsText()
-{
-    var fileToLoad = document.getElementById("fileToLoad").files[0];
+function loadFileAsText(){
+  var fileToLoad = document.getElementById("fileToLoad").files[0];
  
-    var fileReader = new FileReader();
-    fileReader.onload = function(fileLoadedEvent) 
-    {
-        var textFromFileLoaded = fileLoadedEvent.target.result;
-        document.getElementById("inputTextToSave").value = textFromFileLoaded;
-    };
-    fileReader.readAsText(fileToLoad, "UTF-8");
+  var fileReader = new FileReader();
+  fileReader.onload = function(fileLoadedEvent) 
+  {
+    var textFromFileLoaded = fileLoadedEvent.target.result;
+    document.getElementById("inputTextToSave").value = textFromFileLoaded;
+  };
+  fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+async function loadCodes(dict){
+  var w = 10; //number of codes in a set
+  var sets = dict.length/w //= number of sets of w codes
+  for(let i=0; i<sets; i++){
+    await NcenoBrands.methods.addInviteCodes(
+      _goalID,
+      dict.slice(i*w,i*w+(w-1))
+    ).send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+      async function(error, result) {
+        if (!error){
+          await console.log(result);
+        }
+        else
+        console.error(error);
+      }
+      ).once('confirmation', async function(confNumber, receipt){
+        console.log(receipt.status);
+        if(receipt.status == true){
+          correctNonce++;
+          await console.log(receipt.status);
+        }
+        else{
+          console.log('error loading codes.');
+        }
+    });
+  }
 }
  
 </script>
