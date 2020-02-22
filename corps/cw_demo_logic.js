@@ -1,6 +1,43 @@
-console.log("1");
+console.log("2");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
+
+async function loadCodes(num){
+  var dict=new Array();
+  var w = 10;
+
+  //make the list
+  for(let k=0; k<num; k++){
+    dict.push(TOKENSYMBOL+"-"+web3.utils.padRight(web3.utils.randomHex(3),6)+"-"+k); //ex. SUN-0xcfd1a4-209
+  }
+  console.log("your invite codes are:");
+  console.table(dict);
+
+  //start loading them
+  for(let i=0; i<(num/w); i++){
+    await NcenoBrands.methods.addInviteCodes(
+      _goalID,
+      dict.slice(i*w,i*w+(w-1))
+    ).send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+      async function(error, result) {
+        if (!error){
+          await console.log(result);
+        }
+        else
+        console.error(error);
+      }
+      ).once('confirmation', async function(confNumber, receipt){
+        console.log(receipt.status);
+        if(receipt.status == true){
+          correctNonce++;
+          await console.log(receipt.status);
+        }
+        else{
+          console.log('error loading codes.');
+        }
+    });
+  }
+}
 
 NcenoBrands.events.MakeOrder({
     //filter: {paramGoalID: _goalID},

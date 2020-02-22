@@ -1,64 +1,16 @@
-<html>
-<body>
- 
-<table>
-    <tr><td>Text to Save:</td></tr>
-    <tr>
-        <td colspan="3">
-            <textarea id="inputTextToSave" cols="80" rows="25"></textarea>
-        </td>
-    </tr>
-    <tr>
-        <td>Filename to Save As:</td>
-        <td><input id="inputFileNameToSaveAs"></input></td>
-        <td><button onclick="saveTextAsFile()">Save Text to File</button></td>
-    </tr>
-    <tr>
-        <td>Select a File to Load:</td>
-        <td><input type="file" id="fileToLoad"></td>
-        <td><button onclick="loadFileAsText()">Load Selected File</button><td>
-    </tr>
-</table>
- 
-<script type="text/javascript">
- 
-function saveTextAsFile(){
-  var textToSave = document.getElementById("inputTextToSave").value;
-  var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
-  var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-  var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+async function loadCodes(num){
+  var dict=new Array();
+  var w = 10;
 
-  var downloadLink = document.createElement("a");
-  downloadLink.download = fileNameToSaveAs;
-  downloadLink.innerHTML = "Download File";
-  downloadLink.href = textToSaveAsURL;
-  downloadLink.onclick = destroyClickedElement;
-  downloadLink.style.display = "none";
-  document.body.appendChild(downloadLink);
+  //make the list
+  for(let k=0; k<num; k++){
+    dict.push(TOKENSYMBOL+"-"+web3.utils.padRight(web3.utils.randomHex(3),6)+"-"+k); //ex. SUN-0xcfd1a4-209
+  }
+  console.log("your invite codes are:");
+  console.table(dict);
 
-  downloadLink.click();
-}
- 
-function destroyClickedElement(event){
-  document.body.removeChild(event.target);
-}
- 
-function loadFileAsText(){
-  var fileToLoad = document.getElementById("fileToLoad").files[0];
- 
-  var fileReader = new FileReader();
-  fileReader.onload = function(fileLoadedEvent) 
-  {
-    var textFromFileLoaded = fileLoadedEvent.target.result;
-    document.getElementById("inputTextToSave").value = textFromFileLoaded;
-  };
-  fileReader.readAsText(fileToLoad, "UTF-8");
-}
-
-async function loadCodes(dict){
-  var w = 10; //number of codes in a set
-  var sets = dict.length/w //= number of sets of w codes
-  for(let i=0; i<sets; i++){
+  //start loading them
+  for(let i=0; i<(num/w); i++){
     await NcenoBrands.methods.addInviteCodes(
       _goalID,
       dict.slice(i*w,i*w+(w-1))
@@ -82,8 +34,3 @@ async function loadCodes(dict){
     });
   }
 }
- 
-</script>
- 
-</body>
-</html>
