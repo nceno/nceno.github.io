@@ -1,4 +1,4 @@
-console.log("2");
+console.log("3");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -36,14 +36,14 @@ $(function() {
 
       // Callback function
       onSlide: function(position, value) {
-          console.log('onSlide');
-          console.log('position: ' + position, 'value: ' + value);
+          //console.log('onSlide');
+          //console.log('position: ' + position, 'value: ' + value);
       },
 
       // Callback function
       onSlideEnd: function(position, value) {
-          console.log('onSlideEnd');
-          console.log('position: ' + position, 'value: ' + value);
+          //console.log('onSlideEnd');
+          //console.log('position: ' + position, 'value: ' + value);
       }
   });
 });
