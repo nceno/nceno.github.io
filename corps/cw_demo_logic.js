@@ -1,4 +1,4 @@
-console.log("3");
+console.log("4");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -916,8 +916,13 @@ function makeWorkoutPage(){
                             $("#me").prepend(
                               '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
                             );
+
                             lastLogTime = resultC[3];
                             console.log("last log time was: "+lastLogTime);
+                            console.log("diff "+new Date().getTime()/1000 -lastLogTime);
+                            console.log("last log day "+ new Date(lastLogTime).getDay());
+                            console.log("now: "+new Date().getDay());
+
                             if(lastLogTime!= null && new Date(lastLogTime).getDay() == new Date().getDay() && (new Date().getTime()/1000 -lastLogTime)<86400) $("#log").hide();
                           //}
                         //}
