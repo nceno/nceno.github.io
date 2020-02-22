@@ -1137,4 +1137,4 @@ var NcenoBrands = new web3.eth.Contract([
     "name": "UpdateOrder",
     "type": "event"
   }
-], '0xbdf3cd788459d86214aee00f98bf411ec4aaef4e');
+], '0x1995095fedc772f55c0279cd6f1ca45a4a28cf86');
