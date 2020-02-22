@@ -744,6 +744,7 @@
 
 
 
+
                     <!--buttons -->
                     <div class="input-group rounded">
                       <input id="nameField" type="text" class="form-control px-2 mt-1" placeholder="Choose a username" aria-label="change">
@@ -846,19 +847,20 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col text-center">
-                    <h3 style="color:#fff;">Workout value: <b style="color:#ccff00;"><span id="dispValue"></span> SUN</b></h3>
-
-                    <p>How much (NT$) do you normally spend when you come to <span id="compTitle2">Redpoint</span>?</p>
-                    <div >
-                      <input id="avgSpend" type="range" min="0" max="3000" step="50" value="0" data-rangeslider>
-                      <output></output>
-                    </div>
-                    
+                    <h3 style="color:#fff;">Workout value: <b style="color:#ccff00;"><span id="dispValue"></span> SUN</b></h3>                 
 
 
                     <!--buttons -->
                     <button id="redeem" type="button" class="btn btn-block btn-rounded btn-primary">Claim points</button>
                     <!--/buttons -->
+
+                    <p>How much (NT$) do you normally spend when you come to <span id="compTitle2">Redpoint</span>?</p>
+                    <div >
+                      <input id="avgSpend" type="range" min="0" max="3000" step="50" value="0" data-rangeslider>
+                      <br>
+                      <output></output>
+                    </div>
+                    
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -900,6 +902,26 @@
               
               <!--echo, success, fail -->
               <span id="buyEcho"></span>
+
+              <p>Would you have come to <span id="compTitle3">Redpoint</span> today if you did not have points to redeem?</p>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="q3Radio" id="radio10" value="1">
+                <label class="form-check-label" for="inlineRadio11">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="q3Radio" id="radio11" value="0">
+                <label class="form-check-label" for="inlineRadio12">No</label>
+              </div>
+              <br>
+              <p>Are you buying anything else at <span id="compTitle4">Redpoint</span> today without using your points?</p>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="q4Radio" id="radio12" value="1">
+                <label class="form-check-label" for="inlineRadio13">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="q4Radio" id="radio13" value="0">
+                <label class="form-check-label" for="inlineRadio14">No</label>
+              </div>
               
               
               <!--/echo, success, fail -->
