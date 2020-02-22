@@ -263,7 +263,7 @@ async function makeOrdersPage(){
                 console.log(result2[5]+" status is "+result2[4]);
                 //var statusCode;
                 switch(result2[4]) {
-                  case 'a':
+                  case '0':
                     //var statusCode = "new";
                     if(! $('#co'+result2[5]).length) $("#orderList").append('<tr id="co'+result2[5]+'"><td id = "status'+result2[5]+'" data-toggle="modal" data-target="#refundModal" onclick="setRefTarget('+"'"+result2[5]+"'"+');" data-whatever="@mdo" >new</td><td style="color:#ccff00;" id = "order'+result2[5]+'">'+result2[5]+'</td><td id = "name'+result2[5]+'">'+result2[1]+'</td><td id = "item'+result2[5]+'">'+result2[0]+'</td><td id = "cost'+result2[5]+'" >'+result2[2]+'</td><td id = "date'+result2[5]+'">'+new Date(result2[3]*1000).toDateString()+'</td></tr>');
                     console.log("new order");
@@ -918,11 +918,11 @@ function makeWorkoutPage(){
                             );
 
                             lastLogTime = resultC[3]*1000;
-                            var bla = new Date().getTime() - lastLogTime
+                            /*var bla = new Date().getTime() - lastLogTime
                             console.log("last log time was: "+lastLogTime);
                             console.log("diff "+bla);
                             console.log("last log day "+ new Date(lastLogTime).getDay());
-                            console.log("now: "+new Date().getDay());
+                            console.log("now: "+new Date().getDay());*/
 
                             if(lastLogTime!= null && new Date(lastLogTime).getDay() == new Date().getDay() && (new Date().getTime() -lastLogTime)<86400000) $("#log").hide();
                           //}
