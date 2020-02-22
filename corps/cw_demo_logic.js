@@ -167,7 +167,7 @@ function setRefTarget(_orderNo){
 $("#statusLoader").hide();
 function resetUpdateOrder(){
   $("#settleBtn").show();
-  $("#refundBtn").show();
+  $("#issueRefund").show();
   $("#statusLoader").hide();
   makeOrdersPage();
 }
@@ -186,7 +186,7 @@ function setOrderStatus(_orderNo, _action){
       function(error, result) {
         if (!error){
           $("#settleBtn").hide();
-          $("#refundBtn").hide();
+          $("#issueRefund").show();
           $("#statusLoader").show();
           console.log(result);
         }
@@ -250,7 +250,7 @@ function setOrderStatus(_orderNo, _action){
       function(error, result) {
         if (!error){
           $("#settleBtn").hide();
-          $("#refundBtn").hide();
+          $("#issueRefund").show();
           $("#statusLoader").show();
           
           console.log(result);
