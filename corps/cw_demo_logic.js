@@ -4,7 +4,7 @@ console.log("7");
 
 NcenoBrands.events.MakeOrder({
     filter: {paramGoalID: _goalID},
-    fromBlock: 0
+    fromBlock: 0, toBlock: 'latest'
 }, function(error, event){ console.log(event); })
 .on('data', function(event){
     console.log("New order was placed!");
@@ -15,7 +15,7 @@ NcenoBrands.events.MakeOrder({
 
 NcenoBrands.events.UpdateOrder({
     filter: {paramGoalID: _goalID},
-    fromBlock: 0
+    fromBlock: 0, toBlock: 'latest'
 }, function(error, event){ console.log(event); })
 .on('data', function(event){
     console.log("Order status was changed!");
