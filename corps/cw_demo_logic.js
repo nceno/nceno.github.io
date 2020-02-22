@@ -790,7 +790,7 @@ $("#redeem").click(function() {
     console.log(receipt.status);
     if(receipt.status === true){
         correctNonce++;
-        $("#jogLoader").hide();
+        $("#logLoader").hide();
         $("#logSuccess").html("Great job! Check your points wallet in a minute.");
         //listen to see if player is a first finisher
         Nceno.events.Log({
