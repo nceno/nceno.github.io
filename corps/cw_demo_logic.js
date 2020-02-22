@@ -707,10 +707,10 @@ function showBest(){
           dispTimeHours = 12;
         }
         else {dispTimeHours = dispTimeHours%12;}
-        period = "am";
+        period = "pm";
       }
       else{
-        period = "pm";
+        period = "am";
       }
 
       dispHR = _A.average_heartrate; //needs to be adjusted
@@ -718,7 +718,9 @@ function showBest(){
       dispValue = Math.round(bestVal); //needs adjusted
 
       _A.utc_offset/3600
+
       dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
+      if(dispTimeMinutes<10){dispTimeMinutes = "0"+dispTimeMinutes;}
       dispSpeed = _A.average_speed;
       dispDist = _A.distance;
       
