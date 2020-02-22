@@ -1,4 +1,4 @@
-console.log("9");
+console.log("10");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
@@ -16,10 +16,11 @@ async function loadCodes(num){
 
   //start loading them
   for(let i=0; i<(num/w); i++){
-    console.log(dict.slice(i*w,i*w+(w-1)));
+    //console.log(dict.slice(i*w,i*w+(w-1)));
     await NcenoBrands.methods.addInviteCodes(
       _goalID,
-      dict.slice(i*w,i*w+(w-1))
+      //dict.slice(i*w,i*w+(w-1))
+      ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
     ).send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
       async function(error, result) {
         if (!error){
