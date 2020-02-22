@@ -1,14 +1,15 @@
-console.log("8");
+console.log("9");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
 async function loadCodes(num){
   var dict=new Array();
-  var w = 2;
+  var w = 10;
 
   //make the list
   for(let k=0; k<num; k++){
-    dict.push(TOKENSYMBOL+"-"+web3.utils.padRight(web3.utils.randomHex(3),6)+"-"+k); //ex. SUN-0xcfd1a4-209
+    //dict.push(TOKENSYMBOL+"-"+web3.utils.padRight(web3.utils.randomHex(3),6)+"-"+k); //ex. SUN-0xcfd1a4-209
+    dict.push(web3.utils.padRight(web3.utils.randomHex(3),6));
   }
   console.log("your invite codes are:");
   console.table(dict);
