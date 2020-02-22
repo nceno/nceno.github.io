@@ -66,10 +66,11 @@ contract NcenoBrands is RelayRecipient{
     address token;
     uint cutoff;
     string[3] first3;
+    uint finishers;
     mapping(uint=>uint) q1Answers; // answer --> count
     mapping(uint=>uint) q2Answers; // index --> answer
       uint q2Count;
-      mapping(uint=>bool) playerAnsweredQ2 //stravaID --> true/false
+      mapping(uint=>bool) playerAnsweredQ2; //stravaID --> true/false
     mapping(uint=>uint) q3Answers; // answer --> count
 
     mapping(uint=>uint) playerSet;
@@ -131,13 +132,6 @@ contract NcenoBrands is RelayRecipient{
   }
 
   //called by nceno admin
-  function makeToken(uint _supply, address _owner, string memory _symbol, string memory _companyName, address _relayHub) public returns(address){
-    BrandToken createdToken = new BrandToken(_supply, _owner, _symbol, _companyName, _relayHub);
-    emit MakeToken(_symbol, address(createdToken), _supply, _owner, _companyName);
-    return address(createdToken);
-  }
-  
-  //called by nceno admin
   function makeCompany(string memory _name, bytes memory _companyID, address _BrandToken_Address, address _owner) public{
     company memory createdCompany = company({
       name : _name,
@@ -168,6 +162,9 @@ contract NcenoBrands is RelayRecipient{
       bpmTokenRate:_BpmReward,
       owner: getSender(),
       compCount:0,
+      q2Count: 0,
+      finishers: 0,
+      first3: ["0","0","0"],
       token: _token,
       cutoff: _cutoff
     });
@@ -238,9 +235,9 @@ contract NcenoBrands is RelayRecipient{
       payout = goalAt[_goalID].tokenCap - goalAt[_goalID].playerPayout[_stravaID];
     }
 
-    if(!playerAnsweredQ2[_stravaID]){
-      goalAt[_goalID].q2Answers[q2Count]=_q2Answer;
-      q2Count++;
+    if(!goalAt[_goalID].playerAnsweredQ2[_stravaID]){
+      goalAt[_goalID].q2Answers[goalAt[_goalID].q2Count]=_q2Answer;
+      goalAt[_goalID].q2Count++;
     }
 
     //---- token payout
@@ -257,9 +254,10 @@ contract NcenoBrands is RelayRecipient{
     goalAt[_goalID].playerPayout[_stravaID] += payout;
 
     bool finisher = false;
-    if((goalAt[_goalID].playerPayout[_stravaID]+payout >= goalAt[_goalID].tokenCap) && first3.length<3){
-      goalAt[_goalID].first3.push(profileOf[_stravaID].userName);
+    if((goalAt[_goalID].playerPayout[_stravaID]+payout >= goalAt[_goalID].tokenCap) && goalAt[_goalID].finishers<3){
+      goalAt[_goalID].first3[goalAt[_goalID].finishers]=profileOf[_stravaID].userName;
       finisher = true;
+      goalAt[_goalID].finishers++;
     }
 
     kmCount+=_kms;
@@ -330,11 +328,39 @@ contract NcenoBrands is RelayRecipient{
     //goalID --> start0, dur1, tokenCap2, compcount3, remainingTokens4, bpmReward5, kmReward6
   }
 
+
+
+
+
+
   //used to generate the leaderboard
   function getIndexedPlayerID(bytes memory _goalID, uint _index) public view returns(uint, string memory){
     return(goalAt[_goalID].indexedPlayerID[_index], profileOf[goalAt[_goalID].indexedPlayerID[_index]].userName );
     //goalID, index --> stravaID0, username1
-  } 
+  }
+
+    //get order count for order list
+  function getCompanyOrderCt(bytes memory _companyID) public view returns(uint){
+    return(companyAt[_companyID].orderCount);
+  }
+
+  //assuming each challenge has its own contract, this gets the order count for a player in that challenge.
+  function getPlayerOrderCt(uint _stravaID) public view returns(uint){
+    return(profileOf[_stravaID].orderCt);
+  }
+
+  function seeFirst3(bytes memory _goalID)public view returns(string[3] memory){
+    return(goalAt[_goalID].first3);
+  }
+
+  function playerStatus(bytes memory _goalID, uint _stravaID) public view returns(bool){
+    return (goalAt[_goalID].isPlayer[_stravaID]);
+  }
+
+
+
+
+
 
   //useful for workout quickstats screen
   function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, uint){
@@ -342,10 +368,6 @@ contract NcenoBrands is RelayRecipient{
     //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3, avatar4
   }
 
-  //get order count for order list
-  function getCompanyOrderCt(bytes memory _companyID) public view returns(uint){
-    return(companyAt[_companyID].orderCount);
-  }
 
   //used to generate order list
   function getIndexedOrder(bytes memory _companyID, uint _index) public view returns(string memory, string memory, uint, uint, uint, bytes memory){
@@ -365,38 +387,12 @@ contract NcenoBrands is RelayRecipient{
     //orderNo --> item0, buyerName1, price2, date3, status4
   }
 
-  //assuming each challenge has its own contract, this gets the order count for a player in that challenge.
-  function getPlayerOrderCt(uint _stravaID) public view returns(uint){
-    return(profileOf[_stravaID].orderCt);
-  }
-
-  function seeFirst3(bytes memory _goalID)public view returns(string[3]){
-    return(goalAt[_goalID].first3);
-  }
 
 
-  function getNcenoStats() public view returns(uint, uint, uint, uint, uint, uint, uint){
-    return(companyCount, goalCount, kmCount, minsCount, userCount, orderCount, payoutToDate);
-  }
-
-  function playerStatus(bytes memory _goalID, uint _stravaID) public view returns(bool){
-    return (goalAt[_goalID].isPlayer[_stravaID]);
-  }
-
-  function getQ1a(bytes memory _goalID, uint _answer) public returns (uint){
-    return goalAt[_goalID].q1Answers[_answer];
-  }
-  function getQ2count(bytes memory _goalID) public returns (uint){
-    return goalAt[_goalID].q2Count;
-  }
-  function getQ2Status(bytes memory _goalID, uint _stravaID) public returns (bool){
-    return goalAt[_goalID].playerAnsweredQ2[_stravaID];
-  }
-  function getQ2a(bytes memory _goalID, uint _index) public returns (uint){
-    return goalAt[_goalID].q2Answers[_index];
-  }
-  function getQ3a(bytes memory _goalID, uint _answer) public returns (uint){
-    return goalAt[_goalID].q3Answers[_answer];
+  //combo function
+  //getQ1a, getQ2count, getQ2Status, getQ2a, getQ3a
+  function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a) public returns (uint, uint, bool, uint, uint){
+    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].playerAnsweredQ2[_stravaID], goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a] );
   }
   //----- /getters
 

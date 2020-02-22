@@ -3,7 +3,7 @@ const companyID = '0x123456';
 const companyName = "Suntek";
 const tokenAddress = '0xe3d06e15f286bcaaa28528b61da84737318eefc4'; 
 const TOKENSYMBOL = "SUN"; 
-const contractAddress = '0x3c1060724b7d67ae3620040ed94766f4794bb7e0'; //change
+const contractAddress = '0x216150d5b577e98e9872db372180d24065f269aa'; //change
 const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a'; 
 
 const adminUserID_1 = '49092681';
