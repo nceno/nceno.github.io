@@ -2,6 +2,29 @@ console.log("7");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
+NcenoBrands.events.MakeOrder({
+    filter: {paramGoalID: _goalID},
+    fromBlock: 0
+}, function(error, event){ console.log(event); })
+.on('data', function(event){
+    console.log("New order was placed!");
+    console.log(event); // same results as the optional callback above
+    makeOrdersPage();
+})
+.on('error', console.error);
+
+NcenoBrands.events.UpdateOrder({
+    filter: {paramGoalID: _goalID},
+    fromBlock: 0
+}, function(error, event){ console.log(event); })
+.on('data', function(event){
+    console.log("Order status was changed!");
+    console.log(event); // same results as the optional callback above
+    makeOrdersPage();
+})
+.on('error', console.error);
+
+
 ///////----rage slider stuff
 $(function() {
 
@@ -155,6 +178,7 @@ function setOrderStatus(_orderNo, _action){
   if(_action == "refunded"){
     //nceno refund
     NcenoBrands.methods.setOrderStatus(
+      _goalid,
       _orderNo,
       2
     ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},

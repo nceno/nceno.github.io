@@ -1,5 +1,5 @@
 //makeCompany: "Suntek Global","0xccff00","0xe3d06e15f286bcaaa28528b61da84737318eefc4","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//transfer: "0x216150d5b577e98e9872db372180d24065f269aa","600"
+//transfer: "0xbdf3cd788459d86214aee00f98bf411ec4aaef4e","600"
 //host: "0xccff00","1581724800","30","150","600","1","2","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","10"
 //addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 
@@ -19,13 +19,10 @@ import "./ERC20Interface.sol";
 contract NcenoBrands is RelayRecipient{
 
   event MakeUser(address _wallet, uint _stravaID, string _userName);
-  event MakeGoal(bytes _goalID, address _owner);
-  event MakeCompany(bytes _companyID, string _name, address owner);
-  event MakeOrder(bytes _companyID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
-  event Join(bytes _goalID, uint _stravaID, string _userName, string _inviteCode);
+  event MakeOrder(bytes indexed paramGoalID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
+  event Join(bytes paramGoalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes indexed paramGoalID, uint indexed paramStravaID, uint _kms, uint _mins, uint _actID, bool indexed finisher);
-  event MakeToken(string _symbol, address _address, uint _supply, address _owner, string _company);
-  event UpdateOrder(bytes _orderNumber, uint _status);
+  event UpdateOrder(bytes indexed paramGoalID, bytes _orderNumber, uint _status);
   
   //gas station init
   constructor() public {
