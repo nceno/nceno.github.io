@@ -8,8 +8,8 @@ var speedLimit = 4.5; //in m/s
 var speedLow = 1.4; //in m/s
 var BPMthresh = 99; 
 var sesLow = 1200; //in s
-var HRreward = 3;
-var KMreward = 1;
+var HRreward; //loaded from makeworkoutspage
+var KMreward; //loaded from makeworkoutspage
 var placeholderDate = new Date();
 placeholderDate.setDate(placeholderDate.getDate() - 1); //can change "1" day to "20" days for testing.
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
@@ -366,7 +366,9 @@ function makeWorkoutPage(){
         var compcount = parseInt(resultA[3]);
         var remainingTokens = parseInt(resultA[4]);
         var bpmReward = parseInt(resultA[5]); //per 10mins
+          HRreward= parseInt(resultA[5]);
         var kmReward = parseInt(resultA[6]); //per km
+          KMreward=parseInt(resultA[6]);
 
         $('#me').empty();
 
