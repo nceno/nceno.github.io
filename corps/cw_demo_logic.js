@@ -90,11 +90,14 @@ async function makeActivities(){
       console.log("the "+j+" HR workouts are: ");
       console.table(HR);
 
+      
+      //GPS: ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
+
       //loop through GPS[m] to find max
       if(k>0){
         GPS.forEach(function(_G){
           if(_G[5]==true && _G[4]>GPSMaxVal){
-            GPSMaxID = _G[0];
+            GPSMaxID = _G[0]; //<--- maybe the ID's collide if workout has both data?
             GPSMaxVal=_G[4];
           }
         });
@@ -155,9 +158,11 @@ function gapAdjust(){
         console.log("adjusted HR is: "+adjHR+" BPM");
 
         //this is the HR update step.....
+        //HR:  ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+        
         _H[1]=adjHR;
         _H[2]=activeTime;
-        _H[5]= HRreward*activeTime/600;
+        _H[4]= HRreward*activeTime/600;
 
         data.forEach(function(act){
           if (act.id == _H[0]){
