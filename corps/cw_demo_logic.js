@@ -1,6 +1,495 @@
 console.log("11");
-//const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
-//const web3 = new Web3(portis.provider);
+
+///////////////////////////////////////
+//////////////vvvvvvvvv getActivities()
+///////////////////////////////////////
+
+var speedLimit = 4.5; //in m/s
+var speedLow = 1.4; //in m/s
+var BPMthresh = 99; 
+var sesLow = 1200; //in s
+var HRreward = 3;
+var KMreward = 1;
+var placeholderDate = new Date();
+placeholderDate.setDate(placeholderDate.getDate() - 1); //can change "1" day to "20" days for testing.
+var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
+var nowDate = parseInt(parseInt(new Date().getTime())/1000);
+
+var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
+var toLog = new Array(3);
+
+var data = new Object();
+
+let i=0;
+let j=0;
+let k=0;
+
+var GPSMaxID = null;
+var GPSMaxVal=0;
+var avgSpeedMax = 0;
+var distMax = 0;
+var timestampMax = null;
+
+var hrMaxID = null;
+var hrMaxVal=0;
+var avgHRmax = 0;
+var elapsed_timeMax = 0;
+
+var bestID = null;
+var bestVal = 0;
+var identifier = null;
+
+var dispHR;
+var dispMins;
+var dispTimeHours;
+var dispTimeMinutes;
+var dispSpeed;
+var dispDist;
+var dispValue;
+var period;
+
+async function makeActivities(){
+  //---- Get the activities, clean them, and separate them into HR and GPS
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
+  await xhr.addEventListener("readystatechange", async function(){
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      data = await JSON.parse(xhr.responseText);
+      console.log("number of workouts is: "+data.length);
+      //clean the data and make a list of valid workouts.   
+      
+      while(i<data.length){
+        if(data[i].manual == false && data[i].has_heartrate == true){
+          var HRvalid= false;
+          if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
+          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
+          j++;
+        }
+        if(data[i].manual == false && data[i].distance > 0){
+          var GPSvalid= false;
+          if(data[i].distance>1000 && data[i].average_speed<speedLimit && data[i].average_speed>speedLow) {GPSvalid =true;}
+          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date, KMreward*data[i].distance/1000, GPSvalid]);
+          k++;
+        }
+        else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
+          console.log("No valid workouts today...");
+        }
+        i++;
+      }
+
+      //echo the workouts
+      console.log("the "+k+" GPS workouts are: ");
+      console.table(GPS);
+      console.log("the "+j+" HR workouts are: ");
+      console.table(HR);
+
+      //loop through GPS[m] to find max
+      if(k>0){
+        GPS.forEach(function(_G){
+          if(_G[5]==true && _G[4]>GPSMaxVal){
+            GPSMaxID = _G[0];
+            GPSMaxVal=_G[4];
+          }
+        });
+      }
+
+    }
+    //else console.log("access_token is too old.");
+  });
+  xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
+  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
+  xhr.send(stuff);
+}
+
+///////////////////////////////////////
+//////////////^^^^^^^^^^^ getActivities()
+///////////////////////////////////////
+
+
+///////////////////////////////////////
+//////////////vvvvvvvvvvv gapAdjust()
+///////////////////////////////////////
+function gapAdjust(){
+  HR.forEach(async function(_H){
+    var adjHR;
+    var activeTime;
+
+    var stuff2 = null;
+    var xhr2 = new XMLHttpRequest();
+    xhr2.withCredentials = false;
+    await xhr2.addEventListener("readystatechange", async function () {
+      if (this.readyState === 4) {
+        var resp = await JSON.parse(xhr2.responseText);
+        var hr = resp.heartrate.data;
+        var tm = resp.time.data;
+        
+        //----- gap detection -----
+        var gap = 0;
+        for(let s=0; s<tm.length+1; s++){
+          var diff = tm[s+1]-tm[s];
+          if(diff>=10){
+            gap+=diff;
+          }
+        }
+
+        //activeTime will replace elapsed_time
+        activeTime = (1.0*tm[tm.length-1]-gap);
+        var pl = 0;
+        for(let r=0; r<hr.length; r++){
+          pl +=hr[r];
+        }
+        var avghr = pl/hr.length;
+
+        //adjHR will replace avgHR
+        adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
+
+        console.log("total gap is: "+gap/60+" min");
+        console.log("real active time is: "+activeTime/60+" min");
+        console.log("adjusted HR is: "+adjHR+" BPM");
+
+        //this is the HR update step.....
+        _H[1]=adjHR;
+        _H[2]=activeTime;
+        _H[5]= HRreward*activeTime/600;
+
+        data.forEach(function(act){
+          if (act.id == _H[0]){
+            act.elapsed_time = activeTime;
+            act.average_heartrate = adjHR;
+          }
+        });
+
+        //---- /gap detection -----
+      } 
+    });
+    xhr2.open("GET", 'https://www.strava.com/api/v3/activities/'+_H[0]+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
+    xhr2.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
+    xhr2.send(stuff2);
+  });
+}
+
+
+///////////////////////////////////////
+//////////////^^^^^^ gapAdjust()
+///////////////////////////////////////
+
+
+///////////////////////////////////////
+//////////////vvvvvvvvv find best and show in UI
+///////////////////////////////////////
+
+function showBest(){
+  //find the max HR workout
+  if(j>0){
+    HR.forEach(function(_H){
+      if(_H[5]==true && _H[4]>hrMaxVal){
+        hrMaxID = _H[0];
+        hrMaxVal=_H[4];
+      }
+    });
+  }
+
+  //compare the max values and return the id of the best one
+  if(GPSMaxVal>=hrMaxVal){
+    bestVal = GPSMaxVal;
+    bestID = GPSMaxID;
+    identifier = "GPS";
+  }
+  else {
+    bestVal = hrMaxVal;
+    bestID = hrMaxID;
+    identifier = "HR";
+  }
+  console.log("the best one is a "+identifier+" workout: "+bestID+", which is worth "+Math.round(bestVal)+" SUN tokens");
+
+  //get the full details of that activity
+  data.forEach(function(_A){
+    if(_A.id==bestID){
+      //console.log(_A);
+
+      dispTimeHours = new Date(_A.start_date).getHours()//-_A.utc_offset/3600;  may need to use start_date_local
+      if(dispTimeHours%12>=0){
+        if(dispTimeHours%12==0){
+          dispTimeHours = 12;
+        }
+        else {dispTimeHours = dispTimeHours%12;}
+        period = "pm";
+      }
+      else{
+        period = "am";
+      }
+
+      dispHR = _A.average_heartrate; //needs to be adjusted
+      dispMins = _A.elapsed_time; //needs adjusted
+      dispValue = Math.round(bestVal); //needs adjusted
+
+      //_A.utc_offset/3600
+
+      dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
+      if(dispTimeMinutes<10){dispTimeMinutes = "0"+dispTimeMinutes;}
+      dispSpeed = _A.average_speed;
+      dispDist = _A.distance;
+      
+    }
+  });
+  //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
+  if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
+  if(dispMins!= null && dispMins!= 0 && dispHR!= 0) $("#dispMins").html(Math.round(dispMins/60));
+  $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
+  $("#period").html(period); 
+  if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
+  if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
+  $("#dispValue").html(dispValue);
+
+  //make the thing to be logged
+  toLog[0] = bestID;
+  if(identifier == "HR"){
+   toLog[2] = Math.round(dispMins/60);
+   toLog[1] = 0;
+  }
+  else if(identifier == "GPS"){
+    toLog[2] = 0;
+    toLog[1] = Math.round(dispDist/1000);
+  }
+}
+
+///////////////////////////////////////
+//////////////^^^^^^^^^^ find best and show in UI
+///////////////////////////////////////
+
+
+///////////////////////////////////////
+//////////////vvvvvvvv nceno.log()
+///////////////////////////////////////
+
+function resetLog(){
+  $('#redeem').show();
+  //makeWorkoutPage();
+}
+$('#logModal').on('hidden.bs.modal', function (e) {
+  resetLog();
+});
+
+
+$("#redeem").click(function() {
+  $("#logLoader").show();
+  $("#redeem").hide();
+
+  NcenoBrands.methods.log(
+    _goalID, 
+    Cookies.get('stravaID'), 
+    toLog[1], 
+    toLog[2], 
+    toLog[0], 
+    "0x22222"
+  )
+  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+    function(error, result) {
+      if (!error){
+        
+        console.log(result);
+      }
+      else
+
+      console.error(error);
+    }
+  ).once('confirmation', function(confNumber, receipt){
+    console.log(receipt.status);
+    if(receipt.status === true){
+        correctNonce++;
+        $("#logLoader").hide();
+        $("#logSuccess").html("Great job! Check your points wallet in a minute.");
+        //listen to see if player is a first finisher
+        Nceno.events.Log({
+          filter: {paramGoalID: _goalid, paramStravaID: Cookies.get('stravaID'), finisher: true },
+          fromBlock: 0, toBlock: 'latest'
+        }, function(error, event){ 
+            //do some stuff
+            //ex. usdPayout = parseInt(event.returnValues._payout);
+            if(event.returnValues.finisher != false) $("#logSuccess").html("You're one of the first 3 to finish the challenge! Go see the challenge admin to claim the top prize.");
+          }
+        ).on('error', console.error);
+
+      }
+      else{
+        $("#logLoader").hide();
+        $("#redeem").hide();
+        console.error("redeem error");
+      } 
+    }
+  ).once('error', function(error){console.log(error);});
+});
+
+///////////////////////////////////////
+//////////////^^^^^^^ nceno.log()
+///////////////////////////////////////
+
+
+
+$("#dispHR").html("-"); 
+$("#dispMins").html("-");
+$("#dispTime").html("-"); 
+$("#dispSpeed").html("-");
+$("#dispDist").html("-"); 
+$("#dispValue").html("-");
+
+function signOut(){
+  Cookies.remove('access_token');
+  Cookies.remove('stravaID');
+  Cookies.remove('stravaUsername');
+  Cookies.remove('userWallet');
+  location.reload();
+}
+
+var lastLogTime = 0;
+function makeWorkoutPage(){
+  
+
+  //prepare the workouts to be filtered and logged
+  makeActivities();
+
+  setTimeout(function(){ gapAdjust(); }, 1500);
+
+
+  //---get goal params
+
+  NcenoBrands.methods.getGoalParams(_goalID)
+  .call({from: Cookies.get('userWallet')},
+    async function(error, resultA) {
+      if (!error){
+        var start = parseInt(resultA[0]);
+        var dur = parseInt(resultA[1]);
+        var tokenCap = parseInt(resultA[2]);
+        var compcount = parseInt(resultA[3]);
+        var remainingTokens = parseInt(resultA[4]);
+        var bpmReward = parseInt(resultA[5]); //per 10mins
+        var kmReward = parseInt(resultA[6]); //per km
+
+        $('#me').empty();
+
+        //---get other players
+        for(var i= 0; i<compcount; i++){
+
+          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
+          .call({from: Cookies.get('userWallet')},
+            function(error, resultB) {
+              if (!error){
+                var playerID =  resultB[0]; 
+                //fill the whitespace
+                var playerName = resultB[1];
+                //---call that player
+                NcenoBrands.methods.getPlayer(_goalID, playerID)
+                .call({from: Cookies.get('userWallet')},
+                  function(error, resultC) {
+                    if (!error){
+                      //console.log(result);
+                      
+                      var theirKms = resultC[0]; 
+                      var theirMins = resultC[1]; 
+                      var theirReward = resultC[2];
+                      var theirProgress = Math.round(100*theirReward/tokenCap);
+                      var avatar = resultC[4];
+
+                      
+                      switch(avatar){
+                        case "0":
+                          avatar = "avatar0";
+                          break;
+
+                        case "1":
+                          avatar = "avatar1";
+                          break;
+                          
+                        case "2":
+                          avatar = "avatar2";
+                          break;
+                          
+                        case "3":
+                          avatar = "avatar3";
+                          break;
+                        
+                        case "4":
+                          avatar = "avatar4";
+                          break;
+                        
+                        case "5":
+                          avatar = "avatar5";
+                          break;
+
+                        case "6":
+                          avatar = "avatar6";
+                          break; 
+
+                        case "7":
+                          avatar = "avatar7";
+                          break;
+                      }
+
+                      if(playerID == Cookies.get('stravaID')){
+                        //post to top if it's me
+                          //if(! $("#me").length){
+                            $("#me").prepend(
+                              '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
+                            );
+
+                            lastLogTime = resultC[3]*1000;
+                            /*var bla = new Date().getTime() - lastLogTime
+                            console.log("last log time was: "+lastLogTime);
+                            console.log("diff "+bla);
+                            console.log("last log day "+ new Date(lastLogTime).getDay());
+                            console.log("now: "+new Date().getDay());*/
+
+                            if(lastLogTime!= null && new Date(lastLogTime).getDay() == new Date().getDay() && (new Date().getTime() -lastLogTime)<86400000) $("#log").hide();
+                          //}
+                        //}
+                        //populate my quick stats .........
+                        $("#progressPerc").html(theirProgress+'%');
+                        $("#user").html(playerName);                
+                        var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
+                        $("#daysLeft").html(days+" days");
+                        $("#rewardSlot").html(theirReward+' '+TOKENSYMBOL);
+                        $("#potRem").html(remainingTokens+' '+TOKENSYMBOL);
+                        if(remainingTokens<1){
+                          $("#log").hide();
+                        }
+
+                        $("#leaderboardCount").html(compcount);
+
+                      }
+                      //only after if there isn't already an element of the same name
+                      else if(! $('#'+playerName.replace(/ /g,"_")).length){
+                        //.after following entries
+
+                        $('#startList').after(
+                          '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div></div>'
+                        );
+                      }                      
+                    }
+                    else{
+                      console.error(error);
+                    }
+                  }
+                );
+                //---/ call that player
+              }
+              else{
+                console.error(error);
+              }
+            }
+          );
+        }//end for
+        //---/ get other players
+      }
+      else{
+        console.error(error);
+      }
+    }
+  );
+  //---/ get goal params
+}
 
 
 async function loadCodes(num){
@@ -479,9 +968,6 @@ async function makeSpendPage(){
   else{
     $("#action5").html('<a id="buyModalbtn5" onclick="setTarget(item5);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
-  
-
-
 }//end makeSpendPage
 
 var targetName;
@@ -576,498 +1062,7 @@ function buy(){
   });
 }
 
-///////////////////////////////////////
-//////////////vvvvvvvvv getActivities()
-///////////////////////////////////////
 
-var speedLimit = 4.5; //in m/s
-var speedLow = 1.4; //in m/s
-var BPMthresh = 99; 
-var sesLow = 1200; //in s
-var HRreward = 3;
-var KMreward = 1;
-var placeholderDate = new Date();
-placeholderDate.setDate(placeholderDate.getDate() - 1); //can change "1" day to "20" days for testing.
-var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
-var nowDate = parseInt(parseInt(new Date().getTime())/1000);
-
-var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
-var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
-var toLog = new Array(3);
-
-var data = new Object();
-
-let i=0;
-let j=0;
-let k=0;
-
-var GPSMaxID = null;
-var GPSMaxVal=0;
-var avgSpeedMax = 0;
-var distMax = 0;
-var timestampMax = null;
-
-var hrMaxID = null;
-var hrMaxVal=0;
-var avgHRmax = 0;
-var elapsed_timeMax = 0;
-
-var bestID = null;
-var bestVal = 0;
-var identifier = null;
-
-var dispHR;
-var dispMins;
-var dispTimeHours;
-var dispTimeMinutes;
-var dispSpeed;
-var dispDist;
-var dispValue;
-var period;
-
-async function makeActivities(){
-  //---- Get the activities, clean them, and separate them into HR and GPS
-  var stuff = null;
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = false;
-  await xhr.addEventListener("readystatechange", async function(){
-    if (this.readyState === 4) {
-      console.log(this.responseText);
-      data = await JSON.parse(xhr.responseText);
-      console.log("number of workouts is: "+data.length);
-      //clean the data and make a list of valid workouts.   
-      
-      while(i<data.length){
-        if(data[i].manual == false && data[i].has_heartrate == true){
-          var HRvalid= false;
-          if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
-          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
-          j++;
-        }
-        if(data[i].manual == false && data[i].distance > 0){
-          var GPSvalid= false;
-          if(data[i].distance>1000 && data[i].average_speed<speedLimit && data[i].average_speed>speedLow) {GPSvalid =true;}
-          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date, KMreward*data[i].distance/1000, GPSvalid]);
-          k++;
-        }
-        else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
-          console.log("No valid workouts today...");
-        }
-        i++;
-      }
-
-      //echo the workouts
-      console.log("the "+k+" GPS workouts are: ");
-      console.table(GPS);
-      console.log("the "+j+" HR workouts are: ");
-      console.table(HR);
-
-      //loop through GPS[m] to find max
-      if(k>0){
-        GPS.forEach(function(_G){
-          if(_G[5]==true && _G[4]>GPSMaxVal){
-            GPSMaxID = _G[0];
-            GPSMaxVal=_G[4];
-          }
-        });
-      }
-
-    }
-    //else console.log("access_token is too old.");
-  });
-  xhr.open("GET", 'https://www.strava.com/api/v3/athlete/activities?before='+nowDate+'&after='+yesterday);
-  xhr.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
-  xhr.send(stuff);
-}
-
-///////////////////////////////////////
-//////////////^^^^^^^^^^^ getActivities()
-///////////////////////////////////////
-
-
-///////////////////////////////////////
-//////////////vvvvvvvvvvv gapAdjust()
-///////////////////////////////////////
-function gapAdjust(){
-  HR.forEach(async function(_H){
-    var adjHR;
-    var activeTime;
-
-    var stuff2 = null;
-    var xhr2 = new XMLHttpRequest();
-    xhr2.withCredentials = false;
-    await xhr2.addEventListener("readystatechange", async function () {
-      if (this.readyState === 4) {
-        var resp = await JSON.parse(xhr2.responseText);
-        var hr = resp.heartrate.data;
-        var tm = resp.time.data;
-        
-        //----- gap detection -----
-        var gap = 0;
-        for(let s=0; s<tm.length+1; s++){
-          var diff = tm[s+1]-tm[s];
-          if(diff>=10){
-            gap+=diff;
-          }
-        }
-
-        //activeTime will replace elapsed_time
-        activeTime = (1.0*tm[tm.length-1]-gap);
-        var pl = 0;
-        for(let r=0; r<hr.length; r++){
-          pl +=hr[r];
-        }
-        var avghr = pl/hr.length;
-
-        //adjHR will replace avgHR
-        adjHR = (avghr*activeTime + 80*gap)/tm[tm.length-1];
-
-        console.log("total gap is: "+gap/60+" min");
-        console.log("real active time is: "+activeTime/60+" min");
-        console.log("adjusted HR is: "+adjHR+" BPM");
-
-        //this is the HR update step.....
-        _H[1]=adjHR;
-        _H[2]=activeTime;
-        _H[5]= HRreward*activeTime/600;
-
-        data.forEach(function(act){
-          if (act.id == _H[0]){
-            act.elapsed_time = activeTime;
-            act.average_heartrate = adjHR;
-          }
-        });
-
-        //---- /gap detection -----
-      } 
-    });
-    xhr2.open("GET", 'https://www.strava.com/api/v3/activities/'+_H[0]+'/streams?keys=heartrate,time&series_type=time&key_by_type=true');
-    xhr2.setRequestHeader("Authorization", 'Bearer ' + Cookies.get('access_token'));
-    xhr2.send(stuff2);
-  });
-}
-
-
-///////////////////////////////////////
-//////////////^^^^^^ gapAdjust()
-///////////////////////////////////////
-
-
-///////////////////////////////////////
-//////////////vvvvvvvvv find best and show in UI
-///////////////////////////////////////
-
-function showBest(){
-  //find the max HR workout
-  if(j>0){
-    HR.forEach(function(_H){
-      if(_H[5]==true && _H[4]>hrMaxVal){
-        hrMaxID = _H[0];
-        hrMaxVal=_H[4];
-      }
-    });
-  }
-
-  //compare the max values and return the id of the best one
-  if(GPSMaxVal>=hrMaxVal){
-    bestVal = GPSMaxVal;
-    bestID = GPSMaxID;
-    identifier = "GPS";
-  }
-  else {
-    bestVal = hrMaxVal;
-    bestID = hrMaxID;
-    identifier = "HR";
-  }
-  console.log("the best one is a "+identifier+" workout: "+bestID+", which is worth "+Math.round(bestVal)+" SUN tokens");
-
-  //get the full details of that activity
-  data.forEach(function(_A){
-    if(_A.id==bestID){
-      //console.log(_A);
-
-      dispTimeHours = new Date(_A.start_date).getHours()//-_A.utc_offset/3600;  may need to use start_date_local
-      if(dispTimeHours%12>=0){
-        if(dispTimeHours%12==0){
-          dispTimeHours = 12;
-        }
-        else {dispTimeHours = dispTimeHours%12;}
-        period = "pm";
-      }
-      else{
-        period = "am";
-      }
-
-      dispHR = _A.average_heartrate; //needs to be adjusted
-      dispMins = _A.elapsed_time; //needs adjusted
-      dispValue = Math.round(bestVal); //needs adjusted
-
-      //_A.utc_offset/3600
-
-      dispTimeMinutes = new Date(_A.start_date_local).getMinutes();
-      if(dispTimeMinutes<10){dispTimeMinutes = "0"+dispTimeMinutes;}
-      dispSpeed = _A.average_speed;
-      dispDist = _A.distance;
-      
-    }
-  });
-  //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
-  if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
-  if(dispMins!= null && dispMins!= 0) $("#dispMins").html(Math.round(dispMins/60));
-  $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
-  $("#period").html(period); 
-  if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
-  if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
-  $("#dispValue").html(dispValue);
-
-  //make the thing to be logged
-  toLog[0] = bestID;
-  if(identifier == "HR"){
-   toLog[2] = Math.round(dispMins/60);
-   toLog[1] = 0;
-  }
-  else if(identifier == "GPS"){
-    toLog[2] = 0;
-    toLog[1] = Math.round(dispDist/1000);
-  }
-}
-
-///////////////////////////////////////
-//////////////^^^^^^^^^^ find best and show in UI
-///////////////////////////////////////
-
-
-///////////////////////////////////////
-//////////////vvvvvvvv nceno.log()
-///////////////////////////////////////
-
-function resetLog(){
-  $('#redeem').show();
-  //makeWorkoutPage();
-}
-$('#logModal').on('hidden.bs.modal', function (e) {
-  resetLog();
-});
-
-
-$("#redeem").click(function() {
-  $("#logLoader").show();
-  $("#redeem").hide();
-
-  NcenoBrands.methods.log(
-    _goalID, 
-    Cookies.get('stravaID'), 
-    toLog[1], 
-    toLog[2], 
-    toLog[0], 
-    "0x22222"
-  )
-  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        
-        console.log(result);
-      }
-      else
-
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){
-    console.log(receipt.status);
-    if(receipt.status === true){
-        correctNonce++;
-        $("#logLoader").hide();
-        $("#logSuccess").html("Great job! Check your points wallet in a minute.");
-        //listen to see if player is a first finisher
-        Nceno.events.Log({
-          filter: {paramGoalID: _goalid, paramStravaID: Cookies.get('stravaID'), finisher: true },
-          fromBlock: 0, toBlock: 'latest'
-        }, function(error, event){ 
-            //do some stuff
-            //ex. usdPayout = parseInt(event.returnValues._payout);
-            if(event.returnValues.finisher != false) $("#logSuccess").html("You're one of the first 3 to finish the challenge! Go see the challenge admin to claim the top prize.");
-          }
-        ).on('error', console.error);
-
-      }
-      else{
-        $("#logLoader").hide();
-        $("#redeem").hide();
-        console.error("redeem error");
-      } 
-    }
-  ).once('error', function(error){console.log(error);});
-});
-
-///////////////////////////////////////
-//////////////^^^^^^^ nceno.log()
-///////////////////////////////////////
-
-
-
-$("#dispHR").html("-"); 
-$("#dispMins").html("-");
-$("#dispTime").html("-"); 
-$("#dispSpeed").html("-");
-$("#dispDist").html("-"); 
-$("#dispValue").html("-");
-
-function signOut(){
-  Cookies.remove('access_token');
-  Cookies.remove('stravaID');
-  Cookies.remove('stravaUsername');
-  Cookies.remove('userWallet');
-  location.reload();
-}
-
-var lastLogTime = 0;
-function makeWorkoutPage(){
-  
-
-  //prepare the workouts to be filtered and logged
-  makeActivities();
-
-  setTimeout(function(){ gapAdjust(); }, 1500);
-
-
-  //---get goal params
-
-  NcenoBrands.methods.getGoalParams(_goalID)
-  .call({from: Cookies.get('userWallet')},
-    async function(error, resultA) {
-      if (!error){
-        var start = parseInt(resultA[0]);
-        var dur = parseInt(resultA[1]);
-        var tokenCap = parseInt(resultA[2]);
-        var compcount = parseInt(resultA[3]);
-        var remainingTokens = parseInt(resultA[4]);
-        var bpmReward = parseInt(resultA[5]); //per 10mins
-        var kmReward = parseInt(resultA[6]); //per km
-
-        $('#me').empty();
-
-        //---get other players
-        for(var i= 0; i<compcount; i++){
-
-          await NcenoBrands.methods.getIndexedPlayerID(_goalID, i)
-          .call({from: Cookies.get('userWallet')},
-            function(error, resultB) {
-              if (!error){
-                var playerID =  resultB[0]; 
-                //fill the whitespace
-                var playerName = resultB[1];
-                //---call that player
-                NcenoBrands.methods.getPlayer(_goalID, playerID)
-                .call({from: Cookies.get('userWallet')},
-                  function(error, resultC) {
-                    if (!error){
-                      //console.log(result);
-                      
-                      var theirKms = resultC[0]; 
-                      var theirMins = resultC[1]; 
-                      var theirReward = resultC[2];
-                      var theirProgress = Math.round(100*theirReward/tokenCap);
-                      var avatar = resultC[4];
-
-                      
-                      switch(avatar){
-                        case "0":
-                          avatar = "avatar0";
-                          break;
-
-                        case "1":
-                          avatar = "avatar1";
-                          break;
-                          
-                        case "2":
-                          avatar = "avatar2";
-                          break;
-                          
-                        case "3":
-                          avatar = "avatar3";
-                          break;
-                        
-                        case "4":
-                          avatar = "avatar4";
-                          break;
-                        
-                        case "5":
-                          avatar = "avatar5";
-                          break;
-
-                        case "6":
-                          avatar = "avatar6";
-                          break; 
-
-                        case "7":
-                          avatar = "avatar7";
-                          break;
-                      }
-
-                      if(playerID == Cookies.get('stravaID')){
-                        //post to top if it's me
-                          //if(! $("#me").length){
-                            $("#me").prepend(
-                              '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div>'
-                            );
-
-                            lastLogTime = resultC[3]*1000;
-                            /*var bla = new Date().getTime() - lastLogTime
-                            console.log("last log time was: "+lastLogTime);
-                            console.log("diff "+bla);
-                            console.log("last log day "+ new Date(lastLogTime).getDay());
-                            console.log("now: "+new Date().getDay());*/
-
-                            if(lastLogTime!= null && new Date(lastLogTime).getDay() == new Date().getDay() && (new Date().getTime() -lastLogTime)<86400000) $("#log").hide();
-                          //}
-                        //}
-                        //populate my quick stats .........
-                        $("#progressPerc").html(theirProgress+'%');
-                        $("#user").html(playerName);                
-                        var days = Math.round((start+dur*86400-Date.now()/1000)/86400);
-                        $("#daysLeft").html(days+" days");
-                        $("#rewardSlot").html(theirReward+' '+TOKENSYMBOL);
-                        $("#potRem").html(remainingTokens+' '+TOKENSYMBOL);
-                        if(remainingTokens<1){
-                          $("#log").hide();
-                        }
-
-                        $("#leaderboardCount").html(compcount);
-
-                      }
-                      //only after if there isn't already an element of the same name
-                      else if(! $('#'+playerName.replace(/ /g,"_")).length){
-                        //.after following entries
-
-                        $('#startList').after(
-                          '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km + '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/'+avatar+'.png"> </span></div></div></div></div>'
-                        );
-                      }                      
-                    }
-                    else{
-                      console.error(error);
-                    }
-                  }
-                );
-                //---/ call that player
-              }
-              else{
-                console.error(error);
-              }
-            }
-          );
-        }//end for
-        //---/ get other players
-      }
-      else{
-        console.error(error);
-      }
-    }
-  );
-  //---/ get goal params
-
-
-}
 
 
 

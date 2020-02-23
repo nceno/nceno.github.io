@@ -125,10 +125,6 @@ contract NcenoBrands is RelayRecipient{
   //---- /objects
 
   //main functions
-  function changeUsername(uint _stravaID, string memory _newName)public{
-    require(profileOf[_stravaID].wallet==getSender(),"error");
-    profileOf[_stravaID].userName = _newName;
-  }
 
   //called by nceno admin
   function makeCompany(string memory _name, bytes memory _companyID, address _BrandToken_Address, address _owner) public{
@@ -231,10 +227,12 @@ contract NcenoBrands is RelayRecipient{
       && goalAt[_goalID].playerPayout[_stravaID]<goalAt[_goalID].tokenCap,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
-    uint payout = rewardMult*_kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
+    uint payout = rewardMult*_kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate/10;
+    //if the payout is more than remaining, just pay remaining tokens
     if(goalAt[_goalID].potRemaining<payout){
       payout = goalAt[_goalID].potRemaining;
     }
+    //if it will put the player past their token cap, just pay remaining room
     if(payout+goalAt[_goalID].playerPayout[_stravaID] > goalAt[_goalID].tokenCap){
       payout = goalAt[_goalID].tokenCap - goalAt[_goalID].playerPayout[_stravaID];
     }
@@ -398,7 +396,7 @@ contract NcenoBrands is RelayRecipient{
 
 
   //combo function
-  //getQ1a, getQ2count, getQ2Status, getQ2a, getQ3a
+  //getQ1a, getQ2count, getQ2Status, getQ2a, getQ3a, getQ4a
   function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a, uint _Q4a) public returns (uint, uint, bool, uint, uint, uint){
     return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].playerAnsweredQ2[_stravaID], goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a], goalAt[_goalID].q3Answers[_Q4a] );
   }
