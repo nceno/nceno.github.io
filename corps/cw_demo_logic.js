@@ -15,10 +15,12 @@ placeholderDate.setDate(placeholderDate.getDate() - 1); //can change "1" day to 
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
 var nowDate = parseInt(parseInt(new Date().getTime())/1000);
 
-var HR = new Array();  //ID0, avgHR1,    mins2, timestamp3, reward4, valid5
-var GPS = new Array(); //ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
+var HR = new Array();  //HR:  ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+var GPS = new Array(); //GPS: ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
 var toLog = new Array(3);
 
+//HR:  ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+//GPS: ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
 var data = new Object();
 
 let i=0;
@@ -60,18 +62,20 @@ async function makeActivities(){
       data = await JSON.parse(xhr.responseText);
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.   
-      
+      if(data.length <1) console.log("no workouts today.");
+      //HR:  ID0, avgHR1,    mins2, timestamp3, reward4, valid5
+      //GPS: ID0, avgSpeed1, dist2, timestamp3, reward4, valid5
       while(i<data.length){
         if(data[i].manual == false && data[i].has_heartrate == true){
           var HRvalid= false;
           if(data[i].average_heartrate>BPMthresh && data[i].elapsed_time>sesLow) {HRvalid =true;}
-          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, HRreward*data[i].elapsed_time/600, HRvalid]); //need to adjust time, hr, value, validity
+          HR.push([data[i].id, data[i].average_heartrate, data[i].elapsed_time, data[i].start_date, Math.floor(HRreward*data[i].elapsed_time/600), HRvalid]); //need to adjust time, hr, value, validity
           j++;
         }
         if(data[i].manual == false && data[i].distance > 0){
           var GPSvalid= false;
           if(data[i].distance>1000 && data[i].average_speed<speedLimit && data[i].average_speed>speedLow) {GPSvalid =true;}
-          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date, KMreward*data[i].distance/1000, GPSvalid]);
+          GPS.push([data[i].id, data[i].average_speed, data[i].distance, data[i].start_date, Math.floor(KMreward*data[i].distance/1000), GPSvalid]);
           k++;
         }
         else if(data[i].manual == false && data[i].has_heartrate == false && (data[i].distance == 0 || data[i].distance == null)){
