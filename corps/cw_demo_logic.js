@@ -8,8 +8,8 @@ var speedLimit = 4.5; //in m/s
 var speedLow = 1.4; //in m/s
 var BPMthresh = 99; 
 var sesLow = 1200; //in s
-var HRreward; //loaded from makeworkoutspage
-var KMreward; //loaded from makeworkoutspage
+var HRreward; //loaded from page .onload
+var KMreward; //loaded from page .onload
 var placeholderDate = new Date();
 placeholderDate.setDate(placeholderDate.getDate() - 1); //can change "1" day to "20" days for testing.
 var yesterday =parseInt(parseInt(placeholderDate.getTime())/1000);
@@ -366,9 +366,9 @@ function makeWorkoutPage(){
         var compcount = parseInt(resultA[3]);
         var remainingTokens = parseInt(resultA[4]);
         var bpmReward = parseInt(resultA[5]); //per 10mins
-          HRreward= parseInt(resultA[5]);
+          //HRreward= parseInt(resultA[5]);
         var kmReward = parseInt(resultA[6]); //per km
-          KMreward=parseInt(resultA[6]);
+          //KMreward=parseInt(resultA[6]);
 
         $('#me').empty();
 
@@ -1439,6 +1439,21 @@ window.onload = function(){
       function(error, result) {
         if (!error){
           playerOrderCt = result;
+
+          //get the goal params
+          NcenoBrands.methods.getGoalParams(_goalID)
+          .call({from: Cookies.get('userWallet')},
+            async function(error, resultA) {
+              if (!error){
+                HRreward= parseInt(resultA[5]);
+                KMreward=parseInt(resultA[6]);
+              }
+              else
+              console.error(error);
+            }
+          );//---end get goal params
+
+
         }
         else
         console.error(error);
