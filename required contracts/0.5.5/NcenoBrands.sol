@@ -70,6 +70,7 @@ contract NcenoBrands is RelayRecipient{
       uint q2Count;
       mapping(uint=>bool) playerAnsweredQ2; //stravaID --> true/false
     mapping(uint=>uint) q3Answers; // answer --> count
+    mapping(uint=>uint) q3Answers; // answer --> count
 
     mapping(uint=>uint) playerSet;
     mapping(uint=>uint) indexedPlayerID;
@@ -177,7 +178,7 @@ contract NcenoBrands is RelayRecipient{
     
   }
 
-  function join(bytes memory _goalID, uint _stravaID, string memory _userName, uint _avatar, string memory _inviteCode, uint _q1Answer) public {
+  function join(bytes memory _goalID, uint _stravaID, string memory _userName, uint _avatar, string memory _inviteCode, uint _q1Answer, uint _q2Answer) public {
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
@@ -211,11 +212,16 @@ contract NcenoBrands is RelayRecipient{
 
     goalAt[_goalID].q1Answers[_q1Answer]++;
 
+    if(!goalAt[_goalID].playerAnsweredQ2[_stravaID]){
+      goalAt[_goalID].q2Answers[goalAt[_goalID].q2Count]=_q2Answer;
+      goalAt[_goalID].q2Count++;
+    }
+
     goalAt[_goalID].codeOk[_inviteCode]==false;
     emit Join(_goalID,_stravaID, _userName, _inviteCode);
   }
 
-  function log(bytes memory _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes memory _secret, uint _q2Answer) public{
+  function log(bytes memory _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes memory _secret) public{
     require(now-goalAt[_goalID].lastLog[_stravaID] >13 hours 
       && now > goalAt[_goalID].start 
       && now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days 
@@ -231,11 +237,6 @@ contract NcenoBrands is RelayRecipient{
     }
     if(payout+goalAt[_goalID].playerPayout[_stravaID] > goalAt[_goalID].tokenCap){
       payout = goalAt[_goalID].tokenCap - goalAt[_goalID].playerPayout[_stravaID];
-    }
-
-    if(!goalAt[_goalID].playerAnsweredQ2[_stravaID]){
-      goalAt[_goalID].q2Answers[goalAt[_goalID].q2Count]=_q2Answer;
-      goalAt[_goalID].q2Count++;
     }
 
     //---- token payout
@@ -264,7 +265,7 @@ contract NcenoBrands is RelayRecipient{
     emit Log(_goalID, _stravaID, _kms, _mins, _actID, finisher);
   }
   
-  function makeOrder(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price, uint _q3Answer) public{
+  function makeOrder(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price, uint _q3Answer, uint _q4Answer) public{
     require(goalAt[_goalID].halted == false,"error");
 
     //(transfer tokens to owner first)
@@ -288,6 +289,9 @@ contract NcenoBrands is RelayRecipient{
     orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
 
     goalAt[_goalID].q3Answers[_q3Answer]++;
+    goalAt[_goalID].q4Answers[_q4Answer]++;
+
+
 
     orderCount++;
     companyAt[_companyID].orderCount++;
@@ -395,8 +399,8 @@ contract NcenoBrands is RelayRecipient{
 
   //combo function
   //getQ1a, getQ2count, getQ2Status, getQ2a, getQ3a
-  function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a) public returns (uint, uint, bool, uint, uint){
-    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].playerAnsweredQ2[_stravaID], goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a] );
+  function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a, uint _Q4a) public returns (uint, uint, bool, uint, uint, uint){
+    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].playerAnsweredQ2[_stravaID], goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a], goalAt[_goalID].q3Answers[_Q4a] );
   }
   //----- /getters
 
