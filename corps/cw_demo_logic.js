@@ -905,7 +905,7 @@ async function makeSpendPage(){
       async function(error, result) {
         if (!error){
           $("#tokenBalance").html(result+" "+TOKENSYMBOL);
-          myBalance = await result;
+          myBalance =  result;
         }
         else
         console.error(error);
@@ -913,17 +913,17 @@ async function makeSpendPage(){
     );
 
     //get the order count
-    NcenoBrands.methods.getPlayerOrderCt(
+    await NcenoBrands.methods.getPlayerOrderCt(
       Cookies.get('stravaID')
     )
     .call({from: Cookies.get('userWallet'), nonce: correctNonce},
       async function(error, result) {
         if (!error){
-          var playerOrderCt = await result;
+          var playerOrderCt =  result;
           correctNonce++;
           //start making the list
           for(let i = 0; i<playerOrderCt; i++){
-            NcenoBrands.methods.getIndexedPlayerOrder(
+            await NcenoBrands.methods.getIndexedPlayerOrder(
               Cookies.get('stravaID'),
               i
             )
