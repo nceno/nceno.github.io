@@ -1,6 +1,6 @@
 //makeCompany: "Suntek Global","0xccff00","0xe3d06e15f286bcaaa28528b61da84737318eefc4","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
 //transfer: "0x1995095fedc772f55c0279cd6f1ca45a4a28cf86","600"
-//host: "0xccff00","1581724800","30","150","600","1","2","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067","100"
+//host: "0xccff00","1581724800","30","150","600","1","2","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067"
 //addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 
 //join: "0xccff00","39706111","joenance","0","one","0"
@@ -62,7 +62,7 @@ contract NcenoBrands is RelayRecipient{
     address owner;
     uint compCount;
     address token;
-    uint cutoff;
+    //uint cutoff;
     string[3] first3;
     uint finishers;
     mapping(uint=>uint) q1Answers; // answer --> count
@@ -147,7 +147,7 @@ contract NcenoBrands is RelayRecipient{
     
   }
 
-  function host(bytes memory _goalID, uint _start, uint _days, uint _cap, uint _pot, uint _KmReward, uint _BpmReward, address _token, uint _cutoff) public payable{
+  function host(bytes memory _goalID, uint _start, uint _days, uint _cap, uint _pot, uint _KmReward, uint _BpmReward, address _token) public payable{
     goal memory createdGoal = goal({
       halted: false,
       goalID: _goalID,
@@ -164,7 +164,7 @@ contract NcenoBrands is RelayRecipient{
       finishers: 0,
       first3: ["0","0","0"],
       token: _token,
-      cutoff: _cutoff
+      //cutoff: _cutoff
     });
 
     //replace getSender() with _owner parameter?
@@ -181,8 +181,8 @@ contract NcenoBrands is RelayRecipient{
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
-      && goalAt[_goalID].codeOk[_inviteCode]==true
-      && goalAt[_goalID].compCount<goalAt[_goalID].cutoff,"error");
+      && goalAt[_goalID].codeOk[_inviteCode]==true,"error");
+      //&& goalAt[_goalID].compCount<goalAt[_goalID].cutoff,"error");
       
 
     if(userExists[_stravaID] == false){
