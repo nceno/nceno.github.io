@@ -568,13 +568,14 @@
                     <button id="loadCodes" onclick="loadCodes(50);" type="button" class="btn btn-block btn-rounded btn-primary">load codes</button>
                     <button id="doubleRewardsOn" onclick="doubleRewards(2);" type="button" class="btn btn-block btn-rounded btn-primary">Activate double rewards</button>
                     <button id="doubleRewardsOff" onclick="doubleRewards(1);" type="button" class="btn btn-block btn-rounded btn-primary">De-activate double rewards</button>
-                    <button id="doubleRewardsOff" onclick="addTokens();" type="button" class="btn btn-block btn-rounded btn-primary">Add more tokens to challenge</button>
+                    <button id="addTokenBtn" onclick="addTokens();" type="button" class="btn btn-block btn-rounded btn-primary">Add more tokens to challenge</button>
                     <div >
                       <input id="addTokens" type="range" min="50" max="10000" step="50" value="50" data-rangeslider>
                       <br>
                       <output></output>
                     </div>
-                    <a href="https://forms.gle/7zLv8WaT1epfoeyJ7">Click here to enter challenge setup details</a>
+                    <button id="pause" onclick="pause();" type="button" class="btn btn-block btn-rounded btn-primary">Pause the challenge</button>
+                    <a target="_blank" href="https://forms.gle/7zLv8WaT1epfoeyJ7">Click here to enter challenge setup details</a>
                     <!-- <h5 class="mb-2 fs-20 font-weight-normal">Host a new challenge</h5>
                       <div class="container">
                         <div class="row justify-content-center">
