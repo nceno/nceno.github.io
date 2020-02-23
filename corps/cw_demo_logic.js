@@ -2,6 +2,7 @@ console.log("11");
 //const portis = new Portis('67f0b194-14fb-4210-8535-d629eeb666b6', 'rinkeby', { gasRelay: true, scope: ['email'] });
 //const web3 = new Web3(portis.provider);
 
+
 async function loadCodes(num){
   var dict=new Array();
 
@@ -847,6 +848,7 @@ function resetLog(){
 $('#logModal').on('hidden.bs.modal', function (e) {
   resetLog();
 });
+
 
 $("#redeem").click(function() {
   $("#logLoader").show();

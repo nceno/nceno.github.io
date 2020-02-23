@@ -48,6 +48,7 @@ contract NcenoBrands is RelayRecipient{
   uint payoutToDate=0;
 
   struct goal{
+    uint rewardMult=1;
     bool halted;
     mapping(string=>bool) codeOk;
     bytes goalID;
@@ -224,7 +225,7 @@ contract NcenoBrands is RelayRecipient{
       && goalAt[_goalID].playerPayout[_stravaID]<goalAt[_goalID].tokenCap,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
-    uint payout = _kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
+    uint payout = rewardMult*_kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate;
     if(goalAt[_goalID].potRemaining<payout){
       payout = goalAt[_goalID].potRemaining;
     }
@@ -304,7 +305,12 @@ contract NcenoBrands is RelayRecipient{
     emit UpdateOrder(_goalID, _orderNum, _status);
   }
 
-
+  function setRewMult(bytes memory _goalID, uint _mult) public{
+    goalAt[_goalID].rewardMult = _mult;
+  }
+  function getRewMult(bytes memory _goalID) public view returns(uint){
+    return(goalAt[_goalID].rewardMult);
+  }
 
   function halt(bytes memory _goalID, bool _status) public{
     require(goalAt[_goalID].owner == getSender(),"error");
