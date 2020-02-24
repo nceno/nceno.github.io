@@ -288,7 +288,7 @@ contract NcenoBrands is RelayRecipient{
     orderAt[_orderNum]=createdOrder;
     //orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder; //may have a problem
     //stravaID => [orderIndex => orderNum]
-    playerOrders[_stravaID][profileOf[_stravaID].orderCt] = _orderNum;
+    playerOrders[_stravaID][profileOf[_stravaID].orderCt] = _orderNum; 
 
     goalAt[_goalID].q3Answers[_q3Answer]++;
     goalAt[_goalID].q4Answers[_q4Answer]++;
