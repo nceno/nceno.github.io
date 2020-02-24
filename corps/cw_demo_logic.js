@@ -1269,7 +1269,10 @@ $("#joinModBtn").click(function() {
     Cookies.get('stravaID'), 
     $("#nameField").val(),
     $('input[name="avatarRadio"]:checked').val(), 
-    $("#codeField").val())
+    $("#codeField").val(),
+    $('input[name="q1Radio"]:checked').val(),
+    $('input[name="q2Radio"]:checked').val()
+    )
   .send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
       if (!error){
@@ -1309,7 +1312,7 @@ $("#joinModBtn").click(function() {
 
 //creating a goal from the slider values and live ethereum price
 //var goalID = web3.utils.padRight(web3.utils.randomHex(3),6);
-$("#hostBtn").click(function() {
+/*$("#hostBtn").click(function() {
 
   var KmReward = $("#sliderReward").roundSlider('getValue',1).toString();
   var BpmReward = $("#sliderReward").roundSlider('getValue',2)-$("#sliderReward").roundSlider('getValue',1).toString();
@@ -1395,7 +1398,7 @@ function echoGoal(){
     $("#sliderReward").roundSlider('getValue',2)+" tokens/10min for exercises with heart rate, starting automatically from "+ $("#dateChoice").datepicker('getDate', true) +"."
   );
   console.log($("#sliderReward").roundSlider('getValue',1));
-}
+}*/
 
 function resetJoin(){
   $("#avatarChoices").show();
