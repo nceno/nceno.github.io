@@ -993,10 +993,12 @@ function setTarget(item){
 }
 
 function resetSpend(){
-  $("#confirmBuy").show();
+  //$("#confirmBuy").show();
   $("#cancelBuy").show();
   $("#buyLoader").hide();
   $("#getYouPaid").html("Remember those workouts? They're about to pay off!");
+  $('input[name="q3Radio"]').prop('checked', false);
+  $('input[name="q4Radio"]').prop('checked', false);
   makeSpendPage();
 }
 $('#popupBuy').on('hidden.bs.modal', function (e) {
@@ -1400,9 +1402,10 @@ function resetJoin(){
   $("#soonJoinTitle").show();
   $("#nameField").show();
   $("#codeField").show();
-  $("#joinModBtn").show();
+  //$("#joinModBtn").show();
   $("#joinPrompt").html('');
   $('#joinLoader').hide();
+  $('input[name="q1Radio"]').prop('checked', false);
 }
 $('#popupSoonJoin').on('hidden.bs.modal', function (e) {
   resetJoin();
