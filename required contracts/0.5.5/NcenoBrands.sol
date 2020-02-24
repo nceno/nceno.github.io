@@ -97,7 +97,7 @@ contract NcenoBrands is RelayRecipient{
     uint orderCt;
     mapping(bytes=>goal) goalSet;
   }
-  mapping(uint=>mapping(uint=>bytes)) playerOrders; //stravaID => orderIndex => orderNum
+  mapping(uint=>mapping(uint=>bytes)) playerOrders; //stravaID => [orderIndex => orderNum]
 
 
   mapping(uint=>player) public profileOf;
@@ -286,11 +286,12 @@ contract NcenoBrands is RelayRecipient{
     companyAt[_companyID].indexedOrderNumber[orderCount] = _orderNum;
     
     orderAt[_orderNum]=createdOrder;
-    orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
+    //orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder; //may have a problem
+    //stravaID => [orderIndex => orderNum]
+    playerOrders[_stravaID][profileOf[_stravaID].orderCt] = _orderNum;
 
     goalAt[_goalID].q3Answers[_q3Answer]++;
     goalAt[_goalID].q4Answers[_q4Answer]++;
-
 
 
     orderCount++;
@@ -385,7 +386,8 @@ contract NcenoBrands is RelayRecipient{
 
   //used to generate player order history
   function getIndexedPlayerOrder(uint _stravaID, uint _index) public view returns(bytes memory, string memory, uint, uint){
-    return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
+    //return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
+    return(playerOrders[_stravaID][_index], orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
     //stravaID, index --> ordernum0, item1, price2, date3
   }
 
