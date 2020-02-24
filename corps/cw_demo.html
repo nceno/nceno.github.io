@@ -565,12 +565,12 @@
               <div class="col-md-10 col-lg-8">
                 <div class="row">
                   <div class="col">
-                    <button id="loadCodes" onclick="loadCodes(50);" type="button" class="btn btn-block btn-rounded btn-primary">load codes</button>
+                    <button id="loadCodes" onclick="loadCodes(10);" type="button" class="btn btn-block btn-rounded btn-primary">load codes</button>
                     <button id="doubleRewardsOn" onclick="doubleRewards(2);" type="button" class="btn btn-block btn-rounded btn-primary">Activate double rewards</button>
                     <button id="doubleRewardsOff" onclick="doubleRewards(1);" type="button" class="btn btn-block btn-rounded btn-primary">De-activate double rewards</button>
-                    <button id="addTokenBtn" onclick="addTokens();" type="button" class="btn btn-block btn-rounded btn-primary">Add more tokens to challenge</button>
+                    <button id="addTokenBtn" onclick="addTokens($('#tokenAmt').val());" type="button" class="btn btn-block btn-rounded btn-primary">Add more tokens to challenge</button>
                     <div >
-                      <input id="addTokens" type="range" min="50" max="10000" step="50" value="50" data-rangeslider>
+                      <input id="tokenAmt" type="range" min="50" max="10000" step="50" value="50" data-rangeslider>
                       <br>
                       <output></output>
                     </div>
@@ -794,13 +794,14 @@
                 <div class="row">
                   <div class="col text-center mb-2">
                     <p><span id="joinPrompt"></span></p>
-                    <span id="joinReminder" class="col text-center mb-2"></span>
-                  </div>
-                  <div id="joinLoader" class="col text-center mb-2">
-                    <!--loaders -->
-                    <p>Please wait a minute. We're adding you to the challenge...</p>
-                    <img  src="../app/assets/images/loader.svg"> 
-                    <!--/loaders -->
+                    <!-- <span id="joinReminder" class="col text-center mb-2"></span> -->
+                  
+                    <div id="joinLoader" class="col text-center mb-2">
+                      <!--loaders -->
+                      <p>Please wait a minute. We're adding you to the challenge...</p>
+                      <img  src="../app/assets/images/loader.svg"> 
+                      <!--/loaders -->
+                    </div>
                   </div>
                 </div>
               </div>

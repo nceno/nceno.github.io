@@ -562,8 +562,8 @@ NcenoBrands.events.UpdateOrder({
 })
 .on('error', console.error);
 
-
-///////----rage slider stuff
+var avgPurchase;
+///////----rangeslider stuff
 $(function() {
 
   var $document = $(document);
@@ -599,12 +599,14 @@ $(function() {
       onSlide: function(position, value) {
           //console.log('onSlide');
           //console.log('position: ' + position, 'value: ' + value);
+          avgPurchase = value;
       },
 
       // Callback function
       onSlideEnd: function(position, value) {
           //console.log('onSlideEnd');
           //console.log('position: ' + position, 'value: ' + value);
+          avgPurchase = value;
       }
   });
 });
@@ -1271,7 +1273,7 @@ $("#joinModBtn").click(function() {
     $('input[name="avatarRadio"]:checked').val(), 
     $("#codeField").val(),
     $('input[name="q1Radio"]:checked').val(),
-    $('input[name="q2Radio"]:checked').val()
+    $('#avgSpend').val()
     )
   .send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
