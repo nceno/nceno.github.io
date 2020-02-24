@@ -1005,31 +1005,31 @@ $('#popupBuy').on('hidden.bs.modal', function (e) {
 
 
 $("#buyLoader").hide();
+//only let the user buy after they answer the questions.
+$("#confirmBuy").hide();
+$("#q3Radio").on('click', function(){
+  if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
+    $("#confirmBuy").show(); 
+  } 
+  else {
+    $("#confirmBuy").hide(); 
+  }
+});
+
+$("#q4Radio").on('click', function(){
+  if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
+    $("#confirmBuy").show(); 
+  } 
+  else {
+    $("#confirmBuy").hide(); 
+  }
+});
+
 function buy(){
   $("#confirmBuy").hide();
   $("#cancelBuy").hide();
   $("#buyLoader").show();
 
-
-  //only let the user buy after they answer the questions.
-  $("#confirmBuy").hide();
-  $("#q3Radio").on('click', function(){
-    if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
-      $("#confirmBuy").show(); 
-    } 
-    else {
-      $("#confirmBuy").hide(); 
-    }
-  });
-
-  $("#q4Radio").on('click', function(){
-    if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
-      $("#confirmBuy").show(); 
-    } 
-    else {
-      $("#confirmBuy").hide(); 
-    }
-  });
 
   //deposit tokens here...
   TheToken.methods.transfer(
