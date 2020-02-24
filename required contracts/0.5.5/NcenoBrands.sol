@@ -217,7 +217,7 @@ contract NcenoBrands is RelayRecipient{
     emit Join(_goalID,_stravaID, _userName, _inviteCode);
   }
 
-  function log(bytes memory _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes memory _secret) public{
+  function log(bytes memory _goalID, uint _stravaID, uint _kms, uint _mins, uint _actID, bytes memory _secretHash, uint _secretIndex) public{
     require(now-goalAt[_goalID].lastLog[_stravaID] >13 hours 
       && now > goalAt[_goalID].start 
       && now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days 
@@ -282,7 +282,9 @@ contract NcenoBrands is RelayRecipient{
     companyAt[_companyID].orderSet[_orderNum]=createdOrder;
     profileOf[_stravaID].orderSet[_orderNum]=createdOrder;
     companyAt[_companyID].indexedOrder[orderCount]=createdOrder;
+    
     companyAt[_companyID].indexedOrderNumber[orderCount] = _orderNum;
+    
     orderAt[_orderNum]=createdOrder;
     orderAt[playerOrders[_stravaID][profileOf[_stravaID].orderCt]] = createdOrder;
 
