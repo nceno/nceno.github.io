@@ -1007,8 +1007,8 @@ $('#popupBuy').on('hidden.bs.modal', function (e) {
 $("#buyLoader").hide();
 //only let the user buy after they answer the questions.
 $("#confirmBuy").hide();
-$("#q3Radio").on('click', function(){
-  if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
+$("#radio10").on('click', function(){
+  if($('input[name="q3Radio"]').is(':checked') && $('input[name="q4Radio"]').is(':checked')) {
     $("#confirmBuy").show(); 
   } 
   else {
@@ -1016,8 +1016,26 @@ $("#q3Radio").on('click', function(){
   }
 });
 
-$("#q4Radio").on('click', function(){
-  if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
+$("#radio11").on('click', function(){
+  if($('input[name="q3Radio"]').is(':checked') && $('input[name="q4Radio"]').is(':checked')) {
+    $("#confirmBuy").show(); 
+  } 
+  else {
+    $("#confirmBuy").hide(); 
+  }
+});
+
+$("#radio12").on('click', function(){
+  if($('input[name="q3Radio"]').is(':checked') && $('input[name="q4Radio"]').is(':checked')) {
+    $("#confirmBuy").show(); 
+  } 
+  else {
+    $("#confirmBuy").hide(); 
+  }
+});
+
+$("#radio13").on('click', function(){
+  if($('input[name="q3Radio"]').is(':checked') && $('input[name="q4Radio"]').is(':checked')) {
     $("#confirmBuy").show(); 
   } 
   else {
