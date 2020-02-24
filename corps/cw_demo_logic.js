@@ -1010,6 +1010,27 @@ function buy(){
   $("#cancelBuy").hide();
   $("#buyLoader").show();
 
+
+  //only let the user buy after they answer the questions.
+  $("#confirmBuy").hide();
+  $("#q3Radio").on('click', function(){
+    if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
+      $("#confirmBuy").show(); 
+    } 
+    else {
+      $("#confirmBuy").hide(); 
+    }
+  });
+
+  $("#q4Radio").on('click', function(){
+    if($("#q3Radio").is(':checked') && $("#q4Radio").is(':checked')) {
+      $("#confirmBuy").show(); 
+    } 
+    else {
+      $("#confirmBuy").hide(); 
+    }
+  });
+
   //deposit tokens here...
   TheToken.methods.transfer(
     adminWallet,
@@ -1036,7 +1057,9 @@ function buy(){
           orderNo,
           Cookies.get('stravaID'), 
           targetName, 
-          targetPrice
+          targetPrice,
+          $('input[name="q3Radio"]:checked').val(),
+          $('input[name="q4Radio"]:checked').val()
         ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
           function(error, result) {
             if (!error){
