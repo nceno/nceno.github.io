@@ -11,6 +11,44 @@ var NcenoBrands = new web3.eth.Contract([
         "type": "bytes"
       },
       {
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "_userName",
+        "type": "string"
+      },
+      {
+        "name": "_avatar",
+        "type": "uint256"
+      },
+      {
+        "name": "_inviteCode",
+        "type": "string"
+      },
+      {
+        "name": "_q1Answer",
+        "type": "uint256"
+      },
+      {
+        "name": "_q2Answer",
+        "type": "uint256"
+      }
+    ],
+    "name": "join",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
         "name": "_status",
         "type": "bool"
       }
@@ -68,11 +106,11 @@ var NcenoBrands = new web3.eth.Contract([
         "type": "uint256"
       },
       {
-        "name": "_secret",
+        "name": "_secretHash",
         "type": "bytes"
       },
       {
-        "name": "_q2Answer",
+        "name": "_secretIndex",
         "type": "uint256"
       }
     ],
@@ -118,40 +156,6 @@ var NcenoBrands = new web3.eth.Contract([
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_userName",
-        "type": "string"
-      },
-      {
-        "name": "_avatar",
-        "type": "uint256"
-      },
-      {
-        "name": "_inviteCode",
-        "type": "string"
-      },
-      {
-        "name": "_q1Answer",
-        "type": "uint256"
-      }
-    ],
-    "name": "join",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -205,6 +209,25 @@ var NcenoBrands = new web3.eth.Contract([
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      }
+    ],
+    "name": "getRewMult",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -329,52 +352,6 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_start",
-        "type": "uint256"
-      },
-      {
-        "name": "_days",
-        "type": "uint256"
-      },
-      {
-        "name": "_cap",
-        "type": "uint256"
-      },
-      {
-        "name": "_pot",
-        "type": "uint256"
-      },
-      {
-        "name": "_KmReward",
-        "type": "uint256"
-      },
-      {
-        "name": "_BpmReward",
-        "type": "uint256"
-      },
-      {
-        "name": "_token",
-        "type": "address"
-      },
-      {
-        "name": "_cutoff",
-        "type": "uint256"
-      }
-    ],
-    "name": "host",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [
       {
@@ -391,24 +368,6 @@ var NcenoBrands = new web3.eth.Contract([
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_newName",
-        "type": "string"
-      }
-    ],
-    "name": "changeUsername",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -644,6 +603,48 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_companyID",
+        "type": "bytes"
+      },
+      {
+        "name": "_orderNum",
+        "type": "bytes"
+      },
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "_item",
+        "type": "string"
+      },
+      {
+        "name": "_price",
+        "type": "uint256"
+      },
+      {
+        "name": "_q3Answer",
+        "type": "uint256"
+      },
+      {
+        "name": "_q4Answer",
+        "type": "uint256"
+      }
+    ],
+    "name": "makeOrder",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -674,6 +675,48 @@ var NcenoBrands = new web3.eth.Contract([
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_start",
+        "type": "uint256"
+      },
+      {
+        "name": "_days",
+        "type": "uint256"
+      },
+      {
+        "name": "_cap",
+        "type": "uint256"
+      },
+      {
+        "name": "_pot",
+        "type": "uint256"
+      },
+      {
+        "name": "_KmReward",
+        "type": "uint256"
+      },
+      {
+        "name": "_BpmReward",
+        "type": "uint256"
+      },
+      {
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "host",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -795,57 +838,6 @@ var NcenoBrands = new web3.eth.Contract([
     "constant": false,
     "inputs": [
       {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
-        "name": "_Q1a",
-        "type": "uint256"
-      },
-      {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_Q2index",
-        "type": "uint256"
-      },
-      {
-        "name": "_Q3a",
-        "type": "uint256"
-      }
-    ],
-    "name": "getQstuff",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "bool"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
         "name": "_name",
         "type": "string"
       },
@@ -934,15 +926,11 @@ var NcenoBrands = new web3.eth.Contract([
         "type": "bytes"
       },
       {
-        "name": "_orderNum",
-        "type": "bytes"
-      },
-      {
-        "name": "_status",
+        "name": "_mult",
         "type": "uint256"
       }
     ],
-    "name": "setOrderStatus",
+    "name": "setRewMult",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -956,31 +944,15 @@ var NcenoBrands = new web3.eth.Contract([
         "type": "bytes"
       },
       {
-        "name": "_companyID",
-        "type": "bytes"
-      },
-      {
         "name": "_orderNum",
         "type": "bytes"
       },
       {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_item",
-        "type": "string"
-      },
-      {
-        "name": "_price",
-        "type": "uint256"
-      },
-      {
-        "name": "_q3Answer",
+        "name": "_status",
         "type": "uint256"
       }
     ],
-    "name": "makeOrder",
+    "name": "setOrderStatus",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -1137,4 +1109,4 @@ var NcenoBrands = new web3.eth.Contract([
     "name": "UpdateOrder",
     "type": "event"
   }
-], '0x1995095fedc772f55c0279cd6f1ca45a4a28cf86');
+], '0xab949465d1bbbbcc3ab1cca24a227588326f37d0');
