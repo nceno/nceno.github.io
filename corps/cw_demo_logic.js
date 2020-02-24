@@ -1043,6 +1043,8 @@ $("#radio13").on('click', function(){
   }
 });
 
+
+
 function buy(){
   $("#confirmBuy").hide();
   $("#cancelBuy").hide();
@@ -1220,17 +1222,28 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
 }
 
 //show create button only if user agrees to terms
-$("#checker").on('click', function() {
-if($("#checker").is(':checked')) {
-  $("#createBtn").show(); 
-} else {
-  $("#createBtn").hide(); 
-  }
-});
 
 $("#joinModBtn").hide();
 $("#joinChecker").on('click', function(){
-  if($("#joinChecker").is(':checked')) {
+  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0) {
+    $("#joinModBtn").show(); 
+  } 
+  else {
+    $("#joinModBtn").hide(); 
+  }
+});
+
+$("#radio8").on('click', function(){
+  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0) {
+    $("#joinModBtn").show(); 
+  } 
+  else {
+    $("#joinModBtn").hide(); 
+  }
+});
+
+$("#radio9").on('click', function(){
+  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0) {
     $("#joinModBtn").show(); 
   } 
   else {
