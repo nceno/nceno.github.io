@@ -950,12 +950,18 @@ async function makeSpendPage(){
   if(myBalance<item1.price){
     $("#action1").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
+  else if(Cookies.get('access_token')== undefined){
+    $("#action1").html('');
+  }
   else{
     $("#action1").html('<a id="buyModalbtn1" onclick="setTarget(item1);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
   ////////
   if(myBalance<item2.price){
     $("#action2").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
+  }
+  else if(Cookies.get('access_token')== undefined){
+    $("#action2").html('');
   }
   else{
     $("#action2").html('<a id="buyModalbtn2" onclick="setTarget(item2);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
@@ -964,6 +970,9 @@ async function makeSpendPage(){
   if(myBalance<item3.price){
     $("#action3").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
+  else if(Cookies.get('access_token')== undefined){
+    $("#action3").html('');
+  }
   else{
     $("#action3").html('<a id="buyModalbtn3" onclick="setTarget(item3);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
@@ -971,12 +980,18 @@ async function makeSpendPage(){
   if(myBalance<item4.price){
     $("#action4").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
   }
+  else if(Cookies.get('access_token')== undefined){
+    $("#action4").html('');
+  }
   else{
     $("#action4").html('<a id="buyModalbtn4" onclick="setTarget(item4);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
   }
   /////////
   if(myBalance<item5.price){
     $("#action5").html('<font style="color:#f442b3;">Not enough '+TOKENSYMBOL+'</font>');
+  }
+  else if(Cookies.get('access_token')== undefined){
+    $("#action5").html('');
   }
   else{
     $("#action5").html('<a id="buyModalbtn5" onclick="setTarget(item5);" data-toggle="modal" data-target="#popupBuy" class="btn btn-sm btn-outline-white">Buy now</a>');
