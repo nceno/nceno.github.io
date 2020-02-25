@@ -296,7 +296,8 @@ $("#redeem").click(function() {
     toLog[1], 
     toLog[2], 
     toLog[0], 
-    "0x22222"
+    "0x22222",
+    345
   )
   .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
     function(error, result) {
