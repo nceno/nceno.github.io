@@ -1,7 +1,7 @@
 console.log("12");
 
 for(let n=1; n<5; n++){
-  $('#companyTitle'+n).html('<p>'+companyName+'</p>');
+  $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
 }
 
 ///////////////////////////////////////
