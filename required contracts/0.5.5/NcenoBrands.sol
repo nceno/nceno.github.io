@@ -1,5 +1,5 @@
 //makeCompany: "Suntek Global","0xccff00","0xe3d06e15f286bcaaa28528b61da84737318eefc4","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//transfer: "0x1995095fedc772f55c0279cd6f1ca45a4a28cf86","600"
+//transfer: "0x57c9468b517d16aaab60753b981cdea317b192ef","600"
 //host: "0xccff00","1581724800","30","150","600","1","2","0xe3d06e15f286bcaaa28528b61da84737318eefc4"
 
 //addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
@@ -19,10 +19,10 @@ import "./ERC20Interface.sol";
 contract NcenoBrands is RelayRecipient{
 
   event MakeUser(address _wallet, uint _stravaID, string _userName);
-  event MakeOrder(bytes32 indexed paramGoalID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
+  event MakeOrder(bytes indexed paramGoalID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
   event Join(bytes paramGoalID, uint _stravaID, string _userName, string _inviteCode);
   event Log(bytes indexed paramGoalID, uint indexed paramStravaID, uint _kms, uint _mins, uint _actID, bool indexed finisher);
-  event UpdateOrder(bytes32 indexed paramGoalID, bytes _orderNumber, uint _status);
+  event UpdateOrder(bytes indexed paramGoalID, bytes _orderNumber, uint _status);
   
   //gas station init
   constructor() public {
@@ -48,7 +48,7 @@ contract NcenoBrands is RelayRecipient{
   uint payoutToDate=0;
 
   struct goal{
-    uint rewardMult=1;
+    uint rewardMult;
     bool halted;
     mapping(string=>bool) codeOk;
     bytes goalID;
@@ -70,7 +70,7 @@ contract NcenoBrands is RelayRecipient{
       uint q2Count;
       //mapping(uint=>bool) playerAnsweredQ2; //stravaID --> true/false
     mapping(uint=>uint) q3Answers; // answer --> count
-    mapping(uint=>uint) q3Answers; // answer --> count
+    mapping(uint=>uint) q4Answers; // answer --> count
 
     mapping(uint=>uint) playerSet;
     mapping(uint=>uint) indexedPlayerID;
@@ -97,7 +97,7 @@ contract NcenoBrands is RelayRecipient{
     uint orderCt;
     mapping(bytes=>goal) goalSet;
   }
-  mapping(uint=>mapping(uint=>bytes)) playerOrders; //stravaID => [orderIndex => orderNum]
+  mapping(uint=>mapping(uint=>bytes)) playerOrders; //stravaID => orderIndex => orderNum
 
 
   mapping(uint=>player) public profileOf;
@@ -161,6 +161,7 @@ contract NcenoBrands is RelayRecipient{
       finishers: 0,
       first3: ["0","0","0"],
       token: _token,
+      rewardMult : 1
       //cutoff: _cutoff
     });
 
@@ -208,10 +209,10 @@ contract NcenoBrands is RelayRecipient{
 
     goalAt[_goalID].q1Answers[_q1Answer]++;
 
-    if(!goalAt[_goalID].playerAnsweredQ2[_stravaID]){
-      goalAt[_goalID].q2Answers[goalAt[_goalID].q2Count]=_q2Answer;
-      goalAt[_goalID].q2Count++;
-    }
+   
+    goalAt[_goalID].q2Answers[goalAt[_goalID].q2Count]=_q2Answer;
+    goalAt[_goalID].q2Count++;
+    
 
     goalAt[_goalID].codeOk[_inviteCode]==false;
     emit Join(_goalID,_stravaID, _userName, _inviteCode);
@@ -227,7 +228,7 @@ contract NcenoBrands is RelayRecipient{
       && goalAt[_goalID].playerPayout[_stravaID]<goalAt[_goalID].tokenCap,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
-    uint payout = rewardMult*_kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate/10;
+    uint payout = goalAt[_goalID].rewardMult*_kms*goalAt[_goalID].kmTokenRate + _mins*goalAt[_goalID].bpmTokenRate/10;
     //if the payout is more than remaining, just pay remaining tokens
     if(goalAt[_goalID].potRemaining<payout){
       payout = goalAt[_goalID].potRemaining;
@@ -292,6 +293,7 @@ contract NcenoBrands is RelayRecipient{
 
     goalAt[_goalID].q3Answers[_q3Answer]++;
     goalAt[_goalID].q4Answers[_q4Answer]++;
+
 
 
     orderCount++;
@@ -386,7 +388,6 @@ contract NcenoBrands is RelayRecipient{
 
   //used to generate player order history
   function getIndexedPlayerOrder(uint _stravaID, uint _index) public view returns(bytes memory, string memory, uint, uint){
-    //return(orderAt[playerOrders[_stravaID][_index]].orderNum, orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
     return(playerOrders[_stravaID][_index], orderAt[playerOrders[_stravaID][_index]].item, orderAt[playerOrders[_stravaID][_index]].price, orderAt[playerOrders[_stravaID][_index]].date );
     //stravaID, index --> ordernum0, item1, price2, date3
   }
@@ -401,9 +402,9 @@ contract NcenoBrands is RelayRecipient{
 
   //combo function
   //getQ1a, getQ2count, getQ2a, getQ3a, getQ4a
-  function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a, uint _Q4a) public returns (uint, uint, uint, uint, uint){
-    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a], goalAt[_goalID].q3Answers[_Q4a] );
-  }
+ /* function getQstuff(bytes memory _goalID, uint _Q1a, uint _Q2index, uint _Q3a, uint _Q4a) public returns (uint, uint, uint, uint, uint){
+    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count,  goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a], goalAt[_goalID].q3Answers[_Q4a] );
+  }*/
   //----- /getters
 
   //gas station relay stuff
