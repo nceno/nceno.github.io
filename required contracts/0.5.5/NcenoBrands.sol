@@ -439,7 +439,7 @@ contract NcenoBrands is RelayRecipient{
 
 // token factory stuff
 contract BrandToken is RelayRecipient{
-  constructor(uint _supply, address _owner, string memory _symbol, string memory _name, address _relayHub) public {
+  constructor(uint _supply, address _owner, string memory _symbol, string memory _name) public {
     balances[_owner]= _supply;
     thetotalSupply = _supply;
     name = _name;

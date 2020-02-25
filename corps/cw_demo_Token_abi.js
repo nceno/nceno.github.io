@@ -466,4 +466,4 @@ var TheToken = new web3.eth.Contract([
 		"name": "Transfer",
 		"type": "event"
 	}
-],'0xe3d06e15f286bcaaa28528b61da84737318eefc4'); 
+],'0xf98ec1530fc41c8b6372b3c60de787553a333bf1'); 

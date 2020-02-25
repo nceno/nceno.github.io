@@ -1,9 +1,9 @@
 const _goalID = '0xccff00';
 const companyID = '0xccff00'; 
 const companyName = "Wingstop"; //
-const tokenAddress = '0xe3d06e15f286bcaaa28528b61da84737318eefc4'; //
+const tokenAddress = '0xf98ec1530fc41c8b6372b3c60de787553a333bf1'; //
 const TOKENSYMBOL = "WNG"; //
-const contractAddress = '0x57c9468b517d16aaab60753b981cdea317b192ef'; //
+const contractAddress = '0xb7d30d2ddea01e5fdaad522bfc2d50879096fc47'; //
 const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a'; //
 
 const adminUserID_1 = '49092681'; //
