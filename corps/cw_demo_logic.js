@@ -1,4 +1,8 @@
-console.log("11");
+console.log("12");
+
+for(let n=1; n<5; n++){
+  $('#companyTitle'+n).html('<p>'+companyName+'</p>');
+}
 
 ///////////////////////////////////////
 //////////////vvvvvvvvv getActivities()
@@ -725,7 +729,7 @@ function setOrderStatus(_orderNo, _action){
   $("#settleBtn").hide();
   $("#issueRefund").hide();
   $("#statusLoader").show();
-  
+
   if(_action == "refunded"){
     //nceno refund
     NcenoBrands.methods.setOrderStatus(
