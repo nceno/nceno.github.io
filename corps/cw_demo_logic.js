@@ -249,7 +249,7 @@ function showBest(){
   });
   //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
   if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
-  if(dispMins!= null && dispMins!= 0 && dispHR!= 0 && identifier != "GPS") $("#dispMins").html(Math.round(dispMins/60));
+  if(dispMins!= null && dispMins!= null && dispHR!= null ) $("#dispMins").html(Math.round(dispMins/60));
   $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
   $("#period").html(period); 
   if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
