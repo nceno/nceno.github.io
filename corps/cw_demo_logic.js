@@ -206,6 +206,7 @@ function showBest(){
     bestVal = GPSMaxVal;
     bestID = GPSMaxID;
     identifier = "GPS";
+    //hide bmp mins
   }
   else {
     bestVal = hrMaxVal;
@@ -232,7 +233,9 @@ function showBest(){
       }
 
       dispHR = _A.average_heartrate; //needs to be adjusted
+      
       dispMins = _A.elapsed_time; //needs adjusted
+      
       dispValue = Math.round(bestVal); //needs adjusted
 
       //_A.utc_offset/3600
@@ -246,7 +249,7 @@ function showBest(){
   });
   //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
   if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
-  if(dispMins!= null && dispMins!= 0 && dispHR!= 0) $("#dispMins").html(Math.round(dispMins/60));
+  if(dispMins!= null && dispMins!= 0 && dispHR!= 0 && identifier != "GPS") $("#dispMins").html(Math.round(dispMins/60));
   $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
   $("#period").html(period); 
   if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
@@ -1516,7 +1519,7 @@ if(Cookies.get('userWallet') != undefined){
 var code;
 window.onload = function(){
   $("#joinBtn").hide();
-  
+
   if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('userWallet') != undefined){
     var playerOrderCt
     NcenoBrands.methods.getPlayerOrderCt(
