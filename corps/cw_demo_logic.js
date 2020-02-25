@@ -1013,7 +1013,8 @@ function setTarget(item){
 }
 
 function resetSpend(){
-  //$("#confirmBuy").show();
+  $("#buyQs").show();
+
   $("#cancelBuy").show();
   $("#buyLoader").hide();
   $("#getYouPaid").html("Remember those workouts? They're about to pay off!");
@@ -1071,6 +1072,7 @@ function buy(){
   $("#confirmBuy").hide();
   $("#cancelBuy").hide();
   $("#buyLoader").show();
+  $("#buyQs").hide();
 
 
   //deposit tokens here...

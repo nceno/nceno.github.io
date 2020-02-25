@@ -68,7 +68,7 @@ contract NcenoBrands is RelayRecipient{
     mapping(uint=>uint) q1Answers; // answer --> count
     mapping(uint=>uint) q2Answers; // index --> answer
       uint q2Count;
-      mapping(uint=>bool) playerAnsweredQ2; //stravaID --> true/false
+      //mapping(uint=>bool) playerAnsweredQ2; //stravaID --> true/false
     mapping(uint=>uint) q3Answers; // answer --> count
     mapping(uint=>uint) q3Answers; // answer --> count
 
@@ -400,9 +400,9 @@ contract NcenoBrands is RelayRecipient{
 
 
   //combo function
-  //getQ1a, getQ2count, getQ2Status, getQ2a, getQ3a, getQ4a
-  function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a, uint _Q4a) public returns (uint, uint, bool, uint, uint, uint){
-    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].playerAnsweredQ2[_stravaID], goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a], goalAt[_goalID].q3Answers[_Q4a] );
+  //getQ1a, getQ2count, getQ2a, getQ3a, getQ4a
+  function getQstuff(bytes memory _goalID, uint _Q1a, uint _stravaID, uint _Q2index, uint _Q3a, uint _Q4a) public returns (uint, uint, uint, uint, uint){
+    return (goalAt[_goalID].q1Answers[_Q1a], goalAt[_goalID].q2Count, goalAt[_goalID].q2Answers[_Q2index], goalAt[_goalID].q3Answers[_Q3a], goalAt[_goalID].q3Answers[_Q4a] );
   }
   //----- /getters
 
