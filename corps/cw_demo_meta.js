@@ -32,10 +32,10 @@ const item3={
 }
 
 const item4={
-	name: 'Beer mug',
+	name: 'Hat',
 	//price: 450
 	price: 150,
-	descr : "Wingstop logo beer mug"
+	descr : "Wingstop logo hat"
 }
 
 const item5={
