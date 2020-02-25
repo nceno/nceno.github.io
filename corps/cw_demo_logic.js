@@ -722,6 +722,10 @@ $('#refundModal').on('hidden.bs.modal', function (e) {
 });
 
 function setOrderStatus(_orderNo, _action){
+  $("#settleBtn").hide();
+  $("#issueRefund").hide();
+  $("#statusLoader").show();
+  
   if(_action == "refunded"){
     //nceno refund
     NcenoBrands.methods.setOrderStatus(
@@ -731,9 +735,7 @@ function setOrderStatus(_orderNo, _action){
     ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
       function(error, result) {
         if (!error){
-          $("#settleBtn").hide();
-          $("#issueRefund").hide();
-          $("#statusLoader").show();
+          
           console.log(result);
         }
         else
@@ -795,9 +797,9 @@ function setOrderStatus(_orderNo, _action){
     ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
       function(error, result) {
         if (!error){
-          $("#settleBtn").hide();
+          /*$("#settleBtn").hide();
           $("#issueRefund").hide();
-          $("#statusLoader").show();
+          $("#statusLoader").show();*/
           
           console.log(result);
         }
