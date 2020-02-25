@@ -1515,7 +1515,8 @@ if(Cookies.get('userWallet') != undefined){
 
 var code;
 window.onload = function(){
-
+  $("#joinBtn").hide();
+  
   if(Cookies.get('access_token') != undefined && Cookies.get('stravaID') != undefined && Cookies.get('userWallet') != undefined){
     var playerOrderCt
     NcenoBrands.methods.getPlayerOrderCt(
