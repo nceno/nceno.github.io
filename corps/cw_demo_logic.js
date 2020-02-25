@@ -643,7 +643,7 @@ function joinModalLoad(){
       async function(error, result) {
         if (!error){
           $("#startTime").html(new Date(result[0]*1000).toDateString());
-          $("#endTime").html(new Date((result[0]*1000+86400*result[1])*1).toDateString());
+          $("#endTime").html(new Date((result[0]*1+86400*result[1])*1000).toDateString());
           $("#capEcho").html(result[2]+" "+TOKENSYMBOL);
           $("#bpmRate").html(result[5]+" "+TOKENSYMBOL);
           $("#kmRate").html(result[6]+" "+TOKENSYMBOL);
