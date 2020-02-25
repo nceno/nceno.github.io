@@ -712,6 +712,7 @@ function resetUpdateOrder(){
   $("#settleBtn").show();
   $("#issueRefund").show();
   $("#statusLoader").hide();
+  $("#statusEcho").html('');
   makeOrdersPage();
 }
 $('#refundModal').on('hidden.bs.modal', function (e) {
@@ -729,7 +730,7 @@ function setOrderStatus(_orderNo, _action){
       function(error, result) {
         if (!error){
           $("#settleBtn").hide();
-          $("#issueRefund").show();
+          $("#issueRefund").hide();
           $("#statusLoader").show();
           console.log(result);
         }
@@ -793,7 +794,7 @@ function setOrderStatus(_orderNo, _action){
       function(error, result) {
         if (!error){
           $("#settleBtn").hide();
-          $("#issueRefund").show();
+          $("#issueRefund").hide();
           $("#statusLoader").show();
           
           console.log(result);
