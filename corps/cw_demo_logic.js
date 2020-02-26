@@ -283,7 +283,7 @@ function showBest(){
 
 function resetLog(){
   $('#redeem').show();
-    makeWorkoutPage();   //might cause a bug..
+    //makeWorkoutPage();   //might cause a bug..
   $("#logLoader").hide();
 }
 $('#logModal').on('hidden.bs.modal', function (e) {
