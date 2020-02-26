@@ -606,16 +606,22 @@ $(function() {
 
       // Callback function
       onSlide: function(position, value) {
-          //console.log('onSlide');
-          //console.log('position: ' + position, 'value: ' + value);
-          avgPurchase = value;
+        //console.log('onSlide');
+        //console.log('position: ' + position, 'value: ' + value);
+        avgPurchase = value;
+        if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0) {
+          $("#joinModBtn").show(); 
+        } 
       },
 
       // Callback function
       onSlideEnd: function(position, value) {
-          //console.log('onSlideEnd');
-          //console.log('position: ' + position, 'value: ' + value);
-          avgPurchase = value;
+        //console.log('onSlideEnd');
+        //console.log('position: ' + position, 'value: ' + value);
+        avgPurchase = value;
+        if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0) {
+          $("#joinModBtn").show(); 
+        } 
       }
   });
 });
@@ -1254,7 +1260,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
   xhr.send(stuff);
 }
 
-//show create button only if user agrees to terms
+//show join button only if user agrees to terms
 
 $("#joinModBtn").hide();
 $("#joinChecker").on('click', function(){
