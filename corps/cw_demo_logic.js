@@ -166,7 +166,7 @@ function gapAdjust(){
         
         _H[1]=adjHR;
         _H[2]=activeTime;
-        _H[4]= HRreward*activeTime/600;
+        _H[4]= Math.round(HRreward*activeTime/600);
 
         data.forEach(function(act){
           if (act.id == _H[0]){
