@@ -1029,7 +1029,7 @@ function setTarget(item){
 
 function resetSpend(){
   $("#buyQs").show();
-
+  $("#confirmBuy").hide();
   $("#cancelBuy").show();
   $("#buyLoader").hide();
   $("#getYouPaid").html("Remember those workouts? They're about to pay off!");
