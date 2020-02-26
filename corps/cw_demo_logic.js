@@ -1,4 +1,4 @@
-console.log("efcghwerr452");
+console.log("4444");
 
 for(let n=1; n<5; n++){
   $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
