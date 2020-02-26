@@ -365,7 +365,7 @@ function signOut(){
 var lastLogTime = 0;
 function makeWorkoutPage(){
   
-  $('#me').empty(); //may fix the bug
+  //$('#me').empty(); //may fix the bug
   //prepare the workouts to be filtered and logged
   makeActivities();
 
@@ -388,7 +388,7 @@ function makeWorkoutPage(){
         var kmReward = parseInt(resultA[6]); //per km
           //KMreward=parseInt(resultA[6]);
 
-        //$('#me').empty();  //may fix the bug
+        $('#me').empty();  //may fix the bug
 
         //---get other players
         for(var i= 0; i<compcount; i++){
