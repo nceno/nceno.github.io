@@ -1,4 +1,4 @@
-console.log("4444");
+console.log("46245y");
 
 for(let n=1; n<5; n++){
   $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
@@ -1527,6 +1527,7 @@ if(Cookies.get('userWallet') != undefined){
   userWallet = Cookies.get('userWallet');
 }
 
+$('#log').hide();
 var code;
 window.onload = function(){
   $("#joinBtn").hide();
@@ -1550,6 +1551,7 @@ window.onload = function(){
                 console.log("HRreward="+resultA[5]);
                 KMreward= parseInt(resultA[6]);
                 console.log("KmReward="+resultA[6]);
+                $('#log').show();
               }
               else
               console.error(error);
