@@ -1,4 +1,4 @@
-console.log("12");
+console.log("efcghwerr452");
 
 for(let n=1; n<5; n++){
   $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
@@ -1547,7 +1547,9 @@ window.onload = function(){
             async function(error, resultA) {
               if (!error){
                 HRreward= parseInt(resultA[5]);
-                KMreward=parseInt(resultA[6]);
+                console.log("HRreward="+resultA[5]);
+                KMreward= parseInt(resultA[6]);
+                console.log("KmReward="+resultA[6]);
               }
               else
               console.error(error);
