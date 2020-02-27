@@ -1,4 +1,4 @@
-console.log("46245y");
+console.log("2235");
 
 for(let n=1; n<5; n++){
   $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
@@ -259,6 +259,7 @@ function showBest(){
   if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
   if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
   $("#dispValue").html(dispValue);
+  $("#dispToken").html(TOKENSYMBOL);
 
   //make the thing to be logged
   toLog[0] = bestID;
