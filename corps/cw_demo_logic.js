@@ -419,7 +419,8 @@ function makeWorkoutPage(){
                       
                       if(playerID == Cookies.get('stravaID')){
                         //post to top if it's me
-                          //if(! $("#me").length){
+                          if(! $("#me").length){
+                            console.log(pic[4]);
                             switch(pic[4]){
                               case "large.jpg":
                                 // same
@@ -454,7 +455,7 @@ function makeWorkoutPage(){
                             console.log("now: "+new Date().getDay());*/
 
                             if(lastLogTime!= null && new Date(lastLogTime).getDay() == new Date().getDay() && (new Date().getTime() -lastLogTime)<86400000) $("#log").hide();
-                          //}
+                          }
                         //}
                         //populate my quick stats .........
                         $("#progressPerc").html(theirProgress+'%');
@@ -468,11 +469,11 @@ function makeWorkoutPage(){
                         }
 
                         $("#leaderboardCount").html(compcount);
-
                       }
                       //only after if there isn't already an element of the same name
                       else if(! $('#'+playerName.replace(/ /g,"_")).length){
                         //.after following entries
+
 
                         switch(pic[4]){
                           case "large.jpg":
