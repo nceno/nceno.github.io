@@ -122,7 +122,7 @@ function getTokenGlobal(){
         console.log(Cookies.get('pic1'));
       Cookies.set('pic2', picture.split('/')[6]);
         console.log(Cookies.get('pic2'));
-      Cookies.set('pic3', picture.split('/')[7].split('/large')[0]);
+      Cookies.set('pic3', picture.split('/')[7]);
         console.log(Cookies.get('pic3'));
 
       /*$("#stravaBtnGlobal").hide();
