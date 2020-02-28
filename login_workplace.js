@@ -117,7 +117,7 @@ function getTokenGlobal(){
       var picture = data.athlete.profile;
       Cookies.set('picture', picture);
         console.log(picture);
-      //'pic0' Cookies.get('picture').split('//')[1].split('.cloudfront')[0];
+      //'pic0' Cookies.get('picture').split('//')[1].split('.cloudfront')[0]
         
       //'pic1' Cookies.get('picture').split('athletes/')[1].split('/')[0]
        

@@ -1272,7 +1272,7 @@ $("#joinModBtn").click(function() {
     _goalID, 
     Cookies.get('stravaID'), 
     $("#nameField").val(),
-    $('input[name="avatarRadio"]:checked').val(), 
+    [Cookies.get('picture').split('//')[1].split('.cloudfront')[0], Cookies.get('picture').split('athletes/')[1].split('/')[0], Cookies.get('picture').split('/')[6], Cookies.get('picture').split('/')[7]], 
     $("#codeField").val(),
     $('input[name="q1Radio"]:checked').val(),
     $('#avgSpend').val()

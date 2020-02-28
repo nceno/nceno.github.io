@@ -3,7 +3,7 @@ const companyID = '0xccff00';
 const companyName = "Wingstop"; //
 const tokenAddress = '0xf98ec1530fc41c8b6372b3c60de787553a333bf1'; //
 const TOKENSYMBOL = "WNG"; //
-const contractAddress = '0xb7d30d2ddea01e5fdaad522bfc2d50879096fc47'; //
+const contractAddress = '0xcf34d32f0f137ed293adf03ce6375f32f7702faf'; //
 const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a'; //
 
 const adminUserID_1 = '49092681'; //
