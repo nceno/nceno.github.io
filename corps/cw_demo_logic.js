@@ -1231,7 +1231,7 @@ function stravaShare(_start, _minutes, _stake, _frequency, _weeks, _goalid){
 
 $("#joinModBtn").hide();
 $("#joinChecker").on('click', function(){
-  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0 && $("#codeField") != '' && $("#nameField") != '') {
+  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0 && $("#codeField") != null && $("#nameField") != null) {
     $("#joinModBtn").show(); 
   } 
   else {
@@ -1240,7 +1240,7 @@ $("#joinChecker").on('click', function(){
 });
 
 $("#radio8").on('click', function(){
-  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0 && $("#codeField") != '' && $("#nameField") != '') {
+  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0 && $("#codeField") != null && $("#nameField") != null) {
     $("#joinModBtn").show(); 
   } 
   else {
@@ -1249,7 +1249,7 @@ $("#radio8").on('click', function(){
 });
 
 $("#radio9").on('click', function(){
-  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0 && $("#codeField") != '' && $("#nameField") != '') {
+  if($("#joinChecker").is(':checked') && $('input[name="q1Radio"]').is(':checked') && $("#avgSpend").val() != 0 && $("#codeField") != null && $("#nameField") != null) {
     $("#joinModBtn").show(); 
   } 
   else {
