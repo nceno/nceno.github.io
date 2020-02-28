@@ -310,6 +310,44 @@ var NcenoBrands = new web3.eth.Contract([
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_goalID",
+        "type": "bytes"
+      },
+      {
+        "name": "_stravaID",
+        "type": "uint256"
+      },
+      {
+        "name": "_userName",
+        "type": "string"
+      },
+      {
+        "name": "_avatar",
+        "type": "string[5]"
+      },
+      {
+        "name": "_inviteCode",
+        "type": "string"
+      },
+      {
+        "name": "_q1Answer",
+        "type": "uint256"
+      },
+      {
+        "name": "_q2Answer",
+        "type": "uint256"
+      }
+    ],
+    "name": "join",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -553,7 +591,7 @@ var NcenoBrands = new web3.eth.Contract([
       },
       {
         "name": "",
-        "type": "string[4]"
+        "type": "string[5]"
       }
     ],
     "payable": false,
@@ -902,44 +940,6 @@ var NcenoBrands = new web3.eth.Contract([
         "type": "bytes"
       },
       {
-        "name": "_stravaID",
-        "type": "uint256"
-      },
-      {
-        "name": "_userName",
-        "type": "string"
-      },
-      {
-        "name": "_avatar",
-        "type": "string[4]"
-      },
-      {
-        "name": "_inviteCode",
-        "type": "string"
-      },
-      {
-        "name": "_q1Answer",
-        "type": "uint256"
-      },
-      {
-        "name": "_q2Answer",
-        "type": "uint256"
-      }
-    ],
-    "name": "join",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_goalID",
-        "type": "bytes"
-      },
-      {
         "name": "_orderNum",
         "type": "bytes"
       },
@@ -1105,4 +1105,4 @@ var NcenoBrands = new web3.eth.Contract([
     "name": "UpdateOrder",
     "type": "event"
   }
-], '0xcf34d32f0f137ed293adf03ce6375f32f7702faf');
+], '0x7d7c9772d79680f0d84eaeec71ce66ba3c41a22b');
