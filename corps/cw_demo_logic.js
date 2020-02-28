@@ -1549,7 +1549,7 @@ window.onload = function(){
     );
   }
 
-  $("#custAvatar").html('<img height="40" width="40" src="'+Cookies.get('picture')+'">');
+  $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
 
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
