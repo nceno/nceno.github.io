@@ -115,7 +115,7 @@ function getTokenGlobal(){
 
       //https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/large.jpg
       //https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/medium.jpg
-      //https://graph.facebook.com/xxxxxxxxxx/picture?height=256&width=256
+      //https://graph.facebook.com/pic[0]/picture?height=256&width=256
 
       //https://lh3.googleusercontent.com/-C1zyAF8BCA0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdP_MwJXJjTdn-wh1rlMcgdEiiY4g/mo/photo.jpg
       //https://lh3.googleusercontent.com/a-/AAuE7mBt-tNGtDME8kN071u82LYC-6vLsitpsGVkh3tD
