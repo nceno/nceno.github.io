@@ -1597,7 +1597,9 @@ window.onload = function(){
     );
   }
 
-  $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
+  if(Cookies.get('picType') != "default"){
+    $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
+  }else $("#customChoice").hide();
 
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');

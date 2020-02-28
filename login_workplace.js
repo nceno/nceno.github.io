@@ -129,7 +129,7 @@ function getTokenGlobal(){
       Cookies.set('picture', picture);
       
 
-      if(picture.includes('cloudfront')){
+      if(picture.includes('pictures/athletes')){
         Cookies.set('picType', '1');
       }
       else if(picture.includes('facebook')){
