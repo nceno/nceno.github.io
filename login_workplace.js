@@ -115,10 +115,11 @@ function getTokenGlobal(){
 
       //https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/large.jpg
       var picture = data.athlete.profile;
+      Cookies.set('picture', picture);
         console.log(picture);
       Cookies.set('pic0', picture.split('//')[1].split('.cloudfront')[0]);
         console.log(Cookies.get('pic0'));
-      Cookies.set('pic1', picture.split('athletes/')[1].split('/')[0];
+      Cookies.set('pic1', picture.split('athletes/')[1].split('/')[0]);
         console.log(Cookies.get('pic1'));
       Cookies.set('pic2', picture.split('/')[6]);
         console.log(Cookies.get('pic2'));
