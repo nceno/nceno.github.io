@@ -114,17 +114,37 @@ function getTokenGlobal(){
       Cookies.set('stravaID', stravaID);
 
       //https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/large.jpg
-      var picture = data.athlete.profile;
+      //https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/medium.jpg
+      //https://graph.facebook.com/xxxxxxxxxx/picture?height=256&width=256
+
+      //https://lh3.googleusercontent.com/-C1zyAF8BCA0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdP_MwJXJjTdn-wh1rlMcgdEiiY4g/mo/photo.jpg
+      //https://lh3.googleusercontent.com/a-/AAuE7mBt-tNGtDME8kN071u82LYC-6vLsitpsGVkh3tD
+      //https://d3nn82uaxijpm6.cloudfront.net/assets/avatar/athlete/medium-bee27e393b8559be0995b6573bcfde897d6af934dac8f392a6229295290e16dd.png
+      var picture
+      if(data.athlete.profile != null){
+        picture = data.athlete.profile;
+      }
+      else picture = data.athlete.profile_medium;
+      
       Cookies.set('picture', picture);
-        console.log(picture);
+      
+
+      if(picture.includes('cloudfront')){
+        Cookies.set('picType', '1');
+      }
+      else if(picture.includes('facebook')){
+        Cookies.set('picType', '2');
+      }
+      else Cookies.set('picType', 'default');
+
+
       //'pic0' Cookies.get('picture').split('//')[1].split('.cloudfront')[0]
-        
       //'pic1' Cookies.get('picture').split('athletes/')[1].split('/')[0]
-       
       //'pic2' Cookies.get('picture').split('/')[6]
-        
       //'pic3' Cookies.get('picture').split('/')[7]
-        
+      //'pic4' Cookies.get('picture').split('/')[8]
+      //Cookies.get('picture').split('.com/')[1].split('/')[0];
+
 
       /*$("#stravaBtnGlobal").hide();
       if(Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){*/

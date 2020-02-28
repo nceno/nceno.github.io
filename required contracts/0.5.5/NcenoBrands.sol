@@ -92,7 +92,7 @@ contract NcenoBrands is RelayRecipient{
     address wallet;
     uint stravaID;
     string userName;
-    string[4] avatar;
+    string[5] avatar;
     mapping(bytes=>order) orderSet;
     uint orderCt;
     mapping(bytes=>goal) goalSet;
@@ -175,7 +175,7 @@ contract NcenoBrands is RelayRecipient{
     
   }
 
-  function join(bytes memory _goalID, uint _stravaID, string memory _userName, string[4] memory _avatar, string memory _inviteCode, uint _q1Answer, uint _q2Answer) public {
+  function join(bytes memory _goalID, uint _stravaID, string memory _userName, string[5] memory _avatar, string memory _inviteCode, uint _q1Answer, uint _q2Answer) public {
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
@@ -374,7 +374,7 @@ contract NcenoBrands is RelayRecipient{
 
 
   //useful for workout quickstats screen
-  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, string[4] memory){
+  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, string[5] memory){
     return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID],profileOf[_stravaID].avatar );
     //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3, avatar4
   }

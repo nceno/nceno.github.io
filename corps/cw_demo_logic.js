@@ -419,7 +419,7 @@ function makeWorkoutPage(){
                         //post to top if it's me
                           //if(! $("#me").length){
                             $("#me").prepend(
-                              '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/large.jpg"></a></figure> </span></div></div>'
+                              '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/'+pic[4]+'"></a></figure> </span></div></div>'
                             );
 
                             lastLogTime = resultC[3]*1000;
@@ -451,7 +451,7 @@ function makeWorkoutPage(){
                         //.after following entries
 
                         $('#startList').after(
-                          '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/large.jpg"></a></figure> </span></div></div></div></div>'
+                          '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/'+pic[4]+'"></a></figure> </span></div></div></div></div>'
                         );
                       }                      
                     }
@@ -1267,12 +1267,22 @@ $("#joinModBtn").click(function() {
   $("#codeField").hide();
   $("#nameField").hide();
   $("#soonJoinTitle").hide();
+  var avat; 
+  if (Cookies.get('picType') == '1' && $('input[name="avatarRadio"]:checked').val()=="1"){
+    avat = [Cookies.get('picture').split('//')[1].split('.cloudfront')[0], Cookies.get('picture').split('athletes/')[1].split('/')[0], Cookies.get('picture').split('/')[6], Cookies.get('picture').split('/')[7], Cookies.get('picture').split('/')[8]];
+  }
+  else if (Cookies.get('picType') == '2' && $('input[name="avatarRadio"]:checked').val()=="1"){
+    avat= [Cookies.get('picture').split('.com/')[1].split('/')[0], 0, 0, 0, 0];
+  }
+  else avat = [0,0,0,0,"default"];
+
+
 
   NcenoBrands.methods.join(
     _goalID, 
     Cookies.get('stravaID'), 
     $("#nameField").val(),
-    [Cookies.get('picture').split('//')[1].split('.cloudfront')[0], Cookies.get('picture').split('athletes/')[1].split('/')[0], Cookies.get('picture').split('/')[6], Cookies.get('picture').split('/')[7]], 
+    avat, 
     $("#codeField").val(),
     $('input[name="q1Radio"]:checked').val(),
     $('#avgSpend').val()
@@ -1538,6 +1548,8 @@ window.onload = function(){
       }
     );
   }
+
+  $("#custAvatar").html('<img height="40" width="40" src="'+Cookies.get('picture')+'">');
 
 
   //$("#brandsPrompt").html('<p>'+Cookies.get('access_token')+'</p><br><p>'+Cookies.get('stravaID')+'</p><br><p>'+Cookies.get('stravaUsername')+'</p><br><p>'+Cookies.get('userWallet')+'</p>');
