@@ -51,6 +51,7 @@ contract NcenoBrands is RelayRecipient{
     uint rewardMult;
     bool halted;
     mapping(string=>bool) codeOk;
+    mapping(uint=>string) playerCode;
     bytes goalID;
     uint start;
     uint dur;
@@ -121,6 +122,11 @@ contract NcenoBrands is RelayRecipient{
     for(uint i =0; i<10; i++){
       goalAt[_goalID].codeOk[_codes[i]]=true;
     }
+  }
+
+  function kickPlayer(bytes memory _goalID, uint _stravaID) public onlyNcenoAdmin{
+    goalAt[_goalID].isPlayer[_stravaID] = false;
+    goalAt[_goalID].codeOK[goalAt[_goalID].playerCode[_stravaID]] = false;
   }
   //---- /objects
 
@@ -225,6 +231,7 @@ contract NcenoBrands is RelayRecipient{
       /*&& keccak256(_secret) == keccak256('masterhash')*/
       && goalAt[_goalID].halted == false
       && goalAt[_goalID].potRemaining>0
+      && goalAt[_goalID].isPlayer == true
       && goalAt[_goalID].playerPayout[_stravaID]<goalAt[_goalID].tokenCap,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
