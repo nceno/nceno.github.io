@@ -471,7 +471,8 @@ function makeWorkoutPage(){
                         $("#leaderboardCount").html(compcount);
                       }
                       //only after if there isn't already an element of the same name
-                      else if(! $('#'+playerName.replace(/ /g,"_")).length){
+                      //else 
+                        if(! $('#'+playerName.replace(/ /g,"_")).length){
                         //.after following entries
 
 
