@@ -1,8 +1,8 @@
 //makeCompany: "Suntek Global","0xccff00","0xe3d06e15f286bcaaa28528b61da84737318eefc4","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//transfer: "0x57c9468b517d16aaab60753b981cdea317b192ef","600"
-//host: "0xccff00","1581724800","30","150","600","1","2","0xe3d06e15f286bcaaa28528b61da84737318eefc4"
-
+//transfer: "0x1995095fedc772f55c0279cd6f1ca45a4a28cf86","600"
+//host: "0xccff00","1581724800","30","150","600","1","2","0xc7edfa037540d5bc89110d51c1aabc3fdebc8067"
 //addinvite codes: "0xccff00",["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+
 //join: "0xccff00","39706111","joenance","0","one","0"
 //log: "0xccff00","39706111","8","0","666","0x121212","1"
 //make order: "0xccff00","0xccff00","0x666aaa","39706111","beer","12", "0"
@@ -92,7 +92,7 @@ contract NcenoBrands is RelayRecipient{
     address wallet;
     uint stravaID;
     string userName;
-    uint avatar;
+    uint[4] avatar;
     mapping(bytes=>order) orderSet;
     uint orderCt;
     mapping(bytes=>goal) goalSet;
@@ -175,7 +175,7 @@ contract NcenoBrands is RelayRecipient{
     
   }
 
-  function join(bytes memory _goalID, uint _stravaID, string memory _userName, uint _avatar, string memory _inviteCode, uint _q1Answer, uint _q2Answer) public {
+  function join(bytes memory _goalID, uint _stravaID, string memory _userName, uint[4] memory _avatar, string memory _inviteCode, uint _q1Answer, uint _q2Answer) public {
     require(now < goalAt[_goalID].start+goalAt[_goalID].dur*1 days
       && goalAt[_goalID].isPlayer[_stravaID] == false 
       && goalAt[_goalID].halted == false
@@ -374,7 +374,7 @@ contract NcenoBrands is RelayRecipient{
 
 
   //useful for workout quickstats screen
-  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, uint){
+  function getPlayer(bytes memory _goalID, uint _stravaID) public view returns(uint, uint, uint, uint, uint[4] memory){
     return(goalAt[_goalID].playerKms[_stravaID], goalAt[_goalID].playerMins[_stravaID], goalAt[_goalID].playerPayout[_stravaID], goalAt[_goalID].lastLog[_stravaID],profileOf[_stravaID].avatar );
     //goalID, stravaID --> kms0, mins1, reward2, lastLogTime3, avatar4
   }
@@ -445,8 +445,8 @@ contract BrandToken is RelayRecipient{
     name = _name;
     decimals = 0;
     symbol = _symbol;
-    _relayHub = address(0xD216153c06E857cD7f72665E0aF1d7D82172F494);
-    setRelayHub(IRelayHub(_relayHub));
+    //relayHub = address(0xD216153c06E857cD7f72665E0aF1d7D82172F494);
+    //setRelayHub(IRelayHub(relayHub));
     //0xD216153c06E857cD7f72665E0aF1d7D82172F494
   }
 

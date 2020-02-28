@@ -113,6 +113,18 @@ function getTokenGlobal(){
       stravaID = data.athlete.id;
       Cookies.set('stravaID', stravaID);
 
+      //https://xxxxx.cloudfront.net/pictures/athletes/123456789/123456789/2/large.jpg
+      var picture = data.athlete.profile;
+        console.log(picture);
+      Cookies.set('pic0', picture.split('//')[1].split('.cloudfront')[0]);
+        log(Cookies.get('pic0'));
+      Cookies.set('pic1', picture.split('athletes/')[1].split('/')[6]);
+        log(Cookies.get('pic1'));
+      Cookies.set('pic2', picture.split('/')[6].split('/')[7]);
+        log(Cookies.get('pic2'));
+      Cookies.set('pic3', picture.split('/')[7].split('/large')[0]);
+        log(Cookies.get('pic3'));
+
       /*$("#stravaBtnGlobal").hide();
       if(Cookies.get('stravaUsername') == undefined || Cookies.get('userWallet') == null){*/
         showPortisGlobal();
