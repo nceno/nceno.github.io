@@ -120,7 +120,7 @@ function getTokenGlobal(){
         console.log(Cookies.get('pic0'));
       Cookies.set('pic1', picture.split('athletes/')[1].split('/')[6]);
         console.log(Cookies.get('pic1'));
-      Cookies.set('pic2', picture.split('/')[6].split('/')[7]);
+      Cookies.set('pic2', picture.split('/')[7].split('/')[8]);
         console.log(Cookies.get('pic2'));
       Cookies.set('pic3', picture.split('/')[7].split('/large')[0]);
         console.log(Cookies.get('pic3'));
