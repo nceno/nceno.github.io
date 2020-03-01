@@ -4,6 +4,22 @@ for(let n=0; n<5; n++){
   $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
 }
 
+
+function telegramNotify(bToken, chatID, silent, message){
+  var stuff = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      var data = JSON.parse(xhr.responseText);
+    }
+  });
+  xhr.open("POST", 'https://api.telegram.org/bot'+bToken+'/sendMessage?chat_id='+chatID+'&text='+message+'&parse_mode=markdown&disable_notification='+silent);
+  xhr.send(stuff);
+}
+
+
 ///////////////////////////////////////
 //////////////vvvvvvvvv getActivities()
 ///////////////////////////////////////
