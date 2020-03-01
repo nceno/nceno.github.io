@@ -5,7 +5,7 @@ for(let n=0; n<5; n++){
 }
 
 
-function telegramNotify(bToken, chatID, silent, message){
+function telegramNotify(message, silent) {
   var stuff = null;
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
@@ -15,7 +15,7 @@ function telegramNotify(bToken, chatID, silent, message){
       var data = JSON.parse(xhr.responseText);
     }
   });
-  xhr.open("POST", 'https://api.telegram.org/bot'+bToken+'/sendMessage?chat_id='+chatID+'&text='+message+'&parse_mode=markdown&disable_notification='+silent);
+  xhr.open("POST", 'https://api.telegram.org/bot'+tgToken+'/sendMessage?chat_id='+chatID+'&text='+message+'&parse_mode=html&disable_notification='+silent);
   xhr.send(stuff);
 }
 
