@@ -15372,7 +15372,7 @@ footer {
     height: 56px; }
   .navbar-brand .navbar-logo {
     width: auto;
-    max-height: 100%;
+    max-height: 150%;
     display: none; }
 
 .navbar-nav .nav-item + .nav-item {
