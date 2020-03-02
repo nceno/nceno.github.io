@@ -1,18 +1,14 @@
-console.log("341");
+console.log("666");
 
-async function buy(){
-  $("#confirmBuy").hide();
-  $("#cancelBuy").hide();
-  $("#buyLoader").show();
-  $("#buyQs").hide();
 
-  /*Swal.fire({
-    title: 'Remember those workouts? They'+"'"+'re about to pay off!',
-    background: 'url(../app/assets/images/metal.jpg)',
-    html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you'+"'"+'re about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  But first, please answer these two questions:',
-    
-  })*/
-
+var targetName;
+var targetPrice;
+var orderNo;
+function setTarget(item){
+  targetName = item.name;
+  targetPrice = item.price;
+  console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
+  //$("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you are about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>');
   const q3 = new Promise((resolve) => {
     //setTimeout(() => {
       resolve({
@@ -133,6 +129,23 @@ async function buy(){
       })
     }
   }
+}
+
+
+async function buy(){
+  $("#confirmBuy").hide();
+  $("#cancelBuy").hide();
+  $("#buyLoader").show();
+  $("#buyQs").hide();
+
+  /*Swal.fire({
+    title: 'Remember those workouts? They'+"'"+'re about to pay off!',
+    background: 'url(../app/assets/images/metal.jpg)',
+    html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you'+"'"+'re about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  But first, please answer these two questions:',
+    
+  })*/
+
+  
 }
 
 
@@ -1196,16 +1209,7 @@ async function makeSpendPage(){
   }
 }//end makeSpendPage
 
-var targetName;
-var targetPrice;
-var orderNo;
-function setTarget(item){
-  targetName = item.name;
-  targetPrice = item.price;
-  console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
-  $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you are about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>');
 
-}
 
 function resetSpend(){
   $("#buyQs").show();
