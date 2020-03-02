@@ -1,6 +1,6 @@
-console.log("1asdf");
+console.log("88");
 
-function buy(){
+async function buy(){
   $("#confirmBuy").hide();
   $("#cancelBuy").hide();
   $("#buyLoader").show();
