@@ -1,4 +1,4 @@
-console.log("rock");
+console.log("geergeq");
 
 
 var targetName;
@@ -121,6 +121,7 @@ async function setTarget(item){
                 if(receipt.status == true){
                   updateNonce();
                   Swal.fire({
+                    title: 'You created awesomeness...',
                     icon: 'success',
                     imageUrl: targetImg,
                     html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br> <h2><b>'+orderNo+'</b></h2>'
