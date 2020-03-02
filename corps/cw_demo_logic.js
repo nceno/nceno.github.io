@@ -1,4 +1,4 @@
-console.log("666");
+console.log("11");
 
 async function buy(){
   $("#confirmBuy").hide();
@@ -25,7 +25,7 @@ async function buy(){
   const { value: q3Answer } = await Swal.fire({
     title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
     input: 'radio',
-    inputOptions: q1,
+    inputOptions: q3,
     inputValidator: (value) => {
       if (!value) {
         return 'You need to choose something.'
@@ -33,7 +33,7 @@ async function buy(){
     }
   })
 
-  if (q1Answer) {
+  if (q3Answer) {
     Swal.fire({ html: `You selected: ${q3Answer}` })
   }
 
