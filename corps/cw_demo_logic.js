@@ -1,4 +1,4 @@
-console.log("544444");
+console.log("756u5e6ytgf");
 
 
 var targetName;
@@ -85,8 +85,8 @@ async function setTarget(item){
                 Cookies.get('stravaID'), 
                 targetName, 
                 targetPrice,
-                $('input[name="q3Radio"]:checked').val(),
-                $('input[name="q4Radio"]:checked').val()
+                q3Answer,
+                q4Answer
               ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
                 function(error, result) {
                   if (!error){
