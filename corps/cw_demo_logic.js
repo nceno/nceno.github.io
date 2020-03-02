@@ -7,6 +7,7 @@ var orderNo;
 async function setTarget(item){
   targetName = item.name;
   targetPrice = item.price;
+  targetImg = '../app/assets/images/'+item.img; //config
   console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
   const q3 = new Promise((resolve) => {
       resolve({
@@ -120,6 +121,7 @@ async function setTarget(item){
                   updateNonce();
                   Swal.fire({
                     icon: 'success',
+                    imageUrl:"",
                     html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br> <h2><b>'+orderNo+'</b></h2>'
                     
                     

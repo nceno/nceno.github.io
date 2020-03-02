@@ -18,33 +18,38 @@ const item1={
 	name: '6 wings',
 	//price : 620
 	price : 120,
-	descr : "6 wings of your choice"
+	descr : "6 wings of your choice",
+	img: "6pc.jpg"
 }
 
 const item2={
 	name: '2 pints',
 	//price: 700
 	price: 100,
-	descr : "2 Pints of draft beer"
+	descr : "2 Pints of draft beer",
+	img: "2pints.jpg"
 }
 
 const item3={
 	name: 'Dinner for 1',
 	//price: 2200
 	price: 180,
-	descr : "10pc Dinner combo"
+	descr : "10pc Dinner combo",
+	img: "combo.jpg"
 }
 
 const item4={
 	name: 'Hat',
 	//price: 450
 	price: 150,
-	descr : "Wingstop logo hat"
+	descr : "Wingstop logo hat",
+	img: "hat.jpg"
 }
 
 const item5={
 	name: 'Bottle of sauce',
 	//price: 9500
 	price: 90,
-	descr : "1 Bottle of gourmet wing sauce"
+	descr : "1 Bottle of gourmet wing sauce",
+	img: "sauce.jpg"
 }
