@@ -33,7 +33,6 @@ async function buy(){
 
   const { value: q3Answer } = await Swal.fire({
     title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
-    background: 'url(../app/assets/images/metal.jpg)',
     input: 'radio',
     confirmButtonText: 'Submit',
     inputOptions: q3,
@@ -49,7 +48,6 @@ async function buy(){
     console.log("you answered: "+ q3Answer);
     const { value: q4Answer } = await Swal.fire({
       title: 'Are you buying anything else at '+companyName+' today without using your points?',
-      background: 'url(../app/assets/images/metal.jpg)',
       input: 'radio',
       confirmButtonText: 'Submit',
       inputOptions: q4,
