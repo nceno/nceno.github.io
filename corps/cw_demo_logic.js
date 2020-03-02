@@ -1,4 +1,4 @@
-console.log("5");
+console.log("341");
 
 async function buy(){
   $("#confirmBuy").hide();
@@ -35,10 +35,11 @@ async function buy(){
     title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
     background: 'url(../app/assets/images/metal.jpg)',
     input: 'radio',
+    confirmButtonText: 'Submit',
     inputOptions: q3,
     inputValidator: (value) => {
       if (!value) {
-        return 'You need to choose something.'
+        return 'Please answer :)'
       }
     }
   });
@@ -50,10 +51,11 @@ async function buy(){
       title: 'Are you buying anything else at '+companyName+' today without using your points?',
       background: 'url(../app/assets/images/metal.jpg)',
       input: 'radio',
+      confirmButtonText: 'Submit',
       inputOptions: q4,
       inputValidator: (value) => {
         if (!value) {
-          return 'You need to choose something.'
+          return 'Please answer :)'
         }
       }
     })
@@ -62,7 +64,16 @@ async function buy(){
       Swal.fire({
         title: 'Thank you! We'+"'"+'re using these answers to offer better rewards in future challenges.',
         background: 'url(../app/assets/images/metal.jpg)',
-        confirmButtonText: 'Finish my purchase'
+        confirmButtonText: 'Complete my purchase'
+      })
+      .then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
       })
     }
   }
