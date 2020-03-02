@@ -1,4 +1,4 @@
-console.log("42");
+console.log("3322222");
 
 
 var targetName;
@@ -58,7 +58,9 @@ async function setTarget(item){
       .then((result) => {
         if (result.value) {
           Swal.fire({
-
+            // wait
+            imageUrl: '../app/assets/images/loader.svg',
+            title: 'Please wait...'
           })
 
           //submit txn
@@ -106,7 +108,6 @@ async function setTarget(item){
                   updateNonce();
                   Swal.fire({
                     icon: 'success',
-                    title: 'Please wait...',
                     html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br>'+orderNo
                     
                     
