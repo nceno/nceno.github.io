@@ -344,6 +344,7 @@ $("#redeem").click(function() {
         }, function(error, event){ 
             //do some stuff
             //ex. usdPayout = parseInt(event.returnValues._payout);
+            telegramNotify(Cookies.get('stravaUsername')+' just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
             if(event.returnValues.finisher != false) $("#logSuccess").html("You're one of the first 3 to finish the challenge! Go see the challenge admin to claim the top prize.");
           }
         ).on('error', console.error);
@@ -1177,7 +1178,7 @@ function buy(){
             $("#getYouPaid").html("Your receipt");
             $("#buyLoader").hide();
             $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
-            
+            telegramNotify(Cookies.get('stravaUsername')+' just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL, 'false');
           }
           else{
             $("#getYouPaid").html("Error completing purchase...");

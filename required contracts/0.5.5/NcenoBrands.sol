@@ -21,7 +21,7 @@ contract NcenoBrands is RelayRecipient{
   event MakeUser(address _wallet, uint _stravaID, string _userName);
   event MakeOrder(bytes indexed paramGoalID, bytes _orderNum, uint _buyer, string _item, uint _price, uint _date);
   event Join(bytes paramGoalID, uint _stravaID, string _userName, string _inviteCode);
-  event Log(bytes indexed paramGoalID, uint indexed paramStravaID, uint _kms, uint _mins, uint _actID, bool indexed finisher);
+  event Log(bytes indexed paramGoalID, uint indexed paramStravaID, uint _kms, uint _mins, uint _actID, uint _payout, bool indexed finisher);
   event UpdateOrder(bytes indexed paramGoalID, bytes _orderNumber, uint _status);
   
   //gas station init
@@ -268,7 +268,7 @@ contract NcenoBrands is RelayRecipient{
     kmCount+=_kms;
     minsCount+=_mins;
     payoutToDate+=payout;
-    emit Log(_goalID, _stravaID, _kms, _mins, _actID, finisher);
+    emit Log(_goalID, _stravaID, _kms, _mins, _actID, payout, finisher);
   }
   
   function makeOrder(bytes memory _goalID, bytes memory _companyID, bytes memory _orderNum, uint _stravaID, string memory _item, uint _price, uint _q3Answer, uint _q4Answer) public{
