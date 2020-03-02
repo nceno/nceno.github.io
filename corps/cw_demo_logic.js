@@ -1,4 +1,4 @@
-console.log("4555555");
+console.log("544444");
 
 
 var targetName;
@@ -51,7 +51,7 @@ async function setTarget(item){
     if (q4Answer) {
       console.log("you answered: "+ q4Answer);
       Swal.fire({
-        title: 'Remember those workouts? They were worth it!'
+        title: 'Remember those workouts? They were worth it!',
         html: 'You'+"'"+'re about to get '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points!',
         confirmButtonText: 'Complete my purchase'
       })
