@@ -22,6 +22,7 @@ async function setTarget(item){
       })
   });
 
+
   const { value: q3Answer } = await Swal.fire({
     title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
     input: 'radio',
