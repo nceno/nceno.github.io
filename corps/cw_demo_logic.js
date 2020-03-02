@@ -1,4 +1,4 @@
-console.log("73575erth");
+console.log("fgbgd");
 
 
 var targetName;
@@ -68,7 +68,7 @@ async function setTarget(item){
             targetPrice
           )
           .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-            async function(error, result) {
+            function(error, result) {
               if (!error){
                 
                 orderNo = web3.utils.padRight(web3.utils.randomHex(3),6);
@@ -77,7 +77,7 @@ async function setTarget(item){
               else
               console.error(error);
             }
-          ).once('confirmation', function(confNumber, receipt){
+          ).once('confirmation', async function(confNumber, receipt){
             console.log(receipt.status);
             if(receipt.status == true){
               correctNonce++;
