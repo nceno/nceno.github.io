@@ -1,4 +1,4 @@
-console.log("756u5e6ytgf");
+console.log("333");
 
 
 var targetName;
@@ -57,6 +57,10 @@ async function setTarget(item){
       })
       .then((result) => {
         if (result.value) {
+          Swal.fire({
+
+          })
+
           //submit txn
           //deposit tokens here...
           TheToken.methods.transfer(
@@ -100,9 +104,13 @@ async function setTarget(item){
                 console.log(receipt.status);
                 if(receipt.status == true){
                   updateNonce();
-                  $("#getYouPaid").html("Your receipt");
-                  $("#buyLoader").hide();
-                  $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
+                  Swal.fire({
+                    icon: 'success',
+                    html: Cookies.get('stravaUsername')+', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br>'+orderNo
+                    
+                    
+                  })
+                  //$("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
                   telegramNotify(Cookies.get('stravaUsername')+' just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL, 'false');
                 }
                 else{
