@@ -22,6 +22,17 @@ async function setTarget(item){
       })
   });
 
+  Swal.fire({
+    title: 'Good job! You are about to get your reward! But first, we need to ask two questions in order to offer better rewards in future challenges.',
+    input: 'radio',
+    confirmButtonText: 'Submit',
+    inputOptions: q3,
+    inputValidator: (value) => {
+      if (!value) {
+        return 'Please answer :)'
+      }
+    }
+  });
 
   const { value: q3Answer } = await Swal.fire({
     title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
