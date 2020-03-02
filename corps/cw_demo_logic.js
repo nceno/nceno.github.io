@@ -1,4 +1,4 @@
-console.log("4");
+console.log("6");
 
 async function buy(){
   $("#confirmBuy").hide();
@@ -45,7 +45,7 @@ async function buy(){
 
   if (q3Answer) {
     //Swal.fire({ html: `You selected: ${q3Answer}` })
-    console.log("you answered: "+ q4Answer);
+    console.log("you answered: "+ q3Answer);
     const { value: q4Answer } = await Swal.fire({
       title: 'Are you buying anything else at '+companyName+' today without using your points?',
       background: 'url(../app/assets/images/metal.jpg)',
