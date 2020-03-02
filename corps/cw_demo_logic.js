@@ -1,4 +1,4 @@
-console.log("joe");
+console.log("rock");
 
 
 var targetName;
@@ -64,6 +64,7 @@ async function setTarget(item){
       console.log("you answered: "+ q4Answer);
       Swal.fire({
         title: 'Remember those workouts? They were worth it!',
+        imageUrl: targetImg,
         html: 'You'+"'"+'re about to get '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points!',
         confirmButtonText: 'Complete my purchase'
       })
@@ -121,7 +122,7 @@ async function setTarget(item){
                   updateNonce();
                   Swal.fire({
                     icon: 'success',
-                    imageUrl:"",
+                    imageUrl: targetImg,
                     html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br> <h2><b>'+orderNo+'</b></h2>'
                     
                     
