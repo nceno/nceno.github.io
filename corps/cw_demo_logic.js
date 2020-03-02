@@ -1,4 +1,4 @@
-console.log("3322222");
+console.log("9090909");
 
 
 var targetName;
@@ -60,7 +60,8 @@ async function setTarget(item){
           Swal.fire({
             // wait
             imageUrl: '../app/assets/images/loader.svg',
-            title: 'Please wait...'
+            title: 'Please wait...',
+            showConfirmButton: false,
           })
 
           //submit txn
