@@ -49,7 +49,7 @@ async function buy(){
     const { value: q4Answer } = await Swal.fire({
       title: 'Are you buying anything else at '+companyName+' today without using your points?',
       input: 'radio',
-      confirmButtonText: 'Submit',
+      confirmButtonText: 'Complete my purchase',
       inputOptions: q4,
       inputValidator: (value) => {
         if (!value) {
@@ -60,9 +60,7 @@ async function buy(){
     if (q4Answer) {
       console.log("you answered: "+ q4Answer);
       Swal.fire({
-        title: 'Thank you! We'+"'"+'re using these answers to offer better rewards in future challenges.',
-        background: 'url(../app/assets/images/metal.jpg)',
-        confirmButtonText: 'Complete my purchase'
+        html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you'+"'"+'re about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>',
       })
       .then((result) => {
         if (result.value) {
