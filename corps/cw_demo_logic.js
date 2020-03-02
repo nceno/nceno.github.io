@@ -344,7 +344,7 @@ $("#redeem").click(function() {
         }, function(error, event){ 
             //do some stuff
             //ex. usdPayout = parseInt(event.returnValues._payout);
-            telegramNotify(Cookies.get('stravaUsername')+' just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
+            telegramNotify(playerName+' just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
             if(event.returnValues.finisher != false) $("#logSuccess").html("You're one of the first 3 to finish the challenge! Go see the challenge admin to claim the top prize.");
           }
         ).on('error', console.error);
@@ -380,6 +380,7 @@ function signOut(){
   location.reload();
 }
 
+var playerName;
 var lastLogTime = 0;
 function makeWorkoutPage(){
   
@@ -417,7 +418,7 @@ function makeWorkoutPage(){
               if (!error){
                 var playerID =  resultB[0]; 
                 //fill the whitespace
-                var playerName = resultB[1];
+                playerName = resultB[1];
                 //---call that player
                 NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
