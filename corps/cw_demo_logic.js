@@ -8,23 +8,18 @@ async function setTarget(item){
   targetName = item.name;
   targetPrice = item.price;
   console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
-  //$("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you are about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>');
   const q3 = new Promise((resolve) => {
-    //setTimeout(() => {
       resolve({
         '0': 'Yes',
         '1': 'No'
       })
-    //}, 1000)
   });
 
   const q4 = new Promise((resolve) => {
-    //setTimeout(() => {
       resolve({
         '1': 'Yes',
         '0': 'No'
       })
-    //}, 1000)
   });
 
   const { value: q3Answer } = await Swal.fire({
@@ -40,7 +35,6 @@ async function setTarget(item){
   });
 
   if (q3Answer) {
-    //Swal.fire({ html: `You selected: ${q3Answer}` })
     console.log("you answered: "+ q3Answer);
     const { value: q4Answer } = await Swal.fire({
       title: 'Are you buying anything else at '+companyName+' today without using your points?',
