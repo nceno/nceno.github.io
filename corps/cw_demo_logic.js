@@ -4,7 +4,7 @@ console.log("666");
 var targetName;
 var targetPrice;
 var orderNo;
-function setTarget(item){
+async function setTarget(item){
   targetName = item.name;
   targetPrice = item.price;
   console.log("item is: "+targetName+" for "+targetPrice+ " tokens");
