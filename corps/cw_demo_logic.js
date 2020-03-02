@@ -1,4 +1,4 @@
-console.log("0");
+console.log("4");
 
 async function buy(){
   $("#confirmBuy").hide();
@@ -20,7 +20,7 @@ async function buy(){
         '1': 'No'
       })
     //}, 1000)
-  })
+  });
 
   const q4 = new Promise((resolve) => {
     //setTimeout(() => {
@@ -29,7 +29,7 @@ async function buy(){
         '0': 'No'
       })
     //}, 1000)
-  })
+  });
 
   const { value: q3Answer } = await Swal.fire({
     title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
@@ -41,11 +41,11 @@ async function buy(){
         return 'You need to choose something.'
       }
     }
-  })
+  });
 
   if (q3Answer) {
     //Swal.fire({ html: `You selected: ${q3Answer}` })
-    console.log("you answered: "+ ${q4Answer});
+    console.log("you answered: "+ q4Answer);
     const { value: q4Answer } = await Swal.fire({
       title: 'Are you buying anything else at '+companyName+' today without using your points?',
       background: 'url(../app/assets/images/metal.jpg)',
@@ -58,7 +58,7 @@ async function buy(){
       }
     })
     if (q4Answer) {
-      console.log("you answered: "${q4Answer});
+      console.log("you answered: "+ q4Answer);
     }
   }
 
