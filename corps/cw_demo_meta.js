@@ -31,7 +31,7 @@ const item2={
 }
 
 const item3={
-	name: 'Dinner for 1',
+	name: 'a Dinner for 1',
 	//price: 2200
 	price: 180,
 	descr : "10pc Dinner combo",
@@ -39,7 +39,7 @@ const item3={
 }
 
 const item4={
-	name: 'Hat',
+	name: 'a Hat',
 	//price: 450
 	price: 150,
 	descr : "Wingstop logo hat",
@@ -47,7 +47,7 @@ const item4={
 }
 
 const item5={
-	name: 'Bottle of sauce',
+	name: '1 Bottle of sauce',
 	//price: 9500
 	price: 90,
 	descr : "1 Bottle of gourmet wing sauce",
