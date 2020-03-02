@@ -65,11 +65,7 @@ async function buy(){
       })
       .then((result) => {
         if (result.value) {
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
+          //submit txn
         }
       })
     }
