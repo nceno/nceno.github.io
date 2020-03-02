@@ -1132,6 +1132,13 @@ function buy(){
   $("#buyLoader").show();
   $("#buyQs").hide();
 
+  Swal.fire({
+    icon: 'success',
+    title: 'Nice!',
+    text: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>',
+    footer: '<a href="../index.html"> return home</a>'
+  })
+
 
   //deposit tokens here...
   TheToken.methods.transfer(
