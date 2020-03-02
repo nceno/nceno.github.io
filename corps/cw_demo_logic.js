@@ -1,4 +1,4 @@
-console.log("6");
+console.log("1");
 
 async function buy(){
   $("#confirmBuy").hide();
@@ -59,6 +59,11 @@ async function buy(){
     })
     if (q4Answer) {
       console.log("you answered: "+ q4Answer);
+      const { value: q4Answer } = await Swal.fire({
+        title: 'Thank you! We'+"'"+'re using these answers to offer better rewards in future challenges.',
+        background: 'url(../app/assets/images/metal.jpg)',
+        confirmButtonText: 'Finish my purchase'
+      })
     }
   }
 
