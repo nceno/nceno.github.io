@@ -1,4 +1,86 @@
-console.log("0000");
+console.log("1asdf");
+
+function buy(){
+  $("#confirmBuy").hide();
+  $("#cancelBuy").hide();
+  $("#buyLoader").show();
+  $("#buyQs").hide();
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Nice!',
+    background: 'url(../app/assets/images/metal.jpg)',
+    html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>',
+    footer: '<a href="../index.html"> return home</a>'
+  })
+
+
+  //deposit tokens here...
+  TheToken.methods.transfer(
+    adminWallet,
+    targetPrice
+  )
+  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+    function(error, result) {
+      if (!error){
+        
+        orderNo = web3.utils.padRight(web3.utils.randomHex(3),6);
+        console.log(result);
+      }
+      else
+      console.error(error);
+    }
+  ).once('confirmation', function(confNumber, receipt){
+    console.log(receipt.status);
+    if(receipt.status == true){
+      correctNonce++;
+      //---begin make order
+        NcenoBrands.methods.makeOrder(
+          _goalID, 
+          companyID, 
+          orderNo,
+          Cookies.get('stravaID'), 
+          targetName, 
+          targetPrice,
+          $('input[name="q3Radio"]:checked').val(),
+          $('input[name="q4Radio"]:checked').val()
+        ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+          function(error, result) {
+            if (!error){
+
+              
+              console.log(result);
+            }
+            else
+            console.error(error);
+          }
+        ).once('confirmation', function(confNumber, receipt){ 
+          console.log(receipt.status);
+          if(receipt.status == true){
+            updateNonce();
+            $("#getYouPaid").html("Your receipt");
+            $("#buyLoader").hide();
+            $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
+            telegramNotify(Cookies.get('stravaUsername')+' just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL, 'false');
+          }
+          else{
+            $("#getYouPaid").html("Error completing purchase...");
+            console.log("buy error.");
+          } 
+        }).once('error', function(error){
+          $("#getYouPaid").html("Error completing purchase...");
+          console.log(error);
+        });
+      //---end makeorder
+    }
+    else{
+      $("#getYouPaid").html("Error completing purchase...");
+      console.log('error. not enough funds?');
+    }
+  });
+}
+
+
 
 for(let n=0; n<5; n++){
   $('#companyTitle'+n).html('<font style="color:#999;">'+companyName+'</font>');
@@ -1126,84 +1208,7 @@ $("#radio13").on('click', function(){
 
 
 
-function buy(){
-  $("#confirmBuy").hide();
-  $("#cancelBuy").hide();
-  $("#buyLoader").show();
-  $("#buyQs").hide();
 
-  Swal.fire({
-    icon: 'success',
-    title: 'Nice!',
-    text: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>',
-    footer: '<a href="../index.html"> return home</a>'
-  })
-
-
-  //deposit tokens here...
-  TheToken.methods.transfer(
-    adminWallet,
-    targetPrice
-  )
-  .send({from: Cookies.get('userWallet'), nonce: correctNonce, gas: 3000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-    function(error, result) {
-      if (!error){
-        
-        orderNo = web3.utils.padRight(web3.utils.randomHex(3),6);
-        console.log(result);
-      }
-      else
-      console.error(error);
-    }
-  ).once('confirmation', function(confNumber, receipt){
-    console.log(receipt.status);
-    if(receipt.status == true){
-      correctNonce++;
-      //---begin make order
-        NcenoBrands.methods.makeOrder(
-          _goalID, 
-          companyID, 
-          orderNo,
-          Cookies.get('stravaID'), 
-          targetName, 
-          targetPrice,
-          $('input[name="q3Radio"]:checked').val(),
-          $('input[name="q4Radio"]:checked').val()
-        ).send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
-          function(error, result) {
-            if (!error){
-
-              
-              console.log(result);
-            }
-            else
-            console.error(error);
-          }
-        ).once('confirmation', function(confNumber, receipt){ 
-          console.log(receipt.status);
-          if(receipt.status == true){
-            updateNonce();
-            $("#getYouPaid").html("Your receipt");
-            $("#buyLoader").hide();
-            $("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
-            telegramNotify(Cookies.get('stravaUsername')+' just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL, 'false');
-          }
-          else{
-            $("#getYouPaid").html("Error completing purchase...");
-            console.log("buy error.");
-          } 
-        }).once('error', function(error){
-          $("#getYouPaid").html("Error completing purchase...");
-          console.log(error);
-        });
-      //---end makeorder
-    }
-    else{
-      $("#getYouPaid").html("Error completing purchase...");
-      console.log('error. not enough funds?');
-    }
-  });
-}
 
 
 
