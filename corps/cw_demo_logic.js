@@ -1,4 +1,4 @@
-console.log("fgbgd");
+console.log("5364357");
 
 
 var targetName;
@@ -56,7 +56,8 @@ async function setTarget(item){
     if (q4Answer) {
       console.log("you answered: "+ q4Answer);
       Swal.fire({
-        html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you'+"'"+'re about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5>',
+        title: 'Remember those workouts? They were worth it!'
+        html: 'You'+"'"+'re about to get '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points!',
         confirmButtonText: 'Complete my purchase'
       })
       .then((result) => {
