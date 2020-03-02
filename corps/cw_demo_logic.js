@@ -1,4 +1,4 @@
-console.log("9090909");
+console.log("joe");
 
 
 var targetName;
@@ -109,7 +109,7 @@ async function setTarget(item){
                   updateNonce();
                   Swal.fire({
                     icon: 'success',
-                    html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br>'+orderNo
+                    html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br> <h2><b>'+orderNo+'</b></h2>'
                     
                     
                   })
