@@ -6,13 +6,37 @@ function buy(){
   $("#buyLoader").show();
   $("#buyQs").hide();
 
-  Swal.fire({
-    icon: 'success',
-    title: 'Nice!',
+  /*Swal.fire({
+    title: 'Remember those workouts? They'+"'"+'re about to pay off!',
     background: 'url(../app/assets/images/metal.jpg)',
-    html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>',
-    footer: '<a href="../index.html"> return home</a>'
+    html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you'+"'"+'re about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  But first, please answer these two questions:',
+    
+  })*/
+
+  const inputOptions = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        '#ff0000': 'Red',
+        '#00ff00': 'Green',
+        '#0000ff': 'Blue'
+      })
+    }, 1000)
   })
+
+  const { value: color } = await Swal.fire({
+    title: 'Select color',
+    input: 'radio',
+    inputOptions: inputOptions,
+    inputValidator: (value) => {
+      if (!value) {
+        return 'You need to choose something!'
+      }
+    }
+  })
+
+  if (color) {
+    Swal.fire({ html: `You selected: ${color}` })
+  }
 
 
   //deposit tokens here...
