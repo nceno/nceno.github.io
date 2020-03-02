@@ -1,4 +1,4 @@
-console.log("88");
+console.log("666");
 
 async function buy(){
   $("#confirmBuy").hide();
@@ -13,29 +13,28 @@ async function buy(){
     
   })*/
 
-  const inputOptions = new Promise((resolve) => {
+  const q3 = new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        '#ff0000': 'Red',
-        '#00ff00': 'Green',
-        '#0000ff': 'Blue'
+        '0': 'Yes',
+        '1': 'No'
       })
     }, 1000)
   })
 
-  const { value: color } = await Swal.fire({
-    title: 'Select color',
+  const { value: q3Answer } = await Swal.fire({
+    title: 'Would you have come to '+companyName+' today if you did not have points to redeem?',
     input: 'radio',
-    inputOptions: inputOptions,
+    inputOptions: q1,
     inputValidator: (value) => {
       if (!value) {
-        return 'You need to choose something!'
+        return 'You need to choose something.'
       }
     }
   })
 
-  if (color) {
-    Swal.fire({ html: `You selected: ${color}` })
+  if (q1Answer) {
+    Swal.fire({ html: `You selected: ${q3Answer}` })
   }
 
 
