@@ -1,4 +1,4 @@
-console.log("525w4yrhfd");
+console.log("6666");
 
 
 var targetName;
@@ -544,7 +544,7 @@ function redeem(){
             });
 
             telegramNotify(playerName+' just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
-            
+
             if(event.returnValues.finisher != false) {
               Swal.fire({
               title: 'You are a top finisher!',
