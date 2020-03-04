@@ -935,11 +935,19 @@ function joinModalLoad(){
               imageUrl: '../app/assets/images/wingstop.png'
             },
             {
-              title: 'Choose an avatar and username',
+              title: 'Choose an avatar',
               input: 'radio',
+              inputOptions: alAvatar,
+              inputValidator: (value) => {
+                if (!value) {
+                  return 'Please answer :)';
+                }
+              }
+            },
+            {
+              title: 'Choose a username'
               input: 'text',
               confirmButtonText: 'Next',
-              inputOptions: alAvatar,
               inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
@@ -956,9 +964,6 @@ function joinModalLoad(){
                   return 'Please answer :)';
                 }
               }
-            },
-            {
-              title: 'q4'
             },
             {
               title: 'q5'
