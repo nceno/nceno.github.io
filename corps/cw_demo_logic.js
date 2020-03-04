@@ -1,4 +1,4 @@
-console.log("r6544wes");
+console.log("bbbb");
 
 
 var targetName;
@@ -448,17 +448,21 @@ function showBest(){
   $("#dispValue").html(dispValue);
   $("#dispToken").html(TOKENSYMBOL);
 
+  var alHR = ' ';
   if(dispHR!= null && dispHR!= 0) 
-    var alHR = Math.round(dispHR); 
+    alHR = Math.round(dispHR); 
 
+  var alMins = ' ';
   if(dispMins!= null && dispMins!= null && dispHR!= null ) 
-    var alMins = Math.round(dispMins/60);
+    alMins = Math.round(dispMins/60);
 
+  var alSpeed = ' ';
   if(dispSpeed!= null && dispSpeed!= 0) 
-    var alSpeed = (dispSpeed*3.6).toFixed(1);
+    alSpeed = (dispSpeed*3.6).toFixed(1);
 
+  var alDist = ' ';
   if(dispDist!= null && dispDist!= 0) 
-    var alDist = (dispDist/1000).toFixed(1);
+    alDist = (dispDist/1000).toFixed(1);
 
   Swal.fire({
     title: 'Here is your most valuable workout from today',
