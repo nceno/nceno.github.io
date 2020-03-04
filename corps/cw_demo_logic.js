@@ -1,4 +1,4 @@
-console.log("555555");
+console.log("35");
 
 
 var targetName;
@@ -955,7 +955,7 @@ function joinModalLoad(){
               }
             },
             {
-              title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?'
+              title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?',
               confirmButtonText: 'Next',
             },
             {
