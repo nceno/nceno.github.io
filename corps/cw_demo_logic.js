@@ -1,4 +1,4 @@
-console.log("333");
+console.log("666");
 
 
 var targetName;
@@ -945,7 +945,7 @@ function joinModalLoad(){
               }
             },
             {
-              title: 'Choose a username'
+              title: 'Choose a username',
               input: 'text',
               confirmButtonText: 'Next',
               inputValidator: (value) => {
@@ -969,7 +969,7 @@ function joinModalLoad(){
               title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?'
             },
             {
-              title: 'Enter your invite code'
+              title: 'Enter your invite code',
               input: 'text',
               confirmButtonText: 'Join',
               inputValidator: (value) => {
