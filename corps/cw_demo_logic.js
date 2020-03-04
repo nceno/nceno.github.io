@@ -1,4 +1,4 @@
-console.log("24352345234");
+console.log("777");
 
 
 var targetName;
@@ -925,9 +925,6 @@ function joinModalLoad(){
 
 
           Swal.mixin({
-            input: 'text',
-            confirmButtonText: 'Next',
-            showCancelButton: false,
             progressSteps: ['1', '2', '3', '4', '5', '6']
           }).queue([
             {
@@ -939,6 +936,7 @@ function joinModalLoad(){
               title: 'Choose an avatar',
               input: 'radio',
               inputOptions: alAvatar,
+              confirmButtonText: 'Next',
               inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
@@ -948,7 +946,7 @@ function joinModalLoad(){
             {
               title: 'Choose a username',
               input: 'text',
-              
+              confirmButtonText: 'Next',
               inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
@@ -958,7 +956,7 @@ function joinModalLoad(){
             {
               title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
               input: 'radio',
-              
+              confirmButtonText: 'Next',
               inputOptions: q1,
               inputValidator: (value) => {
                 if (!value) {
@@ -968,6 +966,7 @@ function joinModalLoad(){
             },
             {
               title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?'
+              confirmButtonText: 'Next',
             },
             {
               title: 'Enter your invite code',
