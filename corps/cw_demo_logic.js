@@ -1,4 +1,4 @@
-console.log("ryrthhr");
+console.log("65yw");
 
 
 var targetName;
@@ -451,6 +451,7 @@ function showBest(){
   Swal.fire({
     title: 'Here is your most valuable workout from today',
     text: 'Value: 18 WNG',
+    html: '<table class="table table-lined" id="bestWorkout"><thead  class="thead-dark"> <tr><th scope="col"><font size="2">time</font></th> <th scope="col"><font size="2">HR mins</font></th><th scope="col"><font size="2">avg HR</font></th><th scope="col"><font size="2">dist</font></th><th scope="col"><font size="2">avg speed</font></th></tr></thead><tbody ><tr><td ><span id="dispTime"></span><br><span id="period"></span></td><td ><span id="dispMins"></span><br>min</td><td ><span id="dispHR"></span><br>bpm</td><td ><span id="dispDist"></span><br>km</td><td ><span id="dispSpeed"></span><br>kph</td></tr></tbody></table>',
     confirmButtonText:'Claim points'
   })
 
