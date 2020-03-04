@@ -927,7 +927,7 @@ function joinModalLoad(){
           Swal.mixin({
             confirmButtonText: 'Next',
             showCancelButton: false,
-            progressSteps: ['1', '2', '3', '4', '5']
+            progressSteps: ['1', '2', '3', '4', '5', '6']
           }).queue([
             {
               title: 'You are about to join '+companyName+"'s"+' challenge:',
@@ -966,7 +966,17 @@ function joinModalLoad(){
               }
             },
             {
-              title: 'q5'
+              title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?'
+            },
+            {
+              title: 'Enter your invite code'
+              input: 'text',
+              confirmButtonText: 'Join',
+              inputValidator: (value) => {
+                if (!value) {
+                  return 'Please answer :)';
+                }
+              }
             }
           ]).then((result) => {
             if (result.value) {
