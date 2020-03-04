@@ -915,7 +915,6 @@ function joinModalLoad(){
 
 
           Swal.mixin({
-            input: 'text',
             progressSteps: ['1', '2', '3', '4', '5']
           }).queue([
             {
@@ -947,9 +946,10 @@ function joinModalLoad(){
             },
             {
               title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
-              input: 'radio',
+              //input: 'radio',
+              input: 'text',
               confirmButtonText: 'Next',
-              inputOptions: q1,
+              //inputOptions: q1,
               inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
