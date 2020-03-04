@@ -915,8 +915,7 @@ function joinModalLoad(){
 
 
           Swal.mixin({
-            
-            progressSteps: ['1', '2', '3', '4', '5']
+            progressSteps: ['1', '2', '3', '4', '5','6']
           }).queue([
             {
               title: 'You are about to join '+companyName+"'s"+' challenge:',
