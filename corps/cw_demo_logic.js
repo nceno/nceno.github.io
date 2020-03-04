@@ -1,4 +1,4 @@
-console.log("65yw");
+console.log("r6544wes");
 
 
 var targetName;
@@ -448,10 +448,21 @@ function showBest(){
   $("#dispValue").html(dispValue);
   $("#dispToken").html(TOKENSYMBOL);
 
+  if(dispHR!= null && dispHR!= 0) 
+    var alHR = Math.round(dispHR); 
+
+  if(dispMins!= null && dispMins!= null && dispHR!= null ) 
+    var alMins = Math.round(dispMins/60);
+
+  if(dispSpeed!= null && dispSpeed!= 0) 
+    var alSpeed = (dispSpeed*3.6).toFixed(1);
+
+  if(dispDist!= null && dispDist!= 0) 
+    var alDist = (dispDist/1000).toFixed(1);
+
   Swal.fire({
     title: 'Here is your most valuable workout from today',
-    text: 'Value: 18 WNG',
-    html: '<table class="table table-lined" id="bestWorkout"><thead  class="thead-dark"> <tr><th scope="col"><font size="2">time</font></th> <th scope="col"><font size="2">HR mins</font></th><th scope="col"><font size="2">avg HR</font></th><th scope="col"><font size="2">dist</font></th><th scope="col"><font size="2">avg speed</font></th></tr></thead><tbody ><tr><td ><span id="dispTime">'+dispTimeHours+':'+dispTimeMinutes+'</span><br><span id="period">'+period+'</span></td><td ><span id="dispMins"></span><br>min</td><td ><span id="dispHR"></span><br>bpm</td><td ><span id="dispDist"></span><br>km</td><td ><span id="dispSpeed"></span><br>kph</td></tr></tbody></table>',
+    html: '<table class="table table-lined" id="bestWorkout"><thead  class="thead-dark"> <tr><th scope="col"><font size="2">time</font></th> <th scope="col"><font size="2">HR mins</font></th><th scope="col"><font size="2">avg HR</font></th><th scope="col"><font size="2">dist</font></th><th scope="col"><font size="2">avg speed</font></th></tr></thead><tbody ><tr><td ><span id="dispTime">'+dispTimeHours+':'+dispTimeMinutes+'</span><br><span id="period">'+period+'</span></td><td ><span id="dispMins">'+alMins+'</span><br>min</td><td ><span id="dispHR">'+alHR+'</span><br>bpm</td><td ><span id="dispDist">'+alDist+'</span><br>km</td><td ><span id="dispSpeed">'+alSpeed+'</span><br>kph</td></tr></tbody></table>',
     confirmButtonText:'Claim '+dispValue+' '+TOKENSYMBOL
   })
 
