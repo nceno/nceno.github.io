@@ -3,7 +3,7 @@ const companyID = '0xccff00';
 const companyName = "Wingstop"; //
 const tokenAddress = '0xf98ec1530fc41c8b6372b3c60de787553a333bf1'; //
 const TOKENSYMBOL = "WNG"; //
-const contractAddress = '0x7d7c9772d79680f0d84eaeec71ce66ba3c41a22b'; //
+const contractAddress = '0xec0200ca76b388a25fa6f3dc8a701c653a38e044'; //
 const adminWallet = '0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a'; //
 
 //https://api.telegram.org/bot1130094704:AAE5-_tud_WqOx6d_S7ujEI8l97pUW5xFdI/getUpdates

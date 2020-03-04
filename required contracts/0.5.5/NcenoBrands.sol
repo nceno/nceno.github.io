@@ -1,6 +1,6 @@
 //transfer: "0x1995095fedc772f55c0279cd6f1ca45a4a28cf86","600"
 //makeCompany: "Suntek Global","0xccff00","0xf98ec1530fc41c8b6372b3c60de787553a333bf1","0x0B51bdE2EE3Ca800E9F368f2b3807a0D212B711a"
-//host: "0xccff00","1581724800","30","150","600","1","2","0xf98ec1530fc41c8b6372b3c60de787553a333bf1"
+//host: "0xccff00","1583020800","30","150","600","1","2","0xf98ec1530fc41c8b6372b3c60de787553a333bf1"
 
 
 //join: "0xccff00","39706111","joenance","0","one","0"
@@ -126,7 +126,7 @@ contract NcenoBrands is RelayRecipient{
 
   function kickPlayer(bytes memory _goalID, uint _stravaID) public onlyNcenoAdmin{
     goalAt[_goalID].isPlayer[_stravaID] = false;
-    goalAt[_goalID].codeOK[goalAt[_goalID].playerCode[_stravaID]] = false;
+    //goalAt[_goalID].codeOK[goalAt[_goalID].playerCode[_stravaID]] = false;
   }
   //---- /objects
 
@@ -231,7 +231,7 @@ contract NcenoBrands is RelayRecipient{
       /*&& keccak256(_secret) == keccak256('masterhash')*/
       && goalAt[_goalID].halted == false
       && goalAt[_goalID].potRemaining>0
-      && goalAt[_goalID].isPlayer == true
+      && goalAt[_goalID].isPlayer[_stravaID] == true
       && goalAt[_goalID].playerPayout[_stravaID]<goalAt[_goalID].tokenCap,"error");
     goalAt[_goalID].playerKms[_stravaID]+= _kms;
     goalAt[_goalID].playerMins[_stravaID]+= _mins;
