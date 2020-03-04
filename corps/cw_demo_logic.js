@@ -896,7 +896,7 @@ function joinModalLoad(){
           const alAvatar = new Promise((resolve) => {
             resolve({
               '0': '<img height="60" width="60" src="../app/assets/images/avatar0.png">',
-              '1': '<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>'
+              '1': '<figure class="user user-circle"><img height="60" width="60" src="'+Cookies.get('picture')+'"></figure>'
             })
           });
 
