@@ -915,6 +915,7 @@ function joinModalLoad(){
 
 
           Swal.mixin({
+            input: 'text',
             progressSteps: ['1', '2', '3', '4', '5']
           }).queue([
             {
@@ -936,7 +937,7 @@ function joinModalLoad(){
             },*/
             {
               title: 'Choose a username',
-              input: 'text',
+              //input: 'text',
               confirmButtonText: 'Next',
               inputValidator: (value) => {
                 if (!value) {
@@ -947,7 +948,7 @@ function joinModalLoad(){
             {
               title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
               //input: 'radio',
-              input: 'text',
+              //input: 'text',
               confirmButtonText: 'Next',
               //inputOptions: q1,
               inputValidator: (value) => {
@@ -962,7 +963,7 @@ function joinModalLoad(){
             },
             {
               title: 'Enter your invite code',
-              input: 'text',
+              //input: 'text',
               confirmButtonText: 'Join',
               inputValidator: (value) => {
                 if (!value) {
