@@ -899,6 +899,13 @@ function joinModalLoad(){
               '1': '<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>'
             })
           });
+
+          const q1 = new Promise((resolve) => {
+            resolve({
+              '1': 'Yes',
+              '0': 'No'
+            })
+          });
           
           /*if(Cookies.get('picType') != "default"){
             $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
@@ -920,7 +927,7 @@ function joinModalLoad(){
           Swal.mixin({
             confirmButtonText: 'Next',
             showCancelButton: false,
-            progressSteps: ['1', '2', '3', '4']
+            progressSteps: ['1', '2', '3', '4', '5']
           }).queue([
             {
               title: 'You are about to join '+companyName+"'s"+' challenge:',
@@ -928,8 +935,9 @@ function joinModalLoad(){
               imageUrl: '../app/assets/images/wingstop.png'
             },
             {
-              title: 'Choose your avatar',
+              title: 'Choose an avatar and username',
               input: 'radio',
+              input: 'text',
               confirmButtonText: 'Next',
               inputOptions: alAvatar,
               inputValidator: (value) => {
@@ -939,10 +947,21 @@ function joinModalLoad(){
               }
             },
             {
-              'Question 3'
+              title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
+              input: 'radio',
+              confirmButtonText: 'Next',
+              inputOptions: q1,
+              inputValidator: (value) => {
+                if (!value) {
+                  return 'Please answer :)'
+                }
+              }
             },
             {
               'Question 4'
+            },
+            {
+              'Question 5'
             }
           ]).then((result) => {
             if (result.value) {
