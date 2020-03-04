@@ -1,4 +1,4 @@
-console.log("123");
+console.log("24352345234");
 
 
 var targetName;
@@ -911,7 +911,7 @@ function joinModalLoad(){
             $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
           }else $("#customChoice").hide();*/
 
-          Swal.fire({
+          /*Swal.fire({
             title: 'Choose your avatar',
             input: 'radio',
             confirmButtonText: 'Next',
@@ -921,7 +921,7 @@ function joinModalLoad(){
                 return 'Please answer :)'
               }
             }
-          });
+          });*/
 
 
           Swal.mixin({
