@@ -559,7 +559,7 @@ function signOut(){
 
 var playerName;
 var lastLogTime = 0;
-function makeWorkoutPage(){
+async function makeWorkoutPage(){
   
   //$('#me').empty(); //may fix the bug
   //prepare the workouts to be filtered and logged
@@ -570,7 +570,7 @@ function makeWorkoutPage(){
 
   //---get goal params
 
-  NcenoBrands.methods.getGoalParams(_goalID)
+  await NcenoBrands.methods.getGoalParams(_goalID)
   .call({from: Cookies.get('userWallet')},
     async function(error, resultA) {
       if (!error){
@@ -616,7 +616,7 @@ function makeWorkoutPage(){
                         //post to top if it's me
                           //if(! $("#me").length){
                             //$("#me").empty();
-                            console.log(pic[4]);
+                            //console.log(pic[4]);
                             switch(pic[4]){
                               case "large.jpg":
                                 // same
