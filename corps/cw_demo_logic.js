@@ -914,76 +914,101 @@ function joinModalLoad(){
           
 
 
-          Swal.mixin({
-            progressSteps: ['1', '2', '3', '4', '5','6']
-          }).queue([
+          Swal.fire(
             {
               title: 'You are about to join '+companyName+"'s"+' challenge:',
               html: new Date(result[0]*1000).toDateString() +' - '+ new Date((result[0]*1+86400*result[1])*1000).toDateString() +'<br>'+result[2]+" "+TOKENSYMBOL+' max per person. <br>'+'Reward rate: '+result[6]+" "+TOKENSYMBOL+ '/km or '+result[5]+" "+TOKENSYMBOL+'/10min with HR data',
               imageUrl: '../app/assets/images/wingstop.png',
-              confirmButtonText: 'Next'
-            },
-            {
-              title: 'Choose an avatar',
-              input: 'radio',
-              inputOptions: alAvatar,
-              confirmButtonText: 'Next'//,
-              /*inputValidator: (value) => {
-                if (!value) {
-                  return 'Please answer :)';
-                }
-              }*/
-            },
-            {
-              title: 'Choose a username',
-              input: 'text',
-              confirmButtonText: 'Next'//,
-              /*inputValidator: (value) => {
-                if (!value) {
-                  return 'Please answer :)';
-                }
-              }*/
-            },
-            {
-              title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
-              input: 'radio',
-              confirmButtonText: 'Next',
-              inputOptions: q1//,
-              /*inputValidator: (value) => {
-                if (!value) {
-                  return 'Please answer :)';
-                }
-              }*/
-            },
-            {
-              title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?',
-              confirmButtonText: 'Next',
-            },
-            {
-              title: 'Enter your invite code',
-              input: 'text',
-              confirmButtonText: 'Join'//,
-              /*inputValidator: (value) => {
-                if (!value) {
-                  return 'Please answer :)';
-                }
-              }*/
-            }
-          ]).then((result) => {
-            if (result.value) {
-              const answers = JSON.stringify(result.value)
-              Swal.fire({
-                title: 'All done!',
-                html: `
-                  Your answers:
-                  <pre><code>${answers}</code></pre>
-                `,
-                confirmButtonText: 'Lovely!'
-              });
-            }
-          });
+              confirmButtonText: 'Join'
+            })
+              .then((result) => {
+                if (result.value) {
+
+                  Swal.fire({
+                    title: 'Step 1/5- Choose an avatar',
+                    input: 'radio',
+                    inputOptions: alAvatar,
+                    confirmButtonText: 'Next',
+                    inputValidator: (value) => {
+                      if (!value) {
+                        return 'You need an avatar :)';
+                      }
+                    }
+                  })//end step 1 swal
+
+                  .then((result) => {
+                    if (result.value) {
+
+                      Swal.fire({
+                        title: 'Step 2/5- Choose a username',
+                        input: 'text',
+                        confirmButtonText: 'Next',
+                        inputValidator: (value) => {
+                          if (!value) {
+                            return 'You need a name :)';
+                          }
+                        }
+                      })//end step 2 swal
+                      .then((result) => {
+                        if (result.value) {
+
+                          Swal.fire({
+                            title: 'Step 3/5- Did you spend more than you usually do at Wingstop in order to join this challenge?',
+                            input: 'radio',
+                            confirmButtonText: 'Next',
+                            inputOptions: q1,
+                            inputValidator: (value) => {
+                              if (!value) {
+                                return 'Please answer :)';
+                              }
+                            }
+                          })//end step 3 swal
+                          .then((result) => {
+                            if (result.value) {
+
+                              Swal.fire({
+                                title: 'Step 4/5- How much (NT$) do you normally spend each time you come to '+companyName+'?',
+                                html: '<div ><input id="avgSpend" type="range" min="0" max="3000" step="50" value="0" data-rangeslider><br><output style="color:#ccff00;"></output></div>',
+                                confirmButtonText: 'Next',
+                              })// end step 4 swal
+                              .then((result) => {
+                                if (result.value) {
+
+                                  Swal.fire({
+                                    title: 'Last step- Enter your invite code',
+                                    input: 'text',
+                                    confirmButtonText: 'Let'+"'"+'s go!',
+                                    inputValidator: (value) => {
+                                      if (!value) {
+                                        return 'You need an invite code :)';
+                                      }
+                                    }
+                                  })//end step 5 swal
+                                  .then((result) => {
+                                    if (result.value) {
+                                      console.log("all done.. time to join");
+                                    }//end step 5 if
+                                  })//end step 5 then
+
+                                }//end step 4 if
+                              }) //end step 4 then
+
+                            }//end step 3 if
+                          })//end step 3 then
 
 
+                        }//end step 2 if
+                      })//end step 2 then
+
+
+                    }//end step 1 if
+                  })//end step 1 then
+
+
+                }//end step 0 if
+              })//end step 0 then
+
+          
 
           $("#startTime").html(new Date(result[0]*1000).toDateString());
           $("#endTime").html(new Date((result[0]*1+86400*result[1])*1000).toDateString());
@@ -1252,43 +1277,6 @@ async function makeOrdersPage(){
 }
 
 async function makeSpendPage(){
-
-  Swal.mixin({
-    //input: 'text',
-    progressSteps: ['1', '2', '3']
-  }).queue([
-    {
-      title: 'Question 1',
-      input: 'text',
-      text: 'Chaining swal2 modals is easy',
-      confirmButtonText: 'Next'
-    },
-    {
-      title: 'Question 2',
-      input: 'text',
-      text: 'Chaining swal2 modals is easy',
-      confirmButtonText: 'Next'
-    },
-    {
-      title: 'Question 3',
-      input: 'text',
-      text: 'Chaining swal2 modals is easy',
-      confirmButtonText: 'Next'
-    }
-  ]).then((result) => {
-    if (result.value) {
-      const answers = JSON.stringify(result.value)
-      Swal.fire({
-        title: 'All done!',
-        html: `
-          Your answers:
-          <pre><code>${answers}</code></pre>
-        `,
-        confirmButtonText: 'Lovely!'
-      })
-    }
-  })
-
 
   var myBalance
   if(Cookies.get('userWallet') != undefined && Cookies.get('access_token')!= undefined){
