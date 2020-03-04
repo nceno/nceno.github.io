@@ -448,19 +448,19 @@ function showBest(){
   $("#dispValue").html(dispValue);
   $("#dispToken").html(TOKENSYMBOL);
 
-  var alHR = ' ';
+  var alHR = '-';
   if(dispHR!= null && dispHR!= 0) 
     alHR = Math.round(dispHR); 
 
-  var alMins = ' ';
+  var alMins = '-';
   if(dispMins!= null && dispMins!= null && dispHR!= null ) 
     alMins = Math.round(dispMins/60);
 
-  var alSpeed = ' ';
+  var alSpeed = '-';
   if(dispSpeed!= null && dispSpeed!= 0) 
     alSpeed = (dispSpeed*3.6).toFixed(1);
 
-  var alDist = ' ';
+  var alDist = '-';
   if(dispDist!= null && dispDist!= 0) 
     alDist = (dispDist/1000).toFixed(1);
 
