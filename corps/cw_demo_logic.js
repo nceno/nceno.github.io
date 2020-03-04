@@ -915,7 +915,7 @@ function joinModalLoad(){
 
 
           Swal.mixin({
-            input: 'text',
+            
             progressSteps: ['1', '2', '3', '4', '5']
           }).queue([
             {
@@ -924,38 +924,37 @@ function joinModalLoad(){
               imageUrl: '../app/assets/images/wingstop.png',
               confirmButtonText: 'Next'
             },
-            /*{
+            {
               title: 'Choose an avatar',
               input: 'radio',
               inputOptions: alAvatar,
-              confirmButtonText: 'Next',
-              inputValidator: (value) => {
+              confirmButtonText: 'Next'//,
+              /*inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
                 }
-              }
-            },*/
+              }*/
+            },
             {
               title: 'Choose a username',
-              //input: 'text',
-              confirmButtonText: 'Next',
-              inputValidator: (value) => {
+              input: 'text',
+              confirmButtonText: 'Next'//,
+              /*inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
                 }
-              }
+              }*/
             },
             {
               title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
-              //input: 'radio',
-              //input: 'text',
+              input: 'radio',
               confirmButtonText: 'Next',
-              //inputOptions: q1,
-              inputValidator: (value) => {
+              inputOptions: q1//,
+              /*inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
                 }
-              }
+              }*/
             },
             {
               title: 'How much (NT$) do you normally spend each time you come to '+companyName+'?',
@@ -963,13 +962,13 @@ function joinModalLoad(){
             },
             {
               title: 'Enter your invite code',
-              //input: 'text',
-              confirmButtonText: 'Join',
-              inputValidator: (value) => {
+              input: 'text',
+              confirmButtonText: 'Join'//,
+              /*inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
                 }
-              }
+              }*/
             }
           ]).then((result) => {
             if (result.value) {
