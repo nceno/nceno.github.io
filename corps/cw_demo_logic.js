@@ -924,7 +924,7 @@ function joinModalLoad(){
               .then((result) => {
                 if (result.value) {
 
-                  Swal.fire({
+                  var { value: alAv } = awaitSwal.fire({
                     title: 'Step 1/5- Choose an avatar',
                     input: 'radio',
                     inputOptions: alAvatar,
@@ -939,7 +939,7 @@ function joinModalLoad(){
                   .then((result) => {
                     if (result.value) {
 
-                      Swal.fire({
+                      var { value: alName } = await Swal.fire({
                         title: 'Step 2/5- Choose a username',
                         input: 'text',
                         confirmButtonText: 'Next',
@@ -952,7 +952,7 @@ function joinModalLoad(){
                       .then((result) => {
                         if (result.value) {
 
-                          Swal.fire({
+                          var { value: q1Answer } = await Swal.fire({
                             title: 'Step 3/5- Did you spend more than you usually do at Wingstop in order to join this challenge?',
                             input: 'radio',
                             confirmButtonText: 'Next',
@@ -974,7 +974,7 @@ function joinModalLoad(){
                               .then((result) => {
                                 if (result.value) {
 
-                                  Swal.fire({
+                                  var { value: alInvite } = await Swal.fire({
                                     title: 'Last step- Enter your invite code',
                                     input: 'text',
                                     confirmButtonText: 'Let'+"'"+'s go!',
@@ -987,6 +987,7 @@ function joinModalLoad(){
                                   .then((result) => {
                                     if (result.value) {
                                       console.log("all done.. time to join");
+                                      console.log(alAv, alName, q1Answer, avgPurchase, alInvite);
                                     }//end step 5 if
                                   })//end step 5 then
 
