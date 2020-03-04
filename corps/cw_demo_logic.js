@@ -1,4 +1,4 @@
-console.log("87uyj");
+console.log("333");
 
 
 var targetName;
@@ -942,7 +942,7 @@ function joinModalLoad(){
               inputOptions: alAvatar,
               inputValidator: (value) => {
                 if (!value) {
-                  return 'Please answer :)'
+                  return 'Please answer :)';
                 }
               }
             },
@@ -953,15 +953,15 @@ function joinModalLoad(){
               inputOptions: q1,
               inputValidator: (value) => {
                 if (!value) {
-                  return 'Please answer :)'
+                  return 'Please answer :)';
                 }
               }
             },
             {
-              'Question 4'
+              title: 'q4'
             },
             {
-              'Question 5'
+              title: 'q5'
             }
           ]).then((result) => {
             if (result.value) {
@@ -973,9 +973,9 @@ function joinModalLoad(){
                   <pre><code>${answers}</code></pre>
                 `,
                 confirmButtonText: 'Lovely!'
-              })
+              });
             }
-          })
+          });
 
 
 
