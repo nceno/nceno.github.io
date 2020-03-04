@@ -591,9 +591,9 @@ function makeWorkoutPage(){
                 //fill the whitespace
                 playerName = resultB[1];
                 //---call that player
-                NcenoBrands.methods.getPlayer(_goalID, playerID)
+                await NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
-                  function(error, resultC) {
+                  async function(error, resultC) {
                     if (!error){
                       //console.log(result);
                       
