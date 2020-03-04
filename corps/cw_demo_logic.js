@@ -938,7 +938,7 @@ async function joinModalLoad(){
 
                   .then((result) => {
                     if (result.value) {
-                      console.log("avatar: "+ ${alAv});
+                      console.log('avatar: ${alAv}');
                       const { value: alName } = Swal.fire({
                         title: 'Step 2/5- Choose a username',
                         input: 'text',
@@ -951,7 +951,7 @@ async function joinModalLoad(){
                       })//end step 2 swal
                       .then((result) => {
                         if (result.value) {
-                          console.log("avatar: "+ ${alName});
+                          console.log('avatar: + ${alName}');
                           const { value: q1Answer } = Swal.fire({
                             title: 'Step 3/5- Did you spend more than you usually do at '+companyName+' in order to join this challenge?',
                             input: 'radio',
@@ -986,7 +986,7 @@ async function joinModalLoad(){
                                   })//end step 5 swal
                                   .then((result) => {
                                     if (result.value) {
-                                      console.log("avatar: "+ ${alInvite});
+                                      console.log('avatar: + ${alInvite}');
                                       console.log("all done.. time to join");
                                       console.log(alAv, alName, q1Answer, avgPurchase, alInvite);
                                     }//end step 5 if
