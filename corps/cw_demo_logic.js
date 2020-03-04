@@ -565,7 +565,7 @@ function makeWorkoutPage(){
   //prepare the workouts to be filtered and logged
   makeActivities();
 
-  setTimeout(function(){ gapAdjust(); }, 1500);
+  setTimeout(function(){ gapAdjust(); }, 2000);
 
 
   //---get goal params
