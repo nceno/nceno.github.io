@@ -1,4 +1,4 @@
-console.log("777");
+console.log("555555");
 
 
 var targetName;
@@ -911,17 +911,7 @@ function joinModalLoad(){
             $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
           }else $("#customChoice").hide();*/
 
-          /*Swal.fire({
-            title: 'Choose your avatar',
-            input: 'radio',
-            confirmButtonText: 'Next',
-            inputOptions: alAvatar,
-            inputValidator: (value) => {
-              if (!value) {
-                return 'Please answer :)'
-              }
-            }
-          });*/
+          
 
 
           Swal.mixin({
@@ -1261,6 +1251,19 @@ async function makeOrdersPage(){
 }
 
 async function makeSpendPage(){
+
+  Swal.fire({
+    title: 'write something',
+    input: 'text',
+    confirmButtonText: 'Next',
+    inputValidator: (value) => {
+      if (!value) {
+        return 'Please answer :)'
+      }
+    }
+  });
+
+
   var myBalance
   if(Cookies.get('userWallet') != undefined && Cookies.get('access_token')!= undefined){
     //show token balance
