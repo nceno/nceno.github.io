@@ -1,4 +1,4 @@
-console.log("bbbb");
+console.log("525w4yrhfd");
 
 
 var targetName;
@@ -461,11 +461,11 @@ function showBest(){
   }).then((result) => {
   if (result.value) {
     redeem();
-    Swal.fire(
+    Swal.fire({
       imageUrl: '../app/assets/images/loader.svg',
       title: 'Please wait...',
-      showConfirmButton: false,
-    )
+      showConfirmButton: false
+    });
   }
 })
 
