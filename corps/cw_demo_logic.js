@@ -914,7 +914,7 @@ async function joinModalLoad(){
           
 
 
-          Swal.fire(
+          (async () => { Swal.fire(
             {
               title: 'You are about to join '+companyName+"'s"+' challenge:',
               html: new Date(result[0]*1000).toDateString() +' - '+ new Date((result[0]*1+86400*result[1])*1000).toDateString() +'<br>'+result[2]+" "+TOKENSYMBOL+' max per person. <br>'+'Reward rate: '+result[6]+" "+TOKENSYMBOL+ '/km or '+result[5]+" "+TOKENSYMBOL+'/10min with HR data',
@@ -938,7 +938,7 @@ async function joinModalLoad(){
 
                   .then((result) => {
                     if (result.value) {
-
+                      console.log("avatar: "+ ${alAv});
                       const { value: alName } = await Swal.fire({
                         title: 'Step 2/5- Choose a username',
                         input: 'text',
@@ -1008,6 +1008,7 @@ async function joinModalLoad(){
 
                 }//end step 0 if
               })//end step 0 then
+              })()
 
           
 
