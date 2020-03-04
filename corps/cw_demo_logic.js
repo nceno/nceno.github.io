@@ -1,4 +1,4 @@
-console.log("666");
+console.log("123");
 
 
 var targetName;
@@ -925,6 +925,7 @@ function joinModalLoad(){
 
 
           Swal.mixin({
+            input: 'text',
             confirmButtonText: 'Next',
             showCancelButton: false,
             progressSteps: ['1', '2', '3', '4', '5', '6']
@@ -947,7 +948,7 @@ function joinModalLoad(){
             {
               title: 'Choose a username',
               input: 'text',
-              confirmButtonText: 'Next',
+              
               inputValidator: (value) => {
                 if (!value) {
                   return 'Please answer :)';
@@ -957,7 +958,7 @@ function joinModalLoad(){
             {
               title: 'Did you spend more than you usually do at Wingstop in order to join this challenge?',
               input: 'radio',
-              confirmButtonText: 'Next',
+              
               inputOptions: q1,
               inputValidator: (value) => {
                 if (!value) {
