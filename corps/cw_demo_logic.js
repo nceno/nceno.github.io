@@ -1,4 +1,4 @@
-console.log("111111");
+console.log("7989iuykh");
 
 
 var targetName;
@@ -914,7 +914,7 @@ async function joinModalLoad(){
           
 
 
-          (async () => { Swal.fire(
+          Swal.fire(
             {
               title: 'You are about to join '+companyName+"'s"+' challenge:',
               html: new Date(result[0]*1000).toDateString() +' - '+ new Date((result[0]*1+86400*result[1])*1000).toDateString() +'<br>'+result[2]+" "+TOKENSYMBOL+' max per person. <br>'+'Reward rate: '+result[6]+" "+TOKENSYMBOL+ '/km or '+result[5]+" "+TOKENSYMBOL+'/10min with HR data',
@@ -924,7 +924,7 @@ async function joinModalLoad(){
               .then((result) => {
                 if (result.value) {
 
-                  const { value: alAv } = await Swal.fire({
+                  const { value: alAv } = Swal.fire({
                     title: 'Step 1/5- Choose an avatar',
                     input: 'radio',
                     inputOptions: alAvatar,
@@ -939,7 +939,7 @@ async function joinModalLoad(){
                   .then((result) => {
                     if (result.value) {
                       console.log("avatar: "+ ${alAv});
-                      const { value: alName } = await Swal.fire({
+                      const { value: alName } = Swal.fire({
                         title: 'Step 2/5- Choose a username',
                         input: 'text',
                         confirmButtonText: 'Next',
@@ -951,8 +951,8 @@ async function joinModalLoad(){
                       })//end step 2 swal
                       .then((result) => {
                         if (result.value) {
-
-                          const { value: q1Answer } = await Swal.fire({
+                          console.log("avatar: "+ ${alName});
+                          const { value: q1Answer } = Swal.fire({
                             title: 'Step 3/5- Did you spend more than you usually do at '+companyName+' in order to join this challenge?',
                             input: 'radio',
                             confirmButtonText: 'Next',
@@ -965,7 +965,7 @@ async function joinModalLoad(){
                           })//end step 3 swal
                           .then((result) => {
                             if (result.value) {
-
+                              console.log("avatar: "+ q1Answer);
                               Swal.fire({
                                 title: 'Step 4/5- How much (NT$) do you normally spend each time you come to '+companyName+'?',
                                 html: '<div ><input id="avgSpend" type="range" min="0" max="3000" step="50" value="0" data-rangeslider><br><output style="color:#ccff00;"></output></div>',
@@ -973,8 +973,8 @@ async function joinModalLoad(){
                               })// end step 4 swal
                               .then((result) => {
                                 if (result.value) {
-
-                                  const { value: alInvite } = await Swal.fire({
+                                  console.log("avatar: "+ avgPurchase);
+                                  const { value: alInvite } = Swal.fire({
                                     title: 'Last step- Enter your invite code',
                                     input: 'text',
                                     confirmButtonText: 'Let'+"'"+'s go!',
@@ -986,6 +986,7 @@ async function joinModalLoad(){
                                   })//end step 5 swal
                                   .then((result) => {
                                     if (result.value) {
+                                      console.log("avatar: "+ ${alInvite});
                                       console.log("all done.. time to join");
                                       console.log(alAv, alName, q1Answer, avgPurchase, alInvite);
                                     }//end step 5 if
@@ -1008,7 +1009,7 @@ async function joinModalLoad(){
 
                 }//end step 0 if
               })//end step 0 then
-              })()
+              
 
           
 
