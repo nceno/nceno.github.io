@@ -596,9 +596,9 @@ async function makeWorkoutPage(){
               if (!error){
                 var playerID =  resultB[0]; 
                 //fill the whitespace
-                playerName = resultB[1];
+                await playerName = resultB[1];
                 //---call that player
-                await NcenoBrands.methods.getPlayer(_goalID, playerID)
+                NcenoBrands.methods.getPlayer(_goalID, playerID)
                 .call({from: Cookies.get('userWallet')},
                   async function(error, resultC) {
                     if (!error){
@@ -617,7 +617,6 @@ async function makeWorkoutPage(){
                         //post to top if it's me
                           //if(! $("#me").length){
                             //$("#me").empty();
-                            //console.log(pic[4]);
                             switch(pic[4]){
                               case "large.jpg":
                                 // same
@@ -653,11 +652,7 @@ async function makeWorkoutPage(){
                             }
 
                             lastLogTime = resultC[3]*1000;
-                            /*var bla = new Date().getTime() - lastLogTime
-                            console.log("last log time was: "+lastLogTime);
-                            console.log("diff "+bla);
-                            console.log("last log day "+ new Date(lastLogTime).getDay());
-                            console.log("now: "+new Date().getDay());*/
+                            
 
                             if(lastLogTime!= null && new Date(lastLogTime).getDay() == new Date().getDay() && (new Date().getTime() -lastLogTime)<86400000) $("#log").hide();
                           //}
