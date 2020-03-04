@@ -1,4 +1,4 @@
-console.log("223222222");
+console.log("111111");
 
 
 var targetName;
@@ -924,7 +924,7 @@ async function joinModalLoad(){
               .then((result) => {
                 if (result.value) {
 
-                  var { value: alAv } = await Swal.fire({
+                  const { value: alAv } = await Swal.fire({
                     title: 'Step 1/5- Choose an avatar',
                     input: 'radio',
                     inputOptions: alAvatar,
@@ -939,7 +939,7 @@ async function joinModalLoad(){
                   .then((result) => {
                     if (result.value) {
 
-                      var { value: alName } = await Swal.fire({
+                      const { value: alName } = await Swal.fire({
                         title: 'Step 2/5- Choose a username',
                         input: 'text',
                         confirmButtonText: 'Next',
@@ -952,8 +952,8 @@ async function joinModalLoad(){
                       .then((result) => {
                         if (result.value) {
 
-                          var { value: q1Answer } = await Swal.fire({
-                            title: 'Step 3/5- Did you spend more than you usually do at Wingstop in order to join this challenge?',
+                          const { value: q1Answer } = await Swal.fire({
+                            title: 'Step 3/5- Did you spend more than you usually do at '+companyName+' in order to join this challenge?',
                             input: 'radio',
                             confirmButtonText: 'Next',
                             inputOptions: q1,
@@ -974,7 +974,7 @@ async function joinModalLoad(){
                               .then((result) => {
                                 if (result.value) {
 
-                                  var { value: alInvite } = await Swal.fire({
+                                  const { value: alInvite } = await Swal.fire({
                                     title: 'Last step- Enter your invite code',
                                     input: 'text',
                                     confirmButtonText: 'Let'+"'"+'s go!',
