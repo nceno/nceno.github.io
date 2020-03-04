@@ -1,4 +1,4 @@
-console.log("546356y56rthgf");
+console.log("4444");
 
 
 var targetName;
@@ -801,17 +801,17 @@ async function loadCodes(num){
   }
 }
 
-      /*NcenoBrands.events.MakeOrder({
-          //filter: {paramGoalID: _goalID},
-          fromBlock: 6016216, toBlock: 'latest' //6016216
-      }, function(error, event){ console.log(event); })
-      .on('data', function(event){
-          console.log("New order was placed!");
-          //console.log(event); // same results as the optional callback above
-          makeOrdersPage();
-      })
-      .on('error', console.error);
-      */
+NcenoBrands.events.MakeOrder({
+    //filter: {paramGoalID: _goalID},
+    fromBlock: 6016216, toBlock: 'latest' //6016216
+}, function(error, event){ console.log(event); })
+.on('data', function(event){
+    console.log("New order was placed!");
+    //console.log(event); // same results as the optional callback above
+    makeOrdersPage();
+})
+.on('error', console.error);
+      
 
 
 var avgPurchase;
