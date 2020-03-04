@@ -448,6 +448,12 @@ function showBest(){
   $("#dispValue").html(dispValue);
   $("#dispToken").html(TOKENSYMBOL);
 
+  Swal.fire({
+    title: 'Here is your most valuable workout from today',
+    text: 'Value: 18 WNG',
+    confirmButtonText:'Claim points'
+  })
+
   //make the thing to be logged
   toLog[0] = bestID;
   if(identifier == "HR"){
@@ -617,7 +623,7 @@ function makeWorkoutPage(){
                                 $("#me").prepend(
                                     '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/'+pic[4]+'"></a></figure> </span></div></div>'
                                   );
-                                console.log("large" + playerName);
+                                console.log("large " + playerName);
                                 break;
 
                               case "medium.jpg":
@@ -625,7 +631,7 @@ function makeWorkoutPage(){
                                 $("#me").prepend(
                                     '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/'+pic[4]+'"></a></figure> </span></div></div>'
                                   );
-                                console.log("medium" + playerName);
+                                console.log("medium " + playerName);
                                 break;
 
                               case "0":
@@ -633,7 +639,7 @@ function makeWorkoutPage(){
                                 $("#me").prepend(
                                     '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://graph.facebook.com/'+pic[0]+'/picture?height=256&width=256"></a></figure> </span></div></div>'
                                   );
-                                console.log("0" + playerName);
+                                console.log("0 " + playerName);
                                 break;
 
                               case "default":
@@ -641,7 +647,7 @@ function makeWorkoutPage(){
                                 $("#me").prepend(
                                     '<h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/avatar0.png"> </span></div></div>'
                                   );
-                                console.log("default" + playerName);
+                                console.log("default " + playerName);
                                 break;
                             }
 
@@ -679,7 +685,7 @@ function makeWorkoutPage(){
                             $('#startList').after(
                               '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/'+pic[4]+'"></a></figure> </span></div></div></div></div>'
                             );
-                            console.log("large" + playerName);
+                            console.log("large " + playerName);
                             break;
 
                           case "medium.jpg":
@@ -687,7 +693,7 @@ function makeWorkoutPage(){
                             $('#startList').after(
                               '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://'+pic[0]+'.cloudfront.net/pictures/athletes/'+pic[1]+'/'+pic[2]+'/'+pic[3]+'/'+pic[4]+'"></a></figure> </span></div></div></div></div>'
                             );
-                            console.log("large" + playerName);
+                            console.log("large " + playerName);
                             break;
 
                           case "0":
@@ -695,7 +701,7 @@ function makeWorkoutPage(){
                             $('#startList').after(
                               '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><figure class="user user-circle"><a href="https://www.strava.com/athletes/'+playerID+'" target="_blank"><img height="40" width="40" src="https://graph.facebook.com/'+pic[0]+'/picture?height=256&width=256"></a></figure> </span></div></div></div></div>'
                             );
-                            console.log("large" + playerName);
+                            console.log("large " + playerName);
                             break;
 
                           case "default":
@@ -703,7 +709,7 @@ function makeWorkoutPage(){
                             $('#startList').after(
                               '<div id="'+playerName.replace(/ /g,"_")+'" class="col-12 mt-2"><h4 class="progress-title">'  +playerName+ '<font style="color:#ccff00;"> +' +theirReward+' '+TOKENSYMBOL+ '</font> / <font style="color:#f442b3;">' +theirKms+ 'km, '+theirMins+'mins</font></h4><div class="progress-item"><div class="progress"><div class="progress-bar bg-blue" role="progressbar" style="width:' +theirProgress+ '%;" aria-valuenow="' +theirProgress+ '" aria-valuemin="0" aria-valuemax="100"><span><img height="40" width="40" src="../app/assets/images/avatar0.png"> </span></div></div></div></div>'
                             );
-                            console.log("large" + playerName);
+                            console.log("large " + playerName);
                             break;
                         }
 
