@@ -915,6 +915,7 @@ function joinModalLoad(){
 
 
           Swal.mixin({
+            input: 'text',
             progressSteps: ['1', '2', '3', '4', '5']
           }).queue([
             {
