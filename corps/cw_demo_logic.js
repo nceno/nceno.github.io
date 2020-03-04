@@ -1254,16 +1254,41 @@ async function makeOrdersPage(){
 
 async function makeSpendPage(){
 
-  Swal.fire({
-    title: 'write something',
-    input: 'text',
-    confirmButtonText: 'Next',
-    inputValidator: (value) => {
-      if (!value) {
-        return 'Please answer :)'
-      }
+  Swal.mixin({
+    //input: 'text',
+    progressSteps: ['1', '2', '3']
+  }).queue([
+    {
+      title: 'Question 1',
+      input: 'text',
+      text: 'Chaining swal2 modals is easy',
+      confirmButtonText: 'Next'
+    },
+    {
+      title: 'Question 2',
+      input: 'text',
+      text: 'Chaining swal2 modals is easy',
+      confirmButtonText: 'Next'
+    },
+    {
+      title: 'Question 3',
+      input: 'text',
+      text: 'Chaining swal2 modals is easy',
+      confirmButtonText: 'Next'
     }
-  });
+  ]).then((result) => {
+    if (result.value) {
+      const answers = JSON.stringify(result.value)
+      Swal.fire({
+        title: 'All done!',
+        html: `
+          Your answers:
+          <pre><code>${answers}</code></pre>
+        `,
+        confirmButtonText: 'Lovely!'
+      })
+    }
+  })
 
 
   var myBalance
