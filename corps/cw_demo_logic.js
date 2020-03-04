@@ -1,4 +1,4 @@
-console.log("35");
+console.log("556y5");
 
 
 var targetName;
@@ -924,7 +924,7 @@ function joinModalLoad(){
               .then((result) => {
                 if (result.value) {
 
-                  var { value: alAv } = awaitSwal.fire({
+                  var { value: alAv } = await Swal.fire({
                     title: 'Step 1/5- Choose an avatar',
                     input: 'radio',
                     inputOptions: alAvatar,
