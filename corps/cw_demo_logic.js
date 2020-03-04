@@ -151,19 +151,11 @@ async function setTarget(item){
 }
 
 
-async function buy(){
+function buy(){
   $("#confirmBuy").hide();
   $("#cancelBuy").hide();
   $("#buyLoader").show();
   $("#buyQs").hide();
-
-  /*Swal.fire({
-    title: 'Remember those workouts? They'+"'"+'re about to pay off!',
-    background: 'url(../app/assets/images/metal.jpg)',
-    html: '<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you'+"'"+'re about to get <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  But first, please answer these two questions:',
-    
-  })*/
-
   
 }
 
@@ -555,7 +547,7 @@ function redeem(){
               title: 'You are a top finisher!',
               icon: 'warning',
               text: 'You are one of the first three to finish this challenge. Go see the '+companyName+'admin for your extra prize!'
-            })
+            });
             }
           }
         ).on('error', console.error);
