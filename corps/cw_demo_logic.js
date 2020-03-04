@@ -125,8 +125,6 @@ async function setTarget(item){
                     icon: 'success',
                     imageUrl: targetImg,
                     html: Cookies.get('stravaUsername')+ ', you just bought '+targetName+' for '+targetPrice+' '+TOKENSYMBOL+' points. Show this code to the '+companyName+' admin to receive your purchase. <br> <h2><b>'+orderNo+'</b></h2>'
-                    
-                    
                   })
                   //$("#buyEcho").html('<h5><font style="color:#ccff00;">'+Cookies.get('stravaUsername')+'</font>, you just bought <font style="color:#ccff00;">"'+targetName+'"</font> <br>for <font style="color:#ccff00;">'+targetPrice+'</font> '+TOKENSYMBOL+' points.</h5><br>  <font style="color:#fff;">Show this code to the <font style="color:#ccff00;">'+companyName+'</font> admin <br>to receive your purchase.</font> <h1><b style="color:#ccff00;" >'+orderNo+'</b></h1>');
                   telegramNotify(Cookies.get('stravaUsername')+' just earned '+targetName+' for '+targetPrice+' '+TOKENSYMBOL, 'false');
@@ -439,14 +437,14 @@ function showBest(){
     }
   });
   //console.log("display this: "+dispTime+" "+dispMins+" "+dispHR+" "+dispDist+" "+dispSpeed+" "+dispValue);
-  if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
-  if(dispMins!= null && dispMins!= null && dispHR!= null ) $("#dispMins").html(Math.round(dispMins/60));
-  $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
-  $("#period").html(period); 
-  if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
-  if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
-  $("#dispValue").html(dispValue);
-  $("#dispToken").html(TOKENSYMBOL);
+  /*  if(dispHR!= null && dispHR!= 0) $("#dispHR").html(Math.round(dispHR)); 
+    if(dispMins!= null && dispMins!= null && dispHR!= null ) $("#dispMins").html(Math.round(dispMins/60));
+    $("#dispTime").html(dispTimeHours+':'+dispTimeMinutes);
+    $("#period").html(period); 
+    if(dispSpeed!= null && dispSpeed!= 0) $("#dispSpeed").html((dispSpeed*3.6).toFixed(1));
+    if(dispDist!= null && dispDist!= 0) $("#dispDist").html((dispDist/1000).toFixed(1)); 
+    $("#dispValue").html(dispValue);
+    $("#dispToken").html(TOKENSYMBOL);*/
 
   var alHR = '-';
   if(dispHR!= null && dispHR!= 0) 
@@ -468,7 +466,16 @@ function showBest(){
     title: 'Here is your most valuable workout from today',
     html: '<table class="table table-lined" id="bestWorkout"><thead  class="thead-dark"> <tr><th scope="col"><font size="2">time</font></th> <th scope="col"><font size="2">HR mins</font></th><th scope="col"><font size="2">avg HR</font></th><th scope="col"><font size="2">dist</font></th><th scope="col"><font size="2">avg speed</font></th></tr></thead><tbody ><tr><td ><span id="dispTime">'+dispTimeHours+':'+dispTimeMinutes+'</span><br><span id="period">'+period+'</span></td><td ><span id="dispMins">'+alMins+'</span><br>min</td><td ><span id="dispHR">'+alHR+'</span><br>bpm</td><td ><span id="dispDist">'+alDist+'</span><br>km</td><td ><span id="dispSpeed">'+alSpeed+'</span><br>kph</td></tr></tbody></table>',
     confirmButtonText:'Claim '+dispValue+' '+TOKENSYMBOL
-  })
+  }).then((result) => {
+  if (result.value) {
+    redeem();
+    Swal.fire(
+      imageUrl: '../app/assets/images/loader.svg',
+      title: 'Please wait...',
+      showConfirmButton: false,
+    )
+  }
+})
 
   //make the thing to be logged
   toLog[0] = bestID;
@@ -501,7 +508,7 @@ $('#logModal').on('hidden.bs.modal', function (e) {
 });
 
 
-$("#redeem").click(function() {
+function redeem(){
   $("#logLoader").show();
   $("#redeem").hide();
 
@@ -537,8 +544,19 @@ $("#redeem").click(function() {
         }, function(error, event){ 
             //do some stuff
             //ex. usdPayout = parseInt(event.returnValues._payout);
-            telegramNotify(playerName+' just unlocked '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
-            if(event.returnValues.finisher != false) $("#logSuccess").html("You're one of the first 3 to finish the challenge! Go see the challenge admin to claim the top prize.");
+            Swal.fire({
+              title: 'That workout was so worth it...',
+              icon: 'success',
+              html: Cookies.get('stravaUsername')+ ', you just just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for this workout!'
+            });
+            telegramNotify(playerName+' just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
+            if(event.returnValues.finisher != false) {
+              Swal.fire({
+              title: 'You are a top finisher!',
+              icon: 'warning',
+              text: 'You are one of the first three to finish this challenge. Go see the '+companyName+'admin for your extra prize!'
+            })
+            }
           }
         ).on('error', console.error);
 
@@ -550,7 +568,7 @@ $("#redeem").click(function() {
       } 
     }
   ).once('error', function(error){console.log(error);});
-});
+}
 
 ///////////////////////////////////////
 //////////////^^^^^^^ nceno.log()
