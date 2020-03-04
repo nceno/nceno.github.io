@@ -886,7 +886,7 @@ $('#price5').html(item5.price +" "+TOKENSYMBOL);
 $('#title5').html(item5.descr);
 
 
-function joinModalLoad(){
+async function joinModalLoad(){
   NcenoBrands.methods.getGoalParams(_goalID)
     .call({from: Cookies.get('userWallet')},
       async function(error, result) {
