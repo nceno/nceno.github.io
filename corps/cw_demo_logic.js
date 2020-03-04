@@ -527,8 +527,8 @@ function redeem(){
     console.log(receipt.status);
     if(receipt.status === true){
         correctNonce++;
-        $("#logLoader").hide();
-        $("#logSuccess").html("Great job! Check your points wallet in a minute.");
+        //$("#logLoader").hide();
+        //$("#logSuccess").html("Great job! Check your points wallet in a minute.");
         //listen to see if player is a first finisher
         Nceno.events.Log({
           filter: {paramGoalID: _goalid, paramStravaID: Cookies.get('stravaID'), finisher: true },
@@ -536,12 +536,15 @@ function redeem(){
         }, function(error, event){ 
             //do some stuff
             //ex. usdPayout = parseInt(event.returnValues._payout);
+
             Swal.fire({
               title: 'That workout was so worth it...',
               icon: 'success',
               html: Cookies.get('stravaUsername')+ ', you just just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for this workout!'
             });
+
             telegramNotify(playerName+' just earned '+event.returnValues._payout+' '+TOKENSYMBOL+ ' for their workout!', 'false');
+            
             if(event.returnValues.finisher != false) {
               Swal.fire({
               title: 'You are a top finisher!',
