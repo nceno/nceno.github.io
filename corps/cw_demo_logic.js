@@ -249,7 +249,7 @@ async function makeActivities(){
   xhr.withCredentials = false;
   await xhr.addEventListener("readystatechange", async function(){
     if (this.readyState === 4) {
-      console.log(this.responseText);
+      //console.log(this.responseText);
       data = await JSON.parse(xhr.responseText);
       console.log("number of workouts is: "+data.length);
       //clean the data and make a list of valid workouts.   
