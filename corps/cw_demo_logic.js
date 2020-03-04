@@ -892,10 +892,70 @@ function joinModalLoad(){
       async function(error, result) {
         if (!error){
 
+
+          const alAvatar = new Promise((resolve) => {
+            resolve({
+              '0': '<img height="60" width="60" src="../app/assets/images/avatar0.png">',
+              '1': '<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>'
+            })
+          });
+          
+          /*if(Cookies.get('picType') != "default"){
+            $("#custAvatar").html('<figure class="user user-circle"><img height="40" width="40" src="'+Cookies.get('picture')+'"></figure>');
+          }else $("#customChoice").hide();*/
+
           Swal.fire({
-            title: 'You are about to join '+companyName+"'s"+'challenge:',
-            html: new Date(result[0]*1000).toDateString() +' - '+ new Date((result[0]*1+86400*result[1])*1000).toDateString() +'<br>'+result[2]+" "+TOKENSYMBOL+' max per person. <br>'+'Reward rate: '+result[6]+" "+TOKENSYMBOL+ '/km or '+result[5]+" "+TOKENSYMBOL+'/10min with HR data',
-            imageUrl: '../app/assets/images/wingstop.png'
+            title: 'Choose your avatar',
+            input: 'radio',
+            confirmButtonText: 'Next',
+            inputOptions: alAvatar,
+            inputValidator: (value) => {
+              if (!value) {
+                return 'Please answer :)'
+              }
+            }
+          });
+
+
+          Swal.mixin({
+            confirmButtonText: 'Next',
+            showCancelButton: false,
+            progressSteps: ['1', '2', '3', '4']
+          }).queue([
+            {
+              title: 'You are about to join '+companyName+"'s"+' challenge:',
+              html: new Date(result[0]*1000).toDateString() +' - '+ new Date((result[0]*1+86400*result[1])*1000).toDateString() +'<br>'+result[2]+" "+TOKENSYMBOL+' max per person. <br>'+'Reward rate: '+result[6]+" "+TOKENSYMBOL+ '/km or '+result[5]+" "+TOKENSYMBOL+'/10min with HR data',
+              imageUrl: '../app/assets/images/wingstop.png'
+            },
+            {
+              title: 'Choose your avatar',
+              input: 'radio',
+              confirmButtonText: 'Next',
+              inputOptions: alAvatar,
+              inputValidator: (value) => {
+                if (!value) {
+                  return 'Please answer :)'
+                }
+              }
+            },
+            {
+              'Question 3'
+            },
+            {
+              'Question 4'
+            }
+          ]).then((result) => {
+            if (result.value) {
+              const answers = JSON.stringify(result.value)
+              Swal.fire({
+                title: 'All done!',
+                html: `
+                  Your answers:
+                  <pre><code>${answers}</code></pre>
+                `,
+                confirmButtonText: 'Lovely!'
+              })
+            }
           })
 
 
