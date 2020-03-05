@@ -974,14 +974,61 @@ async function joinModalLoad(){
           ]).then((result) => {
             if (result.value) {
               const answers = JSON.stringify(result.value)
-              Swal.fire({
-                title: 'All done!',
-                html: `
-                  Your answers:
-                  <pre><code>${answers}</code></pre>
-                `,
-                confirmButtonText: 'Go!'
-              })
+              console.log(answers);
+
+              var avat; 
+              if (Cookies.get('picType') == '1' && $('input[name="avatarRadio"]:checked').val()=="1"){
+                avat = [Cookies.get('picture').split('//')[1].split('.cloudfront')[0], Cookies.get('picture').split('athletes/')[1].split('/')[0], Cookies.get('picture').split('/')[6], Cookies.get('picture').split('/')[7], Cookies.get('picture').split('/')[8]];
+              }
+              else if (Cookies.get('picType') == '2' && $('input[name="avatarRadio"]:checked').val()=="1"){
+                avat= [Cookies.get('picture').split('.com/')[1].split('/')[0], 0, 0, 0, 0];
+              }
+              else avat = [0,0,0,0,"default"];
+
+
+
+              NcenoBrands.methods.join(
+                _goalID, 
+                Cookies.get('stravaID'), 
+                $("#nameField").val(),
+                avat, 
+                $("#codeField").val(),
+                $('input[name="q1Radio"]:checked').val(),
+                $('#avgSpend').val()
+                )
+              .send({from: Cookies.get('userWallet'), gas: 1000000, gasPrice: Math.ceil(gasPriceChoice)*1000000000},
+                function(error, result) {
+                  if (!error){
+
+                    console.log(result);
+                  }
+                  else
+                  console.error(error);
+                }
+              ).once('confirmation', function(confNumber, receipt){ 
+                console.log(receipt.status);
+                if(receipt.status === true){
+                  updateNonce();
+                  $("#joinLoader").hide();
+                  $("#joinPrompt").html('You'+"'"+'re in. Good luck, '+$("#nameField").val()+'!');
+                  //$("joinChallenge").hide();
+                }
+                else{
+                  $("#joinLoader").show();
+                  $("#avatarChoices").hide();
+                  $("#joinModBtn").hide();
+                  $("#codeField").hide();
+                  $("#nameField").hide();
+                  $("#soonJoinTitle").hide();
+                  $('#joinPrompt').html('<p>Sorry, invite code invalid or challenge is inactive.</p>');
+                  console.log("join error.");
+                } 
+              }).once('error', function(error){console.log(error);});
+
+
+
+              
+              
             }
           })
 
@@ -1551,7 +1598,7 @@ $("#joinModBtn").click(function() {
   $("#codeField").hide();
   $("#nameField").hide();
   $("#soonJoinTitle").hide();
-  var avat; 
+  /*var avat; 
   if (Cookies.get('picType') == '1' && $('input[name="avatarRadio"]:checked').val()=="1"){
     avat = [Cookies.get('picture').split('//')[1].split('.cloudfront')[0], Cookies.get('picture').split('athletes/')[1].split('/')[0], Cookies.get('picture').split('/')[6], Cookies.get('picture').split('/')[7], Cookies.get('picture').split('/')[8]];
   }
@@ -1598,7 +1645,7 @@ $("#joinModBtn").click(function() {
       $('#joinPrompt').html('<p>Sorry, invite code invalid or challenge is inactive.</p>');
       console.log("join error.");
     } 
-  }).once('error', function(error){console.log(error);});
+  }).once('error', function(error){console.log(error);});*/
 });
 
 
